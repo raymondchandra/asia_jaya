@@ -1,0 +1,168 @@
+<?php
+/* copy ke route
+
+//$RESOURCE$
+	//Route::get('/$RESOURCE$/exist', ['as' => 'check.$RESOURCE$.exist' , 'uses' => '$NAME$@exist']);
+	Route::get('/$RESOURCE$', ['as' => 'get.$RESOURCE$.list' , 'uses' => '$NAME$@getAll']);
+	Route::get('/$RESOURCE$/{id}', ['as' => 'get.$RESOURCE$.detail' , 'uses' => '$NAME$@getById']);
+	//Route::get('/$RESOURCE$/<column>/{id}', ['as' => 'get.$RESOURCE$.by<column>' , 'uses' => '$NAME$@getBy<column>']);
+	Route::post('/$RESOURCE$', ['as' => 'add.$RESOURCE$' , 'uses' => '$NAME$@insert']);
+	Route::put('/$RESOURCE$/{id}', ['as' => 'edit.$RESOURCE$' , 'uses' => '$NAME$@updateFull']);
+	//Route::put('/$RESOURCE$/<column>/{id}', ['as' => 'edit.$RESOURCE$.<column>' , 'uses' => '$NAME$@update<column>']);
+	Route::delete('/$RESOURCE$/{id}', ['as' => 'delete.$RESOURCE$' , 'uses' => '$NAME$@delete']);
+
+*/
+class $NAME$ extends \BaseController {
+	
+	public function insert()
+	{
+		$respond = array();
+		$data = Input::all();
+		//validate
+		$validator = Validator::make($data, $MODEL$::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			$MODEL$::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
+	public function getReturn($$RESOURCE$)
+	{
+		$respond = array();
+		if (count($$RESOURCE$) == 0)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			$respond = array('code'=>'200','status' => 'OK','messages'=>$$RESOURCE$);
+		}
+		return Response::json($respond);
+	}
+	
+	public function getAll()
+	{
+		$$RESOURCE$ = $MODEL$::all();
+		return $this->getReturn($$RESOURCE$);
+	}
+
+	public function getById($id)
+	{
+		$$RESOURCE$ = $MODEL$::find($id);
+		return $this->getReturn($$RESOURCE$);
+	}
+	
+	/*
+	public function getBy<column>()
+	{
+		$$RESOURCE$ = $MODEL$::where('','=','')->get();
+		return $this->getReturn($$RESOURCE$);
+	}
+	*/
+
+	public function updateFull($id)
+	{
+		$respond = array();
+		$$RESOURCE$ = $MODEL$::find($id);
+		if ($$RESOURCE$ == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			$data = Input::all();
+			//validate
+			$validator = Validator::make($data, $MODEL$::$rules);
+
+			if ($validator->fails())
+			{
+				$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+				return Response::json($respond);
+			}
+			//save
+			try {
+				$$RESOURCE$->update($data);
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+
+	/*
+	public function update<column>($id)
+	{
+		$respond = array();
+		$$RESOURCE$ = $MODEL$::find($id);
+		if ($$RESOURCE$ == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			//$$RESOURCE$-> = ;
+			try {
+				$$RESOURCE$->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	*/
+	
+	public function delete($id)
+	{
+		$respond = array();
+		$$RESOURCE$ = $MODEL$::find($id);
+		if ($$RESOURCE$ == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			try {
+				$$RESOURCE$->delete();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+
+	/*
+	public function exist()
+	{
+		$respond = array();
+		$$RESOURCE$ = $MODEL$::where('','=','')->get();
+		if (count($$RESOURCE$) >= 0)
+		{
+			$respond = array('code'=>'200','status' => 'OK');
+		}
+		else
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		return Response::json($respond);
+	}
+	*/
+
+}
