@@ -23,6 +23,7 @@ class CreateTransactionsTable extends Migration {
 			$table->tinyInteger('print_shop');
 			$table->tinyInteger('is_void');
 			$table->integer('sales_id')->unsigned();
+			$table->string('status');
 			$table->timestamps();
 		});
 	}
