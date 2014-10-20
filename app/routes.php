@@ -36,7 +36,7 @@ Route::group(['before' => 'auth'], function()
 });
 
 //manager
-Route::group('before' => 'auth_manager'], function()
+Route::group(['before' => 'auth_manager'], function()
 {
 //pesanan
 	//list semua pesanan yg status pending
