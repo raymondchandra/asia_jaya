@@ -1,5 +1,8 @@
 <?php
 
+//tester
+	Route::get('/searchView', 'searchViewController@getList');
+
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
 Route::post('/login', ['as' => 'login', 'uses' => 'AccountController@']);
@@ -10,7 +13,7 @@ Route::group(['before' => 'auth'], function()
 {
 //product
 	//get barang jualan
-	Route::get('/product', ['as' => 'get.product.list' , 'uses' => 'ProductsController@']);
+	Route::get('/product', ['as' => 'get.product.list' , 'uses' => 'ProductsController@getAll']);
 	//cari barang
 	Route::get('/product/search/{value}', ['as' => 'search.product' , 'uses' => 'ProductsController@']);
 //mobile
