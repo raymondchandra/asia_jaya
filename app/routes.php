@@ -1,7 +1,7 @@
 <?php
 
 //tester
-	Route::get('/searchView', 'searchViewController@getList');
+Route::get('/searchView', 'searchViewController@getList');
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
@@ -140,6 +140,23 @@ Route::group(['prefix' => 'admin', 'before' => 'auth_owner'], function()
 	//edit tax
 	Route::put('/tax', ['as' => 'edit.tax' , 'uses' => 'TaxesController@']);
 });
+
+
+/* routing sementara Domi coba interaction + css + jquery */
+Route::group(array('prefix' => 'test'), function()
+{
+
+    //
+	Route::get('/mobile/login', function()
+	{
+		return View::make('pages.mobile.login');
+	});
+
+
+
+});
+
+
 
 
 
