@@ -1,5 +1,7 @@
+<!-- author : Gentry Swanri -->
+
 <html>
 	<body>
-		welcome to asia_jaya
+		Welcome to asia_jaya. Unfortunately, your data is not found.
 	</body>
 </html>

@@ -52,6 +52,19 @@ class ProductDetailsController extends \BaseController {
 	}
 	
 	/*
+		@author : Gentry Swanri
+		@parameter : $productId
+		@return : product detail yang sesuai dengan productId
+		-) Fungsi untuk melakukan pencarian product detail berdasarkan product id;
+	*/
+	public function getByProductId($productId)
+	{
+		$productdetail = Productdetail::where('product_id','=',$productId)->get();
+		return $this->getReturn($productdetail);
+	}
+	
+	
+	/*
 	public function getBy<column>()
 	{
 		$productdetail = Productdetail::where('','=','')->get();
