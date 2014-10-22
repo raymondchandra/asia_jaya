@@ -1,0 +1,4 @@
+
+php artisan db:seed --class=AccountsTableSeeder
+php artisan db:seed --class=CustomersTableSeeder
+php artisan db:seed --class=TaxesTableSeeder

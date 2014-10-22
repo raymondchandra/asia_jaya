@@ -1236,9 +1236,9 @@ return array(
     'Product' => $baseDir . '/app/models/Product.php',
     'ProductDetail' => $baseDir . '/app/models/ProductDetail.php',
     'ProductDetailsController' => $baseDir . '/app/controllers/Database/ProductDetailsController.php',
-    'ProductDetailsTableSeeder' => $baseDir . '/app/database/seeds/ProductDetailsTableSeeder.php',
     'ProductsController' => $baseDir . '/app/controllers/Database/ProductsController.php',
     'ProductsTableSeeder' => $baseDir . '/app/database/seeds/ProductsTableSeeder.php',
+    'ProductzDetailsTableSeeder' => $baseDir . '/app/database/seeds/ProductzDetailsTableSeeder.php',
     'Psr\\Log\\AbstractLogger' => $vendorDir . '/psr/log/Psr/Log/AbstractLogger.php',
     'Psr\\Log\\InvalidArgumentException' => $vendorDir . '/psr/log/Psr/Log/InvalidArgumentException.php',
     'Psr\\Log\\LogLevel' => $vendorDir . '/psr/log/Psr/Log/LogLevel.php',
@@ -1916,5 +1916,6 @@ return array(
     'Whoops\\Run' => $vendorDir . '/filp/whoops/src/Whoops/Run.php',
     'Whoops\\Util\\Misc' => $vendorDir . '/filp/whoops/src/Whoops/Util/Misc.php',
     'Whoops\\Util\\TemplateHelper' => $vendorDir . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+    'ZCreateForeignKey' => $baseDir . '/app/database/migrations/2014_10_21_164745_z_create_foreign_key.php',
     'searchViewController' => $baseDir . '/app/controllers/Page/searchViewController.php',
 );

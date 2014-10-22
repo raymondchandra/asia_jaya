@@ -9,7 +9,11 @@ class Account extends \Eloquent {
 
 	// Don't forget to fill this array
 	protected $fillable = [
-	
+		'username',
+		'password',
+		'role',
+		'last_login',
+		'active'
 	];
 
 }
