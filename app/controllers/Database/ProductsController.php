@@ -52,6 +52,30 @@ class ProductsController extends \BaseController {
 	}
 	
 	/*
+		@author : Gentry Swanri
+		@parameter : $productCode
+		@return : product yang sesuai dengan productCode
+		-) Fungsi ini berfungsi melakukan pencarian product berdasarkan product code
+	*/
+	public function getByProductCode($productCode)
+	{
+		$product = Product::where('product_code','=',$productCode)->get();
+		return $this->getReturn($product);
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $productName
+		@return : product yang sesuai dengan productName
+		-) Fungsi ini berfungsi melakukan pencarian product berdasarkan product code
+	*/
+	public function getByProductName($productName)
+	{
+		$product = Product::where('name','=',$productName)->get();
+		return $this->getReturn($product);
+	}
+	
+	/*
 	public function getBy<column>()
 	{
 		$product = Product::where('','=','')->get();
