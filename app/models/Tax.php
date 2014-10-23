@@ -9,7 +9,7 @@ class Tax extends \Eloquent {
 
 	// Don't forget to fill this array
 	protected $fillable = [
-	
+		'amount'
 	];
 
 }

@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 //get list without filter
 	Route::get('/searchView', 'searchViewController@getList');
 	
@@ -8,6 +9,10 @@
 	
 //get list filter by product code
 	Route::get('/searchViewByName', 'searchViewController@getListByName');
+=======
+//tester
+Route::get('/searchView', 'searchViewController@getList');
+>>>>>>> 767cbf62fc7eeadb2d3b3b293ff564d62747ad16
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
@@ -146,6 +151,23 @@ Route::group(['prefix' => 'admin', 'before' => 'auth_owner'], function()
 	//edit tax
 	Route::put('/tax', ['as' => 'edit.tax' , 'uses' => 'TaxesController@']);
 });
+
+
+/* routing sementara Domi coba interaction + css + jquery */
+Route::group(array('prefix' => 'test'), function()
+{
+
+    //
+	Route::get('/mobile/login', function()
+	{
+		return View::make('pages.mobile.login');
+	});
+
+
+
+});
+
+
 
 
 

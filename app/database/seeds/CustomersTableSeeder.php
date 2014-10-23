@@ -12,7 +12,7 @@ class CustomersTableSeeder extends Seeder {
 		foreach(range(1, 10) as $index)
 		{
 			Customer::create([
-
+				'name' => $faker->name
 			]);
 		}
 	}
