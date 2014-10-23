@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< HEAD
 //get list without filter
 	Route::get('/searchView', 'searchViewController@getList');
 	
@@ -9,10 +8,9 @@
 	
 //get list filter by product code
 	Route::get('/searchViewByName', 'searchViewController@getListByName');
-=======
+	
 //tester
 Route::get('/searchView', 'searchViewController@getList');
->>>>>>> 767cbf62fc7eeadb2d3b3b293ff564d62747ad16
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
