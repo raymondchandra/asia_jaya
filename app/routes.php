@@ -10,7 +10,7 @@
 	Route::get('/searchViewByName', 'searchViewController@getListByName');
 	
 //tester
-Route::get('/searchView', 'searchViewController@getList');
+	//Route::get('/searchView', 'searchViewController@getList');
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
