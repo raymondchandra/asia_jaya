@@ -63,6 +63,17 @@ class ProductDetailsController extends \BaseController {
 		return $this->getReturn($productdetail);
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@parameter : $color
+		@return : product detail yang sesuai dengan color
+		-) Fungsi untuk melakukan pencarian product detail berdasarkan color
+	*/
+	public function getByColor($color)
+	{
+		$productdetail = Productdetail::where('color','=',$color)->get();
+		return $this->getReturn($productdetail);
+	}
 	
 	/*
 	public function getBy<column>()

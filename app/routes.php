@@ -23,8 +23,13 @@
 //get list filter by product code
 	Route::get('/searchViewByName', 'searchViewController@getListByName');
 	
-//tester
-	//Route::get('/searchView', 'searchViewController@getList');
+//Finalize Sell
+	Route::get('/finalizeSell', function(){
+		return View::make('submitTest');
+	});
+	Route::post('finalize', 'finalizeSellController@finalize');
+	
+	
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);

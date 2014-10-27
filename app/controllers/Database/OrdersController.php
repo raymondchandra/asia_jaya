@@ -25,6 +25,34 @@ class OrdersController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@parameter : $quantity, $transactionId, $price, $prodDetailId
+		@return : response => created or failed
+		-) Fungsi ini digunakan untuk memasukkan order milik customer ke dalam tabel order sesuai dengan parameter
+	*/
+	public function insertWithParam($quantity, $transactionId, $price, $prodDetailId){
+		$data = array("quantity"=>$quantity, "transaction_id"=>$transactionId, "price"=>$price, "product_detail_id"=>$prodDetailId);
+		
+		//validate
+		$validator = Validator::make($data, Order::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Order::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($order)
 	{
 		$respond = array();

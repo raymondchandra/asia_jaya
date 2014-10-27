@@ -1917,5 +1917,6 @@ return array(
     'Whoops\\Util\\Misc' => $vendorDir . '/filp/whoops/src/Whoops/Util/Misc.php',
     'Whoops\\Util\\TemplateHelper' => $vendorDir . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
     'ZCreateForeignKey' => $baseDir . '/app/database/migrations/2014_10_21_164745_z_create_foreign_key.php',
+    'finalizeSellController' => $baseDir . '/app/controllers/Page/finalizeSellController.php',
     'searchViewController' => $baseDir . '/app/controllers/Page/searchViewController.php',
 );

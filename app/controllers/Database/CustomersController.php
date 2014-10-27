@@ -25,6 +25,33 @@ class CustomersController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@parameter : $customerName
+		@return : response => success or failed
+		-) Fungsi ini digunakan untuk memasukkan 1 baris baru ke dalam tabel Customer
+	*/
+	public function insertWithParam($customerName){
+		$data = array('name' => $customerName);
+		//validate
+		$validator = Validator::make($data, Customer::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Customer::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($customer)
 	{
 		$respond = array();
@@ -48,6 +75,18 @@ class CustomersController extends \BaseController {
 	public function getById($id)
 	{
 		$customer = Customer::find($id);
+		return $this->getReturn($customer);
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $customerName
+		@return : data customer dengan nama tertentu
+		-) Fungsi ini digunakan untuk mencari data customer sesuai dengan nama tertentu
+	*/
+	public function getByName($customerName)
+	{
+		$customer = Customer::where('name','=',$customerName)->get();
 		return $this->getReturn($customer);
 	}
 	
