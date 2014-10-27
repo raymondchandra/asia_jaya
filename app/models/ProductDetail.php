@@ -15,5 +15,10 @@ class ProductDetail extends \Eloquent {
 		'product_id',
 		'deleted'
 	];
+	
+	public function product()
+    {
+        return $this->belongsTo('Product');
+    }
 
 }

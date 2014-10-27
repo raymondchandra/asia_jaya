@@ -1,5 +1,19 @@
 <?php
-
+	Route::get('/tes', function()
+	{
+		$productDetailController = new ProductDetailsController();
+		$productJson = $productDetailController->getAll();
+		$json = json_decode($productJson->getContent());
+		$products = $json->{'messages'};
+		foreach($products as $product)
+		{
+			$var= ProductDetail::find($product->id)->product;
+			$product->product_name = $var->name;
+			$product->product_kode = $var->product_code;
+		}
+		
+		return Response::json($products);
+	});
 //get list without filter
 	Route::get('/searchView', 'searchViewController@getList');
 	
