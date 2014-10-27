@@ -1,0 +1,197 @@
+@mixin dimension($val, $vil){
+	width: $val;
+	height: $vil;
+}
+
+@mixin box-sizing($val){
+    box-sizing: $val;  
+    -moz-box-sizing: $val; /*Firefox 1-3*/  
+    -webkit-box-sizing: $val; /* Safari */  
+}
+
+@function substraction($some-number, $another-number){
+  @return $some-number + $another-number
+}
+
+@mixin transition ($val){
+	-webkit-transition: all ease-out $val;
+    -moz-transition: all ease-out $val;
+    -o-transition: all  ease-out $val;
+    transition: all ease-out $val;
+}
+
+@mixin border-radius($val){
+	-webkit-border-radius: $val;
+    -moz-border-radius: $val;
+    -o-border-radius: $val;
+    border-radius: $val;
+}
+
+
+$green: #228b22;
+
+
+/*
+------------ Custom Style Sheet
+*/
+.s_tbl {
+    width: 100%;
+    height: inherit;
+    display: table;
+
+    .s_cell {
+        width: 100%;
+        height: inherit;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+}
+
+
+
+body {
+    position: relative;
+    background-color: #f8f8f8;
+}
+
+.s_nav {
+    *{
+        list-style-type: none;  
+    }
+    list-style-type: none;
+    width: 100%;
+    background-color: #999;
+    display: none;
+    top: 0px; 
+    position: relative;
+    //z-index: 99;
+}
+
+.s_sosi_main_nav {
+    padding: 0px;
+    margin: 0px;
+    li {
+        display: block;
+        float:left;
+        a {
+            color: #fff;
+            display: block;
+            background-color: #1f1f1f;
+            font-family: Montserrat;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            &:hover {
+                color: #1f1f1f;
+                background: #ffb400; /* Old browsers */
+                background: -moz-linear-gradient(top,  #ffb400 0%, #ff7f00 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffb400), color-stop(100%,#ff7f00)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #ffb400 0%,#ff7f00 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #ffb400 0%,#ff7f00 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #ffb400 0%,#ff7f00 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #ffb400 0%,#ff7f00 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb400', endColorstr='#ff7f00',GradientType=0 ); /* IE6-9 */
+
+            }
+        }
+    }
+}
+
+.s_icon {
+    display: block;
+    @include dimension(64px, 64px);
+    //background-color: #323232;
+    float: left;
+    cursor: pointer;
+
+    background-image: url('../img/menu_nav.svg');
+    background-size: 64px 64px;
+
+    &:hover, &:active  {
+
+        background-image: url('../img/menu_nav_active.svg');
+        background-size: 64px 64px;
+    }
+}
+
+.s_breadcrumb {
+    line-height: 64px;
+    display: block;
+    float: left;
+    background-color: #1a1a1a;
+    width:100%;
+
+    *{
+        font-family: Montserrat;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .breadcrumb {
+        padding: 0px;
+        margin: 0px; 
+        background-color: transparent; 
+
+        li:first-child {
+            padding-left: 20px;
+        }
+    }
+}
+
+.club_tab {
+    *{
+        font-family: Montserrat;
+        font-weight: 400;
+        color: #fff;
+
+    }
+    background-color: #1A1A1A;
+
+    a:hover, a:active, a:focus { 
+
+        background-color: #f79a0b;
+    }
+
+
+
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+color: #000;
+cursor: default;
+background-color: #f79a0b;
+//border: 1px solid #ddd; 
+border-bottom-color: transparent;
+border-radius: 0px !important;
+}
+
+.nav-tabs>li>a {
+margin-right: 2px;
+line-height: 1.42857143;
+border: 1px solid transparent;
+}
+
+hr {
+    border-color: rgba(95,95,95,0.25);
+}
+
+.active {
+    //color: #ffb400 !important;
+}
+
+.btn-orange {
+color: #fff;
+background-color: #ffb400;
+border-color: #f79a0b;
+}
+
+footer {
+    width: 100%;
+    background-color: #1f1f1f;
+    color: #fff;
+    height: 60px;
+}
+
