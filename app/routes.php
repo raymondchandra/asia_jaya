@@ -1,19 +1,24 @@
 <?php
 	Route::get('/tes', function()
 	{
+		$products = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')->where('product_code', 'LIKE', '')->orWhere('product_name','LIKE','')->get();
+		
+		return $products;
+	});
+	Route::get('/tes2', function()
+	{
 		$productDetailController = new ProductDetailsController();
 		$productJson = $productDetailController->getAll();
 		$json = json_decode($productJson->getContent());
 		$products = $json->{'messages'};
 		foreach($products as $product)
 		{
-			$var= ProductDetail::find($product->id)->product;
-			$product->product_name = $var->name;
-			$product->product_kode = $var->product_code;
+			$product->product_name = ProductDetail::find($product->id)->product->name;
 		}
 		
-		return Response::json($products);
+		return $products;
 	});
+	
 //get list without filter
 	Route::get('/searchView', 'searchViewController@getList');
 	
