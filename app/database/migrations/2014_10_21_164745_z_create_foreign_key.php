@@ -25,7 +25,7 @@ class ZCreateForeignKey extends Migration {
 		Schema::table('transactions', function($table)
 		{
 		    $table->foreign('customer_id')->references('id')->on('customers');
-		    $table->foreign('sales_id')->references('id')->on('account');
+		    $table->foreign('sales_id')->references('id')->on('accounts');
 		});
 		
 		Schema::table('orders', function($table)

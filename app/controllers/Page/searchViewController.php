@@ -1,7 +1,19 @@
 <?php
 
 class searchViewController extends \HomeController{
-	
+	public function getListDavid()
+	{
+		$productDetailController = new ProductDetailsController();
+		$productJson = $productDetailController->getAll();
+		$json = json_decode($productJson->getContent());
+		$products = $json->{'messages'};
+		foreach($products as $product)
+		{
+			$product->product_name = ProductDetail::find($product->id)->product->name;
+		}
+		
+		return $products;
+	}
 	/*
 		@author : Gentry Swanri
 		@parameter : -

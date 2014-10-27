@@ -9,7 +9,7 @@ class ProductzDetailsTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		for ($i=0; $i < 10; $i++)
+		for ($i=1; $i < 11; $i++)
 		{
 			ProductDetail::create([
 				'color' => $faker->colorName,

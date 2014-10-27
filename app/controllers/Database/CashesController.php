@@ -25,6 +25,34 @@ class CashesController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author: Gentry Swanri
+		@parameter :
+		@return : 
+		-) Fungsi ini berguna untuk memasukkan pembayaran tansaksi ke dalam tabel cashes sesuai dengan parameter
+	*/
+	public function insertWithParam($transactionId){
+		$data = array("transaction_id"=>$transactionId, "in"=>0, "out"=>0, "current"=>0, "type"=>"cash");
+		
+		//validate
+		$validator = Validator::make($data, Cash::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Cash::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($cash)
 	{
 		$respond = array();

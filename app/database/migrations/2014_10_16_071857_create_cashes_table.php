@@ -16,8 +16,8 @@ class CreateCashesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('transaction_id')->unsigned()->nullable();
-			$table->integer('in');
-			$table->integer('out');
+			$table->integer('in_amount');
+			$table->integer('out_amount');
 			$table->integer('current');
 			$table->string('type');
 			$table->timestamps();

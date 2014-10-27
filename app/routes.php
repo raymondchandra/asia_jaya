@@ -1,5 +1,24 @@
 <?php
-
+	Route::get('/tes', function()
+	{
+		$products = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')->where('product_code', 'LIKE', '')->orWhere('product_name','LIKE','')->get();
+		
+		return $products;
+	});
+	Route::get('/tes2', function()
+	{
+		$productDetailController = new ProductDetailsController();
+		$productJson = $productDetailController->getAll();
+		$json = json_decode($productJson->getContent());
+		$products = $json->{'messages'};
+		foreach($products as $product)
+		{
+			$product->product_name = ProductDetail::find($product->id)->product->name;
+		}
+		
+		return $products;
+	});
+	
 //get list without filter
 	Route::get('/searchView', 'searchViewController@getList');
 	
@@ -9,8 +28,13 @@
 //get list filter by product code
 	Route::get('/searchViewByName', 'searchViewController@getListByName');
 	
-//tester
-	//Route::get('/searchView', 'searchViewController@getList');
+//Finalize Sell
+	Route::get('/finalizeSell', function(){
+		return View::make('submitTest');
+	});
+	Route::post('finalize', 'finalizeSellController@finalize');
+	
+	
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
