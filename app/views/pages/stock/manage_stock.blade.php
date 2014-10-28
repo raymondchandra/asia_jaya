@@ -100,7 +100,9 @@
 										<input type="text" class="f_cell_nama_produk_input form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										IDR 400.000
+										<span id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">IDR 400.000</span>
+										<input type="text" id="f_cell_harga_modal_input" class=" form-control input-sm hidden" style=""/>
+										
 									</td>
 									<td>
 										IDR 500.000
@@ -142,6 +144,19 @@
 										$(this).addClass('hidden');
 									}
 								});
+
+								$( 'body' ).on( "click",'#f_cell_harga_modal', function() {
+									// 'Getting' data-attributes using getAttribute
+									var plant = document.getElementById('f_cell_harga_modal');
+									var fruitCount = plant.getAttribute('data-modal'); // fruitCount = '12'
+
+									// 'Setting' data-attributes using setAttribute
+									plant.setAttribute('data-modal','7'); // Pesky birds
+									$(this).text(plant.getAttribute('data-modal'));
+								});
+
+
+									
 								</script>
 							</tbody>
 						</table>

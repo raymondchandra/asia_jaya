@@ -180,6 +180,12 @@ Route::group(array('prefix' => 'test'), function()
 {
 
     //Login via Desktop
+	Route::get('/mobile', function()
+	{
+		return View::make('pages.mobile_test.index');
+	});
+
+    //Login via Desktop
 	Route::get('/login_desktop', function()
 	{
 		return View::make('pages.login_desktop');

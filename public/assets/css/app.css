@@ -1,45 +1,17 @@
-@mixin dimension($val, $vil){
-	width: $val;
-	height: $vil;
-}
-
-@mixin box-sizing($val){
-    box-sizing: $val;  
-    -moz-box-sizing: $val; /*Firefox 1-3*/  
-    -webkit-box-sizing: $val; /* Safari */  
-}
-
-@function substraction($some-number, $another-number){
-  @return $some-number + $another-number
-}
-
-@mixin transition ($val){
-	-webkit-transition: all ease-out $val;
-    -moz-transition: all ease-out $val;
-    -o-transition: all  ease-out $val;
-    transition: all ease-out $val;
-}
-
-@mixin border-radius($val){
-	-webkit-border-radius: $val;
-    -moz-border-radius: $val;
-    -o-border-radius: $val;
-    border-radius: $val;
-}
-
-
-$green: #228b22;
-
 /*
 custom
 */
-
+/* line 37, E:/xampp/htdocs/asiajayastore/public/assets/css/app.scss */
 .s_left_display {
-    
+  background-color: #324;
+  display: block;
+  position: fixed;
+  z-index: 99;
+  color: #fff;
 }
-.s_middle_display {
-position: relative;
-}
-.s_right_display {
 
+/* line 47, E:/xampp/htdocs/asiajayastore/public/assets/css/app.scss */
+.s_middle_display {
+  position: relative;
+  background-color: #ff0;
 }
