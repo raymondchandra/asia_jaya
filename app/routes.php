@@ -191,6 +191,12 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.account.manage_account');
 	});
 
+	//Pesanan
+	Route::get('/transaction', function()
+	{
+		return View::make('pages.transaction.manage_transaction');
+	});
+
 
 
 });

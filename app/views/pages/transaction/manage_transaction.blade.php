@@ -5,46 +5,67 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<h3 style="float: left;">
-					Kelola Account
+					Daftar Pesanan
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
 			<span class="clearfix"></span>
 			<hr></hr>
-			<button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target=".pop_up_add_account" style="margin-bottom: 20px;">
-				<span class="glyphicon glyphicon-plus"></span>Add Account
-			</button>
+		
 			<div>
 				<table class="table table-striped table-hover ">
 					<thead class="table-bordered">
 						<tr>
+							<th class="table-bordered" width="110">
+								<a href="javascript:void(0)">Trans. ID</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Username</a>
+								<a href="javascript:void(0)">Customer Name</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Total</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Discount</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" width="80">
+								<a href="javascript:void(0)">Kar. ID</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Karyawan Name</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" width="80">
+								<a href="javascript:void(0)">Void</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered" width="120">
-								<a href="javascript:void(0)">Role</a>
-								<a href="javascript:void(0)">
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
-							</th>
-							<th class="table-bordered">
-								<a href="javascript:void(0)">Last Login</a>
-								<a href="javascript:void(0)">
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
-							</th>
-							<th class="table-bordered">
 								<a href="javascript:void(0)">Status</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="200">
-
-							</th>
+							<th class="table-bordered" width="100"></th>
+							<th class="table-bordered" width="200">Print</th>
 						</thead>
 						<thead>
 							<tr>
@@ -53,23 +74,36 @@
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
-								
+								<td><input type="text" class="form-control input-sm"></td>
+								<td><input type="text" class="form-control input-sm"></td>
+								<td><input type="text" class="form-control input-sm"></td>
+								<td><input type="text" class="form-control input-sm"></td>
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
+								<td></td>
+								
 							</tr>
 						</thead>
 						<tbody>
 							<?php for($i=0; $i<10; $i++){
 							?>
 							<tr> 
-								<td>Username</td>
-								<td>Role</td>
-								<td>Last Login</td>
-								<td>Status</td>
+								<td>824739</td>
+								<td>Luntang Lantung</td>
+								<td>IDR 400.000</td>
+								<td>0</td>
+								<td>2</td>
+								<td>Doni</td>
+								<td>False</td>
+								<td>Belum Lunas</td>
 
 								<td>
-									<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>
+									<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
 									<!-- Button trigger modal class ".alertYesNo" -->
-									<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_delete_account">Delete</button>
+								</td>
+								<td>
+									<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Toko</button>
+									<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">Customer</button>
+									<!-- Button trigger modal class ".alertYesNo" -->
 								</td>
 							</tr> 
 							<?php }
@@ -81,9 +115,7 @@
 		</div>
 	</div>
 
-	@include('pages.account.pop_up_add_account')
-	@include('pages.account.pop_up_edit_account')
-	@include('pages.account.pop_up_delete_account')
+	@include('pages.transaction.pop_up_detail_transaction')
 
 	<script>
 
