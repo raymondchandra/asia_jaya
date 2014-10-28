@@ -179,10 +179,16 @@ Route::group(['prefix' => 'admin', 'before' => 'auth_owner'], function()
 Route::group(array('prefix' => 'test'), function()
 {
 
-    //
+    //Login via Desktop
 	Route::get('/login_desktop', function()
 	{
 		return View::make('pages.login_desktop');
+	});
+
+    //Karyawan
+	Route::get('/account', function()
+	{
+		return View::make('pages.account.manage_account');
 	});
 
 
