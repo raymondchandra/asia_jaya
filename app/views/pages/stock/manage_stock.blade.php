@@ -5,66 +5,71 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<h3 style="float: left;">
-					Daftar Pesanan
+					Daftar Stok Produk
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
 			<span class="clearfix"></span>
 			<hr></hr>
-		
+
 			<div>
 				<table class="table table-bordered table-hover ">
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">Trans. ID</a>
+								<a href="javascript:void(0)">Produk</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Customer Name</a>
+								<a href="javascript:void(0)">Nama Produk</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" width="140">
+								<a href="javascript:void(0)">Harga Modal</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" width="140">
+								<a href="javascript:void(0)">Harga Min.</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" width="140">
+								<a href="javascript:void(0)">Harga Jual</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Total</a>
+								<a href="javascript:void(0)">Stok Toko</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Discount</a>
-								<a href="javascript:void(0)">
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
-							</th>
-							<th class="table-bordered" width="80">
-								<a href="javascript:void(0)">Kar. ID</a>
+								<a href="javascript:void(0)">Stok Gudang</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Karyawan Name</a>
+								<a href="javascript:void(0)">Type</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="80">
-								<a href="javascript:void(0)">Void</a>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Deleted</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="120">
-								<a href="javascript:void(0)">Status</a>
-								<a href="javascript:void(0)">
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
-							</th>
-							<th class="table-bordered" width="100"></th>
 							<th class="table-bordered" width="200">Print</th>
 						</thead>
 						<thead>
@@ -84,40 +89,70 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php for($i=0; $i<10; $i++){
-							?>
-							<tr> 
-								<td>824739</td>
-								<td>Luntang Lantung</td>
-								<td>IDR 400.000</td>
-								<td>0</td>
-								<td>2</td>
-								<td>Doni</td>
-								<td>False</td>
-								<td>Belum Lunas</td>
+							<?php for($i=0; $i<30; $i++){
+								?>
+								<tr> 
+									<td>
+										824739
+									</td>
+									<td>
+										<span class="f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
+										<input type="text" class="f_cell_nama_produk_input form-control input-sm hidden" style=""/>
+									</td>
+									<td>
+										IDR 400.000
+									</td>
+									<td>
+										IDR 500.000
+									</td>
+									<td>
+										IDR 600.000
+									</td>
+									<td>
+										30
+									</td>
+									<td>
+										79
+									</td>
+									<td>
+										Type
+									</td>
+									<td>
+										Deleted
+									</td>
+									<td>
+										<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Toko</button>
+										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">Customer</button>
+										<!-- Button trigger modal class ".alertYesNo" -->
+									</td>
+								</tr> 
+								<?php }
+								?>
+								<script>
+								$( 'body' ).on( "click",'.f_cell_nama_produk', function() {
+									$(this).siblings('.f_cell_nama_produk_input').removeClass('hidden');
+									$(this).siblings('.f_cell_nama_produk_input').val($(this).text());
+									$(this).addClass('hidden');
+								});
 
-								<td>
-									<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
-									<!-- Button trigger modal class ".alertYesNo" -->
-								</td>
-								<td>
-									<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Toko</button>
-									<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">Customer</button>
-									<!-- Button trigger modal class ".alertYesNo" -->
-								</td>
-							</tr> 
-							<?php }
-							?>
-						</tbody>
-					</table>
+								$('.f_cell_nama_produk_input').keypress(function(e) {
+									if(e.which == 13) {
+										$(this).siblings('.f_cell_nama_produk').text($(this).val());
+										$(this).siblings('.f_cell_nama_produk').removeClass('hidden');
+										$(this).addClass('hidden');
+									}
+								});
+								</script>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	@include('pages.transaction.pop_up_detail_transaction')
+		@include('pages.transaction.pop_up_detail_transaction')
 
-	<script>
+		<script>
 
 	/*$('body').on('click','.flogin',function(){
 		$data = {
@@ -140,6 +175,6 @@
 						alert(errorThrown);
 			}
 		},'json');	
-	});*/
-	</script>
+});*/
+</script>
 @stop

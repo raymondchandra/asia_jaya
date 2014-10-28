@@ -197,6 +197,12 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.transaction.manage_transaction');
 	});
 
+	//Stock
+	Route::get('/stock', function()
+	{
+		return View::make('pages.stock.manage_stock');
+	});
+
 
 
 });
