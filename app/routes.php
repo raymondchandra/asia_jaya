@@ -7,16 +7,24 @@
 	});
 	Route::get('/tes2', function()
 	{
-		$productDetailController = new ProductDetailsController();
-		$productJson = $productDetailController->getAll();
-		$json = json_decode($productJson->getContent());
-		$products = $json->{'messages'};
-		foreach($products as $product)
-		{
-			$product->product_name = ProductDetail::find($product->id)->product->name;
-		}
+		$data = array("customer_id"=>1, "total"=>20000, "discount"=>0, "tax"=>0, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>2, "status"=>"OK");
 		
-		return $products;
+		$validator = Validator::make($data, Transaction::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Transaction::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
 	});
 	
 //get list without filter
