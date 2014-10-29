@@ -28,6 +28,7 @@ class finalizeSellController extends \HomeController{
 				return $custId;
 			}
 		}else{
+			echo "customer = "; var_dump($addJson->{'messages'});
 			return -1;
 		}
 	}
@@ -38,7 +39,7 @@ class finalizeSellController extends \HomeController{
 		@return : 1 for created, -1 for failed
 		-) Fungsi untuk untuk melakukan proses pembayaran oleh customer atas pesanannya
 	*/
-	public function addCashes($transactionId){
+	/*public function addCashes($transactionId){
 		$cashController = new CashesController();
 		$addCashes = $cashController->insertWithParam($transactionId);
 		$addJson = json_decode($addCashes->getContent());
@@ -48,7 +49,7 @@ class finalizeSellController extends \HomeController{
 		}else{
 			return -1;
 		}
-	}
+	}*/
 	
 	/*
 		@author : Gentry Swanri
@@ -61,11 +62,12 @@ class finalizeSellController extends \HomeController{
 		$addOrder = $orderController->insertWithParam($quantity, $transactionId, $price, $productDetailId);
 		$addJson = json_decode($addOrder->getContent());
 		
-		echo $addJson->{'status'};
+		//echo $addJson->{'status'};
 		
 		if($addJson->{'status'}=="Created"){
 			return 1;
 		}else{
+			echo "orders = "; var_dump($addJson->{'messages'});
 			return -1;
 		}
 	}
@@ -96,6 +98,7 @@ class finalizeSellController extends \HomeController{
 				return $transId;
 			}
 		}else{
+			echo "Transaction = "; var_dump($addJson->{'messages'});
 			return -1;
 		}
 	}
@@ -121,15 +124,13 @@ class finalizeSellController extends \HomeController{
 		///*
 		$total = 500000;
 		$custName = "Uji Coba Customer";
-		$salesId = 99;
 		$productName = "eius";
 		$color = "FireBrick";
 		$quantity = 3;
+		$salesId = 1;
 		
 		//addCustomer
 		$customerId = $this->addCustomer($custName);
-		
-		echo $customerId;
 		
 		if($customerId!=-1){
 			//add Transaction
