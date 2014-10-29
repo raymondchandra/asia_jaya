@@ -18,7 +18,7 @@
     -moz-transition: all ease-out $val;
     -o-transition: all  ease-out $val;
     transition: all ease-out $val;
-}
+} 
 
 @mixin border-radius($val){
 	-webkit-border-radius: $val;
@@ -34,19 +34,39 @@ $green: #228b22;
 custom
 */
 
+html,body {
+    overflow-x: hidden;
+}
+.s_super_container {
+    position: relative;
+    display:block;
+}
 .s_left_display {
-    background-color: #324;
-    display: block;
-    position: fixed; 
+  //  background-color: #324;
+  display: block;
+    //position: fixed; 
     z-index:99;
     color:#fff;
+    position: fixed; 
     //left: -100px;
-   
+
+    .s_sidebar_area {
+        width: 80%; 
+        display: block; 
+        float: left; 
+        background-color: #324;
+    }
+
+    .s_sidebar_close_area {
+        width: 20%; 
+        display: block; 
+        float: left;
+    }
     
 }
 .s_middle_display {
     position: relative;
-    background-color: #ff0;
+    background-color: #f1f1f1;
 }
 .s_right_display {
 
