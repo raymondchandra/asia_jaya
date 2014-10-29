@@ -1,0 +1,17 @@
+/*
+custom
+*/
+/* line 37, E:/xampp/htdocs/asiajayastore/public/assets/css/app.scss */
+.s_left_display {
+  background-color: #324;
+  display: block;
+  position: fixed;
+  z-index: 99;
+  color: #fff;
+}
+
+/* line 47, E:/xampp/htdocs/asiajayastore/public/assets/css/app.scss */
+.s_middle_display {
+  position: relative;
+  background-color: #ff0;
+}
