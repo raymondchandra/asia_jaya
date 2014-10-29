@@ -9,7 +9,10 @@ class Order extends \Eloquent {
 
 	// Don't forget to fill this array
 	protected $fillable = [
-	
+		'quantity',
+		'transaction_id',
+		'price',
+		'product_detail_id',
 	];
 	
 	public function transaction()

@@ -108,26 +108,26 @@ class finalizeSellController extends \HomeController{
 		@parameter :
 		@return : success or failed
 		-) Fungsi untuk melakukan finalisasi pembelian oleh customer
-		-) Fungsi ini memanggil fungsi addCustomer, addTransaction, addOrders, dan addCashes secara berurutan
+		-) Fungsi ini memanggil fungsi addCustomer, addTransaction, dan addOrders secara berurutan
+		-) Diapnggil berulang kali sesuai dengan banyak produk yang diorder
 	*/
 	public function finalize(){
 		/*
-			-) Pramuniaga menekan tombol finalize lalu memasukkan nama customer dan mendapatkan total harga
+			-) Pramuniaga menekan tombol finalize lalu memasukkan nama customer
 			-) Memanggil fungsi @addCustomer
 			-) Memanggil fungsi @addTransaction
 			-) Memanggil fungsi @addOrders
 			-) Memanggil fungsi @addCashes
 		*/
 		
-		//return "Posting Something";
 		//data transaksi (dummy)
-		///*
 		$total = 500000;
 		$custName = "Uji Coba Customer";
-		$productName = "eius";
-		$color = "FireBrick";
+		$productName = "fugit";
+		$color = "LightCoral";
 		$quantity = 3;
 		$salesId = 1;
+		$response = array();
 		
 		//addCustomer
 		$customerId = $this->addCustomer($custName);
@@ -140,18 +140,18 @@ class finalizeSellController extends \HomeController{
 				$product = $productController->getByProductName($productName);
 				$productJson = json_decode($product->getContent());
 				if($productJson->{'status'}=="Not Found"){
-					return "product name not found == Failed";
+					$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Name Not Found');
 				}else{
 					$productMessages = $productJson->{'messages'};
 					foreach($productMessages as $prodMes){
 						$productId = $prodMes->id;
-						$price = $prodMes->min_price;
+						$price = $prodMes->sales_price;
 					}
 					$productDetailController = new ProductDetailsController();
 					$detailByProductId = $productDetailController->getByProductId($productId);
 					$prodIdJson = json_decode($detailByProductId->getContent());
 					if($prodIdJson->{'status'}=="Not Found"){
-						return "Product Id Not Found";
+						$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Id Not Found');
 					}else{
 						$detail = $prodIdJson->{'messages'};
 						$productDetailId = -1;
@@ -165,27 +165,23 @@ class finalizeSellController extends \HomeController{
 							//add Orders
 							$addOrders = $this->addOrders($quantity, $transactionId, $price, $productDetailId);
 							if($addOrders!=-1){
-								return "Finalize Success";
-								/*$addCashes = $this->addCashes($transactionId);
-								if($addCashes!=-1){
-									return "Finalize Success";
-								}else{
-									return "Add Cashes Failed";
-								}*/
+								echo 'Created';
+								$response = array('code'=>'201','status' => 'Created');
 							}else{
-								return "Add Orders Failed";
+								$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Add Order Failed');
 							}
 						}else{
-							return "Product Detail Id Not Found";
+							$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Detail Id Not Found');
 						}
 					}
 				}
 			}else{
-				return "Add Transaction Failed";
+				$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Add Transaction Failed');
 			}
 		}else{
-			return "Add Customer Failed";
+			$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Add Customer Failed');
 		}
-		//*/
+		
+		return Response::json($response);
 	}
 }
