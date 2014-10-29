@@ -1,7 +1,7 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$products = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')->where('product_code', 'LIKE', '')->orWhere('product_name','LIKE','')->get();
+		$products = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')->where('product_code', 'LIKE', 86651)->orWhere('name','LIKE','fugit')->get();
 		
 		return $products;
 	});
