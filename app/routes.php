@@ -7,24 +7,25 @@
 	});
 	Route::get('/tes2', function()
 	{
-		$data = array("customer_id"=>1, "total"=>20000, "discount"=>0, "tax"=>0, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>2, "status"=>"OK");
+		$productDetailController = new ProductDetailsController();
+		$productJson = $productDetailController->getAll();
+		$json = json_decode($productJson->getContent());
 		
-		$validator = Validator::make($data, Transaction::$rules);
-
-		if ($validator->fails())
-		{
-			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
-			return Response::json($respond);
+		if($json->{'status'}!="Not Found"){
+			$products = $json->{'messages'};
+			foreach($products as $product)
+			{
+				$product->product_name = ProductDetail::find($product->product_id)->product->name;
+				$product->product_code = ProductDetail::find($product->product_id)->product->product_code;
+				$product->sales_price = ProductDetail::find($product->product_id)->product->sales_price;
+			}
+			
+			$response = array('code'=>'200','status' => 'OK','messages'=>$products);
+		}else{
+			$response = array('code'=>'404','status' => 'Not Found');
 		}
-
-		//save
-		try {
-			Transaction::create($data);
-			$respond = array('code'=>'201','status' => 'Created');
-		} catch (Exception $e) {
-			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
-		}
-		return Response::json($respond);
+		
+		return Response::json($response);
 	});
 	
 //get list without filter
