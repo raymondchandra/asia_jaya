@@ -15,5 +15,10 @@ class Cash extends \Eloquent {
 		'current',
 		'type',
 	];
+	
+	public function transaction()
+	{
+		return $this->belongsTo('Transaction');
+	}
 
 }

@@ -16,8 +16,18 @@ class Transaction extends \Eloquent {
 		'print_customer',
 		'print_shop',
 		'is_void',
-		'saled_id',
+		'sales_id',
 		'status',
 	];
+	
+	public function customer()
+	{
+		return $this->belongsTo('Customer');
+	}
+	
+	public function sales()
+	{
+		return $this->belongsTo('Account');
+	}
 
 }

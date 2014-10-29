@@ -11,5 +11,10 @@ class Return extends \Eloquent {
 	protected $fillable = [
 	
 	];
+	
+	public function tradedProduct()
+	{
+		return $this->belongsTo('ProductDetail');
+	}
 
 }
