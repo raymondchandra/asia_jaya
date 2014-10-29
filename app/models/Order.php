@@ -11,5 +11,15 @@ class Order extends \Eloquent {
 	protected $fillable = [
 	
 	];
+	
+	public function transaction()
+	{
+		return $this->belongsTo('Transaction');
+	}
+	
+	public function product_detail()
+	{
+		return $this->belongsTo('ProductDetail');
+	}
 
 }

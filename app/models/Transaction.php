@@ -19,5 +19,15 @@ class Transaction extends \Eloquent {
 		'saled_id',
 		'status',
 	];
+	
+	public function customer()
+	{
+		return $this->belongsTo('Customer');
+	}
+	
+	public function sales()
+	{
+		return $this->belongsTo('Account');
+	}
 
 }

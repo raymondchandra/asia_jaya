@@ -11,5 +11,14 @@ class RestockDetail extends \Eloquent {
 	protected $fillable = [
 	
 	];
-
+	
+	public function product_detail()
+	{
+		return $this->belongsTo('ProductDetail');
+	}
+	
+	public function restock()
+	{
+		return $this->belongsTo('Restock');
+	}
 }
