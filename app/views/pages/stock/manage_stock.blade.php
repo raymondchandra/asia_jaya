@@ -145,7 +145,7 @@
 									}
 								});
 
-								$( 'body' ).on( "click",'#f_cell_harga_modal', function() {
+								/*$( 'body' ).on( "click",'#f_cell_harga_modal', function() {
 									// 'Getting' data-attributes using getAttribute
 									var plant = document.getElementById('f_cell_harga_modal');
 									var fruitCount = plant.getAttribute('data-modal'); // fruitCount = '12'
@@ -153,7 +153,7 @@
 									// 'Setting' data-attributes using setAttribute
 									plant.setAttribute('data-modal','7'); // Pesky birds
 									$(this).text(plant.getAttribute('data-modal'));
-								});
+								});*/
 
 
 									
