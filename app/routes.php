@@ -41,7 +41,11 @@
 	Route::get('/finalizeSell', function(){
 		return View::make('submitTest');
 	});
+	
 	Route::post('finalize', 'finalizeSellController@finalize');
+	
+//Return Product
+	Route::post('returnProduct', 'returnController@returnProduct');
 	
 	
 

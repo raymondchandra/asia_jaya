@@ -9,7 +9,12 @@ class Return extends \Eloquent {
 
 	// Don't forget to fill this array
 	protected $fillable = [
-	
+		'order_id',
+		'type',
+		'status',
+		'solution',
+		'trade_product_id',
+		'difference',
 	];
 	
 	public function tradedProduct()

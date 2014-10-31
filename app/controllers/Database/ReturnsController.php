@@ -25,6 +25,32 @@ class ReturnsController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@parameter :
+		@return :
+		-) Fungsi ini digunakan untuk menambahkan 1 baris baru ke dalam tabel return
+	*/
+	public function insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference){
+		$data = array("order_id"=>$orderId, "type"=>$type, "status"=>$status, "solution"=>$solution, "trade_product_id"=>$tradeProductId, "difference"=>$difference);
+		$validator = Validator::make($data, Return::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Return::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($return)
 	{
 		$respond = array();
