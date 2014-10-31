@@ -11,7 +11,7 @@ class ReturnsTableSeeder extends Seeder {
 
 		foreach(range(1, 10) as $index)
 		{
-			Return::create([
+			Returns::create([
 
 			]);
 		}

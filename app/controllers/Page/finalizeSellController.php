@@ -123,8 +123,8 @@ class finalizeSellController extends \HomeController{
 		//data transaksi (dummy)
 		$total = 500000;
 		$custName = "Uji Coba Customer";
-		$productList[] = array("name"=>"fugit", "color"=>"LightCoral");
-		$productList[] = array("name"=>"porro", "color"=>"Maroon");
+		$productList[] = array("name"=>"qui", "color"=>"Green");
+		$productList[] = array("name"=>"ea", "color"=>"Gold");
 		//$productName = "fugit";
 		//$color = "LightCoral";
 		$quantity = 3;
