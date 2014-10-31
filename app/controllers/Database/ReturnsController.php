@@ -7,7 +7,7 @@ class ReturnsController extends \BaseController {
 		$respond = array();
 		$data = Input::all();
 		//validate
-		$validator = Validator::make($data, Return::$rules);
+		$validator = Validator::make($data, ReturnDB::$rules);
 
 		if ($validator->fails())
 		{
@@ -17,7 +17,7 @@ class ReturnsController extends \BaseController {
 
 		//save
 		try {
-			Return::create($data);
+			ReturnDB::create($data);
 			$respond = array('code'=>'201','status' => 'Created');
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
@@ -33,7 +33,7 @@ class ReturnsController extends \BaseController {
 	*/
 	public function insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference){
 		$data = array("order_id"=>$orderId, "type"=>$type, "status"=>$status, "solution"=>$solution, "trade_product_id"=>$tradeProductId, "difference"=>$difference);
-		$validator = Validator::make($data, Return::$rules);
+		$validator = Validator::make($data, ReturnDB::$rules);
 
 		if ($validator->fails())
 		{
@@ -43,7 +43,7 @@ class ReturnsController extends \BaseController {
 
 		//save
 		try {
-			Return::create($data);
+			ReturnDB::create($data);
 			$respond = array('code'=>'201','status' => 'Created');
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);

@@ -1,7 +1,7 @@
 <?php
 
-class Return extends \Eloquent {
-
+class ReturnDB extends \Eloquent {
+	protected $table = 'returns';
 	// Add your validation rules here
 	public static $rules = [
 		// 'title' => 'required'

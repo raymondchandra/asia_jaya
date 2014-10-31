@@ -1,9 +1,23 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$products = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')->where('product_code', 'LIKE', 86651)->orWhere('name','LIKE','fugit')->get();
-		
-		return $products;
+		$data = array("order_id"=>1, "type"=>1, "status"=>"pending", "solution"=>"pending", "trade_product_id"=>1, "difference"=>-10);
+		$validator = Validator::make($data, ReturnDB::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			ReturnDB::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
 	});
 	Route::get('/tes2', function()
 	{
