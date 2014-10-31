@@ -67,13 +67,13 @@ class ReturnsController extends \BaseController {
 	
 	public function getAll()
 	{
-		$return = Return::all();
+		$return = ReturnDB::all();
 		return $this->getReturn($return);
 	}
 
 	public function getById($id)
 	{
-		$return = Return::find($id);
+		$return = ReturnDB::find($id);
 		return $this->getReturn($return);
 	}
 	
@@ -88,7 +88,7 @@ class ReturnsController extends \BaseController {
 	public function updateFull($id)
 	{
 		$respond = array();
-		$return = Return::find($id);
+		$return = ReturnDB::find($id);
 		if ($return == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');
@@ -97,7 +97,7 @@ class ReturnsController extends \BaseController {
 		{
 			$data = Input::all();
 			//validate
-			$validator = Validator::make($data, Return::$rules);
+			$validator = Validator::make($data, ReturnDB::$rules);
 
 			if ($validator->fails())
 			{
@@ -144,7 +144,7 @@ class ReturnsController extends \BaseController {
 	public function delete($id)
 	{
 		$respond = array();
-		$return = Return::find($id);
+		$return = ReturnDB::find($id);
 		if ($return == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');
