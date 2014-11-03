@@ -20,11 +20,9 @@ class searchViewController extends \HomeController{
 				$product->product_name = ProductDetail::find($product->product_id)->product->name;
 				$product->product_code = ProductDetail::find($product->product_id)->product->product_code;
 				$product->sales_price = ProductDetail::find($product->product_id)->product->sales_price;
-				
-				$result[] = (object) array('product_code'=>$product->product_code, 'product_name'=>$product->product_name, 'color'=>$product->color, 'stock_shop'=>$product->stock_shop, 'stock_storage'=>$product->stock_storage, 'sales_price'=>$product->sales_price);
 			}
 			
-			$response = array('code'=>'200','status' => 'OK','messages'=>$result);
+			$response = array('code'=>'200','status' => 'OK','messages'=>$products);
 		}else{
 			$response = array('code'=>'404','status' => 'Not Found');
 		}
@@ -43,7 +41,7 @@ class searchViewController extends \HomeController{
 		
 		//$products = ProductDetail::join('products', 'product_details.product_id', '=' , 'products.id')->where('product_code', '=' , $productCode)->get();
 		
-		$products = ProductDetail::join('products', 'product_details.product_id', '=' , 'products.id')->where('product_code', '=' , $productCode)->select('products.product_code','products.name','product_details.color', 'product_details.stock_shop', 'product_details.stock_storage', 'products.sales_price')->get();
+		$products = ProductDetail::join('products', 'product_details.product_id', '=' , 'products.id')->where('product_code', '=' , $productCode)->get();
 		
 		if(count($products)==0){
 			$response = array('code'=>'404','status' => 'Not Found');
@@ -72,7 +70,7 @@ class searchViewController extends \HomeController{
 		
 		//$products = ProductDetail::join('products', 'product_details.product_id', '=' , 'products.id')->where('name', '=' , $productName)->get();
 		
-		$products = ProductDetail::join('products', 'product_details.product_id', '=' , 'products.id')->where('name', '=' , $productName)->select('products.product_code','products.name','product_details.color', 'product_details.stock_shop', 'product_details.stock_storage', 'products.sales_price')->get();
+		$products = ProductDetail::join('products', 'product_details.product_id', '=' , 'products.id')->where('name', '=' , $productName)->get();
 		
 		if(count($products)==0){
 			$response = array('code'=>'404','status' => 'Not Found');

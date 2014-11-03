@@ -7,7 +7,7 @@ class ReturnsController extends \BaseController {
 		$respond = array();
 		$data = Input::all();
 		//validate
-		$validator = Validator::make($data, Return::$rules);
+		$validator = Validator::make($data, ReturnDB::$rules);
 
 		if ($validator->fails())
 		{
@@ -17,7 +17,33 @@ class ReturnsController extends \BaseController {
 
 		//save
 		try {
-			Return::create($data);
+			ReturnDB::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter :
+		@return :
+		-) Fungsi ini digunakan untuk menambahkan 1 baris baru ke dalam tabel return
+	*/
+	public function insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference){
+		$data = array("order_id"=>$orderId, "type"=>$type, "status"=>$status, "solution"=>$solution, "trade_product_id"=>$tradeProductId, "difference"=>$difference);
+		$validator = Validator::make($data, ReturnDB::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			ReturnDB::create($data);
 			$respond = array('code'=>'201','status' => 'Created');
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
@@ -41,13 +67,13 @@ class ReturnsController extends \BaseController {
 	
 	public function getAll()
 	{
-		$return = Return::all();
+		$return = ReturnDB::all();
 		return $this->getReturn($return);
 	}
 
 	public function getById($id)
 	{
-		$return = Return::find($id);
+		$return = ReturnDB::find($id);
 		return $this->getReturn($return);
 	}
 	
@@ -62,7 +88,7 @@ class ReturnsController extends \BaseController {
 	public function updateFull($id)
 	{
 		$respond = array();
-		$return = Return::find($id);
+		$return = ReturnDB::find($id);
 		if ($return == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');
@@ -71,7 +97,7 @@ class ReturnsController extends \BaseController {
 		{
 			$data = Input::all();
 			//validate
-			$validator = Validator::make($data, Return::$rules);
+			$validator = Validator::make($data, ReturnDB::$rules);
 
 			if ($validator->fails())
 			{
@@ -118,7 +144,7 @@ class ReturnsController extends \BaseController {
 	public function delete($id)
 	{
 		$respond = array();
-		$return = Return::find($id);
+		$return = ReturnDB::find($id);
 		if ($return == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');

@@ -1,15 +1,8 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$products = ProductDetail::join('products', 'product_details.product_id', '=', 'products.id')->where('product_code', 'LIKE', 86651)->orWhere('name','LIKE','fugit')->get();
-		
-		return $products;
-	});
-	Route::get('/tes2', function()
-	{
-		$data = array("customer_id"=>1, "total"=>20000, "discount"=>0, "tax"=>0, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>2, "status"=>"OK");
-		
-		$validator = Validator::make($data, Transaction::$rules);
+		$data = array("order_id"=>1, "type"=>1, "status"=>"pending", "solution"=>"pending", "trade_product_id"=>1, "difference"=>-10);
+		$validator = Validator::make($data, ReturnDB::$rules);
 
 		if ($validator->fails())
 		{
@@ -19,12 +12,34 @@
 
 		//save
 		try {
-			Transaction::create($data);
+			ReturnDB::create($data);
 			$respond = array('code'=>'201','status' => 'Created');
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
 		}
 		return Response::json($respond);
+	});
+	Route::get('/tes2', function()
+	{
+		$productDetailController = new ProductDetailsController();
+		$productJson = $productDetailController->getAll();
+		$json = json_decode($productJson->getContent());
+		
+		if($json->{'status'}!="Not Found"){
+			$products = $json->{'messages'};
+			foreach($products as $product)
+			{
+				$product->product_name = ProductDetail::find($product->product_id)->product->name;
+				$product->product_code = ProductDetail::find($product->product_id)->product->product_code;
+				$product->sales_price = ProductDetail::find($product->product_id)->product->sales_price;
+			}
+			
+			$response = array('code'=>'200','status' => 'OK','messages'=>$products);
+		}else{
+			$response = array('code'=>'404','status' => 'Not Found');
+		}
+		
+		return Response::json($response);
 	});
 	
 //get list without filter
@@ -40,7 +55,11 @@
 	Route::get('/finalizeSell', function(){
 		return View::make('submitTest');
 	});
+	
 	Route::post('finalize', 'finalizeSellController@finalize');
+	
+//Return Product
+	Route::post('returnProduct', 'returnController@returnProduct');
 	
 	
 

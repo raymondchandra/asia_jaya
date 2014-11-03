@@ -123,8 +123,10 @@ class finalizeSellController extends \HomeController{
 		//data transaksi (dummy)
 		$total = 500000;
 		$custName = "Uji Coba Customer";
-		$productName = "fugit";
-		$color = "LightCoral";
+		$productList[] = array("name"=>"qui", "color"=>"Green");
+		$productList[] = array("name"=>"ea", "color"=>"Gold");
+		//$productName = "fugit";
+		//$color = "LightCoral";
 		$quantity = 3;
 		$salesId = 1;
 		$response = array();
@@ -137,41 +139,42 @@ class finalizeSellController extends \HomeController{
 			$transactionId = $this->addTransaction($salesId, $customerId, $total);
 			if($transactionId!=-1){
 				$productController = new ProductsController();
-				$product = $productController->getByProductName($productName);
-				$productJson = json_decode($product->getContent());
-				if($productJson->{'status'}=="Not Found"){
-					$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Name Not Found');
-				}else{
-					$productMessages = $productJson->{'messages'};
-					foreach($productMessages as $prodMes){
-						$productId = $prodMes->id;
-						$price = $prodMes->sales_price;
-					}
-					$productDetailController = new ProductDetailsController();
-					$detailByProductId = $productDetailController->getByProductId($productId);
-					$prodIdJson = json_decode($detailByProductId->getContent());
-					if($prodIdJson->{'status'}=="Not Found"){
-						$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Id Not Found');
+				$productDetailController = new ProductDetailsController();
+				foreach($productList as $prodList){
+					$product = $productController->getByProductName($prodList["name"]);
+					$productJson = json_decode($product->getContent());
+					if($productJson->{'status'}=="Not Found"){
+						$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Name Not Found');
 					}else{
-						$detail = $prodIdJson->{'messages'};
-						$productDetailId = -1;
-						foreach($detail as $det){
-							if($det->color == $color){
-								$productDetailId = $det->id;
-							}
+						$productMessages = $productJson->{'messages'};
+						foreach($productMessages as $prodMes){
+							$productId = $prodMes->id;
+							$price = $prodMes->sales_price;
 						}
-						
-						if($productDetailId!=-1){
-							//add Orders
-							$addOrders = $this->addOrders($quantity, $transactionId, $price, $productDetailId);
-							if($addOrders!=-1){
-								echo 'Created';
-								$response = array('code'=>'201','status' => 'Created');
-							}else{
-								$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Add Order Failed');
-							}
+						$detailByProductId = $productDetailController->getByProductId($productId);
+						$prodIdJson = json_decode($detailByProductId->getContent());
+						if($prodIdJson->{'status'}=="Not Found"){
+							$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Id Not Found');
 						}else{
-							$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Detail Id Not Found');
+							$detail = $prodIdJson->{'messages'};
+							$productDetailId = -1;
+							foreach($detail as $det){
+								if($det->color == $prodList["color"]){
+									$productDetailId = $det->id;
+								}
+							}
+							
+							if($productDetailId!=-1){
+								//add Orders
+								$addOrders = $this->addOrders($quantity, $transactionId, $price, $productDetailId);
+								if($addOrders!=-1){
+									$response = array('code'=>'201','status' => 'Created');
+								}else{
+									$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Add Order Failed');
+								}
+							}else{
+								$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Detail Id Not Found');
+							}
 						}
 					}
 				}
