@@ -114,7 +114,7 @@
 											<?php
 											for($i=0; $i<15; $i++){
 												?>
-												<tr id="baris_ke_<?php echo($i); ?>" data-toggle="modal" data-target=".pop_up_edit_barang">
+												<tr id="baris_ke_<?php echo($i); ?>" data-toggle="modal" data-target="#pop_up_edit_barang">
 													<td style="line-height: 30px;">
 														123123123
 													</td>
@@ -137,111 +137,106 @@
 												<?php
 											}
 											?>
-											<script>
-										//	$('body').on('click', '.f_table_pesanan > tr', function(){
-										//		alert($(this).attr('id'));
-										//	});
-</script>
-<style>
-.f_table_pesanan > tr:active > td {
-	background-color: #E8CD02 !important;
-}
-</style>
-</tbody>
-</table>
+											<style>
+											.f_table_pesanan > tr:active > td {
+												background-color: #E8CD02 !important;
+											}
+											</style>
+										</tbody>
+									</table>
 
-<div class="form-group">
-	
-	<div class="g-sm-12">
-		<label for="inputEmail3" class="control-label pull-left">Email</label>
-		<input type="email" class="form-control pull-left" id="inputEmail3" placeholder="Email" style="width: 80%;">
-	</div>
-</div>
+									<div class="form-group">
+										<label for="" class="control-label g-sm-6">Subtotal</label>
+										<div class="g-sm-6">
+											<p class="form-control-static" id="" placeholder="" >Rp 900.000.000</p>
+										</div>
+									</div>
 
-</form>
+									<div class="form-group">
+
+										<label for="" class="control-label g-sm-6">Total</label>
+										<div class="g-sm-6">
+											<p class="form-control-static" id="" placeholder="" >Rp 900.000.000</p>
+										</div>
+									</div>
+
+									
+									<div class="form-group">
+										<div class="g-sm-12">
+											<button type="button" class="btn btn-success btn-lg g-sm-12">
+												Finalize Belajaan
+											</button>
+										</div>
+									</div>
+								</form>
+
+								<!-- Modal Search Barang-->
+								@include('pages.mobile_test.pop_up_cari_barang')
+								<!-- Modal Edit Barang-->
+								@include('pages.mobile_test.pop_up_edit_barang')
+								<!-- Modal Edit Barang-->
+								@include('pages.mobile_test.pop_up_delete_alert')
+
+							</div>
+						</div>
+						<script>
+						$(function () {
+							$('#myTab a:last').tab('show')
+						})
+						</script>
+					</div>
+				</div>
+			</div>
+		</section>
+	</section>
 
 
+	<script type="text/javascript">
+		var height = $(window).height();
+		var width = $(window).width();
+		var inc = 0;
+		var tab_width = $('.sf_tab_orderan > ul').children('li').width();
+		var tab_container_width = $('.sf_tab_orderan > ul').width();
 
 
-<!-- Modal Search Barang-->
-@include('pages.mobile_test.pop_up_cari_barang')
-<!-- Modal Edit Barang-->
-@include('pages.mobile_test.pop_up_edit_barang')
+		function updateSize(){
+			$('.s_super_container').height(height);
+			$('.s_super_container').width(width);
+			$('.s_left_display').height(height);
+			$('.s_left_display').width(width);
 
+			$('.s_middle_display').width(width);
+			$('.sf_tab_orderan').width(width);
+			$('.sf_tab_orderan > ul').width(tab_container_width);
 
+			$('.s_left_display').css('left',-width);
 
+			$('.s_sidebar_area').height(height);
+			$('.s_sidebar_close_area').height(height);
+			
+			
+		};
+		$(document).ready(updateSize);
+		$(window).resize(updateSize);
 
+		$('body').on('click', '.f_side_bar_buka', function(){
+			$('.s_left_display').animate({"left": '0px'},330, 'easeInOutExpo');
+			$('.f_side_bar_tutup').removeClass('hidden').addClass('show');
+			$('.f_side_bar_buka').addClass('hidden').removeClass('show');
 
-</div>
-</div>
-<script>
-$(function () {
-	$('#myTab a:last').tab('show')
-})
-</script>
-</div>
-</div>
-</div>
-</section>
-</section>
+		});
 
+		$('body').on('click', '.f_side_bar_tutup', function(){
+			$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
+			$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
+			$('.f_side_bar_buka').removeClass('hidden').addClass('show');
+		});
 
-<script type="text/javascript">
-var height = $(window).height();
-var width = $(window).width();
-var inc = 0;
-var tab_width = $('.sf_tab_orderan > ul').children('li').width();
-var tab_container_width = $('.sf_tab_orderan > ul').width();
-			//alert(tab_container_width);
-
-			function updateSize(){
-				// Get the dimensions of the viewport
-				//var width = $(window).width();
-				
-				//var navHeight = $('#nav_sec').height();
-				
-				//$('#landing_sec').height(height);
-				//$('.landing_spc').height(height - navHeight);
-				$('.s_super_container').height(height);
-				$('.s_super_container').width(width);
-				$('.s_left_display').height(height);
-				$('.s_left_display').width(width);
-				//$('.s_middle_display').height(height);
-				$('.s_middle_display').width(width);
-				$('.sf_tab_orderan').width(width);
-				$('.sf_tab_orderan > ul').width(tab_container_width);
-
-				$('.s_left_display').css('left',-width);
-
-				$('.s_sidebar_area').height(height);
-				$('.s_sidebar_close_area').height(height);
-				
-				
-			};
-			$(document).ready(updateSize);
-			$(window).resize(updateSize);
-
-			$('body').on('click', '.f_side_bar_buka', function(){
-				$('.s_left_display').animate({"left": '0px'},330, 'easeInOutExpo');
-				$('.f_side_bar_tutup').removeClass('hidden').addClass('show');
-				$('.f_side_bar_buka').addClass('hidden').removeClass('show');
-
-			});
-
-			$('body').on('click', '.f_side_bar_tutup', function(){
-				$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
-				$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
-				$('.f_side_bar_buka').removeClass('hidden').addClass('show');
-			});
-
-			$('body').on('click', '.s_sidebar_close_area', function(){
-				$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
-				$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
-				$('.f_side_bar_buka').removeClass('hidden').addClass('show');
-			});
-
-			//var epic = $('.sf_tab_orderan > ul').children('li').length;
-		//	alert(epic);
+		$('body').on('click', '.s_sidebar_close_area', function(){
+			$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
+			$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
+			$('.f_side_bar_buka').removeClass('hidden').addClass('show');
+		});
 
 		$('body').on('click', '#f_add_new_order', function() {
 			$('.sf_tab_orderan > ul').width(tab_container_width+=tab_width);
@@ -258,19 +253,17 @@ var tab_container_width = $('.sf_tab_orderan > ul').width();
 			
 		});
 
-		</script>
-		<script>
+	</script>
+	<script>
 		function pop_up_edit_barang(n){
-				//alert(n);
-			};
+			//alert(n);
+		};
 
-			$('body').on('click','.f_table_pesanan > tr',function(){
-				var n = $(this).attr('id');
-				pop_up_edit_barang(n);
-			});
+		$('body').on('click','.f_table_pesanan > tr',function(){
+			var n = $(this).attr('id');
+			pop_up_edit_barang(n);
+		});
+	</script>
 
-
-			</script>
-
-		</body>
-		</html>
+</body>
+</html>
