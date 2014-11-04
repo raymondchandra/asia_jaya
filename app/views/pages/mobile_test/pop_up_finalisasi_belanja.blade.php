@@ -13,65 +13,57 @@
 			</div>
 
 			<div class="modal-body">
-				<div class="form-horizontal">
+				<div class="form">
 					<div class="form-group">
-						<label class="g-sm-3 control-label">Kode</label>
-						<div class="g-sm-9">
-							<p class="form-control-static">435345434335</p>
-						</div>
+						<label for="">Nama Pelanggan</label>
+						<input type="text" class="form-control" id="" placeholder="John Doe">
 					</div>
+
 					<div class="form-group">
-						<label class="g-sm-3 control-label">Nama</label>
-						<div class="g-sm-9">
-							<p class="form-control-static">Tas Gaya Banget</p>
-						</div>
+						<label for="">Total Biaya
+
+						</label>
+						<p type="text" class="form-control-static" id="" placeholder="John Doe">
+							Rp 1.900.000
+							<button class="btn btn-warning btn-sm pull-right f_diskon_revealer">
+								<span class="glyphicon glyphicon-usd"></span>
+							</button>
+						</p>
 					</div>
-					<div class="form-group">
-						<label class="g-sm-3 control-label">Warna</label>
-						<div class="g-sm-9">
-							<p class="form-control-static">Merah</p>
-						</div>
+					<div class="form-group hidden f_diskon_inputtext">
+						<label for="">Diskon</label>
+						<input type="text" class="form-control" id="" value="0">
 					</div>
-					<div class="form-group">
-						<label for="" class="g-sm-3 control-label">Harga@</label>
-						<div class="g-sm-4">
-							<input class="form-control" id="f_hsatuan_qty" value="100000">
-						</div>
-						<label for="" class="g-sm-2 control-label">Qty.</label>
-						<div class="g-sm-3">
-							<input type="text" class="form-control" value="1" id="f_edit_qty">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="g-sm-3 control-label">Subtotal</label>
-						<div class="g-sm-9">
-							<p class="form-control-static" id="f_subtotal_edit">100000</p>
-						</div>
-						<script>
-						$('body').on('change','#f_edit_qty',function(){
-							$('#f_subtotal_edit').text($('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
-						});
-						</script>
-					</div>
+					<script>
+					$('body').on('click','.f_diskon_revealer',function(){
+						if($('.f_diskon_inputtext').hasClass('hidden')){
+
+							$('.f_diskon_inputtext').removeClass('hidden');
+						}else{
+							$('.f_diskon_inputtext').addClass('hidden');
+						}
+					});
+					</script>
 
 				</div>
 
 			</div>
+
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger pull-left f_slide_alert">Delete</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
-				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+				<p class="g-sm-12 text-center f_masuk_kasir hidden">
+					Orderan sudah masuk kedalam kasir
+				</p>
+				<button type="button" class="btn btn-success pull-left g-sm-5 f_send_ke_kasir">Send</button>
+				<button type="button" class="btn btn-info pull-right g-sm-5" data-dismiss="modal">Back</button>
+
+				<script>
+				$('body').on('click','.f_send_ke_kasir',function(){
+					
+						$('.f_masuk_kasir').removeClass('hidden');
+					
+				});
+				</script>
 			</div>
-			<script>
-				$('body').on('click','.f_slide_alert',function(){
-					$('.f_slider_alert').removeClass('hidden');
-					//alert("sad");
-				});
-				$('body').on('click','.f_slider_tutup',function(){
-					$('.f_slider_alert').addClass('hidden');
-					//alert("sad");
-				});
-			</script>
 
 		</div>
 	</div>
