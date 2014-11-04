@@ -1253,7 +1253,7 @@ return array(
     'RestockDetailsTableSeeder' => $baseDir . '/app/database/seeds/RestockDetailsTableSeeder.php',
     'RestocksController' => $baseDir . '/app/controllers/Database/RestocksController.php',
     'RestocksTableSeeder' => $baseDir . '/app/database/seeds/RestocksTableSeeder.php',
-    'Return' => $baseDir . '/app/models/Return.php',
+    'ReturnDB' => $baseDir . '/app/models/ReturnDB.php',
     'ReturnsController' => $baseDir . '/app/controllers/Database/ReturnsController.php',
     'ReturnsTableSeeder' => $baseDir . '/app/database/seeds/ReturnsTableSeeder.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
@@ -1920,4 +1920,5 @@ return array(
     'finalizeSellController' => $baseDir . '/app/controllers/Page/finalizeSellController.php',
     'returnController' => $baseDir . '/app/controllers/Page/returnController.php',
     'searchViewController' => $baseDir . '/app/controllers/Page/searchViewController.php',
+    'taxController' => $baseDir . '/app/controllers/Page/taxController.php',
 );

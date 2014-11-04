@@ -25,6 +25,32 @@ class TaxesController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@parameter : $amount
+		@return : created or failed
+		-) Fungsi ini digunakan untuk memasukkan data tax ke tabel sesuai dengan parameter
+	*/
+	public function insertWithParam($amount){
+		$data = array('amount'=>$amount);
+		$validator = Validator::make($data, Tax::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Tax::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($tax)
 	{
 		$respond = array();
@@ -70,6 +96,42 @@ class TaxesController extends \BaseController {
 		else
 		{
 			$data = Input::all();
+			//validate
+			$validator = Validator::make($data, Tax::$rules);
+
+			if ($validator->fails())
+			{
+				$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+				return Response::json($respond);
+			}
+			//save
+			try {
+				$tax->update($data);
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $id, $amount
+		@return : updated or not
+		-) Fungsi ini digunakan untuk melakukan perubahan terhadap kolom amount
+	*/
+	public function updateAmount($id, $amount){
+		$respond = array();
+		$tax = Tax::find($id);
+		if ($tax == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			$data = array('amount'=>$amount);
 			//validate
 			$validator = Validator::make($data, Tax::$rules);
 

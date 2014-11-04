@@ -61,6 +61,9 @@
 //Return Product
 	Route::post('returnProduct', 'returnController@returnProduct');
 	
+//Tax Route
+	Route::post('insertUpdateTax', 'taxController@setTax');
+	
 	
 
 //home + login
