@@ -235,8 +235,6 @@
 	@include('pages.mobile_test.pop_up_edit_barang')
 	<!-- Modal Finalisasi Belanja-->
 	@include('pages.mobile_test.pop_up_finalisasi_belanja')
-	<!-- Modal Delete Table Orderan-->
-	<!-- @include('pages.mobile_test.pop_up_delete_table') -->
 
 
 	<script type="text/javascript">
@@ -367,7 +365,7 @@
 			tab_panel+='		</div>                                                                                                                                                     ';
 			tab_panel+='	</form>                                                                                                                                                        ';
 			tab_panel+='</div>                                                                                                                                                            ';
-			tab_panel+='<!-- Modal "alert"-->                                                                                                                                             ';
+			tab_panel+='<!-- Modal -->                                                                                                                                             ';
 			tab_panel+='<div class="modal fade pop_up_delete_table'+ inc +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">                               ';
 			tab_panel+='	<div class="modal-dialog">                                                                                                                                     ';
 			tab_panel+='		<div class="modal-content">                                                                                                                                ';
@@ -405,4 +403,4 @@
 	</script>
 
 </body>
-</html>
+</html> 
