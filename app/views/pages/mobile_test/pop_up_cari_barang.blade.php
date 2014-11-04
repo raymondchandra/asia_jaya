@@ -14,7 +14,7 @@
 						</div>
 					</div>
 				</div>
-				<table class="table table-bordered">
+				<table class="table table-bordered table-striped">
 					<thead>
 						<!--<tr>
 							<th rowspan="2">
@@ -42,33 +42,25 @@
 							</th>
 						</tr>-->
 					</thead>
-					<tbody>
+					<tbody class="f_table_search">
 						<?php
-						for($i=0; $i<3; $i++){
+						for($i=0; $i<20; $i++){
 							?>
-							<tr id="">
-								<tr>
-									<td>
-										423424242342
-									</td>
-									<td colspan="2">
-										Tas KW Epic
-									</td>
-									<tr>
-										<td>
-											Merah
-										</td>
-										<td>
-											10 | 100
-										</td>
-										<td>
-											400.000
-										</td>
-									</tr>
-								</tr>
-								<?php
-							}
-							?>
+							<tr id="" style="border-bottom: 1px solid #000 !important;" data-dismiss="modal">
+								<td>
+									<span style="display: block;">
+										#423424242342 / Merah / <span class="pull-right">10|100</span>
+									</span>
+
+									<span style="display: block;">
+										<span class="pull-left">Tas KW Backpacker</span>   <span class="pull-right">400.000</span>
+									</span>
+
+								</td>
+							</tr>
+							<?php
+						}
+						?>
 							<!--<tr id="">
 								<td style="line-height: 30px;">
 									123123123
@@ -86,7 +78,7 @@
 								</td>
 							</tr>-->
 							<style>
-							.f_table_pesanan > tr:active > td {
+							.f_table_search > tr:active > td {
 								background-color: #E8CD02 !important;
 							}
 							</style>
