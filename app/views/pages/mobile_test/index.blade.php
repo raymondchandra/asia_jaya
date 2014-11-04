@@ -75,91 +75,108 @@
 										Tabel Pesanan
 									</span>
 									<!-- Button trigger modal -->
-									<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#myModal">
+									<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#pop_up_cari_barang">
 										<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Barang
 									</button>
 								</div>
+								<form class="form-horizontal" >
 
-								<table class="table table-bordered table-striped" style="font-size: 0.8em">
-									<thead>
-										<tr>
-											<th rowspan="2">
-												Kode 
-											</th>
-											<th rowspan="2">
-												Warna 
-											</th>
-											<!-- <th rowspan="2">
-												Warna 
-											</th> -->
-											<th colspan="2">
-												Stok
-											</th>
-											<th rowspan="2">
-												Price
-											</th>
-										</tr>
-										<tr>
-											<th>
-												Toko
-											</th>
-											<th>
-												Gdg
-											</th>
-										</tr>
-
-									</thead>
-									<tbody>
-										<?php
-										for($i=0; $i<15; $i++){
-											?>
+									<table class="table table-bordered table-striped" style="font-size: 0.8em">
+										<thead>
 											<tr>
-												<td style="line-height: 22px;">
-													123123123
-												</td>
-												<td style="line-height: 22px;">
-													Merah
-												</td>
-												<td style="line-height: 22px;">
-													10
-												</td>
-												<td style="line-height: 22px;">
-													200
-												</td>
-												<td style="line-height: 22px;">
-													1.000.000
-												</td>
+												<th rowspan="2">
+													Kode 
+												</th>
+												<th rowspan="2">
+													Warna 
+												</th>
+												<th rowspan="2">
+													Qty. 
+												</th>
+												<th colspan="2">
+													Stok
+												</th>
+												<th rowspan="2">
+													Price
+												</th>
 											</tr>
+											<tr>
+												<th>
+													Toko
+												</th>
+												<th>
+													Gdg
+												</th>
+											</tr>
+
+										</thead>
+										<tbody class="f_table_pesanan">
 											<?php
-										}
-										?>
-									</tbody>
-								</table>
+											for($i=0; $i<15; $i++){
+												?>
+												<tr id="baris_ke_<?php echo($i); ?>" data-toggle="modal" data-target="#pop_up_edit_barang">
+													<td style="line-height: 30px;">
+														123123123
+													</td>
+													<td style="line-height: 30px;">
+														Merah
+													</td>
+													<td style="line-height: 30px;">
+														1
+													</td>
+													<td style="line-height: 30px;">
+														10
+													</td>
+													<td style="line-height: 30px;">
+														200
+													</td>
+													<td style="line-height: 30px;">
+														1.000.000
+													</td>
+												</tr>
+												<?php
+											}
+											?>
+											<style>
+											.f_table_pesanan > tr:active > td {
+												background-color: #E8CD02 !important;
+											}
+											</style>
+										</tbody>
+									</table>
 
-
-
-
-
-								<!-- Modal -->
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-												<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-											</div>
-											<div class="modal-body">
-												Arise features a brand new voice cast, compared with the casts of the original film and Stand Alone Complex television anime series. Maaya Sakamoto replaces Atsuko Tanaka as the voice of Major Motoko Kusanagi, Sakamoto having only previously voiced the Major as a child.[2] Other changes to the cast include Kenichirou Matsuda as Batou, Tarusuke Shingaki as Togusa, Ikyuu Jyuku as Chief Daisuke Aramaki, Tomoyuki Dan as Ishikawa, Takuro Nakakuni as Saito, Yōji Ueda as Paz, and Kazuya Nakai as Borma.[4] Miyuki Sawashiro will provide the voice of the series' think tanks the Logicoma (ロジコマ Rojikoma?), short for Logistics Conveyer Machine (ロジスティックス・コンベイヤー・マシン Rojisutikkusu Konbeiyā Mashin?). The Logicoma will also feature in anime shorts included on the Blu-ray releases titled Logicoma Beat (ロジコマ・ビート Rojikoma Bīto?).
-
-												New characters in the first of the episodes include Kurtz (クルツ Kurutsu?), voiced by Mayumi Asano in Japanese and by Mary Elizabeth McGlynn (the previous voice of the Major) in English, the head of the Army 501 Organization (陸軍５０１機関 Rikugun Go Maru Ichi Kikan?), the firm who converted Motoko Kusanagi into a full cyborg and who Kusanagi would replace in the organization had she not joined Section 9; Raizo (ライゾー Raizō?), voiced by Takanori Hoshino, a combat cyborg for the 501 Organization that uses electricity as weapons; Ibachi (イバチ?), voiced by Masahiro Mamiya, a combat cyborg for the 501 Organization skilled in bōjutsu and armed with hidden machine guns; Tsumugi (ツムギ?), voiced by Kenji Nojima, a tactical cyborg for the 501 Organization that has a set of twins' cyberbrains in its head who always talk to each other; and Lieutenant colonel Mamuro (マムロ?), voiced by Atsushi Miyauchi, the leader of the 501 Organization who raised Kusanagi but has disappeared, having had something to do with arms dealing.
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-												<button type="button" class="btn btn-primary">Save changes</button>
-											</div>
+									<div class="form-group">
+										<label for="" class="control-label g-sm-6">Subtotal</label>
+										<div class="g-sm-6">
+											<p class="form-control-static" id="" placeholder="" >Rp 900.000.000</p>
 										</div>
 									</div>
-								</div>
+
+									<div class="form-group">
+
+										<label for="" class="control-label g-sm-6">Total</label>
+										<div class="g-sm-6">
+											<p class="form-control-static" id="" placeholder="" >Rp 900.000.000</p>
+										</div>
+									</div>
+
+									
+									<div class="form-group">
+										<div class="g-sm-12">
+											<button type="button" class="btn btn-success btn-lg g-sm-12">
+												Finalize Belajaan
+											</button>
+										</div>
+									</div>
+								</form>
+
+								<!-- Modal Search Barang-->
+								@include('pages.mobile_test.pop_up_cari_barang')
+								<!-- Modal Edit Barang-->
+								@include('pages.mobile_test.pop_up_edit_barang')
+								<!-- Modal Edit Barang-->
+								@include('pages.mobile_test.pop_up_delete_alert')
+
 							</div>
 						</div>
 						<script>
@@ -175,61 +192,51 @@
 
 
 	<script type="text/javascript">
-	var height = $(window).height();
-	var width = $(window).width();
-	var inc = 0;
-	var tab_width = $('.sf_tab_orderan > ul').children('li').width();
-	var tab_container_width = $('.sf_tab_orderan > ul').width();
-	//alert(tab_container_width);
+		var height = $(window).height();
+		var width = $(window).width();
+		var inc = 0;
+		var tab_width = $('.sf_tab_orderan > ul').children('li').width();
+		var tab_container_width = $('.sf_tab_orderan > ul').width();
 
-	function updateSize(){
-				// Get the dimensions of the viewport
-				//var width = $(window).width();
-				
-				//var navHeight = $('#nav_sec').height();
-				
-				//$('#landing_sec').height(height);
-				//$('.landing_spc').height(height - navHeight);
-				$('.s_super_container').height(height);
-				$('.s_super_container').width(width);
-				$('.s_left_display').height(height);
-				$('.s_left_display').width(width);
-				//$('.s_middle_display').height(height);
-				$('.s_middle_display').width(width);
-				$('.sf_tab_orderan').width(width);
-				$('.sf_tab_orderan > ul').width(tab_container_width);
 
-				$('.s_left_display').css('left',-width);
+		function updateSize(){
+			$('.s_super_container').height(height);
+			$('.s_super_container').width(width);
+			$('.s_left_display').height(height);
+			$('.s_left_display').width(width);
 
-				$('.s_sidebar_area').height(height);
-				$('.s_sidebar_close_area').height(height);
-				
-				
-			};
-			$(document).ready(updateSize);
-			$(window).resize(updateSize);
+			$('.s_middle_display').width(width);
+			$('.sf_tab_orderan').width(width);
+			$('.sf_tab_orderan > ul').width(tab_container_width);
 
-			$('body').on('click', '.f_side_bar_buka', function(){
-				$('.s_left_display').animate({"left": '0px'},330, 'easeInOutExpo');
-				$('.f_side_bar_tutup').removeClass('hidden').addClass('show');
-				$('.f_side_bar_buka').addClass('hidden').removeClass('show');
+			$('.s_left_display').css('left',-width);
 
-			});
+			$('.s_sidebar_area').height(height);
+			$('.s_sidebar_close_area').height(height);
+			
+			
+		};
+		$(document).ready(updateSize);
+		$(window).resize(updateSize);
 
-			$('body').on('click', '.f_side_bar_tutup', function(){
-				$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
-				$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
-				$('.f_side_bar_buka').removeClass('hidden').addClass('show');
-			});
+		$('body').on('click', '.f_side_bar_buka', function(){
+			$('.s_left_display').animate({"left": '0px'},330, 'easeInOutExpo');
+			$('.f_side_bar_tutup').removeClass('hidden').addClass('show');
+			$('.f_side_bar_buka').addClass('hidden').removeClass('show');
 
-			$('body').on('click', '.s_sidebar_close_area', function(){
-				$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
-				$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
-				$('.f_side_bar_buka').removeClass('hidden').addClass('show');
-			});
+		});
 
-			//var epic = $('.sf_tab_orderan > ul').children('li').length;
-		//	alert(epic);
+		$('body').on('click', '.f_side_bar_tutup', function(){
+			$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
+			$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
+			$('.f_side_bar_buka').removeClass('hidden').addClass('show');
+		});
+
+		$('body').on('click', '.s_sidebar_close_area', function(){
+			$('.s_left_display').animate({"left": -width},330, 'easeInOutExpo');
+			$('.f_side_bar_tutup').addClass('hidden').removeClass('show');
+			$('.f_side_bar_buka').removeClass('hidden').addClass('show');
+		});
 
 		$('body').on('click', '#f_add_new_order', function() {
 			$('.sf_tab_orderan > ul').width(tab_container_width+=tab_width);
@@ -246,7 +253,17 @@
 			
 		});
 
-		</script>
+	</script>
+	<script>
+		function pop_up_edit_barang(n){
+			//alert(n);
+		};
 
-	</body>
-	</html>
+		$('body').on('click','.f_table_pesanan > tr',function(){
+			var n = $(this).attr('id');
+			pop_up_edit_barang(n);
+		});
+	</script>
+
+</body>
+</html>
