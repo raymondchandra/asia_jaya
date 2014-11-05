@@ -1,23 +1,29 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$data = array("order_id"=>1, "type"=>1, "status"=>"pending", "solution"=>"pending", "trade_product_id"=>1, "difference"=>-10);
-		$validator = Validator::make($data, ReturnDB::$rules);
-
-		if ($validator->fails())
+		try
 		{
-			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
-			return Response::json($respond);
+			$keyword = "doloremque";
+			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', $keyword)->orWhere('prod.name', 'LIKE', $keyword)->get();
+			if(count($products) == 0)
+			{
+				//not found
+				$response = array('code'=>'404','status' => 'Not Found');
+			}
+			else
+			{
+				//found				
+				$response = array('code'=>'200','status' => 'OK','messages'=>$products);
+			}
+			
+			return Response::json($response);
 		}
-
-		//save
-		try {
-			ReturnDB::create($data);
-			$respond = array('code'=>'201','status' => 'Created');
-		} catch (Exception $e) {
-			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		catch(Exception $e)
+		{
+			//forbidden
+			$response = array('code'=>'403','status' => 'FORBIDDEN');
+			return Response::json($response);
 		}
-		return Response::json($respond);
 	});
 	Route::get('/tes2', function()
 	{
@@ -245,6 +251,10 @@ Route::group(array('prefix' => 'test'), function()
 
 });
 
+Route::group(array('prefix' => 'fungsi'), function()
+{
+	Route::get('/get_product_live_search', ['as'=>'david.getProductLiveSearch','uses' => 'ProductDetailsController@search']);
+});
 
 
 

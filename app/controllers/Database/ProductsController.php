@@ -236,5 +236,38 @@ class ProductsController extends \BaseController {
 		return Response::json($respond);
 	}
 	*/
+	
+	public function search()
+	{
+		try
+		{
+			$keyword = Input::get('keyword');
+			$products = Product::where('product_code', 'LIKE', $keyword)->orWhere('name', 'LIKE', $keyword)->get();
+			if(count($products) == 0)
+			{
+				//not found
+				$response = array('code'=>'404','status' => 'Not Found');
+			}
+			else
+			{
+				//found
+				foreach($products as $product)
+				{
+					$productDetail = ProductDetail::find($product->id);
+					$product->product_color =  $productDetail->color;
+				}
+				
+				$response = array('code'=>'200','status' => 'OK','messages'=>$products);
+			}
+			
+			return Response::json($response);
+		}
+		catch(Exception $e)
+		{
+			//forbidden
+			$response = array('code'=>'403','status' => 'FORBIDDEN');
+			return Response::json($response);
+		}
+	}
 
 }

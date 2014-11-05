@@ -87,7 +87,8 @@
 											Tabel Pesanan ke-0
 									</span>
 									<!-- Button trigger modal -->
-									<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#pop_up_cari_barang">
+									<input type="hidden" value="0">
+									<button class="btn btn-primary btn-sm pull-right tambah_barang_btn" data-toggle="modal" data-target="#pop_up_cari_barang">
 										<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Barang
 									</button>
 								</div>
@@ -99,77 +100,38 @@
 													Kode 
 												</th>
 												<th rowspan="2">
+													Nama
+												</th>
+												<th rowspan="2">
 													Warna 
 												</th>
 												<th rowspan="2">
 													Qty. 
 												</th>
-												<th colspan="2">
-													Stok
-												</th>
 												<th rowspan="2">
 													Price
 												</th>
 											</tr>
-											<tr>
-												<th>
-													Toko
-												</th>
-												<th>
-													Gdg
-												</th>
-											</tr>
 
 										</thead>
-										<tbody class="f_table_pesanan">
-											<?php
-											for($i=0; $i<2; $i++){
-												?>
-												<tr id="baris_ke_<?php echo($i); ?>" data-toggle="modal" data-target="#pop_up_edit_barang">
-													<td style="line-height: 30px;">
-														123123123
-													</td>
-													<td style="line-height: 30px;">
-														Merah
-													</td>
-													<td style="line-height: 30px;">
-														1
-													</td>
-													<td style="line-height: 30px;">
-														10
-													</td>
-													<td style="line-height: 30px;">
-														200
-													</td>
-													<td style="line-height: 30px;">
-														1.000.000
-													</td>
-												</tr>
-												<?php
-											}
-											?>
+										<tbody class="f_table_pesanan" id="pesanan_content_0">
+											
 										</tbody>
 									</table>
 
 									<div class="form-group">
 										<label for="" class="control-label g-sm-6">Subtotal</label>
 										<div class="g-sm-6">
-											<p class="form-control-static" id="" placeholder="" >Rp 900.000.000</p>
+											<p class="form-control-static" id="subtotal_text_0" placeholder="" >IDR 0</p>
 										</div>
 									</div>
 
-									<div class="form-group">
-
-										<label for="" class="control-label g-sm-6">Total</label>
-										<div class="g-sm-6">
-											<p class="form-control-static" id="" placeholder="" >Rp 900.000.000</p>
-										</div>
-									</div>
 
 									<div class="form-group">
 										<div class="g-sm-12">
-											<button type="button" class="btn btn-success btn-lg g-sm-12" data-toggle="modal" data-target="#pop_up_finalisasi_belanja">
-												Finalisasi Belaja
+											<input type="hidden" value="0">
+											<button type="button" class="btn btn-success btn-lg g-sm-12 finalisasi_btn" id="finalisasi_btn_0" data-toggle="modal" data-target="#pop_up_finalisasi_belanja">
+												Finalisasi Belanja
 											</button>
 										</div>
 									</div>
@@ -301,8 +263,8 @@
 			tab_panel+='                                                                                                                                                                  ';
 			tab_panel+='			Tabel Pesanan ke-'+ inc +'                                                                                                                                          ';
 			tab_panel+='		</span>                                                                                                                                                    ';
-			tab_panel+='		<!-- Button trigger modal -->                                                                                                                              ';
-			tab_panel+='		<button class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#pop_up_cari_barang">                                                   ';
+			tab_panel+='		<input type="hidden" value='+ inc +'>                                                                                                                              ';
+			tab_panel+='		<button class="btn btn-primary btn-sm pull-right tambah_barang_btn" data-toggle="modal" data-target="#pop_up_cari_barang">                                                   ';
 			tab_panel+='			<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Barang                                                                        ';
 			tab_panel+='		</button>                                                                                                                                                  ';
 			tab_panel+='	</div>                                                                                                                                                         ';
@@ -314,29 +276,21 @@
 			tab_panel+='						Kode                                                                                                                                       ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='					<th rowspan="2">                                                                                                                               ';
+			tab_panel+='						Nama                                                                                                                                       ';
+			tab_panel+='					</th>                                                                                                                                          ';
+			tab_panel+='					<th rowspan="2">                                                                                                                               ';
 			tab_panel+='						Warna                                                                                                                                      ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='					<th rowspan="2">                                                                                                                               ';
 			tab_panel+='						Qty.                                                                                                                                       ';
 			tab_panel+='					</th>                                                                                                                                          ';
-			tab_panel+='					<th colspan="2">                                                                                                                               ';
-			tab_panel+='						Stok                                                                                                                                       ';
-			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='					<th rowspan="2">                                                                                                                               ';
 			tab_panel+='						Price                                                                                                                                      ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='				</tr>                                                                                                                                              ';
-			tab_panel+='				<tr>                                                                                                                                               ';
-			tab_panel+='					<th>                                                                                                                                           ';
-			tab_panel+='						Toko                                                                                                                                       ';
-			tab_panel+='					</th>                                                                                                                                          ';
-			tab_panel+='					<th>                                                                                                                                           ';
-			tab_panel+='						Gdg                                                                                                                                        ';
-			tab_panel+='					</th>                                                                                                                                          ';
-			tab_panel+='				</tr>                                                                                                                                              ';
 			tab_panel+='                                                                                                                                                                  ';
 			tab_panel+='			</thead>                                                                                                                                               ';
-			tab_panel+='			<tbody class="f_table_pesanan">                                                                                                                        ';
+			tab_panel+='			<tbody class="f_table_pesanan" id="pesanan_content_' + inc + '">                                                                                                                        ';
 			tab_panel+='                                                                                                                                                                  ';
 			tab_panel+='			</tbody>                                                                                                                                               ';
 			tab_panel+='		</table>                                                                                                                                                   ';
@@ -344,23 +298,15 @@
 			tab_panel+='		<div class="form-group">                                                                                                                                   ';
 			tab_panel+='			<label for="" class="control-label g-sm-6">Subtotal</label>                                                                                            ';
 			tab_panel+='			<div class="g-sm-6">                                                                                                                                   ';
-			tab_panel+='				<p class="form-control-static" id="" placeholder="" >Rp 0</p>                                                                                      ';
+			tab_panel+='				<p class="form-control-static" placeholder="" id= "subtotal_text_' + inc + '" >IDR 0</p>                                                                                      ';
 			tab_panel+='			</div>                                                                                                                                                 ';
 			tab_panel+='		</div>                                                                                                                                                     ';
-			tab_panel+='                                                                                                                                                                  ';
-			tab_panel+='		<div class="form-group">                                                                                                                                   ';
-			tab_panel+='                                                                                                                                                                  ';
-			tab_panel+='			<label for="" class="control-label g-sm-6">Total</label>                                                                                               ';
-			tab_panel+='			<div class="g-sm-6">                                                                                                                                   ';
-			tab_panel+='				<p class="form-control-static" id="" placeholder="" >Rp 0</p>                                                                                      ';
-			tab_panel+='			</div>                                                                                                                                                 ';
-			tab_panel+='		</div>                                                                                                                                                     ';
-			tab_panel+='                                                                                                                                                                  ';
 			tab_panel+='		<div class="form-group">                                                                                                                                   ';
 			tab_panel+='			<div class="g-sm-12">                                                                                                                                  ';
-			tab_panel+='				<button type="button" class="btn btn-success btn-lg g-sm-12" data-toggle="modal" data-target="#pop_up_finalisasi_belanja">                         ';
-			tab_panel+='					Finalisasi Belaja                                                                                                                              ';
-			tab_panel+='				</button>                                                                                                                                          ';
+			tab_panel+='				<input type="hidden" value="' + inc + '">                                                                                                                                      ';
+			tab_panel+='				<button type="button" class="btn btn-success btn-lg g-sm-12 finalisasi_btn" id="finalisasi_btn_' + inc + '" data-toggle="modal" data-target="#pop_up_finalisasi_belanja">                         ';
+			tab_panel+='					Finalisasi Belanja                                                                                                                              ';
+			tab_panel+='				</button>                                                                                                                                        ';
 			tab_panel+='			</div>                                                                                                                                                 ';
 			tab_panel+='		</div>                                                                                                                                                     ';
 			tab_panel+='	</form>                                                                                                                                                        ';
@@ -401,6 +347,18 @@
 			pop_up_edit_barang(n);
 		});
 	</script>
-
+	<!--engine-->
+	
+	<script>
+		$('body').on('click','.tambah_barang_btn',function(){
+			$('#tableRep').val($(this).prev().val());
+		});
+		
+		$('body').on('click','.finalisasi_btn',function(){
+			$repId = $(this).prev().val();
+			$('#tableReps').val($repId);
+			$('#total_text').text($('#subtotal_text_'+$repId).text());
+		});
+	</script>
 </body>
 </html> 

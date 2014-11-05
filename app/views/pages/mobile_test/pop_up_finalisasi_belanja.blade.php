@@ -4,6 +4,7 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				<h4 class="modal-title" id="myModalLabel">Finalisasi Belanja</h4>
+				<input type="hidden" id="tableReps" />
 			</div>
 			<div class="f_slider_alert hidden"  style="text-align: center; padding-top:20px;">
 				Apakah Anda yakin ingin menghapus produk ini?
@@ -16,15 +17,17 @@
 				<div class="form">
 					<div class="form-group">
 						<label for="">Nama Pelanggan</label>
-						<input type="text" class="form-control" id="" placeholder="John Doe">
+						<input type="text" class="form-control" id="" placeholder="Masukkan Nama">
 					</div>
 
 					<div class="form-group">
 						<label for="">Total Biaya
 
 						</label>
-						<p type="text" class="form-control-static" id="" placeholder="John Doe">
-							Rp 1.900.000
+						<p type="text" class="form-control-static" placeholder="">
+							<span id="total_text">
+							IDR 0
+							</span>
 							<button class="btn btn-warning btn-sm pull-right f_diskon_revealer">
 								<span class="glyphicon glyphicon-usd"></span>
 							</button>
