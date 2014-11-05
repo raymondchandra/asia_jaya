@@ -1,5 +1,5 @@
 <!-- Modal ".alertYesNo"-->
-<div class="modal fade pop_up_delete_alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade pop_up_delete_table" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
 	<div class="modal-content">
 	  <div class="modal-header">
@@ -7,7 +7,7 @@
 		<h4 class="modal-title" id="myModalLabel">Alert!</h4>
 	  </div>
 	  <div class="modal-body"  style="text-align: center;">
-			Apakah Anda yakin ingin menghapus produk ini?
+			Apakah Anda yakin ingin menghapus Tabel Orderan ini?
 	  </div>
 	  <div class="modal-footer" style="text-align: center;">
 		<button type="button" class="btn btn-danger" data-dismiss="modal" >Ya</button>
