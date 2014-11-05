@@ -51,11 +51,12 @@
 //get list filter by product code
 	Route::get('/searchViewByName', 'searchViewController@getListByName');
 	
-//Finalize Sell
+//Finalize Sell get View
 	Route::get('/finalizeSell', function(){
 		return View::make('submitTest');
 	});
 	
+//Finlize Sell
 	Route::post('finalize', 'finalizeSellController@finalize');
 	
 //Return Product
@@ -64,7 +65,8 @@
 //Tax Route
 	Route::post('insertUpdateTax', 'taxController@setTax');
 	
-	
+//Finalize Return
+	Route::post('finalizeReturn', 'returnController@finalizeReturn');
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);

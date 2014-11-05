@@ -26,6 +26,33 @@ class RestocksController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@parameter :
+		@return :
+		-) Fungsi ini digunakan untuk menginsert record baru ke tabel restock
+	*/
+	public function insertWithParam($type){
+		$data = array('type'=>$type);
+		//validate
+		$validator = Validator::make($data, Restock::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Restock::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($restock)
 	{
 		$respond = array();

@@ -113,6 +113,66 @@ class ProductDetailsController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $id, $amount
+		@return :
+		-) Fungsi ini digunakan untuk melakukan perubahan terhadap kolom stock_shop
+	*/
+	public function updateShop($id, $amount)
+	{
+		$respond = array();
+		$productdetail = Productdetail::find($id);
+		if ($productdetail == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$tempAmount = $productdetail->stock_shop + $amount;
+			$productdetail->stock_shop = $tempAmount;
+			try {
+				$productdetail->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $id, $amount
+		@return :
+		-) Fungsi ini digunakan untuk melakukan perubahan terhadap kolom stock_storage
+	*/
+	public function updateStorage($id, $amount)
+	{
+		$respond = array();
+		$productdetail = Productdetail::find($id);
+		if ($productdetail == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$tempAmount = $productdetail->stock_storage + $amount;
+			$productdetail->stock_storage = $tempAmount;
+			try {
+				$productdetail->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
 
 	/*
 	public function update<column>($id)

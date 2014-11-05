@@ -2,6 +2,12 @@
 
 class taxController extends \HomeController{
 	
+	/*
+		@author : Gentry Swanri
+		@parameter :
+		@return :
+		-) Fungsi ini digunakan untuk memasukkan record baru atau mengupdate kolom amount
+	*/
 	public function setTax(){
 		$id = 1;
 		$amount = 10;
@@ -18,6 +24,12 @@ class taxController extends \HomeController{
 		}
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@parameter :
+		@return :
+		-) Fungsi ini digunakan untuk mengambil isi dari tabel taxes sesuai id
+	*/
 	public function getTax($id){
 		return Tax::find($id);
 	}

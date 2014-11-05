@@ -9,7 +9,10 @@ class RestockDetail extends \Eloquent {
 
 	// Don't forget to fill this array
 	protected $fillable = [
-	
+		'restock_id',
+		'product_detail_id',
+		'stock_shop',
+		'stock_storage'
 	];
 	
 	public function product_detail()

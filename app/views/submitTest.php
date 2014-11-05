@@ -11,5 +11,9 @@
 		<form action="insertUpdateTax" method="post">
 			<input type="Submit" value="Insert Update Tax"></input>
 		</form>
+		
+		<form action="finalizeReturn" method="post">
+			<input type="Submit" value="Finalize Return"></input>
+		</form>
 	</body>
 </html>
