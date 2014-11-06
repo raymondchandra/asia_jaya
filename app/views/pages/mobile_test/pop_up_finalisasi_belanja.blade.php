@@ -16,8 +16,49 @@
 			<div class="modal-body">
 				<div class="form">
 					<div class="form-group">
-						<label for="">Nama Pelanggan</label>
-						<input type="text" class="form-control" id="" placeholder="Masukkan Nama">
+						<label >Nama Pelanggan</label>
+						<input type="text" class="form-control" id="f_nama_pelanggan" val="">
+						<table class="table table-bordered hidden" id="f_table_suggestion_pelanggan" style="background-color: #fff;">
+							<thead>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Nama Orang 1</td>
+								</tr>
+								<tr>
+									<td>Nama Orang 2</td>
+								</tr>
+								<tr>
+									<td>Nama Orang 3</td>
+								</tr>
+								<tr>
+									<td>Nama Orang 4</td>
+								</tr>
+								<tr>
+									<td>Nama Orang 5</td>
+								</tr>
+							</tbody>
+						</table>
+						<style>
+						#f_table_suggestion_pelanggan > tbody > tr:active > td {
+							background-color: #E8CD02 !important;
+						}
+						</style>
+						<script>
+
+							$('body').on('click','#f_nama_pelanggan',function(){
+								//alert($(this).text());
+								//alert($('#f_nama_pelanggan').val());
+								$('#f_table_suggestion_pelanggan').removeClass('hidden');
+							});
+
+							$('body').on('click','#f_table_suggestion_pelanggan > tbody > tr > td',function(){
+								//alert($(this).text());
+								$('#f_nama_pelanggan').val($(this).text());
+								//alert($('#f_nama_pelanggan').val());
+								$('#f_table_suggestion_pelanggan').addClass('hidden');
+							});
+						</script>
 					</div>
 
 					<div class="form-group">
