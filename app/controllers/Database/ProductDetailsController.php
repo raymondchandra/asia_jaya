@@ -245,7 +245,7 @@ class ProductDetailsController extends \BaseController {
 			if(count($products) == 0)
 			{
 				//not found
-				$response = array('code'=>'404','status' => 'Not Found', 'messages'=>$keyword);
+				$response = array('code'=>'404','status' => 'Not Found');
 			}
 			else
 			{
@@ -258,7 +258,7 @@ class ProductDetailsController extends \BaseController {
 		catch(Exception $e)
 		{
 			//forbidden
-			$response = array('code'=>'403','status' => 'Forbidden', 'messages'=>$keyword);
+			$response = array('code'=>'403','status' => 'Forbidden');
 			return Response::json($response);
 		}
 	}

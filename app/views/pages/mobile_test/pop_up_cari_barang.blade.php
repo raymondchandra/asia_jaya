@@ -73,8 +73,8 @@
 				if(response['code'] == '404')
 				{
 					//gagal
-					alert(response['messages']);
-					alert('failed');
+					$data = "<tr><td> No Result Found </td></tr>";
+					$('#searchContent').html($data);
 				}
 				else
 				{

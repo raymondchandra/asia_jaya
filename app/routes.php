@@ -254,6 +254,8 @@ Route::group(array('prefix' => 'test'), function()
 Route::group(array('prefix' => 'fungsi'), function()
 {
 	Route::get('/get_product_live_search', ['as'=>'david.getProductLiveSearch','uses' => 'ProductDetailsController@search']);
+	
+	Route::get('/get_customer_live_search', ['as'=>'david.getCustomerLiveSearch','uses' => 'CustomersController@search']);
 });
 
 
