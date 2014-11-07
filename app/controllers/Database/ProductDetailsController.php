@@ -324,5 +324,30 @@ class ProductDetailsController extends \BaseController {
 		return Response::json($respond);
 	}
 	*/
-
+	public function search()
+	{
+		try
+		{
+			$keyword = Input::get('keyword');
+			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->get();
+			if(count($products) == 0)
+			{
+				//not found
+				$response = array('code'=>'404','status' => 'Not Found');
+			}
+			else
+			{
+				//found				
+				$response = array('code'=>'200','status' => 'OK','messages'=>$products);
+			}
+			
+			return Response::json($response);
+		}
+		catch(Exception $e)
+		{
+			//forbidden
+			$response = array('code'=>'403','status' => 'Forbidden');
+			return Response::json($response);
+		}
+	}
 }

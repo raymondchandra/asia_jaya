@@ -25,6 +25,33 @@ class CustomersController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	public function search()
+	{
+		try
+		{
+			$respond = array();
+			$keyword = Input::get('keyword');
+			$result = Customer::where('name', 'LIKE', '%'.$keyword.'%')->get();
+			if(count($result) == 0)
+			{
+				//not found
+				$response = array('code'=>'404','status' => 'Not Found');
+			}
+			else
+			{
+				//found!!
+				$response = array('code'=>'200','status' => 'OK','messages'=>$result);
+				
+			}
+			return Response::json($response);
+		}
+		catch(Exception $e)
+		{
+			$response = array('code'=>'403','status' => 'Forbidden');
+			return Response::json($response);
+		}
+	}
+	
 	/*
 		@author : Gentry Swanri
 		@parameter : $customerName
