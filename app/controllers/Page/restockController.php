@@ -9,12 +9,13 @@ class restockController extends \HomeController{
 		-) Fungsi ini digunakan untuk melakukan restock
 		-) type 1 = add new stock, type 2 = shop -> storage, type 3 = storage -> shop
 		-) Fungsi ini merupakan Fungsi Utama
+		-) Jika Type =2 maka quantity shop = 0 ;  Jika Type = 3 maka quantity Storage = 0;
 	*/
 	public function doRestockProduct(){
 		$name = 'qui';
 		$color = 'Green';
-		$type = 1;
-		$quantityShop = 100;
+		$type = 2;
+		$quantityShop = 0;
 		$quantityStorage = 100;
 		
 		$respond = array();
@@ -64,7 +65,7 @@ class restockController extends \HomeController{
 		$success = -1;
 		$productDetailId = $this->findProductDetailId($productId, $color);
 	
-		if(type == 2 || type == 3){
+		if($type == 2 || $type == 3){
 			$temp1 = $this->addProductDetail($productDetailId, $shopAmount, $storageAmount);
 			$temp2 = $this->addProduct($productId, $shopAmount, $storageAmount);
 			
@@ -124,14 +125,12 @@ class restockController extends \HomeController{
 		if($productDetailId != -1){
 			$productDetail = Productdetail::find($productDetailId);
 			if($productDetail != null){
-				foreach($productDetail as $prodDet){
-					if(type==2 && $prodDet->stock_shop >= $quantityShop){
-						$able = 1;
-					}else if(type==3 && $prodDet->stockStorage >= $quantityStorage){
-						$able = 1;
-					}else if(type == 1 || type == 4){
-						$able = 1;
-					}
+				if($type==2 && $productDetail->stock_shop >= $quantityShop){
+					$able = 1;
+				}else if($type==3 && $productDetail->stockStorage >= $quantityStorage){
+					$able = 1;
+				}else if($type == 1 || $type == 4){
+					$able = 1;
 				}
 			}
 		}
@@ -268,13 +267,16 @@ class restockController extends \HomeController{
 	public function addRestockDetailRecord($restockId, $productDetailId, $type, $shopAmount, $storageAmount){
 		$restockDetailController = new RestockDetailsController();
 		
+		$shopAmountTemp = $shopAmount;
+		$storageAmountTemp = $storageAmount;
+		
 		if($type==2){
-			$shopAmount = $shopAmount * -1;
+			$shopAmountTemp = $storageAmount * -1;
 		}else if($type==3){
-			$storageAmount = $storageAmount * -1;
+			$storageAmountTemp = $shopAmount * -1;
 		}
 		
-		$addStatus = $restockDetailController->insertWithParam($restockId, $productDetailId, $shopAmount, $storageAmount);
+		$addStatus = $restockDetailController->insertWithParam($restockId, $productDetailId, $shopAmountTemp, $storageAmountTemp);
 		$addStatusJson = json_decode($addStatus->getContent());
 		
 		if($addStatusJson->{'status'} == 'Created'){

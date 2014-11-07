@@ -1918,6 +1918,7 @@ return array(
     'Whoops\\Util\\TemplateHelper' => $vendorDir . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
     'ZCreateForeignKey' => $baseDir . '/app/database/migrations/2014_10_21_164745_z_create_foreign_key.php',
     'finalizeSellController' => $baseDir . '/app/controllers/Page/finalizeSellController.php',
+    'restockController' => $baseDir . '/app/controllers/Page/restockController.php',
     'returnController' => $baseDir . '/app/controllers/Page/returnController.php',
     'searchViewController' => $baseDir . '/app/controllers/Page/searchViewController.php',
     'taxController' => $baseDir . '/app/controllers/Page/taxController.php',

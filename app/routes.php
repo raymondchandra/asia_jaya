@@ -73,6 +73,9 @@
 	
 //Finalize Return
 	Route::post('finalizeReturn', 'returnController@finalizeReturn');
+	
+//restock
+	Route::post('restock', 'restockController@doRestockProduct');
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
