@@ -7,7 +7,7 @@ class returnController extends \HomeController{
 		@parameter :
 		@return :
 		-) Fungsi ini digunakan apabila ada pembeli ynag ingin menukarkan barang yang telah dibeli
-		-) Type mempunyai 3 jenis, yaitu 1=>barang dengan uang, 2=>barang dengan baarang sama, dan 3=>barang dengan barang beda
+		-) Type mempunyai 3 jenis, yaitu 1=>barang dengan uang, 2=>barang dengan barang sama, dan 3=>barang dengan barang beda
 	*/
 	public function returnProduct(){
 		//Dummy data
