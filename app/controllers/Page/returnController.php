@@ -63,6 +63,22 @@ class returnController extends \HomeController{
 		}
 	}
 	
+	public function minusProduct($productId, $shopAmount, $storageAmount){
+		$productController = new ProductsController();
+		
+		$updateShop = $productController->updateMinusShop($productId, $shopAmount);
+		$updateShopDecode = json_decode($updateShop->getContent());
+		
+		$updateStorage = $productController->updateMinusStorage($productId, $storageAmount);
+		$updateStorageDecode = json_decode($updateStorage->getContent());
+		
+		if($updateShopDecode->{'status'} == 'No Content' && $updateStorageDecode->{'status'} == 'No Content'){
+			return 1;
+		}else{
+			return -1;
+		}
+	}
+	
 	public function findProductDetailId($productDetailController, $productId, $color){
 		$productDetailId = -1;
 		
@@ -95,7 +111,7 @@ class returnController extends \HomeController{
 		$productDetailId = $this->findProductDetailId($productDetailController, $productId, $color);
 		if($productDetailId != -1){
 			$updateShop = $productDetailController->updateShop($productDetailId, $shopAmount);
-			$updateStorage = $productDetailController->updateStorage($productId, $storageAmount);
+			$updateStorage = $productDetailController->updateStorage($productDetailId, $storageAmount);
 			
 			$updateShopDecode = json_decode($updateShop->getContent());
 			$updateStorageDecode = json_decode($updateStorage->getContent());
@@ -110,8 +126,29 @@ class returnController extends \HomeController{
 		}
 	}
 	
-	public function doRestock($type){
+	public function minusProductDetail($productId, $color, $shopAmount, $storageAmount){
+		$productDetailController = new ProductDetailsController();
+		$productDetailId = $this->findProductDetailId($productDetailController, $productId, $color);
+		if($productDetailId != -1){
+			$updateShop = $productDetailController->updateMinusShop($productDetailId, $shopAmount);
+			$updateStorage = $productDetailController->updateMinusStorage($productDetailId, $storageAmount);
+			
+			$updateShopDecode = json_decode($updateShop->getContent());
+			$updateStorageDecode = json_decode($updateStorage->getContent());
+			
+			if($updateShopDecode->{'status'} == 'No Content' && $updateStorageDecode->{'status'} == 'No Content'){
+				return $productDetailId;
+			}else{
+				return -1;
+			}
+		}else{
+			return -1;
+		}
+	}
+	
+	public function doRestock(){
 		$restockId = -1;
+		$type = 4;
 	
 		$restockController = new RestocksController();
 		$restockStatus = $restockController->insertWithParam($type);
@@ -161,7 +198,7 @@ class returnController extends \HomeController{
 		$quantityShopTotal = 100;
 		$quantityStorageTotal = 100;
 		
-		$type = 4;
+		$type = 2;
 		
 		$respond = array();
 		
@@ -173,15 +210,25 @@ class returnController extends \HomeController{
 			if($productId != -1){
 				//add product
 				$addProduct = $this->addProduct($productId, $quantityShopTotal, $quantityStorageTotal);
-				if($addProduct==1){
+				if($type == 3){
+					$minusProduct = $this->minusProduct($productId, $quantityShopTotal, $quantityStorageTotal);
+				}else{
+					$minusProduct = 1;
+				}
+				if($addProduct==1 && $minusProduct == 1){
 					//add product detail and get its id. There is a possibility to use foreach in here
-					$productDetailId = $this->addProductDetail($productId, $color, $quantityShopColor, $quantityStorageColor);
-					if($productDetailId != -1){
+					$productDetailIdAdd = $this->addProductDetail($productId, $color, $quantityShopColor, $quantityStorageColor);
+					if($type == 3){
+						$productDetailIdMinus = $this->minusProductDetail($productId, $color, $quantityShopColor, $quantityStorageColor);
+					}else{
+						$productDetailIdMinus = 0;
+					}
+					if($productDetailIdAdd != -1 && $productDetailIdMinus != -1){
 						//add restock and get its id
-						$restockId = $this->doRestock($type);
+						$restockId = $this->doRestock();
 						if($restockId != -1){
 							//add restock detail
-							$addRestockDetail = $this->doRestockDetail($restockId, $productDetailId, $quantityShopColor, $quantityStorageColor);
+							$addRestockDetail = $this->doRestockDetail($restockId, $productDetailIdAdd, $quantityShopColor, $quantityStorageColor);
 							if($addRestockDetail == 1){
 								$respond = array('code'=>'201','status' => 'Created');
 							}else{
