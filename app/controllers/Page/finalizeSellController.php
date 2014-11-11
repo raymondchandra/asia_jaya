@@ -123,11 +123,11 @@ class finalizeSellController extends \HomeController{
 		//data transaksi (dummy)
 		$total = 500000;
 		$custName = "Uji Coba Customer";
-		$productList[] = array("name"=>"qui", "color"=>"Green");
-		$productList[] = array("name"=>"ea", "color"=>"Gold");
+		$productList[] = array("name"=>"qui", "color"=>"Green", "quantity"=>3);
+		$productList[] = array("name"=>"ea", "color"=>"Gold", "quantity"=>3);
 		//$productName = "fugit";
 		//$color = "LightCoral";
-		$quantity = 3;
+		//$quantity = 3;
 		$salesId = 1;
 		$response = array();
 		
@@ -166,7 +166,7 @@ class finalizeSellController extends \HomeController{
 							
 							if($productDetailId!=-1){
 								//add Orders
-								$addOrders = $this->addOrders($quantity, $transactionId, $price, $productDetailId);
+								$addOrders = $this->addOrders($prodList["quantity"], $transactionId, $price, $productDetailId);
 								if($addOrders!=-1){
 									$response = array('code'=>'201','status' => 'Created');
 								}else{

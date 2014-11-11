@@ -89,6 +89,39 @@ class AccountsController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $id
+		@return :
+		-) Fungsi untuk mengupdate status active karyawan
+	*/
+	public function updateActive($id)
+	{
+		$respond = array();
+		$account = Account::find($id);
+		if ($account == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			if($account->active == 1){
+				$account->active = 0;
+			}else{
+				$account->active = 1;
+			}
+			try {
+				$account->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
 
 	/*
 	public function update<column>($id)

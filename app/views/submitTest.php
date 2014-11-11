@@ -19,5 +19,9 @@
 		<form action="restock" method="post">
 			<input type="Submit" value="Restock"></input>
 		</form>
+		
+		<form action="changeActive" method="post">
+			<input type="Submit" value="changeActive"></input>
+		</form>
 	</body>
 </html>

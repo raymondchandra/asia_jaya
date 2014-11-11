@@ -76,6 +76,12 @@
 	
 //restock
 	Route::post('restock', 'restockController@doRestockProduct');
+	
+//get account
+	Route::get('/getAccount', 'accountController@getEmployee');
+	
+//change active status account
+	Route::post('changeActive', 'accountController@changeActive');
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
