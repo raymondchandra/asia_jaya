@@ -4,10 +4,14 @@
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				<h4 class="modal-title" id="myModalLabel">Edit Barang</h4>
+				<input type="hidden" id="rowRep" value="">
+				<input type="hidden" id="tabRep" value="">
+				<input type="hidden" id="minPrice" value="">
+				<input type="hidden" id="currentTotal" value="">
 			</div>
 			<div class="f_slider_alert hidden"  style="text-align: center; padding-top:20px;">
 				Apakah Anda yakin ingin menghapus produk ini?
-				<button type="button" id="hyper_x" class="btn btn-danger" data-dismiss="modal" >Ya</button>
+				<button type="button" id="hyper_x" class="btn btn-danger" data-dismiss="modal">Ya</button>
 				<button type="button" class="btn btn-primary f_slider_tutup" data-dismiss="">Tidak</button>
 				<hr/>
 			</div>
@@ -17,40 +21,48 @@
 					<div class="form-group">
 						<label class="g-sm-3 control-label">Kode</label>
 						<div class="g-sm-9">
-							<p class="form-control-static">435345434335</p>
+							<p class="form-control-static" id="edit_code"></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="g-sm-3 control-label">Nama</label>
 						<div class="g-sm-9">
-							<p class="form-control-static">Tas Gaya Banget</p>
+							<p class="form-control-static" id="edit_nama"></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="g-sm-3 control-label">Warna</label>
 						<div class="g-sm-9">
-							<p class="form-control-static">Merah</p>
+							<p class="form-control-static" id="edit_warna"></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="" class="g-sm-3 control-label">Harga@</label>
 						<div class="g-sm-4">
-							<input class="form-control" id="f_hsatuan_qty" value="100000">
+							<input class="form-control" id="f_hsatuan_qty" value="">
 						</div>
 						<label for="" class="g-sm-2 control-label">Qty.</label>
 						<div class="g-sm-3">
-							<input type="text" class="form-control" value="1" id="f_edit_qty">
+							<input type="text" class="form-control" value="" id="f_edit_qty">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="g-sm-3 control-label">Subtotal</label>
 						<div class="g-sm-9">
-							<p class="form-control-static" id="f_subtotal_edit">100000</p>
+							<p class="form-control-static" id="f_subtotal_edit"></p>
 						</div>
 						<script>
 						$('body').on('change','#f_edit_qty',function(){
-							$('#f_subtotal_edit').text($('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
+							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
 						});
+						$('body').on('change','#f_hsatuan_qty',function(){
+							$min_price = $('#minPrice').val();
+							if($('#f_hsatuan_qty').val() < $min_price)
+							{
+								$('#f_hsatuan_qty').val($min_price);
+							}
+							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
+						})
 						</script>
 					</div>
 
@@ -58,8 +70,8 @@
 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-danger pull-left f_slide_alert">Delete</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+				<button type="button" class="btn btn-danger pull-left f_slide_alert" id="deleteButton">Delete</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="changeButton">Save changes</button>
 				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
 			</div>
 			<script>
@@ -71,6 +83,33 @@
 					$('.f_slider_alert').addClass('hidden');
 					//alert("sad");
 				});
+				$('body').on('click','#hyper_x',function(){
+					
+					$row_id = $('#rowRep').val();
+					$oldTotal = $('#currentTotal').val();
+					$inc = $('#tabRep').val();
+					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
+
+					$total = $currentTotal - $oldTotal;
+					
+					$('#subtotal_text_'+$inc).text("IDR " + $total);
+					$('#'+$row_id).remove();
+					$('.f_slider_alert').addClass('hidden');
+				});
+				$('body').on('click','#changeButton',function(){
+					$row_id = $('#rowRep').val();
+					$('#quantity_'+$row_id).text($('#f_edit_qty').val());
+					$('#price_'+$row_id).text($('#f_hsatuan_qty').val());
+					$oldTotal = $('#currentTotal').val();
+					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
+					$inc = $('#tabRep').val();
+					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
+					$total = $currentTotal + $newTotal - $oldTotal;
+					$('#subtotal_text_'+$inc).text("IDR " + $total);
+					$('.f_slider_alert').addClass('hidden');
+				});
+				
+				function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 			</script>
 
 		</div>

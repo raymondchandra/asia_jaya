@@ -37,7 +37,7 @@
 								//alert($('#f_nama_pelanggan').val());
 								//$('#f_table_suggestion_pelanggan').removeClass('hidden');
 								//ajax search customer.....
-								
+								$('#custIdRep').val("none");
 								$keyword = $('#f_nama_pelanggan').val();
 								trigger = false;
 								$.ajax({
@@ -144,8 +144,53 @@
 
 				<script>
 				$('body').on('click','.f_send_ke_kasir',function(){
-					
-						$('.f_masuk_kasir').removeClass('hidden');
+					$idTable = $('#tableReps').val();
+					$data = [];
+					$('.f_masuk_kasir').removeClass('hidden');
+					//alert($("#pesanan_content_"+$idTable).html());
+					//name color quantity
+					$("#pesanan_content_"+$idTable+" tr").each(function(i, v){
+						$data[i] = [];
+						$name = $(this).children('td')[1].innerText;
+						$color = $(this).children('td')[2].innerText;
+						$quantity = $(this).children('td')[3].innerText;
+						/*
+						$(this).children('td').each(function(ii, vv){
+							if(ii == 1)
+							{
+								$name = vv.innerText;
+							}
+							
+							if(ii == 2)
+							{
+								$color = vv.innerText;
+							}
+							
+							if(ii == 3)
+							{
+								$quantity = vv.innerText;
+							}
+						});
+						*/
+						$data[i] = {name:$name, color:$color, quantity:$quantity};
+					});
+					alert($data);
+					$.ajax({
+						type: 'POST',
+						url: '{{URL::route('david.postFinalizeTransaction')}}',
+						data: {
+							'total' : 500000,
+							'customer_name' : 'si Abang',
+							'id_customer' : '11',
+							'product_list' : $data,
+						},
+						success: function(response){
+							alert(response);
+						},error: function(xhr, textStatus, errorThrown){
+							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+							alert("responseText: "+xhr.responseText);
+						}
+					},'json');
 					
 				});
 				</script>
