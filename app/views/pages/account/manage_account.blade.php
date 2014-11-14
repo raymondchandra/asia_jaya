@@ -57,14 +57,14 @@
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
 							</tr>
 						</thead>
-						<tbody>
-							<?php for($i=0; $i<10; $i++){
+						<tbody id="f_tbody_karyawan">
+							<?php for($i=0; $i<2; $i++){
 							?>
 							<tr> 
 								<td>Username</td>
 								<td>Role</td>
-								<td>Last Login</td>
-								<td>Status</td>
+								<td>-</td>
+								<td>Aktif</td>
 
 								<td>
 									<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>
@@ -86,6 +86,22 @@
 	@include('pages.account.pop_up_delete_account')
 
 	<script>
+	//**pop_up_add_account
+	$('body').on('click','#f_add_new_karyawan_btn',function(){
+		var f_tbody_karyawan_node = '<tr>';
+		f_tbody_karyawan_node +=' <td>'+$('[name=add_account_username]').val()+'</td>';
+		f_tbody_karyawan_node +=' <td>'+$('[name=add_account_role] option:selected').text()+'</td>';
+		f_tbody_karyawan_node +=' <td>-</td>';
+		f_tbody_karyawan_node +=' <td>Aktif</td>';
+		f_tbody_karyawan_node +=' <td>';
+		f_tbody_karyawan_node +=' 	<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>';
+		f_tbody_karyawan_node +=' 	<!-- Button trigger modal class ".alertYesNo" -->';
+		f_tbody_karyawan_node +=' 	<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_delete_account">Delete</button>';
+		f_tbody_karyawan_node +=' </td>';
+		f_tbody_karyawan_node +=' </tr>';
+
+		$('#f_tbody_karyawan').append(f_tbody_karyawan_node);
+	});
 
 	/*$('body').on('click','.flogin',function(){
 		$data = {

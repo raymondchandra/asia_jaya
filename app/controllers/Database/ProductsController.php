@@ -25,6 +25,34 @@ class ProductsController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author : Gentry Swanri
+		@paramater : $productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted
+		@return :
+		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product
+	*/
+	public function insertWithParam($productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted){
+		$data = array('product_code'=>$productCode, 'name'=>$name, 'modal_price'=>$modalPrice, 'min_price'=>$minPrice, 'stock_shop'=>$stockShop, 'stock_storage'=>$stockStorage, 'type'=>$type, 'deleted'=>$deleted);
+		
+		//validate
+		$validator = Validator::make($data, Product::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			Product::create($data);
+			$respond = array('code'=>'201','status' => 'Created');
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($product)
 	{
 		$respond = array();
@@ -148,7 +176,37 @@ class ProductsController extends \BaseController {
 		@author : Gentry Swanri
 		@parameter : $id, $shopAmount
 		@return :
-		-) Fungsi ini digunakan untuk mengupdate stockShop
+		-) Fungsi ini digunakan untuk mengupdate stockShop (-)
+	*/
+	public function updateMinusShop($id, $shopAmount)
+	{
+		$respond = array();
+		$product = Product::find($id);
+		if ($product == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$tempAmount = $product->stock_shop - $shopAmount;
+			$product->stock_shop = $tempAmount;
+			try {
+				$product->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $id, $shopAmount
+		@return :
+		-) Fungsi ini digunakan untuk mengupdate stockStorage
 	*/
 	public function updateStorage($id, $storageAmount)
 	{
@@ -162,6 +220,36 @@ class ProductsController extends \BaseController {
 		{
 			//edit value
 			$tempAmount = $product->stock_storage + $storageAmount;
+			$product->stock_storage = $tempAmount;
+			try {
+				$product->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $id, $shopAmount
+		@return :
+		-) Fungsi ini digunakan untuk mengupdate stockStorage (-)
+	*/
+	public function updateMinusStorage($id, $storageAmount)
+	{
+		$respond = array();
+		$product = Product::find($id);
+		if ($product == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$tempAmount = $product->stock_storage - $storageAmount;
 			$product->stock_storage = $tempAmount;
 			try {
 				$product->save();

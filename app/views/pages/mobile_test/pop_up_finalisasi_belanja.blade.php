@@ -104,7 +104,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="">Total Biaya
+						<label for="">Subtotal
 
 						</label>
 						<p type="text" class="form-control-static" placeholder="">
@@ -120,6 +120,18 @@
 						<label for="">Diskon</label>
 						<input type="text" class="form-control" id="" value="0">
 					</div>
+
+					<div class="form-group">
+						<label for="">Total Biaya
+
+						</label>
+						<p type="text" class="form-control-static" placeholder="">
+							<span id="total_biaya_text">
+							IDR 0
+							</span>
+						</p>
+					</div>
+
 					<script>
 					$('body').on('click','.f_diskon_revealer',function(){
 						if($('.f_diskon_inputtext').hasClass('hidden')){

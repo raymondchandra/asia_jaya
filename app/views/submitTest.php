@@ -15,5 +15,13 @@
 		<form action="finalizeReturn" method="post">
 			<input type="Submit" value="Finalize Return"></input>
 		</form>
+		
+		<form action="restock" method="post">
+			<input type="Submit" value="Restock"></input>
+		</form>
+		
+		<form action="changeActive" method="post">
+			<input type="Submit" value="changeActive"></input>
+		</form>
 	</body>
 </html>

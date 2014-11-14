@@ -15,21 +15,21 @@
 							<div class="form-group" id="nama_promosi">
 								<label class="g-sm-4 control-label">Username</label>
 								<div class="g-sm-5">
-									<input type="text" class="form-control">		
+									<input type="text" class="form-control" name="add_account_username">		
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="g-sm-4 control-label">Password</label>
 								<div class="g-sm-5">
-									<input type="text" class="form-control">		
+									<input type="text" class="form-control" name="add_account_pass">			
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="g-sm-4 control-label">Role</label>
 								<div class="g-sm-5">
-									<select class="form-control">
+									<select class="form-control" name="add_account_role">
 										<option value="manager">Manager</option>
 										<option value="karyawan">Karyawan</option>
 									</select>
@@ -39,6 +39,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal" id="f_add_new_karyawan_btn">Save</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
 				</div>
 			</form>
