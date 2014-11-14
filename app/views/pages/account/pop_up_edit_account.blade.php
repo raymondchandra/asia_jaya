@@ -36,24 +36,28 @@
 								</div>
 							</div>
 
+							<!--
+							Gak kepake
 							<div class="form-group">
 								<label for="inputPassword3" class="g-sm-4 control-label">Status</label>
 								<div class="g-sm-5">
-									<p id="account_status" class="form-control-static">Aktif</p>
+									<p id="account_status" class="form-control-static f_active">Active</p>
 								</div>
 								<div class="g-sm-3">
 									<button type="button" class="btn btn-warning" id="account_status_editor">Change</button>
 									<script>
 									$( 'body' ).on( "click",'#account_status_editor', function() {
-										if($('#account_status').text() == "Aktif"){
-											$('#account_status').text("Non-aktif");
+										if($('#account_status').text() == "Active"){
+											$('#account_status').text("Inactive");
+											$('#account_status').removeClass("f_active").addClass("f_inactive");
 										}else{
-											$('#account_status').text("Aktif");
+											$('#account_status').text("Active");
+											$('#account_status').addClass("f_active").removeClass("f_inactive");
 										}
 									});
 									</script>
 								</div>
-							</div>
+							</div>-->
 						</div>
 					</div>
 				</div>

@@ -4,13 +4,13 @@
 /* ==========================================================================
    Common
    ========================================================================== */
-/* line 42, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 42, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_tbl {
   display: table;
   width: 100%;
   height: inherit;
 }
-/* line 48, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 48, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_tbl .s_cl {
   width: 100%;
   height: inherit;
@@ -20,7 +20,7 @@
   position: relative;
 }
 
-/* line 58, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 58, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 hr {
   border-top: 1px solid #ccc;
 }
@@ -28,7 +28,7 @@ hr {
 /* ==========================================================================
    Pop up
    ========================================================================== */
-/* line 66, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 66, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .pop_up_super_c {
   width: 100%;
   height: 100%;
@@ -40,7 +40,7 @@ hr {
   overflow: auto;
 }
 
-/* line 76, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 76, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .pop_up_tbl {
   width: 100%;
   height: 100%;
@@ -50,13 +50,13 @@ hr {
   vertical-align: middle;
 }
 
-/* line 84, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 84, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .pop_up_cell {
   display: table-cell;
   vertical-align: middle;
 }
 
-/* line 88, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 88, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .close_56 {
   background: url("../img/close56.png") no-repeat;
   width: 56px;
@@ -72,7 +72,7 @@ hr {
 /* ==========================================================================
    Admin panel
    ========================================================================== */
-/* line 105, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 105, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_orenji_header {
   background-color: #d75f07;
   display: block;
@@ -80,7 +80,7 @@ hr {
   height: 20px;
 }
 
-/* line 112, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 112, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_header {
   display: block;
   width: 100%;
@@ -106,12 +106,12 @@ hr {
   /* IE6-8 */
   border-bottom: 1px #5f767f solid;
 }
-/* line 117, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 117, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_header * {
   color: #fff;
 }
 
-/* line 141, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 141, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header {
   background: #606c88;
   /* Old browsers */
@@ -135,21 +135,21 @@ hr {
   width: 100%;
   height: 20px;
 }
-/* line 157, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 157, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header * {
   list-style-type: none;
   color: #b9b9b9;
   cursor: pointer;
 }
-/* line 163, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 163, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header nav > ul {
   padding-left: 0px;
 }
-/* line 166, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 166, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header nav > ul > li {
   display: inline-block;
 }
-/* line 168, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 168, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header nav > ul > li > a {
   display: block;
   padding-left: 20px;
@@ -157,15 +157,15 @@ hr {
   line-height: 20px;
   text-align: center;
 }
-/* line 176, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 176, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header nav > ul > li > ul {
   padding-left: 0px;
 }
-/* line 179, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 179, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header nav > ul > li > ul > li {
   display: block;
 }
-/* line 181, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 181, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_nav_header nav > ul > li > ul > li > a {
   display: block;
   padding-left: 20px;
@@ -174,20 +174,20 @@ hr {
   text-align: center;
 }
 
-/* line 196, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 196, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav {
   margin: 0;
   padding: 0;
 }
 
-/* line 200, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 200, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav li {
   float: left;
   list-style: none;
   font: 12px Tahoma, Arial;
 }
 
-/* line 206, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 206, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav li a {
   display: block;
   position: relative;
@@ -217,12 +217,12 @@ hr {
   white-space: nowrap;
 }
 
-/* line 229, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 229, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav li a:hover {
   background: #1A4473;
 }
 
-/* line 232, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 232, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav li ul {
   margin: 0;
   padding: 0;
@@ -232,13 +232,13 @@ hr {
   position: relative;
 }
 
-/* line 240, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 240, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav li ul li {
   float: none;
   display: inline;
 }
 
-/* line 245, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 245, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav li ul li a {
   width: auto;
   background: #9F1B1B;
@@ -246,20 +246,20 @@ hr {
   z-index: 90;
 }
 
-/* line 251, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 251, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_top_nav li ul li a:hover {
   background: #7F1616;
 }
 
-/* line 258, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 258, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_list_container * {
   list-style-type: none;
 }
-/* line 259, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 259, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_list_container li {
   display: inline-block;
 }
-/* line 262, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 262, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .s_list_container li > div {
   display: block;
   float: left;
@@ -268,7 +268,7 @@ hr {
 /* ==========================================================================
    Mod
    ========================================================================== */
-/* line 275, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 275, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: #fcf5dd;
 }
@@ -278,7 +278,7 @@ hr {
 
  
 /* --- Style --- */
-/* line 287, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 287, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default {
   border-top: 1px #2d444f solid;
   border-bottom: 1px #2d444f solid;
@@ -305,27 +305,27 @@ hr {
   /* IE6-8 */
   border-radius: 0px;
 }
-/* line 310, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 310, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-brand {
   color: #ecf0f1;
 }
-/* line 312, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 312, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
   color: #ffe6d1;
 }
-/* line 316, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 316, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav > li > a {
   padding-top: 0px;
   padding-bottom: 0px;
   line-height: 30px;
   color: #ecf0f1;
 }
-/* line 321, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 321, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   background-color: #d45400;
   color: #ffe6d1;
 }
-/* line 328, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 328, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav .active > a, .navbar-default .navbar-nav .active > a:hover, .navbar-default .navbar-nav .active > a:focus {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -333,7 +333,7 @@ hr {
   color: #ffe6d1;
   background-color: #9f3f00;
 }
-/* line 335, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 335, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav .open > a, .navbar-default .navbar-nav .open > a:hover, .navbar-default .navbar-nav .open > a:focus {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -341,58 +341,58 @@ hr {
   color: #ffe6d1;
   background-color: #9f3f00;
 }
-/* line 341, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 341, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav .open > a .caret, .navbar-default .navbar-nav .open > a:hover .caret, .navbar-default .navbar-nav .open > a:focus .caret {
   border-top-color: #ffe6d1;
   border-bottom-color: #ffe6d1;
 }
-/* line 345, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 345, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav > .dropdown > a {
   padding-top: 0px;
   padding-bottom: 0px;
   line-height: 30px;
 }
-/* line 349, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 349, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav > .dropdown > a .caret {
   border-top-color: #ecf0f1;
   border-bottom-color: #ecf0f1;
 }
-/* line 353, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 353, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-nav > .dropdown > a:hover .caret, .navbar-default .navbar-nav > .dropdown > a:focus .caret {
   border-top-color: #ffe6d1;
   border-bottom-color: #ffe6d1;
 }
-/* line 356, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 356, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-toggle {
   border-color: #9f3f00;
 }
-/* line 358, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 358, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
   background-color: #9f3f00;
 }
-/* line 360, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 360, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ecf0f1;
 }
 
 @media (max-width: 767px) {
-  /* line 363, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+  /* line 363, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #ecf0f1;
   }
-  /* line 365, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+  /* line 365, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #ffe6d1;
     background-color: #9f3f00;
   }
 }
-/* line 376, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 376, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 #editor {
   overflow: scroll;
   max-height: 300px;
 }
 
-/* line 378, E:/xampp/htdocs/asiajayastore/public/assets/css/brauch_style.scss */
+/* line 378, E:/xampp/htdocs/asiajaya/public/assets/css/brauch_style.scss */
 .f_table_suggestion tr td {
   cursor: pointer !important;
 }

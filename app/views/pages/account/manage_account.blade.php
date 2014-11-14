@@ -15,7 +15,7 @@
 				<span class="glyphicon glyphicon-plus"></span>Add Account
 			</button>
 			<div>
-				<table class="table table-striped table-hover ">
+				<table class="table table-hover ">
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered">
@@ -43,7 +43,10 @@
 								</a>
 							</th>
 							<th class="table-bordered" width="200">
-
+								Command
+							</th>
+							<th class="table-bordered" width="70">
+								Delete
 							</th>
 						</thead>
 						<thead>
@@ -52,7 +55,12 @@
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
+								<td>
+									<select class="form-control input-sm">
+										<option value="">Active</option>
+										<option value="">Inactive</option>
+									</select>
+								</td>
 								
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
 							</tr>
@@ -60,16 +68,19 @@
 						<tbody id="f_tbody_karyawan">
 							<?php for($i=0; $i<2; $i++){
 							?>
-							<tr> 
+							<tr class="bg-success"> 
 								<td>Username</td>
 								<td>Role</td>
 								<td>-</td>
-								<td>Aktif</td>
+								<td class="f_account_status_lbl">Active</td>
 
 								<td>
-									<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>
-									<!-- Button trigger modal class ".alertYesNo" -->
-									<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_delete_account">Delete</button>
+									<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>
+									<button type="button" class="f_activate_btn btn btn-success btn-xs hidden">Activate</button>
+									<button type="button" class="f_deactivate_btn btn btn-danger btn-xs">Deactivate</button>
+								</td>
+								<td>
+									<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_delete_account">Delete</button>
 								</td>
 							</tr> 
 							<?php }
@@ -88,20 +99,40 @@
 	<script>
 	//**pop_up_add_account
 	$('body').on('click','#f_add_new_karyawan_btn',function(){
-		var f_tbody_karyawan_node = '<tr>';
+		var f_tbody_karyawan_node = '<tr class="bg-success">';
 		f_tbody_karyawan_node +=' <td>'+$('[name=add_account_username]').val()+'</td>';
 		f_tbody_karyawan_node +=' <td>'+$('[name=add_account_role] option:selected').text()+'</td>';
 		f_tbody_karyawan_node +=' <td>-</td>';
 		f_tbody_karyawan_node +=' <td>Aktif</td>';
 		f_tbody_karyawan_node +=' <td>';
 		f_tbody_karyawan_node +=' 	<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>';
-		f_tbody_karyawan_node +=' 	<!-- Button trigger modal class ".alertYesNo" -->';
+		f_tbody_karyawan_node +=' 	<button type="button" class="f_activate_btn btn btn-success btn-xs hidden">Activate</button>';
+		f_tbody_karyawan_node +=' 	<button type="button" class="f_deactivate_btn btn btn-danger btn-xs">Deactivate</button>';
+		f_tbody_karyawan_node +=' <td>';
 		f_tbody_karyawan_node +=' 	<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_delete_account">Delete</button>';
 		f_tbody_karyawan_node +=' </td>';
 		f_tbody_karyawan_node +=' </tr>';
 
 		$('#f_tbody_karyawan').append(f_tbody_karyawan_node);
 	});
+
+	//Active - Deactivate button
+	$( 'body' ).on( "click",'.f_activate_btn', function() {
+		$(this).addClass("hidden");
+		$(this).siblings(".f_deactivate_btn").removeClass("hidden");
+		$(this).parent().siblings(".f_account_status_lbl").text("Active");
+		$(this).closest('tr').removeClass("bg-danger").addClass("bg-success");
+		
+	});
+
+	$( 'body' ).on( "click",'.f_deactivate_btn', function() {
+		$(this).addClass("hidden");
+		$(this).siblings(".f_activate_btn").removeClass("hidden");
+		$(this).parent().siblings(".f_account_status_lbl").text("Inactive");
+		$(this).closest('tr').addClass("bg-danger").removeClass("bg-success");
+	});
+
+
 
 	/*$('body').on('click','.flogin',function(){
 		$data = {

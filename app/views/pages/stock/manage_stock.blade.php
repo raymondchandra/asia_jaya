@@ -4,8 +4,11 @@
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
-				<h3 style="float: left;">
+				<h3>
 					Daftar Stok Produk
+					<button class="btn btn-success pull-right">
+						<span class="glyphicon glyphicon-plus"></span>Add Stock
+					</button>
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
@@ -96,25 +99,28 @@
 										824739
 									</td>
 									<td>
-										<span class="f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
-										<input type="text" class="f_cell_nama_produk_input form-control input-sm hidden" style=""/>
+										<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
+										<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										<span id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">IDR 400.000</span>
-										<input type="text" id="f_cell_harga_modal_input" class=" form-control input-sm hidden" style=""/>
-										
+										<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">400000</span>
+										<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										IDR 500.000
+										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">500000</span>
+										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										IDR 600.000
+										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">600000</span>
+										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										30
+										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">30</span>
+										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										79
+										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">79</span>
+										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
 										Type
@@ -123,24 +129,28 @@
 										Deleted
 									</td>
 									<td>
-										<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Toko</button>
-										<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">Customer</button>
+										<button class="btn btn-warning btn-xs" data-toggle="" data-target="">
+											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
+										</button>
+										<button class="btn btn-success btn-xs" data-toggle="" data-target="">
+											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
+										</button>
 										<!-- Button trigger modal class ".alertYesNo" -->
 									</td>
 								</tr> 
 								<?php }
 								?>
 								<script>
-								$( 'body' ).on( "click",'.f_cell_nama_produk', function() {
-									$(this).siblings('.f_cell_nama_produk_input').removeClass('hidden');
-									$(this).siblings('.f_cell_nama_produk_input').val($(this).text());
+								$( 'body' ).on( "click",'.f_excel_xlabel', function() {
+									$(this).siblings('.f_excel_xinput').removeClass('hidden');
+									$(this).siblings('.f_excel_xinput').val($(this).text());
 									$(this).addClass('hidden');
 								});
 
-								$('.f_cell_nama_produk_input').keypress(function(e) {
+								$('.f_excel_xinput').keypress(function(e) {
 									if(e.which == 13) {
-										$(this).siblings('.f_cell_nama_produk').text($(this).val());
-										$(this).siblings('.f_cell_nama_produk').removeClass('hidden');
+										$(this).siblings('.f_excel_xlabel').text($(this).val());
+										$(this).siblings('.f_excel_xlabel').removeClass('hidden');
 										$(this).addClass('hidden');
 									}
 								});
