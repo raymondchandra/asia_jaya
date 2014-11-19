@@ -23,5 +23,17 @@
 		<form action="changeActive" method="post">
 			<input type="Submit" value="changeActive"></input>
 		</form>
+		
+		<form action="changevoid" method="post">
+			<input type="Submit" value="changeVoid"></input>
+		</form>
+		
+		<form action="changeprint" method="post">
+			<input type="Submit" value="changePrint"></input>
+		</form>
+		
+		<form action="getorder" method="post">
+			<input type="Submit" value="getOrder"></input>
+		</form>
 	</body>
 </html>

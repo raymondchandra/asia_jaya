@@ -128,6 +128,58 @@ class TransactionsController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
+	
+	/*
+		@author : Gentry Swanri
+	*/
+	public function updateVoid($id)
+	{
+		$respond = array();
+		$transaction = Transaction::find($id);
+		if ($transaction == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$transaction->is_void = 1;
+			try {
+				$transaction->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	
+	/*
+		@author : Gentry Swanri
+	*/
+	public function updatePrintCustomer($id)
+	{
+		$respond = array();
+		$transaction = Transaction::find($id);
+		if ($transaction == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$transaction->print_customer = 1;
+			try {
+				$transaction->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
 
 	/*
 	public function update<column>($id)

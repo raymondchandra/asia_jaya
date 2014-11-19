@@ -82,6 +82,15 @@
 	
 //change active status account
 	Route::post('changeActive', 'accountController@changeActive');
+	
+//change void
+	Route::post('changevoid', 'transController@updateVoid');
+	
+//change print customer
+	Route::post('changeprint', 'transController@updatePrintCustomer');
+	
+//get order
+	Route::post('getorder', 'transController@getOrderByTransactionId');
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);

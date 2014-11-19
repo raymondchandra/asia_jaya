@@ -1923,4 +1923,5 @@ return array(
     'returnController' => $baseDir . '/app/controllers/Page/returnController.php',
     'searchViewController' => $baseDir . '/app/controllers/Page/searchViewController.php',
     'taxController' => $baseDir . '/app/controllers/Page/taxController.php',
+    'transController' => $baseDir . '/app/controllers/Page/transController.php',
 );
