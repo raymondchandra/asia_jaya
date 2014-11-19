@@ -82,6 +82,7 @@
 					$data = "";
 					$.each(response['messages'], function( i, resp ) {
 						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						$data = $data + "<img src='' width='75' height='75' class='pull-left' style='margin-right:8px;'>";
 						$data = $data + "#" + resp.product_code + " / " + resp.color + " / <span class='pull-right'>";
 						$data = $data + resp.stock_shop + " | " + resp.stock_storage + "</span> </span> <span style='display: block;'> <span class='pull-left'>";
 						$data = $data + resp.name + "</span>   <span class='pull-right'>";
@@ -94,6 +95,7 @@
 						$data = $data + "<input type='hidden' value='" + resp.stock_storage + "' id='stock_storage_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
 						$data = $data + "</span>";
 						$data = $data + "</td></tr>";
 						
@@ -116,21 +118,30 @@
 		$stock_storage = $('#stock_storage_'+$id).val();
 		$name = $('#name_'+$id).val();
 		$price = $('#price_'+$id).val();
+		$min_price = $('#min_price_'+$id).val();
 		
-		$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang'> <td style='line-height: 30px;'>";
-		$data = $data + $product_code + "</td> <td style='line-height: 30px;'>";
-		$data = $data + $name + "</td> <td style='line-height: 30px;'>";
-		$data = $data + $color + "</td> <td style='line-height: 30px;'>";
-		$data = $data + 1 + "</td> <td style='line-height: 30px;'>";
-		$data = $data + $price + "</td> </tr>";
+		if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
+		{
 		
-		$('#pesanan_content_'+$inc).prepend($data);
+		}
+		else
+		{
+			$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + 1 + "</td> <td id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + $price + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+			
+			$('#pesanan_content_'+$inc).prepend($data);
+			
+			$subtotalNow = toAngka($('#subtotal_text_'+$inc).text());
+			var a = parseInt($subtotalNow);
+			var b = parseInt($price);
+			var total = a+b;
+			$('#subtotal_text_'+$inc).text("IDR " + toRp(total));
+		}
 		
-		$subtotalNow = toAngka($('#subtotal_text_'+$inc).text());
-		var a = parseInt($subtotalNow);
-        var b = parseInt($price);
-        var total = a+b;
-		$('#subtotal_text_'+$inc).text("IDR " + toRp(total));
 		
 	});
 	

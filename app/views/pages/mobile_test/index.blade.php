@@ -343,8 +343,33 @@
 		};
 
 		$('body').on('click','.f_table_pesanan > tr',function(){
-			var n = $(this).attr('id');
-			pop_up_edit_barang(n);
+			$row_id = $(this).attr('id');
+			$tab_id = $row_id.split('_')[2];
+			$min_price = $('#hidden_'+$row_id).val();
+			$code = $('#code_'+$row_id).text();
+			$nama = $('#name_'+$row_id).text();
+			$warna = $('#color_'+$row_id).text();
+			$quantity = $('#quantity_'+$row_id).text();
+			$harga = $('#price_'+$row_id).text();
+			
+			$a = parseInt($harga);
+			$b = parseInt($quantity);
+			$total = $a*$b;
+			
+			$('#edit_code').text($code);
+			$('#edit_nama').text($nama);
+			$('#edit_warna').text($warna);
+			$('#f_hsatuan_qty').val($harga);
+			$('#f_edit_qty').val($quantity);
+			$('#f_subtotal_edit').text("IDR " + $total);
+			$('#rowRep').val($row_id);
+			$('#tabRep').val($tab_id);
+			$('#minPrice').val($min_price);
+			$('#currentTotal').val($total);
+			
+			$('.f_slider_alert').addClass('hidden');
+			
+			//pop_up_edit_barang(n);
 		});
 	</script>
 	<!--engine-->
@@ -358,6 +383,11 @@
 			$repId = $(this).prev().val();
 			$('#tableReps').val($repId);
 			$('#total_text').text($('#subtotal_text_'+$repId).text());
+		});
+		
+		$('body').on('click','.table_row',function(){
+			$currentPrice = ($(".table_row td")[4].innerText);
+			
 		});
 	</script>
 </body>
