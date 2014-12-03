@@ -65,7 +65,7 @@
 								</a>
 							</th>
 							<th class="table-bordered" width="100"></th>
-							<th class="table-bordered" width="200">Print</th>
+							<th class="table-bordered" width="100">Print</th>
 						</thead>
 						<thead>
 							<tr>
@@ -101,8 +101,12 @@
 									<!-- Button trigger modal class ".alertYesNo" -->
 								</td>
 								<td>
-									<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Toko</button>
-									<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">Customer</button>
+									<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
+									</button>
+									<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
+									</button>
 									<!-- Button trigger modal class ".alertYesNo" -->
 								</td>
 							</tr> 

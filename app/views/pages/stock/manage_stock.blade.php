@@ -25,8 +25,20 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" style="width: 137px;">
+								<a href="javascript:void(0)">Foto</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" style="width: 180px;">
 								<a href="javascript:void(0)">Nama Produk</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Warna</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -62,23 +74,18 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Type</a>
-								<a href="javascript:void(0)">
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
-							</th>
-							<th class="table-bordered">
 								<a href="javascript:void(0)">Deleted</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="200">Print</th>
+							<!--<th class="table-bordered">Print</th>-->
 						</thead>
 						<thead>
 							<tr>
 								
 								<td><input type="text" class="form-control input-sm"></td>
+								<td></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
@@ -87,7 +94,7 @@
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
-								<td></td>
+								<!--<td></td>-->
 								
 							</tr>
 						</thead>
@@ -99,8 +106,15 @@
 										824739
 									</td>
 									<td>
+										<img src="" width="120" height="120">
+									</td>
+									<td>
 										<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
 										<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
+									</td>
+									<td>
+										<span class="f_excel_xlabel" style="line-height: 30px;">Cyan</span>
+										<input type="text" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
 										<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">400000</span>
@@ -123,20 +137,16 @@
 										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										Type
-									</td>
-									<td>
 										Deleted
 									</td>
-									<td>
-										<button class="btn btn-warning btn-xs" data-toggle="" data-target="">
+									<!--<td>
+										<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
 											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
 										</button>
 										<button class="btn btn-success btn-xs" data-toggle="" data-target="">
 											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
 										</button>
-										<!-- Button trigger modal class ".alertYesNo" -->
-									</td>
+									</td>-->
 								</tr> 
 								<?php }
 								?>
