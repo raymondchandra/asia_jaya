@@ -5,7 +5,11 @@
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
 					<span class="sr-only">Close</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">Detail Transaksi ID 987987</h4>
+				<div style="font-size: 1.2em;">
+					<b>ID Transaksi:</b>  <span>987987</span>
+					<span class="clearfix"></span>
+					<b>Nama Customer:</b> <span>Luntang Lantung</span>
+				</div>
 			</div>
 			<form class="form-horizontal" role="form">
 				<div class="modal-body">
@@ -16,6 +20,9 @@
 									<tr>
 										<th>
 											Nama Produk
+										</th>
+										<th>
+											Foto
 										</th>
 										<th>
 											Warna
@@ -37,6 +44,9 @@
 											Tas Selempang
 										</td>
 										<td>
+											<img src="" width="100" height="100">
+										</td>
+										<td>
 											Merah
 										</td>
 										<td>
@@ -52,6 +62,9 @@
 									<tr>
 										<td>
 											Tas Epic
+										</td>
+										<td>
+											<img src="" width="100" height="100">
 										</td>
 										<td>
 											Hijau
@@ -71,6 +84,9 @@
 											Tas Karung
 										</td>
 										<td>
+											<img src="" width="100" height="100">
+										</td>
+										<td>
 											Kuning
 										</td>
 										<td>
@@ -85,13 +101,18 @@
 									</tr>
 								</tbody>
 							</table>
-
+							<hr></hr>
 							<div class="form-group">
 								<label class="g-sm-9 control-label">Subtotal</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static">IDR 3.100.000</p>
 								</div>
 								<label class="g-sm-9 control-label">Diskon</label>
+								<div class="g-sm-3">
+									<p type="text" class="form-control-static">IDR 0</p>
+									
+								</div>
+								<label class="g-sm-9 control-label">Tax</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static">IDR 0</p>
 									
@@ -109,8 +130,12 @@
 
 							<hr></hr>
 
-							<button type="button" class="btn btn-success pull-right">Print Customer</button>
-							<button type="button" class="btn btn-warning pull-right" style="margin-right: 20px;">Print Toko</button>
+							<button type="button" class="btn btn-success pull-right">
+								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Print Customer
+							</button>
+							<button type="button" class="btn btn-warning pull-right" style="margin-right: 20px;">
+								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Print Toko
+							</button>
 
 						</div>
 					</div>

@@ -109,8 +109,12 @@
 
 							<hr></hr>
 
-							<button type="button" class="btn btn-success pull-right">Print Customer</button>
-							<button type="button" class="btn btn-warning pull-right" style="margin-right: 20px;">Print Toko</button>
+							<button type="button" class="btn btn-success pull-right">
+								Print Customer
+							</button>
+							<button type="button" class="btn btn-warning pull-right" style="margin-right: 20px;">
+								Print Toko
+							</button>
 
 						</div>
 					</div>
