@@ -28,7 +28,7 @@ class mobile_view extends \BaseController{
 				return $custId;
 			}
 		}else{
-			echo "customer = "; var_dump($addJson->{'messages'});
+			//echo "customer = "; var_dump($addJson->{'messages'});
 			return -1;
 		}
 	}
@@ -107,7 +107,7 @@ class mobile_view extends \BaseController{
 		$custName = Input::get('customer_name');
 		$idCustomer = Input::get('id_customer');
 		$productList = Input::get('product_list');
-		var_dump($productList);
+		//var_dump($productList);
 		//$productList[] = array("name"=>"ea", "color"=>"Gold","quantity"=>"3");
 		//$productName = "fugit";
 		//$color = "LightCoral";
