@@ -91,6 +91,9 @@
 	
 //get order
 	Route::post('getorder', 'transController@getOrderByTransactionId');
+	
+//get All Transaction
+	Route::post('getAllTransaction', 'transController@getAllTransaction');
 
 //home + login
 Route::get('/', ['as' => 'home', 'uses' => '']);
