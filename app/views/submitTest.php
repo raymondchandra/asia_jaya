@@ -35,5 +35,9 @@
 		<form action="getorder" method="post">
 			<input type="Submit" value="getOrder"></input>
 		</form>
+		
+		<form action="getAllTransaction" method="post">
+			<input type="Submit" value="getAllTransaction"></input>
+		</form>
 	</body>
 </html>
