@@ -15,7 +15,7 @@
 				<span class="glyphicon glyphicon-plus"></span>Add Account
 			</button>
 			<div>
-				<table class="table table-hover ">
+				<table class="table ">
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered">
@@ -150,15 +150,15 @@
 								</td>
 								
 								<td width="">
-									<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
-									<a class="btn btn-primary btn-xs" id="unfilter_button">Back To No-Filter</a>
+									<a class="btn btn-primary btn-xs" id="filter_button"><span class="glyphicon glyphicon-filter" style="margin-right: 5px;"></span>Filter</a>
+									<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
 								</td>
 							</tr>
 						</thead>
 						<tbody id="f_tbody_karyawan">
 							@if($datas != null)
 								@foreach($datas as $data)
-									<tr class="bg-success"> 
+									<tr class=""> 
 										<td id="username_{{$data->id}}">{{$data->username}}</td>
 										@if($data->role == 1)
 											<td id="role_{{$data->id}}">owner</td>
@@ -236,7 +236,7 @@
 	$( 'body' ).on( "click",'.f_activate_btn', function() {
 		$(this).addClass("hidden");
 		$(this).siblings(".f_deactivate_btn").removeClass("hidden");
-		$(this).parent().siblings(".f_account_status_lbl").text("Active");
+		$(this).parent().siblings(".f_account_status_lbl").text("active");
 		$(this).closest('tr').removeClass("bg-danger").addClass("bg-success");
 		$id = $(this).next().val();
 		//alert($id);
@@ -260,7 +260,7 @@
 	$( 'body' ).on( "click",'.f_deactivate_btn', function() {
 		$(this).addClass("hidden");
 		$(this).siblings(".f_activate_btn").removeClass("hidden");
-		$(this).parent().siblings(".f_account_status_lbl").text("Inactive");
+		$(this).parent().siblings(".f_account_status_lbl").text("inactive");
 		$(this).closest('tr').addClass("bg-danger").removeClass("bg-success");
 		$id = $(this).next().val();
 		//alert($id);
@@ -377,5 +377,15 @@
 			}
 		},'json');	
 	});*/
+	$(document).ready(function(){
+		$('.f_account_status_lbl').each(function () {
+		    if ($(this).text() == 'active') {
+				$(this).closest('tr').removeClass("bg-danger").addClass("bg-success");
+		    }else{
+
+				$(this).closest('tr').addClass("bg-danger").removeClass("bg-success");
+		    }
+		});
+	});
 	</script>
 @stop
