@@ -1,29 +1,78 @@
 <?php
 	Route::get('/tes', function()
 	{
-		try
+		$username = Input::get('username','-');
+		$role = Input::get('role', '-');
+		$lastLogin = Input::get('lastLogin', '-');
+		$active = Input::get('active', '-');
+		$sortBy = Input::get('sortBy','none');
+		$order = Input::get('order','none');
+		$filtered = Input::get('filtered', '0');
+		$isFirst = false;
+		
+		if($username != '-')
 		{
-			$keyword = "doloremque";
-			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', $keyword)->orWhere('prod.name', 'LIKE', $keyword)->get();
-			if(count($products) == 0)
+			if($isFirst == false)
 			{
-				//not found
-				$response = array('code'=>'404','status' => 'Not Found');
+				$accountTab = Account::where('username', 'LIKE', '%'.$username.'%');
+				$isFirst = true;
 			}
 			else
 			{
-				//found				
-				$response = array('code'=>'200','status' => 'OK','messages'=>$products);
+				$accountTab = $accountTab->where('username', 'LIKE', '%'.$username.'%');
 			}
-			
-			return Response::json($response);
 		}
-		catch(Exception $e)
+		
+		if($role != '-')
 		{
-			//forbidden
-			$response = array('code'=>'403','status' => 'FORBIDDEN');
-			return Response::json($response);
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('role', '=', $role);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('role', '=', $role);
+			}
 		}
+		
+		if($lastLogin != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('last_login', 'LIKE', '%'.$lastLogin.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('last_login', 'LIKE', '%'.$lastLogin.'%');
+			}
+		}
+		
+		if($active != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('active', '=', $active);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('active', '=', $active);
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$account = Account::orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$account = $accountTab->orderBy($sortBy, $order)->get();
+		}
+		
+		var_dump($account);
 	});
 	Route::get('/tes2', function()
 	{
@@ -45,7 +94,7 @@
 			$response = array('code'=>'404','status' => 'Not Found');
 		}
 		
-		return Response::json($response);
+		echo var_dump($response);
 	});
 	
 //get list without filter
@@ -279,6 +328,14 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/get_customer_live_search', ['as'=>'david.getCustomerLiveSearch','uses' => 'CustomersController@search']);
 	
 	Route::post('/post_finalize_transaction', ['as'=>'david.postFinalizeTransaction','uses' => 'mobile_view@finalize']);
+	
+	Route::get('/view_account', ['as'=>'david.viewAccount','uses' => 'accountController@viewAccount']);
+	
+	Route::put('/edit_account_active', ['as'=>'david.edit_account_active','uses' => 'accountController@changeActive']);
+	
+	Route::put('/edit_account', ['as'=>'david.edit_account','uses' => 'AccountsController@editAccount']);
+	
+	Route::put('/add_account', ['as'=>'david.add_account','uses' => 'AccountsController@addAccount']);
 });
 
 

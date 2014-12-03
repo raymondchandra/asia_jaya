@@ -15,23 +15,23 @@
 							<div class="form-group" id="nama_promosi">
 								<label class="g-sm-4 control-label">Username</label>
 								<div class="g-sm-5">
-									<input type="text" class="form-control" name="add_account_username">		
+									<input type="text" class="form-control" name="add_account_username" id="add_username">		
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="g-sm-4 control-label">Password</label>
 								<div class="g-sm-5">
-									<input type="text" class="form-control" name="add_account_pass">			
+									<input type="text" class="form-control" name="add_account_pass" id="add_password">			
 								</div>
 							</div>
 
 							<div class="form-group">
 								<label class="g-sm-4 control-label">Role</label>
 								<div class="g-sm-5">
-									<select class="form-control" name="add_account_role">
-										<option value="manager">Manager</option>
-										<option value="karyawan">Karyawan</option>
+									<select class="form-control" name="add_account_role" id="add_role">
+										<option value="manager">manager</option>
+										<option value="sales" selected="selected">sales</option>
 									</select>
 								</div>
 							</div>
@@ -46,3 +46,47 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$('body').on('click','#f_add_new_karyawan_btn',function(){
+		var x=document.getElementById("add_role");
+		for (var i = 0; i < x.options.length; i++) 
+		{
+			if(x.options[i].selected ==true)
+			{
+				$roleRaw = x.options[i].value;
+			}
+		}
+		
+		if($roleRaw === 'manager')
+		{
+			$role = 2;
+		}
+		else
+		{
+			$role = 3;
+		}
+		$username = $('#add_username').val();
+		$password = $('#add_password').val();
+		
+		alert($username + " " + $password + " " + $role);
+		
+		$.ajax({
+			type: 'PUT',
+			url: '{{URL::route('david.add_account')}}',
+			data: {
+				'username' : $username,
+				'password' : $password,
+				'role' : $role
+			},
+			success: function(response){
+				
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+		
+		//alert($username + " " + $password + " " +$editedPassword + " " + $role);
+	});
+</script>

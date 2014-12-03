@@ -377,12 +377,16 @@
 	<script>
 		$('body').on('click','.tambah_barang_btn',function(){
 			$('#tableRep').val($(this).prev().val());
+			$('#searchContent').html("");
+			$('#barang_text_box').val("");
 		});
 		
 		$('body').on('click','.finalisasi_btn',function(){
 			$repId = $(this).prev().val();
 			$('#tableReps').val($repId);
 			$('#total_text').text($('#subtotal_text_'+$repId).text());
+			$('#total_biaya_text').text($('#subtotal_text_'+$repId).text());
+			$('#f_nama_pelanggan').val("");
 		});
 		
 		$('body').on('click','.table_row',function(){

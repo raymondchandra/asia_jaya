@@ -40,6 +40,12 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Tax</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
 							<th class="table-bordered" width="80">
 								<a href="javascript:void(0)">Kar. ID</a>
 								<a href="javascript:void(0)">
@@ -47,7 +53,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Karyawan Name</a>
+								<a href="javascript:void(0)">Username</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -65,7 +71,7 @@
 								</a>
 							</th>
 							<th class="table-bordered" width="100"></th>
-							<th class="table-bordered" width="200">Print</th>
+							<th class="table-bordered" width="100">Print</th>
 						</thead>
 						<thead>
 							<tr>
@@ -91,6 +97,7 @@
 								<td>Luntang Lantung</td>
 								<td>IDR 400.000</td>
 								<td>0</td>
+								<td>0</td>
 								<td>2</td>
 								<td>Doni</td>
 								<td>False</td>
@@ -101,8 +108,12 @@
 									<!-- Button trigger modal class ".alertYesNo" -->
 								</td>
 								<td>
-									<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="">Toko</button>
-									<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">Customer</button>
+									<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
+									</button>
+									<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
+									</button>
 									<!-- Button trigger modal class ".alertYesNo" -->
 								</td>
 							</tr> 
