@@ -40,6 +40,12 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Tax</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
 							<th class="table-bordered" width="80">
 								<a href="javascript:void(0)">Kar. ID</a>
 								<a href="javascript:void(0)">
@@ -47,7 +53,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Karyawan Name</a>
+								<a href="javascript:void(0)">Username</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -90,6 +96,7 @@
 								<td>824739</td>
 								<td>Luntang Lantung</td>
 								<td>IDR 400.000</td>
+								<td>0</td>
 								<td>0</td>
 								<td>2</td>
 								<td>Doni</td>
