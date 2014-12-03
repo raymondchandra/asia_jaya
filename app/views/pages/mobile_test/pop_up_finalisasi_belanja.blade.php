@@ -118,7 +118,7 @@
 					</div>
 					<div class="form-group hidden f_diskon_inputtext">
 						<label for="">Diskon</label>
-						<input type="text" class="form-control" id="" value="0">
+						<input type="text" id="diskon_text" class="form-control" id="" value="0">
 					</div>
 
 					<div class="form-group">
@@ -155,6 +155,13 @@
 				<button type="button" class="btn btn-info pull-right g-sm-5" data-dismiss="modal">Back</button>
 
 				<script>
+				$('body').on('keyup','#diskon_text',function(){
+					var oldTotal = toAngka($('#total_text').text());
+					var diskon = $('#diskon_text').val();
+					var newTotal = oldTotal-diskon;
+					$('#total_biaya_text').text("IDR " + toRp(newTotal));
+				});
+				
 				$('body').on('click','.f_send_ke_kasir',function(){
 					$idTable = $('#tableReps').val();
 					$data = [];
@@ -186,14 +193,18 @@
 						*/
 						$data[i] = {name:$name, color:$color, quantity:$quantity};
 					});
-					alert($data);
+					//alert($data);
+					
+					$custName = $('#f_nama_pelanggan').val();
+					$totalBiaya = toAngka($('#total_biaya_text').text());
+					$custIdRep = $('#custIdRep').val();
 					$.ajax({
 						type: 'POST',
 						url: '{{URL::route('david.postFinalizeTransaction')}}',
 						data: {
-							'total' : 500000,
-							'customer_name' : 'si Abang',
-							'id_customer' : '11',
+							'total' : $totalBiaya,
+							'customer_name' : $custName,
+							'id_customer' : $custIdRep,
 							'product_list' : $data,
 						},
 						success: function(response){
@@ -205,6 +216,18 @@
 					},'json');
 					
 				});
+				function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+				function toRp(angka){
+					var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+					var rev2    = '';
+					for(var i = 0; i < rev.length; i++){
+						rev2  += rev[i];
+						if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+							rev2 += '.';
+						}
+					}
+					return rev2.split('').reverse().join('');
+				}
 				</script>
 			</div>
 

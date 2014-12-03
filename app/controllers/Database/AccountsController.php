@@ -51,6 +51,151 @@ class AccountsController extends \BaseController {
 		return $this->getReturn($account);
 	}
 	
+	public function getSortedAll($by, $order)
+	{
+		$account = Account::orderBy($by, $order)->get();
+		
+		return $this->getReturn($account);
+	}
+	
+	public function getFilteredAccount($username, $role, $lastLogin, $active)
+	{
+		$isFirst = false;
+		
+		if($username != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('username', 'LIKE', '%'.$username.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('username', 'LIKE', '%'.$username.'%');
+			}
+		}
+		
+		if($role != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('role', '=', $role);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('role', '=', $role);
+			}
+		}
+		
+		if($lastLogin != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('last_login', 'LIKE', '%'.$lastLogin.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('last_login', 'LIKE', '%'.$lastLogin.'%');
+			}
+		}
+		
+		if($active != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('active', '=', $active);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('active', '=', $active);
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$account = Account::all();
+			$isFirst = true;
+		}
+		else
+		{
+			$account = $accountTab->get();
+		}
+		
+		return $this->getReturn($account);
+	}
+	
+	public function getSortedFilteredAccount($username, $role, $lastLogin, $active, $sortBy, $order)
+	{
+		$isFirst = false;
+		
+		if($username != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('username', 'LIKE', '%'.$username.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('username', 'LIKE', '%'.$username.'%');
+			}
+		}
+		
+		if($role != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('role', '=', $role);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('role', '=', $role);
+			}
+		}
+		
+		if($lastLogin != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('last_login', 'LIKE', '%'.$lastLogin.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('last_login', 'LIKE', '%'.$lastLogin.'%');
+			}
+		}
+		
+		if($active != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('active', '=', $active);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('active', '=', $active);
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$account = Account::orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$account = $accountTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($account);
+	}
+	
 	/*
 	public function getBy<column>()
 	{
@@ -88,6 +233,79 @@ class AccountsController extends \BaseController {
 			
 		}
 		return Response::json($respond);
+	}
+	
+	public function addAccount()
+	{
+		$username = Input::get('username');
+		$password = Input::get('password');
+		$role = Input::get('role');
+		$active = 0;
+		$account = new Account();
+		$account->username = $username;
+		$account->password = Hash::make($password);
+		$account->role = $role;
+		$account->active = $active;
+		
+		try
+		{
+			$account->save();
+			return $respond = array('code'=>'200','status' => 'OK','messages' => $account->id);
+		}
+		catch(Exception $ex)
+		{
+			return $respond = array('code'=>'400','status' => 'Bad Request');
+		}
+	}
+	
+	public function editAccount()
+	{
+		$id = Input::get('id');
+		$username = Input::get('username');
+		$password = Input::get('password');
+		$isEditPassword = Input::get('isEditPassword');
+		$role = Input::get('role');
+		$account  = Account::find($id);
+		$account->username = $username;
+		if($isEditPassword === 'yes')
+		{
+			$account->password = Hash::make($password);
+		}
+		$account->role = $role;
+		try
+		{
+			$account->save();
+			return $respond = array('code'=>'200','status' => 'OK');
+		}
+		catch(Exception $ex)
+		{
+			return $respond = array('code'=>'400','status' => 'Bad Request');
+		}
+	}
+	
+	public function deleteAccount()
+	{
+		$id = Input::get('id');
+		$username = Input::get('username');
+		$password = Input::get('password');
+		$isEditPassword = Input::get('isEditPassword');
+		$role = Input::get('role');
+		$account  = Account::find($id);
+		$account->username = $username;
+		if($isEditPassword === 'yes')
+		{
+			$account->password = Hash::make($password);
+		}
+		$account->role = $role;
+		try
+		{
+			$account->save();
+			return $respond = array('code'=>'200','status' => 'OK');
+		}
+		catch(Exception $ex)
+		{
+			return $respond = array('code'=>'400','status' => 'Bad Request');
+		}
 	}
 	
 	/*
