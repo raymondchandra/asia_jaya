@@ -21,6 +21,11 @@
 				td.selected {
 					background-color: #fcf5dd;
 				}
+
+				thead {
+					background-color: #f5f5f5 !important;
+				}
+
 				</style>
 				<table class="table table-bordered">
 					<thead class="table-bordered">
@@ -85,67 +90,68 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<!--<th class="table-bordered">Print</th>-->
-						</thead>
-						<thead>
-							<tr>
-								
-								<td><input type="text" class="form-control input-sm"></td>
-								<td></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
-								<!--<td></td>-->
-								
-							</tr>
-						</thead>
-						<tbody>
+						</tr>
+						<!--<th class="table-bordered">Print</th>-->
+					</thead>
+					<thead>
+						<tr>
 							
-							<?php for($i=0; $i<30; $i++){
-								?>
-								<tr> 
-									<td>
-										824739
-									</td>
-									<td>
-										<img src="" width="120" height="120">
-									</td>
-									<td>
-										<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
-										<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" style="line-height: 30px;">Cyan</span>
-										<input type="text" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">400000</span>
-										<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">500000</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">600000</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">30</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">79</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										Deleted
-									</td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td></td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td><input type="text" class="form-control input-sm"></td>
+							<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
+							<!--<td></td>-->
+							
+						</tr>
+					</thead>
+					<tbody>
+						
+						<?php for($i=0; $i<30; $i++){
+							?>
+							<tr> 
+								<td>
+									824739
+								</td>
+								<td>
+									<img src="" width="120" height="120">
+								</td>
+								<td>
+									<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
+									<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
+								</td>
+								<td>
+									<span class="f_excel_xlabel" style="line-height: 30px;">Cyan</span>
+									<input type="text" class="f_excel_xinput form-control input-sm hidden" style=""/>
+								</td>
+								<td>
+									<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">400000</span>
+									<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
+								</td>
+								<td>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">500000</span>
+									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
+								</td>
+								<td>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">600000</span>
+									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
+								</td>
+								<td>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">30</span>
+									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
+								</td>
+								<td>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">79</span>
+									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
+								</td>
+								<td>
+									Deleted
+								</td>
 									<!--<td>
 										<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
 											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
@@ -181,7 +187,7 @@
 									plant.setAttribute('data-modal','7'); // Pesky birds
 									$(this).text(plant.getAttribute('data-modal'));
 								});*/
-								</script>
+</script>
 </tbody>
 </table>
 </div>
@@ -283,9 +289,9 @@ $(document).keydown(function(e) {
     $('.table tr td:eq(' + index + ')').addClass('selected');
     if($('.table tr td:eq(' + index + ')').children('.f_excel_xinput').hasClass('hidden') && e.which == 13) {
     	var f_excel_xlabel_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').text();
-		$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').removeClass('hidden');
-		$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').val(f_excel_xlabel_text);
-		$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').addClass('hidden');
+    	$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').removeClass('hidden');
+    	$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').val(f_excel_xlabel_text);
+    	$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').addClass('hidden');
 	}/*else if($('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').hasClass('hidden')){
 		var f_excel_xinput_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xinput').val();
 		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').siblings('.f_excel_xlabel').text(f_excel_xinput_text);

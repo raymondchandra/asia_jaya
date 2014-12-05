@@ -3930,6 +3930,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
+  border-right: 1px solid #202020;
 }
 @media (max-width: 767px) {
   .navbar-nav .open .dropdown-menu {
@@ -4994,7 +4995,7 @@ a.list-group-item-danger.active:focus {
 }
 .panel {
   margin-bottom: 20px;
-  background-color: #f5f5f5; //mod fff
+  background-color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);

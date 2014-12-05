@@ -253,6 +253,12 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.return.manage_return');
 	});
 
+	//Dashboard
+	Route::get('/dashboard', function()
+	{
+		return View::make('pages.dashboard.manage_dashboard');
+	});
+
 
 
 });

@@ -60,6 +60,7 @@ hr {
 }
 
 
+
 /* ==========================================================================
    Pop up
    ========================================================================== */
@@ -318,6 +319,8 @@ $colHover       : #ffe6d1; /*/
             	padding-bottom: 0px;
             	line-height: 30px;
                 color: $colDefault;
+        		border-left: 1px solid #808080; 
+        		border-right: 1px solid #373737;
                 &:hover, &:focus {
 				
                 background-color: #d45400;

@@ -21,8 +21,8 @@
 				<li><a href="{{URL::to('test/stock')}}"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Stok</a></li>
 				<li><a href="{{URL::to('test/tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Tax</a></li>
 				<li><a href="{{URL::to('test/account')}}"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Karyawan</a></li>
-				<li><a href="#">Other Link</a></li>
-				<li><a href="#">Other Link</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-folder-close" style="color:#fff; margin-right:10px;"></span>Laporan Kas</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-stats" style="color:#fff; margin-right:10px;"></span>Laporan Transaksi</a></li>
 				<!--
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book" style="color:#fff; margin-right:10px;"></span>Link<span class="caret"></span></a>
