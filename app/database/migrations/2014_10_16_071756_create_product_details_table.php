@@ -16,6 +16,7 @@ class CreateProductDetailsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('color');
+			$table->string('photo');
 			$table->integer('stock_shop');
 			$table->integer('stock_storage');
 			$table->integer('product_id')->unsigned();
