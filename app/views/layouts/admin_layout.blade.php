@@ -2,9 +2,33 @@
 <html lang="en">
 	<head>
 		@include('includes.head_html')
-		
+		<script>
+
+		function startTime() {
+			var m_names = new Array("Januari", "Februari", "Maret", 
+			"April", "Mei", "Juni", "Juli", "Agustus", "September", 
+			"Oktober", "November", "Desember");
+
+		    var today=new Date();
+		    var mo=today.getMonth();
+		    var da=today.getDate();
+		    var y=today.getFullYear();
+		    var h=today.getHours();
+		    var m=today.getMinutes();
+		    var s=today.getSeconds();
+		    m = checkTime(m);
+		    s = checkTime(s);
+		    document.getElementById('f_clock').innerHTML = da+" "+m_names[mo]+" "+y+" - "+h+":"+m+":"+s;
+		    var t = setTimeout(function(){startTime()},500);
+		}
+
+		function checkTime(i) {
+		    if (i<10) {i = "0" + i};  // add zero in front of numbers < 10
+		    return i;
+		}
+		</script>
 	</head>
-	<body>
+	<body onload="startTime()">
 		<!-- <div class="s_orenji_header">
 		</div> -->
 		<div class="s_top_header">

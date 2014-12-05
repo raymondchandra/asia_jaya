@@ -242,6 +242,16 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.stock.manage_stock');
 	});
+	//Tax
+	Route::get('/tax', function()
+	{
+		return View::make('pages.tax.manage_tax');
+	});
+	//Return
+	Route::get('/return', function()
+	{
+		return View::make('pages.return.manage_return');
+	});
 
 
 
