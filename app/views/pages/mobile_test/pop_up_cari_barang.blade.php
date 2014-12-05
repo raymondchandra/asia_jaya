@@ -82,7 +82,7 @@
 					$data = "";
 					$.each(response['messages'], function( i, resp ) {
 						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
-						$data = $data + "<img src='' width='75' height='75' class='pull-left' style='margin-right:8px;'>";
+						$data = $data + "<img src='" + resp.photo + "' width='75' height='75' class='pull-left' style='margin-right:8px;'>";
 						$data = $data + "#" + resp.product_code + " / " + resp.color + " / <span class='pull-right'>";
 						$data = $data + resp.stock_shop + " | " + resp.stock_storage + "</span> </span> <span style='display: block;'> <span class='pull-left'>";
 						$data = $data + resp.name + "</span>   <span class='pull-right'>";

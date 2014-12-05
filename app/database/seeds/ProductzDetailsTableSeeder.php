@@ -13,6 +13,8 @@ class ProductzDetailsTableSeeder extends Seeder {
 		{
 			ProductDetail::create([
 				'color' => $faker->colorName,
+				//http://localhost/asia_jaya/public/assets/product_img/001.jpg
+				'photo' => 'http://localhost/asia_jaya/public/assets/product_img/00'.$i.'.jpg',
 				'stock_shop' => $faker->randomNumber(3),
 				'stock_storage' => $faker->randomNumber(3),
 				'product_id' => $i,
