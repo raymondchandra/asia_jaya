@@ -90,35 +90,40 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php for($i=0; $i<10; $i++){
-							?>
-							<tr> 
-								<td>824739</td>
-								<td>Luntang Lantung</td>
-								<td>IDR 400.000</td>
-								<td>0</td>
-								<td>0</td>
-								<td>2</td>
-								<td>Doni</td>
-								<td>False</td>
-								<td>Belum Lunas</td>
-
-								<td>
-									<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
-									<!-- Button trigger modal class ".alertYesNo" -->
-								</td>
-								<td>
-									<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
-									</button>
-									<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
-									</button>
-									<!-- Button trigger modal class ".alertYesNo" -->
-								</td>
-							</tr> 
-							<?php }
-							?>
+							@if($dataAll != null)
+								@foreach($dataAll as $data)
+									<tr> 
+										<td>{{$data->id}}</td>
+										<td>{{$data->customerName}}</td>
+										<td>IDR {{$data->total}}</td>
+										<td>IDR {{$data->discount}}</td>
+										<td>{{$data->tax}}%</td>
+										<td>{{$data->sales_id}}</td>
+										<td>{{$data->salesName}}</td>
+										@if($data->is_void == 0)
+											<td>False</td>
+										@else
+											<td>True</td>
+										@endif
+										<td>{{$data->status}}</td>
+										<td>
+											<input type="hidden" value="{{$data->customerName}}" id="hidden_trans_customer_name_{{$data->id}}">
+											<button id="detail_{{$data->id}}" class="btn btn-info btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
+											<input type="hidden" value="{{$data->id}}">
+											<!-- Button trigger modal class ".alertYesNo" -->
+										</td>
+										<td>
+											<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
+												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
+											</button>
+											<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">
+												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
+											</button>
+											<!-- Button trigger modal class ".alertYesNo" -->
+										</td>
+									</tr> 
+								@endforeach
+							@endif
 						</tbody>
 					</table>
 				</div>
@@ -130,27 +135,25 @@
 
 	<script>
 
-	/*$('body').on('click','.flogin',function(){
-		$data = {
-			'status' : '202',
-			'text' : "Hello World!"
-		}
-		
-		var json_data = JSON.stringify($data);
+	$('body').on('click','.view_detail_button',function(){
+		$id = $(this).next().val();
+		$name = $('#hidden_trans_customer_name_'+$id).val();
+
+		$('#pop_up_trans_name').text($id);
+		$('#pop_up_trans_id').text($name);
 		
 		$.ajax({
-			url: '../test_login',
-			type: 'POST',
+			type: 'GET',
+			url: '{{URL::route('david.get_order_by_trans_id')}}',
 			data: {
-				'json_data':json_data
+				'data' : $id
 			},
-			success: function (res) {
-				alert(res)
-			},
-			error: function(jqXHR, textStatus, errorThrown){
-						alert(errorThrown);
+			success: function(response){
+				alert(response.messages[0].quantity);
+			},error: function(xhr, textStatus, errorThrown){
+				alert("Internal Server Error");
 			}
-		},'json');	
-	});*/
+		},'json');
+	});
 	</script>
 @stop

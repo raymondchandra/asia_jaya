@@ -6,9 +6,9 @@
 					<span class="sr-only">Close</span>
 				</button>
 				<div style="font-size: 1.2em;">
-					<b>ID Transaksi:</b>  <span>987987</span>
+					<b>ID Transaksi :</b>  <span id="pop_up_trans_id"></span>
 					<span class="clearfix"></span>
-					<b>Nama Customer:</b> <span>Luntang Lantung</span>
+					<b>Nama Customer :</b> <span id="pop_up_trans_name"></span>
 				</div>
 			</div>
 			<form class="form-horizontal" role="form">
