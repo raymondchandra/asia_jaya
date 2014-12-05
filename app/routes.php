@@ -1,100 +1,26 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$username = Input::get('username','-');
-		$role = Input::get('role', '-');
-		$lastLogin = Input::get('lastLogin', '-');
-		$active = Input::get('active', '-');
-		$sortBy = Input::get('sortBy','none');
-		$order = Input::get('order','none');
-		$filtered = Input::get('filtered', '0');
-		$isFirst = false;
+		$control = new transController();
 		
-		if($username != '-')
-		{
-			if($isFirst == false)
-			{
-				$accountTab = Account::where('username', 'LIKE', '%'.$username.'%');
-				$isFirst = true;
-			}
-			else
-			{
-				$accountTab = $accountTab->where('username', 'LIKE', '%'.$username.'%');
-			}
-		}
-		
-		if($role != '-')
-		{
-			if($isFirst == false)
-			{
-				$accountTab = Account::where('role', '=', $role);
-				$isFirst = true;
-			}
-			else
-			{
-				$accountTab = $accountTab->where('role', '=', $role);
-			}
-		}
-		
-		if($lastLogin != '-')
-		{
-			if($isFirst == false)
-			{
-				$accountTab = Account::where('last_login', 'LIKE', '%'.$lastLogin.'%');
-				$isFirst = true;
-			}
-			else
-			{
-				$accountTab = $accountTab->where('last_login', 'LIKE', '%'.$lastLogin.'%');
-			}
-		}
-		
-		if($active != '-')
-		{
-			if($isFirst == false)
-			{
-				$accountTab = Account::where('active', '=', $active);
-				$isFirst = true;
-			}
-			else
-			{
-				$accountTab = $accountTab->where('active', '=', $active);
-			}
-		}
-		
-		if($isFirst == false)
-		{
-			$account = Account::orderBy($sortBy, $order)->get();
-			$isFirst = true;
-		}
-		else
-		{
-			$account = $accountTab->orderBy($sortBy, $order)->get();
-		}
-		
-		var_dump($account);
+		echo $control->getOrderByTransactionId(10);
 	});
 	Route::get('/tes2', function()
 	{
-		$productDetailController = new ProductDetailsController();
-		$productJson = $productDetailController->getAll();
-		$json = json_decode($productJson->getContent());
-		
-		if($json->{'status'}!="Not Found"){
-			$products = $json->{'messages'};
-			foreach($products as $product)
-			{
-				$product->product_name = ProductDetail::find($product->product_id)->product->name;
-				$product->product_code = ProductDetail::find($product->product_id)->product->product_code;
-				$product->sales_price = ProductDetail::find($product->product_id)->product->sales_price;
-			}
-			
-			$response = array('code'=>'200','status' => 'OK','messages'=>$products);
-		}else{
-			$response = array('code'=>'404','status' => 'Not Found');
+		$idTransaction = 14;
+		$order = Order::where('transaction_id', 'LIKE', $idTransaction)->get();
+
+		if(count($order) == 0)
+		{
+			$order = null;
+			$response = array('code'=>'404','status' => 'Not Found', 'messages' => $order);
+		}
+		else
+		{
+			$response = array('code'=>'200','status' => 'OK', 'messages' => $order);
 		}
 		
-		echo var_dump($response);
+		var_dump($response);
 	});
 	
 //get list without filter
@@ -336,6 +262,10 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/edit_account', ['as'=>'david.edit_account','uses' => 'AccountsController@editAccount']);
 	
 	Route::put('/add_account', ['as'=>'david.add_account','uses' => 'AccountsController@addAccount']);
+	
+	Route::get('/view_transaction', ['as'=>'david.view_transaction','uses' => 'transController@view_transaction']);
+	
+	Route::get('/get_order_by_trans_id', ['as'=>'david.get_order_by_trans_id','uses' => 'transController@getOrderByTransactionId']);
 });
 
 
