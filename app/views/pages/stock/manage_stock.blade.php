@@ -16,7 +16,13 @@
 			<hr></hr>
 
 			<div>
-				<table class="table table-bordered table-hover ">
+				<style>
+
+				td.selected {
+					background-color: #fcf5dd;
+				}
+				</style>
+				<table class="table table-bordered">
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
@@ -99,6 +105,7 @@
 							</tr>
 						</thead>
 						<tbody>
+							
 							<?php for($i=0; $i<30; $i++){
 								?>
 								<tr> 
@@ -174,20 +181,17 @@
 									plant.setAttribute('data-modal','7'); // Pesky birds
 									$(this).text(plant.getAttribute('data-modal'));
 								});*/
-
-
-									
 								</script>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
 
-		@include('pages.transaction.pop_up_detail_transaction')
+@include('pages.transaction.pop_up_detail_transaction')
 
-		<script>
+<script>
 
 	/*$('body').on('click','.flogin',function(){
 		$data = {
@@ -211,5 +215,83 @@
 			}
 		},'json');	
 });*/
+
+var index = 0;
+//38 up, 40down
+
+var maxCellIndex = $('.table tr td').length;
+
+$(document).keydown(function(e) {
+	$('.table tr td:eq(' + index + ')').removeClass('selected');
+
+	var rows = $('.table tr').length;
+	var columns = $('.table tr:eq(1) td').length;
+
+    if (e.keyCode === 39) { //move right or wrap
+    	while( !$('.table tr td:eq(' + (++index) + ')') ) {
+    		if (index >= maxCellIndex) {
+                // wrap both ways:
+                index = -1;
+            }
+        }
+    }
+    if (e.keyCode === 37) { // move left or wrap
+    	--index;
+    	if (index < 0) {
+    		index = maxCellIndex;
+    	}
+    	while( !$('.table tr td:eq(' + (index) + ')') ) {
+    		if (index < 0) {
+                // wrap both ways:
+                index = maxCellIndex;
+            } else {
+            	--index;
+            }
+        }
+    }
+    
+    if (e.keyCode === 38) {  // move up
+    	index -= columns;
+    	if (index < 0) {
+    		index += maxCellIndex;
+    	}
+    	while( !$('.table tr td:eq(' + (index) + ')') ) {
+    		if (index < 0) {
+                // wrap both ways:
+                index += maxCellIndex;
+            } else {
+            	index -= columns;
+            }
+        }
+    }
+    if (e.keyCode === 40) { // move down
+    	index += columns;
+    	if (index >= maxCellIndex) {
+    		index -= maxCellIndex;
+    	}
+    	while( !$('.table tr td:eq(' + (index) + ')') ) {
+    		if (index >= maxCellIndex) {
+                // wrap both ways:
+                index -= maxCellIndex;
+            } else {
+            	index += columns;
+            }
+
+
+        }
+    }
+    $('.table tr td:eq(' + index + ')').addClass('selected');
+    if($('.table tr td:eq(' + index + ')').children('.f_excel_xinput').hasClass('hidden') && e.which == 13) {
+    	var f_excel_xlabel_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').text();
+		$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').removeClass('hidden');
+		$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').val(f_excel_xlabel_text);
+		$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').addClass('hidden');
+	}/*else if($('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').hasClass('hidden')){
+		var f_excel_xinput_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xinput').val();
+		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').siblings('.f_excel_xlabel').text(f_excel_xinput_text);
+		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').siblings('.f_excel_xlabel').removeClass('hidden');
+		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').addClass('hidden');
+	}*/
+});
 </script>
 @stop
