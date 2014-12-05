@@ -247,6 +247,11 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.tax.manage_tax');
 	});
+	//Return
+	Route::get('/return', function()
+	{
+		return View::make('pages.return.manage_return');
+	});
 
 
 
