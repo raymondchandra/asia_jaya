@@ -377,7 +377,7 @@
 	<script>
 		$('body').on('click','.tambah_barang_btn',function(){
 			$('#tableRep').val($(this).prev().val());
-			$('#searchContent').html("");
+			//$('#searchContent').html("");
 			$('#barang_text_box').val("");
 		});
 		
