@@ -60,9 +60,61 @@
 	</div>
 </div>
 <script>
+	//at pop up
 	$(this).ready(function(){
 		//alert("avc");
 		$.ajax({
+			type: 'GET',
+			url: '{{URL::route('david.getProductLiveSearch')}}',
+			data: {
+				'keyword' : ""
+			},
+			success: function(response){
+				if(response['code'] == '404')
+				{
+					//gagal
+					$data = "<tr><td> No Result Found </td></tr>";
+					$('#searchContent').html($data);
+				}
+				else
+				{
+					//berhasil...foreach setiap barang
+					$data = "";
+					$.each(response['messages'], function( i, resp ) {
+						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						$data = $data + "<img src='" + resp.photo + "' width='75' height='75' class='pull-left' style='margin-right:8px;'>";
+						$data = $data + "#" + resp.product_code + " / " + resp.color + " / <span class='pull-right'>";
+						$data = $data + resp.stock_shop + " | " + resp.stock_storage + "</span> </span> <span style='display: block;'> <span class='pull-left'>";
+						$data = $data + resp.name + "</span>   <span class='pull-right'>";
+						$data = $data + "IDR " + toRp(resp.sales_price) + "</span> </span>";
+						$data = $data + "<span class='hiddenVal'>";
+						$data = $data + "<input type='hidden' value='" + resp.id + "' id='id_" + resp.id + "' class='id' />";
+						$data = $data + "<input type='hidden' value='" + resp.product_code + "' id='code_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.color + "' id='color_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.stock_shop + "' id='stock_shop_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.stock_storage + "' id='stock_storage_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
+						$data = $data + "</span>";
+						$data = $data + "</td></tr>";
+						
+					});
+					$('#searchContent').html($data);
+				}
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+	});
+
+	//at close
+	$('#pop_up_cari_barang').on('hidden.bs.modal', function (e) {
+	  //alert('modal closed');
+	  //-- fungsi untuk me-reset sluruh input[type=text] pada modal --
+	  $('#searchContent').empty();
+	  $.ajax({
 			type: 'GET',
 			url: '{{URL::route('david.getProductLiveSearch')}}',
 			data: {
@@ -206,4 +258,6 @@
 	}
 	
 	function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+
+
 </script>

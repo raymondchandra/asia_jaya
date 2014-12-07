@@ -41,7 +41,7 @@
 			</div>
 		</section>
 
-		<section class="s_middle_display">
+		<section class="s_middle_display" style="height: auto;">
 			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 				<div class="container-fluid" style="text-align: center;">
 					<a href="javascript:void()" class="f_side_bar_tutup hidden pull-left" style="line-height:50px; font-size: 1.4em;">	

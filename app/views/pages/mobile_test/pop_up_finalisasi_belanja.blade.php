@@ -229,6 +229,15 @@
 					return rev2.split('').reverse().join('');
 				}
 				</script>
+				<script>
+					//Resetter input[type=text] untuk seluruh modal
+					$('#pop_up_finalisasi_belanja').on('hidden.bs.modal', function (e) {
+					  //alert('modal closed');
+					  //-- fungsi untuk me-reset sluruh input[type=text] pada modal --
+					  $(this).find('#diskon_text').val('');
+					  $(this).find('.f_diskon_inputtext').addClass('hidden');
+					})
+				</script>
 			</div>
 
 		</div>
