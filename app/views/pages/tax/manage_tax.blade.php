@@ -23,13 +23,17 @@
 								<div class="form-group">
 									<label class="control-label g-lg-3">Nilai Tax (%)</label>
 									<div class="g-lg-7">
-										<input type="text" class="form-control">
+										@if($tax==null)
+										<input type="text" class="form-control" value="0" id="taxAmount">
+										@else
+										<input type="text" class="form-control" value="{{$tax->amount}}" id="taxAmount">
+										@endif
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="control-label g-lg-3"> </label>
 									<div class="g-lg-7">
-										<button type="button" class="btn btn-success">Save</button>
+										<button type="button" class="btn btn-success" id="saveTax">Save</button>
 									</div>
 								</div>
 							</form>
@@ -43,6 +47,21 @@
 </div>
 
 <script>
-
+	$("body").on('click', '#saveTax', function(){
+		$tax = $("#taxAmount").val();
+		$.ajax({
+			type: 'PUT',
+			url: '{{URL::route('gentry.edit_tax')}}',
+			data: {
+				'data' : $tax
+			},
+			success: function(response){
+				alert('Perubahan Tax Berhasil');
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+	});
 </script>
 @stop

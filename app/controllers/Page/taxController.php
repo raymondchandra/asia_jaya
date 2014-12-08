@@ -1,6 +1,11 @@
 <?php
 
 class taxController extends \HomeController{
+
+	public function viewTax(){
+		$tax = $this->getTax(1);
+		return View::make('pages.tax.manage_tax', compact('tax'));
+	}
 	
 	/*
 		@author : Gentry Swanri
@@ -10,7 +15,7 @@ class taxController extends \HomeController{
 	*/
 	public function setTax(){
 		$id = 1;
-		$amount = 10;
+		$amount = Input::get('data');
 		
 		$taxesController = new TaxesController();
 		
