@@ -231,7 +231,7 @@
 			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + 1 + "</td> <td id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + $price + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+			$data = $data + "IDR " + toRp($price) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 			
 			$('#pesanan_content_'+$inc).prepend($data);
 			

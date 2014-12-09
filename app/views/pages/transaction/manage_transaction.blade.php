@@ -94,10 +94,10 @@
 								@foreach($dataAll as $data)
 									<tr> 
 										<td>{{$data->id}}</td>
-										<td>{{$data->customerName}}</td>
-										<td>IDR {{$data->total}}</td>
-										<td>IDR {{$data->discount}}</td>
-										<td>{{$data->tax}}%</td>
+										<td id="hidden_trans_customer_name_{{$data->id}}">{{$data->customerName}}</td>
+										<td id="hidden_trans_total_{{$data->id}}">IDR {{$data->total}}</td>
+										<td id="hidden_trans_discount_{{$data->id}}">IDR {{$data->discount}}</td>
+										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>
 										<td>{{$data->sales_id}}</td>
 										<td>{{$data->salesName}}</td>
 										@if($data->is_void == 0)
@@ -107,7 +107,6 @@
 										@endif
 										<td>{{$data->status}}</td>
 										<td>
-											<input type="hidden" value="{{$data->customerName}}" id="hidden_trans_customer_name_{{$data->id}}">
 											<button id="detail_{{$data->id}}" class="btn btn-info btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
 											<input type="hidden" value="{{$data->id}}">
 											<!-- Button trigger modal class ".alertYesNo" -->
@@ -137,10 +136,18 @@
 
 	$('body').on('click','.view_detail_button',function(){
 		$id = $(this).next().val();
-		$name = $('#hidden_trans_customer_name_'+$id).val();
-
-		$('#pop_up_trans_name').text($id);
-		$('#pop_up_trans_id').text($name);
+		$('#transaction_detail_content').html("");
+		$('#transaction_subtotal_detail').text("");
+		$('#transaction_diskon_detail').text("");				
+		$('#transaction_tax_detail').text("");			
+		$('#transaction_total_detail').text("");
+		$name = $('#hidden_trans_customer_name_'+$id).text();
+		$discount = $('#hidden_trans_discount_'+$id).text();
+		$total = $('#hidden_total_discount_'+$id).text();
+		$tax = $('#hidden_trans_tax_'+$id).text();
+		//alert($name);
+		$('#pop_up_trans_name').text($name);
+		$('#pop_up_trans_id').text($id);
 		
 		$.ajax({
 			type: 'GET',
@@ -149,11 +156,49 @@
 				'data' : $id
 			},
 			success: function(response){
-				alert(response.messages[0].quantity);
+				$data = "";
+				$total = 0;
+				
+				$.each(response['messages'], function( i, resp ) {
+					$data += "<tr><td>";
+					$data += resp.namaProduk;
+					$data += "</td><td>";
+					$data += "<img src=" + resp.foto + " width='100' height='100'>";
+					$data += "</td><td>";
+					$data += resp.warna;
+					$data += "</td><td>";
+					$data += resp.quantity;
+					$data += "</td><td>IDR ";
+					$data += toRp(resp.hargaSatuan);
+					$data += "</td><td>IDR ";
+					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
+					$data += "</td>";
+					$data += "</tr>"
+					$('#transaction_detail_content').html($data);
+					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);
+				});
+				$('#transaction_subtotal_detail').text("IDR " + toRp($total));
+				$('#transaction_diskon_detail').text("IDR " + toRp(toAngka($discount)));				
+				$('#transaction_tax_detail').text($tax);			
+				$('#transaction_total_detail').text("IDR " + toRp($total));			
 			},error: function(xhr, textStatus, errorThrown){
-				alert("Internal Server Error");
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
 			}
 		},'json');
 	});
+	
+	function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+	function toRp(angka){
+		var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+		var rev2    = '';
+		for(var i = 0; i < rev.length; i++){
+			rev2  += rev[i];
+			if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+				rev2 += '.';
+			}
+		}
+		return rev2.split('').reverse().join('');
+	}
 	</script>
 @stop

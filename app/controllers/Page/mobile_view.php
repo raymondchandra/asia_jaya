@@ -61,9 +61,9 @@ class mobile_view extends \BaseController{
 		-) Fungsi untuk menambahkan transaksi baru ke dalam tabel transaksi
 		-) Fungsi ini juga dilakukan agar transactionId dapat digunakan sebagai referensi untuk fungsi lain
 	*/
-	public function addTransaction($salesId, $customerId, $total){
+	public function addTransaction($salesId, $customerId, $total, $discount, $tax){
 		$transactionController = new TransactionsController();
-		$addTransaction = $transactionController->insertWithParam($customerId, $total, $salesId);
+		$addTransaction = $transactionController->insertWithParam($customerId, $total, $salesId, $discount, $tax);
 		$addJson = json_decode($addTransaction->getContent());
 		
 		if($addJson->{'status'}=="Created"){
@@ -107,6 +107,8 @@ class mobile_view extends \BaseController{
 		$custName = Input::get('customer_name');
 		$idCustomer = Input::get('id_customer');
 		$productList = Input::get('product_list');
+		$discount = Input::get('discount');
+		$tax = 0;
 		//var_dump($productList);
 		//$productList[] = array("name"=>"ea", "color"=>"Gold","quantity"=>"3");
 		//$productName = "fugit";
@@ -127,7 +129,7 @@ class mobile_view extends \BaseController{
 
 		if($customerId!=-1){
 			//add Transaction
-			$transactionId = $this->addTransaction($salesId, $customerId, $total);
+			$transactionId = $this->addTransaction($salesId, $customerId, $total, $discount, $tax);
 			if($transactionId!=-1){
 				$productController = new ProductsController();
 				$productDetailController = new ProductDetailsController();

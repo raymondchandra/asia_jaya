@@ -57,7 +57,7 @@
 						});
 						$('body').on('change','#f_hsatuan_qty',function(){
 							$min_price = $('#minPrice').val();
-							if($('#f_hsatuan_qty').val() < $min_price)
+							if(parseInt($('#f_hsatuan_qty').val()) < parseInt($min_price))
 							{
 								$('#f_hsatuan_qty').val($min_price);
 							}
@@ -99,7 +99,7 @@
 				$('body').on('click','#changeButton',function(){
 					$row_id = $('#rowRep').val();
 					$('#quantity_'+$row_id).text($('#f_edit_qty').val());
-					$('#price_'+$row_id).text($('#f_hsatuan_qty').val());
+					$('#price_'+$row_id).text("IDR " + toRp($('#f_hsatuan_qty').val()));
 					$oldTotal = $('#currentTotal').val();
 					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
 					$inc = $('#tabRep').val();
@@ -110,6 +110,17 @@
 				});
 				
 				function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+				function toRp(angka){
+					var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+					var rev2    = '';
+					for(var i = 0; i < rev.length; i++){
+						rev2  += rev[i];
+						if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+							rev2 += '.';
+						}
+					}
+					return rev2.split('').reverse().join('');
+				}
 			</script>
 
 		</div>

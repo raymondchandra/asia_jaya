@@ -31,8 +31,8 @@ class TransactionsController extends \BaseController {
 		@return : response => created or failed
 		-) Fungsi ini digunakan untuk memasukkan transaksi baru ke dalam tabel transaksi sesuai dengan parameter
 	*/
-	public function insertWithParam($customerId, $total, $salesId){
-		$data = array("customer_id"=>$customerId, "total"=>$total, "discount"=>0, "tax"=>0, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>$salesId, "status"=>"OK");
+	public function insertWithParam($customerId, $total, $salesId, $discount, $tax){
+		$data = array("customer_id"=>$customerId, "total"=>$total, "discount"=>$discount, "tax"=>$tax, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>$salesId, "status"=>"OK");
 		
 		$validator = Validator::make($data, Transaction::$rules);
 

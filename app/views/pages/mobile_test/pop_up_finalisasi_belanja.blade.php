@@ -151,6 +151,7 @@
 				<p class="g-sm-12 text-center f_masuk_kasir hidden">
 					Orderan sudah masuk kedalam kasir
 				</p>
+				<input type="hidden" id="transaction_tax" value="0"/>
 				<button type="button" class="btn btn-success pull-left g-sm-5 f_send_ke_kasir">Send</button>
 				<button type="button" class="btn btn-info pull-right g-sm-5" data-dismiss="modal">Back</button>
 
@@ -198,6 +199,7 @@
 					$custName = $('#f_nama_pelanggan').val();
 					$totalBiaya = toAngka($('#total_biaya_text').text());
 					$custIdRep = $('#custIdRep').val();
+					$discount = $('#diskon_text').val();
 					$.ajax({
 						type: 'POST',
 						url: '{{URL::route('david.postFinalizeTransaction')}}',
@@ -206,6 +208,7 @@
 							'customer_name' : $custName,
 							'id_customer' : $custIdRep,
 							'product_list' : $data,
+							'discount' : $discount
 						},
 						success: function(response){
 							alert(response);

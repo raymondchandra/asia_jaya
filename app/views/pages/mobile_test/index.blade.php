@@ -352,14 +352,14 @@
 			$quantity = $('#quantity_'+$row_id).text();
 			$harga = $('#price_'+$row_id).text();
 			
-			$a = parseInt($harga);
+			$a = parseInt(toAngka($harga));
 			$b = parseInt($quantity);
 			$total = $a*$b;
 			
 			$('#edit_code').text($code);
 			$('#edit_nama').text($nama);
 			$('#edit_warna').text($warna);
-			$('#f_hsatuan_qty').val($harga);
+			$('#f_hsatuan_qty').val(toAngka($harga));
 			$('#f_edit_qty').val($quantity);
 			$('#f_subtotal_edit').text("IDR " + $total);
 			$('#rowRep').val($row_id);
@@ -371,6 +371,18 @@
 			
 			//pop_up_edit_barang(n);
 		});
+		function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+		function toRp(angka){
+			var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+			var rev2    = '';
+			for(var i = 0; i < rev.length; i++){
+				rev2  += rev[i];
+				if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+					rev2 += '.';
+				}
+			}
+			return rev2.split('').reverse().join('');
+		}
 	</script>
 	<!--engine-->
 	
@@ -383,10 +395,25 @@
 		
 		$('body').on('click','.finalisasi_btn',function(){
 			$repId = $(this).prev().val();
-			$('#tableReps').val($repId);
-			$('#total_text').text($('#subtotal_text_'+$repId).text());
-			$('#total_biaya_text').text($('#subtotal_text_'+$repId).text());
-			$('#f_nama_pelanggan').val("");
+			
+			$.ajax({
+				type: 'GET',
+				url: '{{URL::route('david.get_tax')}}',
+				data: {
+					
+				},
+				success: function(response){
+					//alert(response.messages.amount);
+					$('#tableReps').val($repId);
+					$('#total_text').text($('#subtotal_text_'+$repId).text());
+					$('#total_biaya_text').text($('#subtotal_text_'+$repId).text());
+					$('#f_nama_pelanggan').val("");
+					$('#transaction_tax').val(response.messages.amount)
+				},error: function(xhr, textStatus, errorThrown){
+					alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					alert("responseText: "+xhr.responseText);
+				}
+			},'json');
 		});
 		
 		$('body').on('click','.table_row',function(){

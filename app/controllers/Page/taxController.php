@@ -34,4 +34,13 @@ class taxController extends \HomeController{
 		return Tax::find($id);
 	}
 	
+	public function getTransTax()
+	{
+		$tax = Tax::find(1);
+		
+		$respond = array('code'=>'200','status' => 'OK','messages'=>$tax);
+		
+		return Response::json($respond);
+	}
+	
 }

@@ -3,24 +3,13 @@
 	{
 		$control = new transController();
 		
-		echo $control->getOrderByTransactionId(10);
+		echo $control->getOrderByTransactionId(1);
 	});
 	Route::get('/tes2', function()
 	{
-		$idTransaction = 14;
-		$order = Order::where('transaction_id', 'LIKE', $idTransaction)->get();
-
-		if(count($order) == 0)
-		{
-			$order = null;
-			$response = array('code'=>'404','status' => 'Not Found', 'messages' => $order);
-		}
-		else
-		{
-			$response = array('code'=>'200','status' => 'OK', 'messages' => $order);
-		}
+		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->get();
 		
-		var_dump($response);
+		var_dump($products);
 	});
 	
 //get list without filter
@@ -282,6 +271,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/view_transaction', ['as'=>'david.view_transaction','uses' => 'transController@view_transaction']);
 	
 	Route::get('/get_order_by_trans_id', ['as'=>'david.get_order_by_trans_id','uses' => 'transController@getOrderByTransactionId']);
+	
+	Route::get('/get_tax', ['as'=>'david.get_tax','uses' => 'taxController@getTransTax']);
 });
 
 

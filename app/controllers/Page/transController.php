@@ -101,9 +101,9 @@ class transController extends \HomeController{
 		return $update;
 	}
 	
-	function getOrderByTransactionId($id){
-		$idTransaction = $id;
-		$order = Order::where('transaction_id', 'LIKE', $idTransaction)->get();
+	function getOrderByTransactionId(){
+		$idTransaction = Input::get('data');
+		$order = Order::where('transaction_id', '=', $idTransaction)->get();
 		
 		if(count($order) == 0)
 		{
@@ -119,6 +119,7 @@ class transController extends \HomeController{
 				$ord->namaProduk = $product->name;
 				$ord->warna = $product_detail->color;
 				$ord->hargaSatuan = $product->sales_price;
+				$ord->foto = $product_detail->photo;
 			}
 			$response = array('code'=>'200','status' => 'OK', 'messages' => $order);
 		}
