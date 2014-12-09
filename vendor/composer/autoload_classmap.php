@@ -1923,6 +1923,7 @@ return array(
     'restockController' => $baseDir . '/app/controllers/Page/restockController.php',
     'returnController' => $baseDir . '/app/controllers/Page/returnController.php',
     'searchViewController' => $baseDir . '/app/controllers/Page/searchViewController.php',
+    'stockController' => $baseDir . '/app/controllers/Page/stockController.php',
     'taxController' => $baseDir . '/app/controllers/Page/taxController.php',
     'transController' => $baseDir . '/app/controllers/Page/transController.php',
 );

@@ -112,45 +112,45 @@
 					</thead>
 					<tbody>
 						
-						<?php for($i=0; $i<30; $i++){
-							?>
+						@if($products != null)
+							@foreach($products as $prodList)
 							<tr> 
 								<td>
-									824739
+									{{$prodList->product_code}}
 								</td>
 								<td>
-									<img src="" width="120" height="120">
+									<img src="{{$prodList->photo}}" width="120" height="120">
 								</td>
 								<td>
-									<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
+									<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">{{$prodList->name}}</span>
 									<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" style="line-height: 30px;">Cyan</span>
+									<span class="f_excel_xlabel" style="line-height: 30px;">{{$prodList->color}}</span>
 									<input type="text" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">400000</span>
+									<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
 									<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">500000</span>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->min_price}}">{{$prodList->min_price}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">600000</span>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->sales_price}}">{{$prodList->sales_price}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">30</span>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">79</span>
+									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									Deleted
+									{{$prodList->deleted}}
 								</td>
 									<!--<td>
 										<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
@@ -160,9 +160,10 @@
 											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
 										</button>
 									</td>-->
-								</tr> 
-								<?php }
-								?>
+							</tr>
+							@endforeach
+						@endif
+								
 								<script>
 								$( 'body' ).on( "click",'.f_excel_xlabel', function() {
 									$(this).siblings('.f_excel_xinput').removeClass('hidden');
