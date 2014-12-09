@@ -273,6 +273,12 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/get_order_by_trans_id', ['as'=>'david.get_order_by_trans_id','uses' => 'transController@getOrderByTransactionId']);
 	
 	Route::get('/get_tax', ['as'=>'david.get_tax','uses' => 'taxController@getTransTax']);
+	
+	Route::get('/view_tax', ['as'=>'gentry.view_tax','uses' => 'taxController@viewTax']);
+	
+	Route::put('/edit_tax', ['as'=>'gentry.edit_tax','uses' => 'taxController@setTax']);
+	
+	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock']);
 });
 
 
