@@ -4,8 +4,14 @@
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
-				<h3 style="float: left;">
+				<ol class="breadcrumb">
+					<li class="active">Retur</li>
+				</ol>
+				<h3 style="">
 					Kelola Retur
+					<button class="btn btn-success pull-right" data-toggle="modal" data-target=".pop_up_add_return">
+						<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Retur
+					</button>
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
@@ -39,43 +45,25 @@
 									</a>
 								</th>
 								<th class="table-bordered">
-									<a href="javascript:void(0)">Warna</a>
-									<a href="javascript:void(0)">
-										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-									</a>
-								</th>
-								<th class="table-bordered" width="140">
-									<a href="javascript:void(0)">Harga Modal</a>
-									<a href="javascript:void(0)">
-										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-									</a>
-								</th>
-								<th class="table-bordered" width="140">
-									<a href="javascript:void(0)">Harga Min.</a>
-									<a href="javascript:void(0)">
-										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-									</a>
-								</th>
-								<th class="table-bordered" width="140">
-									<a href="javascript:void(0)">Harga Jual</a>
+									<a href="javascript:void(0)">Solution</a>
 									<a href="javascript:void(0)">
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>
 								</th>
 								<th class="table-bordered">
-									<a href="javascript:void(0)">Stok Toko</a>
+									<a href="javascript:void(0)">trade_product_id</a>
 									<a href="javascript:void(0)">
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>
 								</th>
-								<th class="table-bordered">
-									<a href="javascript:void(0)">Stok Gudang</a>
+								<th class="table-bordered" width="140">
+									<a href="javascript:void(0)">difference</a>
 									<a href="javascript:void(0)">
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>
 								</th>
-								<th class="table-bordered">
-									<a href="javascript:void(0)">Deleted</a>
+								<th class="table-bordered" width="140">
+									<a href="javascript:void(0)">created_at</a>
 									<a href="javascript:void(0)">
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>
@@ -85,9 +73,6 @@
 						<thead>
 							<tr>
 								
-								<td><input type="text" class="form-control input-sm"></td>
-								<td></td>
-								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
@@ -108,7 +93,7 @@
 										824739
 									</td>
 									<td>
-										<img src="" width="120" height="120">
+										tuker barang sama/balikin uang/tuker barang beda 
 									</td>
 									<td>
 										<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
@@ -121,18 +106,6 @@
 									<td>
 										<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">400000</span>
 										<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">500000</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">600000</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
-									</td>
-									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">30</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 									</td>
 									<td>
 										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">79</span>
@@ -166,6 +139,9 @@
 			</div>
 		</div>
 	</div>
+
+
+	@include('pages.return.pop_up_add_return')
 
 	<script>
 

@@ -18,7 +18,14 @@
 				<li><a href="#"><span class="glyphicon glyphicon-home" style="color:#fff; margin-right:10px;"></span>Dashboard</a></li>
 				<li><a href="{{URL::to('test/transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi</a></li>
 				<li><a href="{{URL::to('test/return')}}"><span class="glyphicon glyphicon-transfer" style="color:#fff; margin-right:10px;"></span>Retur</a></li>
-				<li><a href="{{URL::to('test/stock')}}"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Stok</a></li>
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Produk<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{URL::to('test/stock')}}"><span class="glyphicon glyphicon-briefcase" style="margin-right:10px;"></span>Stok</a></li>
+						<li><a href=""><span class="glyphicon glyphicon-plus-sign" style="margin-right:10px;"></span>Restok</a></li>
+					</ul>
+				</li>
 				<li><a href="{{URL::to('test/tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Tax</a></li>
 				<li><a href="{{URL::to('test/account')}}"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Karyawan</a></li>
 				

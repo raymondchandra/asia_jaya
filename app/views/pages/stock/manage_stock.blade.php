@@ -6,9 +6,6 @@
 			<div class="s_title_n_control">
 				<h3>
 					Daftar Stok Produk
-					<button class="btn btn-success pull-right" data-toggle="modal" data-target=".pop_up_add_stock">
-						<span class="glyphicon glyphicon-plus"></span>Add New Stock
-					</button>
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
