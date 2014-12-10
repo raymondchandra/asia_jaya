@@ -116,41 +116,65 @@
 							@foreach($products as $prodList)
 							<tr> 
 								<td>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									{{$prodList->product_code}}
 								</td>
 								<td>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									<img src="{{$prodList->photo}}" width="120" height="120">
 								</td>
 								<td>
-									<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">{{$prodList->name}}</span>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									<span class="f_excel_xlabel f_cell_nama_produk" id="name_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->name}}</span>
 									<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" style="line-height: 30px;">{{$prodList->color}}</span>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									<span class="f_excel_xlabel" id="color_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->color}}</span>
 									<input type="text" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									<span class="f_excel_xlabel" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
 									<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->min_price}}">{{$prodList->min_price}}</span>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									<span class="f_excel_xlabel" id="min_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->min_price}}">{{$prodList->min_price}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->sales_price}}">{{$prodList->sales_price}}</span>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									<span class="f_excel_xlabel" id="sales_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->sales_price}}">{{$prodList->sales_price}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									<span class="f_excel_xlabel" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									<span class="f_excel_xlabel" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									{{$prodList->deleted}}
+									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
+									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
+									@if($prodList->deleted == 0)
+										no
+									@else
+										yes
+									@endif
 								</td>
 									<!--<td>
 										<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
@@ -176,6 +200,39 @@
 										$(this).siblings('.f_excel_xlabel').text($(this).val());
 										$(this).siblings('.f_excel_xlabel').removeClass('hidden');
 										$(this).addClass('hidden');
+										
+										$idProduct = $(this).prev().prev().prev().val();
+										$idDetail = $(this).prev().prev().val();
+										
+										$editName = $("span#name_"+$idProduct).text();
+										$editColor = $("span#color_"+$idProduct).text();
+										$editModal = $("span#modal_"+$idProduct).text();
+										$editMin = $("span#min_"+$idProduct).text();
+										$editSales = $("span#sales_"+$idProduct).text();
+										$editShop = $("span#shop_"+$idProduct).text();
+										$editStorage = $("span#storage_"+$idProduct).text();
+										
+										$.ajax({
+											type: 'PUT',
+											url: '{{URL::route('gentry.edit_stock')}}',
+											data: {
+												'idProduct' : $idProduct,
+												'idDetail' : $idDetail,
+												'editName' : $editName,
+												'editColor' : $editColor,
+												'editModal' : $editModal,
+												'editMin' : $editMin,
+												'editSales' : $editSales,
+												'editShop' : $editShop,
+												'editStorage' : $editStorage
+											},
+											success: function(response){
+												alert('Perubahan Berhasil');
+											},error: function(xhr, textStatus, errorThrown){
+												alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+												alert("responseText: "+xhr.responseText);
+											}
+										},'json');
 									}
 								});
 

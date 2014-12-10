@@ -1,9 +1,16 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$control = new transController();
+		//$control = new transController();
 		
-		echo $control->getOrderByTransactionId(1);
+		//echo $control->getOrderByTransactionId(1);
+		
+		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->get();
+		foreach($products as $prod){
+			$prod->idDetail = ProductDetail::find($prod->product_id)->id;
+		}
+		
+		var_dump($products);
 	});
 	Route::get('/tes2', function()
 	{
@@ -290,6 +297,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/edit_tax', ['as'=>'gentry.edit_tax','uses' => 'taxController@setTax']);
 	
 	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock']);
+	
+	Route::put('/edit_stock', ['as'=>'gentry.edit_stock','uses' => 'stockController@editStock']);
 });
 
 

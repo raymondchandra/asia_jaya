@@ -261,6 +261,37 @@ class ProductDetailsController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : 
+		@return :
+		-) Fungsi ini digunakan untuk melakukan perubahan di view stock
+	*/
+	public function updateForViewStock($id, $editColor, $editShop, $editStorage)
+	{
+		$respond = array();
+		$productdetail = Productdetail::find($id);
+		if ($productdetail == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$productdetail->color = $editColor;
+			$productdetail->stock_shop = $editShop;
+			$productdetail->stock_storage = $editStorage;
+			try {
+				$productdetail->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
 
 	/*
 	public function update<column>($id)

@@ -261,6 +261,38 @@ class ProductsController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : 
+		@return :
+		-) Fungsi ini digunakan untuk mengupdate view Stock
+	*/
+	public function updateForViewStock($id, $editName, $editModal, $editMin, $editSales)
+	{
+		$respond = array();
+		$product = Product::find($id);
+		if ($product == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$product->name = $editName;
+			$product->modal_price = $editModal;
+			$product->min_price = $editMin;
+			$product->sales_price = $editSales;
+			try {
+				$product->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
 
 	/*
 	public function update<column>($id)

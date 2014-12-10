@@ -9,8 +9,30 @@ class stockController extends \HomeController{
 		{
 			//not found
 			$products = null;
+		}else{
+			foreach($products as $prod){
+				$prod->idDetail = ProductDetail::find($prod->product_id)->id;
+			}
 		}
 		
 		return View::make('pages.stock.manage_stock', compact('products'));
+	}
+	
+	public function editStock(){
+		$idProduct = Input::get('idProduct');
+		$idDetail = Input::get('idDetail');
+		$editName = Input::get('editName');
+		$editColor = Input::get('editColor');
+		$editModal = Input::get('editModal');
+		$editMin = Input::get('editMin');
+		$editSales = Input::get('editSales');
+		$editShop = Input::get('editShop');
+		$editStorage = Input::get('editStorage');
+		
+		$productController = new ProductsController();
+		$productDetailController = new ProductDetailsController();
+		
+		$editProductJson = $productController->updateForViewStock($idProduct, $editName, $editModal, $editMin, $editSales);
+		$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage);
 	}
 }
