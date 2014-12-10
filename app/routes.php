@@ -248,6 +248,17 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.dashboard.manage_dashboard');
 	});
 
+	//Pelanggan
+	Route::get('/customer', function()
+	{
+		return View::make('pages.customer.manage_customer');
+	});
+	//Pelanggan
+	Route::get('/customer/transaction_history', function()
+	{
+		return View::make('pages.customer.customer_history');
+	});
+
 
 
 });
