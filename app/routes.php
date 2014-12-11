@@ -265,6 +265,11 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.customer.customer_history');
 	});
+	//Restock
+	Route::get('/restock', function()
+	{
+		return View::make('pages.restock.manage_restock');
+	});
 
 
 
