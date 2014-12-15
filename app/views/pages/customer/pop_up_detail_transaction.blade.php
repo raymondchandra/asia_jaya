@@ -6,7 +6,7 @@
 					<span class="sr-only">Close</span>
 				</button>
 				<div style="font-size: 1.2em;">
-					<b>ID Transaksi :</b>  <span id="pop_up_trans_id">76345546</span>
+					<b>ID Transaksi :</b>  <span id="pop_up_trans_id"></span>
 				</div>
 			</div>
 			<form class="form-horizontal" role="form">
@@ -37,46 +37,7 @@
 									</tr>
 								</thead>
 								<tbody id="transaction_detail_content">
-									<tr>
-										<td>
-											Nama Produk
-										</td>
-										<td>
-											<img src='' width='100' height='100'>
-										</td>
-										<td>
-											Maroon
-										</td>
-										<td>
-											10
-										</td>
-										<td>
-											IDR 100000
-										</td>
-										<td>
-											IDR 1000000
-										</td>
-									</tr>
-									<tr>
-										<td>
-											Nama Produk
-										</td>
-										<td>
-											<img src='' width='100' height='100'>
-										</td>
-										<td>
-											Maroon
-										</td>
-										<td>
-											10
-										</td>
-										<td>
-											IDR 100000
-										</td>
-										<td>
-											IDR 1000000
-										</td>
-									</tr>
+									
 								</tbody>
 							</table>
 							<hr></hr>
