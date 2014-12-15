@@ -30,9 +30,35 @@
 			<div class="container-fluid"> 
 				<div class="row">
 					<div class="s_sidebar_area" style="">	
-						Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-						"Lorem ipsum dolo				
+						<h2 style="text-align: center;">
+							Toko Asia Jaya
+						</h2>
+						<div class="form-horizontal">
+							<div class="form-group">
+								<label class="control-label g-sm-3">ID</label>	
+								<div class="g-sm-9">	
+									<p class="form-control-static">
+										3
+									</p>	
+								</div>		
+							</div>	
+							<div class="form-group">
+								<label class="control-label g-sm-3">Nama</label>	
+								<div class="g-sm-9">	
+									<p class="form-control-static">
+										Nama Karyawan	
+									</p>	
+								</div>		
+							</div>	
+							<div class="form-group">
+								
+								<div class="g-sm-12" style="text-align: center;">	
+									<button type="button" class="btn btn-success">
+										Log Out
+									</button>
+								</div>		
+							</div>			
+						</div>			
 					</div>					
 					<div class="s_sidebar_close_area"  style="background-color: rgba(17,34,51,0.75);">	
 						&nbsp;				
