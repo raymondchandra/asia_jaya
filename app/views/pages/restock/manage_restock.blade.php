@@ -5,7 +5,7 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<h3>
-					Daftar Stok Produk
+					Daftar Restok Produk
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
@@ -109,69 +109,63 @@
 					</thead>
 					<tbody>
 						
-						@if($products != null)
-							@foreach($products as $prodList)
 							<tr> 
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									{{$prodList->product_code}}
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									432
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<img src="{{$prodList->photo}}" width="120" height="120">
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<img src="" width="120" height="120">
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_cell_nama_produk" id="name_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->name}}</span>
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<span class="f_excel_xlabel f_cell_nama_produk" id="name_" style="line-height: 30px;">wererw</span>
 									<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel" id="color_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->color}}</span>
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<span class="f_excel_xlabel" id="color_" style="line-height: 30px;">rewrew</span>
 									<input type="text" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<span class="f_excel_xlabel" id="modal_" style="line-height: 30px;" data-modal="">werewwer</span>
 									<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel" id="min_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->min_price}}">{{$prodList->min_price}}</span>
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<span class="f_excel_xlabel" id="min_" style="line-height: 30px;" data-modal="">wreerw</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel" id="sales_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->sales_price}}">{{$prodList->sales_price}}</span>
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<span class="f_excel_xlabel" id="sales_" style="line-height: 30px;" data-modal="">werrew</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<span class="f_excel_xlabel" id="shop_" style="line-height: 30px;" data-modal="">wererw</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									<span class="f_excel_xlabel" id="storage_" style="line-height: 30px;" data-modal="">ewrewrew</span>
 									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
 								</td>
 								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									@if($prodList->deleted == 0)
-										no
-									@else
-										yes
-									@endif
+									<input type="hidden" id="idProduct" value="" />
+									<input type="hidden" id="idDetail" value="" />
+									erwre
 								</td>
 									<!--<td>
 										<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
@@ -182,8 +176,6 @@
 										</button>
 									</td>-->
 							</tr>
-							@endforeach
-						@endif
 								
 								<script>
 								$( 'body' ).on( "click",'.f_excel_xlabel', function() {

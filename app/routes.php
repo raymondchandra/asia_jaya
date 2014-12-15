@@ -265,6 +265,17 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.customer.customer_history');
 	});
+	//Restock
+	Route::get('/restock', function()
+	{
+		return View::make('pages.restock.manage_restock');
+	});
+
+	//Restock
+	Route::get('/jual_login', function()
+	{
+		return View::make('pages.mobile_test.login');
+	});
 
 
 
