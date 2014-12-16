@@ -4,23 +4,26 @@
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
-				<ol class="breadcrumb">
-  					<li><a href="#">Data Customer</a></li>
-					<li class="active">Transaction History</li>
-				</ol>
 				<h3 style="float: left;">
-					Transaction History | Cust. ID | Nama Customer
+					Daftar Pesanan
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
 			<span class="clearfix"></span>
 			<hr></hr>
+		
 			<div>
 				<table class="table table-bordered table-hover ">
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
 								<a href="javascript:void(0)">Trans. ID</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Customer Name</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -37,34 +40,43 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="100">
-								<a href="javascript:void(0)">is_void</a>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Tax</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" width="80">
+								<a href="javascript:void(0)">Kar. ID</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">status</a>
+								<a href="javascript:void(0)">Username</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
-								<a href="javascript:void(0)">created_at</a>
+							<th class="table-bordered" width="80">
+								<a href="javascript:void(0)">Void</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
-								<a href="javascript:void(0)">Sales Name</a>
+							<th class="table-bordered" width="120">
+								<a href="javascript:void(0)">Status</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="100">Command</th>
+							<th class="table-bordered" width="100"></th>
+							<th class="table-bordered" width="100">Print</th>
 						</thead>
 						<thead>
 							<tr>
+								
+								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
@@ -73,29 +85,40 @@
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
+								<td></td>
+								
 							</tr>
 						</thead>
 						<tbody>
-							@if($transaction!=null)
-								@foreach($transaction as $trans)
+							@if($dataAll != null)
+								@foreach($dataAll as $data)
 									<tr> 
+										<td>{{$data->id}}</td>
+										<td id="hidden_trans_customer_name_{{$data->id}}">{{$data->customerName}}</td>
+										<td id="hidden_trans_total_{{$data->id}}">IDR {{$data->total}}</td>
+										<td id="hidden_trans_discount_{{$data->id}}">IDR {{$data->discount}}</td>
+										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>
+										<td>{{$data->sales_id}}</td>
+										<td>{{$data->salesName}}</td>
+										@if($data->is_void == 0)
+											<td>False</td>
+										@else
+											<td>True</td>
+										@endif
+										<td>{{$data->status}}</td>
 										<td>
-											{{ $trans->id }}
-											<input type="hidden" id="hidden_trans_tax_{{$trans->id}}" value="{{$trans->tax}}" />
+											<button id="detail_{{$data->id}}" class="btn btn-info btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
+											<input type="hidden" value="{{$data->id}}">
+											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
-										<td id="">{{ $trans->total }}</td>
-										<td id="hidden_trans_discount_{{$trans->id}}">{{ $trans->discount }}</td>
-											@if($trans->is_void == 0)
-												<td id="is_void_{{$trans->id}}">False</td>
-											@else
-												<td id="is_void_{{$trans->id}}">True</td>
-											@endif
-										<td id="status_{{$trans->id}}">{{ $trans->status }}</td>
-										<td id="">{{ $trans->created_at }}</td>
-										<td id="">{{ $trans->salesName }}</td>
 										<td>
-											<button id="detail_{{$trans->id}}" class="btn btn-info btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
-											<input type="hidden" value="{{$trans->id}}" />
+											<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
+												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
+											</button>
+											<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">
+												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
+											</button>
+											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
 									</tr> 
 								@endforeach
@@ -107,23 +130,23 @@
 		</div>
 	</div>
 
-	@include('pages.customer.pop_up_detail_transaction')
-	
+	@include('pages.transaction.pop_up_detail_transaction')
+
 	<script>
-		$('body').on('click','.view_detail_button',function(){
+
+	$('body').on('click','.view_detail_button',function(){
 		$id = $(this).next().val();
-		//alert($id);
 		$('#transaction_detail_content').html("");
 		$('#transaction_subtotal_detail').text("");
 		$('#transaction_diskon_detail').text("");				
 		$('#transaction_tax_detail').text("");			
 		$('#transaction_total_detail').text("");
-		$('#transaction_status_detail').text("");
-		$('#transaction_is_void_detail').text("");
+		$name = $('#hidden_trans_customer_name_'+$id).text();
 		$discount = $('#hidden_trans_discount_'+$id).text();
-		$tax = $('#hidden_trans_tax_'+$id).val();
-		$is_void = $('#is_void_'+$id).text();
-		$status = $('#status_'+$id).text();
+		$total = $('#hidden_total_discount_'+$id).text();
+		$tax = $('#hidden_trans_tax_'+$id).text();
+		//alert($name);
+		$('#pop_up_trans_name').text($name);
 		$('#pop_up_trans_id').text($id);
 		
 		$.ajax({
@@ -154,8 +177,6 @@
 					$('#transaction_detail_content').html($data);
 					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);
 				});
-				$('#transaction_status_detail').text($status);
-				$('#transaction_is_void_detail').text($is_void);
 				$('#transaction_subtotal_detail').text("IDR " + toRp($total));
 				$('#transaction_diskon_detail').text("IDR " + toRp(toAngka($discount)));				
 				$('#transaction_tax_detail').text($tax);			
@@ -180,5 +201,4 @@
 		return rev2.split('').reverse().join('');
 	}
 	</script>
-
-	@stop
+@stop

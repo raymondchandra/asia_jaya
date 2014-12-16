@@ -271,6 +271,12 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.restock.manage_restock');
 	});
 
+	//Restock
+	Route::get('/jual_login', function()
+	{
+		return View::make('pages.mobile_test.login');
+	});
+
 
 
 });
@@ -304,6 +310,10 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock']);
 	
 	Route::put('/edit_stock', ['as'=>'gentry.edit_stock','uses' => 'stockController@editStock']);
+	
+	Route::get('/view_customer', ['as'=>'gentry.view_customer','uses' => 'custController@view_customer']);
+	
+	Route::get('/view_cust_trans', ['as'=>'gentry.view_cust_trans','uses' => 'custController@view_history']);
 });
 
 

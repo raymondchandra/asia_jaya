@@ -62,23 +62,47 @@
 							</tr>
 						</thead>
 						<tbody>
-							@for ($i = 0; $i < 10; $i++)
-							<tr> 
-								<td>{{ 14 + $i }}</td>
-								<td id="">Wijaya Sentosa</td>
-								<td id="">79</td>
-								<td id="">IDR 7000000</td>
-								<td id="">2014-12-05 10:06:01</td>
-								<td>
-									<a id="detail_0" class="btn btn-info btn-xs" href="{{URL::to('test/customer/transaction_history')}}">View History</a>
-								</td>
-							</tr> 
-							@endfor
+							@if($dataAll != null)
+								@foreach($dataAll as $data)
+								<tr> 
+									<td>{{ $data->id }}</td>
+									<td id="">{{ $data->name }}</td>
+									<td id="">{{ $data->countTrans }}</td>
+									<td id="">{{ $data->total }}</td>
+									<td id="">{{ $data->created_at }}</td>
+									<td>
+										<!--href="{{URL::to('test/customer/transaction_history')}}"-->
+										<input type="hidden" value="{{ $data->id }}" />
+										<a id="detail_0" class="btn btn-info btn-xs" href="{{URL::to('fungsi/view_cust_trans?id='.$data->id)}}">View History</a>
+									</td>
+								</tr> 
+								@endforeach
+							@endif
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		/*$(document).ready(function(){
+			//$total = $('#totalTransaksi').text();
+			//$('#totalTransaksi').text("IDR " + $total);
+		});*/
+	
+		function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+		function toRp(angka){
+			var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+			var rev2    = '';
+			for(var i = 0; i < rev.length; i++){
+				rev2  += rev[i];
+				if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+					rev2 += '.';
+				}
+			}
+			return rev2.split('').reverse().join('');
+		}
+	</script>
 
 	@stop

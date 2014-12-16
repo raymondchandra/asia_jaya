@@ -73,7 +73,7 @@
 							<th class="table-bordered" width="100"></th>
 							<th class="table-bordered" width="100">Print</th>
 						</thead>
-						<thead>
+						<!--<thead>
 							<tr>
 								
 								<td><input type="text" class="form-control input-sm"></td>
@@ -88,7 +88,7 @@
 								<td></td>
 								
 							</tr>
-						</thead>
+						</thead>-->
 						<tbody>
 							@if($dataAll != null)
 								@foreach($dataAll as $data)
