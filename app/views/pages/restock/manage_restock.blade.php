@@ -6,6 +6,10 @@
 			<div class="s_title_n_control">
 				<h3>
 					Daftar Restok Produk
+
+					<button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target="" style="">
+						<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Add New Stock
+					</button>
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
@@ -28,7 +32,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">Produk</a>
+								<a href="javascript:void(0)">Product Code</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -82,7 +86,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Deleted</a>
+								<a href="javascript:void(0)">Command</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -113,7 +117,7 @@
 								<td>
 									<input type="hidden" id="idProduct" value="" />
 									<input type="hidden" id="idDetail" value="" />
-									432
+									7657658576465
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="" />

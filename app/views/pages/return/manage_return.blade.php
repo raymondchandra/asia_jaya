@@ -32,12 +32,6 @@
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>
 								</th>
-								<th class="table-bordered" style="width: 137px;">
-									<a href="javascript:void(0)">Tipe</a><!-- balik duit, tuker barang, tuker barang harga beda -->
-									<a href="javascript:void(0)">
-										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-									</a>
-								</th>
 								<th class="table-bordered" style="width: 180px;">
 									<a href="javascript:void(0)">Status</a>
 									<a href="javascript:void(0)">
@@ -78,7 +72,6 @@
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
 								<!--<td></td>-->
 								
@@ -93,26 +86,20 @@
 										824739
 									</td>
 									<td>
-										tuker barang sama/balikin uang/tuker barang beda 
-									</td>
-									<td>
-										<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">Tas Trendy</span>
+										<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">status</span>
 										<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										<span class="f_excel_xlabel" style="line-height: 30px;">Cyan</span>
-										<input type="text" class="f_excel_xinput form-control input-sm hidden" style=""/>
+										tuker barang sama/balikin uang/tuker barang beda 
 									</td>
 									<td>
-										<span class="f_excel_xlabel" id="f_cell_harga_modal" style="line-height: 30px;" data-modal="400000">400000</span>
-										<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden" style=""/>
+										4353453464573576
 									</td>
 									<td>
-										<span class="f_excel_xlabel" id="" style="line-height: 30px;" data-modal="400000">79</span>
-										<input type="text" id="" class="f_excel_xinput form-control input-sm hidden" style=""/>
+										-90000
 									</td>
 									<td>
-										Deleted
+										tanggal
 									</td>
 								</tr> 
 								<?php }
