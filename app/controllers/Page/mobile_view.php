@@ -108,7 +108,7 @@ class mobile_view extends \BaseController{
 		$idCustomer = Input::get('id_customer');
 		$productList = Input::get('product_list');
 		$discount = Input::get('discount');
-		$tax = 0;
+		$tax = Input::get('tax');
 		//var_dump($productList);
 		//$productList[] = array("name"=>"ea", "color"=>"Gold","quantity"=>"3");
 		//$productName = "fugit";

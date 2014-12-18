@@ -201,6 +201,7 @@
 					$totalBiaya = toAngka($('#total_biaya_text').text());
 					$custIdRep = $('#custIdRep').val();
 					$discount = $('#diskon_text').val();
+					$tax = $('#transaction_tax').val();
 					$.ajax({
 						type: 'POST',
 						url: '{{URL::route('david.postFinalizeTransaction')}}',
@@ -209,7 +210,8 @@
 							'customer_name' : $custName,
 							'id_customer' : $custIdRep,
 							'product_list' : $data,
-							'discount' : $discount
+							'discount' : $discount,
+							'tax' : $tax
 						},
 						success: function(response){
 							alert(response);
