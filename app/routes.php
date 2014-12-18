@@ -280,6 +280,11 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.mobile_test.login');
 	});
+	//manage_laporan_cash
+	Route::get('/manage_laporan_cash', function()
+	{
+		return View::make('pages.laporan_cash.manage_laporan_cash');
+	});
 
 	Route::get('/manage_laporan_transaksi', function()
 	{

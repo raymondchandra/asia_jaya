@@ -13,60 +13,29 @@
 						<div class="g-sm-12">
 
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Kode Produk</label>
+								<label class="g-sm-3 control-label">Nama Orang</label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Nama Produk</label>
+								<label class="g-sm-3 control-label">Kode Produk (opt)</label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Warna Produk</label>
+								<label class="g-sm-3 control-label">Nama Produk (opt)</label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Harga Modal</label>
+								<label class="g-sm-3 control-label">Kode Transaksi (opt)</label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control">
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Harga Minimal</label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Harga Jual</label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Stok Toko</label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Stok Gudang</label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Foto</label>
-								<div class="g-sm-7">
-									<input type="file" >
-								</div>
-							</div>
-
 
 							<!--<div class="form-group">
 								<label class="g-sm-9 control-label">Subtotal</label>

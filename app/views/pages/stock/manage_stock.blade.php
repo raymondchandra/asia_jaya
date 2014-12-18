@@ -87,6 +87,9 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							<th class="table-bordered">
+								Obral
+							</th>
 						</tr>
 						<!--<th class="table-bordered">Print</th>-->
 					</thead>
@@ -95,6 +98,7 @@
 							
 							<td><input type="text" class="form-control input-sm"></td>
 							<td></td>
+							<td><input type="text" class="form-control input-sm"></td>
 							<td><input type="text" class="form-control input-sm"></td>
 							<td><input type="text" class="form-control input-sm"></td>
 							<td><input type="text" class="form-control input-sm"></td>
@@ -173,14 +177,11 @@
 										yes
 									@endif
 								</td>
-									<!--<td>
-										<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
-											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
-										</button>
-										<button class="btn btn-success btn-xs" data-toggle="" data-target="">
-											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
-										</button>
-									</td>-->
+								<td>
+									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral
+									</button>
+								</td>
 							</tr>
 							@endforeach
 						@endif

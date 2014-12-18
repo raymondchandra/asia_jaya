@@ -33,7 +33,7 @@
 									</a>
 								</th>
 								<th class="table-bordered" style="width: 180px;">
-									<a href="javascript:void(0)">Type</a>
+									<a href="javascript:void(0)">Status</a>
 									<a href="javascript:void(0)">
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>
@@ -62,13 +62,11 @@
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>
 								</th>
-								<th class="table-bordered" width="100">Command</th>
 							</tr>
 						</thead>
 						<thead>
 							<tr>
 								
-								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
@@ -88,10 +86,11 @@
 										824739
 									</td>
 									<td>
-										tuker barang sama/balikin uang/tuker barang beda 
+										<span class="f_excel_xlabel f_cell_nama_produk" style="line-height: 30px;">status</span>
+										<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden" style=""/>
 									</td>
 									<td>
-										masukin gudang / masukin ke daftar obral
+										tuker barang sama/balikin uang/tuker barang beda 
 									</td>
 									<td>
 										4353453464573576
@@ -101,9 +100,6 @@
 									</td>
 									<td>
 										tanggal
-									</td>
-									<td>
-										<button id="" class="btn btn-info btn-xs view_detail_button"  data-toggle="modal" data-target="">Solusi</button>
 									</td>
 								</tr> 
 								<?php }
