@@ -63,6 +63,7 @@
 	//at pop up
 	$(this).ready(function(){
 		//alert("avc");
+		var trigger = false;
 		$.ajax({
 			type: 'GET',
 			url: '{{URL::route('david.getProductLiveSearch')}}',
@@ -100,7 +101,9 @@
 						$data = $data + "</td></tr>";
 						
 					});
+					
 					$('#searchContent').html($data);
+
 				}
 			},error: function(xhr, textStatus, errorThrown){
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
@@ -161,6 +164,7 @@
 	});
 	
 	$('body').on('keyup','#barang_text_box',function(){
+		trigger = false;
 		$keyword = $('#barang_text_box').val();
 		//alert($keyword);
 		$.ajax({
@@ -200,7 +204,10 @@
 						$data = $data + "</td></tr>";
 						
 					});
-					$('#searchContent').html($data);
+					if(trigger == false)
+					{
+						$('#searchContent').html($data);
+					}
 				}
 			},error: function(xhr, textStatus, errorThrown){
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
@@ -210,6 +217,7 @@
 	});
 	//kode buat search..
 	$('body').on('click','.search_row',function(){
+		trigger = true;
 		$inc = $('#tableRep').val();
 		$id = $(this).children().first().children('.hiddenVal').children('.id').val();
 		$product_code = $('#code_'+$id).val();

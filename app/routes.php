@@ -1,16 +1,9 @@
 <?php
 	Route::get('/tes', function()
 	{
-		//$control = new transController();
+		$dataAll = Transaction::whereRaw('created_at >= curdate()')->get();
 		
-		//echo $control->getOrderByTransactionId(1);
-		
-		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->get();
-		foreach($products as $prod){
-			$prod->idDetail = ProductDetail::find($prod->product_id)->id;
-		}
-		
-		var_dump($products);
+		echo $dataAll;
 	});
 	Route::get('/tes2', function()
 	{

@@ -5,9 +5,24 @@ class transController extends \HomeController{
 	public function view_transaction()
 	{
 		$transactionController = new TransactionsController();
+		
+		$dataAll = Transaction::whereRaw('created_at >= curdate()')->get();
+		if(count($dataAll) != 0)
+		{
+			foreach($dataAll as $data){
+				$data->customerName = Customer::find($data->customer_id)->name;
+				$data->salesName = Account::find($data->sales_id)->username;
+				$data->order = $this->getOrderArray($data->id);
+			}
+		}
+		else
+		{
+			$dataAll = null;
+		}
+		return View::make('pages.transaction.manage_transaction', compact('dataAll'));
+		/*
 		$allData = $transactionController->getAll();
 		$allDataJson = json_decode($allData->getContent());
-		
 		if($allDataJson->{'status'}!='Not Found'){
 			$dataAll = $allDataJson->{'messages'};
 			foreach($dataAll as $data){
@@ -19,6 +34,7 @@ class transController extends \HomeController{
 			$dataAll = null;
 		}
 		return View::make('pages.transaction.manage_transaction', compact('dataAll'));
+		*/
 		/*
 		$sortBy = Input::get('sortBy','none');
 		$order = Input::get('order','none');
