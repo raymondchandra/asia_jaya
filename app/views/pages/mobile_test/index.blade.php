@@ -433,9 +433,12 @@
 					//alert(response.messages.amount);
 					$('#tableReps').val($repId);
 					$('#total_text').text($('#subtotal_text_'+$repId).text());
-					$('#total_biaya_text').text($('#subtotal_text_'+$repId).text());
+					$subs = toAngka($('#subtotal_text_'+$repId).text());
+					$newSubs = parseInt($subs) * (100 + parseInt(response.messages.amount)) / 100;
+					$('#total_biaya_text').text("IDR " + toRp(parseInt($newSubs)));
+					$('#total_biaya_label').text("Total Biaya + PPN(" + response.messages.amount + "%)");
 					$('#f_nama_pelanggan').val("");
-					$('#transaction_tax').val(response.messages.amount)
+					$('#transaction_tax').val(response.messages.amount);
 				},error: function(xhr, textStatus, errorThrown){
 					alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 					alert("responseText: "+xhr.responseText);

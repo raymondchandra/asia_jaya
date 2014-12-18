@@ -118,11 +118,11 @@
 					</div>
 					<div class="form-group hidden f_diskon_inputtext">
 						<label for="">Diskon</label>
-						<input type="text" id="diskon_text" class="form-control" id="" value="0">
+						<input type="text" id="diskon_text" class="form-control" id="" value="">
 					</div>
 
 					<div class="form-group">
-						<label for="">Total Biaya
+						<label for="" id="total_biaya_label">Total Biaya
 
 						</label>
 						<p type="text" class="form-control-static" placeholder="">
@@ -159,7 +159,8 @@
 				$('body').on('keyup','#diskon_text',function(){
 					var oldTotal = toAngka($('#total_text').text());
 					var diskon = $('#diskon_text').val();
-					var newTotal = oldTotal-diskon;
+					var tax = $('#transaction_tax').val();
+					var newTotal = (oldTotal-diskon) * ((100+parseInt(tax)) / 100);
 					$('#total_biaya_text').text("IDR " + toRp(newTotal));
 				});
 				
