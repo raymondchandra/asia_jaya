@@ -94,7 +94,11 @@
 								@foreach($dataAll as $data)
 									<tr> 
 										<td>{{$data->id}}</td>
-										<td id="hidden_trans_customer_name_{{$data->id}}">{{$data->customerName}}</td>
+										@if($data->customerName == "")
+											<td id="hidden_trans_customer_name_{{$data->id}}">Tidak Ada Nama</td>
+										@else
+											<td id="hidden_trans_customer_name_{{$data->id}}">{{$data->customerName}}</td>
+										@endif
 										<td id="hidden_trans_total_{{$data->id}}">IDR {{$data->total}}</td>
 										<td id="hidden_trans_discount_{{$data->id}}">IDR {{$data->discount}}</td>
 										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>

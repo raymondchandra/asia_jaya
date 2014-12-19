@@ -1,9 +1,20 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$dataAll = Transaction::whereRaw('created_at >= curdate()')->get();
+		$allData = $transactionController->getAll();
+		$allDataJson = json_decode($allData->getContent());
+		if($allDataJson->{'status'}!='Not Found'){
+			$dataAll = $allDataJson->{'messages'};
+			foreach($dataAll as $data){
+				$data->customerName = Customer::find($data->customer_id)->name;
+				$data->salesName = Account::find($data->sales_id)->username;
+				$data->order = $this->getOrderArray($data->id);
+			}
+		}else{
+			$dataAll = null;
+		}
 		
-		echo $dataAll;
+		var_dump($allData);
 	});
 	Route::get('/tes2', function()
 	{
@@ -280,6 +291,10 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.laporan_cash.manage_laporan_cash');
 	});
 
+	Route::get('/manage_laporan_transaksi', function()
+	{
+		return View::make('pages.laporan_transaction.manage_laporan_transaction');
+	});
 
 
 });
@@ -301,6 +316,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/add_account', ['as'=>'david.add_account','uses' => 'AccountsController@addAccount']);
 	
 	Route::get('/view_transaction', ['as'=>'david.view_transaction','uses' => 'transController@view_transaction']);
+	
+	Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction']);
 	
 	Route::get('/get_order_by_trans_id', ['as'=>'david.get_order_by_trans_id','uses' => 'transController@getOrderByTransactionId']);
 	
