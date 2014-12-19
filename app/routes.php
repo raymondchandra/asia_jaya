@@ -241,6 +241,11 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.return.manage_return');
 	});
+	//Search Return
+	Route::get('/search_return', function()
+	{
+		return View::make('pages.return.search_return');
+	});
 
 	//Dashboard
 	Route::get('/dashboard', function()

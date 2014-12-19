@@ -1,5 +1,5 @@
 <div class="modal fade pop_up_add_return" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-md">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
@@ -13,27 +13,27 @@
 						<div class="g-sm-12">
 
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Nama Orang</label>
+								<label class="g-sm-3 control-label">Nama Barang</label>
+								<div class="g-sm-7">
+									<p type="text" class="form-control-static">Butiran Tas</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="g-sm-3 control-label">Jumlah Yang Dia Order</label>
+								<div class="g-sm-7">
+									<p type="text" class="form-control-static">432</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="g-sm-3 control-label">Yang Mau dikembaliin berapa banyak</label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Kode Produk (opt)</label>
+								<label class="g-sm-3 control-label"></label>
 								<div class="g-sm-7">
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Nama Produk (opt)</label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Kode Transaksi (opt)</label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control">
+									<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
 								</div>
 							</div>
 

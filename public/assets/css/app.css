@@ -1,1 +1,41 @@
-html,body{overflow-x:hidden}.s_super_container{position:relative;display:block}.s_left_display{display:block;z-index:99;color:#fff;position:fixed}.s_left_display .s_sidebar_area{width:80%;display:block;float:left;background-color:#dfdfdf;color:#232323}.s_left_display .s_sidebar_close_area{width:20%;display:block;float:left}.s_middle_display{position:relative;background-color:#f1f1f1}
+/*
+custom
+*/
+/* line 37, E:/xampp/htdocs/asiajaya/public/assets/css/app.scss */
+html, body {
+  overflow-x: hidden;
+}
+
+/* line 40, E:/xampp/htdocs/asiajaya/public/assets/css/app.scss */
+.s_super_container {
+  position: relative;
+  display: block;
+}
+
+/* line 44, E:/xampp/htdocs/asiajaya/public/assets/css/app.scss */
+.s_left_display {
+  display: block;
+  z-index: 99;
+  color: #fff;
+  position: fixed;
+}
+/* line 53, E:/xampp/htdocs/asiajaya/public/assets/css/app.scss */
+.s_left_display .s_sidebar_area {
+  width: 80%;
+  display: block;
+  float: left;
+  background-color: #dfdfdf;
+  color: #232323;
+}
+/* line 61, E:/xampp/htdocs/asiajaya/public/assets/css/app.scss */
+.s_left_display .s_sidebar_close_area {
+  width: 20%;
+  display: block;
+  float: left;
+}
+
+/* line 68, E:/xampp/htdocs/asiajaya/public/assets/css/app.scss */
+.s_middle_display {
+  position: relative;
+  background-color: #f1f1f1;
+}
