@@ -111,15 +111,18 @@
 										@endif
 										<td>{{$data->status}}</td>
 										<td>
+											<button class="btn btn-success btn-xs" data-toggle="modal" data-target=".pop_up_pay_transaction" style="display: block; margin-bottom: 5px;">
+												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Bayar
+											</button>
 											<button id="detail_{{$data->id}}" class="btn btn-info btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
 											<input type="hidden" value="{{$data->id}}">
 											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
 										<td>
-											<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
+											<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
 												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
 											</button>
-											<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">
+											<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="">
 												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
 											</button>
 											<!-- Button trigger modal class ".alertYesNo" -->
@@ -135,6 +138,7 @@
 	</div>
 
 	@include('pages.transaction.pop_up_detail_transaction')
+	@include('pages.transaction.pop_up_pay_transaction')
 
 	<script>
 
