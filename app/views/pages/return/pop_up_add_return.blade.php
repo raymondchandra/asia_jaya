@@ -13,26 +13,79 @@
 						<div class="g-sm-12">
 
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Nama Barang</label>
-								<div class="g-sm-7">
+								<label class="g-sm-4 control-label">Nama Barang</label>
+								<div class="g-sm-6">
 									<p type="text" class="form-control-static">Butiran Tas</p>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Jumlah Yang Dia Order</label>
-								<div class="g-sm-7">
+								<label class="g-sm-4 control-label">Jumlah Yang Dia Order</label>
+								<div class="g-sm-6">
 									<p type="text" class="form-control-static">432</p>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Yang Mau dikembaliin berapa banyak</label>
-								<div class="g-sm-7">
+								<label class="g-sm-4 control-label">Jumlah Yang Mau Dikembalikan</label>
+								<div class="g-sm-6">
 									<input type="text" class="form-control">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label"></label>
-								<div class="g-sm-7">
+								<label class="g-sm-4 control-label">Tipe Retur</label>
+								<div class="g-sm-6">
+									<select class="form-control f_pilih_tipe_retur">
+										<option value="0">tukar dengan barang yang sama</option>
+										<option value="1">tukar dengan barang yang beda</option>
+										<option value="2">tukar dengan uang</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group f_tukar_barang_beda hidden">
+								<label class="g-sm-4 control-label">Nama Barang</label>
+								<div class="g-sm-6">
+									<input type="text" class="form-control f_search_barang_beda">
+								</div>
+
+								<div class="g-sm-8 g-sm-push-2">
+									<table class="table table-bordered">
+										<tbody>
+											<tr class="f_suggest_tukar_barang" id="barang_ceritanya">
+												<td>
+													<img src="" height="50" width="50" style="margin-right: 20px; float: left;">
+													<p class="f_nama_barang_yang_mau_ditukar pull-left" style="line-height: 50px; margin: 0px;">Nama Barang Lain 1</p>
+												</td>
+											</tr>
+											<tr class="f_suggest_tukar_barang" id="barang_ceritanya">
+												<td>
+													<img src="" height="50" width="50" style="margin-right: 20px; float: left;">
+													<p class="f_nama_barang_yang_mau_ditukar pull-left" style="line-height: 50px; margin: 0px;">Nama Barang Lain 2</p>
+												</td>
+											</tr>
+											<tr class="f_suggest_tukar_barang" id="barang_ceritanya">
+												<td>
+													<img src="" height="50" width="50" style="margin-right: 20px; float: left;">
+													<p class="f_nama_barang_yang_mau_ditukar pull-left" style="line-height: 50px; margin: 0px;">Nama Barang Lain 3</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<script>
+								$('body').on('click','.f_suggest_tukar_barang',function(){
+									var t_barang =  $(this).find('.f_nama_barang_yang_mau_ditukar').text();
+									$('.f_search_barang_beda').val(t_barang);
+								});
+								</script>
+							</div>
+							<div class="form-group f_tukar_dengan_uang hidden">
+								<label class="g-sm-4 control-label">Nominal Uang</label>
+								<div class="g-sm-6">
+									<input type="text" class="form-control f_input_tukar_uang">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="g-sm-4 control-label"></label>
+								<div class="g-sm-6">
 									<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
 								</div>
 							</div>
@@ -77,3 +130,26 @@
 		</div>
 	</div>
 </div>
+<script>
+/*jQuery tipe retur*/
+$('body').on('click','.f_pilih_tipe_retur', function(){
+
+	var target = $(this).find(":selected").val();
+
+	if(target == "1"){
+		$('.f_tukar_barang_beda').removeClass('hidden');
+		$('.f_tukar_dengan_uang').addClass('hidden');
+		$('.f_input_tukar_uang').val('');
+		$('.f_search_barang_beda').val('');
+	}else if(target == "2"){
+		$('.f_tukar_dengan_uang').removeClass('hidden');
+		$('.f_tukar_barang_beda').addClass('hidden');
+		$('.f_search_barang_beda').val('');
+	}else{
+		$('.f_tukar_dengan_uang').addClass('hidden');
+		$('.f_tukar_barang_beda').addClass('hidden');
+		$('.f_search_barang_beda').val('');
+		$('.f_input_tukar_uang').val('');
+	}
+});
+</script>
