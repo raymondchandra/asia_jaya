@@ -15,25 +15,25 @@
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Nama Barang</label>
 								<div class="g-sm-7">
-									<p type="text" class="form-control-static">Butiran Tas</p>
+									<p type="text" class="form-control-static" id="prod_name_pop">Butiran Tas</p>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Jumlah Yang Dia Order</label>
 								<div class="g-sm-7">
-									<p type="text" class="form-control-static">432</p>
+									<p type="text" class="form-control-static" id="prod_quantity_pop">432</p>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Yang Mau dikembaliin berapa banyak</label>
 								<div class="g-sm-7">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="prod_return_pop">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="g-sm-3 control-label"></label>
 								<div class="g-sm-7">
-									<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+									<button type="button" class="btn btn-success" data-dismiss="modal" id="save_pop">Save</button>
 								</div>
 							</div>
 

@@ -41,7 +41,7 @@
 	Route::post('finalize', 'finalizeSellController@finalize');
 	
 //Return Product
-	Route::post('returnProduct', 'returnController@returnProduct');
+	//Route::post('returnProduct', 'returnController@returnProduct');
 	
 //Tax Route
 	Route::post('insertUpdateTax', 'taxController@setTax');
@@ -334,6 +334,14 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/view_customer', ['as'=>'gentry.view_customer','uses' => 'custController@view_customer']);
 	
 	Route::get('/view_cust_trans', ['as'=>'gentry.view_cust_trans','uses' => 'custController@view_history']);
+	
+	Route::get('/view_return', ['as'=>'gentry.view_return','uses' => 'returnController@view_return']);
+	
+	Route::get('/search_return', ['as'=>'gentry.search_return','uses' => 'returnController@search_product_return']);
+	
+	Route::put('/insert_return', ['as'=>'gentry.insert_return','uses' => 'returnController@returnProduct']);
+	
+	//Route::put('/put_search_return', ['as'=>'gentry.put_search_return','uses' => 'returnController@search_product_return']);
 });
 
 
