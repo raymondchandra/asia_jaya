@@ -135,7 +135,7 @@
 							<td>
 								{{ $data->id }}
 								<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
-								<input type="hidden" id="prod_id_{{$data->id}}" value="{{$data->prod_id}}" >
+								<!--<input type="hidden" id="prod_id_{{$data->id}}" value="{{$data->prod_id}}" >-->
 							</td>
 							<td>
 								{{ $data->cust_name }}
@@ -198,7 +198,7 @@
 										$row += "<tr><td>";
 										$row += data.id;
 										$row += "<input type='hidden' id='prod_quantity_"+data.id+"' value='"+data.quantity+"' >";
-										$row += "<input type='hidden' id='prod_id_"+data.id+"' value='"+data.id+"' >";
+										//$row += "<input type='hidden' id='prod_id_"+data.id+"' value='"+data.id+"' >";
 										$row += "</td><td>";
 										$row += data.cust_name;
 										$row += "</td><td>";
@@ -240,14 +240,22 @@
 			$('#prod_quantity_pop').text($prodQuantity);
 			
 			$('body').on('click','#save_pop',function(){
-				$prod_id = $('#prod_id_'+$id).val();
+				//$prod_id = $('#prod_id_'+$id).val();
+				$type = $('#type_return option:selected').text();
+				$trade_id = $('#id_trade_prod').val();
+				$return_quantity = $("#quantity_pop").val();
+				
+				alert($return_quantity);
 				
 				$.ajax({
 					type: 'PUT',
 					url: '{{URL::route('gentry.insert_return')}}',
 					data: {
 						'order_id' : $id,
-						'prod_id' : $prod_id
+						//'prod_id' : $prod_id,
+						'type' : $type,
+						'trade_id' : $trade_id,
+						'return_quantity' : $return_quantity
 					},
 					success: function(response){
 						alert('Insert Berhasil');

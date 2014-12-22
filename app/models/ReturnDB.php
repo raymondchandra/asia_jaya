@@ -15,6 +15,7 @@ class ReturnDB extends \Eloquent {
 		'solution',
 		'trade_product_id',
 		'difference',
+		'return_quantity'
 	];
 	
 	public function tradedProduct()

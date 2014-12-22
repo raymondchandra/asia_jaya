@@ -315,14 +315,23 @@ class returnController extends \HomeController{
 	
 	public function returnProduct(){
 		$orderId = Input::get('order_id');
-		$type = 4;
+		$type = Input::get('type');
 		$status = "pending";
 		$solution = "pending";
-		$tradeProductId = Input::get('prod_id');
+		$tradeProductId = Input::get('trade_id');
+		$return_quantity = Input::get('return_quantity');
 		$difference = 0;
 		
+		if($type == "tukar dengan barang yang sama"){
+			$type = 1;
+		}else if($type == "tukar dengan barang yang beda"){
+			$type = 2;
+		}else{
+			$type = 3;
+		}
+		
 		$returnController = new ReturnsController();
-		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference);
+		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity);
 		return $addReturns;
 	}
 }
