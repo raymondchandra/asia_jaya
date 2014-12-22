@@ -17,3 +17,7 @@
 		<script src="{{ asset('assets/js/datepicker/js/bootstrap-datepicker.js') }}"></script>
 		
 		<script src="{{ asset('assets/js/tinymce/js/tinymce/tinymce.min.js') }}"></script>
+
+
+		<script src="{{ asset('assets/js/highcharts4/js/highcharts.js') }}"></script>
+		<script src="{{ asset('assets/js/highcharts4/js/modules/exporting.js') }}"></script>
