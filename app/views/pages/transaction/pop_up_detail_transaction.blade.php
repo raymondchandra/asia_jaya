@@ -44,30 +44,61 @@
 							</table>
 							<hr></hr>
 							<div class="form-group">
-								<label class="g-sm-9 control-label">Subtotal</label>
+								<label class="g-sm-8 control-label">Subtotal</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static" id="transaction_subtotal_detail">IDR 3.100.000</p>
 								</div>
-								<label class="g-sm-9 control-label">Diskon</label>
+								<label class="g-sm-8 control-label">Diskon</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static" id="transaction_diskon_detail">IDR 0</p>
 									
 								</div>
-								<label class="g-sm-9 control-label">Tax</label>
+								<label class="g-sm-8 control-label">Tax</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static" id="transaction_tax_detail">IDR 0</p>
 									
 								</div>
-								<label class="g-sm-9 control-label"></label>
+								<label class="g-sm-8 control-label"></label>
 								<div class="g-sm-3">
 									<hr style="float: left; width: 166px;"></hr>
 									<span class="glyphicon glyphicon-plus pull-right" style="line-height: 39px;"></span>
 								</div>
-								<label class="g-sm-9 control-label">Total</label>
+								<label class="g-sm-8 control-label">Total</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static" id="transaction_total_detail">IDR 3.100.000</p>
 								</div>
+
+								<label class="g-sm-8 control-label">Bayar</label>
+								<div class="g-sm-3">
+									<input type="text" class="form-control" id="f_uang_bayaran">
+								</div>
+								<span class="clearfix"></span>
+
+								<label class="g-sm-8 control-label"></label>
+								<div class="g-sm-3">
+									<hr style="float: left; width: 100%;"></hr>
+								</div>
+								<span class="clearfix"></span>
+
+								<label class="g-sm-8 control-label">Kembalian</label>
+								<div class="g-sm-3">
+									<p type="text" class="form-control-static" id="f_uang_kembalian"></p>
+								</div>
 							</div>
+							
+							<script>
+								$('body').on('change','#f_uang_bayaran',function(){
+									
+ 
+									if($('#transaction_total_detail').text() > $('#f_uang_bayaran').val()){
+										$('#f_uang_kembalian').text("Uang Belum Cukup");
+									}else{
+										var kembalian = $('#f_uang_bayaran').val() - $('#transaction_total_detail').text();
+										$('#f_uang_kembalian').text(kembalian);
+									}
+									
+								});
+							</script>
 
 							<hr></hr>
 
