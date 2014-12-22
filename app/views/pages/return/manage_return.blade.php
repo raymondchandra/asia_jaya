@@ -9,7 +9,7 @@
 				</ol>
 				<h3 style="">
 					Kelola Retur
-					<a class="btn btn-success pull-right" href="{{URL::to('test/search_return')}}">
+					<a class="btn btn-success pull-right" href="{{URL::to('fungsi/search_return')}}">
 						<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Retur
 					</a>
 				</h3>
@@ -79,33 +79,34 @@
 				</thead>
 				<tbody>
 					
-					<?php for($i=0; $i<30; $i++){
-						?>
-						<tr> 
-							<td>
-								824739
-							</td>
-							<td>
-								tuker barang sama/balikin uang/tuker barang beda 
-							</td>
-							<td>
-								masukin gudang / masukin ke daftar obral
-							</td>
-							<td>
-								4353453464573576
-							</td>
-							<td>
-								-90000
-							</td>
-							<td>
-								tanggal
-							</td>
-							<td>
-								<button id="" class="btn btn-info btn-xs view_detail_button"  data-toggle="modal" data-target="">Solusi</button>
-							</td>
-						</tr> 
-						<?php }
-						?>
+						@if($dataAll!=null)
+							@foreach($dataAll as $data)
+							<tr> 
+								<td>
+									{{ $data->order_id }}
+								</td>
+								<td>
+									{{ $data->type }}
+								</td>
+								<td>
+									{{ $data->solution }}
+								</td>
+								<td>
+									{{ $data->trade_product_id }}
+								</td>
+								<td>
+									{{ $data->difference }}
+								</td>
+								<td>
+									{{ $data->created_at}}
+								</td>
+								<td>
+									<button id="" class="btn btn-info btn-xs view_detail_button"  data-toggle="modal" data-target="">Solusi</button>
+								</td>
+							</tr> 
+							@endforeach
+						@endif
+						
 						<script>
 						$( 'body' ).on( "click",'.f_excel_xlabel', function() {
 							$(this).siblings('.f_excel_xinput').removeClass('hidden');

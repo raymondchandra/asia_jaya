@@ -2,27 +2,6 @@
 
 class returnController extends \HomeController{
 	
-	/*
-		@author : Gentry Swanri
-		@parameter :
-		@return :
-		-) Fungsi ini digunakan apabila ada pembeli ynag ingin menukarkan barang yang telah dibeli
-		-) Type mempunyai 3 jenis, yaitu 1=>barang dengan uang, 2=>barang dengan barang sama, dan 3=>barang dengan barang beda
-	*/
-	public function returnProduct(){
-		//Dummy data
-		$orderId = 1;
-		$type = 1;
-		$status = "pending";
-		$solution = "pending";
-		$tradeProductId = 1;
-		$difference = 0;
-		
-		$returnController = new ReturnsController();
-		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference);
-		return $addReturns;
-	}
-	
 	public function updateReturn($returnId){
 		$returnController = new ReturnsController();
 	
@@ -251,5 +230,99 @@ class returnController extends \HomeController{
 		}
 		
 		return Response::json($respond);
+	}
+	
+	//bagian sambung ke view
+	public function view_return(){
+		$returnController = new ReturnsController();
+		$dataJson = $returnController->getAll();
+		$data = json_decode($dataJson->getContent());
+		$dataAll = null;
+		
+		if($data->{'status'}!='Not Found'){
+			$dataAll = $data->{'messages'};
+		}
+		
+		return View::make('pages.return.manage_return', compact('dataAll'));
+	}
+	
+	public function search_product_return(){
+		//$transaction_id = Input::get('data');
+		//$transaction_id = 1;
+		
+		$dataOrder = Order::where('transaction_id', '>', 0)->get();
+		foreach($dataOrder as $data){
+			$data->cust_name = $this->find_cust_name($data->transaction_id);
+			$product_data = $this->find_product_order($data->product_detail_id);
+			$data->prod_id = $product_data->id;
+			$data->prod_code = $product_data->product_code;
+			$data->prod_name = $product_data->name;
+		}
+		
+		//return $transaction_id;
+		return View::make('pages.return.search_return', compact('dataOrder'));
+	}
+	
+	public function search_product_return2(){
+		$cust_name = Input::get('cust_name');
+		$prod_code = Input::get('prod_code');
+		$prod_name = Input::get('prod_name');
+		$trans_code = Input::get('trans_code');
+		
+		/*$list_cust = Customer::where('name', 'LIKE', $cust_name)->get();
+		foreach($list_cust as $listCust){
+			$cust_id = $listCust->id;
+			$trans_list = Transaction::where('customer_id', '=', $cust_id);
+			foreach($trans_list as $listTrans){
+				$trans_id = $listTrans->id;
+				$order_list = Order::where('transaction_id', '=', $trans_id);
+				foreach($order_list as $listOrder){
+					
+				}
+			}
+		}*/
+		
+		$cust_id = Customer::where('name', 'LIKE', '%'.$cust_name.'%')->first();
+		if($cust_id == null)
+		{
+			return null;
+		}
+		else
+		{
+			$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transaction_id', 'LIKE', '%'.$trans_code.'%')->get();
+			
+			foreach($joinTable as $data){
+				$data->cust_name = Customer::find($data->customer_id)->name;
+			}
+			
+			return $joinTable;
+		}
+		//$joinTransOr = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id)->get();
+		//$joinProdDet = DB::table('product_details')->join('products', 'product_details.product_id', '=', 'products.id')->get();
+	}
+	
+	public function find_cust_name($transaction_id){
+		$customer_id = Transaction::find($transaction_id)->customer_id;
+		$customer_name = Customer::find($customer_id)->name;
+		return $customer_name;
+	}
+	
+	public function find_product_order($prod_detail_id){
+		$prod_id = ProductDetail::find($prod_detail_id)->product_id;
+		$prod_data = Product::find($prod_id);
+		return $prod_data;
+	}
+	
+	public function returnProduct(){
+		$orderId = Input::get('order_id');
+		$type = 4;
+		$status = "pending";
+		$solution = "pending";
+		$tradeProductId = Input::get('prod_id');
+		$difference = 0;
+		
+		$returnController = new ReturnsController();
+		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference);
+		return $addReturns;
 	}
 }

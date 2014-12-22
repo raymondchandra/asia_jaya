@@ -1,20 +1,40 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$allData = $transactionController->getAll();
-		$allDataJson = json_decode($allData->getContent());
-		if($allDataJson->{'status'}!='Not Found'){
-			$dataAll = $allDataJson->{'messages'};
-			foreach($dataAll as $data){
-				$data->customerName = Customer::find($data->customer_id)->name;
-				$data->salesName = Account::find($data->sales_id)->username;
-				$data->order = $this->getOrderArray($data->id);
+		$cust_name = "ghi";
+		$prod_code = "";
+		$prod_name = "";
+		$trans_code = "";
+		
+		/*$list_cust = Customer::where('name', 'LIKE', $cust_name)->get();
+		foreach($list_cust as $listCust){
+			$cust_id = $listCust->id;
+			$trans_list = Transaction::where('customer_id', '=', $cust_id);
+			foreach($trans_list as $listTrans){
+				$trans_id = $listTrans->id;
+				$order_list = Order::where('transaction_id', '=', $trans_id);
+				foreach($order_list as $listOrder){
+					
+				}
 			}
-		}else{
-			$dataAll = null;
+		}*/
+		
+		$cust_id = Customer::where('name', 'LIKE', '%'.$cust_name.'%')->first();
+		if($cust_id == null)
+		{
+			return null;
+		}
+		else
+		{
+			$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transaction_id', 'LIKE', '%'.$trans_code.'%')->get();
+		
+			
 		}
 		
-		var_dump($allData);
+		//$joinTransOr = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id)->get();
+		//$joinProdDet = DB::table('product_details')->join('products', 'product_details.product_id', '=', 'products.id')->get();
+		
+		var_dump($joinTable);
 	});
 	Route::get('/tes2', function()
 	{
@@ -41,7 +61,7 @@
 	Route::post('finalize', 'finalizeSellController@finalize');
 	
 //Return Product
-	Route::post('returnProduct', 'returnController@returnProduct');
+	//Route::post('returnProduct', 'returnController@returnProduct');
 	
 //Tax Route
 	Route::post('insertUpdateTax', 'taxController@setTax');
@@ -334,6 +354,16 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/view_customer', ['as'=>'gentry.view_customer','uses' => 'custController@view_customer']);
 	
 	Route::get('/view_cust_trans', ['as'=>'gentry.view_cust_trans','uses' => 'custController@view_history']);
+	
+	Route::get('/view_return', ['as'=>'gentry.view_return','uses' => 'returnController@view_return']);
+	
+	Route::get('/search_return', ['as'=>'gentry.search_return','uses' => 'returnController@search_product_return']);
+	
+	Route::get('/search_return2', ['as'=>'gentry.search_return2','uses' => 'returnController@search_product_return2']);
+	
+	Route::put('/insert_return', ['as'=>'gentry.insert_return','uses' => 'returnController@returnProduct']);
+	
+	//Route::put('/put_search_return', ['as'=>'gentry.put_search_return','uses' => 'returnController@search_product_return']);
 });
 
 

@@ -26,31 +26,31 @@
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Nama Orang</label>
 								<div class="g-sm-7">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="cust_name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Kode Produk (opt)</label>
 								<div class="g-sm-7">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="prod_code">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Nama Produk (opt)</label>
 								<div class="g-sm-7">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="prod_name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Kode Transaksi (opt)</label>
 								<div class="g-sm-7">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="trans_code">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="g-sm-3 control-label"></label>
 								<div class="g-sm-7">
-									<button class="btn btn-success" type="button">
+									<button class="btn btn-success" type="button" id="search_button">
 										Search
 									</button>
 								</div>
@@ -127,35 +127,39 @@
 
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="body_content">
 
-					<?php for($i=0; $i<30; $i++){
-						?>
+					@if($dataOrder != null)
+						@foreach($dataOrder as $data)
 						<tr> 
 							<td>
-								824739
+								{{ $data->id }}
+								<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
+								<input type="hidden" id="prod_id_{{$data->id}}" value="{{$data->prod_id}}" >
 							</td>
 							<td>
-								Human
+								{{ $data->cust_name }}
 							</td>
 							<td>
-								58746hn8g6v8t6b75vb
+								{{ $data->prod_code }}
+							</td>
+							<td id="prod_name_{{$data->id}}">
+								{{ $data->prod_name }}
 							</td>
 							<td>
-								Tas Hebat
+								{{ $data->transaction_id }}
 							</td>
 							<td>
-								764368
+								{{ $data->created_at }}
 							</td>
 							<td>
-								12 August 2090
-							</td>
-							<td>
-								<button id="" class="btn btn-warning btn-xs"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
+								<button id="" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
+								<input type="hidden" value="{{$data->id}}" />
 							</td>
 						</tr> 
-						<?php }
-						?>
+						@endforeach
+					@endif
+						
 						<script>
 						$( 'body' ).on( "click",'.f_excel_xlabel', function() {
 							$(this).siblings('.f_excel_xinput').removeClass('hidden');
@@ -170,6 +174,53 @@
 								$(this).addClass('hidden');
 							}
 						});
+						
+						//blm jalan
+						$("body").on('click', '#search_button', function(){
+							$cust_name = $("#cust_name").val();
+							$prod_code = $("#prod_code").val();
+							$prod_name = $("#prod_name").val();
+							$trans_code = $("#trans_code").val();
+							alert($cust_name);
+							$.ajax({
+								type: 'GET',
+								url: '{{URL::route('gentry.search_return2')}}',
+								data: {
+									'cust_name' : $cust_name,
+									'prod_code' : $prod_code,
+									'prod_name' : $prod_name,
+									'trans_code' : $trans_code
+								},
+								success: function(response){
+									$('#body_content').html("");
+									$row = "";
+									$.each(response, function(i,data){
+										$row += "<tr><td>";
+										$row += data.id;
+										$row += "<input type='hidden' id='prod_quantity_"+data.id+"' value='"+data.quantity+"' >";
+										$row += "<input type='hidden' id='prod_id_"+data.id+"' value='"+data.id+"' >";
+										$row += "</td><td>";
+										$row += data.cust_name;
+										$row += "</td><td>";
+										$row += data.product_code;
+										$row += "</td><td id='prod_name_"+data.id+"'>";
+										$row += data.name;
+										$row += "</td><td>";
+										$row += data.transaction_id;
+										$row += "</td><td>";
+										$row += data.created_at;
+										$row += "</td><td>";
+										$row += "<button id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
+										$row += "<input type='hidden' value='"+data.id+"' >";
+										$row += "</td></tr>";
+									});
+									$("#body_content").html($row);
+								},error: function(xhr, textStatus, errorThrown){
+									alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+									alert("responseText: "+xhr.responseText);
+								}
+							},'json');
+						});
 						</script>
 					</tbody>
 				</table>
@@ -181,6 +232,32 @@
 	@include('pages.return.pop_up_add_return')
 
 	<script>
-
+		$('body').on('click','.view_detail_button',function(){
+			$id = $(this).next().val();
+			$prodName = $('#prod_name_'+$id).text();
+			$prodQuantity = $('#prod_quantity_'+$id).val();
+			$('#prod_name_pop').text($prodName);
+			$('#prod_quantity_pop').text($prodQuantity);
+			
+			$('body').on('click','#save_pop',function(){
+				$prod_id = $('#prod_id_'+$id).val();
+				
+				$.ajax({
+					type: 'PUT',
+					url: '{{URL::route('gentry.insert_return')}}',
+					data: {
+						'order_id' : $id,
+						'prod_id' : $prod_id
+					},
+					success: function(response){
+						alert('Insert Berhasil');
+					},error: function(xhr, textStatus, errorThrown){
+						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+						alert("responseText: "+xhr.responseText);
+					}
+				},'json');
+				
+				});
+		});
 	</script>
 	@stop
