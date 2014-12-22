@@ -21,6 +21,7 @@ class CreateReturnsTable extends Migration {
 			$table->string('solution');
 			$table->integer('trade_product_id')->unsigned()->nullable();
 			$table->integer('difference');
+			$table->integer('return_quantity');
 			$table->timestamps();
 		});
 	}
