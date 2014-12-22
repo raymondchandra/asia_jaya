@@ -381,3 +381,11 @@ $colHover       : #ffe6d1; /*/
 .f_table_suggestion tr td{
 cursor: pointer !important;
 }
+
+.f_suggest_tukar_barang {
+	cursor: pointer;
+
+	&:hover {
+		background-color: #f5f5f5; 
+	}
+}

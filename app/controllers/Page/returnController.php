@@ -248,11 +248,11 @@ class returnController extends \HomeController{
 	
 	public function search_product_return(){
 		//$transaction_id = Input::get('data');
-		$transaction_id = 1;
+		//$transaction_id = 1;
 		
-		$dataOrder = Order::where('transaction_id', '=', $transaction_id)->get();
+		$dataOrder = Order::where('transaction_id', '>', 0)->get();
 		foreach($dataOrder as $data){
-			$data->cust_name = $this->find_cust_name($transaction_id);
+			$data->cust_name = $this->find_cust_name($data->transaction_id);
 			$product_data = $this->find_product_order($data->product_detail_id);
 			$data->prod_id = $product_data->id;
 			$data->prod_code = $product_data->product_code;
@@ -261,6 +261,44 @@ class returnController extends \HomeController{
 		
 		//return $transaction_id;
 		return View::make('pages.return.search_return', compact('dataOrder'));
+	}
+	
+	public function search_product_return2(){
+		$cust_name = Input::get('cust_name');
+		$prod_code = Input::get('prod_code');
+		$prod_name = Input::get('prod_name');
+		$trans_code = Input::get('trans_code');
+		
+		/*$list_cust = Customer::where('name', 'LIKE', $cust_name)->get();
+		foreach($list_cust as $listCust){
+			$cust_id = $listCust->id;
+			$trans_list = Transaction::where('customer_id', '=', $cust_id);
+			foreach($trans_list as $listTrans){
+				$trans_id = $listTrans->id;
+				$order_list = Order::where('transaction_id', '=', $trans_id);
+				foreach($order_list as $listOrder){
+					
+				}
+			}
+		}*/
+		
+		$cust_id = Customer::where('name', 'LIKE', '%'.$cust_name.'%')->first();
+		if($cust_id == null)
+		{
+			return null;
+		}
+		else
+		{
+			$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transaction_id', 'LIKE', '%'.$trans_code.'%')->get();
+			
+			foreach($joinTable as $data){
+				$data->cust_name = Customer::find($data->customer_id)->name;
+			}
+			
+			return $joinTable;
+		}
+		//$joinTransOr = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id)->get();
+		//$joinProdDet = DB::table('product_details')->join('products', 'product_details.product_id', '=', 'products.id')->get();
 	}
 	
 	public function find_cust_name($transaction_id){
