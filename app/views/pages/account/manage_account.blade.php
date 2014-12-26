@@ -11,7 +11,7 @@
 			</div>
 			<span class="clearfix"></span>
 			<hr></hr>
-			<button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target=".pop_up_add_account" style="margin-bottom: 20px;">
+			<button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target=".pop_up_add_account" data-backdrop="static" style="margin-bottom: 20px; ">
 				<span class="glyphicon glyphicon-plus"></span>Add Account
 			</button>
 			<div>

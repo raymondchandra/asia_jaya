@@ -299,6 +299,11 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.restock.manage_restock');
 	});
+	//Restock
+	Route::get('/add_new_stock', function()
+	{
+		return View::make('pages.restock.add_new_stock');
+	});
 
 	//Restock
 	Route::get('/jual_login', function()

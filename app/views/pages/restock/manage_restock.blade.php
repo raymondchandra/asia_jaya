@@ -7,9 +7,9 @@
 				<h3>
 					Daftar Restok Produk
 
-					<button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target="" style="">
+					<a href="{{URL::to('test/add_new_stock')}}" class="pull-right btn btn-success" >
 						<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Add New Stock
-					</button>
+					</a>
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
