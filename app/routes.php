@@ -321,6 +321,11 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.laporan_transaction.manage_laporan_transaction');
 	});
 
+	Route::get('/manage_log', function()
+	{
+		return View::make('pages.account.manage_log');
+	});
+
 
 });
 

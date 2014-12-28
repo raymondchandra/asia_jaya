@@ -99,7 +99,78 @@
 								<div class="panel-heading">Tambah Stock Produk Seri</div>
 								<div class="panel-body">
 
-									dfsdf
+									<div class="form-group">
+										<label class="g-sm-2 control-label">Cari Barang</label>
+										<div class="g-sm-8">
+											<input type="text" class="form-control">
+										</div>
+										<div class="g-sm-2">
+											<button type="button" class="btn btn-success">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</div>
+									</div>
+										<table class="table table-bordered">
+											<tbody>
+												<?php for($_i=0; $_i < 10; $_i++){ ?>
+												<tr>
+													<td>
+														<img src='' width='75' height='75' class='pull-left' >
+													</td>
+													<td>
+														product_code
+													</td>
+													<td>
+														name
+													</td>
+													<td>
+														color
+													</td>
+													<td>
+														stock_shop
+													</td>
+													<td>
+														stock_storage
+													</td>
+													<td>
+														price
+													</td>
+												</tr>
+												<?php } ?>
+											</tbody>
+										</table>
+
+
+									<hr>
+									<h4>
+										Daftar Barang Dalam Seri ini 
+									</h4>
+									<table class="table table-bordered">
+										<tbody>
+											<?php for($_i=0; $_i < 3; $_i++){ ?>
+											<tr>
+												<td>
+													product_code
+												</td>
+												<td>
+													name
+												</td>
+												<td>
+													color
+												</td>
+												<td>
+													stock_shop
+												</td>
+												<td>
+													stock_storage
+												</td>
+												<td>
+													price
+												</td>
+											</tr>
+											<?php } ?>
+										</tbody>
+									</table>
 								</div>
 							</div>
 							<script>
