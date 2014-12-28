@@ -93,8 +93,15 @@
 											<input type="file" >
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label"></label>
+										<div class="g-sm-7">
+											<button type="submit" class="btn btn-success">Add</button>
+										</div>
+									</div>
 								</div>
 							</div>
+
 							<div class="panel panel-default f_seri hidden">
 								<div class="panel-heading">Tambah Stock Produk Seri</div>
 								<div class="panel-body">
@@ -105,25 +112,25 @@
 											<input type="text" class="form-control">
 										</div>
 										<div class="g-sm-2">
-											<button type="button" class="btn btn-success">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button>
+											<!--<button type="button" class="btn btn-success">
+												Search
+											</button>-->
 										</div>
 									</div>
-										<table class="table table-bordered">
+										<table class="table table-bordered table-striped">
 											<tbody>
-												<?php for($_i=0; $_i < 10; $_i++){ ?>
-												<tr>
-													<td>
+												<?php for($_i=0; $_i < 5; $_i++){ ?>
+												<tr style="cursor: pointer;" class="f_search_row_suggest">
+													<td width="92">
 														<img src='' width='75' height='75' class='pull-left' >
 													</td>
-													<td>
+													<td class="f_sug_product_code">
 														product_code
 													</td>
-													<td>
+													<td class="f_sug_product_name">
 														name
 													</td>
-													<td>
+													<td class="f_sug_product_color">
 														color
 													</td>
 													<td>
@@ -132,7 +139,7 @@
 													<td>
 														stock_storage
 													</td>
-													<td>
+													<td class="f_sug_product_price">
 														price
 													</td>
 												</tr>
@@ -146,11 +153,14 @@
 										Daftar Barang Dalam Seri ini 
 									</h4>
 									<table class="table table-bordered">
-										<tbody>
+										<tbody class="f_tbody_barang_seri">
 											<?php for($_i=0; $_i < 3; $_i++){ ?>
 											<tr>
+												<td width="92">
+													<img src='' width='75' height='75' class='pull-left' >
+												</td>
 												<td>
-													product_code
+													product
 												</td>
 												<td>
 													name
@@ -158,19 +168,88 @@
 												<td>
 													color
 												</td>
-												<td>
-													stock_shop
+												<!--<td>
+													stock_
 												</td>
 												<td>
-													stock_storage
-												</td>
+													stock_stor
+												</td>-->
 												<td>
 													price
+												</td>
+												<td>
+													<button type="button" class="btn btn-danger">
+														<span class="glyphicon glyphicon-remove f_row_remove"></span>
+													</button>
 												</td>
 											</tr>
 											<?php } ?>
 										</tbody>
 									</table>
+									<hr>
+									<h4>
+										Identitas Seri
+									</h4>
+									<!--<div class="form-group">
+										<label class="g-sm-3 control-label">Kode Produk</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control">
+										</div>
+									</div>-->
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Nama Seri</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+									<!--<div class="form-group">
+										<label class="g-sm-3 control-label">Warna Produk</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control">
+										</div>
+									</div>-->
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Harga Modal</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control" placeholder="akumulasi harga modal tiap produk">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Harga Minimal</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control" placeholder="akumulasi harga minimal tiap produk">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Harga Jual</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control" placeholder="akumulasi harga jual tiap produk">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label"></label>
+										<div class="g-sm-7">
+											<button type="submit" class="btn btn-success">Add</button>
+										</div>
+									</div>
+									<!--<div class="form-group">
+										<label class="g-sm-3 control-label">Stok Toko</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Stok Gudang</label>
+										<div class="g-sm-7">
+											<input type="text" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Foto</label>
+										<div class="g-sm-7">
+											<input type="file" >
+										</div>
+									</div>-->
 								</div>
 							</div>
 							<script>
@@ -187,15 +266,46 @@
 						</div>
 
 					</div>
-					<div class="container">
-						<div class="g-sm-12">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
-						</div>
-					</div>
 				</form>
 
 			</div>
 		</div>
 	</div>
 </div>
+<script>
+$('body').on('click','.f_search_row_suggest',function(){
+	
+	
+	var row_search = '<tr>';
+	row_search += '<td width="92">';
+	row_search += '		<img src="" width="75" height="75" class="pull-left" >';
+	row_search += '</td>';
+	row_search += '<td>';
+	row_search += 		$(this).find('.f_sug_product_code').text();
+	row_search += '</td>';
+	row_search += '<td>';
+	row_search += 		$(this).find('.f_sug_product_name').text();
+	row_search += '</td>';
+	row_search += '<td>';
+	row_search += 		$(this).find('.f_sug_product_color').text();
+	row_search += '</td>';
+	row_search += '<td>';
+	row_search += 		$(this).find('.f_sug_product_price').text();
+	row_search += '</td>';
+	row_search += '<td>';
+	row_search += '	<button type="button" class="btn btn-danger">';
+	row_search += '		<span class="glyphicon glyphicon-remove f_row_remove"></span>';
+	row_search += '	</button>';
+	row_search += '</td>';
+	row_search += '</tr>';
+
+	$('.f_tbody_barang_seri').append(row_search);
+});
+</script>
+
+<script>
+$('body').on('click','.f_row_remove',function(){
+	$(this).closest('tr').remove();
+});
+</script>
 @stop
