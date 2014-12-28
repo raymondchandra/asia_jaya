@@ -53,12 +53,15 @@
 									</div>
 									<div class="f_form_warna">
 										<div class="form-group">
-											<label class="g-sm-3 control-label">Warna Produk</label>
+											<label class="g-sm-3 control-label">Warna Produk 1</label>
 											<div class="g-sm-6">
 												<input type="text" class="form-control">
 											</div>
 											<div class="g-sm-1">
-												<button type="button" class="btn btn-success  f_add_form_warna pull-right">
+												<button type="button" class="btn btn-danger btn-sm  f_delete_form_warna pull-right">
+													<span class="glyphicon glyphicon-minus"></span>
+												</button>
+												<button type="button" class="btn btn-success btn-sm f_add_form_warna pull-right">
 													<span class="glyphicon glyphicon-plus"></span>
 												</button>
 											</div>
@@ -283,27 +286,26 @@
 	</div>
 </div>
 <script>
+	var i_warna=1;
+
 $('body').on('click','.f_add_form_warna',function(){
 	
-	
+	i_warna++;
 	var row_warna = '<div class="form-group">';
-	row_warna += '<label class="g-sm-3 control-label">Warna Produk</label>';
+	row_warna += '<label class="g-sm-3 control-label">Warna Produk '+ i_warna +'</label>';
 	row_warna += '	<div class="g-sm-6">';
 	row_warna += '		<input type="text" class="form-control">';
 	row_warna += '	</div>';
 	row_warna += '	<div class="g-sm-1">';
-	row_warna += '		<button type="button" class="btn btn-danger pull-right f_delete_form_warna">';
-	row_warna += '			<span class="glyphicon glyphicon-minus"></span>';
-	row_warna += '		</button>';
 	row_warna += '	</div>';
 	row_warna += '</div>';
 
 	$('.f_form_warna').append(row_warna);
 });
-</script>
-<script>
+
 $('body').on('click','.f_delete_form_warna',function(){
-	$(this).closest('.form-group').remove();
+	$('.f_form_warna').children('.form-group:last').remove();
+	i_warna--;
 });
 </script>
 <script>

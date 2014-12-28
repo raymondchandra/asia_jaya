@@ -46,10 +46,10 @@
 								</a>
 							</th>
 
-							<!--<th class="table-bordered" width="200">
+							<th class="table-bordered" width="200">
 								Command
 							</th>
-							<th class="table-bordered" width="70">
+							<!--<th class="table-bordered" width="70">
 								Delete
 							</th>-->
 						</thead>
@@ -72,11 +72,12 @@
 								<td>
 									<input type="text" class="form-control input-sm" id="filter_last_login" placeholder="yyyy-mm-dd hh:mm:ss">
 								</td>
+									 
 								
-								<!--<td width="">
+								<td width="">
 									<a class="btn btn-primary btn-xs" id="filter_button"><span class="glyphicon glyphicon-filter" style="margin-right: 5px;"></span>Filter</a>
 									<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
-								</td>-->
+								</td>
 							</tr>
 						</thead>
 						<tbody id="f_tbody_karyawan">
@@ -93,6 +94,9 @@
 								<td>
 									1977-11-06 23:07:14
 								</td>
+								<td>
+									 
+								</td>
 							</tr>
 							<tr>
 								<td>
@@ -106,6 +110,9 @@
 								</td>
 								<td>
 									1978-11-06 23:07:14
+								</td>
+								<td>
+									 
 								</td>
 							</tr>
 						</tbody>
