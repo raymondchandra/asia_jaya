@@ -21,12 +21,12 @@
 
 
 				
-				
+
 				<div class="container">
 					<div class="g-sm-12">
 
 
-						<h3>Non-ser atau Seri?</h3>
+						<h3>Non-seri atau Seri?</h3>
 						<label class="radio-inline">
 							<input type="radio" name="seri_or_not" id="rad_non_seri" value="0" checked> Non-seri
 						</label>
@@ -51,10 +51,17 @@
 											<input type="text" class="form-control">
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Warna Produk</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control">
+									<div class="f_form_warna">
+										<div class="form-group">
+											<label class="g-sm-3 control-label">Warna Produk</label>
+											<div class="g-sm-6">
+												<input type="text" class="form-control">
+											</div>
+											<div class="g-sm-1">
+												<button type="button" class="btn btn-success  f_add_form_warna pull-right">
+													<span class="glyphicon glyphicon-plus"></span>
+												</button>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -276,6 +283,30 @@
 	</div>
 </div>
 <script>
+$('body').on('click','.f_add_form_warna',function(){
+	
+	
+	var row_warna = '<div class="form-group">';
+	row_warna += '<label class="g-sm-3 control-label">Warna Produk</label>';
+	row_warna += '	<div class="g-sm-6">';
+	row_warna += '		<input type="text" class="form-control">';
+	row_warna += '	</div>';
+	row_warna += '	<div class="g-sm-1">';
+	row_warna += '		<button type="button" class="btn btn-danger pull-right f_delete_form_warna">';
+	row_warna += '			<span class="glyphicon glyphicon-minus"></span>';
+	row_warna += '		</button>';
+	row_warna += '	</div>';
+	row_warna += '</div>';
+
+	$('.f_form_warna').append(row_warna);
+});
+</script>
+<script>
+$('body').on('click','.f_delete_form_warna',function(){
+	$(this).closest('.form-group').remove();
+});
+</script>
+<script>
 $('body').on('click','.f_search_row_suggest',function(){
 	
 	
@@ -305,7 +336,6 @@ $('body').on('click','.f_search_row_suggest',function(){
 	$('.f_tbody_barang_seri').append(row_search);
 });
 </script>
-
 <script>
 $('body').on('click','.f_row_remove',function(){
 	$(this).closest('tr').remove();
