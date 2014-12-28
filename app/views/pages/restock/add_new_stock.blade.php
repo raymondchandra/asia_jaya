@@ -20,25 +20,25 @@
 
 
 
-				<form class="form-horizontal" role="form">
-					
-					<div class="container">
-						<div class="g-sm-12">
+				
+				
+				<div class="container">
+					<div class="g-sm-12">
 
 
-							<h3>Non-ser atau Seri?</h3>
-							<label class="radio-inline">
-								<input type="radio" name="seri_or_not" id="rad_non_seri" value="0" checked> Non-seri
-							</label>
-							<label class="radio-inline">
-								<input type="radio" name="seri_or_not" id="rad_seri" value="1"> Seri
-							</label>
+						<h3>Non-ser atau Seri?</h3>
+						<label class="radio-inline">
+							<input type="radio" name="seri_or_not" id="rad_non_seri" value="0" checked> Non-seri
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="seri_or_not" id="rad_seri" value="1"> Seri
+						</label>
 
-							<h3>Masukan Stock</h3>
-							<div class="panel panel-default f_non_seri">
-								<div class="panel-heading">Tambah Stock Produk Non-seri</div>
-								<div class="panel-body">
-
+						<h3>Masukan Stock</h3>
+						<div class="panel panel-default f_non_seri">
+							<div class="panel-heading">Tambah Stock Produk Non-seri</div>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form">
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Kode Produk</label>
 										<div class="g-sm-7">
@@ -99,12 +99,14 @@
 											<button type="submit" class="btn btn-success">Add</button>
 										</div>
 									</div>
-								</div>
+								</form>
 							</div>
+						</div>
 
-							<div class="panel panel-default f_seri hidden">
-								<div class="panel-heading">Tambah Stock Produk Seri</div>
-								<div class="panel-body">
+						<div class="panel panel-default f_seri hidden">
+							<div class="panel-heading">Tambah Stock Produk Seri</div>
+							<div class="panel-body">
+								<form class="form-horizontal" role="form">
 
 									<div class="form-group">
 										<label class="g-sm-2 control-label">Cari Barang</label>
@@ -117,35 +119,35 @@
 											</button>-->
 										</div>
 									</div>
-										<table class="table table-bordered table-striped">
-											<tbody>
-												<?php for($_i=0; $_i < 5; $_i++){ ?>
-												<tr style="cursor: pointer;" class="f_search_row_suggest">
-													<td width="92">
-														<img src='' width='75' height='75' class='pull-left' >
-													</td>
-													<td class="f_sug_product_code">
-														product_code
-													</td>
-													<td class="f_sug_product_name">
-														name
-													</td>
-													<td class="f_sug_product_color">
-														color
-													</td>
-													<td>
-														stock_shop
-													</td>
-													<td>
-														stock_storage
-													</td>
-													<td class="f_sug_product_price">
-														price
-													</td>
-												</tr>
-												<?php } ?>
-											</tbody>
-										</table>
+									<table class="table table-bordered table-striped">
+										<tbody>
+											<?php for($_i=0; $_i < 5; $_i++){ ?>
+											<tr style="cursor: pointer;" class="f_search_row_suggest">
+												<td width="92">
+													<img src='' width='75' height='75' class='pull-left' >
+												</td>
+												<td class="f_sug_product_code">
+													product_code
+												</td>
+												<td class="f_sug_product_name">
+													name
+												</td>
+												<td class="f_sug_product_color">
+													color
+												</td>
+												<td>
+													stock_shop
+												</td>
+												<td>
+													stock_storage
+												</td>
+												<td class="f_sug_product_price">
+													price
+												</td>
+											</tr>
+											<?php } ?>
+										</tbody>
+									</table>
 
 
 									<hr>
@@ -250,23 +252,24 @@
 											<input type="file" >
 										</div>
 									</div>-->
-								</div>
+								</form>
 							</div>
-							<script>
-							$('body').on('click','[name="seri_or_not"]',function(){
-								if($(this).val() == 0){
-									$('.f_non_seri').removeClass('hidden');
-									$('.f_seri').addClass('hidden');
-								}else{
-									$('.f_non_seri').addClass('hidden');
-									$('.f_seri').removeClass('hidden');
-								}
-							})
-							</script>
 						</div>
-
+						<script>
+						$('body').on('click','[name="seri_or_not"]',function(){
+							if($(this).val() == 0){
+								$('.f_non_seri').removeClass('hidden');
+								$('.f_seri').addClass('hidden');
+							}else{
+								$('.f_non_seri').addClass('hidden');
+								$('.f_seri').removeClass('hidden');
+							}
+						})
+						</script>
 					</div>
-				</form>
+
+				</div>
+				
 
 			</div>
 		</div>

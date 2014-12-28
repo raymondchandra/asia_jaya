@@ -325,6 +325,10 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.account.manage_log');
 	});
+	Route::get('/print_toko', function()
+	{
+		return View::make('pages.print_struk.print_toko');
+	});
 
 
 });
