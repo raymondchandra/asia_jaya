@@ -31,8 +31,8 @@ class ProductDetailsController extends \BaseController {
 		@return :
 		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product Detail
 	*/
-	public function insertWithParam($color, $stockShop, $stockStorage, $productId, $deleted){
-		$data = array('color'=>$color, 'stock_shop'=>$stockShop, 'stock_storage'=>$stockStorage, 'product_id'=>$productId, 'deleted'=>$deleted);
+	public function insertWithParam($color, $photo, $stockShop, $stockStorage, $productId, $deleted){
+		$data = array('color'=>$color, 'photo'=>$photo, 'stock_shop'=>$stockShop, 'stock_storage'=>$stockStorage, 'product_id'=>$productId, 'deleted'=>$deleted);
 		
 		//validate
 		$validator = Validator::make($data, Productdetail::$rules);

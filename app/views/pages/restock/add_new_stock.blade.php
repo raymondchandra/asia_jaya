@@ -42,20 +42,20 @@
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Kode Produk</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="kode_produk">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Nama Produk</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="nama_produk">
 										</div>
 									</div>
 									<div class="f_form_warna">
 										<div class="form-group">
 											<label class="g-sm-3 control-label">Warna Produk 1</label>
 											<div class="g-sm-6">
-												<input type="text" class="form-control">
+												<input type="text" class="form-control" id="warna_produk">
 											</div>
 											<div class="g-sm-1">
 												<button type="button" class="btn btn-danger btn-sm  f_delete_form_warna pull-right">
@@ -70,43 +70,43 @@
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Modal</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="harga_modal">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Minimal</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="harga_minimal">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Jual</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="harga_jual">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Stok Toko</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="stok_toko">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Stok Gudang</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control">
+											<input type="text" class="form-control" id="stok_gudang">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Foto</label>
 										<div class="g-sm-7">
-											<input type="file" >
+											<input type="file" id="foto">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label"></label>
 										<div class="g-sm-7">
-											<button type="submit" class="btn btn-success">Add</button>
+											<button type="submit" class="btn btn-success" id="button_non_series">Add</button>
 										</div>
 									</div>
 								</form>
@@ -342,5 +342,44 @@ $('body').on('click','.f_search_row_suggest',function(){
 $('body').on('click','.f_row_remove',function(){
 	$(this).closest('tr').remove();
 });
+</script>
+<script>
+	$('body').on('click', '#button_non_series', function(){
+		$kode_produk = $('#kode_produk').val();
+		$nama_produk = $('#nama_produk').val();
+		$warna_produk = $('#warna_produk').val();
+		$harga_modal = $('#harga_modal').val();
+		$harga_minimal = $('#harga_minimal').val();
+		$harga_jual = $('#harga_jual').val();
+		$stok_toko = $('#stok_toko').val();
+		$stok_gudang = $('#stok_gudang').val();
+		$foto = "http://localhost/asia_jaya/public/assets/product_img/"+$('#foto').val();
+		
+		alert($foto);
+		
+		$.ajax({
+			type: 'PUT',
+			url: '{{URL::route('gentry.add_new_stock1')}}',
+			data: {
+				'product_code' : $kode_produk,
+				'name' : $nama_produk,
+				'modal_price' : $harga_modal,
+				'min_price' : $harga_minimal,
+				'sales_price' : $harga_jual,
+				'stock_shop' : $stok_toko,
+				'stock_storage' : $stok_gudang,
+				'color' : $color,
+				'detail_stock_shop' : $stok_toko,
+				'detail_stock_storage' : $stok_gudang,
+				'photo' : $foto
+			},
+			success: function(response){
+				alert(response);
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+	});
 </script>
 @stop

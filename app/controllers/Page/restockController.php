@@ -17,6 +17,7 @@ class restockController extends \HomeController{
 		$type = 2;
 		$quantityShop = 0;
 		$quantityStorage = 100;
+		$photo = "a.jpg";
 		
 		$respond = array();
 		$ableRestock = 1;
@@ -29,7 +30,7 @@ class restockController extends \HomeController{
 		if($productId == -1){
 			$insertNew = 1;
 		
-			$productId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted);
+			$productId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo);
 		}else{
 			$ableRestock = $this->isAbleRestock($productId, $color, $quantityShop, $quantityStorage, $type);
 		}
@@ -87,29 +88,6 @@ class restockController extends \HomeController{
 		}
 		
 		return $success;
-	}
-	
-	/*
-		@author : Gentry Swanri
-		@parameter : $productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted
-		@return : 1 or -1
-		-) Fungsi ini digunakan untuk menangani bagian penambahan record baru apabila ada produk yang tidak ada di tabel
-	*/
-	public function addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted){
-	
-		$insertProductStatus = $this->insertNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted);
-		
-		if($insertProductStatus == 1){
-			$productId = $this->findProductId($name);
-			$insertDetailStatus = $this->insertNewProductDetail($color, $detailShop, $detailStorage, $productId, $detailDeleted);
-			if($insertDetailStatus == 1){
-				return $productId;
-			}else{
-				return -1;
-			}
-		}else{
-			return -1;
-		}
 	}
 	
 	/*
@@ -332,44 +310,6 @@ class restockController extends \HomeController{
 	
 	/*
 		@author : Gentry Swanri
-		@paramater : $productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted
-		@return : 1 or -1
-		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product
-	*/
-	public function insertNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted){
-		$productController = new ProductsController();
-		
-		$status = $productController->insertWithParam($productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted);
-		$statusJson = json_decode($status->getContent());
-		
-		if($statusJson->{'status'} == 'Created'){
-			return 1;
-		}else{
-			return -1;
-		}
-	}
-	
-	/*
-		@author : Gentry Swanri
-		@paramater : $color, $stockShop, $stockStorage, $productId, $deleted
-		@return : 1 or -1
-		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product Detail
-	*/
-	public function insertNewProductDetail($color, $stockShop, $stockStorage, $productId, $deleted){
-		$productDetailController = new ProductDetailsController();
-		
-		$addStatus = $productDetailController->insertWithParam($color, $stockShop, $stockStorage, $productId, $deleted);
-		$addStatusJson = json_decode($addStatus->getContent());
-		
-		if($addStatusJson->{'status'} == 'Created'){
-			return 1;
-		}else{
-			return -1;
-		}
-	}
-	
-	/*
-		@author : Gentry Swanri
 		@paramater : $productDetailId, $shopAmount, $storageAmount
 		@return : 1 or -1
 		-) Fungsi ini digunakan untuk menambahkan quantity produk detail
@@ -406,6 +346,88 @@ class restockController extends \HomeController{
 		$updateStorageJson = json_decode($updateStorage->getContent());
 		
 		if($updateShopJson->{'status'} == 'No Content' && $updateStorageJson->{'status'} == 'No Content'){
+			return 1;
+		}else{
+			return -1;
+		}
+	}
+	
+	public function addNewProductView(){
+		$productCode = Input::get('product_code');
+		$name = Input::get('name');
+		$modalPrice = Input::get('modal_price');
+		$minPrice = Input::get('min_price');
+		$salesPrice = Input::get('sales_price');
+		$productShop = Input::get('stock_shop');
+		$productStorage = Input::get('stock_storage');
+		$type = 1;
+		$productDeleted = 0;
+		$color = Input::get('color');
+		$detailShop = Input::get('detail_stock_shop');
+		$detailStorage = Input::get('detail_stock_storage');
+		$detailDeleted = 0;
+		$photo = Input::get('photo');
+	
+		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo);
+		
+		return $newProductId;
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@parameter : $productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted
+		@return : 1 or -1
+		-) Fungsi ini digunakan untuk menangani bagian penambahan record baru apabila ada produk yang tidak ada di tabel
+	*/
+	public function addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo){
+	
+		$insertProductStatus = $this->insertNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted);
+		
+		if($insertProductStatus == 1){
+			$productId = $this->findProductId($name);
+			$insertDetailStatus = $this->insertNewProductDetail($color, $photo, $detailShop, $detailStorage, $productId, $detailDeleted);
+			if($insertDetailStatus == 1){
+				return $productId;
+			}else{
+				return -1;
+			}
+		}else{
+			return -1;
+		}
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@paramater : $productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted
+		@return : 1 or -1
+		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product
+	*/
+	public function insertNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted){
+		$productController = new ProductsController();
+		
+		$status = $productController->insertWithParam($productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted);
+		$statusJson = json_decode($status->getContent());
+		
+		if($statusJson->{'status'} == 'Created'){
+			return 1;
+		}else{
+			return -1;
+		}
+	}
+	
+	/*
+		@author : Gentry Swanri
+		@paramater : $color, $stockShop, $stockStorage, $productId, $deleted
+		@return : 1 or -1
+		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product Detail
+	*/
+	public function insertNewProductDetail($color, $photo, $stockShop, $stockStorage, $productId, $deleted){
+		$productDetailController = new ProductDetailsController();
+		
+		$addStatus = $productDetailController->insertWithParam($color, $photo, $stockShop, $stockStorage, $productId, $deleted);
+		$addStatusJson = json_decode($addStatus->getContent());
+		
+		if($addStatusJson->{'status'} == 'Created'){
 			return 1;
 		}else{
 			return -1;
