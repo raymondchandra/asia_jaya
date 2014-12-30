@@ -70,6 +70,9 @@
 															<th>
 																Stok Gudang
 															</th>
+															<th>
+																Foto
+															</th>
 														</tr>
 													</thead>
 													<tbody class="f_form_warna">
@@ -85,6 +88,9 @@
 															</td>
 															<td>
 																<input type="text" class="form-control" id="stok_gudang_1">
+															</td>
+															<td>
+																<input type="file" id="foto_produk_1">
 															</td>
 														</tr>
 													</tbody>
@@ -340,6 +346,9 @@ $('body').on('click','.f_add_form_warna',function(){
 	row_warna += '	</td>';
 	row_warna += '	<td>';
 	row_warna += '		<input type="text" class="form-control" id="stok_gudang_'+i_warna+'">';
+	row_warna += '	</td>';
+	row_warna += '	<td>';
+	row_warna += '		<input type="file" id="foto_produk_'+i_warna+'">'; 
 	row_warna += '	</td>';
 	row_warna += '</tr>';
 

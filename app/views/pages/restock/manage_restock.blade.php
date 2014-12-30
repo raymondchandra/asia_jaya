@@ -169,7 +169,10 @@
 								<td>
 									<input type="hidden" id="idProduct" value="" />
 									<input type="hidden" id="idDetail" value="" />
-									erwre
+									
+									<button class="btn btn-success btn-xs" data-toggle="" data-target="" style="display: block;">
+										Restock
+									</button>
 								</td>
 									<!--<td>
 										<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
