@@ -51,11 +51,44 @@
 											<input type="text" class="form-control" id="nama_produk">
 										</div>
 									</div>
-									<div class="f_form_warna">
+									<div class="">
 										<div class="form-group">
-											<label class="g-sm-3 control-label">Warna Produk 1</label>
+											<label class="g-sm-3 control-label"></label>
 											<div class="g-sm-6">
-												<input type="text" class="form-control" id="warna_produk_1">
+												<table class="table table-bordered">
+													<thead>
+														<tr>
+															<th>
+																No.
+															</th>
+															<th>
+																Warna
+															</th>
+															<th>
+																Stok Toko
+															</th>
+															<th>
+																Stok Gudang
+															</th>
+														</tr>
+													</thead>
+													<tbody class="f_form_warna">
+														<tr>
+															<td>
+																<span style="line-height:34px;">1</span>
+															</td>
+															<td>
+																<input type="text" class="form-control" id="">
+															</td>
+															<td>
+																<input type="text" class="form-control" id="">
+															</td>
+															<td>
+																<input type="text" class="form-control" id="">
+															</td>
+														</tr>
+													</tbody>
+												</table>
 											</div>
 											<div class="g-sm-1">
 												<button type="button" class="btn btn-danger btn-sm  f_delete_form_warna pull-right">
@@ -66,6 +99,7 @@
 												</button>
 											</div>
 										</div>
+										
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Modal</label>
@@ -85,7 +119,7 @@
 											<input type="text" class="form-control" id="harga_jual">
 										</div>
 									</div>
-									<div class="form-group">
+									<!--<div class="form-group">
 										<label class="g-sm-3 control-label">Stok Toko</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="stok_toko">
@@ -96,7 +130,7 @@
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="stok_gudang">
 										</div>
-									</div>
+									</div>-->
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Foto</label>
 										<div class="g-sm-7">
@@ -106,7 +140,7 @@
 									<div class="form-group">
 										<label class="g-sm-3 control-label"></label>
 										<div class="g-sm-7">
-											<button type="button" class="btn btn-success" id="button_non_series">Add</button>
+											<button type="submit" class="btn btn-success" id="button_non_series">Add</button>
 										</div>
 									</div>
 								</form>
@@ -286,68 +320,38 @@
 	</div>
 </div>
 <script>
-	var i_warna=1;
+	var i_warna = 1;
 
 $('body').on('click','.f_add_form_warna',function(){
 	
 	i_warna++;
-	var row_warna = '<div class="form-group">';
-	row_warna += '<label class="g-sm-3 control-label">Warna Produk '+ i_warna +'</label>';
-	row_warna += '	<div class="g-sm-6">';
-	row_warna += '		<input type="text" class="form-control" id="warna_produk_"'+i_warna+'>';
-	row_warna += '	</div>';
-	row_warna += '	<div class="g-sm-1">';
-	row_warna += '	</div>';
-	row_warna += '</div>';
+
+	var row_warna = '<tr>';
+	row_warna += '<td>';
+	row_warna += '		<span style="line-height:34px;">'+ i_warna +'</span>';
+	row_warna += '	</td>';
+	row_warna += '	<td>';
+	row_warna += '		<input type="text" class="form-control" id="">';
+	row_warna += '	</td>';
+	row_warna += '	<td>';
+	row_warna += '		<input type="text" class="form-control" id="">';
+	row_warna += '	</td>';
+	row_warna += '	<td>';
+	row_warna += '		<input type="text" class="form-control" id="">';
+	row_warna += '	</td>';
+	row_warna += '</tr>';
 
 	$('.f_form_warna').append(row_warna);
 });
 
 $('body').on('click','.f_delete_form_warna',function(){
-	$('.f_form_warna').children('.form-group:last').remove();
-	i_warna--;
+	$('.f_form_warna').children('tr:last').remove();
+	if(i_warna == 0){
+		i_warna = 0;
+	}else{
+		i_warna--;
+	}
 });
-
-	$('body').on('click', '#button_non_series', function(){
-		$kode_produk = $('#kode_produk').val();
-		$nama_produk = $('#nama_produk').val();
-		for(var i=1; i<=i_warna; i++){
-			$warna_produk[] = $('#warna_produk_'+i).val();
-		}
-		$harga_modal = $('#harga_modal').val();
-		$harga_minimal = $('#harga_minimal').val();
-		$harga_jual = $('#harga_jual').val();
-		$stok_toko = $('#stok_toko').val();
-		$stok_gudang = $('#stok_gudang').val();
-		$foto = "http://localhost/asia_jaya/public/assets/product_img/"+$('#foto').val();
-		
-		alert($foto);
-		
-		$.ajax({
-			type: 'PUT',
-			url: '{{URL::route('gentry.add_new_stock1')}}',
-			data: {
-				'product_code' : $kode_produk,
-				'name' : $nama_produk,
-				'modal_price' : $harga_modal,
-				'min_price' : $harga_minimal,
-				'sales_price' : $harga_jual,
-				'stock_shop' : $stok_toko,
-				'stock_storage' : $stok_gudang,
-				'color' : $warna_produk,
-				'detail_stock_shop' : $stok_toko,
-				'detail_stock_storage' : $stok_gudang,
-				'photo' : $foto
-			},
-			success: function(response){
-				alert(response);
-			},error: function(xhr, textStatus, errorThrown){
-				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-				alert("responseText: "+xhr.responseText);
-			}
-		},'json');
-	});
-
 </script>
 <script>
 $('body').on('click','.f_search_row_suggest',function(){
@@ -383,5 +387,44 @@ $('body').on('click','.f_search_row_suggest',function(){
 $('body').on('click','.f_row_remove',function(){
 	$(this).closest('tr').remove();
 });
+</script>
+<script>
+	$('body').on('click', '#button_non_series', function(){
+		$kode_produk = $('#kode_produk').val();
+		$nama_produk = $('#nama_produk').val();
+		$warna_produk = $('#warna_produk').val();
+		$harga_modal = $('#harga_modal').val();
+		$harga_minimal = $('#harga_minimal').val();
+		$harga_jual = $('#harga_jual').val();
+		$stok_toko = $('#stok_toko').val();
+		$stok_gudang = $('#stok_gudang').val();
+		$foto = "http://localhost/asia_jaya/public/assets/product_img/"+$('#foto').val();
+		
+		alert($foto);
+		
+		$.ajax({
+			type: 'PUT',
+			url: '{{URL::route('gentry.add_new_stock1')}}',
+			data: {
+				'product_code' : $kode_produk,
+				'name' : $nama_produk,
+				'modal_price' : $harga_modal,
+				'min_price' : $harga_minimal,
+				'sales_price' : $harga_jual,
+				'stock_shop' : $stok_toko,
+				'stock_storage' : $stok_gudang,
+				'color' : $color,
+				'detail_stock_shop' : $stok_toko,
+				'detail_stock_storage' : $stok_gudang,
+				'photo' : $foto
+			},
+			success: function(response){
+				alert(response);
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+	});
 </script>
 @stop
