@@ -367,8 +367,10 @@ class restockController extends \HomeController{
 		$detailStorage = Input::get('detail_stock_storage');
 		$detailDeleted = 0;
 		$photo = Input::get('photo');
+		$i_warna = Input::get('i_warna');
 	
-		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo);
+		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna);
+		
 		
 		return $newProductId;
 	}
@@ -379,13 +381,21 @@ class restockController extends \HomeController{
 		@return : 1 or -1
 		-) Fungsi ini digunakan untuk menangani bagian penambahan record baru apabila ada produk yang tidak ada di tabel
 	*/
-	public function addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo){
+	public function addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna){
 	
 		$insertProductStatus = $this->insertNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted);
 		
 		if($insertProductStatus == 1){
 			$productId = $this->findProductId($name);
-			$insertDetailStatus = $this->insertNewProductDetail($color, $photo, $detailShop, $detailStorage, $productId, $detailDeleted);
+			$i = 1;
+			$check = true;
+			while($i<=$i_warna && $check == true){
+				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo, $detailShop[$i], $detailStorage[$i], $productId, $detailDeleted);
+				if($insertDetailStatus != 1 || $i==$i_warna){
+					$check = false;
+				}
+				$i++;
+			}
 			if($insertDetailStatus == 1){
 				return $productId;
 			}else{

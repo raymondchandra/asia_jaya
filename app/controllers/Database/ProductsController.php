@@ -32,7 +32,7 @@ class ProductsController extends \BaseController {
 		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product
 	*/
 	public function insertWithParam($productCode, $name, $modalPrice, $minPrice, $salesPrice, $stockShop, $stockStorage, $type, $deleted){
-		$data = array('product_code'=>$productCode, 'name'=>$name, 'modal_price'=>$modalPrice, 'min_price'=>$minPrice, 'stock_shop'=>$stockShop, 'stock_storage'=>$stockStorage, 'type'=>$type, 'deleted'=>$deleted);
+		$data = array('product_code'=>$productCode, 'name'=>$name, 'modal_price'=>$modalPrice, 'min_price'=>$minPrice, 'sales_price'=>$salesPrice, 'stock_shop'=>$stockShop, 'stock_storage'=>$stockStorage, 'type'=>$type, 'deleted'=>$deleted);
 		
 		//validate
 		$validator = Validator::make($data, Product::$rules);
