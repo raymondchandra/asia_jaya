@@ -443,4 +443,18 @@ class restockController extends \HomeController{
 			return -1;
 		}
 	}
+	
+	//based on : http://www.formget.com/ajax-image-upload-php/#
+	public function uploadImage(){
+		$data = Input::get('data');
+		if(isset($data["file"]["type"]))
+		{
+			$sourcePath = $data['file']['tmp_name']; 														// Storing source path of the file in a variable
+			$targetPath = "../../../public/assets/product_img/".$data['file']['name']; 		// Target path where file is to be stored
+			move_uploaded_file($sourcePath,$targetPath) ; 												// Moving Uploaded file
+			return 1;
+		}else{
+			return $data;
+		}
+	}
 }

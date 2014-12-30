@@ -38,7 +38,7 @@
 						<div class="panel panel-default f_non_seri">
 							<div class="panel-heading">Tambah Stock Produk Non-seri</div>
 							<div class="panel-body">
-								<form class="form-horizontal" role="form">
+								<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" id="form_non_series">
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Kode Produk</label>
 										<div class="g-sm-7">
@@ -380,6 +380,22 @@ $('body').on('click','.f_delete_form_warna',function(){
 		
 		//alert($total_stok_toko);
 		
+		//based on :  http://www.formget.com/ajax-image-upload-php/#
+		$.ajax({
+			url: '{{URL::route('gentry.upload_image')}}', 	// Url to which the request is send
+			type: "POST",             									// Type of request to be send, called as method
+			data: new FormData($('#form_non_series')[0]),		// Data sent to server, a set of key/value pairs (i.e. form fields and values)
+			contentType: false,       									// The content type used when sending data to the server.
+			cache: false,             										// To unable request pages to be cached
+			processData:false,        									// To send DOMDocument or non processed data file it is set to false
+			success: function(data)   								// A function to be called if request succeeds
+			{
+				alert(data);
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		});
 		
 		$.ajax({
 			type: 'PUT',

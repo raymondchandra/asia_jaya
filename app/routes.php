@@ -380,6 +380,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	//Route::put('/put_search_return', ['as'=>'gentry.put_search_return','uses' => 'returnController@search_product_return']);
 	
 	Route::put('/add_new_stock1', ['as'=>'gentry.add_new_stock1','uses' => 'restockController@addNewProductView']);
+	
+	Route::post('/upload_image', ['as'=>'gentry.upload_image','uses' => 'restockController@uploadImage']);
 });
 
 
