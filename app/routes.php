@@ -382,6 +382,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/add_new_stock1', ['as'=>'gentry.add_new_stock1','uses' => 'restockController@addNewProductView']);
 	
 	Route::post('/upload_image', ['as'=>'gentry.upload_image','uses' => 'restockController@uploadImage']);
+	
+	Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
 });
 
 

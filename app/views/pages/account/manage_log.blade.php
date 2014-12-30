@@ -20,28 +20,108 @@
 						<tr>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">ID</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Username</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'username')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'username', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'username')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'username', 'order' => 'desc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Role</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'role')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'role', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'role', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'role', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'role')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'role', 'order' => 'desc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'role', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'role', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Last Login</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'last_login')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'last_login', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'last_login', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'last_login', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'last_login')
+											@if($order == 'asc')
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'last_login', 'order' => 'desc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@else
+												<a href="{{action('accountController@manageLog', array('sortBy' => 'last_login', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+											@endif
+										@else
+											<a href="{{action('accountController@manageLog', array('sortBy' => 'last_login', 'order' => 'asc', 'filtered'=>'1','username'=>$username,'role'=>$role,'lastLogin'=>$lastLogin,'id'=>$id))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
@@ -57,13 +137,13 @@
 							<tr>
 								
 								<td>
-									<input type="text" class="form-control input-sm" id="">
+									<input type="text" class="form-control input-sm" id="filter_id">
 								</td>
 								<td>
-									<input type="text" class="form-control input-sm" id="">
+									<input type="text" class="form-control input-sm" id="filter_username">
 								</td>
 								<td>
-									<select class="form-control input-sm" id="">
+									<select class="form-control input-sm" id="filter_role">
 										<option value="owner">owner</option>
 										<option value="manager">manager</option>
 										<option value="sales">sales</option>
@@ -81,40 +161,27 @@
 							</tr>
 						</thead>
 						<tbody id="f_tbody_karyawan">
-							<tr>
-								<td>
-									3
-								</td>
-								<td>
-									Upin
-								</td>
-								<td>
-									sales
-								</td>
-								<td>
-									1977-11-06 23:07:14
-								</td>
-								<td>
-									 
-								</td>
-							</tr>
-							<tr>
-								<td>
-									4
-								</td>
-								<td>
-									Ipim
-								</td>
-								<td>
-									manager
-								</td>
-								<td>
-									1978-11-06 23:07:14
-								</td>
-								<td>
-									 
-								</td>
-							</tr>
+							@if($datas != null)
+								@foreach($datas as $record)
+								<tr>
+									<td>
+										{{ $record->id }}
+									</td>
+									<td>
+										{{ $record->username }}
+									</td>
+									<td>
+										{{ $record->role }}
+									</td>
+									<td>
+										{{ $record->last_login }}
+									</td>
+									<td>
+										 
+									</td>
+								</tr>
+								@endforeach
+							@endif
 						</tbody>
 					</table>
 				</div>
@@ -122,6 +189,55 @@
 		</div>
 	</div>
 
-
+<script>
+	$('body').on('click','#filter_button',function(){
+		$id = $('#filter_id').val();
+		if($id == ''){
+			$id = '-';
+		}
+		
+		$username = $('#filter_username').val();
+		if($username == ''){
+			$username = '-';
+		}
+		
+		var x=document.getElementById("filter_role");
+		for (var i = 0; i < x.options.length; i++) 
+		{
+			if(x.options[i].selected ==true)
+			{
+				$roleRaw = x.options[i].value;
+			}
+		}
+		
+		//alert($roleRaw);
+		
+		if($roleRaw == 'manager')
+		{
+			$role = 'manager';
+		}
+		else if($roleRaw == 'sales')
+		{
+			$role = 'sales';
+		}
+		else
+		{
+			$role = '-';
+		}
+		
+		
+		$lastLogin = $('#filter_last_login').val();
+		if($lastLogin == ''){
+			$lastLogin = '-';
+		}
+		
+		//alert($username + " " + $role + " " + $lastLogin + " " + $id);
+		window.location = "{{URL::route('gentry.manage_log')}}" + "?filtered=1&username="+$username+"&role="+$role+"&lastLogin="+$lastLogin+"&id="+$id;
+	});
+	
+	$('body').on('click','#unfilter_button',function(){
+		window.location = "{{URL::route('gentry.manage_log')}}";
+	});
+</script>
 	
 @stop

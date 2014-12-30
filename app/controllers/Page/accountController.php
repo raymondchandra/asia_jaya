@@ -84,9 +84,10 @@ class accountController extends \BaseController {
 			}
 		}
 		
-		$respond = array('code'=>'200','status' => 'OK','messages'=>$data);
+		return View::make('pages.account.manage_log', compact('data'));
 		
-		return Response::json($respond);
+		//$respond = array('code'=>'200','status' => 'OK','messages'=>$data);
+		//return Response::json($respond);
 	}
 	
 	public function changeActive(){
@@ -94,5 +95,71 @@ class accountController extends \BaseController {
 		$id = Input::get('id');
 		
 		return $accountController->updateActive($id);
+	}
+	
+	public function manageLog()
+	{
+		//return View::make('pages.admin.attribute.manage_attribute', compact('attributes','sortBy','sortType','page','filtered'));
+		$sortBy = Input::get('sortBy','none');
+		$order = Input::get('order','none');
+		$filtered = Input::get('filtered', '0');
+		$accountController = new AccountsController();
+		
+		if($filtered == '0')
+		{
+			if($sortBy === "none")
+			{
+				$allEmployeeJson = $accountController->getAll();
+				$allEmployee = json_decode($allEmployeeJson->getContent());
+			}
+			else
+			{
+				$allEmployeeJson = $accountController->getSortedAll($sortBy, $order);
+				$allEmployee = json_decode($allEmployeeJson->getContent());
+			}
+			$datas = null;
+			if($allEmployee->{'status'} != 'Not Found'){
+				$allEmployeeData = $allEmployee->{'messages'};
+				foreach($allEmployeeData as $allData){
+					if($allData->role == 'manager' || $allData->role == 'sales'){
+						$datas[] = (object)array('id'=>$allData->id, 'username'=>$allData->username, 'role'=>$allData->role, 'last_login'=>$allData->last_login, 'active'=>$allData->active, 'created_at'=>$allData->created_at, 'updated_at'=>$allData->updated_at);
+					}
+				}
+			}
+
+			return View::make('pages.account.manage_log', compact('datas','sortBy','order','filtered'));
+		}
+		else
+		{
+			$username = Input::get('username','-');
+			$role = Input::get('role', '-');
+			$lastLogin = Input::get('lastLogin', '-');
+			$id = Input::get('id', '-');
+			
+			if($sortBy == "none")
+			{
+				$allEmployeeJson = $accountController->getFilteredAccount2($username, $role, $lastLogin, $id);
+			}
+			else
+			{
+				$allEmployeeJson = $accountController->getSortedFilteredAccount2($username, $role, $lastLogin, $id, $sortBy, $order);
+			}
+			//$allEmployeeJson = $accountController->getFilteredProfile($username, $role, $lastLogin, $active);
+			$allEmployee = json_decode($allEmployeeJson->getContent());
+			$datas = null;
+			if($allEmployee->{'status'} != 'Not Found'){
+				$allEmployeeData = $allEmployee->{'messages'};
+				foreach($allEmployeeData as $allData){
+					if($allData->role == 'manager' || $allData->role == 'sales'){
+						$datas[] = (object)array('id'=>$allData->id, 'username'=>$allData->username, 'role'=>$allData->role, 'last_login'=>$allData->last_login, 'active'=>$allData->active, 'created_at'=>$allData->created_at, 'updated_at'=>$allData->updated_at);
+					}
+				}
+			}
+
+			return View::make('pages.account.manage_log', compact('datas','sortBy','order','filtered','username','role','lastLogin','id'));
+		}
+		
+		
+		
 	}
 }

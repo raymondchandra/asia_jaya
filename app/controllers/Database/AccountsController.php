@@ -127,6 +127,75 @@ class AccountsController extends \BaseController {
 		return $this->getReturn($account);
 	}
 	
+	public function getFilteredAccount2($username, $role, $lastLogin, $id)
+	{
+		$isFirst = false;
+		
+		if($username != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('username', 'LIKE', '%'.$username.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('username', 'LIKE', '%'.$username.'%');
+			}
+		}
+		
+		if($role != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('role', 'LIKE', '%'.$role.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('role', 'LIKE', '%'.$role.'%');
+			}
+		}
+		
+		if($lastLogin != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('last_login', 'LIKE', '%'.$lastLogin.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('last_login', 'LIKE', '%'.$lastLogin.'%');
+			}
+		}
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('id', '=', $id);
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$account = Account::all();
+			$isFirst = true;
+		}
+		else
+		{
+			$account = $accountTab->get();
+		}
+		
+		return $this->getReturn($account);
+	}
+	
 	public function getSortedFilteredAccount($username, $role, $lastLogin, $active, $sortBy, $order)
 	{
 		$isFirst = false;
@@ -180,6 +249,75 @@ class AccountsController extends \BaseController {
 			else
 			{
 				$accountTab = $accountTab->where('active', '=', $active);
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$account = Account::orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$account = $accountTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($account);
+	}
+	
+	public function getSortedFilteredAccount2($username, $role, $lastLogin, $id, $sortBy, $order)
+	{
+		$isFirst = false;
+		
+		if($username != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('username', 'LIKE', '%'.$username.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('username', 'LIKE', '%'.$username.'%');
+			}
+		}
+		
+		if($role != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('role', 'LIKE', '%'.$role.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('role', 'LIKE', '%'.$role.'%');
+			}
+		}
+		
+		if($lastLogin != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('last_login', 'LIKE', '%'.$lastLogin.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('last_login', 'LIKE', '%'.$lastLogin.'%');
+			}
+		}
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$accountTab = Account::where('id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$accountTab = $accountTab->where('id', '=', $id);
 			}
 		}
 		
