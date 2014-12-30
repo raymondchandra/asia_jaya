@@ -329,6 +329,10 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.print_struk.print_toko');
 	});
+	Route::get('/print_konsumen', function()
+	{
+		return View::make('pages.print_struk.print_konsumen');
+	});
 
 
 });

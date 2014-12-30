@@ -47,40 +47,12 @@
 			<tr>
 				<td>
 					<tr>
-						<td colspan="2">Nama Barang - Warna</td>
+						<td colspan="2">Nama Barang</td>
 					</tr>
 					<tr>
-						<td style="text-align: right;">10 x 180.000</td>
+						<td style="text-align: right;">30 x 180.000</td>
 						<td style="text-align: right;">=</td>
-						<td style="text-align: right;">1.800.000</td>
-					</tr>
-				</td>
-				
-			</tr>
-
-			<tr>
-				<td>
-					<tr>
-						<td colspan="2">Nama Barang - Warna</td>
-					</tr>
-					<tr>
-						<td style="text-align: right;">10 x 180.000</td>
-						<td style="text-align: right;">=</td>
-						<td style="text-align: right;">1.800.000</td>
-					</tr>
-				</td>
-				
-			</tr>
-
-			<tr>
-				<td>
-					<tr>
-						<td colspan="2">Nama Barang - Warna</td>
-					</tr>
-					<tr>
-						<td style="text-align: right;">10 x 180.000</td>
-						<td style="text-align: right;">=</td>
-						<td style="text-align: right;">1.800.000</td>
+						<td style="text-align: right;">8.400.000</td>
 					</tr>
 				</td>
 				
@@ -93,11 +65,6 @@
 				<td>Total</td>
 				<td>:</td>
 				<td style="text-align: right;">8.400.000</td>
-			</tr>
-			<tr>
-				<td>Diskon</td>
-				<td>:</td>
-				<td style="text-align: right;">0</td>
 			</tr>
 			<tr>
 				<td>Pajak</td>
