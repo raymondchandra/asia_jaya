@@ -381,46 +381,64 @@ $('body').on('click','.f_delete_form_warna',function(){
 		//alert($total_stok_toko);
 		
 		//based on :  http://www.formget.com/ajax-image-upload-php/#
+		//based on :  http://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery
+		$fd = new FormData();
+		$fd.append('file', $('#foto')[0].files[0]);
+		
 		$.ajax({
 			url: '{{URL::route('gentry.upload_image')}}', 	// Url to which the request is send
 			type: "POST",             									// Type of request to be send, called as method
-			data: new FormData($('#form_non_series')[0]),		// Data sent to server, a set of key/value pairs (i.e. form fields and values)
+			data: $fd,		// Data sent to server, a set of key/value pairs (i.e. form fields and values)
 			contentType: false,       									// The content type used when sending data to the server.
 			cache: false,             										// To unable request pages to be cached
 			processData:false,        									// To send DOMDocument or non processed data file it is set to false
 			success: function(data)   								// A function to be called if request succeeds
 			{
 				alert(data);
+				if(data == "Upload Success"){
+					$.ajax({
+						type: 'PUT',
+						url: '{{URL::route('gentry.add_new_stock1')}}',
+						data: {
+							'product_code' : $kode_produk,
+							'name' : $nama_produk,
+							'modal_price' : $harga_modal,
+							'min_price' : $harga_minimal,
+							'sales_price' : $harga_jual,
+							'stock_shop' : $total_stok_toko,
+							'stock_storage' : $total_stok_gudang,
+							'color' : $warna_produk,
+							'detail_stock_shop' : $stok_toko,
+							'detail_stock_storage' : $stok_gudang,
+							'photo' : $foto,
+							'i_warna' : i_warna
+						},
+						success: function(response){
+							alert(response);
+							$('#kode_produk').val("");
+							$('#nama_produk').val("");
+							for($i=1; $i<=$count; $i++){
+								$warna_produk[$i] = $('#warna_produk_'+$i).val("");
+								$stok_toko[$i] = $('#stok_toko_'+$i).val("");
+								$stok_gudang[$i] = $('#stok_gudang_'+$i).val("");
+							}
+							$('#harga_modal').val("");
+							$('#harga_minimal').val("");
+							$('#harga_jual').val("");
+							$('#foto').val("");
+
+							$('.f_form_warna').append(row_warna);
+						},error: function(xhr, textStatus, errorThrown){
+							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+							alert("responseText: "+xhr.responseText);
+						}
+					},'json');
+				}
 			},error: function(xhr, textStatus, errorThrown){
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 				alert("responseText: "+xhr.responseText);
 			}
 		});
-		
-		$.ajax({
-			type: 'PUT',
-			url: '{{URL::route('gentry.add_new_stock1')}}',
-			data: {
-				'product_code' : $kode_produk,
-				'name' : $nama_produk,
-				'modal_price' : $harga_modal,
-				'min_price' : $harga_minimal,
-				'sales_price' : $harga_jual,
-				'stock_shop' : $total_stok_toko,
-				'stock_storage' : $total_stok_gudang,
-				'color' : $warna_produk,
-				'detail_stock_shop' : $stok_toko,
-				'detail_stock_storage' : $stok_gudang,
-				'photo' : $foto,
-				'i_warna' : i_warna
-			},
-			success: function(response){
-				alert(response);
-			},error: function(xhr, textStatus, errorThrown){
-				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-				alert("responseText: "+xhr.responseText);
-			}
-		},'json');
 	});
 </script>
 <script>

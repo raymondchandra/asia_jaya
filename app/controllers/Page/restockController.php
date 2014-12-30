@@ -371,8 +371,11 @@ class restockController extends \HomeController{
 	
 		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna);
 		
-		
-		return $newProductId;
+		if($newProductId != -1){
+			return "success add new product";
+		}else{
+			return "failed add new product";
+		}
 	}
 	
 	/*
@@ -445,16 +448,21 @@ class restockController extends \HomeController{
 	}
 	
 	//based on : http://www.formget.com/ajax-image-upload-php/#
+	//based on : http://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery
 	public function uploadImage(){
-		$data = Input::get('data');
-		if(isset($data["file"]["type"]))
+		//$data = Input::get('data');
+		if(isset($_FILES['file']['name']))
 		{
-			$sourcePath = $data['file']['tmp_name']; 														// Storing source path of the file in a variable
-			$targetPath = "../../../public/assets/product_img/".$data['file']['name']; 		// Target path where file is to be stored
-			move_uploaded_file($sourcePath,$targetPath) ; 												// Moving Uploaded file
-			return 1;
+			if(!file_exists("/xampp/htdocs/asia_jaya/public/assets/product_img/".$_FILES['file']['name'])){
+				$sourcePath = $_FILES['file']['tmp_name']; 																						// Storing source path of the file in a variable
+				$targetPath = "/xampp/htdocs/asia_jaya/public/assets/product_img/".$_FILES['file']['name']; 		// Target path where file is to be stored
+				move_uploaded_file($sourcePath,$targetPath) ; 																				// Moving Uploaded file
+				return "Upload Success";
+			}else{
+				return "Filename is already exist";
+			}
 		}else{
-			return $data;
+			return "Upload Failed";
 		}
 	}
 }
