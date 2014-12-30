@@ -55,7 +55,7 @@
 										<div class="form-group">
 											<label class="g-sm-3 control-label">Warna Produk 1</label>
 											<div class="g-sm-6">
-												<input type="text" class="form-control" id="warna_produk">
+												<input type="text" class="form-control" id="warna_produk_1">
 											</div>
 											<div class="g-sm-1">
 												<button type="button" class="btn btn-danger btn-sm  f_delete_form_warna pull-right">
@@ -106,7 +106,7 @@
 									<div class="form-group">
 										<label class="g-sm-3 control-label"></label>
 										<div class="g-sm-7">
-											<button type="submit" class="btn btn-success" id="button_non_series">Add</button>
+											<button type="button" class="btn btn-success" id="button_non_series">Add</button>
 										</div>
 									</div>
 								</form>
@@ -294,7 +294,7 @@ $('body').on('click','.f_add_form_warna',function(){
 	var row_warna = '<div class="form-group">';
 	row_warna += '<label class="g-sm-3 control-label">Warna Produk '+ i_warna +'</label>';
 	row_warna += '	<div class="g-sm-6">';
-	row_warna += '		<input type="text" class="form-control">';
+	row_warna += '		<input type="text" class="form-control" id="warna_produk_"'+i_warna+'>';
 	row_warna += '	</div>';
 	row_warna += '	<div class="g-sm-1">';
 	row_warna += '	</div>';
@@ -307,6 +307,47 @@ $('body').on('click','.f_delete_form_warna',function(){
 	$('.f_form_warna').children('.form-group:last').remove();
 	i_warna--;
 });
+
+	$('body').on('click', '#button_non_series', function(){
+		$kode_produk = $('#kode_produk').val();
+		$nama_produk = $('#nama_produk').val();
+		for(var i=1; i<=i_warna; i++){
+			$warna_produk[] = $('#warna_produk_'+i).val();
+		}
+		$harga_modal = $('#harga_modal').val();
+		$harga_minimal = $('#harga_minimal').val();
+		$harga_jual = $('#harga_jual').val();
+		$stok_toko = $('#stok_toko').val();
+		$stok_gudang = $('#stok_gudang').val();
+		$foto = "http://localhost/asia_jaya/public/assets/product_img/"+$('#foto').val();
+		
+		alert($foto);
+		
+		$.ajax({
+			type: 'PUT',
+			url: '{{URL::route('gentry.add_new_stock1')}}',
+			data: {
+				'product_code' : $kode_produk,
+				'name' : $nama_produk,
+				'modal_price' : $harga_modal,
+				'min_price' : $harga_minimal,
+				'sales_price' : $harga_jual,
+				'stock_shop' : $stok_toko,
+				'stock_storage' : $stok_gudang,
+				'color' : $warna_produk,
+				'detail_stock_shop' : $stok_toko,
+				'detail_stock_storage' : $stok_gudang,
+				'photo' : $foto
+			},
+			success: function(response){
+				alert(response);
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+	});
+
 </script>
 <script>
 $('body').on('click','.f_search_row_suggest',function(){
@@ -342,44 +383,5 @@ $('body').on('click','.f_search_row_suggest',function(){
 $('body').on('click','.f_row_remove',function(){
 	$(this).closest('tr').remove();
 });
-</script>
-<script>
-	$('body').on('click', '#button_non_series', function(){
-		$kode_produk = $('#kode_produk').val();
-		$nama_produk = $('#nama_produk').val();
-		$warna_produk = $('#warna_produk').val();
-		$harga_modal = $('#harga_modal').val();
-		$harga_minimal = $('#harga_minimal').val();
-		$harga_jual = $('#harga_jual').val();
-		$stok_toko = $('#stok_toko').val();
-		$stok_gudang = $('#stok_gudang').val();
-		$foto = "http://localhost/asia_jaya/public/assets/product_img/"+$('#foto').val();
-		
-		alert($foto);
-		
-		$.ajax({
-			type: 'PUT',
-			url: '{{URL::route('gentry.add_new_stock1')}}',
-			data: {
-				'product_code' : $kode_produk,
-				'name' : $nama_produk,
-				'modal_price' : $harga_modal,
-				'min_price' : $harga_minimal,
-				'sales_price' : $harga_jual,
-				'stock_shop' : $stok_toko,
-				'stock_storage' : $stok_gudang,
-				'color' : $color,
-				'detail_stock_shop' : $stok_toko,
-				'detail_stock_storage' : $stok_gudang,
-				'photo' : $foto
-			},
-			success: function(response){
-				alert(response);
-			},error: function(xhr, textStatus, errorThrown){
-				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-				alert("responseText: "+xhr.responseText);
-			}
-		},'json');
-	});
 </script>
 @stop
