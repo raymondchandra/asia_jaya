@@ -182,18 +182,15 @@
 									@endif
 								</td>
 								<td>
-									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
+									<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: block;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row
+									</button>
+									<button class="btn btn-danger btn-xs" data-toggle="" data-target="" style="display: block; margin-top: 5px;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral
 									</button>
 									<input type="hidden" value="{{$prodList->idDetail}}" />
 									<input type="hidden" value="{{$prodList->id}}" />
-									<button class="btn btn-warning btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: block;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row
-									</button>
-									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Ganti Foto
-									</button>
-									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
+									<button class="btn btn-danger btn-xs" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Hapus
 									</button>
 									<input type="file" class="filestyle" data-input="false">
@@ -419,6 +416,15 @@ $(document).keydown(function(e) {
 });
 
 
-$(":file").filestyle({input: false}).filestyle({buttonText: 'Ubah Foto'});
+$(":file").filestyle(
+	{input: false}
+);
+
+
+$(".bootstrap-filestyle").find('label').addClass('btn-xs').addClass('btn-info').text('');
+$(".bootstrap-filestyle").find('label').append('<span class="glyphicon glyphicon-folder-open" style="margin-right: 5px;"></span>Ubar Gambar');
+
+
+
 </script>
 @stop
