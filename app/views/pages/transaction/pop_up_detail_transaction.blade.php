@@ -27,7 +27,7 @@
 										<th>
 											Warna
 										</th>
-										<th>
+										<th width="120">
 											Kuantitas
 										</th>
 										<th>

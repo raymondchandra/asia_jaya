@@ -111,10 +111,12 @@
 										@endif
 										<td>{{$data->status}}</td>
 										<td>
-											<button class="btn btn-success btn-xs" data-toggle="modal" data-target=".pop_up_pay_transaction" style="display: block; margin-bottom: 5px;">
+											<!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target=".pop_up_pay_transaction" style="display: block; margin-bottom: 5px;">
 												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Bayar
+											</button>-->
+											<button id="detail_{{$data->id}}" class="btn btn-success btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">
+												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>View Detail
 											</button>
-											<button id="detail_{{$data->id}}" class="btn btn-info btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
 											<input type="hidden" value="{{$data->id}}">
 											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
@@ -174,8 +176,9 @@
 					$data += "<img src=" + resp.foto + " width='100' height='100'>";
 					$data += "</td><td>";
 					$data += resp.warna;
-					$data += "</td><td>";
-					$data += resp.quantity;
+					$data += "</td><td class='f_td_excel_xlabel'>";
+					$data += "<span class='f_excel_xlabel' id=' style=''line-height: 30px;' >"+ resp.quantity +"</span>";
+					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden' style=''/>";
 					$data += "</td><td>IDR ";
 					$data += toRp(resp.hargaSatuan);
 					$data += "</td><td>IDR ";
@@ -208,5 +211,26 @@
 		}
 		return rev2.split('').reverse().join('');
 	}
+
+
+
+	/*------- MERUBAH Kuantitas Barang | Detail TRANSAKSI - START -------*/
+	$( 'body' ).on( "click",'.f_td_excel_xlabel', function() {
+		$(this).children('.f_excel_xlabel').siblings('.f_excel_xinput').removeClass('hidden');
+		$(this).children('.f_excel_xlabel').siblings('.f_excel_xinput').val($(this).text());
+		$(this).children('.f_excel_xlabel').addClass('hidden');
+	});
+	$( 'body' ).on( "keypress",'.f_excel_xinput', function(e) {
+		var key = e.which;
+		if(key == 13)  
+		{
+			$(this).siblings('.f_excel_xlabel').text($(this).val());
+			$(this).siblings('.f_excel_xlabel').removeClass('hidden');
+			$(this).addClass('hidden');
+		}
+	});
+	/*------- MERUBAH Kuantitas Barang | Detail TRANSAKSI - END -------*/
+
+
 	</script>
-@stop
+	@stop
