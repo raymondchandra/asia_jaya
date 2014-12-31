@@ -268,7 +268,7 @@ class ProductsController extends \BaseController {
 		@return :
 		-) Fungsi ini digunakan untuk mengupdate view Stock
 	*/
-	public function updateForViewStock($id, $editName, $editModal, $editMin, $editSales)
+	public function updateForViewStock($id, $editName, $editModal, $editMin, $editSales, $editKode)
 	{
 		$respond = array();
 		$product = Product::find($id);
@@ -279,6 +279,7 @@ class ProductsController extends \BaseController {
 		else
 		{
 			//edit value
+			$product->product_code = $editKode;
 			$product->name = $editName;
 			$product->modal_price = $editModal;
 			$product->min_price = $editMin;
