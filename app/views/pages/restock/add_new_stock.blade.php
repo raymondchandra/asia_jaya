@@ -229,9 +229,12 @@
 												<td>
 													price
 												</td>
+												<td width="150">
+													<input tpye="text" class="form-control" placeholder="Kuantitas (e.g: 1)">
+												</td>
 												<td>
-													<button type="button" class="btn btn-danger">
-														<span class="glyphicon glyphicon-remove f_row_remove"></span>
+													<button type="button" class="btn btn-danger f_row_remove">
+														<span class="glyphicon glyphicon-remove "></span>
 													</button>
 												</td>
 											</tr>

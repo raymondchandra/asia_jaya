@@ -4,10 +4,13 @@
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
-				<h3>
+				<h3 class="pull-left">
 					Daftar Stok Produk
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
+				<a href="{{URL::to('test/add_new_stock')}}" class="pull-right btn btn-success" >
+					<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Add New Stock
+				</a>
 			</div>
 			<span class="clearfix"></span>
 			<hr></hr>
@@ -181,6 +184,16 @@
 									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral
 									</button>
+									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row
+									</button>
+									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Ganti Foto
+									</button>
+									<button class="btn btn-warning btn-xs" data-toggle="" data-target="" style="display: block;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Hapus
+									</button>
+									<input type="file" class="filestyle" data-input="false">
 								</td>
 							</tr>
 							@endforeach
@@ -355,5 +368,8 @@ $(document).keydown(function(e) {
 		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').addClass('hidden');
 	}*/
 });
+
+
+$(":file").filestyle({input: false}).filestyle({buttonText: 'Ubah Foto'});
 </script>
 @stop

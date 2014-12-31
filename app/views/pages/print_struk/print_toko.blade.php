@@ -6,6 +6,7 @@
 			html,body {
 				font-family: consolas;
 				font-size: 10pt;
+				margin:0cm;
 			}
 			table{
 				width: 100%;
@@ -26,14 +27,14 @@
 				<td>2342352</td>
 			</tr>
 			<tr>
-				<td>Tanggal</td>
+				<td>Waktu</td>
 				<td>:</td>
-				<td>9 nov 2014</td>
+				<td>9 nov 2014 14:33:24</td>
 			</tr>
 			<tr>
-				<td>Jam</td>
+				<td>Pelanggan</td>
 				<td>:</td>
-				<td>14:33:24</td>
+				<td>John Deo</td>
 			</tr>
 			<tr>
 				<td>Karyawan</td>
@@ -138,7 +139,9 @@
 				<td colspan="3">
 					
 					<p>
-						Barang yang sudah dibeli tidak dapat dikembalikan
+						Terimakasih telah berbelanja di toko kami.
+						<br/>
+						Barang yang sudah dibeli tidak dapat dikembalikan.
 					</p>
 				</td>
 			</tr>
