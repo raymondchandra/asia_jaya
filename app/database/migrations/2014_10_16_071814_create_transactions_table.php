@@ -17,6 +17,7 @@ class CreateTransactionsTable extends Migration {
 			$table->increments('id');
 			$table->integer('customer_id')->unsigned();
 			$table->integer('total');
+			$table->integer('total_paid');
 			$table->integer('discount');
 			$table->integer('tax');
 			$table->tinyInteger('print_customer');
