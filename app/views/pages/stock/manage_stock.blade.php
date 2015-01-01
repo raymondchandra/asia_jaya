@@ -128,7 +128,8 @@
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<img src="{{$prodList->photo}}" width="120" height="120">
+									<input type="hidden" id="fotoChanged_{{$prodList->id}}" value="0" />
+									<img src="{{$prodList->photo}}" id="gambar_{{$prodList->id}}" width="120" height="120">
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
@@ -182,6 +183,8 @@
 									@endif
 								</td>
 								<td>
+									<input type="hidden" value="{{$prodList->idDetail}}" />
+									<input type="hidden" value="{{$prodList->id}}" />
 									<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: block;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row
 									</button>
@@ -190,10 +193,11 @@
 									</button>
 									<input type="hidden" value="{{$prodList->idDetail}}" />
 									<input type="hidden" value="{{$prodList->id}}" />
-									<button class="btn btn-danger btn-xs" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">
+									<button class="btn btn-danger btn-xs  hapus_button" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Hapus
 									</button>
-									<input type="file" class="filestyle" data-input="false">
+									<input type="hidden" value="{{$prodList->id}}" />
+									<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}">
 								</td>
 							</tr>
 							@endforeach
@@ -204,6 +208,48 @@
 									$(this).siblings('.f_excel_xinput').removeClass('hidden');
 									$(this).siblings('.f_excel_xinput').val($(this).text());
 									$(this).addClass('hidden');
+								});
+								
+								$( 'body' ).on( "click",'.hapus_button', function() {
+									$id= $(this).prev().val();
+									$idDetail = $(this).prev().prev().val();
+									$.ajax({
+										type: 'PUT',
+										url: '{{URL::route('david.delete_prod_det')}}',
+										data: {
+											'data' : $idDetail,
+										},
+										success: function(response){
+											alert('Delete Berhasil');
+											
+										},error: function(xhr, textStatus, errorThrown){
+											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+											alert("responseText: "+xhr.responseText);
+										}
+									},'json');
+								});
+								
+								$( 'body' ).on( "change",'.edit_gambar_button', function(evt) {
+									var tgt = evt.target || window.event.srcElement,
+									files = tgt.files;
+									if (FileReader && files && files.length) 
+									{
+										$id= $(this).prev().val();
+										$("#fotoChanged_"+$id).val('1');
+										
+										var fr = new FileReader();
+										fr.onload = function () {
+											$('#gambar_'+$id).attr('src',fr.result);
+										}
+										fr.readAsDataURL(files[0]);
+									}
+									// Not supported
+									else {
+										// fallback -- perhaps submit the input to an iframe and temporarily store
+										// them on the server until the user's session ends.
+									}
+									
+									
 								});
 								
 								$( 'body' ).on( "click",'.update_row_button', function() {
@@ -226,6 +272,14 @@
 									$editShop = $("span#shop_"+$idProduct).text();
 									$editStorage = $("span#storage_"+$idProduct).text();
 									$editKode = $("span#kode_"+$idProduct).text();
+									$isEditFoto = $("#fotoChanged_"+$idProduct).val();
+									$editFoto = '-';
+									if($isEditFoto == '1')
+									{
+										$editFotoPath = $('#edit_gambar_button_'+$idProduct).val();
+										var arr = $editFotoPath.split('\\');
+										$editFoto = arr[arr.length - 1];
+									}
 									
 									$.ajax({
 										type: 'PUT',
@@ -240,10 +294,33 @@
 											'editSales' : $editSales,
 											'editShop' : $editShop,
 											'editStorage' : $editStorage,
-											'editKode' : $editKode
+											'editKode' : $editKode,
+											'editFoto' : $editFoto
 										},
 										success: function(response){
 											alert('Perubahan Berhasil');
+											if($isEditFoto == '1')
+											{
+												$fd = new FormData();
+												$fd.append('file', $('#edit_gambar_button_'+$idProduct)[0].files[0]);
+												
+												$.ajax({
+													url: '{{URL::route('gentry.upload_image')}}',
+													type: "POST",             									
+													data: $fd,
+													contentType: false,       									
+													cache: false,             										
+													processData:false,        									
+													success: function(data)   								
+													{
+														alert(data);
+													},error: function(xhr, textStatus, errorThrown){
+														alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+														alert("responseText: "+xhr.responseText);
+													}
+												});
+												
+											}
 										},error: function(xhr, textStatus, errorThrown){
 											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 											alert("responseText: "+xhr.responseText);

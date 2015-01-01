@@ -87,14 +87,25 @@
 							</div>
 							
 							<script>
-								$('body').on('change','#f_uang_bayaran',function(){
-									
- 
-									if($('#transaction_total_detail').text() > $('#f_uang_bayaran').val()){
+								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+								function toRp(angka){
+									var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+									var rev2    = '';
+									for(var i = 0; i < rev.length; i++){
+										rev2  += rev[i];
+										if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+											rev2 += '.';
+										}
+									}
+									return rev2.split('').reverse().join('');
+								}
+								$('body').on('keyup','#f_uang_bayaran',function(){
+
+									if(toAngka($('#transaction_total_detail').text()) > toAngka($('#f_uang_bayaran').val())){
 										$('#f_uang_kembalian').text("Uang Belum Cukup");
 									}else{
-										var kembalian = $('#f_uang_bayaran').val() - $('#transaction_total_detail').text();
-										$('#f_uang_kembalian').text(kembalian);
+										var kembalian = parseInt($('#f_uang_bayaran').val()) - parseInt(toAngka($('#transaction_total_detail').text()));
+										$('#f_uang_kembalian').text("IDR " + toRp(kembalian));
 									}
 									
 								});

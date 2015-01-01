@@ -28,12 +28,23 @@ class stockController extends \HomeController{
 		$editSales = Input::get('editSales');
 		$editShop = Input::get('editShop');
 		$editStorage = Input::get('editStorage');
-		$editKode = Input::get('editKode','-');
+		$editKode = Input::get('editKode');
+		$editFoto = Input::get('editFoto');
 		
 		$productController = new ProductsController();
 		$productDetailController = new ProductDetailsController();
 		
 		$editProductJson = $productController->updateForViewStock($idProduct, $editName, $editModal, $editMin, $editSales, $editKode);
-		$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage);
+		$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage, $editFoto);
 	}
+	
+	public function deleteProduct()
+	{
+		$id = Input::get('data');
+		$productDetailController = new ProductDetailsController();
+		
+		return $productDetailController->deleteProdDet($id);
+	}
+	
+	
 }

@@ -1921,6 +1921,7 @@ return array(
     'custController' => $baseDir . '/app/controllers/Page/custController.php',
     'finalizeSellController' => $baseDir . '/app/controllers/Page/finalizeSellController.php',
     'mobile_view' => $baseDir . '/app/controllers/Page/mobile_view.php',
+    'printController' => $baseDir . '/app/controllers/Page/printController.php',
     'restockController' => $baseDir . '/app/controllers/Page/restockController.php',
     'returnController' => $baseDir . '/app/controllers/Page/returnController.php',
     'searchViewController' => $baseDir . '/app/controllers/Page/searchViewController.php',

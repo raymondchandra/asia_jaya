@@ -1,40 +1,9 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$cust_name = "ghi";
-		$prod_code = "";
-		$prod_name = "";
-		$trans_code = "";
+		$orders = DB::table('orders')->select(DB::raw('name , SUM(quantity) as quantity, SUM(price) as price'))->join('product_details', 'product_details.id', '=', 'orders.product_detail_id')->join('products' , 'product_id' , '=' , 'products.id')->where('transaction_id', '=', 6)->groupBy('name')->get();
 		
-		/*$list_cust = Customer::where('name', 'LIKE', $cust_name)->get();
-		foreach($list_cust as $listCust){
-			$cust_id = $listCust->id;
-			$trans_list = Transaction::where('customer_id', '=', $cust_id);
-			foreach($trans_list as $listTrans){
-				$trans_id = $listTrans->id;
-				$order_list = Order::where('transaction_id', '=', $trans_id);
-				foreach($order_list as $listOrder){
-					
-				}
-			}
-		}*/
-		
-		$cust_id = Customer::where('name', 'LIKE', '%'.$cust_name.'%')->first();
-		if($cust_id == null)
-		{
-			return null;
-		}
-		else
-		{
-			$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transaction_id', 'LIKE', '%'.$trans_code.'%')->get();
-		
-			
-		}
-		
-		//$joinTransOr = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id)->get();
-		//$joinProdDet = DB::table('product_details')->join('products', 'product_details.product_id', '=', 'products.id')->get();
-		
-		var_dump($joinTable);
+		var_dump($orders);
 	});
 	Route::get('/tes2', function()
 	{
@@ -388,6 +357,12 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::post('/upload_image', ['as'=>'gentry.upload_image','uses' => 'restockController@uploadImage']);
 	
 	Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
+	
+	Route::put('/delete_product_detail', ['as'=>'david.delete_prod_det','uses' => 'stockController@deleteProduct']);
+	
+	Route::get('/view_print_toko', ['as'=>'david.view_print_toko','uses' => 'printController@view_print_toko']);
+	
+	Route::get('/view_print_konsumen', ['as'=>'david.view_print_konsumen','uses' => 'printController@view_print_konsumen']);
 });
 
 

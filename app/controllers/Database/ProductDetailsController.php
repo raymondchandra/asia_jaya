@@ -262,13 +262,36 @@ class ProductDetailsController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	public function deleteProdDet($id)
+	{
+		$respond = array();
+		$productdetail = Productdetail::find($id);
+		if ($productdetail == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$productdetail->deleted = 1;
+			try {
+				$productdetail->save();
+				$respond = array('code'=>'200','status' => 'OK');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	
 	/*
 		@author : Gentry Swanri
 		@parameter : 
 		@return :
 		-) Fungsi ini digunakan untuk melakukan perubahan di view stock
 	*/
-	public function updateForViewStock($id, $editColor, $editShop, $editStorage)
+	public function updateForViewStock($id, $editColor, $editShop, $editStorage, $editFoto)
 	{
 		$respond = array();
 		$productdetail = Productdetail::find($id);
@@ -282,6 +305,10 @@ class ProductDetailsController extends \BaseController {
 			$productdetail->color = $editColor;
 			$productdetail->stock_shop = $editShop;
 			$productdetail->stock_storage = $editStorage;
+			if($editFoto != '-')
+			{
+				$productdetail->photo = "http://localhost/asia_jaya/public/assets/product_img/".$editFoto;
+			}
 			try {
 				$productdetail->save();
 				$respond = array('code'=>'204','status' => 'No Content');
