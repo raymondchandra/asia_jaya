@@ -234,6 +234,12 @@
 											<input type="button" id="add_seri_button" class="btn btn-success" value="Add"/>
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Foto</label>
+										<div class="g-sm-7">
+											<input type="file" id="">
+										</div>
+									</div>
 									<!--<div class="form-group">
 										<label class="g-sm-3 control-label">Stok Toko</label>
 										<div class="g-sm-7">
