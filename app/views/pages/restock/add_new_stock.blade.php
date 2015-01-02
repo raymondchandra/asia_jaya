@@ -287,6 +287,12 @@
 											<button type="submit" class="btn btn-success">Add</button>
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="g-sm-3 control-label">Foto</label>
+										<div class="g-sm-7">
+											<input type="file" id="">
+										</div>
+									</div>
 									<!--<div class="form-group">
 										<label class="g-sm-3 control-label">Stok Toko</label>
 										<div class="g-sm-7">
