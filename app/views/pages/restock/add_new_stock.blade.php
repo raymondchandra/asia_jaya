@@ -152,7 +152,10 @@
 								</form>
 							</div>
 						</div>
-
+						<!-- SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI -->
+						<!-- SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI -->
+						<!-- SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI -->
+						
 						<div class="panel panel-default f_seri hidden">
 							<div class="panel-heading">Tambah Stock Produk Seri</div>
 							<div class="panel-body">
@@ -161,7 +164,7 @@
 									<div class="form-group">
 										<label class="g-sm-2 control-label">Cari Barang</label>
 										<div class="g-sm-8">
-											<input type="text" class="form-control">
+											<input type="text" id="seri_cari_barang_input" class="form-control">
 										</div>
 										<div class="g-sm-2">
 											<!--<button type="button" class="btn btn-success">
@@ -170,32 +173,8 @@
 										</div>
 									</div>
 									<table class="table table-bordered table-striped">
-										<tbody>
-											<?php for($_i=0; $_i < 5; $_i++){ ?>
-											<tr style="cursor: pointer;" class="f_search_row_suggest">
-												<td width="92">
-													<img src='' width='75' height='75' class='pull-left' >
-												</td>
-												<td class="f_sug_product_code">
-													product_code
-												</td>
-												<td class="f_sug_product_name">
-													name
-												</td>
-												<td class="f_sug_product_color">
-													color
-												</td>
-												<td>
-													stock_shop
-												</td>
-												<td>
-													stock_storage
-												</td>
-												<td class="f_sug_product_price">
-													price
-												</td>
-											</tr>
-											<?php } ?>
+										<tbody id="cari_barang_seri_content">
+											
 										</tbody>
 									</table>
 
@@ -206,39 +185,7 @@
 									</h4>
 									<table class="table table-bordered">
 										<tbody class="f_tbody_barang_seri">
-											<?php for($_i=0; $_i < 3; $_i++){ ?>
-											<tr>
-												<td width="92">
-													<img src='' width='75' height='75' class='pull-left' >
-												</td>
-												<td>
-													product
-												</td>
-												<td>
-													name
-												</td>
-												<td>
-													color
-												</td>
-												<!--<td>
-													stock_
-												</td>
-												<td>
-													stock_stor
-												</td>-->
-												<td>
-													price
-												</td>
-												<td width="150">
-													<input tpye="text" class="form-control" placeholder="Kuantitas (e.g: 1)">
-												</td>
-												<td>
-													<button type="button" class="btn btn-danger f_row_remove">
-														<span class="glyphicon glyphicon-remove "></span>
-													</button>
-												</td>
-											</tr>
-											<?php } ?>
+											
 										</tbody>
 									</table>
 									<hr>
@@ -266,25 +213,25 @@
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Modal</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control" placeholder="akumulasi harga modal tiap produk">
+											<input type="text" class="form-control" placeholder="akumulasi harga modal produk">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Minimal</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control" placeholder="akumulasi harga minimal tiap produk">
+											<input type="text" class="form-control" placeholder="akumulasi harga minimal produk">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Jual</label>
 										<div class="g-sm-7">
-											<input type="text" class="form-control" placeholder="akumulasi harga jual tiap produk">
+											<input type="text" class="form-control" placeholder="akumulasi harga jual produk">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label"></label>
 										<div class="g-sm-7">
-											<button type="submit" class="btn btn-success">Add</button>
+											<input type="button" id="add_seri_button" class="btn btn-success" value="Add"/>
 										</div>
 									</div>
 									<!--<div class="form-group">
@@ -332,42 +279,42 @@
 	var i_warna = 1;
 	$count = 1;
 
-$('body').on('click','.f_add_form_warna',function(){
-	
-	i_warna++;
-	$count++;
+	$('body').on('click','.f_add_form_warna',function(){
+		
+		i_warna++;
+		$count++;
 
-	var row_warna = '<tr>';
-	row_warna += '<td>';
-	row_warna += '		<span style="line-height:34px;">'+ i_warna +'</span>';
-	row_warna += '	</td>';
-	row_warna += '	<td>';
-	row_warna += '		<input type="text" class="form-control" id="warna_produk_'+i_warna+'">';
-	row_warna += '	</td>';
-	row_warna += '	<td>';
-	row_warna += '		<input type="text" class="form-control" id="stok_toko_'+i_warna+'">';
-	row_warna += '	</td>';
-	row_warna += '	<td>';
-	row_warna += '		<input type="text" class="form-control" id="stok_gudang_'+i_warna+'">';
-	row_warna += '	</td>';
-	row_warna += '	<td>';
-	row_warna += '		<input type="file" id="foto_produk_'+i_warna+'">'; 
-	row_warna += '	</td>';
-	row_warna += '</tr>';
+		var row_warna = '<tr>';
+		row_warna += '<td>';
+		row_warna += '		<span style="line-height:34px;">'+ i_warna +'</span>';
+		row_warna += '	</td>';
+		row_warna += '	<td>';
+		row_warna += '		<input type="text" class="form-control" id="warna_produk_'+i_warna+'">';
+		row_warna += '	</td>';
+		row_warna += '	<td>';
+		row_warna += '		<input type="text" class="form-control" id="stok_toko_'+i_warna+'">';
+		row_warna += '	</td>';
+		row_warna += '	<td>';
+		row_warna += '		<input type="text" class="form-control" id="stok_gudang_'+i_warna+'">';
+		row_warna += '	</td>';
+		row_warna += '	<td>';
+		row_warna += '		<input type="file" id="foto_produk_'+i_warna+'">'; 
+		row_warna += '	</td>';
+		row_warna += '</tr>';
 
-	$('.f_form_warna').append(row_warna);
-});
+		$('.f_form_warna').append(row_warna);
+	});
 
-$('body').on('click','.f_delete_form_warna',function(){
-	$('.f_form_warna').children('tr:last').remove();
-	if(i_warna == 0){
-		i_warna = 0;
-		$count = 0;
-	}else{
-		i_warna--;
-		$count--;
-	}
-});
+	$('body').on('click','.f_delete_form_warna',function(){
+		$('.f_form_warna').children('tr:last').remove();
+		if(i_warna == 0){
+			i_warna = 0;
+			$count = 0;
+		}else{
+			i_warna--;
+			$count--;
+		}
+	});
 
 	
 	$('body').on('click', '#button_non_series', function(){
@@ -455,33 +402,114 @@ $('body').on('click','.f_delete_form_warna',function(){
 </script>
 <script>
 $('body').on('click','.f_search_row_suggest',function(){
+	trigger = true;
+	if($('#'+ $(this).find('.f_sug_product_id').val() + '-' + $(this).find('.f_sug_product_color').text()).length)
+	{
 	
-	
-	var row_search = '<tr>';
-	row_search += '<td width="92">';
-	row_search += '		<img src="" width="75" height="75" class="pull-left" >';
-	row_search += '</td>';
-	row_search += '<td>';
-	row_search += 		$(this).find('.f_sug_product_code').text();
-	row_search += '</td>';
-	row_search += '<td>';
-	row_search += 		$(this).find('.f_sug_product_name').text();
-	row_search += '</td>';
-	row_search += '<td>';
-	row_search += 		$(this).find('.f_sug_product_color').text();
-	row_search += '</td>';
-	row_search += '<td>';
-	row_search += 		$(this).find('.f_sug_product_price').text();
-	row_search += '</td>';
-	row_search += '<td>';
-	row_search += '	<button type="button" class="btn btn-danger">';
-	row_search += '		<span class="glyphicon glyphicon-remove f_row_remove"></span>';
-	row_search += '	</button>';
-	row_search += '</td>';
-	row_search += '</tr>';
+	}
+	else
+	{
+		var row_search = '<tr id="' + $(this).find('.f_sug_product_id').val() + '-' + $(this).find('.f_sug_product_color').text() + '">';
+		row_search += '<td width="92">';
+		row_search += '		<img src="' + $(this).find('.f_sug_product_img').attr('src') + '" width="75" height="75" class="pull-left" >';
+		row_search += '</td>';
+		row_search += '<input type="hidden" class="f_sug_product_id" value="' + $(this).find('.f_sug_product_id').val() + '"/>';
+		row_search += '<td>';
+		row_search += 		$(this).find('.f_sug_product_code').text();
+		row_search += '</td>';
+		row_search += '<td>';
+		row_search += 		$(this).find('.f_sug_product_name').text();
+		row_search += '</td>';
+		row_search += '<td>';
+		row_search += 		$(this).find('.f_sug_product_color').text();
+		row_search += '</td>';
+		row_search += '<td width="150">';
+		row_search += '<input tpye="text" class="form-control f_sug_input_quan" placeholder="Kuantitas (e.g: 1)">';
+		row_search += '</td>';
+		row_search += '<td>';
+		row_search += '	<button type="button" class="btn btn-danger">';
+		row_search += '		<span class="glyphicon glyphicon-remove f_row_remove"></span>';
+		row_search += '	</button>';
+		row_search += '</td>';
+		row_search += '</tr>';
 
-	$('.f_tbody_barang_seri').append(row_search);
+		$('.f_tbody_barang_seri').append(row_search);
+	}
 });
+</script>
+<script>
+	$('body').on('keyup','#seri_cari_barang_input',function(){
+		var trigger = false;
+		$keyword = $('#seri_cari_barang_input').val();
+		
+		$.ajax({
+			type: 'GET',
+			url: '{{URL::route('david.getProductLiveSearch')}}',
+			data: {
+				'keyword' : $keyword
+			},
+			success: function(response){
+				if(response['code'] == '404')
+				{
+					//gagal
+					$data = "<tr><td> No Result Found </td></tr>";
+					$('#searchContent').html($data);
+				}
+				else
+				{
+					//berhasil...foreach setiap barang
+					$data = "";
+					$.each(response['messages'], function( i, resp ) {
+
+						$data = $data + "<tr style='cursor: pointer;' class='f_search_row_suggest'> <td width='92'>";
+						$data = $data + "<img src='" + resp.photo + "' width='75' height='75' class='pull-left f_sug_product_img' > </td> <td class='f_sug_product_code'>";
+						$data = $data + resp.product_code + "</td> <input type='hidden' class='f_sug_product_id' value='" + resp.id + "'/><td class='f_sug_product_name'>";
+						$data = $data + resp.name + "</td> <td class='f_sug_product_color'>";
+						$data = $data + resp.color + "</td> <td>";
+						$data = $data + resp.stock_shop + "</td> <td>";
+						$data = $data + resp.stock_storage + "</td> </tr>";
+						
+					});
+					if(trigger == false)
+					{
+						$('#cari_barang_seri_content').html($data);
+					}
+				}
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+		
+	});
+	
+	$('body').on('click','#add_seri_button',function(){
+		$data = "";
+		$(".f_tbody_barang_seri tr").each(function(i, v){
+			$id = $(this).find('.f_sug_product_id').val();
+			$quantity = $(this).children('td').find('.f_sug_input_quan').val();
+			/*
+			$(this).children('td').each(function(ii, vv){
+				if(ii == 1)
+				{
+					$name = vv.innerText;
+				}
+				
+				if(ii == 2)
+				{
+					$color = vv.innerText;
+				}
+				
+				if(ii == 3)
+				{
+					$quantity = vv.innerText;
+				}
+			});
+			*/
+			$data += $id+"-"+$quantity+";";
+		});
+		alert($data);
+	});
 </script>
 <script>
 $('body').on('click','.f_row_remove',function(){

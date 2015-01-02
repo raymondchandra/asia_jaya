@@ -20,6 +20,8 @@ class CreateProductDetailsTable extends Migration {
 			$table->integer('stock_shop');
 			$table->integer('stock_storage');
 			$table->integer('product_id')->unsigned();
+			$table->string('reference')->default('0');
+			$table->tinyInteger('isSeri')->default(0);
 			$table->tinyInteger('deleted');
 			$table->timestamps();
 		});

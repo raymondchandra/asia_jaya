@@ -14,6 +14,8 @@ class ProductDetail extends \Eloquent {
 		'stock_shop',
 		'stock_storage',
 		'product_id',
+		'reference',
+		'isSeri',
 		'deleted'
 	];
 	

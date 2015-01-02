@@ -167,7 +167,7 @@
 				$('body').on('click','.f_send_ke_kasir',function(){
 					$idTable = $('#tableReps').val();
 					$data = [];
-					$('.f_masuk_kasir').removeClass('hidden');
+					
 					//alert($("#pesanan_content_"+$idTable).html());
 					//name color quantity
 					$("#pesanan_content_"+$idTable+" tr").each(function(i, v){
@@ -214,7 +214,8 @@
 							'tax' : $tax
 						},
 						success: function(response){
-							alert(response);
+							$('.f_masuk_kasir').removeClass('hidden');
+							$('.f_send_ke_kasir').addClass('hidden');
 						},error: function(xhr, textStatus, errorThrown){
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 							alert("responseText: "+xhr.responseText);
