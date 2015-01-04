@@ -304,6 +304,13 @@ Route::group(array('prefix' => 'test'), function()
 	});
 
 
+	//obral
+	Route::get('/obral', function()
+	{
+		return View::make('pages.obral.manage_obral');
+	});
+
+
 });
 
 Route::group(array('prefix' => 'fungsi'), function()
