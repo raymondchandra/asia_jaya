@@ -58,7 +58,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="80">
+							<th class="table-bordered" width="120">
 								<a href="javascript:void(0)">Void</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -70,7 +70,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="100"></th>
+							<th class="table-bordered" width="100">View Detail</th>
 							<th class="table-bordered" width="100">Print</th>
 						</thead>
 						<thead>
@@ -83,7 +83,18 @@
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
+								<td>
+									<select class="form-control input-sm">
+										<option value="true">true</option>
+										<option value="false">false</option>
+									</select>
+								</td>
+								<td>
+									<select class="form-control input-sm">
+										<option value="true">paid</option>
+										<option value="false">unpaid</option>
+									</select>
+								</td>
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
 								<td></td>
 								
