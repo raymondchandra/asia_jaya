@@ -1,6 +1,11 @@
 <?php
 	Route::get('/tes', function()
 	{
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status')->get();
+		
+		var_dump($joined);
+	
+		/*
 		try
 		{
 			$keyword = "ser";
@@ -43,6 +48,7 @@
 			$response = array('code'=>'403','status' => $e->getMessage());
 			return Response::json($response);
 		}
+		*/
 	});
 	Route::get('/tes2', function()
 	{
@@ -368,7 +374,9 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::get('/view_transaction', ['as'=>'david.view_transaction','uses' => 'transController@view_transaction']);
 	
-	Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction']);
+	//Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction']);
+	
+	Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction2']);
 	
 	Route::get('/get_order_by_trans_id', ['as'=>'david.get_order_by_trans_id','uses' => 'transController@getOrderByTransactionId']);
 	
