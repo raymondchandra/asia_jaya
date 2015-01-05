@@ -1,15 +1,52 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$orders = DB::table('orders')->select(DB::raw('name , SUM(quantity) as quantity, SUM(price) as price'))->join('product_details', 'product_details.id', '=', 'orders.product_detail_id')->join('products' , 'product_id' , '=' , 'products.id')->where('transaction_id', '=', 6)->groupBy('name')->get();
-		
-		var_dump($orders);
+		try
+		{
+			$keyword = "ser";
+			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->get();
+			foreach($products as $product)
+			{
+				if($product->isSeri == '1')
+				{
+					$reference = $product->reference;
+					$prdClr = $product->color;
+					$reference = explode(';',$reference);
+					$counter = count($reference);
+					$prdClr = explode('-',$prdClr);
+					$clr = "";
+					for($i=0 ; $i<$counter-1 ; $i++)
+					{
+						$quant = explode('-',$reference[$i]);
+						$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
+					}
+					
+					$product->color = $clr;
+				}
+			}
+			if(count($products) == 0)
+			{
+				//not found
+				$response = array('code'=>'404','status' => 'Not Found');
+			}
+			else
+			{
+				//found				
+				$response = array('code'=>'200','status' => 'OK','messages'=>$products);
+			}
+			
+			return Response::json($response);
+		}
+		catch(Exception $e)
+		{
+			//forbidden
+			$response = array('code'=>'403','status' => $e->getMessage());
+			return Response::json($response);
+		}
 	});
 	Route::get('/tes2', function()
 	{
-		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->get();
-		
-		var_dump($products);
+		var_dump(explode(';',"2-50;"));
 	});
 	
 //get list without filter
@@ -355,6 +392,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/add_new_stock1', ['as'=>'gentry.add_new_stock1','uses' => 'restockController@addNewProductView']);
 	
 	Route::post('/upload_image', ['as'=>'gentry.upload_image','uses' => 'restockController@uploadImage']);
+	
+	Route::post('/upload_image_v2', ['as'=>'gentry.upload_image_v2','uses' => 'restockController@uploadArrayImage']);
 	
 	Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
 	

@@ -368,8 +368,10 @@ class restockController extends \HomeController{
 		$detailDeleted = 0;
 		$photo = Input::get('photo');
 		$i_warna = Input::get('i_warna');
+		$reference = Input::get('reference','0');
+		$isSeri = Input::get('seri', '0');
 	
-		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna);
+		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna, $reference, $isSeri);
 		
 		if($newProductId != -1){
 			return "success add new product";
@@ -384,7 +386,7 @@ class restockController extends \HomeController{
 		@return : 1 or -1
 		-) Fungsi ini digunakan untuk menangani bagian penambahan record baru apabila ada produk yang tidak ada di tabel
 	*/
-	public function addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna){
+	public function addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna, $reference, $seri){
 	
 		$insertProductStatus = $this->insertNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted);
 		
@@ -393,7 +395,7 @@ class restockController extends \HomeController{
 			$i = 1;
 			$check = true;
 			while($i<=$i_warna && $check == true){
-				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo, $detailShop[$i], $detailStorage[$i], $productId, $detailDeleted);
+				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $detailShop[$i], $detailStorage[$i], $productId, $detailDeleted, $reference, $seri);
 				if($insertDetailStatus != 1 || $i==$i_warna){
 					$check = false;
 				}
@@ -434,10 +436,10 @@ class restockController extends \HomeController{
 		@return : 1 or -1
 		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product Detail
 	*/
-	public function insertNewProductDetail($color, $photo, $stockShop, $stockStorage, $productId, $deleted){
+	public function insertNewProductDetail($color, $photo, $stockShop, $stockStorage, $productId, $deleted, $reference, $seri){
 		$productDetailController = new ProductDetailsController();
 		
-		$addStatus = $productDetailController->insertWithParam($color, $photo, $stockShop, $stockStorage, $productId, $deleted);
+		$addStatus = $productDetailController->insertWithParam($color, $photo, $stockShop, $stockStorage, $productId, $deleted, $reference, $seri);
 		$addStatusJson = json_decode($addStatus->getContent());
 		
 		if($addStatusJson->{'status'} == 'Created'){
@@ -453,15 +455,59 @@ class restockController extends \HomeController{
 		//$data = Input::get('data');
 		if(isset($_FILES['file']['name']))
 		{
-			if(!file_exists("/xampp/htdocs/asia_jaya/public/assets/product_img/".$_FILES['file']['name'])){
+			$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+			$newFileName = Input::get('fileName').".".$ext;
+			if(true){
 				$sourcePath = $_FILES['file']['tmp_name']; 																						// Storing source path of the file in a variable
-				$targetPath = "/xampp/htdocs/asia_jaya/public/assets/product_img/".$_FILES['file']['name']; 		// Target path where file is to be stored
+				$targetPath = "/xampp/htdocs/asia_jaya/public/assets/product_img/".$newFileName; 		// Target path where file is to be stored
 				move_uploaded_file($sourcePath,$targetPath) ; 																				// Moving Uploaded file
 				return "Upload Success";
 			}else{
 				return "Filename is already exist";
 			}
 		}else{
+			return "Upload Failed";
+		}
+	}
+	
+	public function uploadArrayImage(){
+		$datas = explode( ',', Input::get('fileName'));
+		
+		$count = Input::get('count');
+		$mark = 0;
+		$fileName[] = array();
+		
+		for($i=1 ; $i<=$count ; $i++)
+		{
+			if(isset($_FILES['file_'.$i]['name']))
+			{
+				$ext = pathinfo($_FILES['file_'.$i]['name'], PATHINFO_EXTENSION);
+				$newFileName = $datas[$i-1].".".$ext;
+				if(true){
+					$sourcePath = $_FILES['file_'.$i]['tmp_name']; 																						// Storing source path of the file in a variable
+					$targetPath = "/xampp/htdocs/asia_jaya/public/assets/product_img/".$newFileName; 		// Target path where file is to be stored
+					move_uploaded_file($sourcePath,$targetPath) ; 																				// Moving Uploaded file
+					//return "Upload Success";
+					$mark = 0;
+				}else{
+					//return "Filename is already exist";
+					$mark = 1;
+				}
+			}else{
+				//return "Upload Failed";
+				$mark = 2;
+			}
+		}
+		if($mark == 0)
+		{
+			return "Upload Success";
+		}
+		else if($mark == 1)
+		{
+			return "Filename is already exist";
+		}
+		else
+		{
 			return "Upload Failed";
 		}
 	}

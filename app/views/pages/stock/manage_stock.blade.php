@@ -288,7 +288,7 @@
 											'idProduct' : $idProduct,
 											'idDetail' : $idDetail,
 											'editName' : $editName,
-											'editColor' : $editColor,
+											'editColor' : $editName,
 											'editModal' : $editModal,
 											'editMin' : $editMin,
 											'editSales' : $editSales,
@@ -303,7 +303,7 @@
 											{
 												$fd = new FormData();
 												$fd.append('file', $('#edit_gambar_button_'+$idProduct)[0].files[0]);
-												
+												$fd.append('fileName', $editName+"-"+$warna_produk);
 												$.ajax({
 													url: '{{URL::route('gentry.upload_image')}}',
 													type: "POST",             									

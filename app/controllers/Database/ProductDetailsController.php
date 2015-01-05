@@ -31,8 +31,8 @@ class ProductDetailsController extends \BaseController {
 		@return :
 		-) Fungsi ini digunakan untuk menambahkan record baru ke dalam tabel Product Detail
 	*/
-	public function insertWithParam($color, $photo, $stockShop, $stockStorage, $productId, $deleted){
-		$data = array('color'=>$color, 'photo'=>$photo, 'stock_shop'=>$stockShop, 'stock_storage'=>$stockStorage, 'product_id'=>$productId, 'deleted'=>$deleted);
+	public function insertWithParam($color, $photo, $stockShop, $stockStorage, $productId, $deleted, $reference, $seri){
+		$data = array('color'=>$color, 'photo'=>$photo, 'stock_shop'=>$stockShop, 'stock_storage'=>$stockStorage, 'product_id'=>$productId, 'deleted'=>$deleted, 'reference'=>$reference, 'isSeri'=>$seri);
 		
 		//validate
 		$validator = Validator::make($data, Productdetail::$rules);
@@ -388,6 +388,32 @@ class ProductDetailsController extends \BaseController {
 		{
 			$keyword = Input::get('keyword');
 			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->get();
+			foreach($products as $product)
+			{
+				if($product->isSeri == '1')
+				{
+					$reference = $product->reference;
+					$prdClr = $product->color;
+					$reference = explode(';',$reference);
+					$counter = count($reference);
+					$prdClr = explode('-',$prdClr);
+					$clr = "";
+					for($i=0 ; $i<$counter-1 ; $i++)
+					{
+						$quant = explode('-',$reference[$i]);
+						if($i == 0)
+						{
+							$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
+						}
+						else
+						{
+							$clr .= " ".$prdClr[$i]." x ".$quant[count($quant)-1];
+						}
+					}
+					
+					$product->color = $clr;
+				}
+			}
 			if(count($products) == 0)
 			{
 				//not found
