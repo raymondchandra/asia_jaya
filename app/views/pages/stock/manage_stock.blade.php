@@ -188,7 +188,7 @@
 									<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: block;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row
 									</button>
-									<button class="btn btn-danger btn-xs" data-toggle="" data-target="" style="display: block; margin-top: 5px;">
+									<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_obral" style="display: block; margin-top: 5px;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral
 									</button>
 									<input type="hidden" value="{{$prodList->idDetail}}" />
@@ -388,6 +388,7 @@
 </div>
 
 @include('pages.stock.pop_up_add_stock')
+@include('pages.stock.pop_up_obral')
 
 <script>
 
