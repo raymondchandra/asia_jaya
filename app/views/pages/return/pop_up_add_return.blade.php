@@ -85,7 +85,7 @@
 							<div class="form-group f_tukar_dengan_uang hidden">
 								<label class="g-sm-4 control-label">Nominal Uang</label>
 								<div class="g-sm-6">
-									<input type="text" class="form-control f_input_tukar_uang">
+									<input type="text" class="form-control f_input_tukar_uang" id="nominal_uang">
 								</div>
 							</div>
 							<div class="form-group">

@@ -320,18 +320,51 @@ class returnController extends \HomeController{
 		$solution = "pending";
 		$tradeProductId = Input::get('trade_id');
 		$return_quantity = Input::get('return_quantity');
-		$difference = 0;
+		$difference = -1;
+		$nominal_uang = Input::get('nominal_uang');
+		
+		if($tradeProductId==''){
+			$tradeProductId = null;
+		}
+		
+		$order_data = Order::find($orderId);
+		$product_detail_data = ProductDetail::find($order_data->product_detail_id);
+		$product_data = Product::find($product_detail_data->product_id);
+		$currentPrice = $product_data->sales_price;
+		$priceReturn = $order_data->price / $order_data->quantity;
+		$priceReturn = $priceReturn * $return_quantity;
 		
 		if($type == "tukar dengan barang yang sama"){
 			$type = 1;
+			
+			$difference = $priceReturn-$currentPrice;
+			if($difference<0){
+				$difference = $difference*-1;
+			}
+			
 		}else if($type == "tukar dengan barang yang beda"){
 			$type = 2;
+			
+			$product_price = Product::find($tradeProductId)->sales_price;
+			$difference = $priceReturn-($product_price*$return_quantity);
+			if($difference < 0){
+				$difference = $difference*-1;
+			}
 		}else{
 			$type = 3;
+			
+			if($nominal_uang != ''){
+				$difference = $nominal_uang-$priceReturn;
+				if($difference<0){
+					$difference = $difference*-1;
+				}
+			}
 		}
 		
 		$returnController = new ReturnsController();
 		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity);
+		//$temp = json_decode($addReturns->getContent());
 		return $addReturns;
+		//return $difference;
 	}
 }

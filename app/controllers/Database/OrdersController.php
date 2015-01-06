@@ -163,6 +163,20 @@ class OrdersController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
+	
+	public function getTop10ProductBought()
+	{
+		$respond = array();
+		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as total'))->groupBy('product_detail_id')->orderBy('total')->take(10)->get();
+		foreach($orders as $ord)
+		{
+			$prdDtl = ProductDetail::find($ord->product_detail_id);
+			$prd = Product::find($prdDtl->product_id);
+			$ord->name = $prd->name." - ".$prdDtl->color;
+		}
+		
+		return $orders;
+	}
 
 	/*
 	public function exist()

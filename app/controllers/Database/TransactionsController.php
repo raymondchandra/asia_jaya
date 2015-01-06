@@ -243,5 +243,285 @@ class TransactionsController extends \BaseController {
 		return Response::json($respond);
 	}
 	*/
+	
+	public function getSortedAll($by, $order)
+	{
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status');
+		$result = $joined->orderBy($by, $order)->get();
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getFilteredAccount($id, $custName, $total, $discount, $tax, $salesId, $salesName, $void, $status)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status');
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('transactions.id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('transactions.id', '=', $id);
+			}
+		}
+		
+		if($custName != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('name', 'LIKE', '%'.$custName.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('name', 'LIKE', '%'.$custName.'%');
+			}
+		}
+		
+		if($total != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('total', '=', $total);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('total', '=', $total);
+			}
+		}
+		
+		if($discount != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('discount', '=', $discount);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('discount', '=', $discount);
+			}
+		}
+		
+		if($tax != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('tax', '=', $tax);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('tax', '=', $tax);
+			}
+		}
+		
+		if($salesId != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('sales_id', '=', $salesId);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('sales_id', '=', $salesId);
+			}
+		}
+		
+		if($salesName != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('username', 'LIKE', '%'.$salesName.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('username', 'LIKE', '%'.$salesName.'%');
+			}
+		}
+		
+		if($void != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('is_void', '=', $void);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('is_void', '=', $void);
+			}
+		}
+		
+		if($status != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('status', 'LIKE', '%'.$status.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->get();
+		}
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getSortedFilteredAccount($id, $custName, $total, $discount, $tax, $salesId, $salesName, $void, $status, $sortBy, $order)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status');
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('transactions.id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('transactions.id', '=', $id);
+			}
+		}
+		
+		if($custName != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('name', 'LIKE', '%'.$custName.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('name', 'LIKE', '%'.$custName.'%');
+			}
+		}
+		
+		if($total != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('total', '=', $total);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('total', '=', $total);
+			}
+		}
+		
+		if($discount != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('discount', '=', $discount);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('discount', '=', $discount);
+			}
+		}
+		
+		if($tax != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('tax', '=', $tax);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('tax', '=', $tax);
+			}
+		}
+		
+		if($salesId != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('sales_id', '=', $salesId);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('sales_id', '=', $salesId);
+			}
+		}
+		
+		if($salesName != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('username', 'LIKE', '%'.$salesName.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('username', 'LIKE', '%'.$salesName.'%');
+			}
+		}
+		
+		if($void != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('void', '=', $void);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('void', '=', $void);
+			}
+		}
+		
+		if($status != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('status', 'LIKE', '%'.$status.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($result);
+	}
 
 }

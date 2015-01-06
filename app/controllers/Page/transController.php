@@ -117,6 +117,103 @@ class transController extends \HomeController{
 		
 		return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('dataAll'));
 	}
+	
+	public function view_all_transaction2()
+	{
+	
+		$sortBy = Input::get('sortBy','none');
+		$order = Input::get('order','none');
+		$filtered = Input::get('filtered', '0');
+		$transactionController = new TransactionsController();
+		
+		if($filtered == '0')
+		{
+			if($sortBy === "none")
+			{
+				$allTransactionJson = $transactionController->getAll();
+				$allTransaction = json_decode($allTransactionJson->getContent());
+				if($allTransaction->{'status'}!='Not Found'){
+					$dataAll = $allTransaction->{'messages'};
+					foreach($dataAll as $data){
+						$data->name = Customer::find($data->customer_id)->name;
+						$data->username = Account::find($data->sales_id)->username;
+						$data->order = $this->getOrderArray($data->id);
+					}
+				}
+			}
+			else
+			{
+				$allTransactionJson = $transactionController->getSortedAll($sortBy, $order);
+				$allTransaction = json_decode($allTransactionJson->getContent());
+				if($allTransaction->{'status'}!='Not Found'){
+					$dataAll = $allTransaction->{'messages'};
+					foreach($dataAll as $data){
+						$data->order = $this->getOrderArray($data->id);
+					}
+				}
+			}
+			$datas = null;
+			if($allTransaction->{'status'} != 'Not Found'){
+				foreach($dataAll as $allData){
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order);
+				}
+			}
+
+			return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('datas','sortBy','order','filtered'));
+		}
+		else
+		{
+			$id = Input::get('id','-');
+			$name = Input::get('name', '-');
+			$total = Input::get('total', '-');
+			$discount = Input::get('discount', '-');
+			$tax = Input::get('tax', '-');
+			$sales_id = Input::get('sales_id', '-');
+			$username = Input::get('username', '-');
+			$void = Input::get('void', '-');
+			$status = Input::get('status', '-');
+			
+			if($sortBy == "none")
+			{
+				$allTransactionJson = $transactionController->getFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $void, $status);
+			}
+			else
+			{
+				$allTransactionJson = $transactionController->getSortedFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $void, $status, $sortBy, $order);
+			}
+			//$allEmployeeJson = $accountController->getFilteredProfile($username, $role, $lastLogin, $active);
+			$allTransaction = json_decode($allTransactionJson->getContent());
+			$datas = null;
+			if($allTransaction->{'status'} != 'Not Found'){
+				$allTransactionData = $allTransaction->{'messages'};
+				foreach($allTransactionData as $allData){
+					$allData->order = $this->getOrderArray($allData->id);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order);
+					
+				}
+			}
+
+			return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('datas','sortBy','order','filtered','id','name','total','discount','tax','sales_id','username','void','status'));
+		}
+	
+		/*
+		$transactionController = new TransactionsController();
+		$allData = $transactionController->getAll();
+		$allDataJson = json_decode($allData->getContent());
+		if($allDataJson->{'status'}!='Not Found'){
+			$dataAll = $allDataJson->{'messages'};
+			foreach($dataAll as $data){
+				$data->customerName = Customer::find($data->customer_id)->name;
+				$data->salesName = Account::find($data->sales_id)->username;
+				$data->order = $this->getOrderArray($data->id);
+			}
+		}else{
+			$dataAll = null;
+		}
+		
+		return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('dataAll'));
+		*/
+	}
 
 	function updateVoid(){
 		$transactionController = new TransactionsController();
