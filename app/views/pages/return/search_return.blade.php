@@ -135,6 +135,7 @@
 							<td>
 								{{ $data->id }}
 								<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
+								<input type="hidden" id="order_price_{{$data->id}}" value="{{$data->price}}">
 								<!--<input type="hidden" id="prod_id_{{$data->id}}" value="{{$data->prod_id}}" >-->
 							</td>
 							<td>
@@ -198,6 +199,7 @@
 										$row += "<tr><td>";
 										$row += data.id;
 										$row += "<input type='hidden' id='prod_quantity_"+data.id+"' value='"+data.quantity+"' >";
+										$row += "<input type='hidden' id='order_price_"+data.id+"' value='"+data.price+"' >";
 										//$row += "<input type='hidden' id='prod_id_"+data.id+"' value='"+data.id+"' >";
 										$row += "</td><td>";
 										$row += data.cust_name;
@@ -232,6 +234,7 @@
 	@include('pages.return.pop_up_add_return')
 
 	<script>
+	
 		$('body').on('click','.view_detail_button',function(){
 			$id = $(this).next().val();
 			$prodName = $('#prod_name_'+$id).text();
@@ -239,13 +242,26 @@
 			$('#prod_name_pop').text($prodName);
 			$('#prod_quantity_pop').text($prodQuantity);
 			
+			$('body').on('click','.f_pilih_tipe_retur', function(){
+
+				var target = $(this).find(":selected").val();
+
+				if(target == "3"){
+					$tempQuantity = $('#prod_quantity_'+$id).val();
+					$tempPrice = $('#order_price_'+$id).val();
+					$('#nominal_uang').val($tempPrice / $tempQuantity);
+				}
+			});
+			
 			$('body').on('click','#save_pop',function(){
 				//$prod_id = $('#prod_id_'+$id).val();
 				$type = $('#type_return option:selected').text();
+				//alert($type);
 				$trade_id = $('#id_trade_prod').val();
 				$return_quantity = $("#quantity_pop").val();
+				$nominal_uang = $('#nominal_uang').val();
 				
-				alert($return_quantity);
+				//alert($return_quantity);
 				
 				$.ajax({
 					type: 'PUT',
@@ -255,9 +271,11 @@
 						//'prod_id' : $prod_id,
 						'type' : $type,
 						'trade_id' : $trade_id,
-						'return_quantity' : $return_quantity
+						'return_quantity' : $return_quantity,
+						'nominal_uang' : $nominal_uang
 					},
 					success: function(response){
+						alert(response);
 						alert('Insert Berhasil');
 					},error: function(xhr, textStatus, errorThrown){
 						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
