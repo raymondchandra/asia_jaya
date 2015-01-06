@@ -1,54 +1,14 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status')->get();
+		$customerController = new CustomersController();
+		$ordersController = new OrdersController();
+		$returnController = new ReturnsController();
+		$productDetailController = new ProductDetailsController();
 		
-		var_dump($joined);
-	
-		/*
-		try
-		{
-			$keyword = "ser";
-			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->get();
-			foreach($products as $product)
-			{
-				if($product->isSeri == '1')
-				{
-					$reference = $product->reference;
-					$prdClr = $product->color;
-					$reference = explode(';',$reference);
-					$counter = count($reference);
-					$prdClr = explode('-',$prdClr);
-					$clr = "";
-					for($i=0 ; $i<$counter-1 ; $i++)
-					{
-						$quant = explode('-',$reference[$i]);
-						$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
-					}
-					
-					$product->color = $clr;
-				}
-			}
-			if(count($products) == 0)
-			{
-				//not found
-				$response = array('code'=>'404','status' => 'Not Found');
-			}
-			else
-			{
-				//found				
-				$response = array('code'=>'200','status' => 'OK','messages'=>$products);
-			}
-			
-			return Response::json($response);
-		}
-		catch(Exception $e)
-		{
-			//forbidden
-			$response = array('code'=>'403','status' => $e->getMessage());
-			return Response::json($response);
-		}
-		*/
+		$topBuyer = $customerController->getTop10Buyer();
+		
+		var_dump($topBuyer);
 	});
 	Route::get('/tes2', function()
 	{
@@ -417,6 +377,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/view_print_toko', ['as'=>'david.view_print_toko','uses' => 'printController@view_print_toko']);
 	
 	Route::get('/view_print_konsumen', ['as'=>'david.view_print_konsumen','uses' => 'printController@view_print_konsumen']);
+	
+	Route::get('/view_dashboard', ['as'=>'david.view_dashboard','uses' => 'dashboardController@viewDashboard']);
 });
 
 

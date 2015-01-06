@@ -77,19 +77,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php for($fi=0; $fi<10; $fi++){?>
-							<tr>
+							<?php $counter = 1?>
+							@foreach($topBuyer as $buyer)
+								<tr>
 								<td>
-									<?php echo($fi + 1);?>
+									{{$counter}}
+									<?php $counter++ ?>
 								</td>
 								<td>
-									ねこちゃん
+									{{$buyer->name}}
 								</td>
 								<td>
-									<?php echo(9000000 - $fi);?>
+									{{$buyer->total}}
 								</td>
 							</tr>
-							<?php } ?>
+							@endforeach
+							
 						</tbody>
 					</table>
 				</div>
@@ -109,16 +112,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php for($fi=0; $fi<10; $fi++){?>
-							<tr>
+							<?php $counter = 1?>
+							@foreach($topProduct as $product)
+								<tr>
 								<td>
-									<?php echo($fi + 1);?>
+									{{$counter}}
+									<?php $counter++ ?>
 								</td>
 								<td>
-									ねこちゃん
+									{{$product->name}}
 								</td>
 							</tr>
-							<?php } ?>
+							@endforeach
 						</tbody>
 					</table>
 				</div>
@@ -138,16 +143,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php for($fi=0; $fi<10; $fi++){?>
-						<tr>
+						<?php $counter = 1?>
+						@foreach($topReturn as $return)
+							<tr>
 							<td>
-								<?php echo($fi + 1);?>
+								{{$counter}}
+								<?php $counter++ ?>
 							</td>
 							<td>
-								ねこちゃん
+								{{$return->name}}
 							</td>
 						</tr>
-						<?php } ?>
+						@endforeach
 					</tbody>
 				</table>
 			</div>
@@ -308,16 +315,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<?php for($fi=0; $fi<10; $fi++){?>
-				<tr>
+				<?php $counter = 1?>
+				@foreach($topRepeat as $repeat)
+					<tr>
 					<td>
-						<?php echo($fi + 1);?>
+						{{$counter}}
+						<?php $counter++ ?>
 					</td>
 					<td>
-						ねこちゃん
+						{{$repeat->name}}
 					</td>
 				</tr>
-				<?php } ?>
+				@endforeach
 			</tbody>
 		</table>
 	</div>

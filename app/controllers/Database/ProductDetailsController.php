@@ -434,4 +434,18 @@ class ProductDetailsController extends \BaseController {
 			return Response::json($response);
 		}
 	}
+	
+	public function getTop10RepeatedProduct()
+	{
+		$respond = array();
+		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))->join('transactions', 'transactions.id', '=','orders.transaction_id')->groupBy('customer_id')->groupBy('product_detail_id')->orderBy('quant_total')->take(10)->get();
+		foreach($orders as $ord)
+		{
+			$prdDtl = ProductDetail::find($ord->product_detail_id);
+			$prd = Product::find($prdDtl->product_id);
+			$ord->name = $prd->name." - ".$prdDtl->color;
+		}
+		
+		return $orders;
+	}
 }

@@ -1919,6 +1919,7 @@ return array(
     'ZCreateForeignKey' => $baseDir . '/app/database/migrations/2014_10_21_164745_z_create_foreign_key.php',
     'accountController' => $baseDir . '/app/controllers/Page/accountController.php',
     'custController' => $baseDir . '/app/controllers/Page/custController.php',
+    'dashboardController' => $baseDir . '/app/controllers/Page/dashboardController.php',
     'finalizeSellController' => $baseDir . '/app/controllers/Page/finalizeSellController.php',
     'mobile_view' => $baseDir . '/app/controllers/Page/mobile_view.php',
     'printController' => $baseDir . '/app/controllers/Page/printController.php',
