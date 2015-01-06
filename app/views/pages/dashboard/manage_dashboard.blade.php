@@ -159,65 +159,64 @@
 			<div class="panel-body">
 				<script type="text/javascript">
 				$(function () {
-			$('#container').highcharts({
-				chart: {
-					type: 'area'
-				},
-				title: {
-					text: 'Income Toko Asia Jaya Bulan Ini'
-				},
-				subtitle: {
-					text: ''
-				},
-				xAxis: {
-					allowDecimals: false,
-					labels: {
-						formatter: function () {
-                    return this.value; // clean, unformatted number for year
-                }
-            }
-        },
-        yAxis: {
-        	title: {
-        		text: 'Rupiah'
-        	},
-        	labels: {
-        		formatter: function () {
-        			//return this.value / 1000 + 'k';
-        			return this.value ;
-        		}
-        	}
-        },
-        tooltip: {
-        	pointFormat: 'Income Rp <b>{point.y:,.0f}</b><br/>Pada hari ke-{point.x}'
-        },
-        plotOptions: {
-        	area: {
-        		pointStart: 1,
-        		marker: {
-        			enabled: false,
-        			symbol: 'circle',
-        			radius: 1,
-        			states: {
-        				hover: {
-        					enabled: true
-        				}
-        			}
-        		}
-        	}
-        },
-        series: [{
-        	name: 'Hari',
-        	data: [0, 30100200,20100200, 24100200, 36100200, 
-        	10100200,30100200,20100200, 38100200, 9100200,
-        	15100200, 38100200, 9100200, 23100200, 22100200, 
-        	10100200, 30100200,20100200, 24100200, 36100200, 
-        	10100200,30100200,20100200, 38100200, 9100200,
-        	15100200, 38100200, 9100200, 23100200, 22100200,
-        	0 
-        	]
-        }]
-    });
+					$('#container').highcharts({
+						chart: {
+							type: 'area'
+						},
+						title: {
+							text: 'Income Toko Asia Jaya Bulan Ini'
+						},
+						subtitle: {
+							text: ''
+						},
+						xAxis: {
+							allowDecimals: false,
+							labels: {
+								formatter: function () {
+									return this.value; 
+								}
+							}
+						},
+						yAxis: {
+							title: {
+								text: 'Rupiah'
+							},
+							labels: {
+								formatter: function () {
+									return this.value ;
+								}
+							}
+						},
+						tooltip: {
+							pointFormat: 'Income Rp <b>{point.y:,.0f}</b><br/>Pada hari ke-{point.x}'
+						},
+						plotOptions: {
+							area: {
+								pointStart: 1,
+								marker: {
+									enabled: false,
+									symbol: 'circle',
+									radius: 1,
+									states: {
+										hover: {
+											enabled: true
+										}
+									}
+								}
+							}
+						},
+						series: [{
+							name: 'Hari',
+							data: [0, 30100200,20100200, 24100200, 36100200, 
+							10100200,30100200,20100200, 38100200, 9100200,
+							15100200, 38100200, 9100200, 23100200, 22100200, 
+							10100200, 30100200,20100200, 24100200, 36100200, 
+							10100200,30100200,20100200, 38100200, 9100200,
+							15100200, 38100200, 9100200, 23100200, 22100200,
+							0 
+							]
+						}]
+					});
 });
 </script>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
@@ -243,48 +242,47 @@
 					allowDecimals: false,
 					labels: {
 						formatter: function () {
-                    return this.value; // clean, unformatted number for year
-                }
-            }
-        },
-        yAxis: {
-        	title: {
-        		text: 'Rupiah'
-        	},
-        	labels: {
-        		formatter: function () {
-        			//return this.value / 1000 + 'k';
-        			return this.value ;
-        		}
-        	}
-        },
-        tooltip: {
-        	pointFormat: 'Income Rp <b>{point.y:,.0f}</b><br/>Pada akhir bulan ke-{point.x}'
-        },
-        plotOptions: {
-        	area: {
-        		pointStart: 1,
-        		marker: {
-        			enabled: false,
-        			symbol: 'circle',
-        			radius: 1,
-        			states: {
-        				hover: {
-        					enabled: true
-        				}
-        			}
-        		}
-        	}
-        },
-        series: [{
-        	name: 'Bulan',
-        	data: [0, 30100200,20100200,
-        	24100200, 36100200, 10100200,
-        	15100200, 38100200, 9100200,
-        	23100200, 22100200, 39100200]
-        }]
-    });
-});
+							return this.value; 
+						}
+					}
+				},
+				yAxis: {
+					title: {
+						text: 'Rupiah'
+					},
+					labels: {
+						formatter: function () {
+							return this.value ;
+						}
+					}
+				},
+				tooltip: {
+					pointFormat: 'Income Rp <b>{point.y:,.0f}</b><br/>Pada akhir bulan ke-{point.x}'
+				},
+				plotOptions: {
+					area: {
+						pointStart: 1,
+						marker: {
+							enabled: false,
+							symbol: 'circle',
+							radius: 1,
+							states: {
+								hover: {
+									enabled: true
+								}
+							}
+						}
+					}
+				},
+				series: [{
+					name: 'Bulan',
+					data: [0, 30100200,20100200,
+					24100200, 36100200, 10100200,
+					15100200, 38100200, 9100200,
+					23100200, 22100200, 39100200]
+				}]
+			});
+		});
 </script>
 </script>
 <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
