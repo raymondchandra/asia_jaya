@@ -317,9 +317,9 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.restock.manage_restock');
 	});
 	//Restock
-	Route::get('/add_new_stock', function()
+	Route::get('/history_restock', function()
 	{
-		return View::make('pages.restock.add_new_stock');
+		return View::make('pages.restock.history_restock');
 	});
 
 	//Restock
