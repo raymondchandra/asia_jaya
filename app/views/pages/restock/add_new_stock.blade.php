@@ -192,7 +192,7 @@
 									</table>
 									<hr>
 									<h4>
-										Identitas Seri
+										Foto Seri
 									</h4>
 									<!--<div class="form-group">
 										<label class="g-sm-3 control-label">Kode Produk</label>
@@ -200,7 +200,7 @@
 											<input type="text" class="form-control">
 										</div>
 									</div>-->
-									<div class="form-group">
+									<!--<div class="form-group">
 										<label class="g-sm-3 control-label">Nama Seri</label>
 										<div class="g-sm-7">
 											<input type="text" id="nama_seri_input" class="form-control">
@@ -212,12 +212,12 @@
 											<input type="text" id="kode_seri_input" class="form-control">
 										</div>
 									</div>
-									<!--<div class="form-group">
+									<div class="form-group">
 										<label class="g-sm-3 control-label">Warna Produk</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control">
 										</div>
-									</div>-->
+									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Harga Modal</label>
 										<div class="g-sm-7">
@@ -235,7 +235,7 @@
 										<div class="g-sm-7">
 											<input type="text" id="jual_seri_input" class="form-control" placeholder="akumulasi harga jual produk">
 										</div>
-									</div>
+									</div>-->
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Foto</label>
 										<div class="g-sm-7">

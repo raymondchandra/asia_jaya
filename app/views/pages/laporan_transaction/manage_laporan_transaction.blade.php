@@ -4,10 +4,40 @@
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
-				<h3 style="float: left;">
-					Daftar Pesanan
-				</h3>
-				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
+				<div class="g-lg-3">
+					<h3 style="float: left;">
+						Laporan Transaksi
+					</h3>
+				</div>
+				<div class="g-lg-9" style="margin-top: 14px;">
+					<div class="g-md-3" style="text-align: right; line-height: 34px;">
+						Range tanggal
+					</div>
+					<div class="input-daterange g-md-6">
+						<div class="g-md-4">
+							<input value="2012-04-05" class="f_date_0 form-control"/>
+						</div>
+						<div class="g-md-1" style="text-align:center; line-height: 34px;">
+							<span>to</span>
+						</div>
+						<div class="g-md-4">
+							<input value="2012-04-07" class="f_date_1 form-control"/>
+						</div>
+						<div class="g-md-3">
+							<button type="button" class="btn btn-success">
+								Show
+							</button>
+						</div>
+					</div>
+
+					<script>
+					$('.f_date_0').datepicker();
+
+					$('.f_date_1').datepicker();
+					</script>
+				</div>
+				
+
 			</div>
 			<span class="clearfix"></span>
 			<hr></hr>
