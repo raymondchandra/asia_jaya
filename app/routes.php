@@ -428,6 +428,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/view_print_toko', ['as'=>'david.view_print_toko','uses' => 'printController@view_print_toko']);
 	
 	Route::get('/view_print_konsumen', ['as'=>'david.view_print_konsumen','uses' => 'printController@view_print_konsumen']);
+	
+	Route::get('/view_print_return', ['as'=>'gentry.view_print_konsumen','uses' => 'printController@view_print_return']);
 });
 
 

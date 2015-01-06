@@ -41,17 +41,17 @@
 			<tr>
 				<td>Waktu Transaksi</td>
 				<td>:</td>
-				<td>date</td>
+				<td>{{date("d-M-Y, G:i:s", strtotime($created))}}</td>
 			</tr>
 			<tr>
 				<td>Pelanggan</td>
 				<td>:</td>
-				<td>nama pelanggan</td>
+				<td>{{$pelanggan}}</td>
 			</tr>
 			<tr>
 				<td>Karyawan</td>
 				<td>:</td>
-				<td>nama sales</td>
+				<td>{{$sales}}</td>
 			</tr>
 		</table>
 		-----------------------------------------
@@ -62,27 +62,27 @@
 					<tr>
 						<td>Tipe Retur</td>
 						<td>:</td>
-						<td>sagduyas</td>
+						<td>{{$type}}</td>
 					</tr>
 					<tr>
 						<td>Solusi</td>
 						<td>:</td>
-						<td>dfssdf dsfdfs</td>
+						<td>{{$solution}}</td>
 					</tr>
 					<tr>
 						<td>Barang Retur</td>
 						<td>:</td>
-						<td>Barang returan asdas</td>
+						<td>{{$barangReturn}}</td>
 					</tr>
 					<tr>
 						<td>Ditukar Dengan</td>
 						<td>:</td>
-						<td>-</td>
+						<td>{{$barangTukar}}</td>
 					</tr>
 					<tr>
 						<td>Diferensial</td>
 						<td>:</td>
-						<td>Rp 100.000</td>
+						<td>{{$difference}}</td>
 					</tr>
 					<tr>
 						<td colspan="3">
@@ -91,40 +91,7 @@
 					</tr>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<tr>
-						<td>Tipe Retur</td>
-						<td>:</td>
-						<td>sagduyas</td>
-					</tr>
-					<tr>
-						<td>Solusi</td>
-						<td>:</td>
-						<td>fdsdfs </td>
-					</tr>
-					<tr>
-						<td>Barang Retur</td>
-						<td>:</td>
-						<td>Barang returan asdas</td>
-					</tr>
-					<tr>
-						<td>Ditukar Dengan</td>
-						<td>:</td>
-						<td>-</td>
-					</tr>
-					<tr>
-						<td>Diferensial</td>
-						<td>:</td>
-						<td>Rp 100.000</td>
-					</tr>
-					<tr>
-						<td colspan="3">
-							----------------------------------------
-						</td>
-					</tr>
-				</td>
-			</tr>
+			
 		</table>
 
 		<table>
