@@ -1,10 +1,15 @@
 <?php
 	Route::get('/tes', function()
 	{
+		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail');
+		
+		var_dump($products->get());
+	
+		/*
 		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status')->get();
 		
 		var_dump($joined);
-	
+		*/
 		/*
 		try
 		{
@@ -386,7 +391,9 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::put('/edit_tax', ['as'=>'gentry.edit_tax','uses' => 'taxController@setTax']);
 	
-	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock']);
+	//Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock']);
+	
+	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock2']);
 	
 	Route::put('/edit_stock', ['as'=>'gentry.edit_stock','uses' => 'stockController@editStock']);
 	

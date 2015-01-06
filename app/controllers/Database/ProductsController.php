@@ -390,5 +390,286 @@ class ProductsController extends \BaseController {
 			return Response::json($response);
 		}
 	}
+	
+	public function getSortedAll($by, $order)
+	{
+		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail');
+	
+		$result = $products->orderBy($by, $order)->get();
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getFilteredAccount($product_code, $name, $color, $modal_price, $min_price, $sales_price, $stock_shop, $stock_storage, $deleted)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail');
+		
+		if($product_code != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.product_code', 'LIKE', '%'.$product_code.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.product_code', 'LIKE', '%'.$product_code.'%');
+			}
+		}
+		
+		if($name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.name', 'LIKE', '%'.$name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.name', 'LIKE', '%'.$name.'%');
+			}
+		}
+		
+		if($color != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.color', 'LIKE', '%'.$color.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.color', 'LIKE', '%'.$color.'%');
+			}
+		}
+		
+		if($modal_price != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.modal_price', '=', $modal_price);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.modal_price', '=', $modal_price);
+			}
+		}
+		
+		if($min_price != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.min_price', '=', $min_price);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.min_price', '=', $min_price);
+			}
+		}
+		
+		if($sales_price != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.sales_price', '=', $sales_price);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.sales_price', '=', $sales_price);
+			}
+		}
+		
+		if($stock_shop != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.stock_shop', '=', $stock_shop);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.stock_shop', '=', $stock_shop);
+			}
+		}
+		
+		if($stock_storage != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.stock_storage', '=', $stock_storage);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.stock_storage', '=', $stock_storage);
+			}
+		}
+		
+		if($deleted != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.deleted', '=', $deleted);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.deleted', '=', $deleted);
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->get();
+		}
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getSortedFilteredAccount($product_code, $name, $color, $modal_price, $min_price, $sales_price, $stock_shop, $stock_storage, $deleted, $sortBy, $order)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail');
+		
+		if($product_code != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.product_code', 'LIKE', '%'.$product_code.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.product_code', 'LIKE', '%'.$product_code.'%');
+			}
+		}
+		
+		if($name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.name', 'LIKE', '%'.$name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.name', 'LIKE', '%'.$name.'%');
+			}
+		}
+		
+		if($color != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.color', 'LIKE', '%'.$color.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.color', 'LIKE', '%'.$color.'%');
+			}
+		}
+		
+		if($modal_price != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.modal_price', '=', $modal_price);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.modal_price', '=', $modal_price);
+			}
+		}
+		
+		if($min_price != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.min_price', '=', $min_price);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.min_price', '=', $min_price);
+			}
+		}
+		
+		if($sales_price != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prod.sales_price', '=', $sales_price);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prod.sales_price', '=', $sales_price);
+			}
+		}
+		
+		if($stock_shop != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.stock_shop', '=', $stock_shop);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.stock_shop', '=', $stock_shop);
+			}
+		}
+		
+		if($stock_storage != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.stock_storage', '=', $stock_storage);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.stock_storage', '=', $stock_storage);
+			}
+		}
+		
+		if($deleted != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('prds.deleted', '=', $deleted);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('prds.deleted', '=', $deleted);
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($result);
+	}
 
 }
