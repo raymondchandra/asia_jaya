@@ -345,6 +345,10 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.print_struk.print_konsumen');
 	});
+	Route::get('/print_return', function()
+	{
+		return View::make('pages.print_struk.print_return');
+	});
 
 
 	//obral
