@@ -314,6 +314,12 @@ Route::group(array('prefix' => 'test'), function()
 	});
 
 
+	//laporan_cash
+	Route::get('/laporan_cashflow', function()
+	{
+		return View::make('pages.laporan_cash.manage_laporan_cash');
+	});
+
 });
 
 Route::group(array('prefix' => 'fungsi'), function()
