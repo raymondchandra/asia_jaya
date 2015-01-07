@@ -117,6 +117,24 @@ class OrdersController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
+	
+	public function updateOrder($id, $quantity, $price)
+	{
+		$order = Order::find($id);
+		
+		$order->quantity = $quantity;
+		$order->price = $price;
+		
+		try
+		{
+			$order->save();
+			return 1;
+		}
+		catch(Exception $e)
+		{
+			return -1;
+		}
+	}
 
 	/*
 	public function update<column>($id)

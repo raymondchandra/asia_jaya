@@ -307,27 +307,172 @@ class transController extends \HomeController{
 		$print_shop = 0;
 		$status = "Paid";
 		$controller = new TransactionsController();
-		$result = $controller->updateTransactionById($id, $total, $total_paid, $discount, $print_customer, $print_shop, $status);
-		if($result == 1)
+		if($total_paid>=$total)
 		{
-			//update cash
-			$cash = new CashesController();
-			//$transactionId, $in, $out, $type
-			$cashUpdate = $cash->insertWithParam($id, $total, $total_paid-$total,"transaction");
-			$cashResult = json_decode($cashUpdate->getContent());
-			if($cashResult->{'code'} == 201)
+			$result = $controller->updateTransactionById($id, $total, $total_paid, $discount, $print_customer, $print_shop, $status);
+			if($result == 1)
 			{
-				$response = array('code'=>'200','status' => 'OK');
+				//update cash
+				$cash = new CashesController();
+				//$transactionId, $in, $out, $type
+				$cashUpdate = $cash->insertWithParam($id, $total, $total_paid-$total,"transaction");
+				$cashResult = json_decode($cashUpdate->getContent());
+				if($cashResult->{'code'} == 201)
+				{
+					$response = array('code'=>'200','status' => 'OK');
+					return Response::json($response);
+				}
+				else
+				{
+					$response = array('code'=>'500','status' => 'NOK');
+					return Response::json($response);
+				}		
 			}
 			else
 			{
 				$response = array('code'=>'500','status' => 'NOK');
-			}		
+				return Response::json($response);
+			}
 		}
 		else
 		{
 			$response = array('code'=>'500','status' => 'NOK');
+			return Response::json($response);
 		}
+	}
+	
+	public function updateOrder()
+	{
+		$orderIds = Input::get('data');
+		$orderQtys = Input::get('qty');
+		$orderPrices = Input::get('prcs');
+		$counter = Input::get('ctr');
+		$orderController = new OrdersController();
+		$cekResult = 1;
+		
+		for($i=0 ; $i<$counter ; $i++)
+		{
+			if($orderQtys[$i] == 0)
+			{
+				$i = $counter + 1;
+				$cekResult = -1;
+			}
+		}
+		
+		if($cekResult == 1)
+		{
+			for($i=0 ; $i<$counter ; $i++)
+			{
+				$updateResult = $orderController->updateOrder($orderIds[$i], $orderQtys[$i], $orderPrices[$i]);
+				if($updateResult == -1)
+				{
+					$i = $counter + 1;
+				}
+			}
+			
+			if($updateResult == 1)
+			{
+				$response = array('code'=>'200','status' => 'OK');
+				return Response::json($response);
+			}
+			else
+			{
+				$response = array('code'=>'500','status' => 'NOK');
+				return Response::json($response);
+			}
+		}
+		else
+		{
+			$response = array('code'=>'500','status' => 'NOK');
+			return Response::json($response);
+		}
+		
+	}
+	
+	public function updateStock()
+	{
+		$orderIds = Input::get('data');
+		$orderQtys = Input::get('qty');
+		$counter = Input::get('ctr');
+		$cekResult = 1;
+		$message = "";
+		$productDetailController = new ProductDetailsController();
+		//cek dulu...
+		for($i=0 ; $i<$counter ; $i++)
+		{
+			$orderDetail = Order::find($orderIds[$i]);
+			$productDetail = ProductDetail::find($orderDetail->product_detail_id);
+			$stock_shop = $productDetail->stock_shop;
+			$stock_storage = $productDetail->stock_storage;
+			if($orderQtys[$i] > $stock_shop)
+			{
+				//cek stock gudang
+				if($orderQtys[$i] - $stock_shop > $stock_storage)
+				{
+					//wah masalah ni...kurang bro
+					$i = $counter + 1;
+					$cekResult = -1;
+				}
+				else
+				{
+					//ambil dari gudang juga.....
+				}
+			}
+			else
+			{
+				//langsung kurangin aja JAK...
+				
+			}
+		}
+		//SIKAT!!!!!
+		$updateResult = 1;
+		if($cekResult == 1)
+		{
+			for($i=0 ; $i<$counter ; $i++)
+			{
+				$orderDetail = Order::find($orderIds[$i]);
+				$productDetail = ProductDetail::find($orderDetail->product_detail_id);
+				$message .= $productDetail->id;
+				$stock_shop = $productDetail->stock_shop;
+				$stock_storage = $productDetail->stock_storage;
+				if($orderQtys[$i] > $stock_shop)
+				{
+					//cek stock gudang
+					if($orderQtys[$i] - $stock_shop > $stock_storage)
+					{
+						//wah masalah ni...kurang bro
+						$i = $counter + 1;
+						$updateResult = -1;
+					}
+					else
+					{
+						//ambil dari gudang juga.....
+						$productDetailController->updateMinusShop($productDetail->id, $stock_shop);
+						$productDetailController->updateMinusStorage($productDetail->id, $orderQtys[$i]-$stock_shop);
+					}
+				}
+				else
+				{
+					//langsung kurangin aja JAK...
+					$productDetailController->updateMinusShop($productDetail->id, $orderQtys[$i]);
+				}
+				
+				if($updateResult == -1)
+				{
+					$response = array('code'=>'500','status' => 'NOK');
+					return Response::json($response);
+				}
+			}
+			
+			$response = array('code'=>'200','status' => 'NOK');
+			return Response::json($response);
+		}
+		else
+		{
+			$response = array('code'=>'500','status' => 'NOK');
+			return Response::json($response);
+		}
+		
 	}
 
 }

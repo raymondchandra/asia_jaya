@@ -151,7 +151,7 @@ class ProductDetailsController extends \BaseController {
 	public function updateShop($id, $amount)
 	{
 		$respond = array();
-		$productdetail = Productdetail::find($id);
+		$productdetail = ProductDetail::find($id);
 		if ($productdetail == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');
@@ -181,7 +181,7 @@ class ProductDetailsController extends \BaseController {
 	public function updateMinusShop($id, $amount)
 	{
 		$respond = array();
-		$productdetail = Productdetail::find($id);
+		$productdetail = ProductDetail::find($id);
 		if ($productdetail == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');
@@ -241,7 +241,7 @@ class ProductDetailsController extends \BaseController {
 	public function updateMinusStorage($id, $amount)
 	{
 		$respond = array();
-		$productdetail = Productdetail::find($id);
+		$productdetail = ProductDetail::find($id);
 		if ($productdetail == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');

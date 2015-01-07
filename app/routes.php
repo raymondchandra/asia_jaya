@@ -1,11 +1,28 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$cash = new CashesController();
-		$cashUpdate = $cash->insertWithParam('-',10000, 0,"transaction");
-		$cashResult = json_decode($cashUpdate->getContent());
+		$id = 1;
+		$amount = 2;
+		$productdetail = ProductDetail::find($id);
+		if ($productdetail == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$tempAmount = $productdetail->stock_shop - $amount;
+			$productdetail->stock_shop = $tempAmount;
+			try {
+				$productdetail->save();
+				$respond = array('code'=>'204','status' => 'No Content');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
 		
-		var_dump($cashResult->{'code'});
+		var_dump($respond);
 	});
 	Route::get('/tes2', function()
 	{
@@ -383,9 +400,17 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::get('/view_print_konsumen', ['as'=>'david.view_print_konsumen','uses' => 'printController@view_print_konsumen']);
 	
+	Route::get('/view_print_return', ['as'=>'gentry.view_print_konsumen','uses' => 'printController@view_print_return']);
+	
 	Route::get('/view_dashboard', ['as'=>'david.view_dashboard','uses' => 'dashboardController@viewDashboard']);
 	
 	Route::put('/save_transaction', ['as'=>'david.save_transaction','uses' => 'transController@updateTransaction']);
+	
+	Route::put('/update_order', ['as'=>'david.update_order','uses' => 'transController@updateOrder']);
+	
+	Route::put('/update_stock', ['as'=>'david.update_stock','uses' => 'transController@updateStock']);
+	
+	Route::put('/update_solution_return', ['as'=>'david.update_solution_return','uses' => 'returnController@updateSolution']);
 });
 
 

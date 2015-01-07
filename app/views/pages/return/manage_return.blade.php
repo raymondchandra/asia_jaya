@@ -37,6 +37,12 @@
 							</a>
 						</th>
 						<th class="table-bordered">
+							<a href="javascript:void(0)">Status</a>
+							<a href="javascript:void(0)">
+								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+							</a>
+						</th>
+						<th class="table-bordered">
 							<a href="javascript:void(0)">Solution</a>
 							<a href="javascript:void(0)">
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -67,8 +73,25 @@
 					<tr>
 						
 						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
+						<td>
+							<select class="form-control input-sm">
+									<option value="true">tukar barang sama</option>
+									<option value="false">tukar barang beda</option>
+									<option value="false">tukar uang</option>
+							</select>
+						</td>
+						<td>
+							<select class="form-control input-sm">
+									<option value="true">pending</option>
+									<option value="false">fixed</option>
+							</select>
+						</td>
+						<td>
+							<select class="form-control input-sm">
+									<option value="true">kembalikan ke toko</option>
+									<option value="false">masukan ke daftar obral</option>
+							</select>
+						</td>
 						<td><input type="text" class="form-control input-sm"></td>
 						<td><input type="text" class="form-control input-sm"></td>
 						<td><input type="text" class="form-control input-sm"></td>
@@ -89,6 +112,9 @@
 									{{ $data->type }}
 								</td>
 								<td>
+									{{ $data->status }}
+								</td>
+								<td>
 									{{ $data->solution }}
 								</td>
 								<td>
@@ -101,7 +127,8 @@
 									{{ $data->created_at}}
 								</td>
 								<td>
-									<button id="" class="btn btn-info btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_solusi">Solusi</button>
+									<input type="hidden" value="{{$data->id}}"/>
+									<button id="" class="btn btn-info btn-xs solution-btn"  data-toggle="modal" data-target=".pop_up_solusi">Solusi</button>
 								</td>
 							</tr> 
 							@endforeach
@@ -120,6 +147,38 @@
 								$(this).siblings('.f_excel_xlabel').removeClass('hidden');
 								$(this).addClass('hidden');
 							}
+						});
+						
+						$( 'body' ).on( "click",'.solution-btn', function() {
+							$id = $(this).prev().val();
+							$('#return_id_hidden').val($id);
+							$('#return_id_hidden_print').val($id);
+							/*
+							$.ajax({
+								type: 'PUT',
+								url: '{{URL::route('david.update_solution_return')}}',
+								data: {
+									'data' : $id;
+									'qty' : $orderQtys,
+									'ctr' : $counter
+								},
+								success: function(response){
+									//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
+									if(response['code'] == 200)
+									{
+										window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$id);
+										location.reload();
+									}
+									else
+									{
+										alert("Something Going Wrong.. Check your form or contact developer..");
+									}
+								},error: function(xhr, textStatus, errorThrown){
+									alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+									alert("responseText: "+xhr.responseText);
+								}
+							},'json');
+							*/
 						});
 						</script>
 					</tbody>

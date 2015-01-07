@@ -58,7 +58,7 @@
 								<label class="g-sm-8 control-label">Tax</label>
 								<div class="g-sm-3">
 									
-									<p type="text" class="form-control-static" id="transaction_tax_detail">IDR 0</p>
+									<p type="text" class="form-control-static" id="transaction_tax_detail"></p>
 									
 								</div>
 								<label class="g-sm-8 control-label"></label>
@@ -70,7 +70,7 @@
 								-->
 								<label class="g-sm-8 control-label">Total</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_total_detail">IDR 3.100.000</p>
+									<p type="text" class="form-control-static" id="transaction_total_detail"></p>
 								</div>
 
 								<label class="g-sm-8 control-label">Bayar</label>
@@ -125,34 +125,106 @@
 							<script>
 								$('body').on('click','#save-btn',function(){
 
-									//ajax bayar.... ajax ngurangin stok
-									//$id = Input::get('data');
-									//$total = Input::get('total');
-									//$total_paid = Input::get('paid');
-									//$discount = Input::get('discount');
+									//ajax bayar.... ajax ngupdet order dan ngurangin stock
+									//ajax buat ngupdate
 									$id = $('#pop_up_trans_id').text();
 									$total = toAngka($('#transaction_total_detail').text());									
 									$total_paid = toAngka($('#f_uang_bayaran').val());
-									alert($total_paid);
 									$discount = toAngka($('#transaction_diskon_detail').val());
+									$orderIds = [];
+									$orderQtys = [];
+									$orderPrices = [];
+									$counter = 0;
+									$("#transaction_detail_content tr").each(function(i, v)
+									{
+										$orderIds[$counter] = $(this).find('#hidden_id').val();
+										$orderQtys[$counter] = $(this).children('td')[3].innerText;
+										$orderPrices[$counter] = toAngka($(this).children('td')[5].innerText);
+										$counter++;
+									});
+
 									$.ajax({
 										type: 'PUT',
-										url: '{{URL::route('david.save_transaction')}}',
+										url: '{{URL::route('david.update_order')}}',
 										data: {
-											'data' : $id,
-											'total' : $total,
-											'paid' : $total_paid,
-											'discount' : $discount
+											'data' : $orderIds,
+											'qty' : $orderQtys,
+											'prcs' : $orderPrices,
+											'ctr' : $counter
 										},
 										success: function(response){
-											window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$id);
-											location.reload();
+											if(response['code'] == 200)
+											{
+												$.ajax({
+													type: 'PUT',
+													url: '{{URL::route('david.save_transaction')}}',
+													data: {
+														'data' : $id,
+														'total' : $total,
+														'paid' : $total_paid,
+														'discount' : $discount
+													},
+													success: function(response){
+														//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
+														if(response['code'] == 200)
+														{
+															$.ajax({
+																type: 'PUT',
+																url: '{{URL::route('david.update_stock')}}',
+																data: {
+																	'data' : $orderIds,
+																	'qty' : $orderQtys,
+																	'ctr' : $counter
+																},
+																success: function(response){
+																	//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
+																	if(response['code'] == 200)
+																	{
+																		window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$id);
+																		location.reload();
+																	}
+																	else
+																	{
+																		alert("Something Going Wrong.. Check your form or contact developer..");
+																	}
+																},error: function(xhr, textStatus, errorThrown){
+																	alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+																	alert("responseText: "+xhr.responseText);
+																}
+															},'json');
+														}
+														else
+														{
+															alert("Something Going Wrong.. Check your payment input or contact developer..");
+														}
+													},error: function(xhr, textStatus, errorThrown){
+														alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+														alert("responseText: "+xhr.responseText);
+													}
+												},'json');
+											}
+											else
+											{
+												alert("Something Going Wrong.. Check your form or contact developer..");
+											}
 										},error: function(xhr, textStatus, errorThrown){
 											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 											alert("responseText: "+xhr.responseText);
 										}
 									},'json');
 								});
+								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+								function toRp(angka){
+									var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+									var rev2    = '';
+									for(var i = 0; i < rev.length; i++){
+										rev2  += rev[i];
+										if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+											rev2 += '.';
+										}
+									}
+									return rev2.split('').reverse().join('');
+								}
 							</script>
 							<!--
 							<button type="button" class="btn btn-success pull-right">

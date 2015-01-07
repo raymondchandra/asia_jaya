@@ -174,7 +174,8 @@
 				$total = 0;
 				
 				$.each(response['messages'], function( i, resp ) {
-					$data += "<tr><td>";
+					$data += "<tr><input id='hidden_id' type=hidden value='"+resp.id+"'/>";
+					$data += "<td>"
 					$data += resp.namaProduk;
 					$data += "</td><td>";
 					$data += "<img src='{{asset('"+resp.foto+"')}}' width='100' height='100'>";
@@ -183,7 +184,7 @@
 					$data += "</td><td class='f_td_excel_xlabel'>";
 					$data += "<span class='f_excel_xlabel' id=' style=''line-height: 30px;' >"+ resp.quantity +"</span>";
 					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden f_qty_transaction' style=''/>";
-					$data += "</td><td>IDR ";
+					$data += "</td><td class='f_price_transaction'>IDR ";
 					$data += toRp(resp.hargaSatuan);
 					$data += "</td><td class='f_subtotal_price_transaction'>IDR ";
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
@@ -194,8 +195,12 @@
 				});
 				//$('#transaction_subtotal_detail').text("IDR " + toRp($total));
 				$('#transaction_diskon_detail').val(toAngka($discount));				
-				$('#transaction_tax_detail').text($tax);			
+				$('#transaction_tax_detail').text($tax);	
+				$total -= toAngka($discount);
+				$tax = $total * toAngka($tax) / 100;
+				$total += $tax;				
 				$('#transaction_total_detail').text("IDR " + toRp($total));
+				
 				if($status == "Paid")
 				{
 					$('#f_uang_bayaran').val("IDR " + toRp($paid));
@@ -266,7 +271,7 @@
 		if(key == 13)  
 		{
 			//alert($(this).val());
-			var sub_tot_text = toAngka($(this).closest('tr').find('.f_subtotal_price_transaction').text());
+			var sub_tot_text = toAngka($(this).closest('tr').find('.f_price_transaction').text());
 			var perkalian_subtotal = sub_tot_text*($(this).val());
 			//alert(perkalian_subtotal);
 			$(this).closest('tr').find('.f_subtotal_price_transaction').text('IDR ' + toRp(perkalian_subtotal));
@@ -276,6 +281,9 @@
 				$totalPrice = $(this).children('td')[5].innerText;
 				$total += toAngka($totalPrice);
 			});
+			$total -= toAngka($('#transaction_diskon_detail').val())
+			$tax = $total * toAngka($('#transaction_tax_detail').text()) / 100;
+			$total += $tax;
 			$('#transaction_total_detail').text("IDR " + toRp($total));
 		}
 		

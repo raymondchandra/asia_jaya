@@ -367,4 +367,14 @@ class returnController extends \HomeController{
 		return $addReturns;
 		//return $difference;
 	}
+	
+	public function updateSolution()
+	{
+		$id = Input::get('data');
+		$solusi = Input::get('solusi');
+		
+		$returnController = new ReturnsController();
+		
+		return $returnController->updateSolution($id, $solusi);
+	}
 }

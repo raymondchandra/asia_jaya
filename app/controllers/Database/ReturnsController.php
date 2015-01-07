@@ -151,7 +151,7 @@ class ReturnsController extends \BaseController {
 		@return :
 		-) Fungsi ini digunakan untuk mengubah solution dari pending -> fixed
 	*/
-	public function updateSolution($id)
+	public function updateSolution($id,$solution)
 	{
 		$respond = array();
 		$return = ReturnDB::find($id);
@@ -162,7 +162,8 @@ class ReturnsController extends \BaseController {
 		else
 		{
 			//edit value
-			$return->solution = 'fixed';
+			$return->status = 'fixed';
+			$return->solution = $solution;
 			try {
 				$return->save();
 				$respond = array('code'=>'204','status' => 'No Content');
