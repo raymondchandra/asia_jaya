@@ -114,6 +114,8 @@
 											<!--<button class="btn btn-success btn-xs" data-toggle="modal" data-target=".pop_up_pay_transaction" style="display: block; margin-bottom: 5px;">
 												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Bayar
 											</button>-->
+											<input type='hidden' value='{{$data->status}}' id="hidden_status"/>
+											<input type='hidden' value='{{$data->total_paid}}' id="hidden_paid"/>
 											<button id="detail_{{$data->id}}" class="btn btn-success btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">
 												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>View Detail
 											</button>
@@ -146,6 +148,8 @@
 
 	$('body').on('click','.view_detail_button',function(){
 		$id = $(this).next().val();
+		$status = $(this).prev().prev().val();
+		$paid = $(this).prev().val()
 		$('#transaction_detail_content').html("");
 		//$('#transaction_subtotal_detail').text("");
 		$('#transaction_diskon_detail').text("");				
@@ -173,25 +177,42 @@
 					$data += "<tr><td>";
 					$data += resp.namaProduk;
 					$data += "</td><td>";
-					$data += "<img src=" + resp.foto + " width='100' height='100'>";
+					$data += "<img src='{{asset('"+resp.foto+"')}}' width='100' height='100'>";
 					$data += "</td><td>";
 					$data += resp.warna;
 					$data += "</td><td class='f_td_excel_xlabel'>";
 					$data += "<span class='f_excel_xlabel' id=' style=''line-height: 30px;' >"+ resp.quantity +"</span>";
-					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden' style=''/>";
+					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden f_qty_transaction' style=''/>";
 					$data += "</td><td>IDR ";
 					$data += toRp(resp.hargaSatuan);
-					$data += "</td><td>IDR ";
+					$data += "</td><td class='f_subtotal_price_transaction'>IDR ";
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
 					$data += "</td>";
 					$data += "</tr>"
 					$('#transaction_detail_content').html($data);
 					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);
 				});
-				$('#transaction_subtotal_detail').text("IDR " + toRp($total));
-				$('#transaction_diskon_detail').text("IDR " + toRp(toAngka($discount)));				
+				//$('#transaction_subtotal_detail').text("IDR " + toRp($total));
+				$('#transaction_diskon_detail').val(toAngka($discount));				
 				$('#transaction_tax_detail').text($tax);			
-				$('#transaction_total_detail').text("IDR " + toRp($total));			
+				$('#transaction_total_detail').text("IDR " + toRp($total));
+				if($status == "Paid")
+				{
+					$('#f_uang_bayaran').val("IDR " + toRp($paid));
+					$('#f_uang_bayaran').attr('disabled','disabled');
+					$('#transaction_diskon_detail').attr('disabled','disabled');
+					$kembalian = parseInt($paid) - parseInt($total);
+					$('#f_uang_kembalian').text("IDR " + toRp($kembalian));
+					$('#save-btn').addClass('hidden');
+				}
+				else
+				{
+					$('#f_uang_bayaran').removeAttr('disabled');
+					$('#transaction_diskon_detail').removeAttr('disabled');
+					$('#f_uang_kembalian').text("");
+					$('#save-btn').removeClass('hidden');
+				}
+							
 			},error: function(xhr, textStatus, errorThrown){
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 				alert("responseText: "+xhr.responseText);
@@ -235,7 +256,30 @@
 		window.open("{{URL::route('david.view_print_toko')}}"+"?dataT="+$(this).attr('id'));
 	});
 	$( 'body' ).on( "click",'.print-konsumen-btn', function() {
-		window.open("{{URL::route('david.view_print_toko')}}"+"?dataT="+$(this).attr('id'));
+		window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$(this).attr('id'));
+	});
+	
+	/*------- HUBUNGAN Quantity, Subtotal | Detail TRANSAKSI - START -------*/
+	
+	$( 'body' ).on( "keypress",'.f_qty_transaction', function(e) {
+		var key = e.which;
+		if(key == 13)  
+		{
+			//alert($(this).val());
+			var sub_tot_text = toAngka($(this).closest('tr').find('.f_subtotal_price_transaction').text());
+			var perkalian_subtotal = sub_tot_text*($(this).val());
+			//alert(perkalian_subtotal);
+			$(this).closest('tr').find('.f_subtotal_price_transaction').text('IDR ' + toRp(perkalian_subtotal));
+			$total = 0;
+			$("#transaction_detail_content tr").each(function(i, v)
+			{
+				$totalPrice = $(this).children('td')[5].innerText;
+				$total += toAngka($totalPrice);
+			});
+			$('#transaction_total_detail').text("IDR " + toRp($total));
+		}
+		
+		
 	});
 	</script>
 	@stop

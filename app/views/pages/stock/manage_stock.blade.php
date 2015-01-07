@@ -309,7 +309,7 @@
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									<input type="hidden" id="fotoChanged_{{$prodList->id}}" value="0" />
-									<img src="{{$prodList->photo}}" id="gambar_{{$prodList->id}}" width="120" height="120">
+									<img src="{{URL::asset($prodList->photo)}}" id="gambar_{{$prodList->id}}" width="120" height="120">
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />

@@ -31,9 +31,16 @@ class CashesController extends \BaseController {
 		@return : 
 		-) Fungsi ini berguna untuk memasukkan pembayaran tansaksi ke dalam tabel cashes sesuai dengan parameter
 	*/
-	public function insertWithParam($transactionId){
-		$data = array("transaction_id"=>$transactionId, "in"=>0, "out"=>0, "current"=>0, "type"=>"cash");
-		
+	public function insertWithParam($transactionId, $in, $out, $type){
+		if($transactionId == "-")
+		{
+			$data = array("in_amount"=>$in, "out_amount"=>$out, "current"=>0, "type"=>$type);
+		}
+		else
+		{
+			$data = array("transaction_id"=>$transactionId, "in_amount"=>$in, "out_amount"=>$out, "current"=>0, "type"=>$type);
+		}
+				
 		//validate
 		$validator = Validator::make($data, Cash::$rules);
 

@@ -165,7 +165,9 @@
 				});
 				
 				$('body').on('click','.f_send_ke_kasir',function(){
+
 					$idTable = $('#tableReps').val();
+					$('#flag_'+ $idTable).val('1');
 					$data = [];
 					
 					//alert($("#pesanan_content_"+$idTable).html());

@@ -32,7 +32,7 @@ class TransactionsController extends \BaseController {
 		-) Fungsi ini digunakan untuk memasukkan transaksi baru ke dalam tabel transaksi sesuai dengan parameter
 	*/
 	public function insertWithParam($customerId, $total, $salesId, $discount, $tax){
-		$data = array("customer_id"=>$customerId, "total"=>$total, "discount"=>$discount, "tax"=>$tax, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>$salesId, "status"=>"OK");
+		$data = array("customer_id"=>$customerId, "total"=>$total, "discount"=>$discount, "tax"=>$tax, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>$salesId, "status"=>"UnPaid");
 		
 		$validator = Validator::make($data, Transaction::$rules);
 
@@ -246,7 +246,7 @@ class TransactionsController extends \BaseController {
 	
 	public function getSortedAll($by, $order)
 	{
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status');
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid');
 		$result = $joined->orderBy($by, $order)->get();
 		
 		return $this->getReturn($result);
@@ -256,7 +256,7 @@ class TransactionsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status');
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid');
 		
 		if($id != '-')
 		{
@@ -392,7 +392,7 @@ class TransactionsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status');
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid');
 		
 		if($id != '-')
 		{
@@ -522,6 +522,27 @@ class TransactionsController extends \BaseController {
 		}
 		
 		return $this->getReturn($result);
+	}
+	
+	public function updateTransactionById($id, $total, $total_paid, $discount, $print_customer, $print_shop, $status)
+	{
+		$transaction = Transaction::find($id);
+		$transaction->total = $total;
+		$transaction->total_paid = $total_paid;
+		$transaction->discount = $discount;
+		$transaction->print_customer = $print_customer;
+		$transaction->print_shop = $print_shop;
+		$transaction->status = $status;
+		
+		try
+		{
+			$transaction->save();
+			return 1;
+		}
+		catch(Exception $e)
+		{
+			return 0;
+		}
 	}
 
 }

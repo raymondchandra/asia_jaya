@@ -50,7 +50,7 @@
 								</div>
 								<label class="g-sm-9 control-label">Diskon</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_diskon_detail">IDR 0</p>
+									<input type="text" class="form-control" id="transaction_diskon_detail">
 									
 								</div>
 								<label class="g-sm-9 control-label">Tax</label>
@@ -59,10 +59,12 @@
 									
 								</div>
 								<label class="g-sm-9 control-label"></label>
+								<!--
 								<div class="g-sm-3">
 									<hr style="float: left; width: 166px;"></hr>
 									<span class="glyphicon glyphicon-plus pull-right" style="line-height: 39px;"></span>
 								</div>
+								-->
 								<label class="g-sm-9 control-label">Total</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static" id="transaction_total_detail">IDR 3.100.000</p>

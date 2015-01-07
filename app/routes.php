@@ -1,14 +1,11 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$customerController = new CustomersController();
-		$ordersController = new OrdersController();
-		$returnController = new ReturnsController();
-		$productDetailController = new ProductDetailsController();
+		$cash = new CashesController();
+		$cashUpdate = $cash->insertWithParam('-',10000, 0,"transaction");
+		$cashResult = json_decode($cashUpdate->getContent());
 		
-		$topBuyer = $customerController->getTop10Buyer();
-		
-		var_dump($topBuyer);
+		var_dump($cashResult->{'code'});
 	});
 	Route::get('/tes2', function()
 	{
@@ -387,6 +384,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::get('/view_print_konsumen', ['as'=>'david.view_print_konsumen','uses' => 'printController@view_print_konsumen']);
 	
 	Route::get('/view_dashboard', ['as'=>'david.view_dashboard','uses' => 'dashboardController@viewDashboard']);
+	
+	Route::put('/save_transaction', ['as'=>'david.save_transaction','uses' => 'transController@updateTransaction']);
 });
 
 

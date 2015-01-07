@@ -185,7 +185,7 @@ $('body').on('click','.f_pilih_tipe_retur', function(){
 					$data = "";
 					$.each(response['messages'], function( i, resp ) {
 						$data += "<tr class='f_suggest_tukar_barang' id='barang_ceritanya'><td>";
-						$data += "<img src='"+ resp.photo +"' height='50' width='50' style='margin-right: 20px; float: left;'>";
+						$data += "<img src='{{asset('"+resp.photo+"')}}' height='50' width='50' style='margin-right: 20px; float: left;'>";
 						$data += "<p class='f_nama_barang_yang_mau_ditukar pull-left' style='line-height: 50px; margin: 0px;'>"+ resp.name +" / "+resp.color+"</p>";
 						$data += "<input type='hidden' class='f_id_barang_yang_mau_ditukar' value='"+resp.id+"'>";
 						$data += "</td></tr>";

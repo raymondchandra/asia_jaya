@@ -159,6 +159,7 @@
 											<button type="button" class="btn btn-success btn-lg g-sm-12 finalisasi_btn" id="finalisasi_btn_0" data-toggle="modal" data-target="#pop_up_finalisasi_belanja">
 												Finalisasi Belanja
 											</button>
+											<input type="hidden" value="0" id="flag_0"/>
 										</div>
 									</div>
 								</form>
@@ -334,6 +335,7 @@
 			tab_panel+='				<button type="button" class="btn btn-success btn-lg g-sm-12 finalisasi_btn" id="finalisasi_btn_' + inc + '" data-toggle="modal" data-target="#pop_up_finalisasi_belanja">                         ';
 			tab_panel+='					Finalisasi Belanja                                                                                                                              ';
 			tab_panel+='				</button>                                                                                                                                        ';
+			tab_panel+='				<input type="hidden" value="0" id="flag_' + inc + '"/>                                                                                                                                       ';
 			tab_panel+='			</div>                                                                                                                                                 ';
 			tab_panel+='		</div>                                                                                                                                                     ';
 			tab_panel+='	</form>                                                                                                                                                        ';
@@ -450,6 +452,17 @@
 			$currentPrice = ($(".table_row td")[4].innerText);
 			
 		});
+	</script>
+	<script>
+	$('body').on('click','.finalisasi_btn',function(){
+		if($(this).next('input').val() == 0){ 
+			$('.f_send_ke_kasir').removeClass('hidden');
+			$('.f_masuk_kasir').addClass('hidden');
+		}else if($(this).next('input').val() == 1){
+			$('.f_send_ke_kasir').addClass('hidden');
+			$('.f_masuk_kasir').removeClass('hidden');
+		}
+	});
 	</script>
 </body>
 </html> 

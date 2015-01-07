@@ -155,7 +155,7 @@ class transController extends \HomeController{
 			$datas = null;
 			if($allTransaction->{'status'} != 'Not Found'){
 				foreach($dataAll as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid);
 				}
 			}
 
@@ -188,7 +188,7 @@ class transController extends \HomeController{
 				$allTransactionData = $allTransaction->{'messages'};
 				foreach($allTransactionData as $allData){
 					$allData->order = $this->getOrderArray($allData->id);
-					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid);
 					
 				}
 			}
@@ -295,6 +295,39 @@ class transController extends \HomeController{
 		}
 		
 		return Response::json($response);
+	}
+	
+	public function updateTransaction()
+	{
+		$id = Input::get('data');
+		$total = Input::get('total');
+		$total_paid = Input::get('paid');
+		$discount = Input::get('discount');
+		$print_customer = 1;
+		$print_shop = 0;
+		$status = "Paid";
+		$controller = new TransactionsController();
+		$result = $controller->updateTransactionById($id, $total, $total_paid, $discount, $print_customer, $print_shop, $status);
+		if($result == 1)
+		{
+			//update cash
+			$cash = new CashesController();
+			//$transactionId, $in, $out, $type
+			$cashUpdate = $cash->insertWithParam($id, $total, $total_paid-$total,"transaction");
+			$cashResult = json_decode($cashUpdate->getContent());
+			if($cashResult->{'code'} == 201)
+			{
+				$response = array('code'=>'200','status' => 'OK');
+			}
+			else
+			{
+				$response = array('code'=>'500','status' => 'NOK');
+			}		
+		}
+		else
+		{
+			$response = array('code'=>'500','status' => 'NOK');
+		}
 	}
 
 }

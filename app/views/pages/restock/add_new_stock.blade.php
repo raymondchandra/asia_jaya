@@ -353,7 +353,7 @@
 			var arr = $fotoPath.split('\\');
 			var arr2 = arr[arr.length-1].split('.');
 			$fileName += $nama_produk+"-"+$warna_produk[$i] + ",";
-			$detailName[$i] = "http://localhost/asia_jaya/public/assets/product_img/" + $nama_produk+"-"+$warna_produk[$i] + "." + arr2[arr2.length - 1];
+			$detailName[$i] = "assets/product_img/" + $nama_produk+"-"+$warna_produk[$i] + "." + arr2[arr2.length - 1];
 		}
 		$harga_modal = $('#harga_modal').val();
 		$harga_minimal = $('#harga_minimal').val();
@@ -493,7 +493,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 					$.each(response['messages'], function( i, resp ) {
 
 						$data = $data + "<tr style='cursor: pointer;' class='f_search_row_suggest'> <td width='92'>";
-						$data = $data + "<img src='" + resp.photo + "' width='75' height='75' class='pull-left f_sug_product_img' > </td> <td class='f_sug_product_code'>";
+						$data = $data + "<img src='{{asset('"+resp.photo+"')}}' width='75' height='75' class='pull-left f_sug_product_img' > </td> <td class='f_sug_product_code'>";
 						$data = $data + resp.product_code + "</td> <input type='hidden' class='f_sug_product_id' value='" + resp.id + "'/> <input type='hidden' class='f_sug_parent_product_id' value='" + resp.product_id + "'/><td class='f_sug_product_name'>";
 						$data = $data + resp.name + "</td> <td class='f_sug_product_color'>";
 						$data = $data + resp.color + "</td> <td>";
@@ -567,7 +567,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 		var arr = $fotoPath.split('\\');
 		var arr2 = arr[arr.length-1].split('.');
 		$foto = [];
-		$foto[1] = "http://localhost/asia_jaya/public/assets/product_img/"+$nama_produk+"-"+$warna_produk[1]+"."+arr2[arr2.length - 1];
+		$foto[1] = "assets/product_img/"+$nama_produk+"-"+$warna_produk[1]+"."+arr2[arr2.length - 1];
 		$fd = new FormData();
 		$fd.append('file', $('#foto_seri_input')[0].files[0]);
 		$fd.append('fileName', $nama_produk+"-"+$warna_produk[1]);
