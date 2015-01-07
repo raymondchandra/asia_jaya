@@ -346,7 +346,7 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::put('/edit_tax', ['as'=>'gentry.edit_tax','uses' => 'taxController@setTax']);
 	
-	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock']);
+	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock2']);
 	
 	Route::put('/edit_stock', ['as'=>'gentry.edit_stock','uses' => 'stockController@editStock']);
 	
@@ -365,6 +365,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	//Route::put('/put_search_return', ['as'=>'gentry.put_search_return','uses' => 'returnController@search_product_return']);
 	
 	Route::put('/add_new_stock1', ['as'=>'gentry.add_new_stock1','uses' => 'restockController@addNewProductView']);
+	
+	Route::put('/add_new_seri', ['as'=>'gentry.add_new_seri','uses' => 'restockController@addNewSeri']);
 	
 	Route::post('/upload_image', ['as'=>'gentry.upload_image','uses' => 'restockController@uploadImage']);
 	

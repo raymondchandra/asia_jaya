@@ -216,6 +216,7 @@
 						success: function(response){
 							$('.f_masuk_kasir').removeClass('hidden');
 							$('.f_send_ke_kasir').addClass('hidden');
+							
 						},error: function(xhr, textStatus, errorThrown){
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 							alert("responseText: "+xhr.responseText);
@@ -243,7 +244,11 @@
 					  //-- fungsi untuk me-reset sluruh input[type=text] pada modal --
 					  $(this).find('#diskon_text').val('');
 					  $(this).find('.f_diskon_inputtext').addClass('hidden');
-					})
+					});
+					
+					$('.modal').on('hidden.bs.modal', function(e) { 
+					  $('.f_masuk_kasir').addClass('hidden');
+					});
 				</script>
 			</div>
 

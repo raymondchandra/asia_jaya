@@ -44,10 +44,12 @@
 							</table>
 							<hr></hr>
 							<div class="form-group">
+								<!--
 								<label class="g-sm-8 control-label">Subtotal</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static" id="transaction_subtotal_detail">IDR 3.100.000</p>
 								</div>
+								-->
 								<label class="g-sm-8 control-label">Diskon</label>
 								<div class="g-sm-3">
 									<p type="text" class="form-control-static" id="transaction_diskon_detail">IDR 0</p>

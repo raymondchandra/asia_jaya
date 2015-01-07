@@ -239,7 +239,7 @@
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Foto</label>
 										<div class="g-sm-7">
-											<input type="file" id="foto_seri_input">
+											<input accept="image/*" type="file" id="foto_seri_input">
 										</div>
 									</div>
 									<div class="form-group">
@@ -444,6 +444,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 		row_search += '		<img src="' + $(this).find('.f_sug_product_img').attr('src') + '" width="75" height="75" class="pull-left" >';
 		row_search += '</td>';
 		row_search += '<input type="hidden" class="f_sug_product_id" value="' + $(this).find('.f_sug_product_id').val() + '"/>';
+		row_search += '<input type="hidden" class="f_sug_parent_product_id" value="' + $(this).find('.f_sug_parent_product_id').val() + '"/>';
 		row_search += '<td>';
 		row_search += 		$(this).find('.f_sug_product_code').text();
 		row_search += '</td>';
@@ -493,7 +494,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 
 						$data = $data + "<tr style='cursor: pointer;' class='f_search_row_suggest'> <td width='92'>";
 						$data = $data + "<img src='" + resp.photo + "' width='75' height='75' class='pull-left f_sug_product_img' > </td> <td class='f_sug_product_code'>";
-						$data = $data + resp.product_code + "</td> <input type='hidden' class='f_sug_product_id' value='" + resp.id + "'/><td class='f_sug_product_name'>";
+						$data = $data + resp.product_code + "</td> <input type='hidden' class='f_sug_product_id' value='" + resp.id + "'/> <input type='hidden' class='f_sug_parent_product_id' value='" + resp.product_id + "'/><td class='f_sug_product_name'>";
 						$data = $data + resp.name + "</td> <td class='f_sug_product_color'>";
 						$data = $data + resp.color + "</td> <td>";
 						$data = $data + resp.stock_shop + "</td> <td>";
@@ -516,10 +517,14 @@ $('body').on('click','.f_search_row_suggest',function(){
 	$('body').on('click','#add_seri_button',function(){
 		$datas = "";
 		$colorData = "";
+		$product_id = "";
+		$nama_produk = "";
 		$(".f_tbody_barang_seri tr").each(function(i, v){
 			$id = $(this).find('.f_sug_product_id').val();
 			$quantity = $(this).children('td').find('.f_sug_input_quan').val();
+			$product_ids = $(this).find('.f_sug_parent_product_id').val();
 			$color = $(this).children('td')[3].innerText;
+			$nama_produk = $(this).children('td')[2].innerText;
 			/*
 			$(this).children('td').each(function(ii, vv){
 				if(ii == 1)
@@ -540,10 +545,12 @@ $('body').on('click','.f_search_row_suggest',function(){
 			*/
 			$datas += $id+"-"+$quantity+";";
 			$colorData += $color+"-"; 
+			$product_id = $product_ids;
 		});
+		
 		$colorData = $colorData.substr(0, $colorData.length-1);
-		$kode_produk = $('#kode_seri_input').val();
-		$nama_produk = $('#nama_seri_input').val();
+		//$kode_produk = $('#kode_seri_input').val();
+		//$nama_produk = $('#nama_seri_input').val();
 		$warna_produk = [];
 		$warna_produk[1] = $colorData;
 		$stok_toko = [];
@@ -553,9 +560,9 @@ $('body').on('click','.f_search_row_suggest',function(){
 		$total_stok_toko = 0;
 		$total_stok_gudang = 0;
 		
-		$harga_modal = $('#modal_seri_input').val();
-		$harga_minimal = $('#minimal_seri_input').val();
-		$harga_jual = $('#jual_seri_input').val();
+		//$harga_modal = $('#modal_seri_input').val();
+		//$harga_minimal = $('#minimal_seri_input').val();
+		//$harga_jual = $('#jual_seri_input').val();
 		$fotoPath = $('#foto_seri_input').val();
 		var arr = $fotoPath.split('\\');
 		var arr2 = arr[arr.length-1].split('.');
@@ -578,15 +585,9 @@ $('body').on('click','.f_search_row_suggest',function(){
 				if(data == "Upload Success"){
 					$.ajax({
 						type: 'PUT',
-						url: '{{URL::route('gentry.add_new_stock1')}}',
+						url: '{{URL::route('gentry.add_new_seri')}}',
 						data: {
-							'product_code' : $kode_produk,
-							'name' : $nama_produk,
-							'modal_price' : $harga_modal,
-							'min_price' : $harga_minimal,
-							'sales_price' : $harga_jual,
-							'stock_shop' : $total_stok_toko,
-							'stock_storage' : $total_stok_gudang,
+							'product_id' : $product_id,
 							'color' : $warna_produk,
 							'detail_stock_shop' : $stok_toko,
 							'detail_stock_storage' : $stok_gudang,

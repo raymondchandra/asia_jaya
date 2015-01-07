@@ -387,13 +387,13 @@ class ProductDetailsController extends \BaseController {
 		try
 		{
 			$keyword = Input::get('keyword');
-			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->get();
-			foreach($products as $product)
+			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->get();
+			foreach($products as $product => $key)
 			{
-				if($product->isSeri == '1')
+				if($key->isSeri == '1')
 				{
-					$reference = $product->reference;
-					$prdClr = $product->color;
+					$reference = $key->reference;
+					$prdClr = $key->color;
 					$reference = explode(';',$reference);
 					$counter = count($reference);
 					$prdClr = explode('-',$prdClr);
@@ -401,17 +401,27 @@ class ProductDetailsController extends \BaseController {
 					for($i=0 ; $i<$counter-1 ; $i++)
 					{
 						$quant = explode('-',$reference[$i]);
-						if($i == 0)
+						$productDetail = ProductDetail::find($quant[0]);
+						if($productDetail->deleted == '0')
 						{
-							$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
-						}
-						else
-						{
-							$clr .= " ".$prdClr[$i]." x ".$quant[count($quant)-1];
+							if($i == 0)
+							{
+								$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
+							}
+							else
+							{
+								$clr .= " ".$prdClr[$i]." x ".$quant[count($quant)-1];
+							}
 						}
 					}
-					
-					$product->color = $clr;
+					if($clr == "")
+					{
+						unset($products[$product]);
+					}
+					else
+					{
+						$key->color = $clr;
+					}
 				}
 			}
 			if(count($products) == 0)
@@ -430,7 +440,7 @@ class ProductDetailsController extends \BaseController {
 		catch(Exception $e)
 		{
 			//forbidden
-			$response = array('code'=>'403','status' => 'Forbidden');
+			$response = array('code'=>'403','status' => $e->getMessage());
 			return Response::json($response);
 		}
 	}

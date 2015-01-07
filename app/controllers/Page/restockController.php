@@ -380,6 +380,40 @@ class restockController extends \HomeController{
 		}
 	}
 	
+	public function addNewSeri()
+	{
+		$productId = Input::get('product_id');
+		$productDeleted = 0;
+		$color = Input::get('color');
+		$detailShop = Input::get('detail_stock_shop');
+		$detailStorage = Input::get('detail_stock_storage');
+		$detailDeleted = 0;
+		$photo = Input::get('photo');
+		$i_warna = Input::get('i_warna');
+		$reference = Input::get('reference','0');
+		$isSeri = Input::get('seri', '0');
+		
+		$insertDetailStatus = $this->insertNewProductDetail($color[1], $photo[1], $detailShop[1], $detailStorage[1], $productId, $detailDeleted, $reference, $isSeri);
+		
+		if($insertDetailStatus == 1){
+			if($insertDetailStatus != -1){
+				return "success add new Seri";
+			}else{
+				return "failed add new Seri";
+			}
+		}
+		else
+		{
+			return "failed add new Seri";
+		}
+		
+		if($newProductId != -1){
+			return "success add new product";
+		}else{
+			
+		}
+	}
+	
 	/*
 		@author : Gentry Swanri
 		@parameter : $productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted

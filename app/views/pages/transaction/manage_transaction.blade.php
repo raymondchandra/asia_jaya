@@ -121,10 +121,10 @@
 											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
 										<td>
-											<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
+											<button class="btn btn-primary btn-xs print-toko-btn" id="{{$data->id}}" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
 												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
 											</button>
-											<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="">
+											<button class="btn btn-primary btn-xs print-konsumen-btn" id="{{$data->id}}" data-toggle="modal" data-target="">
 												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
 											</button>
 											<!-- Button trigger modal class ".alertYesNo" -->
@@ -147,7 +147,7 @@
 	$('body').on('click','.view_detail_button',function(){
 		$id = $(this).next().val();
 		$('#transaction_detail_content').html("");
-		$('#transaction_subtotal_detail').text("");
+		//$('#transaction_subtotal_detail').text("");
 		$('#transaction_diskon_detail').text("");				
 		$('#transaction_tax_detail').text("");			
 		$('#transaction_total_detail').text("");
@@ -231,6 +231,11 @@
 	});
 	/*------- MERUBAH Kuantitas Barang | Detail TRANSAKSI - END -------*/
 
-
+	$( 'body' ).on( "click",'.print-toko-btn', function() {
+		window.open("{{URL::route('david.view_print_toko')}}"+"?dataT="+$(this).attr('id'));
+	});
+	$( 'body' ).on( "click",'.print-konsumen-btn', function() {
+		window.open("{{URL::route('david.view_print_toko')}}"+"?dataT="+$(this).attr('id'));
+	});
 	</script>
 	@stop
