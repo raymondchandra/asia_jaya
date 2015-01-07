@@ -38,22 +38,27 @@
 			<div class="container-fluid" style="">
 				<div class="row">
 					<div class="g-lg-12">
-						<form class="form-horizontal" style="margin-top: 50px;">
+						<form class="form" style="margin-top: 50px;">
 							<div class="form-group">
-								<label class="control-label g-sm-3">Username</label>	
-								<div class="g-sm-9">	
+								<h2 style="text-align: center; text-transform: uppercase;">	
+									Toko Asia Jaya
+								</h2>	
+							</div>	
+							<div class="form-group">
+								<label class="control-label g-sm-12">Username</label>	
+								<div class="g-sm-12">	
 									<input class="form-control" type="text">
 								</div>		
 							</div>	
-							<div class="form-group">
-								<label class="control-label g-sm-3">Password</label>	
-								<div class="g-sm-9">	
+							<div class="form-group" >
+								<label class="control-label g-sm-12" style="margin-top: 20px;">Password</label>	
+								<div class="g-sm-12">	
 									<input class="form-control" type="password">
 								</div>		
 							</div>	
 							<div class="form-group">
 								
-								<div class="g-sm-12" style="text-align: center;">	
+								<div class="g-sm-12" style="text-align: center; margin-top: 20px;">	
 									<button type="button" class="btn btn-success">
 										Log In
 									</button>

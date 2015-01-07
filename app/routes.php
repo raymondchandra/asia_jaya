@@ -334,6 +334,13 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.laporan_cash.manage_laporan_cash');
 	});
 
+
+	//login mobile
+	Route::get('/login_jualan', function()
+	{
+		return View::make('pages.mobile_test.login');
+	});
+
 });
 
 Route::group(array('prefix' => 'fungsi'), function()
