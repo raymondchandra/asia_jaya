@@ -6,7 +6,7 @@
 			<div class="s_title_n_control">
 				<div class="g-lg-3">
 					<h3 style="float: left;">
-						Laporan Transaksi
+						Laporan Seluruh Transaksi
 					</h3>
 				</div>
 				<div class="g-lg-9" style="margin-top: 14px;">

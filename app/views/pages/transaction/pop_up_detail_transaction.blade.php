@@ -114,14 +114,17 @@
 							</script>
 
 							<hr></hr>
-
+							<button type="button" class="btn btn-success pull-right"  data-dismiss="modal">
+								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Save
+							</button>
+							<!--
 							<button type="button" class="btn btn-success pull-right">
 								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Print Customer
 							</button>
 							<button type="button" class="btn btn-warning pull-right" style="margin-right: 20px;">
 								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Print Toko
 							</button>
-
+							-->
 						</div>
 					</div>
 				</div>
