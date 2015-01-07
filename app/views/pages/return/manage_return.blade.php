@@ -101,7 +101,7 @@
 									{{ $data->created_at}}
 								</td>
 								<td>
-									<button id="" class="btn btn-info btn-xs view_detail_button"  data-toggle="modal" data-target="">Solusi</button>
+									<button id="" class="btn btn-info btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_solusi">Solusi</button>
 								</td>
 							</tr> 
 							@endforeach
@@ -130,6 +130,7 @@
 
 
 	@include('pages.return.pop_up_add_return')
+	@include('pages.return.pop_up_solusi')
 
 	<script>
 
