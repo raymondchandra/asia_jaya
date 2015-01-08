@@ -16,8 +16,8 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="{{URL::route('david.view_dashboard')}}"><span class="glyphicon glyphicon-home" style="color:#fff; margin-right:10px;"></span>Dashboard</a></li>
-				<li><a href="{{URL::to('test/transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi Hari Ini</a></li>
-				<li><a href="{{URL::to('test/return')}}"><span class="glyphicon glyphicon-transfer" style="color:#fff; margin-right:10px;"></span>Retur</a></li>
+				<li><a href="{{URL::route('david.view_transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi Hari Ini</a></li>
+				<li><a href="{{URL::route('gentry.view_return')}}"><span class="glyphicon glyphicon-transfer" style="color:#fff; margin-right:10px;"></span>Retur</a></li>
 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Produk<span class="caret"></span></a>
