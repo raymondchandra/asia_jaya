@@ -71,37 +71,157 @@
 					<tr>
 						<th class="table-bordered" width="110">
 							<a href="javascript:void(0)">Order ID</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered" style="width: 180px;">
 							<a href="javascript:void(0)">Nama Orang</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'cust_name')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'cust_name', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'cust_name', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'cust_name', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'cust_name')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'cust_name', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'cust_name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'cust_name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered">
 							<a href="javascript:void(0)">Kode Produk</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'prod_code')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_code', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_code', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_code', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'prod_code')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_code', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_code', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_code', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered">
 							<a href="javascript:void(0)">Nama Produk</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'prod_name')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_name', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_name', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_name', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'prod_name')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_name', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'prod_name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered" width="140">
 							<a href="javascript:void(0)">Kode Transaksi</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'transaction_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'transaction_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'transaction_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'transaction_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'transaction_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'transaction_id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'transaction_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'transaction_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered" width="140">
 							<a href="javascript:void(0)">Tanggal</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'created_at')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'created_at')
+										@if($order == 'asc')
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@search_product_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@search_product_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'cust_name'=>$cust_name,'prod_code'=>$prod_code,'prod_name'=>$prod_name,'transaction_id'=>$transaction_id,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
@@ -116,21 +236,21 @@
 				<thead>
 					<tr>
 
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
+						<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_cust_name"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_prod_code"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_prod_name"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_transaction_id"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_created"></td>
+						<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
 						<!--<td></td>-->
 
 					</tr>
 				</thead>
 				<tbody id="body_content">
 
-					@if($dataOrder != null)
-						@foreach($dataOrder as $data)
+					@if($datas != null)
+						@foreach($datas as $data)
 						<tr> 
 							<td>
 								{{ $data->id }}
@@ -234,6 +354,40 @@
 	@include('pages.return.pop_up_add_return')
 
 	<script>
+	
+		$('body').on('click','#filter_button',function(){
+			$order_id = $('#filter_order_id').val();
+			if($order_id == ''){
+				$order_id = '-';
+			}
+			
+			$cust_name = $('#filter_cust_name').val();
+			if($cust_name == ''){
+				$cust_name = '-';
+			}
+			
+			$prod_code = $('#filter_prod_code').val();
+			if($prod_code == ''){
+				$prod_code = '-';
+			}
+			
+			$prod_name = $('#filter_prod_name').val();
+			if($prod_name == ''){
+				$prod_name = '-';
+			}
+			
+			$transaction_id = $('#filter_transaction_id').val();
+			if($transaction_id == ''){
+				$transaction_id = '-';
+			}
+			
+			$created = $('#filter_created').val();
+			if($created == ''){
+				$created = '-';
+			}
+			
+			window.location = "{{URL::route('gentry.search_return')}}" + "?filtered=1&id="+$order_id+"&cust_name="+$cust_name+"&prod_code="+$prod_code+"&prod_name="+$prod_name+"&transaction_id="+$transaction_id+"&created_at="+$created;
+		});	
 	
 		$('body').on('click','.view_detail_button',function(){
 			$id = $(this).next().val();

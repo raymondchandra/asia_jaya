@@ -474,5 +474,208 @@ class ReturnsController extends \BaseController {
 		
 		return $this->getReturn($result);
 	}
+	
+	public function getSortedAll2($by, $order)
+	{
+		$joined = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->select('orders.id','customers.name AS cust_name','products.product_code AS prod_code','products.name AS prod_name','orders.transaction_id','orders.created_at AS created_at','orders.quantity','orders.price', 'products.id AS prod_id');
+		
+		$result = $joined->orderBy($by, $order)->get();
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getFilteredAccount2($id, $cust_name, $prod_code, $prod_name, $transaction_id, $created_at)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->select('orders.id','customers.name AS cust_name','products.product_code AS prod_code','products.name AS prod_name','orders.transaction_id','orders.created_at AS created_at','orders.quantity','orders.price', 'products.id AS prod_id');
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('orders.id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('orders.id', '=', $id);
+			}
+		}
+		
+		if($cust_name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.name', 'LIKE', '%'.$cust_name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.name', 'LIKE', '%'.$cust_name.'%');
+			}
+		}
+		
+		if($prod_code != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$prod_code.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', 'LIKE', '%'.$prod_code.'%');
+			}
+		}
+		
+		if($prod_name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.name', 'LIKE', '%'.$prod_name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.name', 'LIKE', '%'.$prod_name.'%');
+			}
+		}
+		
+		if($transaction_id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('orders.transaction_id', '=', $transaction_id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('orders.transaction_id', '=', $transaction_id);
+			}
+		}
+		
+		if($created_at != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('orders.created_at', 'LIKE', '%'.$created_at.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('orders.created_at', 'LIKE', '%'.$created_at.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->get();
+		}
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getSortedFilteredAccount2($id, $cust_name, $prod_code, $prod_name, $transaction_id, $created_at, $sortBy, $order)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->select('orders.id','customers.name AS cust_name','products.product_code AS prod_code','products.name AS prod_name','orders.transaction_id','orders.created_at AS created_at','orders.quantity','orders.price', 'products.id AS prod_id');
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('orders.id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('orders.id', '=', $id);
+			}
+		}
+		
+		if($cust_name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.name', 'LIKE', '%'.$cust_name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.name', 'LIKE', '%'.$cust_name.'%');
+			}
+		}
+		
+		if($prod_code != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$prod_code.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', 'LIKE', '%'.$prod_code.'%');
+			}
+		}
+		
+		if($prod_name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.name', 'LIKE', '%'.$prod_name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.name', 'LIKE', '%'.$prod_name.'%');
+			}
+		}
+		
+		if($transaction_id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('orders.transaction_id', '=', $transaction_id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('orders.transaction_id', '=', $transaction_id);
+			}
+		}
+		
+		if($created_at != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('orders.created_at', 'LIKE', '%'.$created_at.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('orders.created_at', 'LIKE', '%'.$created_at.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($result);
+	}
 
 }
