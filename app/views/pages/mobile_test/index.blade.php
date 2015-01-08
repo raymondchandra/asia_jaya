@@ -388,6 +388,9 @@
 			$('#edit_code').text($code);
 			$('#edit_nama').text($nama);
 			$('#edit_warna').text($warna);
+
+			$('#edit_harga_min').text($min_price);
+
 			$('#f_hsatuan_qty').val(toAngka($harga));
 			$('#f_edit_qty').val($quantity);
 			$('#f_subtotal_edit').text("IDR " + $total);
