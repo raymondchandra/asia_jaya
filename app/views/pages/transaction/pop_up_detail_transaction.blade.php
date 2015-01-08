@@ -213,6 +213,30 @@
 										}
 									},'json');
 								});
+								
+								$('body').on( "keyup",'#transaction_diskon_detail', function(e) {
+									$total = 0;
+									$("#transaction_detail_content tr").each(function(i, v)
+									{
+										$totalPrice = $(this).children('td')[5].innerText;
+										$total += toAngka($totalPrice);
+									});
+									
+									//alert($total);
+									if($('#transaction_diskon_detail').val() == "")
+									{
+										
+									}
+									else
+									{
+										$total -= toAngka($('#transaction_diskon_detail').val());
+									}
+									
+									$tax = parseInt($total) * toAngka($('#transaction_tax_detail').text()) / parseInt(100);
+									$total += $tax;
+									$('#transaction_total_detail').text("IDR " + toRp($total));
+								});
+								
 								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 								function toRp(angka){
 									var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
@@ -225,6 +249,8 @@
 									}
 									return rev2.split('').reverse().join('');
 								}
+								
+								
 							</script>
 							<!--
 							<button type="button" class="btn btn-success pull-right">

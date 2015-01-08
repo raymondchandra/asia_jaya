@@ -42,6 +42,7 @@
 													//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
 													if(response['code'] == 204)
 													{
+														window.open("{{URL::route('gentry.view_print_konsumen')}}"+"?dataT="+$id;
 														location.reload();
 													}
 													else
