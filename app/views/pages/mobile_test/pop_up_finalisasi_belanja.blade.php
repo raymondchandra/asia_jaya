@@ -152,7 +152,7 @@
 					Orderan sudah masuk kedalam kasir
 				</p>
 				<input type="hidden" id="transaction_tax" value="0"/>
-				<button type="button" class="btn btn-success pull-left g-sm-5 f_send_ke_kasir">Send</button>
+				<button type="button" class="btn btn-success pull-left g-sm-5 f_send_ke_kasir" disabled>Send</button>
 				<button type="button" class="btn btn-info pull-right g-sm-5" data-dismiss="modal">Back</button>
 
 				<script>
@@ -251,6 +251,28 @@
 					$('.modal').on('hidden.bs.modal', function(e) { 
 					  $('.f_masuk_kasir').addClass('hidden');
 					});
+
+					/* -- jan 9 2015 | START -- */
+					/* -- button disabled error prevention -- */
+					$('#f_nama_pelanggan').keyup(function(){
+						if( $(this).val() != '' ){
+							$('.f_send_ke_kasir').removeAttr('disabled');
+						}
+					});
+					$('#f_nama_pelanggan').keydown(function(){
+						if( $(this).val() == '' ){
+							$('.f_send_ke_kasir').attr('disabled','disabled'); 
+						}
+					});
+
+					$('body').on('click','.test_row',function(){
+						$('.f_send_ke_kasir').removeAttr('disabled');
+					});
+
+					$('#pop_up_finalisasi_belanja').on('hidden.bs.modal', function () { 
+						$('.f_send_ke_kasir').attr('disabled','disabled'); 
+					});
+					/* -- jan 9 2015 | END -- */
 				</script>
 			</div>
 

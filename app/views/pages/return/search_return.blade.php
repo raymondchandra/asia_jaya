@@ -266,6 +266,8 @@
 
 	*/
 
+	/* -- jan 9 2015 | START -- */
+	/* -- button disabled error prevention -- */
 	$('#cust_name').keyup(function(){
 		if( $(this).val() != '' ){
 			$('#search_button').removeAttr('disabled');
@@ -273,11 +275,11 @@
 	});
 	$('#cust_name').keydown(function(){
 		if( $(this).val() == '' ){
-			$('#search_button').attr('disabled','disabled');
-		//alert($(this).val());
+			$('#search_button').attr('disabled','disabled'); 
 		}
 	});
-	
+	/* -- jan 9 2015 | END -- */
+
 		$('body').on('click','.view_detail_button',function(){
 			$id = $(this).next().val();
 			$prodName = $('#prod_name_'+$id).text();
