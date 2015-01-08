@@ -339,10 +339,10 @@
 											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
 										<td>
-											<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
+											<button class="btn btn-warning btn-xs print-toko-btn" id="{{$data->id}}" data-toggle="modal" data-target="" style="display: block; margin-bottom: 5px;">
 												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Toko
 											</button>
-											<button class="btn btn-success btn-xs" data-toggle="modal" data-target="">
+											<button class="btn btn-success btn-xs print-konsumen-btn" id="{{$data->id}}" data-toggle="modal" data-target="">
 												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Customer
 											</button>
 											<!-- Button trigger modal class ".alertYesNo" -->
@@ -462,11 +462,12 @@
 					$data += "<img src='{{asset('"+resp.foto+"')}}' width='100' height='100'>";
 					$data += "</td><td>";
 					$data += resp.warna;
-					$data += "</td><td>";
-					$data += resp.quantity;
-					$data += "</td><td>IDR ";
+					$data += "</td><td class='f_td_excel_xlabel'>";
+					$data += "<span class='f_excel_xlabel' id=' style=''line-height: 30px;' >"+ resp.quantity +"</span>";
+					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden f_qty_transaction' style=''/>";
+					$data += "</td><td class='f_price_transaction'>IDR ";
 					$data += toRp(resp.hargaSatuan);
-					$data += "</td><td>IDR ";
+					$data += "</td><td class='f_subtotal_price_transaction'>IDR ";
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
 					$data += "</td>";
 					$data += "</tr>"
@@ -512,5 +513,51 @@
 		}
 		return rev2.split('').reverse().join('');
 	}
+	
+	$( 'body' ).on( "click",'.print-toko-btn', function() {
+		window.open("{{URL::route('david.view_print_toko')}}"+"?dataT="+$(this).attr('id'));
+	});
+	$( 'body' ).on( "click",'.print-konsumen-btn', function() {
+		window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$(this).attr('id'));
+	});
+	
+	$( 'body' ).on( "click",'.f_td_excel_xlabel', function() {
+		$(this).children('.f_excel_xlabel').siblings('.f_excel_xinput').removeClass('hidden');
+		$(this).children('.f_excel_xlabel').siblings('.f_excel_xinput').val($(this).text());
+		$(this).children('.f_excel_xlabel').addClass('hidden');
+	});
+	$( 'body' ).on( "keypress",'.f_excel_xinput', function(e) {
+		var key = e.which;
+		if(key == 13)  
+		{
+			$(this).siblings('.f_excel_xlabel').text($(this).val());
+			$(this).siblings('.f_excel_xlabel').removeClass('hidden');
+			$(this).addClass('hidden');
+		}
+	});
+	
+	$( 'body' ).on( "keypress",'.f_qty_transaction', function(e) {
+		var key = e.which;
+		if(key == 13)  
+		{
+			//alert($(this).val());
+			var sub_tot_text = toAngka($(this).closest('tr').find('.f_price_transaction').text());
+			var perkalian_subtotal = sub_tot_text*($(this).val());
+			//alert(perkalian_subtotal);
+			$(this).closest('tr').find('.f_subtotal_price_transaction').text('IDR ' + toRp(perkalian_subtotal));
+			$total = 0;
+			$("#transaction_detail_content tr").each(function(i, v)
+			{
+				$totalPrice = $(this).children('td')[5].innerText;
+				$total += toAngka($totalPrice);
+			});
+			$total -= toAngka($('#transaction_diskon_detail').val())
+			$tax = $total * toAngka($('#transaction_tax_detail').text()) / 100;
+			$total += $tax;
+			$('#transaction_total_detail').text("IDR " + toRp($total));
+		}
+		
+		
+	});
 	</script>
 @stop

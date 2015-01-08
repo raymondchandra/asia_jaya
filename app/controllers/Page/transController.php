@@ -252,6 +252,8 @@ class transController extends \HomeController{
 				$ord->warna = $product_detail->color;
 				$ord->hargaSatuan = $product->sales_price;
 				$ord->foto = $product_detail->photo;
+				$ord->stock_shop = $product_detail->stock_shop;
+				$ord->stock_storage = $product_detail->stock_storage;
 			}
 			$response = array('code'=>'200','status' => 'OK', 'messages' => $order);
 		}
