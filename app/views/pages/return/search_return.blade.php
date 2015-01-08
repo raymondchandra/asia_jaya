@@ -50,7 +50,7 @@
 							<div class="form-group">
 								<label class="g-sm-3 control-label"></label>
 								<div class="g-sm-7">
-									<button class="btn btn-success" type="button" id="search_button" disabled>
+									<button class="btn btn-success" type="button" id="search_button" readonly>
 										Search
 									</button>
 								</div>
@@ -270,12 +270,12 @@
 	/* -- button disabled error prevention -- */
 	$('#cust_name').keyup(function(){
 		if( $(this).val() != '' ){
-			$('#search_button').removeAttr('disabled');
+			$('#search_button').removeAttr('readonly');
 		}
 	});
 	$('#cust_name').keydown(function(){
 		if( $(this).val() == '' ){
-			$('#search_button').attr('disabled','disabled'); 
+			$('#search_button').attr('readonly','readonly'); 
 		}
 	});
 	/* -- jan 9 2015 | END -- */
