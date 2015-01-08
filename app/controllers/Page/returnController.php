@@ -233,6 +233,7 @@ class returnController extends \HomeController{
 	}
 	
 	//bagian sambung ke view
+	/*
 	public function view_return(){
 		$returnController = new ReturnsController();
 		$dataJson = $returnController->getAll();
@@ -245,7 +246,74 @@ class returnController extends \HomeController{
 		
 		return View::make('pages.return.manage_return', compact('dataAll'));
 	}
+	*/
 	
+	public function view_return()
+	{
+		//return View::make('pages.admin.attribute.manage_attribute', compact('attributes','sortBy','sortType','page','filtered'));
+		$sortBy = Input::get('sortBy','none');
+		$order = Input::get('order','none');
+		$filtered = Input::get('filtered', '0');
+		$returnController = new ReturnsController();
+		
+		if($filtered == '0')
+		{
+			if($sortBy === "none")
+			{
+				$allReturnJson = $returnController->getAll();
+				$allReturn = json_decode($allReturnJson->getContent());
+			}
+			else
+			{
+				$allReturnJson = $returnController->getSortedAll($sortBy, $order);
+				$allReturn = json_decode($allReturnJson->getContent());
+			}
+			$datas = null;
+			if($allReturn->{'status'} != 'Not Found'){
+				$allReturnData = $allReturn->{'messages'};
+				foreach($allReturnData as $allData){
+					$datas[] = (object)array('id'=>$allData->id,'order_id'=>$allData->order_id, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+				}
+			}
+
+			return View::make('pages.return.manage_return', compact('datas','sortBy','order','filtered'));
+		}
+		else
+		{
+			$order_id = Input::get('order_id','-');
+			$type = Input::get('type', '-');
+			$status = Input::get('status', '-');
+			$solution = Input::get('solution', '-');
+			$trade_product_id = Input::get('trade_product_id', '-');
+			$difference = Input::get('difference', '-');
+			$created_at = Input::get('created_at', '-');
+			
+			if($sortBy == "none")
+			{
+				$allReturnJson = $returnController->getFilteredAccount($order_id, $type, $status, $solution, $trade_product_id, $difference, $created_at);
+			}
+			else
+			{
+				$allReturnJson = $returnController->getSortedFilteredAccount($order_id, $type, $status, $solution, $trade_product_id, $difference, $created_at, $sortBy, $order);
+			}
+			//$allEmployeeJson = $accountController->getFilteredProfile($username, $role, $lastLogin, $active);
+			$allReturn = json_decode($allReturnJson->getContent());
+			$datas = null;
+			if($allReturn->{'status'} != 'Not Found'){
+				$allReturnData = $allReturn->{'messages'};
+				foreach($allReturnData as $allData){
+					$datas[] = (object)array('id'=>$allData->id, 'order_id'=>$allData->order_id, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+				}
+			}
+
+			return View::make('pages.return.manage_return', compact('datas','sortBy','order','filtered','order_id','type','status','solution','trade_product_id', 'difference','created_at'));
+		}
+		
+		
+		
+	}
+	
+	/*
 	public function search_product_return(){
 		//$transaction_id = Input::get('data');
 		//$transaction_id = 1;
@@ -261,6 +329,74 @@ class returnController extends \HomeController{
 		
 		//return $transaction_id;
 		return View::make('pages.return.search_return', compact('dataOrder'));
+	}
+	*/
+	
+	public function search_product_return()
+	{
+		//return View::make('pages.admin.attribute.manage_attribute', compact('attributes','sortBy','sortType','page','filtered'));
+		$sortBy = Input::get('sortBy','none');
+		$order = Input::get('order','none');
+		$filtered = Input::get('filtered', '0');
+		$returnController = new ReturnsController();
+		
+		if($filtered == '0')
+		{
+			if($sortBy === "none")
+			{
+				$dataAll = Order::where('transaction_id', '>', 0)->get();
+				foreach($dataAll as $data){
+					$data->cust_name = $this->find_cust_name($data->transaction_id);
+					$product_data = $this->find_product_order($data->product_detail_id);
+					$data->prod_id = $product_data->id;
+					$data->prod_code = $product_data->product_code;
+					$data->prod_name = $product_data->name;
+				}
+			}
+			else
+			{
+				$dataJson = $returnController->getSortedAll2($sortBy, $order);
+				$data = json_decode($dataJson->getContent());
+				if($data->{'status'} != 'Not Found'){
+					$dataAll = $data->{'messages'};
+				}
+			}
+			$datas = null;
+			foreach($dataAll as $allData){
+				$datas[] = (object)array('id'=>$allData->id, 'cust_name'=>$allData->cust_name, 'prod_code'=>$allData->prod_code, 'prod_name'=>$allData->prod_name, 'transaction_id'=>$allData->transaction_id, 'created_at'=>$allData->created_at, 'quantity'=>$allData->quantity, 'price'=>$allData->price, 'prod_id'=>$allData->prod_id);
+			}
+
+			return View::make('pages.return.search_return', compact('datas','sortBy','order','filtered'));
+		}
+		else
+		{
+			$id = Input::get('id','-');
+			$cust_name = Input::get('cust_name', '-');
+			$prod_code = Input::get('prod_code', '-');
+			$prod_name = Input::get('prod_name', '-');
+			$transaction_id = Input::get('transaction_id', '-');
+			$created_at = Input::get('created_at', '-');
+			
+			if($sortBy == "none")
+			{
+				$dataAllJson = $returnController->getFilteredAccount2($id, $cust_name, $prod_code, $prod_name, $transaction_id, $created_at);
+			}
+			else
+			{
+				$dataAllJson = $returnController->getSortedFilteredAccount2($id, $cust_name, $prod_code, $prod_name, $transaction_id, $created_at, $sortBy, $order);
+			}
+			
+			$dataAll = json_decode($dataAllJson->getContent());
+			$datas = null;
+			if($dataAll->{'status'} != 'Not Found'){
+				$data = $dataAll->{'messages'};
+				foreach($data as $allData){
+					$datas[] = (object)array('id'=>$allData->id, 'cust_name'=>$allData->cust_name, 'prod_code'=>$allData->prod_code, 'prod_name'=>$allData->prod_name, 'transaction_id'=>$allData->transaction_id, 'created_at'=>$allData->created_at, 'quantity'=>$allData->quantity, 'price'=>$allData->price, 'prod_id'=>$allData->prod_id);
+				}
+			}
+
+			return View::make('pages.return.search_return', compact('datas','sortBy','order','filtered','id','cust_name','prod_code','prod_name','transaction_id','created_at'));
+		}	
 	}
 	
 	public function search_product_return2(){
