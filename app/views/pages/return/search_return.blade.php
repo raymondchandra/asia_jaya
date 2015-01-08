@@ -26,23 +26,23 @@
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Nama Orang</label>
 								<div class="g-sm-7">
-									<input type="text" class="form-control" id="cust_name">
+									<input type="text" class="form-control" id="cust_name" placeholder="Masukkan nama pelanggan">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Kode Produk (opt)</label>
+								<label class="g-sm-3 control-label">Kode Produk <span style="font-weight: 300;">(opt)</span></label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control" id="prod_code">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Nama Produk (opt)</label>
+								<label class="g-sm-3 control-label">Nama Produk <span style="font-weight: 300;">(opt)</span></label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control" id="prod_name">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Kode Transaksi (opt)</label>
+								<label class="g-sm-3 control-label">Kode Transaksi <span style="font-weight: 300;">(opt)</span></label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control" id="trans_code">
 								</div>
@@ -50,7 +50,7 @@
 							<div class="form-group">
 								<label class="g-sm-3 control-label"></label>
 								<div class="g-sm-7">
-									<button class="btn btn-success" type="button" id="search_button">
+									<button class="btn btn-success" type="button" id="search_button" disabled>
 										Search
 									</button>
 								</div>
@@ -265,6 +265,18 @@
 		});
 
 	*/
+
+	$('#cust_name').keyup(function(){
+		if( $(this).val() != '' ){
+			$('#search_button').removeAttr('disabled');
+		}
+	});
+	$('#cust_name').keydown(function(){
+		if( $(this).val() == '' ){
+			$('#search_button').attr('disabled','disabled');
+		//alert($(this).val());
+		}
+	});
 	
 		$('body').on('click','.view_detail_button',function(){
 			$id = $(this).next().val();
