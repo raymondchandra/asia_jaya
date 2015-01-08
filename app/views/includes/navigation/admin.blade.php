@@ -15,8 +15,8 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="#"><span class="glyphicon glyphicon-home" style="color:#fff; margin-right:10px;"></span>Dashboard</a></li>
-				<li><a href="{{URL::to('test/transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi</a></li>
+				<li><a href="{{URL::route('david.view_dashboard')}}"><span class="glyphicon glyphicon-home" style="color:#fff; margin-right:10px;"></span>Dashboard</a></li>
+				<li><a href="{{URL::to('test/transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi Hari Ini</a></li>
 				<li><a href="{{URL::to('test/return')}}"><span class="glyphicon glyphicon-transfer" style="color:#fff; margin-right:10px;"></span>Retur</a></li>
 
 				<li class="dropdown">
