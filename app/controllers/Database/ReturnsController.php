@@ -251,5 +251,228 @@ class ReturnsController extends \BaseController {
 		return Response::json($respond);
 	}
 	*/
+	
+	public function getSortedAll($by, $order)
+	{
+		$result = ReturnDB::orderBy($by, $order)->get();
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getFilteredAccount($orderId, $type, $status, $solution, $tradeProductId, $difference, $created)
+	{
+		$isFirst = false;
+		
+		if($orderId != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('order_id', '=', $orderId);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('order_id', '=', $orderId);
+			}
+		}
+		
+		if($type != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('type', '=', $type);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('type', '=', $type);
+			}
+		}
+		
+		if($status != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('status', 'LIKE', '%'.$status.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+			}
+		}
+		
+		if($solution != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('solution', 'LIKE', '%'.$solution.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('solution', 'LIKE', '%'.$solution.'%');
+			}
+		}
+		
+		if($tradeProductId != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('trade_product_id', '=', $tradeProductId);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('trade_product_id', '=', $tradeProductId);
+			}
+		}
+		
+		if($difference != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('difference', '=', $difference);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('difference', '=', $difference);
+			}
+		}
+		
+		if($created != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('created_at', 'LIKE', '%'.$created.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('created_at', 'LIKE', '%'.$created.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = ReturnDB::all();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->get();
+		}
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getSortedFilteredAccount($orderId, $type, $status, $solution, $tradeProductId, $difference, $created)
+	{
+		$isFirst = false;
+		
+		if($orderId != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('order_id', '=', $orderId);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('order_id', '=', $order_id);
+			}
+		}
+		
+		if($type != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('type', '=', $type);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('type', '=', $type);
+			}
+		}
+		
+		if($status != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('status', 'LIKE', '%'.$status.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+			}
+		}
+		
+		if($solution != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('solution', 'LIKE', '%'.$solution.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('solution', 'LIKE', '%'.$solution.'%');
+			}
+		}
+		
+		if($tradeProductId != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('trade_product_id', '=', $tradeProductId);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('trade_product_id', '=', $tradeProductId);
+			}
+		}
+		
+		if($difference != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('difference', '=', $difference);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('difference', '=', $difference);
+			}
+		}
+		
+		if($created != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = ReturnDB::where('created_at', 'LIKE', '%'.$created.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('created_at', 'LIKE', '%'.$created.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = ReturnDB::orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($result);
+	}
 
 }

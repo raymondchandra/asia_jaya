@@ -26,43 +26,183 @@
 					<tr>
 						<th class="table-bordered" width="110">
 							<a href="javascript:void(0)">Order ID</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'order_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'order_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered" style="width: 180px;">
 							<a href="javascript:void(0)">Type</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'type')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'type')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered">
 							<a href="javascript:void(0)">Status</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'status')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'status')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered">
 							<a href="javascript:void(0)">Solution</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'solution')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'solution')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered">
 							<a href="javascript:void(0)">trade_product_id</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'trade_product_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'trade_product_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered" width="140">
 							<a href="javascript:void(0)">difference</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'difference')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'difference')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
 						<th class="table-bordered" width="140">
 							<a href="javascript:void(0)">created_at</a>
-							<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'created_at')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'created_at')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
@@ -72,38 +212,38 @@
 				<thead>
 					<tr>
 						
-						<td><input type="text" class="form-control input-sm"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
 						<td>
-							<select class="form-control input-sm">
+							<select class="form-control input-sm" id="filter_type">
 									<option value="true">tukar barang sama</option>
 									<option value="false">tukar barang beda</option>
 									<option value="false">tukar uang</option>
 							</select>
 						</td>
 						<td>
-							<select class="form-control input-sm">
+							<select class="form-control input-sm" id="filter_status">
 									<option value="true">pending</option>
 									<option value="false">fixed</option>
 							</select>
 						</td>
 						<td>
-							<select class="form-control input-sm">
+							<select class="form-control input-sm" id="filter_solution">
 									<option value="true">kembalikan ke toko</option>
 									<option value="false">masukan ke daftar obral</option>
 							</select>
 						</td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td><input type="text" class="form-control input-sm"></td>
-						<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
+						<td><input type="text" class="form-control input-sm" id="filter_trade_product_id"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_difference"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_created_at"></td>
+						<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
 						<!--<td></td>-->
 						
 					</tr>
 				</thead>
 				<tbody>
 					
-						@if($dataAll!=null)
-							@foreach($dataAll as $data)
+						@if($datas!=null)
+							@foreach($datas as $data)
 							<tr> 
 								<td>
 									{{ $data->order_id }}
@@ -192,6 +332,83 @@
 	@include('pages.return.pop_up_solusi')
 
 	<script>
-
+		$('body').on('click','#filter_button',function(){
+			$order_id = $('#filter_order_id').val();
+			if($order_id == ''){
+				$order_id = '-';
+			}
+			
+			var a=document.getElementById("filter_type");
+			for (var i = 0; i < a.options.length; i++) 
+			{
+				if(a.options[i].selected ==true)
+				{
+					$typeRaw = a.options[i].value;
+				}
+			}
+			
+			if($typeRaw == 'true'){
+				$type = 1;
+			}else if($typeRaw == 'false'){
+				$type = 2;
+			}else if($typeRaw == 'false'){
+				$type = 3;
+			}else{
+				$type = '-';
+			}
+			
+			var b=document.getElementById("filter_status");
+			for (var i = 0; i < b.options.length; i++) 
+			{
+				if(b.options[i].selected ==true)
+				{
+					$statusRaw = b.options[i].value;
+				}
+			}
+			
+			if($statusRaw == 'true'){
+				$status = 'pending';
+			}else if($statusRaw == 'false'){
+				$status = 'fixed';
+			}else{
+				$status = '-';
+			}
+			
+			var c=document.getElementById("filter_solution");
+			for (var i = 0; i < c.options.length; i++) 
+			{
+				if(c.options[i].selected ==true)
+				{
+					$solutionRaw = c.options[i].value;
+				}
+			}
+			
+			if($solutionRaw == 'true'){
+				$solution = 'kembalikan ke toko';
+			}else if($solutionRaw == 'false'){
+				$solution = 'masukkan ke daftar obral';
+			}else{
+				$solution = '-';
+			}
+			
+			//$solution = '-';
+			
+			$trade_product_id = $('#filter_trade_product_id').val();
+			if($trade_product_id == ''){
+				$trade_product_id = '-';
+			}
+			
+			$difference = $('#filter_difference').val();
+			if($difference == ''){
+				$difference = '-';
+			}
+			
+			$created_at = $('#filter_created_at').val();
+			if($created_at == ''){
+				$created_at = '-';
+			}
+			
+			window.location = "{{URL::route('gentry.view_return')}}" + "?filtered=1&order_id="+$order_id+"&type="+$type+"&status="+$status+"&solution="+$solution+"&trade_product_id="+$trade_product_id+"&difference="+$difference+"&created_at="+$created_at;
+		});
 	</script>
 	@stop
