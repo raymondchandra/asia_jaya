@@ -280,6 +280,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							<th class="table-bordered"></th>
 							<th class="table-bordered" width="100">View Detail</th>
 							<th class="table-bordered" width="100">Print</th>
 						</thead>
@@ -305,6 +306,7 @@
 										<option value="false">unpaid</option>
 									</select>
 								</td>
+								<td></td>
 								<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
 								<td></td>
 								
@@ -331,6 +333,7 @@
 											<td>True</td>
 										@endif
 										<td>{{$data->status}}</td>
+										<td>01/07/2015</td>
 										<td>
 											<input type='hidden' value='{{$data->status}}' id="hidden_status"/>
 											<input type='hidden' value='{{$data->total_paid}}' id="hidden_paid"/>
