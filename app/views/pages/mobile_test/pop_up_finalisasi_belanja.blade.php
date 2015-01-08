@@ -18,7 +18,7 @@
 					<div class="form-group">
 						<label >Nama Pelanggan</label>
 						<input type="hidden" id="custIdRep" value="none">
-						<input type="text" class="form-control" id="f_nama_pelanggan">
+						<input type="text" class="form-control" id="f_nama_pelanggan" placeholder="Masukkan nama pelanggan">
 						<table class="table table-bordered hidden" id="f_table_suggestion_pelanggan" style="background-color: #fff;">
 							<thead>
 							</thead>
@@ -118,7 +118,7 @@
 					</div>
 					<div class="form-group hidden f_diskon_inputtext">
 						<label for="">Diskon</label>
-						<input type="text" id="diskon_text" class="form-control" id="" value="">
+						<input type="text" id="diskon_text" class="form-control" id="" value="" placeholder="e.g.: 10000">
 					</div>
 
 					<div class="form-group">
