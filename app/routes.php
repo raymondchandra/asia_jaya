@@ -450,6 +450,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::get('/add_opening_cash', ['as'=>'david.add_opening_cash','uses' => 'dashboardController@addOpeningCash']);
 	
+	Route::get('/range_date', ['as'=>'gentry.range_date','uses' => 'transController@filterByDateRange']);
+	
 });
 
 
