@@ -26,7 +26,7 @@
 						<li><a href=""><span class="glyphicon glyphicon-plus-sign" style="margin-right:10px;"></span>Restok</a></li>
 					</ul>
 				</li>
-				<li><a href="{{URL::to('test/tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Tax</a></li>
+				<li><a href="{{URL::route('gentry.view_tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Tax</a></li>
 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Account<span class="caret"></span></a>

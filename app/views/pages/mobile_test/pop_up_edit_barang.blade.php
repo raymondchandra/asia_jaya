@@ -62,12 +62,14 @@
 							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
 						});
 						$('body').on('keyup','#f_hsatuan_qty',function(){
+							/*
 							$min_price = $('#minPrice').val();
 							if(parseInt($('#f_hsatuan_qty').val()) < parseInt($min_price))
 							{
 								$('#f_hsatuan_qty').val($min_price);
 							}
 							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
+							*/
 						})
 						</script>
 					</div>

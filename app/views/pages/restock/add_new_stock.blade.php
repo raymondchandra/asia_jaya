@@ -84,10 +84,10 @@
 																<input type="text" class="form-control" id="warna_produk_1">
 															</td>
 															<td>
-																<input type="text" class="form-control" id="stok_toko_1">
+																<input type="text" class="form-control ff_num_only" id="stok_toko_1">
 															</td>
 															<td>
-																<input type="text" class="form-control" id="stok_gudang_1">
+																<input type="text" class="form-control ff_num_only" id="stok_gudang_1">
 															</td>
 															<td>
 																<input accept="image/*" type="file" id="foto_produk_1" class="product_foto">
@@ -108,19 +108,19 @@
 										
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Harga Modal</label>
+										<label class="g-sm-3 control-label ff_num_only">Harga Modal</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="harga_modal">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Harga Minimal</label>
+										<label class="g-sm-3 control-label ff_num_only">Harga Minimal</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="harga_minimal">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Harga Jual</label>
+										<label class="g-sm-3 control-label ff_num_only">Harga Jual</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="harga_jual">
 										</div>
@@ -307,10 +307,10 @@
 		row_warna += '		<input type="text" class="form-control" id="warna_produk_'+i_warna+'">';
 		row_warna += '	</td>';
 		row_warna += '	<td>';
-		row_warna += '		<input type="text" class="form-control" id="stok_toko_'+i_warna+'">';
+		row_warna += '		<input type="text" class="form-control ff_num_only" id="stok_toko_'+i_warna+'">';
 		row_warna += '	</td>';
 		row_warna += '	<td>';
-		row_warna += '		<input type="text" class="form-control" id="stok_gudang_'+i_warna+'">';
+		row_warna += '		<input type="text" class="form-control ff_num_only" id="stok_gudang_'+i_warna+'">';
 		row_warna += '	</td>';
 		row_warna += '	<td>';
 		row_warna += '		<input accept="image/*" type="file" id="foto_produk_'+i_warna+'" class="product_foto">'; 
@@ -455,7 +455,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 		row_search += 		$(this).find('.f_sug_product_color').text();
 		row_search += '</td>';
 		row_search += '<td width="150">';
-		row_search += '<input tpye="text" class="form-control f_sug_input_quan" placeholder="Kuantitas (e.g: 1)">';
+		row_search += '<input tpye="text" class="form-control f_sug_input_quan ff_num_only" placeholder="Kuantitas (e.g: 1)">';
 		row_search += '</td>';
 		row_search += '<td>';
 		row_search += '	<button type="button" class="btn btn-danger">';
@@ -465,7 +465,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 		row_search += '</tr>';
 
 		$('.f_tbody_barang_seri').append(row_search);
-	}
+	} 
 });
 </script>
 <script>
@@ -628,5 +628,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 $('body').on('click','.f_row_remove',function(){
 	$(this).closest('tr').remove();
 });
+
+
 </script>
 @stop
