@@ -544,5 +544,20 @@ class TransactionsController extends \BaseController {
 			return 0;
 		}
 	}
+	
+	public function makeVoid($id)
+	{
+		$transaction = Transaction::find($id);
+		$transaction->is_void = 1;
+		try
+		{
+			$transaction->save();
+			return 1;
+		}
+		catch(Exception $e)
+		{
+			return -1;
+		}
+	}
 
 }

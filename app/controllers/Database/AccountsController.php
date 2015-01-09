@@ -388,11 +388,11 @@ class AccountsController extends \BaseController {
 		try
 		{
 			$account->save();
-			return $respond = array('code'=>'200','status' => 'OK','messages' => $account->id);
+			return Response::json(array('code'=>'200','status' => 'OK','messages' => $account->id));
 		}
 		catch(Exception $ex)
 		{
-			return $respond = array('code'=>'400','status' => 'Bad Request');
+			return Response::json(array('code'=>'400','status' => 'Bad Request'));
 		}
 	}
 	

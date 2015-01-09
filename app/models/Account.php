@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Account extends \Eloquent implements UserInterface, RemindableInterface
+
+class Account extends \Eloquent
 {
 	protected $hidden = array('password');
 

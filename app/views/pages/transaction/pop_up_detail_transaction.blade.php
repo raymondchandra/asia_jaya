@@ -36,6 +36,9 @@
 										<th>
 											Sub Total
 										</th>
+										<th>
+											 
+										</th>
 									</tr>
 								</thead>
 								<tbody id="transaction_detail_content">
@@ -177,7 +180,6 @@
 																	'ctr' : $counter
 																},
 																success: function(response){
-																	//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
 																	if(response['code'] == 200)
 																	{
 																		window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$id);

@@ -155,7 +155,7 @@ class transController extends \HomeController{
 			$datas = null;
 			if($allTransaction->{'status'} != 'Not Found'){
 				foreach($dataAll as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at' => $allData->created_at, 'is_void' => $allData->is_void);
 				}
 			}
 
@@ -188,7 +188,7 @@ class transController extends \HomeController{
 				$allTransactionData = $allTransaction->{'messages'};
 				foreach($allTransactionData as $allData){
 					$allData->order = $this->getOrderArray($allData->id);
-					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at' => $allData->created_at, 'is_void' => $allData->is_void);
 					
 				}
 			}
@@ -466,7 +466,7 @@ class transController extends \HomeController{
 				}
 			}
 			
-			$response = array('code'=>'200','status' => 'NOK');
+			$response = array('code'=>'200','status' => 'OK');
 			return Response::json($response);
 		}
 		else
@@ -475,6 +475,24 @@ class transController extends \HomeController{
 			return Response::json($response);
 		}
 		
+	}
+	
+	public function makeVoid()
+	{
+		$id = Input::get('data');
+		$transController = new TransactionsController();
+		$voidResult = $transController->makeVoid($id);
+		if($voidResult == 1)
+		{
+			$trans = Transaction::find($id);
+			$cash = new CashesController();
+			$cashUpdate = $cash->insertWithParam($id, 0, $trans->total,"void transaction");
+			return Response::json($response = array('code'=>'200','status' => 'OK'));
+		}
+		else
+		{
+			return Response::json($response = array('code'=>'204','status' => 'NOK'));
+		}
 	}
 
 }

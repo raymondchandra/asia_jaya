@@ -1,10 +1,10 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$cash = new CashesController();
-		$cashUpdate = $cash->insertWithParam('-', 1000, 200,"transaction");
-		$cashResult = json_decode($cashUpdate->getContent());
-		var_dump($cashResult);
+		$accountController = new AccountsController();
+		$allEmployeeJson = $accountController->getAll();
+		$allEmployee = json_decode($allEmployeeJson->getContent());
+		var_dump($allEmployee->{'messages'});
 	});
 	Route::get('/tes2', function()
 	{
@@ -402,6 +402,10 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/update_solution_return', ['as'=>'david.update_solution_return','uses' => 'returnController@updateSolution']);
 	
 	Route::get('/view_cashflow', ['as'=>'david.view_cashflow','uses' => 'cashController@view_laporan_cash']);
+	
+	Route::put('/make_void', ['as'=>'david.make_void','uses' => 'transController@makeVoid']);
+	
+	Route::put('/add_obral', ['as'=>'david.add_obral','uses' => 'stockController@makeObral']);
 });
 
 

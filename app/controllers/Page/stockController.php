@@ -110,5 +110,20 @@ class stockController extends \HomeController{
 		return $productDetailController->deleteProdDet($id);
 	}
 	
+	public function makeObral()
+	{
+		$amount = Input::get('amount');
+		$id = Input::get('data');
+		
+		$controller = new ProductDetailsController();
+		$obralResult = $controller->addObral($amount);
+		if($obralResult == 1)
+		{
+			return $controller->updateMinusShop($id, $amount);
+		}
+		$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		return Response::json($respond);
+	}
+	
 	
 }
