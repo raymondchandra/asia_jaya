@@ -205,7 +205,7 @@ class CustomersController extends \BaseController {
 	public function getTop10Buyer()
 	{
 		$respond = array();
-		$customer = DB::table('transactions')->select(DB::raw('customer_id,sum(total) as total'))->groupBy('customer_id')->orderBy('total')->take(10)->get();
+		$customer = DB::table('transactions')->select(DB::raw('customer_id,sum(total) as total'))->groupBy('customer_id')->orderBy('total','dsc')->take(10)->get();
 		foreach($customer as $cust)
 		{
 			$cust->name = Customer::find($cust->customer_id)->name;

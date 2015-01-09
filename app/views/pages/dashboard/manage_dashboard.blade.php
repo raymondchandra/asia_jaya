@@ -1,6 +1,17 @@
 @extends('layouts.admin_layout'){{-- WARNING! fase ini sementara untuk show saja, untuk lebih lanjut akan dibuat controller agar tidak meng-extend layout --}}
 @section('content')	
 <div class="container-fluid">
+	<?php
+			
+		function toMoney($val,$symbol='IDR ',$r=0)
+		{
+			$n = $val;
+			$sign = ($n < 0) ? '-' : '';
+			$i = number_format(abs($n),$r,",",".");
+
+			return  $symbol.$sign.$i;
+		}
+	?>
 	<div class="row">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
@@ -25,7 +36,7 @@
 								Jumlah Uang 
 							</label>
 							<div class="g-sm-7">
-								<input type="text" class="form-control">
+								<input type="text" class="form-control" id="opening-cash-input">
 							</div>
 						</div>
 					</form>
@@ -35,9 +46,47 @@
 
 							</label>
 							<div class="g-sm-7">
-								<button class="btn btn-success">
-									Save
-								</button>
+								<input type="button" value="Save" class="btn btn-success opening-cash-btn">
+								<script>
+									$('body').on('click','.opening-cash-btn',function(){
+										$amount = $('#opening-cash-input').val();
+										$.ajax({
+											type: 'GET',
+											url: '{{URL::route('david.add_opening_cash')}}',
+											data: {
+												'amount' : $amount
+											},
+											success: function(response){
+												if(response['code'] == 200)
+												{
+													alert('success add opeing cash');
+													$('.today-cash').text("IDR " + toRp(response['message']));
+												}
+												else
+												{
+													alert("Something Going Wrong.. Check your form or contact developer..");
+												}
+											},error: function(xhr, textStatus, errorThrown){
+												alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+												alert("responseText: "+xhr.responseText);
+											}
+										},'json');
+									});
+									
+									function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+									function toRp(angka){
+										var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+										var rev2    = '';
+										for(var i = 0; i < rev.length; i++){
+											rev2  += rev[i];
+											if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+												rev2 += '.';
+											}
+										}
+										return rev2.split('').reverse().join('');
+									}
+									
+								</script>
 							</div>
 						</div>
 					</form>
@@ -52,7 +101,7 @@
 								Jumlah Uang 
 							</label>
 							<div class="g-sm-7">
-								<p type="text" class="form-control-static">Rp 2.200.000</p>
+								<p type="text" class="form-control-static today-cash">{{toMoney($todayCash)}}</p>
 							</div>
 						</div>
 					</form>
@@ -88,7 +137,7 @@
 									{{$buyer->name}}
 								</td>
 								<td>
-									{{$buyer->total}}
+									{{toMoney($buyer->total)}}
 								</td>
 							</tr>
 							@endforeach
@@ -214,14 +263,7 @@
 						},
 						series: [{
 							name: 'Hari',
-							data: [0, 30100200,20100200, 24100200, 36100200, 
-							10100200,30100200,20100200, 38100200, 9100200,
-							15100200, 38100200, 9100200, 23100200, 22100200, 
-							10100200, 30100200,20100200, 24100200, 36100200, 
-							10100200,30100200,20100200, 38100200, 9100200,
-							15100200, 38100200, 9100200, 23100200, 22100200,
-							0 
-							]
+							data: [{{$monthCash}}]
 						}]
 					});
 });
@@ -283,10 +325,7 @@
 				},
 				series: [{
 					name: 'Bulan',
-					data: [0, 30100200,20100200,
-					24100200, 36100200, 10100200,
-					15100200, 38100200, 9100200,
-					23100200, 22100200, 39100200]
+					data: [{{$yearCash}}]
 				}]
 			});
 		});

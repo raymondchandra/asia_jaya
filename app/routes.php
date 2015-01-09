@@ -1,10 +1,51 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$accountController = new AccountsController();
-		$allEmployeeJson = $accountController->getAll();
-		$allEmployee = json_decode($allEmployeeJson->getContent());
-		var_dump($allEmployee->{'messages'});
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<32 ; $i++)
+		{
+			if($i<10)
+			{
+				$date = "0".$i;
+				
+			}
+			else
+			{
+				$date = $i;
+			}
+			
+			if($i<9)
+			{
+				$date2 = "0".$i+1;
+				
+			}
+			else
+			{
+				$date2 = $i+1;
+			}
+			
+			if(date('n')<10)
+			{
+				$month = "0".date('n');
+			}
+			else
+			{
+				$month = date('n');
+			}
+			
+			$todayDate = date('Y')."-".$month."-".$date;
+			$datas = Cash::where(DB::raw('DATE(created_at)'),'=',$todayDate)->get();
+			$todayTotal = 0;
+			foreach($datas as $data)
+			{
+				$todayTotal += $data->in_amount;
+				$todayTotal -= $data->out_amount;
+			}
+			$array[$i-1] = $todayTotal;
+			echo $array[$i-1]."\n";
+		}
+		
 	});
 	Route::get('/tes2', function()
 	{
@@ -406,6 +447,9 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/make_void', ['as'=>'david.make_void','uses' => 'transController@makeVoid']);
 	
 	Route::put('/add_obral', ['as'=>'david.add_obral','uses' => 'stockController@makeObral']);
+	
+	Route::get('/add_opening_cash', ['as'=>'david.add_opening_cash','uses' => 'dashboardController@addOpeningCash']);
+	
 });
 
 

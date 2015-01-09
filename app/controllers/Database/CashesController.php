@@ -28,7 +28,7 @@ class CashesController extends \BaseController {
 	public function getTodayData()
 	{
 		$respond = array();
-		$datas = Cash::all();
+		$datas = Cash::whereRaw('created_at >= curdate()')->get();
 		if(count($datas) == 0)
 		{
 			$datas = null;
@@ -191,6 +191,107 @@ class CashesController extends \BaseController {
 			}
 			
 		}
+		return Response::json($respond);
+	}
+	
+	public function getTodayTotalCash()
+	{
+		$respond = array();
+		$datas = Cash::whereRaw('created_at >= curdate()')->get();
+		if(count($datas) == 0)
+		{
+			$datas = null;
+		}
+		else
+		{
+			$total = 0;
+			foreach($datas as $data)
+			{
+				$in = $data->in_amount;
+				$out = $data->out_amount;
+				$total = $total + $in -$out;
+				$data->total = $total;
+			}
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$total);
+		return Response::json($respond);
+	}
+	
+	public function getMonthlyCashFlow()
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<32 ; $i++)
+		{
+			if($i<10)
+			{
+				$date = "0".$i;
+				
+			}
+			else
+			{
+				$date = $i;
+			}
+			
+			if($i<9)
+			{
+				$date2 = "0".$i+1;
+				
+			}
+			else
+			{
+				$date2 = $i+1;
+			}
+			
+			if(date('n')<10)
+			{
+				$month = "0".date('n');
+			}
+			else
+			{
+				$month = date('n');
+			}
+			
+			$todayDate = date('Y')."-".$month."-".$date;
+			$datas = Cash::where(DB::raw('DATE(created_at)'),'=',$todayDate)->get();
+			$todayTotal = 0;
+			foreach($datas as $data)
+			{
+				$todayTotal += $data->in_amount;
+				$todayTotal -= $data->out_amount;
+			}
+			$array[$i-1] = $todayTotal;
+		}
+		$result = $array[0];
+		for($i=1 ; $i<31 ; $i++)
+		{
+			$result .= ",".$array[$i];
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$result);
+		return Response::json($respond);
+	}
+	
+	public function getYearlyCashFlow()
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<13 ; $i++)
+		{
+			$datas = Cash::where(DB::raw('MONTH(created_at)'),'=',$i)->get();
+			$todayTotal = 0;
+			foreach($datas as $data)
+			{
+				$todayTotal += $data->in_amount;
+				$todayTotal -= $data->out_amount;
+			}
+			$array[$i-1] = $todayTotal;
+		}
+		$result = $array[0];
+		for($i=1 ; $i<12 ; $i++)
+		{
+			$result .= ",".$array[$i];
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$result);
 		return Response::json($respond);
 	}
 
