@@ -402,6 +402,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/update_solution_return', ['as'=>'david.update_solution_return','uses' => 'returnController@updateSolution']);
 	
 	Route::get('/view_cashflow', ['as'=>'david.view_cashflow','uses' => 'cashController@view_laporan_cash']);
+	
+	Route::get('/range_date', ['as'=>'gentry.range_date','uses' => 'transController@filterByDateRange']);
 });
 
 
