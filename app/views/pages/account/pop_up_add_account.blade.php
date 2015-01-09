@@ -80,6 +80,26 @@
 				'role' : $role
 			},
 			success: function(response){
+			
+				var f_tbody_karyawan_node = '<tr class="bg-success">';
+				f_tbody_karyawan_node +=' <td>'+$username+'</td>';
+				f_tbody_karyawan_node +=' <td>'+$role+'</td>';
+				f_tbody_karyawan_node +=' <td>-</td>';
+				f_tbody_karyawan_node +=' <td>Aktif</td>';
+				f_tbody_karyawan_node +=' <td>';
+				f_tbody_karyawan_node +=' 	<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>';
+				f_tbody_karyawan_node +=' 	<input type="hidden" value="'+response['messages']+'"/>';
+				f_tbody_karyawan_node +=' 	<button type="button" class="f_activate_btn btn btn-success btn-xs hidden">Activate</button>';
+				f_tbody_karyawan_node +=' 	<input type="hidden" value="'+response['messages']+'"/>';
+				f_tbody_karyawan_node +=' 	<button type="button" class="f_deactivate_btn btn btn-danger btn-xs">Deactivate</button>';
+				f_tbody_karyawan_node +=' 	<input type="hidden" value="'+response['messages']+'"/>';
+				f_tbody_karyawan_node +=' <td>';
+				f_tbody_karyawan_node +=' 	<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_delete_account">Delete</button>';
+				f_tbody_karyawan_node +=' 	<input type="hidden" value="'+response['messages']+'"/>';
+				f_tbody_karyawan_node +=' </td>';
+				f_tbody_karyawan_node +=' </tr>';
+
+				$('#f_tbody_karyawan').append(f_tbody_karyawan_node);
 				
 			},error: function(xhr, textStatus, errorThrown){
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);

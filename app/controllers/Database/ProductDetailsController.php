@@ -458,4 +458,24 @@ class ProductDetailsController extends \BaseController {
 		
 		return $orders;
 	}
+	
+	public function addObral($amount)
+	{
+		$respond = array();
+		$product = Product::where('product_code','=','000000')->first();
+		$productDetail = ProductDetail::where('product_id','=',$product->id)->first();
+		$current = $productDetail->stock_shop;
+		$productDetail->stock_shop = $current + $amount;
+		
+		try
+		{
+			$productDetail->save();
+			return 1;
+		}
+		catch(Exception $e)
+		{
+			return -1;
+		}
+	}
+	
 }

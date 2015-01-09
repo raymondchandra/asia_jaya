@@ -280,7 +280,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered"></th>
+							<th class="table-bordered">Tanggal</th>
 							<th class="table-bordered" width="100">View Detail</th>
 							<th class="table-bordered" width="100">Print</th>
 						</thead>
@@ -339,6 +339,12 @@
 											<input type='hidden' value='{{$data->total_paid}}' id="hidden_paid"/>
 											<button id="detail_{{$data->id}}" class="btn btn-info btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
 											<input type="hidden" value="{{$data->id}}">
+											@if($data->is_void == 0)
+											<button id="void_{{$data->id}}" class="btn btn-danger btn-xs view_void_button" data-toggle="modal" data-target=".pop_up_void_transaction" style="margin-top: 5px;">
+												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Void
+											</button>
+											@endif
+											
 											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
 										<td>
@@ -359,8 +365,58 @@
 			</div>
 		</div>
 	</div>
+	
+<!-- modal void -->	
+<div class="modal fade pop_up_void_transaction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<!--<div style="font-size: 1.2em;">
+					<b>ID Transaksi :</b>  <span id="pop_up_trans_id"></span>
+					<span class="clearfix"></span>
+					<b>Nama Customer :</b> <span id="pop_up_trans_name"></span>
+				</div>-->
+			</div>
+			<form class="form-horizontal" role="form">
+				<div class="modal-body">
+					<div class="row">
+						<div class="g-sm-12"><!-- g-sm-5 -->
+							
+								
+							<div class="form-group" style="text-align: center;">
+								<h4>
+								Apakah Anda yakin ingin mem-void transaksi ini?
+								</h4>
+								<input type="hidden" id="tableRep"/>
+								<button type="button" class="btn btn-danger yes-btn" data-dismiss="modal">Ya</button>
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Tidak</button>
+							</div>
+							
+							
+							
+							<!--
+							<button type="button" class="btn btn-success pull-right">
+								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Print Customer
+							</button>
+							<button type="button" class="btn btn-warning pull-right" style="margin-right: 20px;">
+								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Print Toko
+							</button>
+							-->
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
-	@include('pages.transaction.pop_up_detail_transaction')
+	@include('pages.transaction.pop_up_detail_transaction') 
 
 	<script>
 
@@ -618,6 +674,36 @@
 		}
 		return rev2.split('').reverse().join('');
 	}
+	
+	$( 'body' ).on( "click",'.view_void_button', function() {
+		$('#tableRep').val($(this).prev().val());
+		//alert($(this).prev().val());
+	});
+	
+	$( 'body' ).on( "click",'.yes-btn', function() {
+		//ajax void
+		$id = $('#tableRep').val();
+		$.ajax({
+			type: 'PUT',
+			url: '{{URL::route('david.make_void')}}',
+			data: {
+				'data' : $id
+			},
+			success: function(response){
+				if(response['code'] == 200)
+				{
+					location.reload();
+				}
+				else
+				{
+					alert("Something Going Wrong.. Check your form or contact developer..");
+				}
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+	});
 	
 	$( 'body' ).on( "click",'.print-toko-btn', function() {
 		window.open("{{URL::route('david.view_print_toko')}}"+"?dataT="+$(this).attr('id'));
