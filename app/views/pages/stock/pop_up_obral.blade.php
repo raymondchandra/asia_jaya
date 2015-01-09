@@ -15,10 +15,39 @@
 							<div class="form-group">
 								<label class="g-sm-3 g-sm-push-2 control-label">Jumlah Yang Mau Diobral</label>
 								<div class="g-sm-3 g-sm-push-2">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" id="input_amount">
 								</div>
 								<div class="g-sm-3 g-sm-push-2">
-									<button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+									<input type="hidden" id="tableRep"/>
+									<button type="button" class="btn btn-success save-btn" data-dismiss="modal">Save</button>
+									<script>
+										$( 'body' ).on( "click",'.save-btn', function() {
+											$id = $('#tableRep').val();
+											$amount = $('#input_amount').val();
+											alert($id+ " " + $amount);
+											$.ajax({
+												type: 'PUT',
+												url: '{{URL::route('david.add_obral')}}',
+												data: {
+													'data' : $id,
+													'amount' : $amount
+												},
+												success: function(response){
+													if(response['code']==204)
+													{
+														location.reload();
+													}
+													else
+													{
+														alert("Internal Server Error");
+													}
+												},error: function(xhr, textStatus, errorThrown){
+													alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+													alert("responseText: "+xhr.responseText);
+												}
+											},'json');
+										});
+									</script>
 								</div>
 							</div>
 

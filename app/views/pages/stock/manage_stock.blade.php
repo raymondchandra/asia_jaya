@@ -368,7 +368,7 @@
 									<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: block;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row
 									</button>
-									<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_obral" style="display: block; margin-top: 5px;">
+									<button class="btn btn-danger btn-xs obral-btn" data-toggle="modal" data-target=".pop_up_obral" style="display: block; margin-top: 5px;">
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral
 									</button>
 									<input type="hidden" value="{{$prodList->idDetail}}" />
@@ -390,6 +390,11 @@
 									$(this).addClass('hidden');
 								});
 								
+								$( 'body' ).on( "click",'.obral-btn', function() {
+									$id= $(this).next().val();
+									$('#tableRep').val($id);
+								});
+								
 								$( 'body' ).on( "click",'.hapus_button', function() {
 									$id= $(this).prev().val();
 									$idDetail = $(this).prev().prev().val();
@@ -401,7 +406,7 @@
 										},
 										success: function(response){
 											alert('Delete Berhasil');
-											
+											location.reload();
 										},error: function(xhr, textStatus, errorThrown){
 											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 											alert("responseText: "+xhr.responseText);
@@ -494,6 +499,7 @@
 													success: function(data)   								
 													{
 														alert(data);
+														
 													},error: function(xhr, textStatus, errorThrown){
 														alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 														alert("responseText: "+xhr.responseText);
@@ -501,6 +507,7 @@
 												});
 												
 											}
+											location.reload();
 										},error: function(xhr, textStatus, errorThrown){
 											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 											alert("responseText: "+xhr.responseText);
