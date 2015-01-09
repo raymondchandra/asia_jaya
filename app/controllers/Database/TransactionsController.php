@@ -246,7 +246,7 @@ class TransactionsController extends \BaseController {
 	
 	public function getSortedAll($by, $order)
 	{
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid');
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
 		$result = $joined->orderBy($by, $order)->get();
 		
 		return $this->getReturn($result);
@@ -256,7 +256,7 @@ class TransactionsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid');
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
 		
 		if($id != '-')
 		{
@@ -392,7 +392,7 @@ class TransactionsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid');
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
 		
 		if($id != '-')
 		{
@@ -489,12 +489,12 @@ class TransactionsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('void', '=', $void);
+				$resultTab = $joined->where('is_void', '=', $void);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('void', '=', $void);
+				$resultTab = $resultTab->where('is_void', '=', $void);
 			}
 		}
 		

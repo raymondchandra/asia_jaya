@@ -192,7 +192,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="72">
 								<a href="javascript:void(0)">Stok Toko</a>
 									@if($filtered == 0)
 										@if($sortBy == 'stock_shop')
@@ -327,31 +327,31 @@
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
-									<input type="text" id="f_cell_harga_modal_input" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
+									<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									<span class="f_excel_xlabel f_excel_xlabel_4_{{$prodList->id}}" id="min_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->min_price}}">{{$prodList->min_price}}</span>
-									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_4_{{$prodList->id}}" style="" value="{{$prodList->min_price}}"/>
+									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_4_{{$prodList->id}}" style="" value="{{$prodList->min_price}}"/>
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									<span class="f_excel_xlabel f_excel_xlabel_5_{{$prodList->id}}" id="sales_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->sales_price}}">{{$prodList->sales_price}}</span>
-									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_5_{{$prodList->id}}" style="" value="{{$prodList->sales_price}}"/>
+									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_5_{{$prodList->id}}" style="" value="{{$prodList->sales_price}}"/>
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									<span class="f_excel_xlabel f_excel_xlabel_6_{{$prodList->id}}" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
-									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_6_{{$prodList->id}}" style="" value="{{$prodList->stock_shop}}"/>
+									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_6_{{$prodList->id}}" style="" value="{{$prodList->stock_shop}}"/>
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
 									<span class="f_excel_xlabel f_excel_xlabel_7_{{$prodList->id}}" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
-									<input type="text" id="" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_7_{{$prodList->id}}" style="" value="{{$prodList->stock_storage}}"/>
+									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_7_{{$prodList->id}}" style="" value="{{$prodList->stock_storage}}"/>
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
@@ -743,6 +743,7 @@ $(":file").filestyle(
 
 $(".bootstrap-filestyle").find('label').addClass('btn-xs').addClass('btn-info').text('');
 $(".bootstrap-filestyle").find('label').append('<span class="glyphicon glyphicon-folder-open" style="margin-right: 5px;"></span>Ubar Gambar');
+
 
 
 

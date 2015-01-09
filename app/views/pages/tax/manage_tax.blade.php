@@ -24,9 +24,9 @@
 									<label class="control-label g-lg-3">Nilai Tax (%)</label>
 									<div class="g-lg-7">
 										@if($tax==null)
-										<input type="text" class="form-control" value="0" id="taxAmount">
+										<input type="text" class="form-control" value="0" id="taxAmount" placeholder="e.g.: 10">
 										@else
-										<input type="text" class="form-control" value="{{$tax->amount}}" id="taxAmount">
+										<input type="text" class="form-control" value="{{$tax->amount}}" id="taxAmount" placeholder="e.g.: 10">
 										@endif
 									</div>
 								</div>
@@ -47,6 +47,19 @@
 </div>
 
 <script>
+
+	/* -- jan 9 2015 | START -- */
+	/* -- button disabled error prevention -- */
+	$('#taxAmount').on('input', function() {  
+		//var ff_harga_min = parseFloat($(this).closest('.form-horizontal').find('#edit_harga_min').text());
+		if( ($(this).val() != '') && !isNaN($(this).val())){
+			$('#saveTax').removeAttr('disabled');
+		} else {
+			$('#saveTax').attr('disabled','disabled');
+		}
+	});
+	/* -- jan 9 2015 | END -- */
+
 	$("body").on('click', '#saveTax', function(){
 		$tax = $("#taxAmount").val();
 		$.ajax({

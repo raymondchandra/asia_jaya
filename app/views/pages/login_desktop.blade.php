@@ -36,15 +36,6 @@
 											<input type="password" class="form-control" placeholder="Password">	
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="g-sm-push-4 g-sm-3">
-											<div class="checkbox">
-												<label>
-													<input type="checkbox"> Remember me
-												</label>
-											</div>
-										</div>
-									</div>
 
 									<div class="form-group">
 										<div class=" g-sm-12">
