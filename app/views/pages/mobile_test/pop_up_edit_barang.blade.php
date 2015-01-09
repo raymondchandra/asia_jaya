@@ -45,11 +45,11 @@
 					<div class="form-group" style="margin-bottom: 0px;">
 						<label for="" class="g-sm-3 control-label">Harga@</label>
 						<div class="g-sm-4">
-							<input class="form-control" id="f_hsatuan_qty" value="">
+							<input type="number" class="form-control" id="f_hsatuan_qty" value="">
 						</div>
 						<label for="" class="g-sm-2 control-label">Qty.</label>
 						<div class="g-sm-3">
-							<input type="text" class="form-control" value="" id="f_edit_qty">
+							<input type="number" class="form-control" value="" id="f_edit_qty">
 						</div>
 					</div>
 					<div class="form-group" style="margin-bottom: 0px;">
@@ -109,7 +109,7 @@
 					$('#quantity_'+$row_id).text($('#f_edit_qty').val());
 					$oldTotal = $('#currentTotal').val();
 					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
-					$('#price_'+$row_id).text("IDR " + toRp($newTotal));
+					$('#price_'+$row_id).text("" + toRp($newTotal));
 					$inc = $('#tabRep').val();
 					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
 					$total = $currentTotal + $newTotal - $oldTotal;

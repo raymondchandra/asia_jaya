@@ -135,7 +135,7 @@
 													Qty. 
 												</th>
 												<th rowspan="2">
-													Price
+													Price(IDR)
 												</th>
 											</tr>
 
@@ -313,7 +313,7 @@
 			tab_panel+='						Qty.                                                                                                                                       ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='					<th rowspan="2">                                                                                                                               ';
-			tab_panel+='						Price                                                                                                                                      ';
+			tab_panel+='						Price(IDR)                                                                                                                                 ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='				</tr>                                                                                                                                              ';
 			tab_panel+='                                                                                                                                                                  ';
