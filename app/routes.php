@@ -1,28 +1,10 @@
 <?php
 	Route::get('/tes', function()
 	{
-		$id = 1;
-		$amount = 2;
-		$productdetail = ProductDetail::find($id);
-		if ($productdetail == null)
-		{
-			$respond = array('code'=>'404','status' => 'Not Found');
-		}
-		else
-		{
-			//edit value
-			$tempAmount = $productdetail->stock_shop - $amount;
-			$productdetail->stock_shop = $tempAmount;
-			try {
-				$productdetail->save();
-				$respond = array('code'=>'204','status' => 'No Content');
-			} catch (Exception $e) {
-				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
-			}
-			
-		}
-		
-		var_dump($respond);
+		$cash = new CashesController();
+		$cashUpdate = $cash->insertWithParam('-', 1000, 200,"transaction");
+		$cashResult = json_decode($cashUpdate->getContent());
+		var_dump($cashResult);
 	});
 	Route::get('/tes2', function()
 	{
@@ -418,6 +400,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::put('/update_stock', ['as'=>'david.update_stock','uses' => 'transController@updateStock']);
 	
 	Route::put('/update_solution_return', ['as'=>'david.update_solution_return','uses' => 'returnController@updateSolution']);
+	
+	Route::get('/view_cashflow', ['as'=>'david.view_cashflow','uses' => 'cashController@view_laporan_cash']);
 });
 
 

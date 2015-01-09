@@ -10,8 +10,8 @@ class Cash extends \Eloquent {
 	// Don't forget to fill this array
 	protected $fillable = [
 		'transaction_id',
-		'in',
-		'out',
+		'in_amount',
+		'out_amount',
 		'current',
 		'type',
 	];

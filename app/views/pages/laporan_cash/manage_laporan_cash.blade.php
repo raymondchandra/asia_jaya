@@ -28,20 +28,28 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							<!--
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Customer Name</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							-->
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Total Transaksi</a>
+								<a href="javascript:void(0)">In</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Total Cash</a>
+								<a href="javascript:void(0)">Out</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Total</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -95,6 +103,48 @@
 						</thead>
 						
 						<tbody>
+							<?php
+			
+								function toMoney($val,$symbol='IDR ',$r=0)
+								{
+									$n = $val;
+									$sign = ($n < 0) ? '-' : '';
+									$i = number_format(abs($n),$r,",",".");
+
+									return  $symbol.$sign.$i;
+								}
+							?>
+							@if($datas != null)
+								@foreach($datas as $data)
+									<tr>
+										<td>
+											{{$data->type}}
+										</td>
+										<td>
+											@if($data->transaction_id == null)
+												-
+											@else
+												{{$data->transaction_id}}
+											@endif
+										</td>
+										<td>
+											{{toMoney($data->in_amount)}}
+										</td>
+										<td>
+											{{toMoney($data->out_amount)}}
+										</td>
+										<td>
+											{{toMoney($data->total)}}
+										</td>
+										<td>
+											{{$data->created_at}}
+										</td>
+									</tr>
+								@endforeach								
+							@else
+							
+							@endif
+							<!--
 							<tr>
 								<td>
 									Transaksi
@@ -178,6 +228,7 @@
 									2015-7-30 07:34:01
 								</td>
 							</tr>
+							-->
 									<!--<tr> 
 										
 										<td> 

@@ -456,7 +456,40 @@
 				$total = 0;
 				
 				$.each(response['messages'], function( i, resp ) {
-					$data += "<tr><td>";
+					$shop = resp.stock_shop;
+					$storage = resp.stock_storage;
+					$avaliability = 0;
+					if(resp.quantity > $shop)
+					{
+						if(resp.quantity > $storage)
+						{
+							$avaliability = 2;
+						}
+						else
+						{
+							$avaliability = 1;
+						}
+					}
+					else
+					{
+						
+					}
+					if($avaliability == 1)
+					{
+						$data += "<tr class='s_danger_1'>";
+					}
+					else if($avaliability == 2)
+					{
+						$data += "<tr class='s_danger_2'>";
+					}
+					else
+					{
+						$data += "<tr>";
+					}
+					$data += "<input id='hidden_id' type=hidden value='"+resp.id+"'/>";
+					$data += "<input id='hidden_shop' type=hidden value='"+$shop+"'/>";
+					$data += "<input id='hidden_storage' type=hidden value='"+$storage+"'/>";
+					$data += "<td>"
 					$data += resp.namaProduk;
 					$data += "</td><td>";
 					$data += "<img src='{{asset('"+resp.foto+"')}}' width='100' height='100'>";
@@ -486,6 +519,7 @@
 					$kembalian = parseInt($paid) - parseInt($total);
 					$('#f_uang_kembalian').text("IDR " + toRp($kembalian));
 					$('#save-btn').addClass('hidden');
+					$('#save-btn').addClass('paid');
 				}
 				else
 				{
@@ -555,6 +589,69 @@
 			$tax = $total * toAngka($('#transaction_tax_detail').text()) / 100;
 			$total += $tax;
 			$('#transaction_total_detail').text("IDR " + toRp($total));
+			
+			//cek stock
+			$shop = $(this).closest('tr').find('#hidden_shop').val();
+			$storage = $(this).closest('tr').find('#hidden_storage').val();
+			$avaliability = 0;
+			if(parseInt($(this).val()) > parseInt($shop))
+			{
+				if(parseInt($(this).val()) > parseInt(parseInt($storage) + parseInt($shop)))
+				{
+					$avaliability = 2;
+				}
+				else
+				{
+					$avaliability = 1;
+				}
+			}
+			else
+			{
+				
+			}
+			
+			if($avaliability == 1)
+			{
+				$(this).closest('tr').removeClass('s_danger_2');
+				$(this).closest('tr').addClass('s_danger_1');
+				$(this).closest('tr').removeClass('error');
+			}
+			else if($avaliability == 2)
+			{
+				$(this).closest('tr').removeClass('s_danger_1');
+				$(this).closest('tr').addClass('s_danger_2');
+				$(this).closest('tr').addClass('error');
+			}
+			else
+			{
+				$(this).closest('tr').removeClass('s_danger_2');
+				$(this).closest('tr').removeClass('s_danger_1');
+				$(this).closest('tr').removeClass('error');
+			}
+			$canContinue = 1;
+			$("#transaction_detail_content tr").each(function(i, v)
+			{
+				if($(this).hasClass('error'))
+				{
+					$canContinue = 0;
+				}
+			});
+			
+			if($canContinue == 0)
+			{
+				$('#save-btn').addClass('hidden');
+			}
+			else
+			{
+				if($('#save-btn').hasClass('paid'))
+				{
+				
+				}
+				else
+				{
+					$('#save-btn').removeClass('hidden');
+				}
+			}
 		}
 		
 		

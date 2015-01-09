@@ -52,10 +52,10 @@
 							<p class="form-control-static" id="f_subtotal_edit"></p>
 						</div>
 						<script>
-						$('body').on('change','#f_edit_qty',function(){
+						$('body').on('keyup','#f_edit_qty',function(){
 							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
 						});
-						$('body').on('change','#f_hsatuan_qty',function(){
+						$('body').on('keyup','#f_hsatuan_qty',function(){
 							$min_price = $('#minPrice').val();
 							if(parseInt($('#f_hsatuan_qty').val()) < parseInt($min_price))
 							{
@@ -99,9 +99,9 @@
 				$('body').on('click','#changeButton',function(){
 					$row_id = $('#rowRep').val();
 					$('#quantity_'+$row_id).text($('#f_edit_qty').val());
-					$('#price_'+$row_id).text("IDR " + toRp($('#f_hsatuan_qty').val()));
 					$oldTotal = $('#currentTotal').val();
 					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
+					$('#price_'+$row_id).text("IDR " + toRp($newTotal));
 					$inc = $('#tabRep').val();
 					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
 					$total = $currentTotal + $newTotal - $oldTotal;

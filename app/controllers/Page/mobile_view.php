@@ -159,7 +159,36 @@ class mobile_view extends \BaseController{
 							
 							if($productDetailId!=-1){
 								//add Orders
-								$addOrders = $this->addOrders($prodList['quantity'], $transactionId, $price, $productDetailId);
+								//cek seri
+								$cekProduct = ProductDetail::find($productDetailId);
+								if($cekProduct -> isSeri == 1)
+								{
+									//iterasi dari reference
+									$reference = $cekProduct->reference;
+									$reference = explode(';',$reference);
+									$counter = count($reference);
+									
+									for($i=0 ; $i<$counter-1 ; $i++)
+									{
+										$quant = explode('-',$reference[$i]);
+										$productDetail = ProductDetail::find($quant[0]);
+										if($productDetail->deleted == '0')
+										{
+											if($i == 0)
+											{
+												$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
+											}
+											else
+											{
+												$clr .= " ".$prdClr[$i]." x ".$quant[count($quant)-1];
+											}
+										}
+									}
+								}
+								else
+								{
+									$addOrders = $this->addOrders($prodList['quantity'], $transactionId, $price, $productDetailId);
+								}
 								if($addOrders!=-1){
 									$response = array('code'=>'201','status' => 'Created');
 								}else{

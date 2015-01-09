@@ -25,6 +25,29 @@ class CashesController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	public function getTodayData()
+	{
+		$respond = array();
+		$datas = Cash::all();
+		if(count($datas) == 0)
+		{
+			$datas = null;
+		}
+		else
+		{
+			$total = 0;
+			foreach($datas as $data)
+			{
+				$in = $data->in_amount;
+				$out = $data->out_amount;
+				$total = $total + $in -$out;
+				$data->total = $total;
+			}
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$datas);
+		return Response::json($respond);
+	}
+	
 	/*
 		@author: Gentry Swanri
 		@parameter :

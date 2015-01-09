@@ -42,7 +42,7 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book" style="color:#fff; margin-right:10px;"></span>Laporan<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#"><span class="glyphicon glyphicon-folder-close" style="margin-right:10px;"></span>Laporan by Kas</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-folder-close" style="margin-right:10px;"></span>Laporan by Kasir</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>Laporan by Transaksi</a></li>
 						<li><a href="#"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>Laporan by Customer</a></li>
 					</ul>

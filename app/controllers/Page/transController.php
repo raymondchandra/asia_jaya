@@ -317,7 +317,7 @@ class transController extends \HomeController{
 				//update cash
 				$cash = new CashesController();
 				//$transactionId, $in, $out, $type
-				$cashUpdate = $cash->insertWithParam($id, $total, $total_paid-$total,"transaction");
+				$cashUpdate = $cash->insertWithParam($id, $total_paid, $total_paid-$total,"transaction");
 				$cashResult = json_decode($cashUpdate->getContent());
 				if($cashResult->{'code'} == 201)
 				{
