@@ -126,6 +126,17 @@ class transController extends \HomeController{
 		$filtered = Input::get('filtered', '0');
 		$transactionController = new TransactionsController();
 		
+		$start_date = Input::get('start_date');
+		$end_date = Input::get('end_date');
+		
+		if($start_date != '' && $end_date != ''){
+			$from = date(date("Y-m-d, G:i:s", strtotime($start_date)));
+			$to = date(date("Y-m-d, G:i:s", strtotime($end_date)));
+		}else{
+			$from = '';
+			$to = '';
+		}
+		
 		if($filtered == '0')
 		{
 			if($sortBy === "none")
@@ -143,7 +154,7 @@ class transController extends \HomeController{
 			}
 			else
 			{
-				$allTransactionJson = $transactionController->getSortedAll($sortBy, $order);
+				$allTransactionJson = $transactionController->getSortedAll($sortBy, $order, $from, $to);
 				$allTransaction = json_decode($allTransactionJson->getContent());
 				if($allTransaction->{'status'}!='Not Found'){
 					$dataAll = $allTransaction->{'messages'};
@@ -159,7 +170,7 @@ class transController extends \HomeController{
 				}
 			}
 
-			return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('datas','sortBy','order','filtered'));
+			return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('datas','sortBy','order','filtered','start_date','end_date'));
 		}
 		else
 		{
@@ -175,11 +186,11 @@ class transController extends \HomeController{
 			
 			if($sortBy == "none")
 			{
-				$allTransactionJson = $transactionController->getFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $is_void, $status);
+				$allTransactionJson = $transactionController->getFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $is_void, $status, $from, $to);
 			}
 			else
 			{
-				$allTransactionJson = $transactionController->getSortedFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $is_void, $status, $sortBy, $order);
+				$allTransactionJson = $transactionController->getSortedFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $is_void, $status, $sortBy, $order, $from, $to);
 			}
 			//$allEmployeeJson = $accountController->getFilteredProfile($username, $role, $lastLogin, $active);
 			$allTransaction = json_decode($allTransactionJson->getContent());
@@ -193,7 +204,7 @@ class transController extends \HomeController{
 				}
 			}
 
-			return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('datas','sortBy','order','filtered','id','name','total','discount','tax','sales_id','username','is_void','status'));
+			return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('datas','sortBy','order','filtered','id','name','total','discount','tax','sales_id','username','is_void','status','start_date','end_date'));
 		}
 	
 		/*
@@ -215,6 +226,7 @@ class transController extends \HomeController{
 		*/
 	}
 	
+	/*
 	public function filterByDateRange(){
 		$start_date = Input::get('start_date');
 		$end_date = Input::get('end_date');
@@ -232,6 +244,7 @@ class transController extends \HomeController{
 		return $dataAll;
 		
 	}
+	*/
 
 	function updateVoid(){
 		$transactionController = new TransactionsController();
