@@ -28,7 +28,7 @@
 		}
 		</script>
 	</head>
-	<body onload="startTime()">
+	<body>
 		<!-- <div class="s_orenji_header">
 		</div> -->
 		<div class="s_top_header">
@@ -105,7 +105,9 @@
 			  //alert('modal closed');
 			  //-- fungsi untuk me-reset sluruh input[type=text] pada modal --
 			  $(this).find('input[type=text]').val('');
-			})
+			});
+			
+			startTime()
 		</script>
 		
 	</body>

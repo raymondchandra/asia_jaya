@@ -18,25 +18,31 @@
 
 			<div class="modal-body">
 				<div class="form-horizontal">
-					<div class="form-group">
+					<div class="form-group" style="margin-bottom: 0px;">
 						<label class="g-sm-3 control-label">Kode</label>
 						<div class="g-sm-9">
 							<p class="form-control-static" id="edit_code"></p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="margin-bottom: 0px;">
 						<label class="g-sm-3 control-label">Nama</label>
 						<div class="g-sm-9">
 							<p class="form-control-static" id="edit_nama"></p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="margin-bottom: 0px;">
 						<label class="g-sm-3 control-label">Warna</label>
 						<div class="g-sm-9">
 							<p class="form-control-static" id="edit_warna"></p>
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="margin-bottom: 0px;">
+						<label class="g-sm-3 control-label">Harga Min</label>
+						<div class="g-sm-9">
+							<p class="form-control-static" id="edit_harga_min"></p>
+						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 0px;">
 						<label for="" class="g-sm-3 control-label">Harga@</label>
 						<div class="g-sm-4">
 							<input class="form-control" id="f_hsatuan_qty" value="">
@@ -46,7 +52,7 @@
 							<input type="text" class="form-control" value="" id="f_edit_qty">
 						</div>
 					</div>
-					<div class="form-group">
+					<div class="form-group" style="margin-bottom: 0px;">
 						<label class="g-sm-3 control-label">Subtotal</label>
 						<div class="g-sm-9">
 							<p class="form-control-static" id="f_subtotal_edit"></p>
@@ -121,6 +127,19 @@
 					}
 					return rev2.split('').reverse().join('');
 				}
+
+
+				/* -- jan 9 2015 | START -- */
+				/* -- button disabled error prevention -- */
+				$('#f_hsatuan_qty').on('input', function() {  
+				   var ff_harga_min = parseFloat($(this).closest('.form-horizontal').find('#edit_harga_min').text());
+				   if( ($(this).val() < ff_harga_min) || isNaN($(this).val())){
+				   	$('#changeButton').attr('disabled','disabled');
+				   } else {
+				   	$('#changeButton').removeAttr('disabled');
+				   }
+				});
+				/* -- jan 9 2015 | END -- */
 			</script>
 
 		</div>

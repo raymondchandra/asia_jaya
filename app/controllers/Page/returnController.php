@@ -313,7 +313,6 @@ class returnController extends \HomeController{
 		
 	}
 	
-	/*
 	public function search_product_return(){
 		//$transaction_id = Input::get('data');
 		//$transaction_id = 1;
@@ -330,8 +329,8 @@ class returnController extends \HomeController{
 		//return $transaction_id;
 		return View::make('pages.return.search_return', compact('dataOrder'));
 	}
-	*/
 	
+	/*
 	public function search_product_return()
 	{
 		//return View::make('pages.admin.attribute.manage_attribute', compact('attributes','sortBy','sortType','page','filtered'));
@@ -398,6 +397,7 @@ class returnController extends \HomeController{
 			return View::make('pages.return.search_return', compact('datas','sortBy','order','filtered','id','cust_name','prod_code','prod_name','transaction_id','created_at'));
 		}	
 	}
+	*/
 	
 	public function search_product_return2(){
 		$cust_name = Input::get('cust_name');

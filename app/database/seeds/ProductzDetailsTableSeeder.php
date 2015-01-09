@@ -11,17 +11,18 @@ class ProductzDetailsTableSeeder extends Seeder {
 
 		for ($i=1; $i < 11; $i++)
 		{
+			if($i < 10)
+			{
+				$photoName = '0'.$i;
+			}
+			else
+			{
+				$photoName = '00'.$i;
+			}
 			ProductDetail::create([
 				'color' => $faker->colorName,
 				//http://localhost/asia_jaya/public/assets/product_img/001.jpg
-				if($i == 10)
-				{
-					'photo' => 'assets/product_img/0'.$i.'.jpg',
-				}
-				else
-				{
-					'photo' => 'assets/product_img/00'.$i.'.jpg',
-				}
+				'photo' => 'assets/product_img/0'.$photoName.'.jpg',
 				'stock_shop' => $faker->randomNumber(3),
 				'stock_storage' => $faker->randomNumber(3),
 				'product_id' => $i,
