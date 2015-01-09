@@ -1,49 +1,37 @@
 <?php
+use Carbon\Carbon;
 	Route::get('/tes', function()
 	{
-		$respond = array();
-		$array = array();
-		for($i=1 ; $i<32 ; $i++)
+		if(Struk::find(1) == null)
 		{
-			if($i<10)
+			$struk = new Struk();
+			$struk->date = Carbon::Now();
+			$struk->no_struk = 1;
+			$struk->save();
+			
+			return 1;
+		}
+		else
+		{
+			$struk = Struk::find(1);
+			
+			if(Carbon::parse($struk->date)->diffInDays(Carbon::Now()) >= 1)
 			{
-				$date = "0".$i;
+				$struk->date= Carbon::Now();
+				$struk->no_struk = 1;
+				$struk->save();
 				
+				return 1;
 			}
 			else
 			{
-				$date = $i;
-			}
-			
-			if($i<9)
-			{
-				$date2 = "0".$i+1;
 				
+				$nmr = $struk->no_struk;
+				$struk->no_struk = $nmr+1;
+				$struk->save();
+				
+				return $nmr+1;
 			}
-			else
-			{
-				$date2 = $i+1;
-			}
-			
-			if(date('n')<10)
-			{
-				$month = "0".date('n');
-			}
-			else
-			{
-				$month = date('n');
-			}
-			
-			$todayDate = date('Y')."-".$month."-".$date;
-			$datas = Cash::where(DB::raw('DATE(created_at)'),'=',$todayDate)->get();
-			$todayTotal = 0;
-			foreach($datas as $data)
-			{
-				$todayTotal += $data->in_amount;
-				$todayTotal -= $data->out_amount;
-			}
-			$array[$i-1] = $todayTotal;
-			echo $array[$i-1]."\n";
 		}
 		
 	});

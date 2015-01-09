@@ -15,13 +15,13 @@
 					</div>
 					<div class="input-daterange g-md-6">
 						<div class="g-md-4">
-							<input value="2012-04-05" class="f_date_0 form-control" id="start_date"/>
+							<input value="" class="f_date_0 form-control" id="start_date"/>
 						</div>
 						<div class="g-md-1" style="text-align:center; line-height: 34px;">
 							<span>to</span>
 						</div>
 						<div class="g-md-4">
-							<input value="2012-04-07" class="f_date_1 form-control" id="end_date"/>
+							<input value="" class="f_date_1 form-control" id="end_date"/>
 						</div>
 						<div class="g-md-3">
 							<button type="button" class="btn btn-success" id="show_range_button">
