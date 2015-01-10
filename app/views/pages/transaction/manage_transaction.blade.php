@@ -290,7 +290,7 @@
 					$data += "</td>";
 					$data += "</tr>"
 					$('#transaction_detail_content').html($data);
-					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);
+					$total += parseInt(parseInt(resp.price)/parseInt(resp.quantity)) * parseInt(resp.quantity);
 				});
 				//$('#transaction_subtotal_detail').text("IDR " + toRp($total));
 				$('#transaction_diskon_detail').val(toAngka($discount));				
