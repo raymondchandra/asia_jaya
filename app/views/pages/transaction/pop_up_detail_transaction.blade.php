@@ -122,8 +122,8 @@
 							
 
 							<hr></hr>
+							<input type="hidden" value="-" id="deleted_order"/>
 							<button type="button" class="btn btn-success pull-right" id="save-btn"  data-dismiss="modal">
-								<input type="hidden" value="" id="deleted_order"/>
 								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Save
 							</button>
 							<script>
@@ -139,6 +139,7 @@
 									$orderQtys = [];
 									$orderPrices = [];
 									$counter = 0;
+									$deleted = $(this).prev().val();
 									$("#transaction_detail_content tr").each(function(i, v)
 									{
 										$orderIds[$counter] = $(this).find('#hidden_id').val();
@@ -154,7 +155,7 @@
 											'data' : $orderIds,
 											'qty' : $orderQtys,
 											'prcs' : $orderPrices,
-											//'deleted' : $deleted,
+											'deleted' : $deleted,
 											'ctr' : $counter
 										},
 										success: function(response){
