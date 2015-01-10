@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 	Route::get('/tes', function()
 	{
-		echo Hash::make('mgr');
+		var_dump(explode(',',"1,2,3,4,"));
 		
 	});
 	Route::get('/tes2', function()

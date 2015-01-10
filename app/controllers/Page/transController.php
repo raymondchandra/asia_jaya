@@ -380,8 +380,24 @@ class transController extends \HomeController{
 		$orderQtys = Input::get('qty');
 		$orderPrices = Input::get('prcs');
 		$counter = Input::get('ctr');
+		$deleted = Input::get('deleted');
 		$orderController = new OrdersController();
 		$cekResult = 1;
+		$updateResult = 1;
+		//deleteOrder dulu..permisi
+		$deleted = explode(',',$deleted);
+		if($deleted[0] == "-")
+		{
+			//ga ada yg harus di delete
+		}
+		else
+		{
+			for($x=0 ; $x<(count($deleted)-1) ;$x++)
+			{
+				$ord = Order::find($deleted[$x]);
+				$ord->delete();
+			}
+		}
 		
 		for($i=0 ; $i<$counter ; $i++)
 		{
