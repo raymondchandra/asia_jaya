@@ -127,7 +127,7 @@ Route::group(['prefix' => 'sales','before' => 'authSales'], function()
 });
 
 //manager
-Route::group(['prefix' => 'mgr','before' => 'auth_manager'], function()
+Route::group(['prefix' => 'mgr','before' => 'authMgr'], function()
 {
 //return
 	Route::get('/view_return', ['as'=>'gentry.view_return','uses' => 'returnController@view_return']);

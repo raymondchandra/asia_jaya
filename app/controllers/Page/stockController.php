@@ -261,10 +261,18 @@ class stockController extends \HomeController{
 			}
 			else if($editStorage > $stock_storage && $editShop = $stock_shop)//restock dari luar ke gudang
 			{
+				if(Auth::user()->role == 2)
+				{
+					return 0;
+				}
 				$controller->insertWithParam(3, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
 			}
 			else //restock dari luar ke toko
 			{
+				if(Auth::user()->role == 2)
+				{
+					return 0;
+				}
 				$controller->insertWithParam(4, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
 			}
 		}
@@ -275,7 +283,7 @@ class stockController extends \HomeController{
 		$editProductJson = $productController->updateForViewStock($idProduct, $editName, $editModal, $editMin, $editSales, $editKode);
 		$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage, $editFoto);
 		
-		
+		return 1;
 	}
 	
 	public function deleteProduct()

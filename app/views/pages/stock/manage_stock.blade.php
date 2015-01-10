@@ -536,6 +536,10 @@
 												});
 												
 											}
+											if(response == 0)
+											{
+												alert("You dont have access to add stock from outside");
+											}
 											location.reload();
 										},error: function(xhr, textStatus, errorThrown){
 											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
