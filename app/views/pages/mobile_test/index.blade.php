@@ -379,9 +379,10 @@
 			$nama = $('#name_'+$row_id).text();
 			$warna = $('#color_'+$row_id).text();
 			$quantity = $('#quantity_'+$row_id).text();
+
 			$harga = $('#price_'+$row_id).text();
 			
-			$a = parseInt(toAngka($harga));
+			$a = parseInt(toAngka($harga) / toAngka($quantity));
 			$b = parseInt($quantity);
 			$total = $a*$b;
 			
@@ -391,7 +392,7 @@
 
 			$('#edit_harga_min').text($min_price);
 
-			$('#f_hsatuan_qty').val(toAngka($harga));
+			$('#f_hsatuan_qty').val(toAngka($harga)/toAngka($quantity));
 			$('#f_edit_qty').val($quantity);
 			$('#f_subtotal_edit').text("IDR " + $total);
 			$('#rowRep').val($row_id);

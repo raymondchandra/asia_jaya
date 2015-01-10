@@ -63,6 +63,8 @@ if ((Agent::isMobile() == true) || (Agent::isTablet() == true)) {
 	Route::get('/', ['as' => 'login.mobile', 'uses' => 'AccountsController@viewMobileLogin','before'=>'' ]);
 
 } else if((Agent::isMobile() == false) && (Agent::isTablet() == false)) {
+	
+	Route::get('/login_mobile', ['as' => 'login.mobile', 'uses' => 'AccountsController@viewMobileLogin','before'=>'' ]);
 	Route::get('/login', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
 	Route::get('/', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
 } 

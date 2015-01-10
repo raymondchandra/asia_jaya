@@ -111,7 +111,12 @@
 					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
 					$('#price_'+$row_id).text("" + toRp($newTotal));
 					$inc = $('#tabRep').val();
+
+					$('.tab-pane ')
+
 					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
+
+
 					$total = $currentTotal + $newTotal - $oldTotal;
 					$('#subtotal_text_'+$inc).text("IDR " + $total);
 					$('.f_slider_alert').addClass('hidden');
