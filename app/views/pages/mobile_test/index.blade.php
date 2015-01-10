@@ -34,7 +34,7 @@
 							Toko Asia Jaya
 						</h2>
 						<div class="form-horizontal">
-							<div class="form-group">
+							<!--<div class="form-group">
 								<label class="control-label g-sm-4">ID</label>	
 								<div class="g-sm-8">	
 									<p class="form-control-static">
@@ -49,7 +49,7 @@
 										Nama Karyawan	
 									</p>	
 								</div>		
-							</div>	
+							</div>	-->
 							<div class="form-group">
 								
 								<div class="g-sm-12" style="text-align: center;">	
