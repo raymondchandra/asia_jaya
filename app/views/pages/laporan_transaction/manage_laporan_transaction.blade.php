@@ -646,6 +646,7 @@
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
 					$data += "</td>";
 					$data += "<td>";
+					$data += "<input id='hidden_id_delete' type=hidden value='"+resp.id+"'/>";
 					$data += "<button type='button'class='btn btn-danger f_delete_row_pesanan_vtrans btn-xs'><span class='glyphicon glyphicon-remove'></span></button>";
 					$data += "</td>";
 					$data += "</tr>"
@@ -678,6 +679,39 @@
 				alert("responseText: "+xhr.responseText);
 			}
 		},'json');
+	});
+	
+	//menghapus tr detail pesanan
+	$('body').on('click','.f_delete_row_pesanan_vtrans',function(){
+		$id = $(this).prev().val();
+		//delete the row
+		$(this).closest('tr').remove();
+		//siapkan variable temp subtotal
+		var f_new_subtotal = 0; 
+
+		//foreach subtotal per row
+		$('#transaction_detail_content tr').each(function(){
+		 	f_new_subtotal += toAngka( $(this).find('.f_subtotal_price_transaction').text() );
+		});
+
+		var f_cur_transaction_diskon_detail = toAngka( $('#transaction_diskon_detail').val() );
+		var f_cur_transaction_tax_detail = toAngka( $('#transaction_tax_detail').text() ) / 100;
+
+		var f_cur_discounted = f_new_subtotal - f_cur_transaction_diskon_detail;
+		var f_cur_transaction_total_detail = f_cur_discounted + (f_cur_discounted*f_cur_transaction_tax_detail);
+
+		$('#transaction_total_detail').text("IDR " + toRp(f_cur_transaction_total_detail));
+		var current = $('#deleted_order').val();
+		if(current == "-")
+		{
+			current = "";
+		}
+		$('#deleted_order').val(current+$id+",");
+		//alert(f_cur_transaction_total_detail);
+
+		//alert(this_f_subtotal_price_transaction);
+		//alert(this_transaction_total_detail);
+		//
 	});
 	
 	function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
