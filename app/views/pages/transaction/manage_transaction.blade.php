@@ -281,9 +281,9 @@
 					$data += "<span class='f_excel_xlabel' id=' style=''line-height: 30px;' >"+ resp.quantity +"</span>";
 					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden f_qty_transaction' style=''/>";
 					$data += "</td><td class='f_price_transaction'>IDR ";
-					$data += toRp(resp.hargaSatuan);
+					$data += toRp(parseInt(resp.price)/parseInt(resp.quantity));
 					$data += "</td><td class='f_subtotal_price_transaction'>IDR ";
-					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
+					$data += toRp(resp.price);
 					$data += "</td>";
 					$data += "<td>";
 					$data += "<button type='button'class='btn btn-danger f_delete_row_pesanan_vtrans btn-xs'><span class='glyphicon glyphicon-remove'></span></button>";
