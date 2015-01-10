@@ -123,6 +123,7 @@
 
 							<hr></hr>
 							<button type="button" class="btn btn-success pull-right" id="save-btn"  data-dismiss="modal">
+								<input type="hidden" value="" id="deleted_order"/>
 								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Save
 							</button>
 							<script>
@@ -153,6 +154,7 @@
 											'data' : $orderIds,
 											'qty' : $orderQtys,
 											'prcs' : $orderPrices,
+											'deleted' = $deleted;
 											'ctr' : $counter
 										},
 										success: function(response){
