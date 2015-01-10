@@ -110,10 +110,8 @@
 					$oldTotal = $('#currentTotal').val();
 					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
 					$('#price_'+$row_id).text("" + toRp($newTotal));
-					$inc = $('#tabRep').val();
-
-					$('.tab-pane ')
-
+					$inc = $('#tabRep').val(); 
+					
 					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
 
 
