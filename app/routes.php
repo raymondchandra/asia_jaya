@@ -365,6 +365,12 @@ Route::group(array('prefix' => 'test'), function()
 	{
 		return View::make('pages.already_login');
 	});
+	//restock_histoy
+
+	Route::get('/history_restock', function()
+	{
+		return View::make('pages.restock.history_restock');
+	});
 
 });
 
