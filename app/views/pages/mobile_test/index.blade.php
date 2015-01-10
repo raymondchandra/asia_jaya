@@ -53,9 +53,32 @@
 							<div class="form-group">
 								
 								<div class="g-sm-12" style="text-align: center;">	
-									<button type="button" class="btn btn-success">
-										Log Out
-									</button>
+									<input type="button" class="btn btn-success" id="logOutText" value="Log Out"/>
+										<script>
+											$('body').on('click','#logOutText',function(){
+																	
+												$.ajax({
+													type: 'POST',
+													url: '{{URL::route('david.post_sign_out')}}',
+													data: {
+
+													},
+													success: function(response){
+														if(response == "OK")
+														{
+															window.location.href="{{URL::route('login.mobile')}}";
+														}
+														else
+														{
+															
+														}
+													},error: function(xhr, textStatus, errorThrown){
+														alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+														alert("responseText: "+xhr.responseText);
+													}
+												},'json');
+											});
+										</script>
 								</div>		
 							</div>			
 						</div>			
