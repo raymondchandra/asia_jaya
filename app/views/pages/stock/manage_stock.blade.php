@@ -374,7 +374,10 @@
 									<input type="hidden" value="{{$prodList->idDetail}}" />
 									<input type="hidden" value="{{$prodList->id}}" />
 									<button class="btn btn-danger btn-xs  hapus_button" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Hapus
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Delete
+									</button>
+									<button class="btn btn-success btn-xs  undelete_button" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">
+										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Undelete
 									</button>
 									<input type="hidden" value="{{$prodList->id}}" />
 									<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}" style="width: 100px;">
