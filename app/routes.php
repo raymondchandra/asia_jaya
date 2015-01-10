@@ -57,13 +57,19 @@ use Carbon\Carbon;
 //get All Transaction
 	Route::post('getAllTransaction', 'transController@getAllTransaction');
 
-//home + login
-Route::get('/login', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
-Route::get('/login_mobile', ['as' => 'login.mobile', 'uses' => 'AccountsController@viewMobileLogin','before'=>'' ]);
+if ((Agent::isMobile() == true) || (Agent::isTablet() == true)) { 
+
+	Route::get('/login_mobile', ['as' => 'login.mobile', 'uses' => 'AccountsController@viewMobileLogin','before'=>'' ]);
+
+} else if((Agent::isMobile() == false) && (Agent::isTablet() == false)) {
+	Route::get('/login', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
+} 
+
+//home + login 
 
 Route::post('/logout', ['as' => 'logout', 'uses' => 'AccountController@']);
 
-//sales
+//sales    
 Route::group(['prefix' => 'sales','before' => 'authSales'], function()
 {
 //mobile

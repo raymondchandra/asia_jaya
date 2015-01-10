@@ -10,13 +10,9 @@ A user agent class for Laravel, based on [Mobile Detect](https://github.com/serb
 Installation
 ------------
 
-Add the package to your composer.json and run `composer update`.
+Install using composer:
 
-	{
-	    "require": {
-	        "jenssegers/agent": "*"
-	    }
-	}
+	composer require jenssegers/agent
 
 Add the service provider in `app/config/app.php`:
 
@@ -90,6 +86,14 @@ Get the operating system. (Ubuntu, Windows, OS X, ...)
 Get the browser name. (Chrome, IE, Safari, Firefox, ...)
 
 	Agent::browser();
+
+### Desktop detection
+
+Check if the user is a desktop.
+
+	Agent::isDesktop();
+
+*This checks if a user is not a mobile device, tablet or robot.*
 
 ### Robot detection
 

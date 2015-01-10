@@ -16,7 +16,7 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<h3 style="float: left;">
-					Dashboard
+					Dashboard 
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>

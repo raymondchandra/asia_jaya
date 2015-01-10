@@ -26,7 +26,7 @@
 										@if($tax==null)
 										<input type="text" class="form-control" value="0" id="taxAmount" placeholder="e.g.: 10">
 										@else
-										<input type="text" class="form-control" value="{{$tax->amount}}" id="taxAmount" placeholder="e.g.: 10">
+										<input type="text" class="form-control ff_num_only" value="{{$tax->amount}}" id="taxAmount" placeholder="e.g.: 10">
 										@endif
 									</div>
 								</div>
