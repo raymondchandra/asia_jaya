@@ -642,6 +642,9 @@
 					$data += "</td><td class='f_subtotal_price_transaction'>IDR ";
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
 					$data += "</td>";
+					$data += "<td>";
+					$data += "<button type='button'class='btn btn-danger f_delete_row_pesanan_vtrans btn-xs'><span class='glyphicon glyphicon-remove'></span></button>";
+					$data += "</td>";
 					$data += "</tr>"
 					$('#transaction_detail_content').html($data);
 					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);

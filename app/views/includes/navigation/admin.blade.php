@@ -23,6 +23,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Barang<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="{{URL::route('gentry.view_stock')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>View Stock</a></li>
+						<li><a href="{{URL::route('david.view_restock_history')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>View Restock History</a></li>
 						<li><a href="{{URL::route('gentry.view_return')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>View Retur</a></li>
 						<li><a href="{{URL::route('david.view_obral')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>View Obral</a></li>
 					</ul>
