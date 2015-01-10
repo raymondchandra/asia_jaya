@@ -377,7 +377,7 @@
 										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Hapus
 									</button>
 									<input type="hidden" value="{{$prodList->id}}" />
-									<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}">
+									<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}" style="width: 100px;">
 								</td>
 							</tr>
 							@endforeach
@@ -745,7 +745,17 @@ $(".bootstrap-filestyle").find('label').addClass('btn-xs').addClass('btn-info').
 $(".bootstrap-filestyle").find('label').append('<span class="glyphicon glyphicon-folder-open" style="margin-right: 5px;"></span>Ubar Gambar');
 
 
-
+$(document).keydown(function(e) {
+    var n = 128;  //Enter the amount of px you want to scroll here
+    if (e.which == 38 && document.activeElement == document.body) {
+        e.preventDefault();
+        document.body.scrollTop -= n;
+    }
+    if (e.which == 40 && document.activeElement == document.body) {
+        e.preventDefault();
+        document.body.scrollTop += n;
+    }
+});
 
 </script>
 @stop
