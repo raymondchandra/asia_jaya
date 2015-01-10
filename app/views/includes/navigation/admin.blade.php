@@ -16,37 +16,39 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="{{URL::route('david.view_dashboard')}}"><span class="glyphicon glyphicon-home" style="color:#fff; margin-right:10px;"></span>Dashboard</a></li>
-				<li><a href="{{URL::to('fungsi/view_transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi Hari Ini</a></li>
-				<li><a href="{{URL::route('gentry.view_return')}}"><span class="glyphicon glyphicon-transfer" style="color:#fff; margin-right:10px;"></span>Retur</a></li>
+				<li><a href="{{URL::route('david.view_transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi Hari Ini</a></li>
+
 
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Produk<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Barang<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{URL::to('test/stock')}}"><span class="glyphicon glyphicon-briefcase" style="margin-right:10px;"></span>Stok</a></li>
-						<li><a href=""><span class="glyphicon glyphicon-plus-sign" style="margin-right:10px;"></span>Restok</a></li>
-					</ul>
-				</li>
-				<li><a href="{{URL::route('gentry.view_tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Tax</a></li>
-
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Account<span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="{{URL::to('fungsi/view_account')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>Account Karyawan</a></li>
-						<li><a href="{{URL::to('test/manage_log')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>Log Karyawan</a></li>
+						<li><a href="{{URL::route('gentry.view_stock')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>View Stock</a></li>
+						<li><a href="{{URL::route('gentry.view_return')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>View Retur</a></li>
+						<li><a href=" "><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>View Obral</a></li>
 					</ul>
 				</li>
 
-				
-				
-				
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-book" style="color:#fff; margin-right:10px;"></span>Laporan<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Laporan By<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#"><span class="glyphicon glyphicon-folder-close" style="margin-right:10px;"></span>Laporan by Kasir</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>Laporan by Transaksi</a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>Laporan by Customer</a></li>
+						<li><a href="{{URL::route('david.view_all_transaction')}}"><span class="glyphicon glyphicon-briefcase" style="margin-right:10px;"></span>Semua Transaksi</a></li>
+						<li><a href="{{URL::route('david.view_cashflow')}}"><span class="glyphicon glyphicon-usd" style="margin-right:10px;"></span>Semua Cashflow</a></li>
+						<li><a href="{{URL::route('gentry.view_customer')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>Semua Customer</a></li>
 					</ul>
 				</li>
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Kepegawaian<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{URL::route('david.viewAccount')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>Account Karyawan</a></li>
+						<li><a href="{{URL::route('gentry.manage_log')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>Log Karyawan</a></li>
+					</ul>
+				</li> 
+
+				
+				<li><a href="{{URL::route('gentry.view_tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Set Tax</a></li>
+
+
 				<!--
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-volume-up" style="color:#fff; margin-right:10px;"></span>Link<span class="caret"></span></a>

@@ -1840,17 +1840,17 @@
     },
     {
         "name": "jenssegers/agent",
-        "version": "v2.1.3",
-        "version_normalized": "2.1.3.0",
+        "version": "v2.1.4",
+        "version_normalized": "2.1.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/jenssegers/laravel-agent.git",
-            "reference": "0653fc5376dbb9971ee5a8764fd49a0550069c0d"
+            "reference": "7e04968dd85dfba150c8c4a98a34eed6f6a6df01"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/jenssegers/laravel-agent/zipball/0653fc5376dbb9971ee5a8764fd49a0550069c0d",
-            "reference": "0653fc5376dbb9971ee5a8764fd49a0550069c0d",
+            "url": "https://api.github.com/repos/jenssegers/laravel-agent/zipball/7e04968dd85dfba150c8c4a98a34eed6f6a6df01",
+            "reference": "7e04968dd85dfba150c8c4a98a34eed6f6a6df01",
             "shasum": ""
         },
         "require": {
@@ -1861,7 +1861,7 @@
         "require-dev": {
             "satooshi/php-coveralls": "*"
         },
-        "time": "2014-09-23 08:45:45",
+        "time": "2014-12-07 17:08:08",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
