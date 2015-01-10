@@ -98,6 +98,13 @@ class CustomersController extends \BaseController {
 		$customer = Customer::all();
 		return $this->getReturn($customer);
 	}
+	
+	public function getAlls()
+	{
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total)'), 'customers.created_at', DB::raw('SUM(transactions.total)'))->groupBy('customers.id')->get();
+		
+		return $this->getReturn($joined);
+	}
 
 	public function getById($id)
 	{

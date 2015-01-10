@@ -38,7 +38,7 @@ class AccountsController extends \BaseController {
 			}
 			else if(Auth::user()->role == 2)
 			{
-				$acc = Account:find(Auth::user()->id);
+				$acc = Account::find(Auth::user()->id);
 				$acc->last_login = Carbon::now();
 				try
 				{
@@ -52,7 +52,7 @@ class AccountsController extends \BaseController {
 			}
 			else
 			{
-				$acc = Account:find(Auth::user()->id);
+				$acc = Account::find(Auth::user()->id);
 				$acc->last_login = Carbon::now();
 				try
 				{

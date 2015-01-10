@@ -3,7 +3,7 @@
 class custController extends \HomeController{
 	public function view_customer(){
 		$customerController = new CustomersController();
-		$allData = $customerController->getAll();
+		$allData = $customerController->getAlls();
 		$allDataJson = json_decode($allData->getContent());
 		
 		if($allDataJson->{'status'}!='Not Found'){
