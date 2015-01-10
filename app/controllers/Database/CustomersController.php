@@ -101,9 +101,182 @@ class CustomersController extends \BaseController {
 	
 	public function getAlls()
 	{
-		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total)'), 'customers.created_at', DB::raw('SUM(transactions.total)'))->groupBy('customers.id')->get();
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id')->get();
 		
 		return $this->getReturn($joined);
+	}
+	
+	public function getSortedAll($by, $order)
+	{
+	
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id');
+		
+		$result = $joined->orderBy($by, $order)->get();
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getFilteredAccount($id, $custName, $count, $total, $created_at)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id');
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.id', '=', $id);
+			}
+		}
+		
+		if($custName != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.name', 'LIKE', '%'.$custName.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.name', 'LIKE', '%'.$custName.'%');
+			}
+		}
+		
+		if($count != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->having(DB::raw('COUNT(transactions.total)'),'>',$count);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->having(DB::raw('COUNT(transactions.total)'),'>',$count);
+			}
+		}
+		
+		if($total != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->having(DB::raw('SUM(transactions.total)'),'>',$total);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->having(DB::raw('SUM(transactions.total)'),'>',$total);
+			}
+		}
+		
+		
+		
+		if($created_at != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.created_at', '=', $created_at);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.created_at', '=', $created_at);
+			}
+		}
+		
+		
+		if($isFirst == false)
+		{
+			$result = $joined->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->get();
+		}
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getSortedFilteredAccount($id, $custName, $count, $total, $created_at)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id');
+		
+		if($id != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.id', '=', $id);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.id', '=', $id);
+			}
+		}
+		
+		if($custName != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.name', 'LIKE', '%'.$custName.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.name', 'LIKE', '%'.$custName.'%');
+			}
+		}
+		
+		
+		if($count != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->having(DB::raw('COUNT(transactions.total)'),'>',$count);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->having(DB::raw('COUNT(transactions.total)'),'>',$count);
+			}
+		}
+		
+		if($total != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->having(DB::raw('SUM(transactions.total)'),'>',$total);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->having(DB::raw('SUM(transactions.total)'),'>',$total);
+			}
+		}
+		
+		
+		
+		
+		
+		if($isFirst == false)
+		{
+			$result = $joined->orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($result);
 	}
 
 	public function getById($id)

@@ -2,7 +2,11 @@
 use Carbon\Carbon;
 	Route::get('/tes', function()
 	{
-		var_dump(explode(',',"1,2,3,4,"));
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS count'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id')->having(DB::raw('COUNT(transactions.total)'),'>',2);
+		
+		$result = $joined->orderBy('count', 'asc')->get();
+		
+		var_dump($result);
 		
 	});
 	Route::get('/tes2', function()

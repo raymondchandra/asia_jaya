@@ -172,7 +172,7 @@ class RestockDetailsController extends \BaseController {
 	
 	public function getSortedAll($by, $order)
 	{
-		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy($by,$order)->get();
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy('restock_details.created_at','dsc')->get();
 		
 		return $this->getReturn($joined);
 	}
@@ -181,7 +181,7 @@ class RestockDetailsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy($by,$order)->get();
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy('restock_details.created_at','dsc');
 		
 		if($code != '-')
 		{
@@ -278,7 +278,7 @@ class RestockDetailsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy($by,$order)->get();
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at');
 		
 		if($code != '-')
 		{

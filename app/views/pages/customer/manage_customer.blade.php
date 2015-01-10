@@ -21,31 +21,131 @@
 						<tr>
 							<th class="table-bordered" width="110">
 								<a href="javascript:void(0)">Cust. ID</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Customer Name</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+										@if($sortBy == 'name')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Count Belanja</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+										@if($sortBy == 'countTrans')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'countTrans', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'countTrans', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'countTrans', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'countTrans', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'countTrans', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'countTrans', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Total Money Spend</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+										@if($sortBy == 'total')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'total', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'total', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Created At</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+										@if($sortBy == 'created_at')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('custController@view_customer', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@else
+												<a href="{{action('custController@view_customer', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+											@endif
+										@else
+											<a href="{{action('custController@view_customer', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'count'=>$count,'created_at'=>$created_at))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
@@ -53,25 +153,31 @@
 						</thead>
 						<thead>
 							<tr>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
+								<td><input type="text" class="form-control input-sm" id="input_1" ></td>
+								<td><input type="text" class="form-control input-sm" id="input_2"></td>
+								<td><input type="text" class="form-control input-sm" id="input_3" placeholder=" > input"></td>
+								<td><input type="text" class="form-control input-sm" id="input_4" placeholder=" > input"></td>
+								<td><input type="text" class="form-control input-sm" id="input_5" placeholder="yyyy-MM-dd hh-mm-ss"></td>
 								<td width="">
-									<a class="btn btn-primary btn-xs">Filter</a>
+									<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
 									<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
 								</td>
 							</tr>
 						</thead>
 						<tbody>
-							@if($dataAll != null)
-								@foreach($dataAll as $data)
+							@if($datas != null)
+								@foreach($datas as $data)
 								<tr> 
 									<td>{{ $data->id }}</td>
 									<td id="">{{ $data->name }}</td>
 									<td id="">{{ $data->countTrans }}</td>
-									<td id="">{{ $data->total }}</td>
+									<td id="">
+										@if($data->total == null)
+											0
+										@else
+											{{ $data->total}}
+										@endif
+										</td>
 									<td id="">{{ $data->created_at }}</td>
 									<td>
 										<!--href="{{URL::to('test/customer/transaction_history')}}"-->
@@ -106,6 +212,41 @@
 			}
 			return rev2.split('').reverse().join('');
 		}
+		
+		$('body').on('click','#unfilter_button',function(){
+			window.location = "{{URL::route('gentry.view_customer')}}";
+		});
+		
+		$('body').on('click','#filter_button',function(){
+			$id = $('#input_1').val();
+			if($id == ''){
+				$id = '-';
+			}
+			
+			$name = $('#input_2').val();
+			if($name == ''){
+				$name = '-';
+			}
+			
+			$total = $('#input_4').val();
+			if($total == ''){
+				$total = '-';
+			}
+			
+			$count = $('#input_3').val();
+			if($count == ''){
+				$count = '-';
+			}
+			
+			$created_at = $('#input_5').val();
+			if($created_at == ''){
+				$created_at = '-';
+			}
+			
+			
+			
+			window.location = "{{URL::route('gentry.view_customer')}}" + "?filtered=1&id="+$id+"&name="+$name+"&total="+$total+"&count="+$count+"&created_at="+$created_at;
+		});
 	</script>
 
 	@stop

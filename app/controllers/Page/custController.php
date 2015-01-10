@@ -2,21 +2,58 @@
 
 class custController extends \HomeController{
 	public function view_customer(){
+		$sortBy = Input::get('sortBy','none');
+		$order = Input::get('order','none');
+		$filtered = Input::get('filtered', '0');
 		$customerController = new CustomersController();
-		$allData = $customerController->getAlls();
-		$allDataJson = json_decode($allData->getContent());
-		
-		if($allDataJson->{'status'}!='Not Found'){
-			$dataAll = $allDataJson->{'messages'};
-			foreach($dataAll as $data){
-				$data->countTrans = $this->countTransaction($data->id);
-				$data->total = $this->countTotal($data->id);
+		if($filtered == '0')
+		{
+			if($sortBy === "none")
+			{
+				$allData = $customerController->getAlls();
+				$allDataJson = json_decode($allData->getContent());			
 			}
-		}else{
-			$dataAll = null;
+			else
+			{
+				$allData = $customerController->getSortedAll($sortBy, $order);
+				$allDataJson = json_decode($allData->getContent());
+			}
+			$datas = null;
+			if($allDataJson->{'status'} != 'Not Found')
+			{
+				$datas = $allDataJson->{'messages'};
+			}
+
+			return View::make('pages.customer.manage_customer', compact('datas','sortBy','order','filtered'));
+		}
+		else
+		{
+			//$id, $custName, $count, $total, $created_at
+			$id = Input::get('id','-');
+			$name = Input::get('name', '-');
+			$total = Input::get('total', '-');
+			$count = Input::get('count', '-');
+			$created_at = Input::get('created_at', '-');
+			
+			if($sortBy == "none")
+			{
+				$allData = $customerController->getFilteredAccount($id, $name, $count, $total, $created_at);
+			}
+			else
+			{
+				$allData = $customerController->getFilteredAccount($id, $name, $count, $total, $created_at, $sortBy, $order);
+			}
+			//$allEmployeeJson = $accountController->getFilteredProfile($username, $role, $lastLogin, $active);
+			$allDataJson = json_decode($allData->getContent());	
+			$datas = null;
+			if($allDataJson->{'status'} != 'Not Found')
+			{
+				$datas = $allDataJson->{'messages'};
+			}
+			
+			return View::make('pages.customer.manage_customer', compact('datas','sortBy','order','filtered','id','name','total','count','created_at'));
 		}
 		
-		return View::make('pages.customer.manage_customer', compact('dataAll'));
 	}
 	
 	public function view_history(){

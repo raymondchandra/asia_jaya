@@ -205,7 +205,11 @@
 							<td><input type="text" class="form-control input-sm" id="filter_shop"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_storage"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_time"></td>
-							<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
+							<td>
+							<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
+							<br/>
+							<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
+							</td>
 							<!--<td></td>-->
 							
 						</tr>
@@ -320,7 +324,7 @@
 			$shop = '-';
 		}
 		
-		$storage = $('#filter_storage).val();
+		$storage = $('#filter_storage').val();
 		if($storage == ''){
 			$storage = '-';
 		}
@@ -331,10 +335,12 @@
 		}
 		
 
-		window.location = "{{URL::route('david.view_all_transaction')}}" + "?filtered=1&code="+$code+"&name="+$name+"&color="+$color+"&hop="+$shop+"&storage="+$storage+"&time="+$time;
+		window.location = "{{URL::route('david.view_restock_history')}}" + "?filtered=1&code="+$code+"&name="+$name+"&color="+$color+"&hop="+$shop+"&storage="+$storage+"&time="+$time;
 	});
 
-
+	$('body').on('click','#unfilter_button',function(){
+		window.location = "{{URL::route('david.view_restock_history')}}";
+	});
 	/*$('body').on('click','.flogin',function(){
 		$data = {
 			'status' : '202',
@@ -358,82 +364,82 @@
 		},'json');	
 });*/
 
-var index = 0;
-//38 up, 40down
+	var index = 0;
+	//38 up, 40down
 
-var maxCellIndex = $('.table tr td').length;
+	var maxCellIndex = $('.table tr td').length;
 
-$(document).keydown(function(e) {
-	$('.table tr td:eq(' + index + ')').removeClass('selected');
+	$(document).keydown(function(e) {
+		$('.table tr td:eq(' + index + ')').removeClass('selected');
 
-	var rows = $('.table tr').length;
-	var columns = $('.table tr:eq(1) td').length;
+		var rows = $('.table tr').length;
+		var columns = $('.table tr:eq(1) td').length;
 
-    if (e.keyCode === 39) { //move right or wrap
-    	while( !$('.table tr td:eq(' + (++index) + ')') ) {
-    		if (index >= maxCellIndex) {
-                // wrap both ways:
-                index = -1;
-            }
-        }
-    }
-    if (e.keyCode === 37) { // move left or wrap
-    	--index;
-    	if (index < 0) {
-    		index = maxCellIndex;
-    	}
-    	while( !$('.table tr td:eq(' + (index) + ')') ) {
-    		if (index < 0) {
-                // wrap both ways:
-                index = maxCellIndex;
-            } else {
-            	--index;
-            }
-        }
-    }
-    
-    if (e.keyCode === 38) {  // move up
-    	index -= columns;
-    	if (index < 0) {
-    		index += maxCellIndex;
-    	}
-    	while( !$('.table tr td:eq(' + (index) + ')') ) {
-    		if (index < 0) {
-                // wrap both ways:
-                index += maxCellIndex;
-            } else {
-            	index -= columns;
-            }
-        }
-    }
-    if (e.keyCode === 40) { // move down
-    	index += columns;
-    	if (index >= maxCellIndex) {
-    		index -= maxCellIndex;
-    	}
-    	while( !$('.table tr td:eq(' + (index) + ')') ) {
-    		if (index >= maxCellIndex) {
-                // wrap both ways:
-                index -= maxCellIndex;
-            } else {
-            	index += columns;
-            }
+		if (e.keyCode === 39) { //move right or wrap
+			while( !$('.table tr td:eq(' + (++index) + ')') ) {
+				if (index >= maxCellIndex) {
+					// wrap both ways:
+					index = -1;
+				}
+			}
+		}
+		if (e.keyCode === 37) { // move left or wrap
+			--index;
+			if (index < 0) {
+				index = maxCellIndex;
+			}
+			while( !$('.table tr td:eq(' + (index) + ')') ) {
+				if (index < 0) {
+					// wrap both ways:
+					index = maxCellIndex;
+				} else {
+					--index;
+				}
+			}
+		}
+		
+		if (e.keyCode === 38) {  // move up
+			index -= columns;
+			if (index < 0) {
+				index += maxCellIndex;
+			}
+			while( !$('.table tr td:eq(' + (index) + ')') ) {
+				if (index < 0) {
+					// wrap both ways:
+					index += maxCellIndex;
+				} else {
+					index -= columns;
+				}
+			}
+		}
+		if (e.keyCode === 40) { // move down
+			index += columns;
+			if (index >= maxCellIndex) {
+				index -= maxCellIndex;
+			}
+			while( !$('.table tr td:eq(' + (index) + ')') ) {
+				if (index >= maxCellIndex) {
+					// wrap both ways:
+					index -= maxCellIndex;
+				} else {
+					index += columns;
+				}
 
 
-        }
-    }
-    $('.table tr td:eq(' + index + ')').addClass('selected');
-    if($('.table tr td:eq(' + index + ')').children('.f_excel_xinput').hasClass('hidden') && e.which == 13) {
-    	var f_excel_xlabel_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').text();
-    	$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').removeClass('hidden');
-    	$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').val(f_excel_xlabel_text);
-    	$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').addClass('hidden');
-	}/*else if($('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').hasClass('hidden')){
-		var f_excel_xinput_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xinput').val();
-		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').siblings('.f_excel_xlabel').text(f_excel_xinput_text);
-		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').siblings('.f_excel_xlabel').removeClass('hidden');
-		$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').addClass('hidden');
-	}*/
-});
+			}
+		}
+		$('.table tr td:eq(' + index + ')').addClass('selected');
+		if($('.table tr td:eq(' + index + ')').children('.f_excel_xinput').hasClass('hidden') && e.which == 13) {
+			var f_excel_xlabel_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').text();
+			$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').removeClass('hidden');
+			$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').siblings('.f_excel_xinput').val(f_excel_xlabel_text);
+			$('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').addClass('hidden');
+		}/*else if($('.table tr td:eq(' + index + ')').children('.f_excel_xlabel').hasClass('hidden')){
+			var f_excel_xinput_text = $('.table tr td:eq(' + index + ')').children('.f_excel_xinput').val();
+			$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').siblings('.f_excel_xlabel').text(f_excel_xinput_text);
+			$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').siblings('.f_excel_xlabel').removeClass('hidden');
+			$('.table tr td:eq(' + index + ')').children('.f_excel_xinput').addClass('hidden');
+		}*/
+	});
 </script>
 @stop

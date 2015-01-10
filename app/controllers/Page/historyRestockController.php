@@ -35,15 +35,15 @@ class historyRestockController extends \HomeController{
 			$color = Input::get('color', '-');
 			$shop = Input::get('shop', '-');
 			$storage = Input::get('storage', '-');
-			$created_at = Input::get('time', '-');
+			$time = Input::get('time', '-');
 			
 			if($sortBy == "none")
 			{
-				$allResultJson = $controller->getFilteredAccount($code, $prod_name, $color, $shop, $storage, $created_at);
+				$allResultJson = $controller->getFilteredRestock($code, $prod_name, $color, $shop, $storage, $time);
 			}
 			else
 			{
-				$allResultJson = $controller->getSortedFilteredAccount($$code, $prod_name, $color, $shop, $storage, $created_at, $sortBy, $order);
+				$allResultJson = $controller->getSortedFilteredAccount($code, $prod_name, $color, $shop, $storage, $time, $sortBy, $order);
 			}
 			
 			$allResult = json_decode($allResultJson->getContent());
@@ -53,7 +53,7 @@ class historyRestockController extends \HomeController{
 				$datas = $allResult->{'messages'};	
 			}
 			
-			return View::make('pages.restock.history_restock', compact('datas','sortBy','order','filtered','code','prod_name','color','shop','storage','created_at'));
+			return View::make('pages.restock.history_restock', compact('datas','sortBy','order','filtered','code','prod_name','color','shop','storage','time'));
 		}
 	}
 	
