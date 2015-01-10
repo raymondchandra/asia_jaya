@@ -63,7 +63,7 @@
 							<div class="form-group">
 								<label class="g-sm-3 control-label">Foto</label>
 								<div class="g-sm-7">
-									<input type="file" >
+									<input type="file" accept="image/*">
 								</div>
 							</div>
 
