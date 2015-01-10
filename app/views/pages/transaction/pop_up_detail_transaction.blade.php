@@ -154,7 +154,7 @@
 											'data' : $orderIds,
 											'qty' : $orderQtys,
 											'prcs' : $orderPrices,
-											'deleted' = $deleted;
+											//'deleted' : $deleted,
 											'ctr' : $counter
 										},
 										success: function(response){
