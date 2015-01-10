@@ -58,7 +58,10 @@
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
 								<td><input type="text" class="form-control input-sm"></td>
-								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
+								<td width="">
+									<a class="btn btn-primary btn-xs">Filter</a>
+									<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
+								</td>
 							</tr>
 						</thead>
 						<tbody>

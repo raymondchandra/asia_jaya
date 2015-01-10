@@ -192,7 +192,7 @@ class mobile_view extends \BaseController{
 									$reference = $cekProduct->reference;
 									$reference = explode(';',$reference);
 									$counter = count($reference);
-									$pricePerOrder = $price/($counter-1);
+									$pricePerOrder = $prodList['price']/($counter-1);
 									for($i=0 ; $i<$counter-1 ; $i++)
 									{
 										$quant = explode('-',$reference[$i]);
@@ -223,7 +223,7 @@ class mobile_view extends \BaseController{
 								}
 								else
 								{
-									$addOrders = $this->addOrders($prodList['quantity'], $transactionId, $price, $productDetailId);
+									$addOrders = $this->addOrders($prodList['quantity'], $transactionId, $prodList['price'], $productDetailId);
 								}
 								if($addOrders!=-1){
 									$response = array('code'=>'201','status' => 'Created');

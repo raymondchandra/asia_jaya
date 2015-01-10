@@ -177,6 +177,7 @@
 						$name = $(this).children('td')[1].innerText;
 						$color = $(this).children('td')[2].innerText;
 						$quantity = $(this).children('td')[3].innerText;
+						$price = $(this).children('td')[4].innerText;
 						/*
 						$(this).children('td').each(function(ii, vv){
 							if(ii == 1)
@@ -195,7 +196,7 @@
 							}
 						});
 						*/
-						$data[i] = {name:$name, color:$color, quantity:$quantity};
+						$data[i] = {name:$name, color:$color, quantity:$quantity, price:$price};
 					});
 					//alert($data);
 					

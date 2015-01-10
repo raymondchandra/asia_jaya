@@ -507,5 +507,23 @@ class transController extends \HomeController{
 		}
 		
 	}
+	
+	public function makeVoid()
+	{
+		$id = Input::get('data');
+		$transController = new TransactionsController();
+		$voidResult = $transController->makeVoid($id);
+		if($voidResult == 1)
+		{
+			$trans = Transaction::find($id);
+			$cash = new CashesController();
+			$cashUpdate = $cash->insertWithParam($id, 0, $trans->total,"void transaction");
+			return Response::json($response = array('code'=>'200','status' => 'OK'));
+		}
+		else
+		{
+			return Response::json($response = array('code'=>'204','status' => 'NOK'));
+		}
+	}
 
 }

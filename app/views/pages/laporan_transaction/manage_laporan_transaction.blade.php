@@ -307,7 +307,11 @@
 									</select>
 								</td>
 								<td></td>
-								<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
+								<td width="">
+								<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
+								<br/>
+								<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
+								</td>
 								<td></td>
 								
 							</tr>
@@ -827,6 +831,10 @@
 		}
 		
 		
+	});
+	
+	$('body').on('click','#unfilter_button',function(){
+		window.location = "{{URL::route('david.view_all_transaction')}}";
 	});
 	</script>
 @stop

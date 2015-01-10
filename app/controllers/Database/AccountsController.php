@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class AccountsController extends \BaseController {
 
 	public function viewDesktopLogin()
@@ -21,15 +23,45 @@ class AccountsController extends \BaseController {
 		if(Auth::attempt($data, $remember_me))
 		{
 			if(Auth::user()->role == 1)
-			{					
+			{
+				$acc = Account:find(Auth::user()->id);
+				$acc->last_login = Carbon::now();
+				try
+				{
+					$acc->save();
+				}
+				catch(Exception $e)
+				{
+					return "fail";
+				}
 				return "owner";
 			}
 			else if(Auth::user()->role == 2)
 			{
+				$acc = Account:find(Auth::user()->id);
+				$acc->last_login = Carbon::now();
+				try
+				{
+					$acc->save();
+				}
+				catch(Exception $e)
+				{
+					return "fail";
+				}
 				return "mgr";
 			}
 			else
 			{
+				$acc = Account:find(Auth::user()->id);
+				$acc->last_login = Carbon::now();
+				try
+				{
+					$acc->save();
+				}
+				catch(Exception $e)
+				{
+					return "fail";
+				}
 				return "sales";
 			}
 		}
