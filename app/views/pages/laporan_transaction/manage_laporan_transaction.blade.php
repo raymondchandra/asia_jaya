@@ -15,13 +15,13 @@
 					</div>
 					<div class="input-daterange g-md-6">
 						<div class="g-md-4">
-							<input value="" class="f_date_0 form-control" id="start_date"/>
+							<input value="{{$start_date}}" class="f_date_0 form-control" id="start_date"/>
 						</div>
 						<div class="g-md-1" style="text-align:center; line-height: 34px;">
 							<span>to</span>
 						</div>
 						<div class="g-md-4">
-							<input value="" class="f_date_1 form-control" id="end_date"/>
+							<input value="{{$end_date}}" class="f_date_1 form-control" id="end_date"/>
 						</div>
 						<div class="g-md-3">
 							<button type="button" class="btn btn-success" id="show_range_button">
@@ -424,9 +424,21 @@
 		$start_date = $('#start_date').val();
 		$end_date = $('#end_date').val();
 		
+		$id = '-';
+		$name = '-';
+		$total = '-';
+		$discount = '-';
+		$tax = '-';
+		$sales_id = '-';
+		$username = '-';
+		$is_void = '-';
+		$status = '-';
+		
+		window.location = "{{URL::route('david.view_all_transaction')}}" + "?filtered=1&id="+$id+"&name="+$name+"&total="+$total+"&discount="+$discount+"&tax="+$tax+"&sales_id="+$sales_id+"&username="+$username+"&is_void="+$is_void+"&status="+$status+"&start_date="+$start_date+"&end_date="+$end_date;;
+		
 		//alert($start_date);
 		//alert($end_date);
-		
+		/*
 		$.ajax({
 			type: 'GET',
 			url: '{{URL::route('gentry.range_date')}}',
@@ -485,7 +497,7 @@
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 				alert("responseText: "+xhr.responseText);
 			}
-		},'json');
+		},'json');*/
 	});
 	
 	$('body').on('click','#filter_button',function(){

@@ -1,6 +1,80 @@
 <?php
 
 class AccountsController extends \BaseController {
+
+	public function viewDesktopLogin()
+	{
+		return View::make('pages.login_desktop');
+	}
+	
+	public function viewMobileLogin()
+	{
+		return View::make('pages.mobile_test.login');
+	}
+	
+	public function postSignIn()
+	{
+		$username = Input::get('data');
+		$password = Input::get('datas');
+		$data = array('username'=>$username, 'password'=>$password);
+		$remember_me = Input::get('remember_me') === 'yes';
+		if(Auth::attempt($data, $remember_me))
+		{
+			if(Auth::user()->role == 1)
+			{					
+				return "owner";
+			}
+			else if(Auth::user()->role == 2)
+			{
+				return "mgr";
+			}
+			else
+			{
+				return "sales";
+			}
+		}
+		else
+		{
+			//fail
+			return "fail";
+		}
+
+	}
+	
+	public function postMobileSignIn()
+	{
+		$username = Input::get('data');
+		$password = Input::get('datas');
+		$data = array('username'=>$username, 'password'=>$password);
+		$remember_me = Input::get('remember_me') === 'yes';
+		if(Auth::attempt($data, $remember_me))
+		{
+			if(Auth::user()->role == 1)
+			{					
+				return "owner";
+			}
+			else if(Auth::user()->role == 2)
+			{
+				return "mgr";
+			}
+			else
+			{
+				return "sales";
+			}
+		}
+		else
+		{
+			//fail
+			return "fail";
+		}
+	}
+	
+	public function postLogout()
+	{
+		Auth::logout();
+		Session::flush();
+		return "OK";
+	}
 	
 	public function insert()
 	{

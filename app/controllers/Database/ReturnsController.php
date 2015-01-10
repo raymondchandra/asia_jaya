@@ -31,7 +31,7 @@ class ReturnsController extends \BaseController {
 		@return :
 		-) Fungsi ini digunakan untuk menambahkan 1 baris baru ke dalam tabel return
 	*/
-	public function insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $returnQuantity){
+	public function insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $returnQuantity, $in_amount, $out_amount){
 		$data = array("order_id"=>$orderId, "type"=>$type, "status"=>$status, "solution"=>$solution, "trade_product_id"=>$tradeProductId, "difference"=>$difference, "return_quantity"=>$returnQuantity);
 		$validator = Validator::make($data, ReturnDB::$rules);
 
@@ -44,6 +44,11 @@ class ReturnsController extends \BaseController {
 		//save
 		try {
 			ReturnDB::create($data);
+			//masukin ke cash dulu ya..ijin aja sih ini ma
+			$transId = Order::find($orderId);
+			$amount = Input::get('amount');
+			$controller = new CashesController();
+			$controller->insertWithParam($transId->transaction_id,$in_amount,$in_amount,'return');
 			$respond = array('code'=>'201','status' => 'Created');
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);

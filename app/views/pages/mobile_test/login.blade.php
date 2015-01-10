@@ -47,22 +47,48 @@
 							<div class="form-group">
 								<label class="control-label g-sm-12">Username</label>	
 								<div class="g-sm-12">	
-									<input class="form-control" type="text">
+									<input class="form-control input-usrnm"  type="text">
 								</div>		
 							</div>	
 							<div class="form-group" >
-								<label class="control-label g-sm-12" style="margin-top: 20px;">Password</label>	
+								<label class="control-label g-sm-12 " style="margin-top: 20px;">Password</label>	
 								<div class="g-sm-12">	
-									<input class="form-control" type="password">
+									<input class="form-control input-passwd" type="password">
 								</div>		
 							</div>	
 							<div class="form-group">
 								
 								<div class="g-sm-12" style="text-align: center; margin-top: 20px;">	
-									<button type="button" class="btn btn-success">
-										Log In
-									</button>
-								</div>		
+									<input type="button" class="btn btn-success flogin" value="Log In"/>
+									<script>
+										$('body').on('click','.flogin',function(){
+											
+											$pass = $('.input-passwd').val();
+											$id = $('.input-usrnm').val();
+											$.ajax({
+												type: 'POST',
+												url: '{{URL::route('david.post_sign_in')}}',
+												data: {
+													'data' : $id,
+													'datas' : $pass
+												},
+												success: function(response){
+													if(response == "fail")
+													{
+														
+													}
+													else
+													{
+														window.location.href="{{URL::route('mobile_site')}}";
+													}
+												},error: function(xhr, textStatus, errorThrown){
+													alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+													alert("responseText: "+xhr.responseText);
+												}
+											},'json');
+										});
+									</script>
+						</div>		
 							</div>			
 						</form>
 					</div>

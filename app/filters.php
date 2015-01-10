@@ -33,21 +33,70 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+Route::filter('authSales', function()
 {
 	if (Auth::guest())
 	{
-		if (Request::ajax())
+		return Redirect::guest('login');
+	}
+	else
+	{
+		if(Auth::user()->role > 3)
 		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-			return Redirect::guest('login');
+			$message = "Anda tidak memiliki hak akses untuk halaman ini";
+			return Redirect::to('redirectAdmin')->with('message', $message);
 		}
 	}
 });
 
+Route::filter('authMgr', function()
+{
+	if (Auth::guest())
+	{
+		return Redirect::guest('login');
+	}
+	else
+	{
+		if(Auth::user()->role > 2)
+		{
+			$message = "Anda tidak memiliki hak akses untuk halaman ini";
+			return Redirect::to('redirectAdmin')->with('message', $message);
+		}
+	}
+});
+
+Route::filter('authOwner', function()
+{
+	if (Auth::guest())
+	{
+		return Redirect::guest('login');
+	}
+	else
+	{
+		if(Auth::user()->role > 1)
+		{
+			$message = "Anda tidak memiliki hak akses untuk halaman ini";
+			return Redirect::to('redirectAdmin')->with('message', $message);
+		}
+	}
+});
+
+Route::filter('checkLogin', function()
+{
+	if(Auth::check())
+	{
+		$message = "Anda sudah login";
+		if(Auth::user()->role == 1)
+		{
+			return Redirect::to('redirect')->with('message', $message);
+		}
+		else
+		{
+			return Redirect::to('redirect')->with('message', $message);
+		}
+		
+	}
+});
 
 Route::filter('auth.basic', function()
 {

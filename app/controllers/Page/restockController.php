@@ -371,7 +371,7 @@ class restockController extends \HomeController{
 		$reference = Input::get('reference','0');
 		$isSeri = Input::get('seri', '0');
 	
-		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type, $productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna, $reference, $isSeri);
+		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type,$productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna, $reference, $isSeri);
 		
 		if($newProductId != -1){
 			return "success add new product";
@@ -426,13 +426,30 @@ class restockController extends \HomeController{
 		
 		if($insertProductStatus == 1){
 			$productId = $this->findProductId($name);
+			$controller = new RestocksController();
 			$i = 1;
 			$check = true;
 			while($i<=$i_warna && $check == true){
-				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $detailShop[$i], $detailStorage[$i], $productId, $detailDeleted, $reference, $seri);
-				if($insertDetailStatus != 1 || $i==$i_warna){
+				
+			
+				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $detailShop[$i], $detailStorage[$i], $productId,$detailDeleted, $reference, $seri);
+				if($insertDetailStatus == -1 || $i==$i_warna)
+				{
 					$check = false;
 				}
+				else
+				{
+					//restock buat product detail id=insertDetailStatus;
+					if($detailShop[$i] != 0)//restock dari luar ke toko
+					{
+						$controller->insertWithParam(4, $insertDetailStatus, $detailShop[$i], 0);
+					}
+					else if($detailStorage[$i] != 0)//restock dari luar ke gudang
+					{
+						$controller->insertWithParam(5, $productDetailId, 0, $detailStorage[$i]);
+					}
+				}
+				
 				$i++;
 			}
 			if($insertDetailStatus == 1){
@@ -477,7 +494,7 @@ class restockController extends \HomeController{
 		$addStatusJson = json_decode($addStatus->getContent());
 		
 		if($addStatusJson->{'status'} == 'Created'){
-			return 1;
+			return $addStatusJson->{'message'};
 		}else{
 			return -1;
 		}

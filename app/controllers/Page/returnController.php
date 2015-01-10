@@ -469,10 +469,12 @@ class returnController extends \HomeController{
 		$currentPrice = $product_data->sales_price;
 		$priceReturn = $order_data->price / $order_data->quantity;
 		$priceReturn = $priceReturn * $return_quantity;
-		
+		$out_amount = $priceReturn;
+		$in_amount = 0;
 		if($type == "tukar dengan barang yang sama"){
 			$type = 1;
 			
+			$in_amount = $currentPrice;
 			$difference = $priceReturn-$currentPrice;
 			if($difference<0){
 				$difference = $difference*-1;
@@ -482,6 +484,7 @@ class returnController extends \HomeController{
 			$type = 2;
 			
 			$product_price = Product::find($tradeProductId)->sales_price;
+			$in_amount = $product_price;
 			$difference = $priceReturn-($product_price*$return_quantity);
 			if($difference < 0){
 				$difference = $difference*-1;
@@ -489,6 +492,7 @@ class returnController extends \HomeController{
 		}else{
 			$type = 3;
 			
+			$in_amount = $nominal_uang;
 			if($nominal_uang != ''){
 				$difference = $nominal_uang-$priceReturn;
 				if($difference<0){
@@ -498,7 +502,7 @@ class returnController extends \HomeController{
 		}
 		
 		$returnController = new ReturnsController();
-		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity);
+		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
 		//$temp = json_decode($addReturns->getContent());
 		return $addReturns;
 		//return $difference;
@@ -508,9 +512,33 @@ class returnController extends \HomeController{
 	{
 		$id = Input::get('data');
 		$solusi = Input::get('solusi');
-		
+		$controller = new RestockController();
 		$returnController = new ReturnsController();
 		
+		if($solusi == "Masukan ke stok toko")
+		{
+			//rubah stock
+			$return = ReturnDB::find($id);
+			$order = Order::find($return->return_id);
+			$productDetail = ProductDetail::find($order->product_detail_id);
+			$currentStock = $productDetail->stock_shop;
+			$productDetail->stock_shop = $currentStock + $return->return_quantitiy;
+			try
+			{
+				$productDetail->save();
+				//restock
+				$controller->insertWithParam(5, $productDetail->id, $return->return_quantitiy, 0);
+			}
+			catch(Exception $e)
+			{
+			
+			}
+			
+		}
+		else
+		{
+			//tambah barang obral
+		}
 		return $returnController->updateSolution($id, $solusi);
 	}
 }

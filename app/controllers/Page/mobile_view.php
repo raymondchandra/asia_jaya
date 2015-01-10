@@ -1,7 +1,10 @@
 <?php
 
 class mobile_view extends \BaseController{
-
+	public function viewMobileSite()
+	{
+		return View::make('pages.mobile_test.index');
+	}
 	/*
 		@author : Gentry Swanri
 		@parameter : $customerName

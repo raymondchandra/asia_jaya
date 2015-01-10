@@ -39,7 +39,47 @@
 						<h2 style="margin-left:20px;">Toko Asia Jaya</h2>
 					</div>
 					<div class="g-lg-8" style="line-height: 69px; text-align: right;">
-						Hello, Owner | <a href="#">log out</a>
+						
+						@if(Auth::user() != null)
+							Hello,
+							@if(Auth::user()->role == 1)
+								Owner
+							@elseif(Auth::user()->role == 2)
+								Manager
+							@else
+								Sales
+							@endif
+							| 
+							<a href="#" id="logOutText">log out</a>
+							<script>
+								$('body').on('click','#logOutText',function(){
+														
+									$.ajax({
+										type: 'POST',
+										url: '{{URL::route('david.post_sign_out')}}',
+										data: {
+
+										},
+										success: function(response){
+											if(response == "OK")
+											{
+												window.location.href="{{URL::route('login.desktop')}}";
+											}
+											else
+											{
+												
+											}
+										},error: function(xhr, textStatus, errorThrown){
+											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+											alert("responseText: "+xhr.responseText);
+										}
+									},'json');
+								});
+							</script>
+						@endif
+
+						
+						
 					</div>
 				</div>
 			</div>

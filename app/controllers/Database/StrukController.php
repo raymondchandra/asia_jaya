@@ -19,7 +19,7 @@ class StrukController extends \BaseController {
 		{
 			$struk = Struk::find(1);
 			
-			if(Carbon::create($struk->date)->diffInDays(Carbon::Now()) >= 1)
+			if(Carbon::parse($struk->date)->diffInDays(Carbon::Now()) >= 1)
 			{
 				$struk->date= Carbon::Now();
 				$struk->no_struk = 1;
@@ -34,7 +34,7 @@ class StrukController extends \BaseController {
 				$struk->no_struk = $nmr+1;
 				$struk->save();
 				
-				return $nmr;
+				return $nmr+1;
 			}
 		}
 	}

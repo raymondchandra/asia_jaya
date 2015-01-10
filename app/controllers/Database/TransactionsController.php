@@ -248,7 +248,14 @@ class TransactionsController extends \BaseController {
 	{
 	
 		if($from != '' && $to != ''){
-			$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->whereBetween('transactions.created_at', array($from,$to));
+			if($from == $to)
+			{
+				$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->where(DB::raw('DATE(transactions.created_at)'),'=',$from);
+			}
+			else
+			{
+				$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->where(DB::raw('DATE(transactions.created_at)'),'>=',$from)->where(DB::raw('DATE(transactions.created_at)'),'<=',$to);
+			}
 		}else{
 			$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
 		}
@@ -263,7 +270,14 @@ class TransactionsController extends \BaseController {
 		$isFirst = false;
 		
 		if($from != '' && $to != ''){
-			$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->whereBetween('transactions.created_at', array($from,$to));
+			if($from == $to)
+			{
+				$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->where(DB::raw('DATE(transactions.created_at)'),'=',$from);
+			}
+			else
+			{
+				$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->where(DB::raw('DATE(transactions.created_at)'),'>=',$from)->where(DB::raw('DATE(transactions.created_at)'),'<=',$to);
+			}
 		}else{
 			$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
 		}
@@ -403,7 +417,14 @@ class TransactionsController extends \BaseController {
 		$isFirst = false;
 		
 		if($from != '' && $to != ''){
-			$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->whereBetween('transactions.created_at', array($from,$to));
+			if($from == $to)
+			{
+				$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->where(DB::raw('DATE(transactions.created_at)'),'=',$from);
+			}
+			else
+			{
+				$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at')->where(DB::raw('DATE(transactions.created_at)'),'>=',$from)->where(DB::raw('DATE(transactions.created_at)'),'<=',$to);
+			}
 		}else{
 			$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
 		}

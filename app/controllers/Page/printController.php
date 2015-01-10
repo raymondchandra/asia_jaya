@@ -20,8 +20,27 @@ class printController extends \HomeController{
 			$value->productName = $product->name;
 			$total += $value->price;
 		}
-
-		return View::make('pages.print_struk.print_toko', compact('namaPelanggan','namaSales','transaksi','orders','total'));
+		$strukController = new StrukController();
+		$noStruk = $strukController->get();
+		if($noStruk < 10)
+		{
+			$noStruk = "00".$noStruk;
+		}
+		else if($noStruk < 100)
+		{
+			$noStruk = "0".$noStruk;
+		}
+		else
+		{
+		
+		}
+		
+		$year = substr(date('Y'), -2);
+		$date = date('d');
+		$month = date('m');
+		$dw = date( "w");
+		$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+		return View::make('pages.print_struk.print_toko', compact('namaPelanggan','namaSales','transaksi','orders','total','kodeFaktur'));
 	}
 	
 	public function view_print_konsumen(){
@@ -38,8 +57,27 @@ class printController extends \HomeController{
 		{
 			$total += $value->price;
 		}
-
-		return View::make('pages.print_struk.print_konsumen', compact('namaPelanggan','namaSales','transaksi','orders','total'));
+		$strukController = new StrukController();
+		$noStruk = $strukController->get();
+		if($noStruk < 10)
+		{
+			$noStruk = "00".$noStruk;
+		}
+		else if($noStruk < 100)
+		{
+			$noStruk = "0".$noStruk;
+		}
+		else
+		{
+		
+		}
+		
+		$year = substr(date('Y'), -2);
+		$date = date('d');
+		$month = date('m');
+		$dw = date( "w");
+		$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+		return View::make('pages.print_struk.print_konsumen', compact('namaPelanggan','namaSales','transaksi','orders','total','kodeFaktur'));
 	}
 	
 	public function view_print_return(){
@@ -65,8 +103,27 @@ class printController extends \HomeController{
 			$barangTukar = '-';
 		}
 		$difference = $return_data->difference;
+		$strukController = new StrukController();
+		$noStruk = $strukController->get();
+		if($noStruk < 10)
+		{
+			$noStruk = "00".$noStruk;
+		}
+		else if($noStruk < 100)
+		{
+			$noStruk = "0".$noStruk;
+		}
+		else
+		{
 		
+		}
 		
-		return View::make('pages.print_struk.print_return', compact('created','pelanggan','sales','type','solution','barangReturn','barangTukar','difference'));
+		$year = substr(date('Y'), -2);
+		$date = date('d');
+		$month = date('m');
+		$dw = date( "w");
+		$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+		
+		return View::make('pages.print_struk.print_return', compact('created','pelanggan','sales','type','solution','barangReturn','barangTukar','difference','kodeFaktur'));
 	}
 }

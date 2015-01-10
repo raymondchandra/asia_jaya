@@ -49,7 +49,7 @@
 			<tr>
 				<td>Faktur</td>
 				<td>:</td>
-				<td>2342352</td>
+				<td>{{$kodeFaktur}}</td>
 			</tr>
 			<tr>
 				<td>Waktu Transaksi</td>

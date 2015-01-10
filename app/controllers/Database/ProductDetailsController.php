@@ -45,8 +45,8 @@ class ProductDetailsController extends \BaseController {
 
 		//save
 		try {
-			Productdetail::create($data);
-			$respond = array('code'=>'201','status' => 'Created');
+			$result = ProductDetail::create($data);
+			$respond = array('code'=>'201','status' => 'Created','message'=>$result->id);
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
 		}

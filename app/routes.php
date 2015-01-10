@@ -2,37 +2,7 @@
 use Carbon\Carbon;
 	Route::get('/tes', function()
 	{
-		if(Struk::find(1) == null)
-		{
-			$struk = new Struk();
-			$struk->date = Carbon::Now();
-			$struk->no_struk = 1;
-			$struk->save();
-			
-			return 1;
-		}
-		else
-		{
-			$struk = Struk::find(1);
-			
-			if(Carbon::parse($struk->date)->diffInDays(Carbon::Now()) >= 1)
-			{
-				$struk->date= Carbon::Now();
-				$struk->no_struk = 1;
-				$struk->save();
-				
-				return 1;
-			}
-			else
-			{
-				
-				$nmr = $struk->no_struk;
-				$struk->no_struk = $nmr+1;
-				$struk->save();
-				
-				return $nmr+1;
-			}
-		}
+		echo Hash::make('mgr');
 		
 	});
 	Route::get('/tes2', function()
@@ -88,13 +58,23 @@ use Carbon\Carbon;
 	Route::post('getAllTransaction', 'transController@getAllTransaction');
 
 //home + login
-Route::get('/', ['as' => 'home', 'uses' => '']);
-Route::post('/login', ['as' => 'login', 'uses' => 'AccountController@']);
+Route::get('/login', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
+Route::get('/login_mobile', ['as' => 'login.mobile', 'uses' => 'AccountsController@viewMobileLogin','before'=>'' ]);
+
 Route::post('/logout', ['as' => 'logout', 'uses' => 'AccountController@']);
 
 //sales
-Route::group(['before' => 'auth'], function()
+Route::group(['prefix' => 'sales','before' => 'authSales'], function()
 {
+//mobile
+	Route::get('/mobile',['as'=>'mobile_site','uses' => 'mobile_view@viewMobileSite']);
+//pesanan
+	Route::get('/view_transaction', ['as'=>'david.view_transaction','uses' => 'transController@view_transaction']);
+	
+	//Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction']);
+	
+	Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction2']);
+	/*
 //product
 	//get barang jualan
 	Route::get('/product', ['as' => 'get.product.list' , 'uses' => 'ProductsController@getAll']);
@@ -119,12 +99,17 @@ Route::group(['before' => 'auth'], function()
 	//bayar+print
 	Route::put('/transaction/{id}', ['as' => 'pay.transaction' , 'uses' => 'TransactionsController@']);
 	//hapus pesanan
-	Route::delete('/transaction/{id}', ['as' => 'delete.transaction' , 'uses' => 'TransactionsController@delete']);
+	Route::delete('/transaction/{id}', ['as' => 'delete.transaction' , 'uses' => 'TransactionsController@delete']);*/
 });
 
 //manager
 Route::group(['before' => 'auth_manager'], function()
 {
+//return
+	Route::get('/view_return', ['as'=>'gentry.view_return','uses' => 'returnController@view_return']);
+//stock
+	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock2']);
+/*
 //pesanan
 	//list semua pesanan yg status pending
 	Route::get('/transaction/pending', ['as' => 'get.transaction.pending.list' , 'uses' => 'TransactionsController@']);
@@ -153,12 +138,24 @@ Route::group(['before' => 'auth_manager'], function()
 	Route::get('/product/obral', ['as' => 'get.product.obral' , 'uses' => 'ProductsController@']);
 	//obralkan barang
 	Route::put('/product/obral', ['as' => 'add.product.obral' , 'uses' => 'ProductsController@']);
-	
+*/
 });
 
 //owner
-Route::group(['prefix' => 'admin', 'before' => 'auth_owner'], function()
+Route::group(['prefix' => 'owner','before' => 'authOwner'], function()
 {
+//dashboard
+	Route::get('/view_dashboard', ['as'=>'david.view_dashboard','uses' => 'dashboardController@viewDashboard']);
+//cashflow
+	Route::get('/view_cashflow', ['as'=>'david.view_cashflow','uses' => 'cashController@view_laporan_cash']);
+//customer
+	Route::get('/view_customer', ['as'=>'gentry.view_customer','uses' => 'custController@view_customer']);
+//account
+	Route::get('/view_account', ['as'=>'david.viewAccount','uses' => 'accountController@viewAccount']);
+//log
+	Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
+//tax
+	Route::get('/view_tax', ['as'=>'gentry.view_tax','uses' => 'taxController@viewTax']);
 //product
 	//(get pake route yang manager dan sales)
 	//edit barang
@@ -438,7 +435,11 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::get('/add_opening_cash', ['as'=>'david.add_opening_cash','uses' => 'dashboardController@addOpeningCash']);
 	
-	//Route::get('/range_date', ['as'=>'gentry.range_date','uses' => 'transController@filterByDateRange']);
+	Route::get('/range_date', ['as'=>'gentry.range_date','uses' => 'transController@filterByDateRange']);
+	
+	Route::post('/post_sign_in', ['as'=>'david.post_sign_in','uses' => 'AccountsController@postSignIn']);
+	
+	Route::post('/post_sign_out', ['as'=>'david.post_sign_out','uses' => 'AccountsController@postLogOut']);
 	
 });
 

@@ -197,6 +197,7 @@ class CashesController extends \BaseController {
 	public function getTodayTotalCash()
 	{
 		$respond = array();
+		$total = 0;
 		$datas = Cash::whereRaw('created_at >= curdate()')->get();
 		if(count($datas) == 0)
 		{
@@ -204,7 +205,7 @@ class CashesController extends \BaseController {
 		}
 		else
 		{
-			$total = 0;
+			
 			foreach($datas as $data)
 			{
 				$in = $data->in_amount;

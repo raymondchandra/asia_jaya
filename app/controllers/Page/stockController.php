@@ -95,11 +95,42 @@ class stockController extends \HomeController{
 		$editKode = Input::get('editKode');
 		$editFoto = Input::get('editFoto');
 		
+		//cek restock
+		$productDetail = ProductDetail::find($idDetail);
+		$stock_shop = $productDetail->stock_shop;
+		$stock_storage = $productDetail->stock_storage;
+		$controller = new RestocksController();
+		if($editShop == $stock_shop && $editStorage == $stock_storage)
+		{
+			//tidak ada restock;
+		}
+		else
+		{
+			if($editStorage < $stock_storage && $editShop > $stock_shop)//restock gudang ke toko
+			{
+				$controller->insertWithParam(1, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
+			}
+			else if($editStorage > $stock_storage && $editShop < $stock_shop)//restock toko ke gudang
+			{
+				$controller->insertWithParam(2, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
+			}
+			else if($editStorage > $stock_storage && $editShop = $stock_shop)//restock dari luar ke gudang
+			{
+				$controller->insertWithParam(3, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
+			}
+			else //restock dari luar ke toko
+			{
+				$controller->insertWithParam(4, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
+			}
+		}
+		
 		$productController = new ProductsController();
 		$productDetailController = new ProductDetailsController();
 		
 		$editProductJson = $productController->updateForViewStock($idProduct, $editName, $editModal, $editMin, $editSales, $editKode);
 		$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage, $editFoto);
+		
+		
 	}
 	
 	public function deleteProduct()

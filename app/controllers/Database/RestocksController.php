@@ -32,7 +32,7 @@ class RestocksController extends \BaseController {
 		@return :
 		-) Fungsi ini digunakan untuk menginsert record baru ke tabel restock
 	*/
-	public function insertWithParam($type){
+	public function insertWithParam($type, $productDetailId, $shopAmount, $storageAmount){
 		$data = array('type'=>$type);
 		//validate
 		$validator = Validator::make($data, Restock::$rules);
@@ -45,8 +45,9 @@ class RestocksController extends \BaseController {
 
 		//save
 		try {
-			Restock::create($data);
-			$respond = array('code'=>'201','status' => 'Created');
+			$id = Restock::create($data);
+			$detail = new RestockDetailsController();
+			return $detail->insertWithParam($id->id, $productDetailId, $shopAmount, $storageAmount);
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
 		}
