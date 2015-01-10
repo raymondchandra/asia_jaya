@@ -307,12 +307,11 @@
 									</select>
 								</td>
 								<td></td>
-								<td width="">
+								<td width="" colspan="2">
 								<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
 								<br/>
 								<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
 								</td>
-								<td></td>
 								
 							</tr>
 						</thead>
