@@ -349,6 +349,26 @@ Route::group(array('prefix' => 'test'), function()
 		return View::make('pages.mobile_test.login');
 	});
 
+	//forbidden
+
+	Route::get('/forbid', function()
+	{
+		return View::make('pages.forbid');
+	});
+
+	//forbidden
+
+	Route::get('/already_login', function()
+	{
+		return View::make('pages.already_login');
+	});
+	//restock_histoy
+
+	Route::get('/history_restock', function()
+	{
+		return View::make('pages.restock.history_restock');
+	});
+
 });
 
 Route::group(array('prefix' => 'fungsi'), function()

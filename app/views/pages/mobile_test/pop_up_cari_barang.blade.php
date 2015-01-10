@@ -84,10 +84,11 @@
 					$.each(response['messages'], function( i, resp ) {
 						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
 						$data = $data + "<img src='{{asset('"+resp.photo+"')}}' width='75' height='75' class='pull-left' style='margin-right:8px;'>";
-						$data = $data + "#" + resp.product_code + " / " + resp.color + " / <span class='pull-right'>";
-						$data = $data + resp.stock_shop + " | " + resp.stock_storage + "</span> </span> <span style='display: block;'> <span class='pull-left'>";
-						$data = $data + resp.name + "</span>   <span class='pull-right'>";
-						$data = $data + "IDR " + toRp(resp.sales_price) + "</span> </span>";
+						$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						$data = $data + "</span> <span style='display: block;'> ";
+						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
+						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
+						$data = $data + "<span class='pull-right'>IDR " + toRp(resp.sales_price) + "</span> </span>";
 						$data = $data + "<span class='hiddenVal'>";
 						$data = $data + "<input type='hidden' value='" + resp.id + "' id='id_" + resp.id + "' class='id' />";
 						$data = $data + "<input type='hidden' value='" + resp.product_code + "' id='code_" + resp.id + "' />";
@@ -111,7 +112,7 @@
 			}
 		},'json');
 	});
-
+ 
 	//at close
 	$('#pop_up_cari_barang').on('hidden.bs.modal', function (e) {
 	  //alert('modal closed');
@@ -137,10 +138,11 @@
 					$.each(response['messages'], function( i, resp ) {
 						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
 						$data = $data + "<img src='{{asset('"+resp.photo+"')}}' width='75' height='75' class='pull-left' style='margin-right:8px;'>";
-						$data = $data + "#" + resp.product_code + " / " + resp.color + " / <span class='pull-right'>";
-						$data = $data + resp.stock_shop + " | " + resp.stock_storage + "</span> </span> <span style='display: block;'> <span class='pull-left'>";
-						$data = $data + resp.name + "</span>   <span class='pull-right'>";
-						$data = $data + "IDR " + toRp(resp.sales_price) + "</span> </span>";
+						$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						$data = $data + "</span> <span style='display: block;'> ";
+						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
+						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
+						$data = $data + "<span class='pull-right'>IDR " + toRp(resp.sales_price) + "</span> </span>";
 						$data = $data + "<span class='hiddenVal'>";
 						$data = $data + "<input type='hidden' value='" + resp.id + "' id='id_" + resp.id + "' class='id' />";
 						$data = $data + "<input type='hidden' value='" + resp.product_code + "' id='code_" + resp.id + "' />";
@@ -187,10 +189,11 @@
 					$.each(response['messages'], function( i, resp ) {
 						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
 						$data = $data + "<img src='{{asset('"+resp.photo+"')}}' width='75' height='75' class='pull-left' style='margin-right:8px;'>";
-						$data = $data + "#" + resp.product_code + " / " + resp.color + " / <span class='pull-right'>";
-						$data = $data + resp.stock_shop + " | " + resp.stock_storage + "</span> </span> <span style='display: block;'> <span class='pull-left'>";
-						$data = $data + resp.name + "</span>   <span class='pull-right'>";
-						$data = $data + "IDR " + toRp(resp.sales_price) + "</span> </span>";
+						$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						$data = $data + "</span> <span style='display: block;'> ";
+						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
+						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
+						$data = $data + "<span class='pull-right'>IDR " + toRp(resp.sales_price) + "</span> </span>";
 						$data = $data + "<span class='hiddenVal'>";
 						$data = $data + "<input type='hidden' value='" + resp.id + "' id='id_" + resp.id + "' class='id' />";
 						$data = $data + "<input type='hidden' value='" + resp.product_code + "' id='code_" + resp.id + "' />";
@@ -239,7 +242,7 @@
 			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + 1 + "</td> <td id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + "IDR " + toRp($price) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+			$data = $data + "" + toRp($price) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 			
 			$('#pesanan_content_'+$inc).prepend($data);
 			

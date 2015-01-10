@@ -118,7 +118,7 @@
 					</div>
 					<div class="form-group hidden f_diskon_inputtext">
 						<label for="">Diskon</label>
-						<input type="text" id="diskon_text" class="form-control" id="" value="" placeholder="e.g.: 10000">
+						<input type="number" id="diskon_text" class="form-control" id="" value="" placeholder="e.g.: 10000">
 					</div>
 
 					<div class="form-group">
