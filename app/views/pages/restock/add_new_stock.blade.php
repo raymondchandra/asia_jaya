@@ -610,7 +610,7 @@ $('body').on('click','.f_search_row_suggest',function(){
 							$('#harga_jual').val("");
 							$('#foto').val("");
 
-							$('.f_form_warna').append(row_warna);
+							//$('.f_form_warna').append(row_warna);
 						},error: function(xhr, textStatus, errorThrown){
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 							alert("responseText: "+xhr.responseText);

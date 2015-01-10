@@ -320,38 +320,64 @@
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_excel_xlabel_2_{{$prodList->id}}" id="color_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->color}}</span>
-									<input type="text" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_2_{{$prodList->id}}" style="" value="{{$prodList->color}}"/>
+									@if($prodList->isSeri == 0)
+										<span class="f_excel_xlabel f_excel_xlabel_2_{{$prodList->id}}" id="color_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->color}}</span>
+										<input type="text" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_2_{{$prodList->id}}" style="" value="{{$prodList->color}}"/>
+									@else
+										<span class="" id="color_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->color}}</span>
+									@endif
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
-									<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
+									@if($prodList->isSeri == 0)
+										<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
+										<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
+									@else
+										<span class="" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
+									@endif
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_excel_xlabel_4_{{$prodList->id}}" id="min_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->min_price}}">{{$prodList->min_price}}</span>
-									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_4_{{$prodList->id}}" style="" value="{{$prodList->min_price}}"/>
+									@if($prodList->isSeri == 0)
+										<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->min_price}}</span>
+										<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
+									@else
+										<span class="" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->min_price}}</span>
+									@endif
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_excel_xlabel_5_{{$prodList->id}}" id="sales_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->sales_price}}">{{$prodList->sales_price}}</span>
-									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_5_{{$prodList->id}}" style="" value="{{$prodList->sales_price}}"/>
+									@if($prodList->isSeri == 0)
+										<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->sales_price}}</span>
+										<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
+									@else
+										<span class="" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->sales_price}}</span>
+									@endif
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_excel_xlabel_6_{{$prodList->id}}" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
-									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_6_{{$prodList->id}}" style="" value="{{$prodList->stock_shop}}"/>
+									
+									@if($prodList->isSeri == 0)
+										<span class="f_excel_xlabel f_excel_xlabel_6_{{$prodList->id}}" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
+										<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_6_{{$prodList->id}}" style="" value="{{$prodList->stock_shop}}"/>
+									@else
+										<span class="" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
+									@endif
+									
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
 									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_excel_xlabel_7_{{$prodList->id}}" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
-									<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_7_{{$prodList->id}}" style="" value="{{$prodList->stock_storage}}"/>
+									@if($prodList->isSeri == 0)
+										<span class="f_excel_xlabel f_excel_xlabel_7_{{$prodList->id}}" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
+										<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_7_{{$prodList->id}}" style="" value="{{$prodList->stock_storage}}"/>
+									@else
+										<span class="" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
+									@endif
 								</td>
 								<td>
 									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />

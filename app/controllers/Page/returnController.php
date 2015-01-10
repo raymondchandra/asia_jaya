@@ -531,13 +531,16 @@ class returnController extends \HomeController{
 			}
 			catch(Exception $e)
 			{
-			
+				
 			}
 			
 		}
 		else
 		{
 			//tambah barang obral
+			$return = ReturnDB::find($id);
+			$controller = new ProductDetailsController();
+			$controller->addObral($return->return_quantitiy);
 		}
 		return $returnController->updateSolution($id, $solusi);
 	}

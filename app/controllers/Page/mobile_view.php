@@ -133,6 +133,7 @@ class mobile_view extends \BaseController{
 		if($customerId!=-1){
 			//add Transaction
 			$transactionId = $this->addTransaction($salesId, $customerId, $total, $discount, $tax);
+			$wadoo = "";
 			if($transactionId!=-1){
 				$productController = new ProductsController();
 				$productDetailController = new ProductDetailsController();
@@ -154,12 +155,33 @@ class mobile_view extends \BaseController{
 						}else{
 							$detail = $prodIdJson->{'messages'};
 							$productDetailId = -1;
+							
 							foreach($detail as $det){
-								if($det->color == $prodList["color"]){
-									$productDetailId = $det->id;
+								if($det->isSeri == 1)
+								{
+									$tempColor = explode(' - ',$prodList["color"]);
+									$counter = count($tempColor);
+									$realColor = "";
+									for($x = 0 ; $x<$counter ; $x++)
+									{
+										$iterColor = explode(' * ',$tempColor[$x]);
+										$realColor .= $iterColor[1]."-";
+									}
+									
+									$realColor = substr($realColor,0,strlen($realColor)-1);
+									$wadoo .= $realColor;
+									if($det->color == $realColor){
+										$productDetailId = $det->id;
+										
+									}
+								}
+								else
+								{
+									if($det->color == $prodList["color"]){
+										$productDetailId = $det->id;
+									}
 								}
 							}
-							
 							if($productDetailId!=-1){
 								//add Orders
 								//cek seri
@@ -170,21 +192,32 @@ class mobile_view extends \BaseController{
 									$reference = $cekProduct->reference;
 									$reference = explode(';',$reference);
 									$counter = count($reference);
-									
+									$pricePerOrder = $price/($counter-1);
 									for($i=0 ; $i<$counter-1 ; $i++)
 									{
 										$quant = explode('-',$reference[$i]);
 										$productDetail = ProductDetail::find($quant[0]);
-										if($productDetail->deleted == '0')
+										
+										$orderQuantity = $prodList['quantity'] * $quant[1];
+										$shop_stock = $productDetail->stock_shop;
+										$storage_stock = $productDetail->stock_storage;
+										//cek stock
+										if($orderQuantity > $shop_stock)
 										{
-											if($i == 0)
+											if($orderQuantity > ($shop_stock + $storage_stock))
 											{
-												$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
+												//jgn tambahin
 											}
 											else
 											{
-												$clr .= " ".$prdClr[$i]." x ".$quant[count($quant)-1];
+												//tambahin
+												$addOrders = $this->addOrders($prodList['quantity']*$quant[1], $transactionId, $pricePerOrder, $quant[0]);
 											}
+										}
+										else
+										{
+											//tambahin
+											$addOrders = $this->addOrders($prodList['quantity']*$quant[1], $transactionId, $pricePerOrder, $quant[0]);
 										}
 									}
 								}
@@ -198,7 +231,7 @@ class mobile_view extends \BaseController{
 									$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Add Order Failed');
 								}
 							}else{
-								$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Detail Id Not Found');
+								$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Detail Id Not Found'.$wadoo);
 							}
 						}
 					}

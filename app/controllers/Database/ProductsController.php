@@ -393,7 +393,7 @@ class ProductsController extends \BaseController {
 	
 	public function getSortedAll($by, $order)
 	{
-		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail');
+		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference');
 	
 		$result = $products->orderBy($by, $order)->get();
 		
@@ -404,7 +404,7 @@ class ProductsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail');
+		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference');
 		
 		if($product_code != '-')
 		{
@@ -540,7 +540,7 @@ class ProductsController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail');
+		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference');
 		
 		if($product_code != '-')
 		{

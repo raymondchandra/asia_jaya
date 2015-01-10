@@ -24,12 +24,12 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="{{URL::route('gentry.view_stock')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>View Stock</a></li>
 						<li><a href="{{URL::route('gentry.view_return')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>View Retur</a></li>
-						<li><a href=" "><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>View Obral</a></li>
+						<li><a href="{{URL::route('david.view_obral')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>View Obral</a></li>
 					</ul>
 				</li>
 
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Laporan By<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Laporan<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="{{URL::route('david.view_all_transaction')}}"><span class="glyphicon glyphicon-briefcase" style="margin-right:10px;"></span>Semua Transaksi</a></li>
 						<li><a href="{{URL::route('david.view_cashflow')}}"><span class="glyphicon glyphicon-usd" style="margin-right:10px;"></span>Semua Cashflow</a></li>

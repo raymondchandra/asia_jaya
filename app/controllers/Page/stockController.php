@@ -28,7 +28,7 @@ class stockController extends \HomeController{
 		{
 			if($sortBy === "none")
 			{
-				$dataAll = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail')->get();
+				$dataAll = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference')->get();
 			}
 			else
 			{
@@ -41,7 +41,80 @@ class stockController extends \HomeController{
 			$datas = null;
 			if(count($dataAll)!=0){
 				foreach($dataAll as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'idDetail'=>$allData->idDetail, 'product_code'=>$allData->product_code, 'photo'=>$allData->photo, 'name'=>$allData->name, 'color'=>$allData->color, 'modal_price'=>$allData->modal_price, 'min_price'=>$allData->min_price, 'sales_price'=>$allData->sales_price, 'stock_shop'=>$allData->stock_shop, 'stock_storage'=>$allData->stock_storage, 'deleted'=>$allData->deleted);
+					if($allData->isSeri == 1)
+					{
+						$reference = $allData->reference;
+						$prdClr = $allData->color;
+						$reference = explode(';',$reference);
+						$counter = count($reference);
+						$prdClr = explode('-',$prdClr);
+						$clr = "";
+						$shopTotal = "";
+						$storageTotal = "";
+						$salesPrice = 0;
+						$minPrice = 0;
+						$modPrice = 0;
+						for($i=0 ; $i<$counter-1 ; $i++)
+						{
+							$quant = explode('-',$reference[$i]);
+							$productDetail = ProductDetail::find($quant[0]);
+							if($productDetail->deleted == '0')
+							{							
+								//cek stok
+								$prd = Product::find($productDetail->product_id);
+								$salesPrice += $prd->sales_price;
+								$minPrice += $prd->min_price;
+								$modPrice += $prd->modal_price;
+								
+								$shop = $productDetail->stock_shop;
+								$shopTotal .= $shop." - ";
+								
+								$storage = $productDetail->stock_storage;
+								$storageTotal .= $storage." - ";
+								if($quant[count($quant)-1] > $shop)
+								{
+									if($quant[count($quant)-1] > ($shop + $storage))
+									{
+									 //jgn masukin
+									}
+									else
+									{
+										//masukin
+										if($i == 0)
+										{
+											$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
+										}
+										else
+										{
+											$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
+										}
+									}
+								}
+								else
+								{
+									//masukin
+									if($i == 0)
+									{
+										$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
+									}
+									else
+									{
+										$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
+									}
+								}
+							}
+						}
+						$shopTotal = substr($shopTotal,0,strlen($shopTotal)-3);
+						$storageTotal = substr($storageTotal,0,strlen($storageTotal)-3);
+						$allData->color = $clr;
+						$allData->stock_shop = $shopTotal;
+						$allData->stock_storage = $storageTotal;
+						$allData->min_price = $minPrice;
+						$allData->sales_price = $salesPrice;
+						$allData->modal_price = $modPrice;
+					}
+					
+					$datas[] = (object)array('id'=>$allData->id, 'idDetail'=>$allData->idDetail, 'product_code'=>$allData->product_code, 'photo'=>$allData->photo, 'name'=>$allData->name, 'color'=>$allData->color, 'modal_price'=>$allData->modal_price, 'min_price'=>$allData->min_price, 'sales_price'=>$allData->sales_price, 'stock_shop'=>$allData->stock_shop, 'stock_storage'=>$allData->stock_storage, 'deleted'=>$allData->deleted, 'isSeri'=>$allData->isSeri);
 				}
 			}
 			
@@ -73,7 +146,79 @@ class stockController extends \HomeController{
 			if($allProduct->{'status'} != 'Not Found'){
 				$allProductData = $allProduct->{'messages'};
 				foreach($allProductData as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'idDetail'=>$allData->idDetail, 'product_code'=>$allData->product_code, 'photo'=>$allData->photo, 'name'=>$allData->name, 'color'=>$allData->color, 'modal_price'=>$allData->modal_price, 'min_price'=>$allData->min_price, 'sales_price'=>$allData->sales_price, 'stock_shop'=>$allData->stock_shop, 'stock_storage'=>$allData->stock_storage, 'deleted'=>$allData->deleted);
+					if($allData->isSeri == 1)
+					{
+						$reference = $allData->reference;
+						$prdClr = $allData->color;
+						$reference = explode(';',$reference);
+						$counter = count($reference);
+						$prdClr = explode('-',$prdClr);
+						$clr = "";
+						$shopTotal = "";
+						$storageTotal = "";
+						$salesPrice = 0;
+						$minPrice = 0;
+						$modPrice = 0;
+						for($i=0 ; $i<$counter-1 ; $i++)
+						{
+							$quant = explode('-',$reference[$i]);
+							$productDetail = ProductDetail::find($quant[0]);
+							if($productDetail->deleted == '0')
+							{							
+								//cek stok
+								$prd = Product::find($productDetail->product_id);
+								$salesPrice += $prd->sales_price;
+								$minPrice += $prd->min_price;
+								$modPrice += $prd->modal_price;
+								
+								$shop = $productDetail->stock_shop;
+								$shopTotal .= $shop." - ";
+								
+								$storage = $productDetail->stock_storage;
+								$storageTotal .= $storage." - ";
+								if($quant[count($quant)-1] > $shop)
+								{
+									if($quant[count($quant)-1] > ($shop + $storage))
+									{
+									 //jgn masukin
+									}
+									else
+									{
+										//masukin
+										if($i == 0)
+										{
+											$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
+										}
+										else
+										{
+											$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
+										}
+									}
+								}
+								else
+								{
+									//masukin
+									if($i == 0)
+									{
+										$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
+									}
+									else
+									{
+										$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
+									}
+								}
+							}
+						}
+						$shopTotal = substr($shopTotal,0,strlen($shopTotal)-3);
+						$storageTotal = substr($storageTotal,0,strlen($storageTotal)-3);
+						$allData->color = $clr;
+						$allData->stock_shop = $shopTotal;
+						$allData->stock_storage = $storageTotal;
+						$allData->min_price = $minPrice;
+						$allData->sales_price = $salesPrice;
+						$allData->modal_price = $modPrice;
+					}
+					$datas[] = (object)array('id'=>$allData->id, 'idDetail'=>$allData->idDetail, 'product_code'=>$allData->product_code, 'photo'=>$allData->photo, 'name'=>$allData->name, 'color'=>$allData->color, 'modal_price'=>$allData->modal_price, 'min_price'=>$allData->min_price, 'sales_price'=>$allData->sales_price, 'stock_shop'=>$allData->stock_shop, 'stock_storage'=>$allData->stock_storage, 'deleted'=>$allData->deleted, 'isSeri'=>$allData->isSeri);
 					
 				}
 			}

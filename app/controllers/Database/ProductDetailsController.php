@@ -398,19 +398,56 @@ class ProductDetailsController extends \BaseController {
 					$counter = count($reference);
 					$prdClr = explode('-',$prdClr);
 					$clr = "";
+					$shopTotal = 0;
+					$storageTotal = 0;
+					$salesPrice = 0;
+					$minPrice = 0;
 					for($i=0 ; $i<$counter-1 ; $i++)
 					{
 						$quant = explode('-',$reference[$i]);
 						$productDetail = ProductDetail::find($quant[0]);
 						if($productDetail->deleted == '0')
-						{
-							if($i == 0)
+						{							
+							//cek stok
+							$prd = Product::find($productDetail->product_id);
+							$salesPrice += $prd->sales_price;
+							$minPrice += $prd->min_price;
+							
+							$shop = $productDetail->stock_shop;
+							$shopTotal += $shop;
+							
+							$storage = $productDetail->stock_storage;
+							$storageTotal += $storage;
+							if($quant[count($quant)-1] > $shop)
 							{
-								$clr .= $prdClr[$i]." x ".$quant[count($quant)-1];
+								if($quant[count($quant)-1] > ($shop + $storage))
+								{
+								 //jgn masukin
+								}
+								else
+								{
+									//masukin
+									if($i == 0)
+									{
+										$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
+									}
+									else
+									{
+										$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
+									}
+								}
 							}
 							else
 							{
-								$clr .= " ".$prdClr[$i]." x ".$quant[count($quant)-1];
+								//masukin
+								if($i == 0)
+								{
+									$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
+								}
+								else
+								{
+									$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
+								}
 							}
 						}
 					}
@@ -421,6 +458,10 @@ class ProductDetailsController extends \BaseController {
 					else
 					{
 						$key->color = $clr;
+						$key->stock_shop = $shopTotal;
+						$key->stock_storage = $storageTotal;
+						$key->min_price = $minPrice;
+						$key->sales_price = $salesPrice;
 					}
 				}
 			}

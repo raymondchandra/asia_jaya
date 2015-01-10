@@ -44,7 +44,7 @@ Route::filter('authSales', function()
 		if(Auth::user()->role > 3)
 		{
 			$message = "Anda tidak memiliki hak akses untuk halaman ini";
-			return Redirect::to('\warning\forbid');
+			return Redirect::to('warning\forbid');
 		}
 	}
 });
@@ -60,7 +60,7 @@ Route::filter('authMgr', function()
 		if(Auth::user()->role > 2)
 		{
 			$message = "Anda tidak memiliki hak akses untuk halaman ini";
-			return Redirect::to('\warning\forbid');
+			return Redirect::to('warning\forbid');
 		}
 	}
 });
@@ -76,7 +76,7 @@ Route::filter('authOwner', function()
 		if(Auth::user()->role > 1)
 		{
 			$message = "Anda tidak memiliki hak akses untuk halaman ini";
-			return Redirect::to('\warning\forbid');
+			return Redirect::to('warning\forbid');
 		}
 	}
 });
@@ -86,7 +86,7 @@ Route::filter('checkLogin', function()
 	if(Auth::check())
 	{
 		$message = "Anda sudah login";
-		return Redirect::to('\warning\already_login');
+		return Redirect::to('warning\already_login');
 		
 	}
 });

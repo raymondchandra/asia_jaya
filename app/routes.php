@@ -7,7 +7,17 @@ use Carbon\Carbon;
 	});
 	Route::get('/tes2', function()
 	{
-		var_dump(explode(';',"2-50;"));
+		$tempColor = explode('-',"10*abc-10*deg");
+		$counter = count($tempColor);
+		$realColor = "";
+		for($x = 0 ; $x<$counter ; $x++)
+		{
+			$iterColor = explode('*',$tempColor[$x]);
+			$realColor .= $iterColor[1]."-";
+			echo $iterColor[1];
+		}
+		echo strlen($realColor);
+		echo $realColor = substr($realColor,0,strlen($realColor)-1);
 	});
 	
 //get list without filter
@@ -407,7 +417,7 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::post('/post_finalize_transaction', ['as'=>'david.postFinalizeTransaction','uses' => 'mobile_view@finalize']);
 	
-	Route::get('/view_account', ['as'=>'david.viewAccount','uses' => 'accountController@viewAccount']);
+	//Route::get('/view_account', ['as'=>'david.viewAccount','uses' => 'accountController@viewAccount']);
 	
 	Route::put('/edit_account_active', ['as'=>'david.edit_account_active','uses' => 'accountController@changeActive']);
 	
@@ -415,29 +425,29 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::put('/add_account', ['as'=>'david.add_account','uses' => 'AccountsController@addAccount']);
 	
-	Route::get('/view_transaction', ['as'=>'david.view_transaction','uses' => 'transController@view_transaction']);
+	//Route::get('/view_transaction', ['as'=>'david.view_transaction','uses' => 'transController@view_transaction']);
 	
 	//Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction']);
 	
-	Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction2']);
+	//Route::get('/view_all_transaction', ['as'=>'david.view_all_transaction','uses' => 'transController@view_all_transaction2']);
 	
 	Route::get('/get_order_by_trans_id', ['as'=>'david.get_order_by_trans_id','uses' => 'transController@getOrderByTransactionId']);
 	
 	Route::get('/get_tax', ['as'=>'david.get_tax','uses' => 'taxController@getTransTax']);
 	
-	Route::get('/view_tax', ['as'=>'gentry.view_tax','uses' => 'taxController@viewTax']);
+	//Route::get('/view_tax', ['as'=>'gentry.view_tax','uses' => 'taxController@viewTax']);
 	
 	Route::put('/edit_tax', ['as'=>'gentry.edit_tax','uses' => 'taxController@setTax']);
 	
-	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock2']);
+	//Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock2']);
 	
 	Route::put('/edit_stock', ['as'=>'gentry.edit_stock','uses' => 'stockController@editStock']);
 	
-	Route::get('/view_customer', ['as'=>'gentry.view_customer','uses' => 'custController@view_customer']);
+	//Route::get('/view_customer', ['as'=>'gentry.view_customer','uses' => 'custController@view_customer']);
 	
 	Route::get('/view_cust_trans', ['as'=>'gentry.view_cust_trans','uses' => 'custController@view_history']);
 	
-	Route::get('/view_return', ['as'=>'gentry.view_return','uses' => 'returnController@view_return']);
+	//Route::get('/view_return', ['as'=>'gentry.view_return','uses' => 'returnController@view_return']);
 	
 	Route::get('/search_return', ['as'=>'gentry.search_return','uses' => 'returnController@search_product_return']);
 	
@@ -455,7 +465,7 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::post('/upload_image_v2', ['as'=>'gentry.upload_image_v2','uses' => 'restockController@uploadArrayImage']);
 	
-	Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
+	//Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
 	
 	Route::put('/delete_product_detail', ['as'=>'david.delete_prod_det','uses' => 'stockController@deleteProduct']);
 	
@@ -465,7 +475,7 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::get('/view_print_return', ['as'=>'gentry.view_print_konsumen','uses' => 'printController@view_print_return']);
 	
-	Route::get('/view_dashboard', ['as'=>'david.view_dashboard','uses' => 'dashboardController@viewDashboard']);
+	//Route::get('/view_dashboard', ['as'=>'david.view_dashboard','uses' => 'dashboardController@viewDashboard']);
 	
 	Route::put('/save_transaction', ['as'=>'david.save_transaction','uses' => 'transController@updateTransaction']);
 	
@@ -475,7 +485,7 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::put('/update_solution_return', ['as'=>'david.update_solution_return','uses' => 'returnController@updateSolution']);
 	
-	Route::get('/view_cashflow', ['as'=>'david.view_cashflow','uses' => 'cashController@view_laporan_cash']);
+	//Route::get('/view_cashflow', ['as'=>'david.view_cashflow','uses' => 'cashController@view_laporan_cash']);
 	
 	Route::put('/make_void', ['as'=>'david.make_void','uses' => 'transController@makeVoid']);
 	

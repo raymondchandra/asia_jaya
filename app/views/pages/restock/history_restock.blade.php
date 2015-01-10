@@ -218,7 +218,7 @@
 										{{$data->product_code}}
 									</td>
 									<td>
-										{{$data->product_name}}
+										{{$data->name}}
 									</td>
 									<td>
 										{{$data->color}}

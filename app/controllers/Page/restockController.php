@@ -395,23 +395,14 @@ class restockController extends \HomeController{
 		
 		$insertDetailStatus = $this->insertNewProductDetail($color[1], $photo[1], $detailShop[1], $detailStorage[1], $productId, $detailDeleted, $reference, $isSeri);
 		
-		if($insertDetailStatus == 1){
-			if($insertDetailStatus != -1){
-				return "success add new Seri";
-			}else{
-				return "failed add new Seri";
-			}
+		if($insertDetailStatus != -1){
+			return "success add new Seri";
 		}
 		else
 		{
 			return "failed add new Seri";
 		}
 		
-		if($newProductId != -1){
-			return "success add new product";
-		}else{
-			
-		}
 	}
 	
 	/*
