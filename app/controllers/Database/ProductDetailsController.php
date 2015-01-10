@@ -504,7 +504,21 @@ class ProductDetailsController extends \BaseController {
 	{
 		$respond = array();
 		$product = Product::where('product_code','=','000000')->first();
+		$id;
+		if($product == null)
+		{
+			$productController = new ProductsController();
+			$id = $productController->insertWithParam("000000", "Barang Obral", 0, 0, 0, 0, 0, "-", 0);
+			$product = Product::find($id);
+		}
 		$productDetail = ProductDetail::where('product_id','=',$product->id)->first();
+		if($productDetail == null)
+		{
+			$productController = new ProductsController();
+			$id = $this->insertWithParam("-", "-", 0, 0, $id, 0, 0, 0);
+			$productDetail = ProductDetail::find($id);
+		}
+		
 		$current = $productDetail->stock_shop;
 		$productDetail->stock_shop = $current + $amount;
 		
