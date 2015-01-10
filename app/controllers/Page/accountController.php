@@ -78,7 +78,7 @@ class accountController extends \BaseController {
 		if($allEmployee->{'status'} != 'Not Found'){
 			$allEmployeeData = $allEmployee->{'messages'};
 			foreach($allEmployeeData as $allData){
-				if($allData->role == 'manager' || $allData->role == 'sales'){
+				if($allData->role == '2' || $allData->role == '3'){
 					$data[] = (object)array('id'=>$allData->id, 'username'=>$allData->username, 'role'=>$allData->role, 'last_login'=>$allData->last_login, 'active'=>$allData->active, 'created_at'=>$allData->created_at, 'updated_at'=>$allData->updated_at);
 				}
 			}
@@ -121,7 +121,7 @@ class accountController extends \BaseController {
 			if($allEmployee->{'status'} != 'Not Found'){
 				$allEmployeeData = $allEmployee->{'messages'};
 				foreach($allEmployeeData as $allData){
-					if($allData->role == 'manager' || $allData->role == 'sales'){
+					if($allData->role == '2' || $allData->role == '3'){
 						$datas[] = (object)array('id'=>$allData->id, 'username'=>$allData->username, 'role'=>$allData->role, 'last_login'=>$allData->last_login, 'active'=>$allData->active, 'created_at'=>$allData->created_at, 'updated_at'=>$allData->updated_at);
 					}
 				}
@@ -150,7 +150,7 @@ class accountController extends \BaseController {
 			if($allEmployee->{'status'} != 'Not Found'){
 				$allEmployeeData = $allEmployee->{'messages'};
 				foreach($allEmployeeData as $allData){
-					if($allData->role == 'manager' || $allData->role == 'sales'){
+					if($allData->role == '2' || $allData->role == '3'){
 						$datas[] = (object)array('id'=>$allData->id, 'username'=>$allData->username, 'role'=>$allData->role, 'last_login'=>$allData->last_login, 'active'=>$allData->active, 'created_at'=>$allData->created_at, 'updated_at'=>$allData->updated_at);
 					}
 				}
