@@ -33,37 +33,157 @@
 						<tr>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Product Code</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'product_code')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'product_code', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'product_code')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'product_code', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+									@endif
+								@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered" style="width: 180px;">
 								<a href="javascript:void(0)">Product Name</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'name')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'product_name')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+									@endif
+								@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Warna</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'color')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'product_name')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+									@endif
+								@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Restok ke Toko</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'stock_shop')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'product_name')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+									@endif
+								@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Restok ke Gudang</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'stock_storage')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_storage', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'product_name')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_storage', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+									@endif
+								@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Waktu</a>
-								<a href="javascript:void(0)">
+								@if($filtered == 0)
+									@if($sortBy == 'created_at')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'product_name')
+										@if($order == 'asc')
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@else
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+										@endif
+									@else
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
+									@endif
+								@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
@@ -79,91 +199,47 @@
 					<thead>
 						<tr>
 							
-							<td><input type="text" class="form-control input-sm"></td>
-							<td><input type="text" class="form-control input-sm"></td>
-							<td><input type="text" class="form-control input-sm"></td>
-							<td><input type="text" class="form-control input-sm"></td>
-							<td><input type="text" class="form-control input-sm"></td>
-							<td><input type="text" class="form-control input-sm"></td>
-							<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
+							<td><input type="text" class="form-control input-sm" id="filter_code"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_name"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_color"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_shop"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_storage"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_time"></td>
+							<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
 							<!--<td></td>-->
 							
 						</tr>
 					</thead>
 					<tbody>
+						@if($datas != null)
+							@foreach($datas as $data)
+								<tr> 
+									<td>
+										{{$data->product_code}}
+									</td>
+									<td>
+										{{$data->product_name}}
+									</td>
+									<td>
+										{{$data->color}}
+									</td>
+									<td>
+										{{$data->stock_shop}}
+									</td>
+									<td>
+										{{$data->stock_storage}}
+									</td>
+									<td>
+										{{$data->created_at}}
+									</td>
+									<td>
+										<input type="hidden" id="idProduct" value="" />
+										<input type="hidden" id="idDetail" value="" />
+									</td>
+								</tr>
+							@endforeach
+						@endif
 						
-						<tr> 
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								7657658576
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								Tas Ransel
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								Polkadot
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								10
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								0
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								2015-01-29 15:41:43
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-							</td>
-						</tr>
-						<tr> 
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								7657658576
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								Tas Ransel
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								Polkadot
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								10
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								0
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-								2015-01-29 15:41:43
-							</td>
-							<td>
-								<input type="hidden" id="idProduct" value="" />
-								<input type="hidden" id="idDetail" value="" />
-							</td>
-						</tr>
 
 						<script>
 						$( 'body' ).on( "click",'.f_excel_xlabel', function() {
@@ -223,6 +299,41 @@
 @include('pages.stock.pop_up_add_stock')
 
 <script>
+	$('body').on('click','#filter_button',function(){
+		$code = $('#filter_code').val();
+		if($code == ''){
+			$code = '-';
+		}
+		
+		$name = $('#filter_name').val();
+		if($name == ''){
+			$name = '-';
+		}
+		
+		$color = $('#filter_color').val();
+		if($color == ''){
+			$color = '-';
+		}
+		
+		$shop = $('#filter_shop').val();
+		if($shop == ''){
+			$shop = '-';
+		}
+		
+		$storage = $('#filter_storage).val();
+		if($storage == ''){
+			$storage = '-';
+		}
+		
+		$time = $('#filter_time').val();
+		if($time == ''){
+			$time = '-';
+		}
+		
+
+		window.location = "{{URL::route('david.view_all_transaction')}}" + "?filtered=1&code="+$code+"&name="+$name+"&color="+$color+"&hop="+$shop+"&storage="+$storage+"&time="+$time;
+	});
+
 
 	/*$('body').on('click','.flogin',function(){
 		$data = {

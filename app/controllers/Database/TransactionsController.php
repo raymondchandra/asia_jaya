@@ -244,6 +244,15 @@ class TransactionsController extends \BaseController {
 	}
 	*/
 	
+	public function getAlls()
+	{
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
+		if(Auth::user()->role == 3)
+		{
+			$joined = $joined->where('transactions.sales_id','=',Auth::user()->id);
+		}
+	}
+	
 	public function getSortedAll($by, $order, $from, $to)
 	{
 	
@@ -260,6 +269,10 @@ class TransactionsController extends \BaseController {
 			$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at');
 		}
 		
+		if(Auth::user()->role == 3)
+		{
+			$joined = $joined->where('transactions.sales_id','=',Auth::user()->id);
+		}
 		$result = $joined->orderBy($by, $order)->get();
 		
 		return $this->getReturn($result);
@@ -401,11 +414,19 @@ class TransactionsController extends \BaseController {
 		
 		if($isFirst == false)
 		{
+			if(Auth::user()->role == 3)
+			{
+				$joined = $joined->where('transactions.sales_id','=',Auth::user()->id);
+			}
 			$result = $joined->get();
 			$isFirst = true;
 		}
 		else
 		{
+			if(Auth::user()->role == 3)
+			{
+				$resultTab = $resultTab->where('transactions.sales_id','=',Auth::user()->id);
+			}
 			$result = $resultTab->get();
 		}
 		
@@ -548,11 +569,19 @@ class TransactionsController extends \BaseController {
 		
 		if($isFirst == false)
 		{
+			if(Auth::user()->role == 3)
+			{
+				$joined = $joined->where('transactions.sales_id','=',Auth::user()->id);
+			}
 			$result = $joined->orderBy($sortBy, $order)->get();
 			$isFirst = true;
 		}
 		else
 		{
+			if(Auth::user()->role == 3)
+			{
+				$resultTab = $resultTab->where('transactions.sales_id','=',Auth::user()->id);
+			}
 			$result = $resultTab->orderBy($sortBy, $order)->get();
 		}
 		

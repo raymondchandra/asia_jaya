@@ -36,29 +36,40 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							<!--
 							<th class="table-bordered">
-								Comman
+								Command
 							</th>
+							-->
 						</tr>
 						<!--<th class="table-bordered">Print</th>-->
 					</thead>
 					<thead>
+						<!--
 						<tr>
 							
 							<td><input type="text" class="form-control input-sm"></td>
 							<td></td>
 							<!--<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
 							<td></td>-->
-							
+						<!--	
 						</tr>
+						-->
 					</thead>
 					<tbody>
 							<tr> 
 								<td>
 									<input type="hidden" id="" value="" />
 									<input type="hidden" id="" value="" />
-									<span class="" id="kode_" style="line-height: 30px;">435</span>
+									<span class="" id="kode_" style="line-height: 30px;">
+									@if($quantity != null)
+										{{$quantity}}
+									@else
+										0
+									@endif
+									</span>
 								</td>
+								<!--
 								<td>
 								<!--	<input type="hidden" value="" />
 									<input type="hidden" value="" />
@@ -75,8 +86,9 @@
 									</button>
 									<input type="hidden" value="" />
 									<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_">
-								-->
+								--><!--
 								</td>
+								-->
 							</tr>
 								
 								<script>

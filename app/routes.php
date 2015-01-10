@@ -103,12 +103,14 @@ Route::group(['prefix' => 'sales','before' => 'authSales'], function()
 });
 
 //manager
-Route::group(['before' => 'auth_manager'], function()
+Route::group(['prefix' => 'mgr','before' => 'auth_manager'], function()
 {
 //return
 	Route::get('/view_return', ['as'=>'gentry.view_return','uses' => 'returnController@view_return']);
 //stock
 	Route::get('/view_stock', ['as'=>'gentry.view_stock','uses' => 'stockController@viewStock2']);
+//obral
+	ROute::get('/view_obral', ['as'=>'david.view_obral','uses' => 'obralViewController@viewObral']);
 /*
 //pesanan
 	//list semua pesanan yg status pending
@@ -156,6 +158,8 @@ Route::group(['prefix' => 'owner','before' => 'authOwner'], function()
 	Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
 //tax
 	Route::get('/view_tax', ['as'=>'gentry.view_tax','uses' => 'taxController@viewTax']);
+//restock
+	Route::get('/view_restock_history', ['as'=>'david.view_restock_history','uses' => 'historyRestockController@viewHistoryRestock']);
 //product
 	//(get pake route yang manager dan sales)
 	//edit barang
@@ -222,6 +226,22 @@ Route::group(['prefix' => 'owner','before' => 'authOwner'], function()
 	Route::put('/tax', ['as' => 'edit.tax' , 'uses' => 'TaxesController@']);
 });
 
+Route::group(array('prefix' => 'warning'), function()
+{
+	//forbidden
+
+	Route::get('/forbid', function()
+	{
+		return View::make('pages.forbid');
+	});
+
+	//logged in
+
+	Route::get('/already_login', function()
+	{
+		return View::make('pages.already_login');
+	});
+});
 
 /* routing sementara Domi coba interaction + css + jquery */
 Route::group(array('prefix' => 'test'), function()

@@ -162,7 +162,215 @@ class RestockDetailsController extends \BaseController {
 		}
 		return Response::json($respond);
 	}
-
+	
+	public function getAlls()
+	{
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy('restock_details.created_at','dsc')->get();
+		
+		return $this->getReturn($joined);
+	}
+	
+	public function getSortedAll($by, $order)
+	{
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy($by,$order)->get();
+		
+		return $this->getReturn($joined);
+	}
+	
+	public function getFilteredRestock($code, $prod_name, $color, $shop, $storage, $created_at)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy($by,$order)->get();
+		
+		if($code != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', '=', $code);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', '=', $code);
+			}
+		}
+		
+		if($prod_name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$prod_name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', 'LIKE', '%'.$prod_name.'%');
+			}
+		}
+		
+		if($color != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('product_details.color', 'LIKE', '%'.$total.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('product_details.color', 'LIKE', '%'.$total.'%');
+			}
+		}
+		
+		if($shop != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('restock_details.stock_shop', '=', $shop);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('restock_details.stock_shop', '=', $shop);
+			}
+		}
+		
+		if($storage != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('restock_details.stock_storage', '=', $storage);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('restock_details.stock_storage', '=', $storage);
+			}
+		}
+		
+		if($created_at != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('restock_details.created_at', 'LIKE', '%'.$created_at.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('restock_details.created_at', 'LIKE', '%'.$created_at.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->orderBy('restock_details.created_at','dsc')->get();
+		}
+		
+		return $this->getReturn($result);
+	}
+	
+	public function getSortedFilteredAccount($code, $prod_name, $color, $shop, $storage, $created_at, $sortBy, $order)
+	{
+		$isFirst = false;
+		
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy($by,$order)->get();
+		
+		if($code != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', '=', $code);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', '=', $code);
+			}
+		}
+		
+		if($prod_name != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$prod_name.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', 'LIKE', '%'.$prod_name.'%');
+			}
+		}
+		
+		if($color != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('product_details.color', 'LIKE', '%'.$total.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('product_details.color', 'LIKE', '%'.$total.'%');
+			}
+		}
+		
+		if($shop != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('restock_details.stock_shop', '=', $shop);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('restock_details.stock_shop', '=', $shop);
+			}
+		}
+		
+		if($storage != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('restock_details.stock_storage', '=', $storage);
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('restock_details.stock_storage', '=', $storage);
+			}
+		}
+		
+		if($created_at != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('restock_details.created_at', 'LIKE', '%'.$created_at.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('restock_details.created_at', 'LIKE', '%'.$created_at.'%');
+			}
+		}
+		
+		if($isFirst == false)
+		{
+			$result = $joined->orderBy($sortBy, $order)->get();
+			$isFirst = true;
+		}
+		else
+		{
+			$result = $resultTab->orderBy($sortBy, $order)->get();
+		}
+		
+		return $this->getReturn($result);
+	}
+	
 	/*
 	public function exist()
 	{

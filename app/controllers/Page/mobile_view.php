@@ -117,7 +117,7 @@ class mobile_view extends \BaseController{
 		//$productName = "fugit";
 		//$color = "LightCoral";
 		//salesId didapet dari Auth::user()->id
-		$salesId = 1;
+		$salesId = Auth::user()->id;
 		$response = array();
 		
 		//addCustomer
