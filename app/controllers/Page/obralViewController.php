@@ -11,7 +11,7 @@ class obralViewController extends \HomeController{
 		}
 		else
 		{
-			$productObralDetail = ProductDetail::where('product_id','=',$productObral->id);
+			$productObralDetail = ProductDetail::where('product_id','=',$productObral->id)->first();
 			$quantity = $productObralDetail->stock_shop;
 		}
 

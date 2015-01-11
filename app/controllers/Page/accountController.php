@@ -27,7 +27,7 @@ class accountController extends \BaseController {
 			if($allEmployee->{'status'} != 'Not Found'){
 				$allEmployeeData = $allEmployee->{'messages'};
 				foreach($allEmployeeData as $allData){
-					if($allData->role == '2' || $allData->role == '3'){
+					if($allData->role == '2' || $allData->role == '3' || $allData->role == '1'){
 						$datas[] = (object)array('id'=>$allData->id, 'username'=>$allData->username, 'role'=>$allData->role, 'last_login'=>$allData->last_login, 'active'=>$allData->active, 'created_at'=>$allData->created_at, 'updated_at'=>$allData->updated_at);
 					}
 				}

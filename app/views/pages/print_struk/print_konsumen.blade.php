@@ -39,6 +39,11 @@
 				<td>{{$kodeFaktur}}</td>
 			</tr>
 			<tr>
+				<td>ID Transaksi</td>
+				<td>:</td>
+				<td>{{$transaksi->id}}</td>
+			</tr>
+			<tr>
 				<td>Waktu Transaksi</td>
 				<td>:</td>
 				<td>{{date("d-M-Y, G:i:s", strtotime($transaksi->created_at))}}</td>

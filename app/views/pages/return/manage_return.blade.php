@@ -4,9 +4,6 @@
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
-				<ol class="breadcrumb">
-					<li class="active">Retur</li>
-				</ol>
 				<h3 style="">
 					Kelola Retur
 					<a class="btn btn-success pull-right" href="{{URL::to('fungsi/search_return')}}">

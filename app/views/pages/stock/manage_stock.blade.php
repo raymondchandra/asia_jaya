@@ -8,7 +8,7 @@
 					Daftar Stok Produk
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
-				<a href="{{URL::to('test/add_new_stock')}}" class="pull-right btn btn-success" >
+				<a href="{{action('david.view_add_new_stock')}}" class="pull-right btn btn-success" >
 					<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Add New Stock
 				</a>
 			</div>

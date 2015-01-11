@@ -58,7 +58,7 @@ class custController extends \HomeController{
 	
 	public function view_history(){
 		$id = Input::get('id');
-		
+		$customer = Customer::find($id);
 		$transaction = $this->findSpesificTransaction($id);
 		if($transaction!=null){
 			foreach($transaction as $trans){
@@ -66,7 +66,7 @@ class custController extends \HomeController{
 			}
 		}
 		
-		return View::make('pages.customer.customer_history', compact('transaction'));
+		return View::make('pages.customer.customer_history', compact('transaction','customer'));
 	}
 	
 	public function findSalesName($sales_id){

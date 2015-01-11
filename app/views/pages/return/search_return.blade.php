@@ -90,7 +90,7 @@
 							</a>
 						</th>
 						<th class="table-bordered" width="140">
-							<a href="javascript:void(0)">Kode Transaksi</a>
+							<a href="javascript:void(0)">ID Transaksi</a>
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
@@ -107,7 +107,7 @@
 						</th>
 					</tr>
 				</thead>
-				<thead>
+				<!--<thead>
 					<tr>
 
 						<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
@@ -117,10 +117,9 @@
 						<td><input type="text" class="form-control input-sm" id="filter_transaction_id"></td>
 						<td><input type="text" class="form-control input-sm" id="filter_created"></td>
 						<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
-						<!--<td></td>-->
-
+						
 					</tr>
-				</thead>
+				</thead>-->
 				<tbody id="body_content">
 
 					@if($dataOrder != null)
@@ -176,7 +175,7 @@
 							$prod_code = $("#prod_code").val();
 							$prod_name = $("#prod_name").val();
 							$trans_code = $("#trans_code").val();
-							alert($cust_name);
+							//alert($cust_name);
 							$.ajax({
 								type: 'GET',
 								url: '{{URL::route('gentry.search_return2')}}',
@@ -204,7 +203,7 @@
 										$row += "</td><td>";
 										$row += data.transaction_id;
 										$row += "</td><td>";
-										$row += data.created_at;
+										$row += data.transTime;
 										$row += "</td><td>";
 										$row += "<button id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
 										$row += "<input type='hidden' value='"+data.id+"' >";
@@ -320,7 +319,7 @@
 						'nominal_uang' : $nominal_uang
 					},
 					success: function(response){
-						alert(response);
+						//alert(response);
 						alert('Insert Berhasil');
 					},error: function(xhr, textStatus, errorThrown){
 						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);

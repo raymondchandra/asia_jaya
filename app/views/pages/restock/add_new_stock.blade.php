@@ -381,7 +381,7 @@
 			success: function(data)   								// A function to be called if request succeeds
 			{
 				alert(data);
-				if(data == "Upload Success"){
+				if(true){
 					
 					$.ajax({
 						

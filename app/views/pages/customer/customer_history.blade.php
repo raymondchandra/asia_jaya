@@ -9,7 +9,7 @@
 					<li class="active">Transaction History</li>
 				</ol>
 				<h3 style="float: left;">
-					Transaction History | Cust. ID | Nama Customer
+					Transaction History | {{$customer->id}} | {{$customer->name}}
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
