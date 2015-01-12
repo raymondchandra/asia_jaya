@@ -205,10 +205,10 @@
 							<td><input type="text" class="form-control input-sm" id="filter_shop"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_storage"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_time"></td>
-							<td>
-							<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
-							<br/>
-							<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
+							<td width="140">
+							<a class="btn btn-primary btn-xs" id="filter_button" style="float: left;">Filter</a>
+							
+							<a class="btn btn-primary btn-xs" id="unfilter_button" style="float: left; margin-left: 5px;"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
 							</td>
 							<!--<td></td>-->
 							

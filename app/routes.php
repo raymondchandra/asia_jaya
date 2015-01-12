@@ -2,11 +2,7 @@
 use Carbon\Carbon;
 	Route::get('/tes', function()
 	{
-		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS count'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id')->having(DB::raw('COUNT(transactions.total)'),'>',2);
-		
-		$result = $joined->orderBy('count', 'asc')->get();
-		
-		var_dump($result);
+		echo Hash::make('owner');
 		
 	});
 	Route::get('/tes2', function()
@@ -184,6 +180,8 @@ Route::group(['prefix' => 'owner','before' => 'authOwner'], function()
 	Route::get('/view_tax', ['as'=>'gentry.view_tax','uses' => 'taxController@viewTax']);
 //restock
 	Route::get('/view_restock_history', ['as'=>'david.view_restock_history','uses' => 'historyRestockController@viewHistoryRestock']);
+//add new stock
+	Route::get('/view_add_new_stock', ['as'=>'david.view_add_new_stock','uses' => 'stockController@viewAddStock']);
 //product
 	//(get pake route yang manager dan sales)
 	//edit barang
@@ -268,7 +266,7 @@ Route::group(array('prefix' => 'warning'), function()
 });
 
 /* routing sementara Domi coba interaction + css + jquery */
-Route::group(array('prefix' => 'test'), function()
+Route::group(array('prefix' => 'byaxugan'), function()
 {
 
     //Login via Desktop

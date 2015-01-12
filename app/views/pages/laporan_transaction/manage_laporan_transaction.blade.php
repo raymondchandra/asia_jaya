@@ -307,16 +307,26 @@
 									</select>
 								</td>
 								<td></td>
-								<td width="">
-								<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
-								<br/>
-								<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
+								<td width="" colspan="2">
+								<a class="btn btn-primary btn-xs" id="filter_button" style="float: left;">Filter</a>
+								
+								<a class="btn btn-primary btn-xs" id="unfilter_button"  style="float: left; margin-left: 5px;"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>
 								</td>
-								<td></td>
 								
 							</tr>
 						</thead>
 						<tbody id="body_content">
+							<?php
+			
+								function toMoney($val,$symbol='IDR ',$r=0)
+								{
+									$n = $val;
+									$sign = ($n < 0) ? '-' : '';
+									$i = number_format(abs($n),$r,",",".");
+
+									return  $symbol.$sign.$i;
+								}
+							?>
 							@if($datas != null)
 								@foreach($datas as $data)
 									<tr> 
@@ -326,8 +336,8 @@
 										@else
 											<td id="hidden_trans_customer_name_{{$data->id}}">{{$data->name}}</td>
 										@endif
-										<td id="hidden_trans_total_{{$data->id}}">IDR {{$data->total}}</td>
-										<td id="hidden_trans_discount_{{$data->id}}">IDR {{$data->discount}}</td>
+										<td id="hidden_trans_total_{{$data->id}}">{{toMoney($data->total)}}</td>
+										<td id="hidden_trans_discount_{{$data->id}}">{{toMoney($data->discount)}}</td>
 										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>
 										<td>{{$data->sales_id}}</td>
 										<td>{{$data->username}}</td>
@@ -343,12 +353,14 @@
 											<input type='hidden' value='{{$data->total_paid}}' id="hidden_paid"/>
 											<button id="detail_{{$data->id}}" class="btn btn-info btn-xs view_detail_button" data-toggle="modal" data-target=".pop_up_detail_transaction">View Detail</button>
 											<input type="hidden" value="{{$data->id}}">
-											@if($data->is_void == 0)
-											<button id="void_{{$data->id}}" class="btn btn-danger btn-xs view_void_button" data-toggle="modal" data-target=".pop_up_void_transaction" style="margin-top: 5px;">
-												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Void
-											</button>
+											@if(Auth::user()->role != 3)
+												@if($data->is_void == 0 && $data->status == "Paid")
+												<button id="void_{{$data->id}}" class="btn btn-danger btn-xs view_void_button" data-toggle="modal" data-target=".pop_up_void_transaction" style="margin-top: 5px;">
+													<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Void
+												</button>
+												
+												@endif
 											@endif
-											
 											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
 										<td>

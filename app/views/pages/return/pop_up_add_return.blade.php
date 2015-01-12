@@ -91,7 +91,7 @@
 							<div class="form-group">
 								<label class="g-sm-4 control-label"></label>
 								<div class="g-sm-6">
-									<button type="button" class="btn btn-success" data-dismiss="modal" id="save_pop">Save</button>
+									<input type="button" class="btn btn-success" data-dismiss="modal" id="save_pop" value="Save"/>
 								</div>
 							</div>
 

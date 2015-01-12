@@ -230,6 +230,7 @@
 		$name = $('#name_'+$id).val();
 		$price = $('#price_'+$id).val();
 		$min_price = $('#min_price_'+$id).val();
+		$quant = $color.split('-');
 		
 		if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{
@@ -241,7 +242,7 @@
 			$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + 1 + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + $quant.length + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + "" + toRp($price) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 			
 			$('#pesanan_content_'+$inc).prepend($data);

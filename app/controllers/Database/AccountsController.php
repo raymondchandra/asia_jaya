@@ -22,47 +22,54 @@ class AccountsController extends \BaseController {
 		$remember_me = Input::get('remember_me') === 'yes';
 		if(Auth::attempt($data, $remember_me))
 		{
-			if(Auth::user()->role == 1)
+			if(Auth::user()->active == 1)
 			{
-				$acc = Account::find(Auth::user()->id);
-				$acc->last_login = Carbon::now();
-				try
+				if(Auth::user()->role == 1)
 				{
-					$acc->save();
+					$acc = Account::find(Auth::user()->id);
+					$acc->last_login = Carbon::now();
+					try
+					{
+						$acc->save();
+					}
+					catch(Exception $e)
+					{
+						return "fail";
+					}
+					return "owner";
 				}
-				catch(Exception $e)
+				else if(Auth::user()->role == 2)
 				{
-					return "fail";
+					$acc = Account::find(Auth::user()->id);
+					$acc->last_login = Carbon::now();
+					try
+					{
+						$acc->save();
+					}
+					catch(Exception $e)
+					{
+						return "fail";
+					}
+					return "mgr";
 				}
-				return "owner";
-			}
-			else if(Auth::user()->role == 2)
-			{
-				$acc = Account::find(Auth::user()->id);
-				$acc->last_login = Carbon::now();
-				try
+				else
 				{
-					$acc->save();
+					$acc = Account::find(Auth::user()->id);
+					$acc->last_login = Carbon::now();
+					try
+					{
+						$acc->save();
+					}
+					catch(Exception $e)
+					{
+						return "fail";
+					}
+					return "sales";
 				}
-				catch(Exception $e)
-				{
-					return "fail";
-				}
-				return "mgr";
 			}
 			else
 			{
-				$acc = Account::find(Auth::user()->id);
-				$acc->last_login = Carbon::now();
-				try
-				{
-					$acc->save();
-				}
-				catch(Exception $e)
-				{
-					return "fail";
-				}
-				return "sales";
+				return "fail";
 			}
 		}
 		else
@@ -81,17 +88,24 @@ class AccountsController extends \BaseController {
 		$remember_me = Input::get('remember_me') === 'yes';
 		if(Auth::attempt($data, $remember_me))
 		{
-			if(Auth::user()->role == 1)
-			{					
-				return "owner";
-			}
-			else if(Auth::user()->role == 2)
+			if(Auth::user()->active == 1)
 			{
-				return "mgr";
+				if(Auth::user()->role == 1)
+				{					
+					return "owner";
+				}
+				else if(Auth::user()->role == 2)
+				{
+					return "mgr";
+				}
+				else
+				{
+					return "sales";
+				}
 			}
 			else
 			{
-				return "sales";
+				return "fail";
 			}
 		}
 		else

@@ -131,10 +131,14 @@
 												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>View Detail
 											</button>
 											<input type="hidden" value="{{$data->id}}">
-											@if($data->is_void == 0)
-											<button id="void_{{$data->id}}" class="btn btn-danger btn-xs view_void_button" data-toggle="modal" data-target=".pop_up_void_transaction" style="margin-top: 5px;">
-												<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Void
-											</button>
+											@if(Auth::user()->role != 3)
+											
+												@if($data->is_void == 0 && $data->status == "Paid")
+												<button id="void_{{$data->id}}" class="btn btn-danger btn-xs view_void_button" data-toggle="modal" data-target=".pop_up_void_transaction" style="margin-top: 5px;">
+													<span class="glyphicon glyphicon-usd" style="margin-right: 5px;"></span>Void
+												</button>
+												
+												@endif
 											@endif
 											<!-- Button trigger modal class ".alertYesNo" -->
 										</td>
