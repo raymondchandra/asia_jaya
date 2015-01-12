@@ -47,7 +47,7 @@
 				<td colspan="3">&nbsp;</td>
 			</tr>
 			<tr>
-				<td>Faktur</td>
+				<td>No. Nota</td>
 				<td>:</td>
 				<td>{{$kodeFaktur}}</td>
 			</tr>
@@ -173,7 +173,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Kembali</td>
+				<td>Kembalian</td>
 				<td>:</td>
 				<td style="text-align: right;">{{toMoney($transaksi->total_paid - $transaksi->total)}}</td>
 			</tr>

@@ -34,7 +34,7 @@
 				<td colspan="3">&nbsp;</td>
 			</tr>
 			<tr>
-				<td>Faktur</td>
+				<td>No. Nota</td>
 				<td>:</td>
 				<td>{{$kodeFaktur}}</td>
 			</tr>
@@ -80,7 +80,7 @@
 						<td>{{$barangTukar}}</td>
 					</tr>
 					<tr>
-						<td>Diferensial</td>
+						<td>Selisih</td>
 						<td>:</td>
 						<td>{{$difference}}</td>
 					</tr>

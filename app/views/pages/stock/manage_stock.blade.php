@@ -31,7 +31,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">Produk</a>
+								<a href="javascript:void(0)">Kode Produk</a>
 									@if($filtered == 0)
 										@if($sortBy == 'product_code')
 											@if($order == 'asc')
@@ -63,7 +63,7 @@
 								</a>
 							</th>
 							<th class="table-bordered" style="width: 180px;">
-								<a href="javascript:void(0)">Nama Produk</a>
+								<a href="javascript:void(0)">Merk Produk</a>
 									@if($filtered == 0)
 										@if($sortBy == 'name')
 											@if($order == 'asc')

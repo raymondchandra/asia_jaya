@@ -10,7 +10,7 @@
 				<div class="form-horizontal">
 					<div class="form-group has-feedback">
 						<div class="g-sm-12">
-							<input type="search" class="form-control" id="barang_text_box" placeholder="kode atau nama produk">
+							<input type="search" class="form-control" id="barang_text_box" placeholder="kode atau merk barang">
 							<span class="glyphicon glyphicon-search form-control-feedback"></span>
 						</div>
 					</div>

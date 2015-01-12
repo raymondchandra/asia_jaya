@@ -10,7 +10,7 @@
 				<input type="hidden" id="currentTotal" value="">
 			</div>
 			<div class="f_slider_alert hidden"  style="text-align: center; padding-top:20px;">
-				Apakah Anda yakin ingin menghapus produk ini?
+				Apakah Anda yakin ingin menghapus barang ini?
 				<button type="button" id="hyper_x" class="btn btn-danger" data-dismiss="modal">Ya</button>
 				<button type="button" class="btn btn-primary f_slider_tutup" data-dismiss="">Tidak</button>
 				<hr/>
@@ -25,7 +25,7 @@
 						</div>
 					</div>
 					<div class="form-group" style="margin-bottom: 0px;">
-						<label class="g-sm-3 control-label">Nama</label>
+						<label class="g-sm-3 control-label">Merk</label>
 						<div class="g-sm-9">
 							<p class="form-control-static" id="edit_nama"></p>
 						</div>

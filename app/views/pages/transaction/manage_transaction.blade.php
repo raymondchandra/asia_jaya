@@ -17,13 +17,13 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">Trans. ID</a>
+								<a href="javascript:void(0)">No. Nota</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Customer Name</a>
+								<a href="javascript:void(0)">Pelanggan</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -35,7 +35,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Discount</a>
+								<a href="javascript:void(0)"><img src="{{asset('assets/img/pigblk.png')}}" height="14"></a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -46,14 +46,14 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="80">
+							<!--<th class="table-bordered" width="80">
 								<a href="javascript:void(0)">Kar. ID</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
-							</th>
+							</th>-->
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Username</a>
+								<a href="javascript:void(0)">Karyawan</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -113,7 +113,7 @@
 										<td id="hidden_trans_total_{{$data->id}}">{{toMoney($data->total)}}</td>
 										<td id="hidden_trans_discount_{{$data->id}}">{{toMoney($data->discount)}}</td>
 										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>
-										<td>{{$data->sales_id}}</td>
+										<!--<td>{{-- $data->sales_id --}}</td> -->
 										<td>{{$data->salesName}}</td>
 										@if($data->is_void == 0)
 											<td>False</td>

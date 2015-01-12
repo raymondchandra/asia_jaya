@@ -17,7 +17,7 @@
 								<thead>
 									<tr>
 										<th>
-											Nama Produk
+											Kode Barang
 										</th>
 										<th>
 											Foto
@@ -58,7 +58,7 @@
 									<div class="g-sm-8">
 										<p type="text" class="form-control-static" id="transaction_subtotal_detail">IDR 6.100.000</p>
 									</div>
-									<label class="g-sm-4 control-label">Diskon</label>
+									<label class="g-sm-4 control-label"><img src="{{asset('assets/img/pigblk.png')}}" height="14"></label>
 									<div class="g-sm-8">
 										<p type="text" class="form-control-static" id="transaction_diskon_detail">IDR 0</p>
 

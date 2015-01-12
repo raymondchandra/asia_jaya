@@ -7,7 +7,7 @@
 				<input type="hidden" id="tableReps" />
 			</div>
 			<div class="f_slider_alert hidden"  style="text-align: center; padding-top:20px;">
-				Apakah Anda yakin ingin menghapus produk ini?
+				Apakah Anda yakin ingin menghapus barang ini?
 				<button type="button" id="hyper_x" class="btn btn-danger" data-dismiss="modal" >Ya</button>
 				<button type="button" class="btn btn-primary f_slider_tutup" data-dismiss="">Tidak</button>
 				<hr/>
@@ -152,8 +152,8 @@
 					Orderan sudah masuk kedalam kasir
 				</p>
 				<input type="hidden" id="transaction_tax" value="0"/>
-				<button type="button" class="btn btn-success pull-left g-sm-5 f_send_ke_kasir" disabled>Send</button>
-				<button type="button" class="btn btn-info pull-right g-sm-5" data-dismiss="modal">Back</button>
+				<button type="button" class="btn btn-info pull-left g-sm-5" data-dismiss="modal">Back</button>
+				<button type="button" class="btn btn-success pull-right g-sm-5 f_send_ke_kasir" disabled>Send</button>
 
 				<script>
 				$('body').on('keyup','#diskon_text',function(){
