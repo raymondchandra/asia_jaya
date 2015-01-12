@@ -370,7 +370,7 @@ class restockController extends \HomeController{
 		$i_warna = Input::get('i_warna');
 		$reference = Input::get('reference','0');
 		$isSeri = Input::get('seri', '0');
-	
+		
 		$newProductId = $this->addNewProduct($productCode, $name, $modalPrice, $minPrice, $salesPrice, $productShop, $productStorage, $type,$productDeleted, $color, $detailShop, $detailStorage, $detailDeleted, $photo, $i_warna, $reference, $isSeri);
 		
 		if($newProductId != -1){
@@ -420,9 +420,10 @@ class restockController extends \HomeController{
 			$controller = new RestocksController();
 			$i = 1;
 			$check = true;
+			$seriReference = "";
+			$seriClr = "";
 			while($i<=$i_warna && $check == true){
-				
-			
+				$seriClr .= $color[$i]."-";
 				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $detailShop[$i], $detailStorage[$i], $productId,$detailDeleted, $reference, $seri);
 				if($insertDetailStatus == -1 || $i==$i_warna)
 				{
@@ -440,9 +441,12 @@ class restockController extends \HomeController{
 						$controller->insertWithParam(5, $productDetailId, 0, $detailStorage[$i]);
 					}
 				}
+				$seriReference.= $insertDetailStatus."-1;";
 				
 				$i++;
 			}
+			$seriClr = substr($seriClr,0,strlen($seriClr)-1);
+			$insertDetailStatus = $this->insertNewProductDetail($seriClr, '-', 0, 0, $productId,$detailDeleted, $seriReference, 1);
 			if($insertDetailStatus == 1){
 				return $productId;
 			}else{

@@ -381,7 +381,7 @@
 			success: function(data)   								// A function to be called if request succeeds
 			{
 				alert(data);
-				if(data == "Upload Success"){
+				if(true){
 					
 					$.ajax({
 						
@@ -415,7 +415,7 @@
 							$('#harga_jual').val("");
 							$('#foto').val("");
 
-							$('.f_form_warna').append(row_warna);
+							//$('.f_form_warna').append(row_warna);
 						},error: function(xhr, textStatus, errorThrown){
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 							alert("responseText: "+xhr.responseText);

@@ -469,12 +469,7 @@
 								$( 'body' ).on( "click",'.update_row_button', function() {
 									$id= $(this).prev().val();
 									$idDetail = $(this).prev().prev().val();
-									for ( var i = 0; i <= 7; i++ ) 
-									{
-										$('.f_excel_xinput_'+i+'_'+$id).addClass('hidden');
-										$('.f_excel_xlabel_'+i+'_'+$id).removeClass('hidden');
-										$('.f_excel_xlabel_'+i+'_'+$id).text($('.f_excel_xinput_'+i+'_'+$id).val());
-									}
+									
 									$idProduct = $id;
 									$idDetail = $idDetail;
 									
@@ -502,7 +497,7 @@
 											'idProduct' : $idProduct,
 											'idDetail' : $idDetail,
 											'editName' : $editName,
-											'editColor' : $editName,
+											'editColor' : $editColor,
 											'editModal' : $editModal,
 											'editMin' : $editMin,
 											'editSales' : $editSales,
@@ -546,8 +541,9 @@
 											alert("responseText: "+xhr.responseText);
 										}
 									},'json');
+									
 								});
-
+								
 								$('.f_excel_xinput').keypress(function(e) {
 									if(e.which == 13) {
 										$(this).siblings('.f_excel_xlabel').text($(this).val());

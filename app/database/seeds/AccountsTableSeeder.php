@@ -8,7 +8,32 @@ class AccountsTableSeeder extends Seeder {
 	public function run()
 	{
 		$faker = Faker::create();
-
+		
+		Account::create([
+			'username' => 'owner',
+			'password' => Hash::make('owner'),
+			'role' => 1,
+			'last_login' => $faker->dateTime($max = 'now') ,
+			'active' => 1
+		]);
+		
+		Account::create([
+			'username' => 'mgr',
+			'password' => Hash::make('mgr'),
+			'role' => 2,
+			'last_login' => $faker->dateTime($max = 'now') ,
+			'active' => 1
+		]);
+		
+		Account::create([
+			'username' => 'sales',
+			'password' => Hash::make('sales'),
+			'role' => 3,
+			'last_login' => $faker->dateTime($max = 'now') ,
+			'active' => 1
+		]);
+		
+		/*
 		foreach(range(1, 10) as $index)
 		{
 			$number = rand(0, 2);
@@ -24,14 +49,9 @@ class AccountsTableSeeder extends Seeder {
 			{
 				$role = "owner";
 			}
-			Account::create([
-				'username' => $faker->userName,
-				'password' => $faker->password,
-				'role' => $role,
-				'last_login' => $faker->dateTime($max = 'now') ,
-				'active' => 1
-			]);
+			
 		}
 	}
+	*/
 
 }
