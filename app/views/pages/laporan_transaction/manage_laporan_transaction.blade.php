@@ -298,12 +298,14 @@
 									<select class="form-control input-sm" id="filter_void">
 										<option value="true">true</option>
 										<option value="false">false</option>
+										<option value="semua_void">semua void</option>
 									</select>
 								</td>
 								<td>
 									<select class="form-control input-sm" id="filter_status">
 										<option value="true">paid</option>
 										<option value="false">unpaid</option>
+										<option value="semua_status">semua status</option>
 									</select>
 								</td>
 								<td></td>
@@ -450,7 +452,7 @@
 		$is_void = '-';
 		$status = '-';
 		
-		window.location = "{{URL::route('david.view_all_transaction')}}" + "?filtered=1&id="+$id+"&name="+$name+"&total="+$total+"&discount="+$discount+"&tax="+$tax+"&sales_id="+$sales_id+"&username="+$username+"&is_void="+$is_void+"&status="+$status+"&start_date="+$start_date+"&end_date="+$end_date;;
+		window.location = "{{URL::route('david.view_all_transaction')}}" + "?filtered=1&id="+$id+"&name="+$name+"&total="+$total+"&discount="+$discount+"&tax="+$tax+"&sales_id="+$sales_id+"&username="+$username+"&is_void="+$is_void+"&status="+$status+"&start_date="+$start_date+"&end_date="+$end_date;
 		
 		//alert($start_date);
 		//alert($end_date);
@@ -573,9 +575,9 @@
 			}
 		}
 		if($tempVal2 == 'true'){
-			$status = 'OK';
+			$status = 'Paid';
 		}else if($tempVal2 == 'false'){
-			$status = 'Not OK';
+			$status = 'UnPaid';
 		}else{
 			$status = '-';
 		}

@@ -212,21 +212,24 @@
 						<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
 						<td>
 							<select class="form-control input-sm" id="filter_type">
-									<option value="true">tukar barang sama</option>
-									<option value="false">tukar barang beda</option>
-									<option value="false">tukar uang</option>
+									<option value="tukar_barang_sama">tukar barang sama</option>
+									<option value="tukar_barang_beda">tukar barang beda</option>
+									<option value="tukar_uang">tukar uang</option>
+									<option value="semua_tipe">semua tipe</option>
 							</select>
 						</td>
 						<td>
 							<select class="form-control input-sm" id="filter_status">
-									<option value="true">pending</option>
-									<option value="false">fixed</option>
+									<option value="pending">pending</option>
+									<option value="fixed">fixed</option>
+									<option value="semua_status">semua status</option>
 							</select>
 						</td>
 						<td>
 							<select class="form-control input-sm" id="filter_solution">
-									<option value="true">kembalikan ke toko</option>
-									<option value="false">masukan ke daftar obral</option>
+									<option value="kembalikan_ke_toko">kembalikan ke toko</option>
+									<option value="masukkan_ke_daftar_obral">masukan ke daftar obral</option>
+									<option value="semua_solusi">semua solusi</option>
 							</select>
 						</td>
 						<td><input type="text" class="form-control input-sm" id="filter_trade_product_id"></td>
@@ -344,11 +347,11 @@
 				}
 			}
 			
-			if($typeRaw == 'true'){
+			if($typeRaw == 'tukar_barang_sama'){
 				$type = 1;
-			}else if($typeRaw == 'false'){
+			}else if($typeRaw == 'tukar_barang_beda'){
 				$type = 2;
-			}else if($typeRaw == 'false'){
+			}else if($typeRaw == 'tukar_uang'){
 				$type = 3;
 			}else{
 				$type = '-';
@@ -363,9 +366,9 @@
 				}
 			}
 			
-			if($statusRaw == 'true'){
+			if($statusRaw == 'pending'){
 				$status = 'pending';
-			}else if($statusRaw == 'false'){
+			}else if($statusRaw == 'fixed'){
 				$status = 'fixed';
 			}else{
 				$status = '-';
@@ -380,9 +383,9 @@
 				}
 			}
 			
-			if($solutionRaw == 'true'){
+			if($solutionRaw == 'kembalikan_ke_toko'){
 				$solution = 'kembalikan ke toko';
-			}else if($solutionRaw == 'false'){
+			}else if($solutionRaw == 'masukkan_ke_daftar_obral'){
 				$solution = 'masukkan ke daftar obral';
 			}else{
 				$solution = '-';

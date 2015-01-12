@@ -18,13 +18,33 @@
 						<tr>
 							<th class="table-bordered" >
 								<a href="javascript:void(0)">Tipe Jual Beli</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'type')
+											@if($order == 'asc')
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'type', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif										
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">ID Transaksi</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'transaction_id')
+											@if($order == 'asc')
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'transaction_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'transaction_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'transaction_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif										
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
@@ -38,19 +58,49 @@
 							-->
 							<th class="table-bordered">
 								<a href="javascript:void(0)">In</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'in_amount')
+											@if($order == 'asc')
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'in_amount', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'in_amount', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'in_amount', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif										
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Out</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'out_amount')
+											@if($order == 'asc')
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'out_amount', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'out_amount', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'out_amount', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif										
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Total</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'total')
+											@if($order == 'asc')
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'total', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif										
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
@@ -94,7 +144,17 @@
 
 							<th class="table-bordered" width="200">
 								<a href="javascript:void(0)">Waktu</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'created_at')
+											@if($order == 'asc')
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('cashController@view_laporan_cash', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif										
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
