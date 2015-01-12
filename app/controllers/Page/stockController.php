@@ -1,7 +1,10 @@
 <?php
 
 class stockController extends \HomeController{
-		
+	public function viewAddStock()
+	{
+		return View::make('pages.restock.add_new_stock');
+	}	
 	public function viewStock()
 	{
 		$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->get();
