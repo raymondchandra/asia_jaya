@@ -166,6 +166,42 @@ class transController extends \HomeController{
 		return View::make('pages.laporan_transaction.manage_laporan_transaction', compact('dataAll'));
 	}
 	
+	/*
+	public function char_at($str, $pos)
+	{
+		return $str{$pos};
+	}
+	
+	public function addDate($end_date){
+		$month = "";
+		$dates = "";
+		$year = "";
+		$i = 0;
+		
+		while($this->char_at($end_date,$i) != '/'){
+			$month .= $this->char_at($end_date,$i);
+			$i++;
+		}
+		$i++;
+		while($this->char_at($end_date,$i) != '/'){
+			$dates .= $this->char_at($end_date,$i);
+			$i++;
+		}
+		$i++;
+		while($i < strlen($end_date)){
+			$year .= $this->char_at($end_date,$i);
+			$i++;
+		}
+		
+		$dates = intval($dates)+1;
+		
+		$end_date = $month . '/' . $dates . '/' . $year;
+			
+		return $end_date;
+	}
+	*/
+	
+	//reference ==> http://php.net/manual/en/function.date-add.php
 	public function view_all_transaction2()
 	{
 	
@@ -178,8 +214,12 @@ class transController extends \HomeController{
 		$end_date = Input::get('end_date');
 		
 		if($start_date != '' && $end_date != ''){
+			//$finalEndDate = $this->addDate($end_date);
 			$from = date("Y-m-d, G:i:s", strtotime($start_date));
 			$to = date("Y-m-d, G:i:s", strtotime($end_date));
+			$to = new DateTime($to);
+			$diff1day = new DateInterval('P1D');
+			$to->add($diff1day);
 		}else{
 			$from = '';
 			$to = '';

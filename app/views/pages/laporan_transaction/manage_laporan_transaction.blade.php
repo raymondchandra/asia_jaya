@@ -61,12 +61,12 @@
 									@else
 										@if($sortBy == 'id')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -87,12 +87,12 @@
 									@else
 										@if($sortBy == 'name')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -113,12 +113,12 @@
 									@else
 										@if($sortBy == 'total')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'total', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'total', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -139,12 +139,12 @@
 									@else
 										@if($sortBy == 'discount')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'discount', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'discount', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'discount', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'discount', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'discount', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'discount', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -165,12 +165,12 @@
 									@else
 										@if($sortBy == 'tax')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'tax', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'tax', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -191,12 +191,12 @@
 									@else
 										@if($sortBy == 'sales_id')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -217,12 +217,12 @@
 									@else
 										@if($sortBy == 'username')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'username', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'username', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -243,12 +243,12 @@
 									@else
 										@if($sortBy == 'is_void')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'is_void', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'is_void', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'is_void', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'is_void', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'is_void', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'is_void', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -269,12 +269,12 @@
 									@else
 										@if($sortBy == 'status')
 											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'status', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'status', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 											@endif
 										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status))}}">
+											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -442,6 +442,32 @@
 		$start_date = $('#start_date').val();
 		$end_date = $('#end_date').val();
 		
+		/*
+		$month = "";
+		$dates = "";
+		$year = "";
+		$i = 0;
+		
+		while($end_date.charAt($i) != '/'){
+			$month += $end_date.charAt($i);
+			$i++;
+		}
+		$i++;
+		while($end_date.charAt($i) != '/'){
+			$dates += $end_date.charAt($i);
+			$i++;
+		}
+		$i++;
+		while($i < $end_date.length){
+			$year += $end_date.charAt($i);
+			$i++;
+		}
+		
+		$dates = parseInt($dates)+1;
+		
+		$end_date = $month + '/' + $dates + '/' +$year; 
+		*/
+		
 		$id = '-';
 		$name = '-';
 		$total = '-';
@@ -519,6 +545,9 @@
 	});
 	
 	$('body').on('click','#filter_button',function(){
+		$start_date = $('#start_date').val();
+		$end_date = $('#end_date').val();
+	
 		$id = $('#filter_id').val();
 		if($id == ''){
 			$id = '-';
@@ -582,7 +611,7 @@
 			$status = '-';
 		}
 		
-		window.location = "{{URL::route('david.view_all_transaction')}}" + "?filtered=1&id="+$id+"&name="+$name+"&total="+$total+"&discount="+$discount+"&tax="+$tax+"&sales_id="+$sales_id+"&username="+$username+"&is_void="+$is_void+"&status="+$status;
+		window.location = "{{URL::route('david.view_all_transaction')}}" + "?filtered=1&id="+$id+"&name="+$name+"&total="+$total+"&discount="+$discount+"&tax="+$tax+"&sales_id="+$sales_id+"&username="+$username+"&is_void="+$is_void+"&status="+$status+"&start_date="+$start_date+"&end_date="+$end_date;
 	});
 
 	$('body').on('click','.view_detail_button',function(){
