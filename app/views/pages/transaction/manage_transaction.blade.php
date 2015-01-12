@@ -33,7 +33,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Customer Name</a>
+								<a href="javascript:void(0)">Pelanggan</a>
 									@if($filtered == 0)
 										@if($sortBy == 'name')
 											@if($order == 'asc')
@@ -80,7 +80,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="50">
 								<a href="javascript:void(0)">Tax</a>
 									@if($filtered == 0)
 										@if($sortBy == 'tax')
@@ -93,27 +93,11 @@
 											<a href="{{action('transController@view_transaction', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'0'))}}">
 										@endif
 									@endif
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+									<!--<span class="glyphicon glyphicon-sort" style="float: right;"></span>-->
 								</a>
-							</th>
-							<th class="table-bordered" width="80">
-								<a href="javascript:void(0)">Kar. ID</a>
-									@if($filtered == 0)
-										@if($sortBy == 'sales_id')
-											@if($order == 'asc')
-												<a href="{{action('transController@view_transaction', array('sortBy' => 'sales_id', 'order' => 'desc', 'filtered'=>'0'))}}">
-											@else
-												<a href="{{action('transController@view_transaction', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'0'))}}">
-											@endif
-										@else
-											<a href="{{action('transController@view_transaction', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'0'))}}">
-										@endif
-									@endif
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
-							</th>
+							</th> 
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Username</a>
+								<a href="javascript:void(0)">Karyawan</a>
 									@if($filtered == 0)
 										@if($sortBy == 'username')
 											@if($order == 'asc')
@@ -202,8 +186,7 @@
 										@endif
 										<td id="hidden_trans_total_{{$data->id}}">{{toMoney($data->total)}}</td>
 										<td id="hidden_trans_discount_{{$data->id}}">{{toMoney($data->discount)}}</td>
-										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>
-										<td>{{$data->sales_id}}</td>
+										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td> 
 										<td>{{$data->username}}</td>
 										@if($data->is_void == 0)
 											<td>False</td>

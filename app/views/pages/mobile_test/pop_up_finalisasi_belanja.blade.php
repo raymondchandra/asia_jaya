@@ -118,7 +118,12 @@
 					</div>
 					<div class="form-group hidden f_diskon_inputtext">
 						<label for="">Diskon</label>
-						<input type="number" id="diskon_text" class="form-control" id="" value="" placeholder="e.g.: 10000">
+
+						<div class="input-group">
+							<input type="number" id="diskon_text" class="form-control" id="" value="" placeholder="e.g.: 10000" aria-describedby="basic-ribuan">
+							<span class="input-group-addon" id="basic-ribuan">.000</span>
+						</div>
+
 					</div>
 
 					<div class="form-group">

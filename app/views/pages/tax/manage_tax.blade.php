@@ -24,9 +24,19 @@
 									<label class="control-label g-lg-3">Nilai Tax (%)</label>
 									<div class="g-lg-7">
 										@if($tax==null)
-										<input type="text" class="form-control" value="0" id="taxAmount" placeholder="e.g.: 10">
+
+
+										<div class="input-group">
+											<input type="text" class="form-control" value="0" id="taxAmount" placeholder="e.g.: 10" aria-describedby="basic-persen">
+											<span class="input-group-addon" id="basic-persen">%</span>
+										</div>
+
 										@else
-										<input type="text" class="form-control ff_num_only" value="{{$tax->amount}}" id="taxAmount" placeholder="e.g.: 10">
+
+										<div class="input-group"> 
+											<input type="text" class="form-control ff_num_only" value="{{$tax->amount}}" id="taxAmount" placeholder="e.g.: 10" aria-describedby="basic-persen">
+											<span class="input-group-addon" id="basic-persen">%</span>
+										</div>
 										@endif
 									</div>
 								</div>
@@ -48,9 +58,9 @@
 
 <script>
 
-	/* -- jan 9 2015 | START -- */
-	/* -- button disabled error prevention -- */
-	$('#taxAmount').on('input', function() {  
+/* -- jan 9 2015 | START -- */
+/* -- button disabled error prevention -- */
+$('#taxAmount').on('input', function() {  
 		//var ff_harga_min = parseFloat($(this).closest('.form-horizontal').find('#edit_harga_min').text());
 		if( ($(this).val() != '') && !isNaN($(this).val())){
 			$('#saveTax').removeAttr('disabled');
@@ -58,23 +68,23 @@
 			$('#saveTax').attr('disabled','disabled');
 		}
 	});
-	/* -- jan 9 2015 | END -- */
+/* -- jan 9 2015 | END -- */
 
-	$("body").on('click', '#saveTax', function(){
-		$tax = $("#taxAmount").val();
-		$.ajax({
-			type: 'PUT',
-			url: '{{URL::route('gentry.edit_tax')}}',
-			data: {
-				'data' : $tax
-			},
-			success: function(response){
-				alert('Perubahan Tax Berhasil');
-			},error: function(xhr, textStatus, errorThrown){
-				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-				alert("responseText: "+xhr.responseText);
-			}
-		},'json');
-	});
+$("body").on('click', '#saveTax', function(){
+	$tax = $("#taxAmount").val();
+	$.ajax({
+		type: 'PUT',
+		url: '{{URL::route('gentry.edit_tax')}}',
+		data: {
+			'data' : $tax
+		},
+		success: function(response){
+			alert('Perubahan Tax Berhasil');
+		},error: function(xhr, textStatus, errorThrown){
+			alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+			alert("responseText: "+xhr.responseText);
+		}
+	},'json');
+});
 </script>
 @stop

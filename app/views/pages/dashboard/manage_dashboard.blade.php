@@ -36,7 +36,12 @@
 								Jumlah Uang 
 							</label>
 							<div class="g-sm-7">
-								<input type="text" class="form-control" id="opening-cash-input">
+
+								<div class="input-group">
+									<input type="text" class="form-control" id="opening-cash-input" aria-describedby="basic-ribuan">
+									<span class="input-group-addon" id="basic-ribuan">.000</span>
+									
+								</div>
 							</div>
 						</div>
 					</form>

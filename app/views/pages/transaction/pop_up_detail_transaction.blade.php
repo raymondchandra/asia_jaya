@@ -53,9 +53,13 @@
 									<p type="text" class="form-control-static" id="transaction_subtotal_detail">IDR 3.100.000</p>
 								</div>
 								-->
-								<label class="g-sm-8 control-label"><img src="{{asset('assets/img/pigblk.png')}}" height="14"></label>
+								<label class="g-sm-8 control-label"><img src="{{asset('assets/img/pigblk.png')}}" height="20"></label>
 								<div class="g-sm-3">
-									<input type="text" class="form-control" id="transaction_diskon_detail">
+
+									<div class="input-group">
+										<input type="text" class="form-control" id="transaction_diskon_detail" aria-describedby="basic-ribuan">
+										<span class="input-group-addon" id="basic-ribuan">.000</span>
+									</div>
 									
 								</div>
 								<label class="g-sm-8 control-label">Tax</label>
@@ -78,7 +82,11 @@
 
 								<label class="g-sm-8 control-label">Bayar</label>
 								<div class="g-sm-3">
-									<input type="text" class="form-control" id="f_uang_bayaran">
+									
+									<div class="input-group">
+										<input type="text" class="form-control" id="f_uang_bayaran" aria-describedby="basic-ribuan">
+										<span class="input-group-addon" id="basic-ribuan">.000</span>
+									</div>
 								</div>
 								<span class="clearfix"></span>
 

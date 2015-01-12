@@ -73,7 +73,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Customer Name</a>
+								<a href="javascript:void(0)">Pelanggan</a>
 								@if($filtered == 0)
 										@if($sortBy == 'name')
 											@if($order == 'asc')
@@ -150,7 +150,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="50">
 								<a href="javascript:void(0)">Tax</a>
 								@if($filtered == 0)
 										@if($sortBy == 'tax')
@@ -173,37 +173,11 @@
 											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@endif
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+									<!--<span class="glyphicon glyphicon-sort" style="float: right;"></span>-->
 								</a>
-							</th>
-							<th class="table-bordered" width="80">
-								<a href="javascript:void(0)">Kar. ID</a>
-								@if($filtered == 0)
-										@if($sortBy == 'sales_id')
-											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'desc', 'filtered'=>'0'))}}">
-											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'0'))}}">
-											@endif
-										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'0'))}}">
-										@endif
-									@else
-										@if($sortBy == 'sales_id')
-											@if($order == 'asc')
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'desc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
-											@else
-												<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
-											@endif
-										@else
-											<a href="{{action('transController@view_all_transaction2', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'1','id'=>$id,'name'=>$name,'total'=>$total,'discount'=>$discount,'tax'=>$tax,'sales_id'=>$sales_id,'username'=>$username,'is_void'=>$is_void,'status'=>$status,'start_date'=>$start_date,'end_date'=>$end_date))}}">
-										@endif
-									@endif
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
-							</th>
+							</th> 
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Username</a>
+								<a href="javascript:void(0)">Karyawan</a>
 								@if($filtered == 0)
 										@if($sortBy == 'username')
 											@if($order == 'asc')
@@ -291,8 +265,7 @@
 								<td><input type="text" class="form-control input-sm" id="filter_name"></td>
 								<td><input type="text" class="form-control input-sm" id="filter_total"></td>
 								<td><input type="text" class="form-control input-sm" id="filter_discount"></td>
-								<td><input type="text" class="form-control input-sm" id="filter_tax"></td>
-								<td><input type="text" class="form-control input-sm" id="filter_sales_id"></td>
+								<td><input type="text" class="form-control input-sm" id="filter_tax"></td> 
 								<td><input type="text" class="form-control input-sm" id="filter_username"></td>
 								<td>
 									<select class="form-control input-sm" id="filter_void">
@@ -340,8 +313,7 @@
 										@endif
 										<td id="hidden_trans_total_{{$data->id}}">{{toMoney($data->total)}}</td>
 										<td id="hidden_trans_discount_{{$data->id}}">{{toMoney($data->discount)}}</td>
-										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>
-										<td>{{$data->sales_id}}</td>
+										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td> 
 										<td>{{$data->username}}</td>
 										@if($data->is_void == 0)
 											<td>False</td>
