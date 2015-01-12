@@ -295,6 +295,26 @@ class CashesController extends \BaseController {
 		$respond = array('code'=>'200','status' => 'OK','message'=>$result);
 		return Response::json($respond);
 	}
+	
+	public function getSortedAll($by, $order)
+	{
+			$resultTemp = DB::table('cashes')->select('type', 'transaction_id', 'in_amount', 'out_amount', DB::raw('SUM(in_amount-out_amount) AS total'), 'created_at');
+		
+			$result = $resultTemp->orderBy($by, $order)->whereRaw('created_at >= curdate()')->get();
+			
+			/*
+			$total = 0;
+			foreach($result as $data)
+			{
+				$in = $data->in_amount;
+				$out = $data->out_amount;
+				$total = $total + $in -$out;
+				$data->total = $total;
+			}
+			*/
+		
+		return $this->getReturn($result);
+	}
 
 	/*
 	public function exist()

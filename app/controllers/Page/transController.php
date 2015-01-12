@@ -2,6 +2,7 @@
 
 class transController extends \HomeController{
 
+	/*
 	public function view_transaction()
 	{
 		$transactionController = new TransactionsController();
@@ -20,6 +21,8 @@ class transController extends \HomeController{
 			$dataAll = null;
 		}
 		return View::make('pages.transaction.manage_transaction', compact('dataAll'));
+	}
+	*/
 		/*
 		$allData = $transactionController->getAll();
 		$allDataJson = json_decode($allData->getContent());
@@ -96,7 +99,52 @@ class transController extends \HomeController{
 		}
 		
 		*/
+	
+	
+	public function view_transaction(){
+		$sortBy = Input::get('sortBy','none');
+		$order = Input::get('order','none');
+		$filtered = Input::get('filtered', '0');
+		$transactionController = new TransactionsController();
 		
+		if($filtered == '0')
+		{
+			if($sortBy === "none")
+			{
+				$dataAll = Transaction::whereRaw('created_at >= curdate()')->get();
+				if(count($dataAll) != 0)
+				{
+					foreach($dataAll as $data){
+						$data->name = Customer::find($data->customer_id)->name;
+						$data->username = Account::find($data->sales_id)->username;
+						$data->order = $this->getOrderArray($data->id);
+					}
+				}else{
+					$dataAll = null;
+				}
+			}
+			else
+			{
+				$allTransactionJson = $transactionController->getSortedOnly($sortBy, $order);
+				$allTransaction = json_decode($allTransactionJson->getContent());
+				if($allTransaction->{'status'} != 'Not Found'){
+					$dataAll = $allTransaction->{'messages'};
+					foreach($dataAll as $data){
+						$data->order = $this->getOrderArray($data->id);
+					}
+				}else{
+					$dataAll = null;
+				}
+			}
+			$datas = null;
+			if($dataAll != null){
+				foreach($dataAll as $allData){
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'is_void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at'=>$allData->created_at, 'order'=>$allData->order);
+				}
+			}
+		
+			return View::make('pages.transaction.manage_transaction', compact('datas','sortBy','order','filtered'));
+		}
 	}
 	
 	public function view_all_transaction()
@@ -130,8 +178,8 @@ class transController extends \HomeController{
 		$end_date = Input::get('end_date');
 		
 		if($start_date != '' && $end_date != ''){
-			$from = date(date("Y-m-d, G:i:s", strtotime($start_date)));
-			$to = date(date("Y-m-d, G:i:s", strtotime($end_date)));
+			$from = date("Y-m-d, G:i:s", strtotime($start_date));
+			$to = date("Y-m-d, G:i:s", strtotime($end_date));
 		}else{
 			$from = '';
 			$to = '';

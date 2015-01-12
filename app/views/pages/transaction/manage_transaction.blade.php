@@ -17,56 +17,146 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">No. Nota</a>
-								<a href="javascript:void(0)">
+								<a href="javascript:void(0)">Trans. ID</a>
+									@if($filtered == 0)
+										@if($sortBy == 'id')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif										
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Pelanggan</a>
-								<a href="javascript:void(0)">
+								<a href="javascript:void(0)">Customer Name</a>
+									@if($filtered == 0)
+										@if($sortBy == 'name')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Total</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'total')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'total', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'total', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)"><img src="{{asset('assets/img/pigblk.png')}}" height="14"></a>
-								<a href="javascript:void(0)">
+								<a href="javascript:void(0)">Discount</a>
+									@if($filtered == 0)
+										@if($sortBy == 'discount')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'discount', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'discount', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'discount', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Tax</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'tax')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'tax', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'tax', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<!--<th class="table-bordered" width="80">
+							<th class="table-bordered" width="80">
 								<a href="javascript:void(0)">Kar. ID</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'sales_id')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'sales_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'sales_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
-							</th>-->
+							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Karyawan</a>
-								<a href="javascript:void(0)">
+								<a href="javascript:void(0)">Username</a>
+									@if($filtered == 0)
+										@if($sortBy == 'username')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'username', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'username', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered" width="80">
 								<a href="javascript:void(0)">Void</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'is_void')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'is_void', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'is_void', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'is_void', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
 							<th class="table-bordered" width="120">
 								<a href="javascript:void(0)">Status</a>
-								<a href="javascript:void(0)">
+									@if($filtered == 0)
+										@if($sortBy == 'status')
+											@if($order == 'asc')
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'status', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('transController@view_transaction', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('transController@view_transaction', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
@@ -101,20 +191,20 @@
 									return  $symbol.$sign.$i;
 								}
 							?>
-							@if($dataAll != null)
-								@foreach($dataAll as $data)
+							@if($datas != null)
+								@foreach($datas as $data)
 									<tr> 
 										<td>{{$data->id}}</td>
-										@if($data->customerName == "")
+										@if($data->name == "")
 											<td id="hidden_trans_customer_name_{{$data->id}}">Tidak Ada Nama</td>
 										@else
-											<td id="hidden_trans_customer_name_{{$data->id}}">{{$data->customerName}}</td>
+											<td id="hidden_trans_customer_name_{{$data->id}}">{{$data->name}}</td>
 										@endif
 										<td id="hidden_trans_total_{{$data->id}}">{{toMoney($data->total)}}</td>
 										<td id="hidden_trans_discount_{{$data->id}}">{{toMoney($data->discount)}}</td>
 										<td id="hidden_trans_tax_{{$data->id}}">{{$data->tax}}%</td>
-										<!--<td>{{-- $data->sales_id --}}</td> -->
-										<td>{{$data->salesName}}</td>
+										<td>{{$data->sales_id}}</td>
+										<td>{{$data->username}}</td>
 										@if($data->is_void == 0)
 											<td>False</td>
 										@else
