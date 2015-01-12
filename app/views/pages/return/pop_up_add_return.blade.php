@@ -13,7 +13,7 @@
 						<div class="g-sm-12">
 
 							<div class="form-group">
-								<label class="g-sm-4 control-label">Nama Barang</label>
+								<label class="g-sm-4 control-label">Kode Barang</label>
 								<div class="g-sm-7">
 									<p type="text" class="form-control-static" id="prod_name_pop"></p>
 								</div>
@@ -41,7 +41,7 @@
 								</div>
 							</div>
 							<div class="form-group f_tukar_barang_beda hidden">
-								<label class="g-sm-4 control-label">Nama Barang</label>
+								<label class="g-sm-4 control-label">Kode Barang</label>
 								<input type="hidden" id="id_trade_prod">
 								<div class="g-sm-6">
 									<input type="text" class="form-control f_search_barang_beda" id="barang_text_box">

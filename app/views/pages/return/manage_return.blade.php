@@ -48,7 +48,7 @@
 							</a>
 						</th>
 						<th class="table-bordered" style="width: 180px;">
-							<a href="javascript:void(0)">Type</a>
+							<a href="javascript:void(0)">Tipe</a>
 								@if($filtered == 0)
 									@if($sortBy == 'type')
 										@if($order == 'asc')
@@ -100,7 +100,7 @@
 							</a>
 						</th>
 						<th class="table-bordered">
-							<a href="javascript:void(0)">Solution</a>
+							<a href="javascript:void(0)">Solusi</a>
 								@if($filtered == 0)
 									@if($sortBy == 'solution')
 										@if($order == 'asc')
@@ -126,7 +126,7 @@
 							</a>
 						</th>
 						<th class="table-bordered">
-							<a href="javascript:void(0)">trade_product_id</a>
+							<a href="javascript:void(0)">Tukar dengan Kode Produk</a>
 								@if($filtered == 0)
 									@if($sortBy == 'trade_product_id')
 										@if($order == 'asc')
@@ -152,7 +152,7 @@
 							</a>
 						</th>
 						<th class="table-bordered" width="140">
-							<a href="javascript:void(0)">difference</a>
+							<a href="javascript:void(0)">Selisih</a>
 								@if($filtered == 0)
 									@if($sortBy == 'difference')
 										@if($order == 'asc')

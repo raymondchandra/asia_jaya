@@ -125,7 +125,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Discount</a>
+								<a href="javascript:void(0)"><img src="{{asset('assets/img/pigblk.png')}}" height="14"></a>
 								@if($filtered == 0)
 										@if($sortBy == 'discount')
 											@if($order == 'asc')

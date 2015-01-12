@@ -7,9 +7,9 @@
 				<h3>
 					History Restock
 
-					<a href="{{URL::to('test/add_new_stock')}}" class="pull-right btn btn-success" >
+					<!-- <a href="{{URL::to('test/add_new_stock')}}" class="pull-right btn btn-success" >
 						<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Add New Stock
-					</a>
+					</a> -->
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
@@ -32,7 +32,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Product Code</a>
+								<a href="javascript:void(0)">Kode Produk</a>
 								@if($filtered == 0)
 									@if($sortBy == 'product_code')
 										@if($order == 'asc')
@@ -58,7 +58,7 @@
 								</a>
 							</th>
 							<th class="table-bordered" style="width: 180px;">
-								<a href="javascript:void(0)">Product Name</a>
+								<a href="javascript:void(0)">Merk Produk</a>
 								@if($filtered == 0)
 									@if($sortBy == 'name')
 										@if($order == 'asc')

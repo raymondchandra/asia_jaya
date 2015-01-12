@@ -146,10 +146,10 @@
 										<thead>
 											<tr>
 												<th rowspan="2">
-													Kode 
+													Kode
 												</th>
 												<th rowspan="2">
-													Nama
+													Merk
 												</th>
 												<th rowspan="2">
 													Warna 
@@ -180,7 +180,7 @@
 										<div class="g-sm-12">
 											<input type="hidden" value="0">
 											<button type="button" class="btn btn-success btn-lg g-sm-12 finalisasi_btn" id="finalisasi_btn_0" data-toggle="modal" data-target="#pop_up_finalisasi_belanja">
-												Finalisasi Belanja
+												Kirim ke Laptop
 											</button>
 											<input type="hidden" value="0" id="flag_0"/>
 										</div>
@@ -327,7 +327,7 @@
 			tab_panel+='						Kode                                                                                                                                       ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='					<th rowspan="2">                                                                                                                               ';
-			tab_panel+='						Nama                                                                                                                                       ';
+			tab_panel+='						Merk                                                                                                                                       ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='					<th rowspan="2">                                                                                                                               ';
 			tab_panel+='						Warna                                                                                                                                      ';

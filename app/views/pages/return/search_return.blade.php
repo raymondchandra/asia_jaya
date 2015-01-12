@@ -42,7 +42,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="g-sm-3 control-label">Kode Transaksi <span style="font-weight: 300;">(opt)</span></label>
+								<label class="g-sm-3 control-label">No. Nota<span style="font-weight: 300;">(opt)</span></label>
 								<div class="g-sm-7">
 									<input type="text" class="form-control" id="trans_code">
 								</div>
@@ -90,7 +90,7 @@
 							</a>
 						</th>
 						<th class="table-bordered" width="140">
-							<a href="javascript:void(0)">ID Transaksi</a>
+							<a href="javascript:void(0)">No. Nota</a>
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
