@@ -211,7 +211,7 @@
 				.htCore tr td:nth-child(1),
 				.htCore tr td:nth-child(2)
 				{
-					display: none;
+					/*display: none;*/
 				}
 
 				.htCore tr td:nth-child(3),.htCore tr th:nth-child(3) {
@@ -413,70 +413,70 @@
 									$(this).text(plant.getAttribute('data-modal'));
 								});*/
 							</script>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
+							</tbody>
+							</table>
+							</div>
+							</div>
+							</div>
+							</div>
 
-@include('pages.stock.pop_up_add_stock')
-@include('pages.stock.pop_up_obral')
+							@include('pages.stock.pop_up_add_stock')
+							@include('pages.stock.pop_up_obral')
 
-<script>
-	$('body').on('click','#filter_button',function(){
-		$product_code = $('#filter_product_code').val();
-		if($product_code == ''){
-			$product_code = '-';
-		}
-		
-		$name = $('#filter_name').val();
-		if($name == ''){
-			$name = '-';
-		}
-		
-		$color = $('#filter_color').val();
-		if($color == ''){
-			$color = '-';
-		}
-		
-		$modal_price = $('#filter_modal_price').val();
-		if($modal_price == ''){
-			$modal_price = '-';
-		}
-		
-		$min_price = $('#filter_min_price').val();
-		if($min_price == ''){
-			$min_price = '-';
-		}
-		
-		$sales_price = $('#filter_sales_price').val();
-		if($sales_price == ''){
-			$sales_price = '-';
-		}
-		
-		$stock_shop = $('#filter_stock_shop').val();
-		if($stock_shop == ''){
-			$stock_shop = '-';
-		}
-		
-		$stock_storage = $('#filter_stock_storage').val();
-		if($stock_storage == ''){
-			$stock_storage = '-';
-		}
-		
-		$deleted = $('#filter_deleted').val();
-		if($deleted == 'yes'){
-			$deleted = 1;
-		}else if($deleted == 'no'){
-			$deleted = 0;
-		}else{
-			$deleted = '-';
-		}
-		
-		window.location = "{{URL::route('gentry.view_stock')}}" + "?filtered=1&product_code="+$product_code+"&name="+$name+"&color="+$color+"&modal_price="+$modal_price+"&min_price="+$min_price+"&sales_price="+$sales_price+"&stock_shop="+$stock_shop+"&stock_storage="+$stock_storage+"&deleted="+$deleted;
-	});
-</script>
+							<script>
+								$('body').on('click','#filter_button',function(){
+									$product_code = $('#filter_product_code').val();
+									if($product_code == ''){
+										$product_code = '-';
+									}
+									
+									$name = $('#filter_name').val();
+									if($name == ''){
+										$name = '-';
+									}
+									
+									$color = $('#filter_color').val();
+									if($color == ''){
+										$color = '-';
+									}
+									
+									$modal_price = $('#filter_modal_price').val();
+									if($modal_price == ''){
+										$modal_price = '-';
+									}
+									
+									$min_price = $('#filter_min_price').val();
+									if($min_price == ''){
+										$min_price = '-';
+									}
+									
+									$sales_price = $('#filter_sales_price').val();
+									if($sales_price == ''){
+										$sales_price = '-';
+									}
+									
+									$stock_shop = $('#filter_stock_shop').val();
+									if($stock_shop == ''){
+										$stock_shop = '-';
+									}
+									
+									$stock_storage = $('#filter_stock_storage').val();
+									if($stock_storage == ''){
+										$stock_storage = '-';
+									}
+									
+									$deleted = $('#filter_deleted').val();
+									if($deleted == 'yes'){
+										$deleted = 1;
+									}else if($deleted == 'no'){
+										$deleted = 0;
+									}else{
+										$deleted = '-';
+									}
+									
+									window.location = "{{URL::route('gentry.view_stock')}}" + "?filtered=1&product_code="+$product_code+"&name="+$name+"&color="+$color+"&modal_price="+$modal_price+"&min_price="+$min_price+"&sales_price="+$sales_price+"&stock_shop="+$stock_shop+"&stock_storage="+$stock_storage+"&deleted="+$deleted;
+								});
+							</script>
 
 <script>
 
