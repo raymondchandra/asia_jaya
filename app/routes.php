@@ -421,7 +421,7 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::post('/post_finalize_transaction', ['as'=>'david.postFinalizeTransaction','uses' => 'mobile_view@finalize']);
 	
-	//Route::get('/view_account', ['as'=>'david.viewAccount','uses' => 'accountController@viewAccount']);
+	Route::get('/view_account', ['as'=>'david.viewAccount','uses' => 'accountController@viewAccount']);
 	
 	Route::put('/edit_account_active', ['as'=>'david.edit_account_active','uses' => 'accountController@changeActive']);
 	

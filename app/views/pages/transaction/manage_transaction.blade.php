@@ -17,7 +17,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">Trans. ID</a>
+								<a href="javascript:void(0)">No. Nota</a>
 									@if($filtered == 0)
 										@if($sortBy == 'id')
 											@if($order == 'asc')
@@ -33,7 +33,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Pelanggan</a>
+								<a href="javascript:void(0)">Nama Pelanggan</a>
 									@if($filtered == 0)
 										@if($sortBy == 'name')
 											@if($order == 'asc')
@@ -65,7 +65,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Discount</a>
+								<a href="javascript:void(0)"><img src="{{asset('assets/img/pigblk.png')}}" height="14"></a>
 									@if($filtered == 0)
 										@if($sortBy == 'discount')
 											@if($order == 'asc')
@@ -81,7 +81,7 @@
 								</a>
 							</th>
 							<th class="table-bordered" width="50">
-								<a href="javascript:void(0)">Tax</a>
+								<a href="javascript:void(0)">Pajak</a>
 									@if($filtered == 0)
 										@if($sortBy == 'tax')
 											@if($order == 'asc')
@@ -97,7 +97,7 @@
 								</a>
 							</th> 
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Karyawan</a>
+								<a href="javascript:void(0)">Nama Karyawan</a>
 									@if($filtered == 0)
 										@if($sortBy == 'username')
 											@if($order == 'asc')
