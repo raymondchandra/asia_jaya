@@ -27,19 +27,287 @@
 				}
 
 				</style>
-				<div id="example1">
-				</div>
+				<table class="table table-bordered">
+					<thead class="table-bordered">
+						<tr>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Kode Produk</a>
+									@if($filtered == 0)
+										@if($sortBy == 'product_code')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'product_code', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'product_code')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'product_code', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'product_code', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Foto</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Merek Produk</a>
+									@if($filtered == 0)
+										@if($sortBy == 'name')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'name')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Warna</a>
+									@if($filtered == 0)
+										@if($sortBy == 'color')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'color', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'color')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'color', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" >
+								<a href="javascript:void(0)">Harga Modal</a>
+									@if($filtered == 0)
+										@if($sortBy == 'modal_price')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'modal_price', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'modal_price', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'modal_price', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'modal_price')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'modal_price', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'modal_price', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'modal_price', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" >
+								<a href="javascript:void(0)">Harga Min.</a>
+									@if($filtered == 0)
+										@if($sortBy == 'min_price')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'min_price', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'min_price', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'min_price', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'min_price')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'min_price', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'min_price', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'min_price', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Harga Jual</a>
+									@if($filtered == 0)
+										@if($sortBy == 'sales_price')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'sales_price', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'sales_price', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'sales_price', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'sales_price')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'sales_price', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'sales_price', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'sales_price', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" >
+								<a href="javascript:void(0)">Stok Toko</a>
+									@if($filtered == 0)
+										@if($sortBy == 'stock_shop')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_shop', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'stock_shop')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_shop', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Stok Gudang</a>
+									@if($filtered == 0)
+										@if($sortBy == 'stock_storage')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_storage', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'stock_storage')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_storage', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'stock_storage', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Deleted</a>
+									@if($filtered == 0)
+										@if($sortBy == 'deleted')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'deleted', 'order' => 'desc', 'filtered'=>'0'))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'deleted', 'order' => 'asc', 'filtered'=>'0'))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'deleted', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										@if($sortBy == 'deleted')
+											@if($order == 'asc')
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'deleted', 'order' => 'desc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@else
+												<a href="{{action('stockController@viewStock2', array('sortBy' => 'deleted', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+											@endif
+										@else
+											<a href="{{action('stockController@viewStock2', array('sortBy' => 'deleted', 'order' => 'asc', 'filtered'=>'1','product_code'=>$product_code,'name'=>$name,'color'=>$color,'modal_price'=>$modal_price,'min_price'=>$min_price,'sales_price'=>$sales_price,'stock_shop'=>$stock_shop,'stock_storage'=>$stock_storage,'deleted'=>$deleted))}}">
+										@endif
+									@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
+								Command
+							</th>
+						</tr>
+						<!--<th class="table-bordered">Print</th>-->
+					</thead>
+					<thead>
+						<tr>
+							
+							<td><input type="text" class="form-control input-sm" id="filter_product_code"></td>
+							<td></td>
+							<td><input type="text" class="form-control input-sm" id="filter_name"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_color"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_modal_price"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_min_price"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_sales_price"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_stock_shop"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_stock_storage"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_deleted"></td>
+							<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
+							<!--<td></td>-->
+							
+						</tr>
+					</thead>
+				</table>
+				<div id="example1"> </div>
 				<script>
 				var data = [
-				<?php $_i = 100; ?>
+				<?php $_i = 100; $sidebar_i = 1; ?>
 				@if($datas != null)
 				@foreach($datas as $prodList)
 				{
 					prod_id: "{{ $_i }}",
 					prod_detail_id: "0",
+					sidebar: "{{ $sidebar_i }}",
 					kode_barang: "{{$prodList->product_code}}", 
 					foto: "{{URL::asset($prodList->photo)}}",
-					merk_barang: "{{$prodList->name}}",
+					merek_barang: "{{$prodList->name}}",
 					warna: "{{$prodList->color}}",
 					harga_modal: "{{$prodList->modal_price}}",
 					harga_min: "{{$prodList->min_price}}",
@@ -54,18 +322,18 @@
 					command: ''
 							+ '<input type="hidden" value="{{$prodList->idDetail}}" />'
 							+ '<input type="hidden" value="{{$prodList->id}}" />'
-							+ '<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: block;">'
+							+ '<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;">'
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row'
 							+ '</button>'
-							+ '<button class="btn btn-danger btn-xs obral-btn" data-toggle="modal" data-target=".pop_up_obral" style="display: block; margin-top: 5px;">'
+							+ '<button class="btn btn-danger btn-xs obral-btn" data-toggle="modal" data-target=".pop_up_obral" style="display: inline-block; margin-top: 5px;">'
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral'
-							+ '</button>'
+							+ '</button><span class="clearfix"></span>'
 							+ '<input type="hidden" value="{{$prodList->idDetail}}" />'
 							+ '<input type="hidden" value="{{$prodList->id}}" />'
-							+ '<button class="btn btn-danger btn-xs  hapus_button" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">'
+							+ '<button class="btn btn-danger btn-xs  hapus_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">'
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Delete'
 							+ '</button>'
-							+ '<button class="btn btn-success btn-xs  undelete_button" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">'
+							+ '<button class="btn btn-success btn-xs  undelete_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">'
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Undelete'
 							+ '</button>'
 							+ '<input type="hidden" value="{{$prodList->id}}" />'
@@ -73,7 +341,7 @@
 							+ ''
 				},
 
-				<?php $_i++; ?>
+				<?php $_i++; $sidebar_i++; ?>
 				@endforeach
 				@endif
 
@@ -126,13 +394,14 @@
 				    data: data,
 				    enterMoves: {row: 0, col: 0},
 				    //colWidths: [50, 50, 50, 60,50, 50, 50, 60,50, 50, 50, 60,50],
-				    colHeaders: ["prod_id", "prod_det_id", "Kode Barang", "Foto","Merk Barang", "Warna", "Harga Modal", "Harga Min.","Harga Jual", "Stok Toko", "Stok Gudang", "Deleted",""],
+				    colHeaders: ["prod_id", "prod_det_id", "","Kode Barang", "Foto","Merek Barang", "Warna", "Harga Modal", "Harga Min.","Harga Jual", "Stok Toko", "Stok Gudang", "Deleted",""],
 				    columns: [
 				      {data: "prod_id", renderer: "html"},
 				      {data: "prod_detail_id", renderer: "html"},
+				      {data: "sidebar", renderer: "html"},
 				      {data: "kode_barang", renderer: "html"},
 				      {data: "foto", renderer: coverRenderer},
-				      {data: "merk_barang", renderer: "html"},
+				      {data: "merek_barang", renderer: "html"},
 				      {data: "warna", renderer: "html"},
 				      {data: "harga_modal", renderer: "html"},
 				      {data: "harga_min", renderer: "html"},
@@ -145,7 +414,7 @@
 				      cells : function(row, col, prop) {
 				      	var cellProperties = {};
 
-				      	if (col == 0 || col == 1 || col == 3 || col == 11 || col == 12) {
+				      	if (col == 0 || col == 1 || col == 2 || col == 4 || col == 12 || col == 13) {
 				      		cellProperties.readOnly = true;
 				      	}
 				      	else
@@ -165,18 +434,21 @@
 						//alert(colAffected);
 
 						var rowArr 			= ht.getDataAtRow(coordinate[0]);
+
 						var prod_id 		= rowArr[0];
 						var prod_detail_id 	= rowArr[1];
-						var kode_barang  	= rowArr[2];
-						var foto  			= rowArr[3];
-						var merk_barang  	= rowArr[4];
-						var warna  			= rowArr[5];
-						var harga_modal  	= rowArr[6];
-						var harga_min  		= rowArr[7];
-						var harga_jual  	= rowArr[8];
-						var stok_toko  		= rowArr[9];
-						var stok_gudang  	= rowArr[10];
-						var deleted  		= rowArr[11];
+						var sidebar 		= rowArr[2];
+						var kode_barang  	= rowArr[3];
+						var foto  			= rowArr[4];
+						var merek_barang  	= rowArr[5];
+						var warna  			= rowArr[6];
+						var harga_modal  	= rowArr[7];
+						var harga_min  		= rowArr[8];	
+						var harga_jual  	= rowArr[9];
+						var stok_toko  		= rowArr[10];
+						var stok_gudang  	= rowArr[11];
+						var deleted  		= rowArr[12];
+						var command  		= rowArr[13];
 
 						alert("Col: " + colAffected +", Prod. ID: "+ prod_id + ", Prod. Detail ID: " + prod_detail_id);
 

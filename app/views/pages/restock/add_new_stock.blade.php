@@ -26,13 +26,13 @@
 					<div class="g-sm-12">
 
 
-						<h3>Non-seri atau Seri?</h3>
+						<!--<h3>Non-seri atau Seri?</h3>
 						<label class="radio-inline">
 							<input type="radio" name="seri_or_not" id="rad_non_seri" value="0" checked> Non-seri
 						</label>
 						<label class="radio-inline">
 							<input type="radio" name="seri_or_not" id="rad_seri" value="1"> Seri
-						</label>
+						</label>-->
 
 						<h3>Masukan Stock</h3>
 						<div class="panel panel-default f_non_seri">
@@ -40,13 +40,13 @@
 							<div class="panel-body">
 								<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" id="form_non_series">
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Kode Produk</label>
+										<label class="g-sm-3 control-label">Kode Barang</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="kode_produk">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Nama Produk</label>
+										<label class="g-sm-3 control-label">Merek Barang</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="nama_produk">
 										</div>
@@ -84,6 +84,22 @@
 													</p>
 												</div>
 												<script>
+												var data = [ 
+												@for($sidebar_i = 1; $sidebar_i < 10; $sidebar_i++)
+												{
+													prod_id: "",
+													prod_detail_id: "",
+													sidebar: "", 
+													command: '' 
+															+ '<input accept="image/*" type="file" id="" class="product_foto">'
+															+ ''
+												},
+ 												@endfor
+
+
+												];
+
+
 												var container = document.getElementById("example1"),
 												exapmleConsole = document.getElementById("example1console"),
 												autosave = document.getElementById('autosave'),
@@ -91,12 +107,34 @@
 												save = document.getElementById('save'),
 												autosaveNotification,
 												hot1 = new Handsontable(container,{
-													startRows: 10,
-													startCols: 4,
-													rowHeaders: true,
-													colHeaders: true,
-													minSpareRows: 1,
-													contextMenu: true,
+													data: data,
+				  									enterMoves: {row: 1, col: 0},
+													//startRows: 10,
+													columns: [
+														      {data: "prod_id", renderer: "html"},
+														      {data: "prod_detail_id", renderer: "html"},
+														      {data: "sidebar", renderer: "html"},
+														      {data: "command", renderer: "html"},
+														      ],
+
+				    								colWidths: [100, 100, 100, 200],
+													//rowHeaders: true,
+													colHeaders: ["Warna", "Stok Toko", "Stok Gudang", "Foto"],
+													minSpareRows: true,
+													//contextMenu: true,
+													cells : function(row, col, prop) {
+												      	var cellProperties = {};
+
+												      	if (col == 3) {
+												      		cellProperties.readOnly = true;
+												      	}
+												      	else
+												      	{
+												      		cellProperties.readOnly = false;
+												      	}
+
+												      	return cellProperties;
+												      },
 													afterChange: function (change, source) {
 														if (source === 'loadData') {
 													        return; //don't save this change
@@ -159,7 +197,7 @@
 													}
 												});
 												</script>
-												<table class="table table-bordered">
+												<table class="table table-bordered" style="margin-top: 300px;">
 													<thead>
 														<tr>
 															<th>
@@ -367,129 +405,7 @@
 					<!-- SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI -->
 					<!-- SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI SERI -->
 
-					<div class="panel panel-default f_seri hidden">
-						<div class="panel-heading">Tambah Stock Produk Seri</div>
-						<div class="panel-body">
-							<form class="form-horizontal" role="form">
-
-								<div class="form-group">
-									<label class="g-sm-2 control-label">Cari Barang</label>
-									<div class="g-sm-8">
-										<input type="text" id="seri_cari_barang_input" class="form-control">
-									</div>
-									<div class="g-sm-2">
-											<!--<button type="button" class="btn btn-success">
-												Search
-											</button>-->
-										</div>
-									</div>
-									<table class="table table-bordered table-striped">
-										<tbody id="cari_barang_seri_content">
-											
-										</tbody>
-									</table>
-
-
-									<hr>
-									<h4>
-										Daftar Barang Dalam Seri ini 
-									</h4>
-									<table class="table table-bordered">
-										<tbody class="f_tbody_barang_seri">
-											
-										</tbody>
-									</table>
-									<hr>
-									<h4>
-										Foto Seri
-									</h4>
-									<!--<div class="form-group">
-										<label class="g-sm-3 control-label">Kode Produk</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control">
-										</div>
-									</div>-->
-									<!--<div class="form-group">
-										<label class="g-sm-3 control-label">Nama Seri</label>
-										<div class="g-sm-7">
-											<input type="text" id="nama_seri_input" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Kode Seri</label>
-										<div class="g-sm-7">
-											<input type="text" id="kode_seri_input" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Warna Produk</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Harga Modal</label>
-										<div class="g-sm-7">
-											<input type="text" id="modal_seri_input" class="form-control" placeholder="akumulasi harga modal produk">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Harga Minimal</label>
-										<div class="g-sm-7">
-											<input type="text" id="minimal_seri_input" class="form-control" placeholder="akumulasi harga minimal produk">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Harga Jual</label>
-										<div class="g-sm-7">
-											<input type="text" id="jual_seri_input" class="form-control" placeholder="akumulasi harga jual produk">
-										</div>
-									</div>-->
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Foto</label>
-										<div class="g-sm-7">
-											<input accept="image/*" type="file" id="foto_seri_input">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label"></label>
-										<div class="g-sm-7">
-											<input type="button" id="add_seri_button" class="btn btn-success" value="Add"/>
-										</div>
-									</div>
-									
-									<!--<div class="form-group">
-										<label class="g-sm-3 control-label">Stok Toko</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Stok Gudang</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Foto</label>
-										<div class="g-sm-7">
-											<input type="file" >
-										</div>
-									</div>-->
-								</form>
-							</div>
-						</div>
-						<script>
-						$('body').on('click','[name="seri_or_not"]',function(){
-							if($(this).val() == 0){
-								$('.f_non_seri').removeClass('hidden');
-								$('.f_seri').addClass('hidden');
-							}else{
-								$('.f_non_seri').addClass('hidden');
-								$('.f_seri').removeClass('hidden');
-							}
-						})
-						</script>
+					
 					</div>
 
 				</div>
