@@ -31,75 +31,55 @@
 				</div>
 				<script>
 				var data = [
-				  {
-				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
-				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    cover: "http://ecx.images-amazon.com/images/I/51bRhyVTVGL._SL50_.jpg"
-				  },
-				  {
-				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
-				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
-				    comments: "This is <big>the</big> book about JavaScript",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    cover: "http://ecx.images-amazon.com/images/I/51gdVAEfPUL._SL50_.jpg"
-				  },
-				  {
-				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
-				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
-				    comments: "  <a href='http://shop.oreilly.com/product/9780596805531.do'>comments</a> are highly <strong>positive</strong>.",
-				    
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    cover: "http://ecx.images-amazon.com/images/I/51VFNL4T7kL._SL50_.jpg"
-				  }
+				<?php $_i = 0; ?>
+				@if($datas != null)
+				@foreach($datas as $prodList)
+				{
+					prod_id: "{{  $_i }}",
+					prod_detail_id: "0",
+					kode_barang: "HK881",
+					foto: "http://img.wikinut.com/img/gycf69_-6rv_5fol/jpeg/0/Best-Friends-Img-Src%3AImage%3A-FreeDigitalPhotos.net.jpeg",
+					merk_barang: "Cats",
+					warna: "Pelangi",
+					harga_modal: "40000",
+					harga_min: "70000",
+					harga_jual: "70000",
+					stok_toko: "10",
+					stok_gudang: "200",
+					deleted: "Ya",
+					command: "<a href='http://shop.oreilly.com/product/9780596805531.do'>comments</a> are highly <strong>positive</strong>."
+				},
+
+				<?php $_i++; ?>
+				@endforeach
+				@endif
+
 				];
 
 				function strip_tags(input, allowed) {
 				  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
 				  allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
 				  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-				    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+				  commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
 				  return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
-				    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+				  	return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
 				  });
-				}
+				};
 
 				var safeHtmlRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-				  var escaped = Handsontable.helper.stringify(value);
+					var escaped = Handsontable.helper.stringify(value);
 				  escaped = strip_tags(escaped, '<em><b><strong><a><big>'); //be sure you only allow certain HTML tags to avoid XSS threats (you should also remove unwanted HTML attributes)
 				  td.innerHTML = escaped;
 				  return td;
-				  },
-				  coverRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+				};
+
+				 var coverRenderer = function (instance, td, row, col, prop, value, cellProperties) {
 				    var escaped = Handsontable.helper.stringify(value);
 				    if (escaped.indexOf('http') === 0) {
 				      var img = document.createElement('IMG');
 				      img.src = value;
+				      img.width = 80;
+				      img.height = 80;
 
 				      Handsontable.Dom.addEvent(img, 'mousedown', function (e){
 				        e.preventDefault();//prevent selection quirk
@@ -113,36 +93,88 @@
 				      Handsontable.renderers.TextRenderer.apply(this, arguments); //render as text
 				    }
 				    return td;
-				  },
-				  container = document.getElementById("example1"),
-				    hot1 = new Handsontable(container, {
+				  };
+
+				 // var container = document.getElementById("example1");
+
+				 //  var hot1 = new Handsontable(container, {
+
+				  $("#example1").handsontable({
 				    data: data,
+				    enterMoves: {row: 0, col: 0},
 				    //colWidths: [50, 50, 50, 60,50, 50, 50, 60,50, 50, 50, 60,50],
 				    colHeaders: ["prod_id", "prod_det_id", "Kode Produk", "Foto","prod_id", "prod_det_id", "Kode Produk", "Foto","prod_id", "prod_det_id", "Kode Produk", "Foto",""],
 				    columns: [
-				      {data: "title", renderer: "html"},
-				      {data: "description", renderer: "html"},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "cover", renderer: coverRenderer}
-				    ]
+				      {data: "prod_id", renderer: "html"},
+				      {data: "prod_detail_id", renderer: "html"},
+				      {data: "kode_barang", renderer: "html"},
+				      {data: "foto", renderer: coverRenderer},
+				      {data: "merk_barang", renderer: "html"},
+				      {data: "warna", renderer: "html"},
+				      {data: "harga_modal", renderer: "html"},
+				      {data: "harga_min", renderer: "html"},
+				      {data: "harga_jual", renderer: "html"},
+				      {data: "stok_toko", renderer: "html"},
+				      {data: "stok_gudang", renderer: "html"},
+				      {data: "deleted", renderer: "html"},
+				      {data: "command", renderer: "html"}
+				      ],
+				      cells : function(row, col, prop) {
+				      	var cellProperties = {};
+
+				      	if (col == 0 || col == 1  || col == 3) {
+				      		cellProperties.readOnly = true;
+				      	}
+				      	else
+				      	{
+				      		cellProperties.readOnly = false;
+				      	}
+
+				      	return cellProperties;
+				      },
+				      afterChange: function(changes, source) { 
+				      	//alert('g');
+				      	var ht = $('#example1').handsontable('getInstance');
+				      	var sel = ht.getSelected();
+
+//'alert' the index of the starting row of the selection
+alert(sel[0]);
+
+
+				      }
 				  });
 
-$('.htCore').addClass('table');
+				   $('.htCore').addClass('table');
+
+					
+				      	 
+
+			//Return index of the currently selected cells as an array [startRow, startCol, endRow, endCol]
+			
+
+			//'alert' the index of the starting row of the selection
+			 			  
 				</script>
 				<style>
+				.handsontableInput {
+					padding: 8px !important;
+				}
+				.handsontable {
+					width: 100% !important;
+				}
+
+				.htCore {
+					width: 100% !important;
+					table-layout: auto !important;
+				}
+
 				.htCore tr td:first-child {
 					/*display: none;*/
 				}
+
+				.ht_clone_top { display: none !important; }
 				</style>
+			<span class="clearfix"></span>
 				<table class="table table-bordered">
 					<thead class="table-bordered">
 						<tr>
