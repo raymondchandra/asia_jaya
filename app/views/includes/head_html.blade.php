@@ -23,3 +23,7 @@
 		<script src="{{ asset('assets/js/highcharts4/js/modules/exporting.js') }}"></script>
 		
 		<script src="{{ asset('assets/js/bootstrap-filestyle.min.js') }}"></script>
+
+		<script src="{{ asset('assets/js/handsontable/dist/handsontable.full.js') }}"></script>
+		<link rel="stylesheet" media="screen" href="{{ asset('assets/js/handsontable/dist/handsontable.full.css') }}">
+		<link rel="stylesheet" media="screen" href="{{ asset('assets/js/handsontable/plugins/bootstrap/handsontable.bootstrap.css') }}">

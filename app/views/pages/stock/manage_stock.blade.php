@@ -27,6 +27,122 @@
 				}
 
 				</style>
+				<div id="example1">
+				</div>
+				<script>
+				var data = [
+				  {
+				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
+				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    cover: "http://ecx.images-amazon.com/images/I/51bRhyVTVGL._SL50_.jpg"
+				  },
+				  {
+				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
+				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
+				    comments: "This is <big>the</big> book about JavaScript",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    cover: "http://ecx.images-amazon.com/images/I/51gdVAEfPUL._SL50_.jpg"
+				  },
+				  {
+				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
+				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
+				    comments: "  <a href='http://shop.oreilly.com/product/9780596805531.do'>comments</a> are highly <strong>positive</strong>.",
+				    
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
+				    cover: "http://ecx.images-amazon.com/images/I/51VFNL4T7kL._SL50_.jpg"
+				  }
+				];
+
+				function strip_tags(input, allowed) {
+				  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+				  allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+				  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+				    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+				  return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+				    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+				  });
+				}
+
+				var safeHtmlRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+				  var escaped = Handsontable.helper.stringify(value);
+				  escaped = strip_tags(escaped, '<em><b><strong><a><big>'); //be sure you only allow certain HTML tags to avoid XSS threats (you should also remove unwanted HTML attributes)
+				  td.innerHTML = escaped;
+				  return td;
+				  },
+				  coverRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+				    var escaped = Handsontable.helper.stringify(value);
+				    if (escaped.indexOf('http') === 0) {
+				      var img = document.createElement('IMG');
+				      img.src = value;
+
+				      Handsontable.Dom.addEvent(img, 'mousedown', function (e){
+				        e.preventDefault();//prevent selection quirk
+				      });
+
+				      Handsontable.Dom.empty(td);
+				      td.appendChild(img);
+
+				    }
+				    else {
+				      Handsontable.renderers.TextRenderer.apply(this, arguments); //render as text
+				    }
+				    return td;
+				  },
+				  container = document.getElementById("example1"),
+				    hot1 = new Handsontable(container, {
+				    data: data,
+				    //colWidths: [50, 50, 50, 60,50, 50, 50, 60,50, 50, 50, 60,50],
+				    colHeaders: ["prod_id", "prod_det_id", "Kode Produk", "Foto","prod_id", "prod_det_id", "Kode Produk", "Foto","prod_id", "prod_det_id", "Kode Produk", "Foto",""],
+				    columns: [
+				      {data: "title", renderer: "html"},
+				      {data: "description", renderer: "html"},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "comments", renderer: safeHtmlRenderer},
+				      {data: "cover", renderer: coverRenderer}
+				    ]
+				  });
+
+$('.htCore').addClass('table');
+				</script>
+				<style>
+				.htCore tr td:first-child {
+					/*display: none;*/
+				}
+				</style>
 				<table class="table table-bordered">
 					<thead class="table-bordered">
 						<tr>
