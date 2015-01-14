@@ -49,7 +49,13 @@
 						</div>
 						<label for="" class="g-sm-2 control-label">Qty.</label>
 						<div class="g-sm-3">
-							<input type="number" class="form-control" value="" id="f_edit_qty">
+							<!--<input type="number" class="form-control" value="" id="f_edit_qty">-->
+
+							<div class="input-group">
+							  <span class="input-group-addon ff_qty_min"><span class="glyphicon glyphicon-minus"></span></span>
+							  <input type="number" class="form-control" value="" id="f_edit_qty">
+							  <span class="input-group-addon ff_qty_plus"><span class="glyphicon glyphicon-plus"></span></span>
+							</div>
 						</div>
 					</div>
 					<div class="form-group" style="margin-bottom: 0px;">
@@ -70,7 +76,19 @@
 							}
 							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
 							*/
-						})
+						});
+						$('body').on('click','.ff_qty_min',function(){ 
+							if($('#f_edit_qty').val() != 1){
+								var qty_temp = parseInt($('#f_edit_qty').val())-1; 
+								$('#f_edit_qty').val(qty_temp);
+								$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+							}
+						});
+						$('body').on('click','.ff_qty_plus',function(){ 
+							var qty_temp = parseInt($('#f_edit_qty').val())+1; 
+							$('#f_edit_qty').val(qty_temp);
+							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+						});
 						</script>
 					</div>
 
