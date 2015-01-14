@@ -4,12 +4,45 @@
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
-				<h3 style="">
-					Kelola Retur
-					<a class="btn btn-success pull-right" href="{{URL::to('fungsi/search_return')}}">
-						<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Retur
-					</a>
-				</h3>
+				<div class="g-lg-2">
+
+					<h3 style="">
+						Kelola Retur 
+					</h3>
+				</div>
+				<div class="g-lg-8" style="margin-top: 14px;">
+					<div class="g-md-3" style="text-align: right; line-height: 34px;">
+						Range tanggal
+					</div>
+					<div class="input-daterange g-md-6">
+						<div class="g-md-4">
+							<input value="" class="f_date_0 form-control" id="start_date"/>
+						</div>
+						<div class="g-md-1" style="text-align:center; line-height: 34px;">
+							<span>to</span>
+						</div>
+						<div class="g-md-4">
+							<input value="" class="f_date_1 form-control" id="end_date"/>
+						</div>
+						<div class="g-md-3">
+							<button type="button" class="btn btn-success" id="show_range_button">
+								Show
+							</button>
+						</div>
+					</div>
+
+					<script>
+					$('.f_date_0').datepicker();
+
+					$('.f_date_1').datepicker();
+					</script>
+				</div>
+				<div class="g-lg-2" style="margin-top: 14px;">
+ 
+						<a class="btn btn-success pull-right" href="{{URL::to('fungsi/search_return')}}">
+							<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Retur
+						</a> 
+				</div>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
 			<span class="clearfix"></span>
