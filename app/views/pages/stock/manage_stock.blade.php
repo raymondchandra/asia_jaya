@@ -27,126 +27,10 @@
 				}
 
 				</style>
-				<div id="example1">
-				</div>
-				<script>
-				var data = [
-				  {
-				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
-				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    cover: "http://ecx.images-amazon.com/images/I/51bRhyVTVGL._SL50_.jpg"
-				  },
-				  {
-				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
-				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
-				    comments: "This is <big>the</big> book about JavaScript",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    cover: "http://ecx.images-amazon.com/images/I/51gdVAEfPUL._SL50_.jpg"
-				  },
-				  {
-				    title: "<a href='http://www.amazon.com/Professional-JavaScript-Developers-Nicholas-Zakas/dp/1118026691'>Professional  </a>",
-				    description: " <a href='http://bit.ly/sM1bDf'>book</a> provides  <b>JavaScript</b>.",
-				    comments: "  <a href='http://shop.oreilly.com/product/9780596805531.do'>comments</a> are highly <strong>positive</strong>.",
-				    
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    comments: "I would rate it &#x2605;&#x2605;&#x2605;&#x2605;&#x2606;",
-				    cover: "http://ecx.images-amazon.com/images/I/51VFNL4T7kL._SL50_.jpg"
-				  }
-				];
-
-				function strip_tags(input, allowed) {
-				  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-				  allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
-				  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-				    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
-				  return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
-				    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
-				  });
-				}
-
-				var safeHtmlRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-				  var escaped = Handsontable.helper.stringify(value);
-				  escaped = strip_tags(escaped, '<em><b><strong><a><big>'); //be sure you only allow certain HTML tags to avoid XSS threats (you should also remove unwanted HTML attributes)
-				  td.innerHTML = escaped;
-				  return td;
-				  },
-				  coverRenderer = function (instance, td, row, col, prop, value, cellProperties) {
-				    var escaped = Handsontable.helper.stringify(value);
-				    if (escaped.indexOf('http') === 0) {
-				      var img = document.createElement('IMG');
-				      img.src = value;
-
-				      Handsontable.Dom.addEvent(img, 'mousedown', function (e){
-				        e.preventDefault();//prevent selection quirk
-				      });
-
-				      Handsontable.Dom.empty(td);
-				      td.appendChild(img);
-
-				    }
-				    else {
-				      Handsontable.renderers.TextRenderer.apply(this, arguments); //render as text
-				    }
-				    return td;
-				  },
-				  container = document.getElementById("example1"),
-				    hot1 = new Handsontable(container, {
-				    data: data,
-				    //colWidths: [50, 50, 50, 60,50, 50, 50, 60,50, 50, 50, 60,50],
-				    colHeaders: ["prod_id", "prod_det_id", "Kode Produk", "Foto","prod_id", "prod_det_id", "Kode Produk", "Foto","prod_id", "prod_det_id", "Kode Produk", "Foto",""],
-				    columns: [
-				      {data: "title", renderer: "html"},
-				      {data: "description", renderer: "html"},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "comments", renderer: safeHtmlRenderer},
-				      {data: "cover", renderer: coverRenderer}
-				    ]
-				  });
-
-$('.htCore').addClass('table');
-				</script>
-				<style>
-				.htCore tr td:first-child {
-					/*display: none;*/
-				}
-				</style>
 				<table class="table table-bordered">
 					<thead class="table-bordered">
 						<tr>
-							<th class="table-bordered" width="110">
+							<th class="table-bordered">
 								<a href="javascript:void(0)">Kode Produk</a>
 									@if($filtered == 0)
 										@if($sortBy == 'product_code')
@@ -172,14 +56,14 @@ $('.htCore').addClass('table');
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" style="width: 137px;">
+							<th class="table-bordered">
 								<a href="javascript:void(0)">Foto</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" style="width: 180px;">
-								<a href="javascript:void(0)">Merk Produk</a>
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Merek Produk</a>
 									@if($filtered == 0)
 										@if($sortBy == 'name')
 											@if($order == 'asc')
@@ -230,7 +114,7 @@ $('.htCore').addClass('table');
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="140">
+							<th class="table-bordered" >
 								<a href="javascript:void(0)">Harga Modal</a>
 									@if($filtered == 0)
 										@if($sortBy == 'modal_price')
@@ -256,7 +140,7 @@ $('.htCore').addClass('table');
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="140">
+							<th class="table-bordered" >
 								<a href="javascript:void(0)">Harga Min.</a>
 									@if($filtered == 0)
 										@if($sortBy == 'min_price')
@@ -282,7 +166,7 @@ $('.htCore').addClass('table');
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="140">
+							<th class="table-bordered">
 								<a href="javascript:void(0)">Harga Jual</a>
 									@if($filtered == 0)
 										@if($sortBy == 'sales_price')
@@ -308,7 +192,7 @@ $('.htCore').addClass('table');
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="72">
+							<th class="table-bordered" >
 								<a href="javascript:void(0)">Stok Toko</a>
 									@if($filtered == 0)
 										@if($sortBy == 'stock_shop')
@@ -387,7 +271,7 @@ $('.htCore').addClass('table');
 								</a>
 							</th>
 							<th class="table-bordered">
-								Obral
+								Command
 							</th>
 						</tr>
 						<!--<th class="table-bordered">Print</th>-->
@@ -410,124 +294,213 @@ $('.htCore').addClass('table');
 							
 						</tr>
 					</thead>
+				</table>
+				<div id="example1"> </div>
+				<script>
+				var data = [
+				<?php $_i = 100; $sidebar_i = 1; ?>
+				@if($datas != null)
+				@foreach($datas as $prodList)
+				{
+					prod_id: "{{ $_i }}",
+					prod_detail_id: "0",
+					sidebar: "{{ $sidebar_i }}",
+					kode_barang: "{{$prodList->product_code}}", 
+					foto: "{{URL::asset($prodList->photo)}}",
+					merek_barang: "{{$prodList->name}}",
+					warna: "{{$prodList->color}}",
+					harga_modal: "{{$prodList->modal_price}}",
+					harga_min: "{{$prodList->min_price}}",
+					harga_jual: "{{$prodList->sales_price}}",
+					stok_toko: "{{$prodList->stock_shop}}",
+					stok_gudang: "{{$prodList->stock_storage}}",
+					@if($prodList->deleted == 0)
+						deleted: "Tidak",
+					@else
+						deleted: "Ya",
+					@endif
+					command: ''
+							+ '<input type="hidden" value="{{$prodList->idDetail}}" />'
+							+ '<input type="hidden" value="{{$prodList->id}}" />'
+							+ '<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;">'
+							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row'
+							+ '</button>'
+							+ '<button class="btn btn-danger btn-xs obral-btn" data-toggle="modal" data-target=".pop_up_obral" style="display: inline-block; margin-top: 5px;">'
+							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral'
+							+ '</button><span class="clearfix"></span>'
+							+ '<input type="hidden" value="{{$prodList->idDetail}}" />'
+							+ '<input type="hidden" value="{{$prodList->id}}" />'
+							+ '<button class="btn btn-danger btn-xs  hapus_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">'
+							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Delete'
+							+ '</button>'
+							+ '<button class="btn btn-success btn-xs  undelete_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">'
+							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Undelete'
+							+ '</button>'
+							+ '<input type="hidden" value="{{$prodList->id}}" />'
+							+ '<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}" style="width: 100px;">'
+							+ ''
+				},
+
+				<?php $_i++; $sidebar_i++; ?>
+				@endforeach
+				@endif
+
+				];
+
+				function strip_tags(input, allowed) {
+				  // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+				  allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+				  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+				  commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+				  return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+				  	return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+				  });
+				};
+
+				var safeHtmlRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+					var escaped = Handsontable.helper.stringify(value);
+				  escaped = strip_tags(escaped, '<em><b><strong><a><big>'); //be sure you only allow certain HTML tags to avoid XSS threats (you should also remove unwanted HTML attributes)
+				  td.innerHTML = escaped;
+				  return td;
+				};
+
+				 var coverRenderer = function (instance, td, row, col, prop, value, cellProperties) {
+				    var escaped = Handsontable.helper.stringify(value);
+				    if (escaped.indexOf('http') === 0) {
+				      var img = document.createElement('IMG');
+				      img.src = value;
+				      img.width = 80;
+				      img.height = 80;
+
+				      Handsontable.Dom.addEvent(img, 'mousedown', function (e){
+				        e.preventDefault();//prevent selection quirk
+				      });
+
+				      Handsontable.Dom.empty(td);
+				      td.appendChild(img);
+
+				    }
+				    else {
+				      Handsontable.renderers.TextRenderer.apply(this, arguments); //render as text
+				    }
+				    return td;
+				  };
+
+				 // var container = document.getElementById("example1");
+
+				 //  var hot1 = new Handsontable(container, {
+
+				  $("#example1").handsontable({
+				    data: data,
+				    enterMoves: {row: 0, col: 0},
+				    //colWidths: [50, 50, 50, 60,50, 50, 50, 60,50, 50, 50, 60,50],
+				    colHeaders: ["prod_id", "prod_det_id", "","Kode Barang", "Foto","Merek Barang", "Warna", "Harga Modal", "Harga Min.","Harga Jual", "Stok Toko", "Stok Gudang", "Deleted",""],
+				    columns: [
+				      {data: "prod_id", renderer: "html"},
+				      {data: "prod_detail_id", renderer: "html"},
+				      {data: "sidebar", renderer: "html"},
+				      {data: "kode_barang", renderer: "html"},
+				      {data: "foto", renderer: coverRenderer},
+				      {data: "merek_barang", renderer: "html"},
+				      {data: "warna", renderer: "html"},
+				      {data: "harga_modal", renderer: "html"},
+				      {data: "harga_min", renderer: "html"},
+				      {data: "harga_jual", renderer: "html"},
+				      {data: "stok_toko", renderer: "html"},
+				      {data: "stok_gudang", renderer: "html"},
+				      {data: "deleted", renderer: "html"},
+				      {data: "command", renderer: "html"}
+				      ],
+				      cells : function(row, col, prop) {
+				      	var cellProperties = {};
+
+				      	if (col == 0 || col == 1 || col == 2 || col == 4 || col == 12 || col == 13) {
+				      		cellProperties.readOnly = true;
+				      	}
+				      	else
+				      	{
+				      		cellProperties.readOnly = false;
+				      	}
+
+				      	return cellProperties;
+				      },
+				      afterChange: function(changes, source) { 
+				      	//alert('g');
+				      	var ht = $('#example1').handsontable('getInstance');
+				      	var coordinate = ht.getSelected();
+
+				      	var colAffected = coordinate[1];
+
+						//alert(colAffected);
+
+						var rowArr 			= ht.getDataAtRow(coordinate[0]);
+
+						var prod_id 		= rowArr[0];
+						var prod_detail_id 	= rowArr[1];
+						var sidebar 		= rowArr[2];
+						var kode_barang  	= rowArr[3];
+						var foto  			= rowArr[4];
+						var merek_barang  	= rowArr[5];
+						var warna  			= rowArr[6];
+						var harga_modal  	= rowArr[7];
+						var harga_min  		= rowArr[8];	
+						var harga_jual  	= rowArr[9];
+						var stok_toko  		= rowArr[10];
+						var stok_gudang  	= rowArr[11];
+						var deleted  		= rowArr[12];
+						var command  		= rowArr[13];
+
+						alert("Col: " + colAffected +", Prod. ID: "+ prod_id + ", Prod. Detail ID: " + prod_detail_id);
+
+
+				      }
+				  });
+
+
+				      	 
+
+			//Return index of the currently selected cells as an array [startRow, startCol, endRow, endCol]
+			
+
+			//'alert' the index of the starting row of the selection
+			 			  
+				</script>
+				<style>
+				.handsontableInput {
+					padding: 8px !important;
+				}
+				.handsontable {
+					width: 100% !important;
+				}
+
+				.htCore {
+					width: 100% !important;
+					table-layout: auto !important;
+				}
+
+				.htCore tr th:nth-child(1), 
+				.htCore tr th:nth-child(2),
+				.htCore tr td:nth-child(1),
+				.htCore tr td:nth-child(2)
+				{
+					/*display: none;*/
+				}
+
+				.htCore tr td:nth-child(3),.htCore tr th:nth-child(3) {
+					border-left: 1px solid #CCC;
+				}
+				.htCore tr td:nth-child(4) {
+					width: 82px !important;
+					text-align: center;
+				}
+
+				.ht_clone_top { display: none !important; }
+				</style>
+			<span class="clearfix"></span>
+				<table class="table table-bordered">
+					
 					<tbody>
 						
-						@if($datas != null)
-							@foreach($datas as $prodList)
-							<tr> 
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_excel_xlabel_0_{{$prodList->id}}" id="kode_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->product_code}}</span>
-									<input type="text" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_0_{{$prodList->id}}" style="" value="{{$prodList->product_code}}"/>
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<input type="hidden" id="fotoChanged_{{$prodList->id}}" value="0" />
-									<img src="{{URL::asset($prodList->photo)}}" id="gambar_{{$prodList->id}}" width="120" height="120">
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									<span class="f_excel_xlabel f_cell_nama_produk f_excel_xlabel_1_{{$prodList->id}}" id="name_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->name}}</span>
-									<input type="text" class="f_excel_xinput f_cell_nama_produk_input form-control input-sm hidden f_excel_xinput_1_{{$prodList->id}}" style="" value="{{$prodList->name}}"/>
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									@if($prodList->isSeri == 0)
-										<span class="f_excel_xlabel f_excel_xlabel_2_{{$prodList->id}}" id="color_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->color}}</span>
-										<input type="text" class="f_excel_xinput form-control input-sm hidden f_excel_xinput_2_{{$prodList->id}}" style="" value="{{$prodList->color}}"/>
-									@else
-										<span class="" id="color_{{$prodList->id}}" style="line-height: 30px;">{{$prodList->color}}</span>
-									@endif
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									@if($prodList->isSeri == 0)
-										<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
-										<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
-									@else
-										<span class="" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->modal_price}}</span>
-									@endif
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									@if($prodList->isSeri == 0)
-										<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->min_price}}</span>
-										<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
-									@else
-										<span class="" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->min_price}}</span>
-									@endif
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									@if($prodList->isSeri == 0)
-										<span class="f_excel_xlabel f_excel_xlabel_3_{{$prodList->id}}" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->sales_price}}</span>
-										<input type="text" id="f_cell_harga_modal_input" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_3_{{$prodList->id}}" style="" value="{{$prodList->modal_price}}"/>
-									@else
-										<span class="" id="modal_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->modal_price}}">{{$prodList->sales_price}}</span>
-									@endif
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									
-									@if($prodList->isSeri == 0)
-										<span class="f_excel_xlabel f_excel_xlabel_6_{{$prodList->id}}" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
-										<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_6_{{$prodList->id}}" style="" value="{{$prodList->stock_shop}}"/>
-									@else
-										<span class="" id="shop_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_shop}}">{{$prodList->stock_shop}}</span>
-									@endif
-									
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									@if($prodList->isSeri == 0)
-										<span class="f_excel_xlabel f_excel_xlabel_7_{{$prodList->id}}" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
-										<input type="text" id="" class="ff_num_only f_excel_xinput form-control input-sm hidden f_excel_xinput_7_{{$prodList->id}}" style="" value="{{$prodList->stock_storage}}"/>
-									@else
-										<span class="" id="storage_{{$prodList->id}}" style="line-height: 30px;" data-modal="{{$prodList->stock_storage}}">{{$prodList->stock_storage}}</span>
-									@endif
-								</td>
-								<td>
-									<input type="hidden" id="idProduct" value="{{$prodList->id}}" />
-									<input type="hidden" id="idDetail" value="{{$prodList->idDetail}}" />
-									@if($prodList->deleted == 0)
-										no
-									@else
-										yes
-									@endif
-								</td>
-								<td>
-									<input type="hidden" value="{{$prodList->idDetail}}" />
-									<input type="hidden" value="{{$prodList->id}}" />
-									<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: block;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row
-									</button>
-									<button class="btn btn-danger btn-xs obral-btn" data-toggle="modal" data-target=".pop_up_obral" style="display: block; margin-top: 5px;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral
-									</button>
-									<input type="hidden" value="{{$prodList->idDetail}}" />
-									<input type="hidden" value="{{$prodList->id}}" />
-									<button class="btn btn-danger btn-xs  hapus_button" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Delete
-									</button>
-									<button class="btn btn-success btn-xs  undelete_button" data-toggle="" data-target="" style="display: block; margin-top: 5px;margin-bottom: 5px;">
-										<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Undelete
-									</button>
-									<input type="hidden" value="{{$prodList->id}}" />
-									<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}" style="width: 100px;">
-								</td>
-							</tr>
-							@endforeach
-						@endif
-								
 								<script>
 								$( 'body' ).on( "click",'.f_excel_xlabel', function() {
 									$(this).siblings('.f_excel_xinput').removeClass('hidden');
@@ -712,70 +685,70 @@ $('.htCore').addClass('table');
 									$(this).text(plant.getAttribute('data-modal'));
 								});*/
 							</script>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
+							</tbody>
+							</table>
+							</div>
+							</div>
+							</div>
+							</div>
 
-@include('pages.stock.pop_up_add_stock')
-@include('pages.stock.pop_up_obral')
+							@include('pages.stock.pop_up_add_stock')
+							@include('pages.stock.pop_up_obral')
 
-<script>
-	$('body').on('click','#filter_button',function(){
-		$product_code = $('#filter_product_code').val();
-		if($product_code == ''){
-			$product_code = '-';
-		}
-		
-		$name = $('#filter_name').val();
-		if($name == ''){
-			$name = '-';
-		}
-		
-		$color = $('#filter_color').val();
-		if($color == ''){
-			$color = '-';
-		}
-		
-		$modal_price = $('#filter_modal_price').val();
-		if($modal_price == ''){
-			$modal_price = '-';
-		}
-		
-		$min_price = $('#filter_min_price').val();
-		if($min_price == ''){
-			$min_price = '-';
-		}
-		
-		$sales_price = $('#filter_sales_price').val();
-		if($sales_price == ''){
-			$sales_price = '-';
-		}
-		
-		$stock_shop = $('#filter_stock_shop').val();
-		if($stock_shop == ''){
-			$stock_shop = '-';
-		}
-		
-		$stock_storage = $('#filter_stock_storage').val();
-		if($stock_storage == ''){
-			$stock_storage = '-';
-		}
-		
-		$deleted = $('#filter_deleted').val();
-		if($deleted == 'yes'){
-			$deleted = 1;
-		}else if($deleted == 'no'){
-			$deleted = 0;
-		}else{
-			$deleted = '-';
-		}
-		
-		window.location = "{{URL::route('gentry.view_stock')}}" + "?filtered=1&product_code="+$product_code+"&name="+$name+"&color="+$color+"&modal_price="+$modal_price+"&min_price="+$min_price+"&sales_price="+$sales_price+"&stock_shop="+$stock_shop+"&stock_storage="+$stock_storage+"&deleted="+$deleted;
-	});
-</script>
+							<script>
+								$('body').on('click','#filter_button',function(){
+									$product_code = $('#filter_product_code').val();
+									if($product_code == ''){
+										$product_code = '-';
+									}
+									
+									$name = $('#filter_name').val();
+									if($name == ''){
+										$name = '-';
+									}
+									
+									$color = $('#filter_color').val();
+									if($color == ''){
+										$color = '-';
+									}
+									
+									$modal_price = $('#filter_modal_price').val();
+									if($modal_price == ''){
+										$modal_price = '-';
+									}
+									
+									$min_price = $('#filter_min_price').val();
+									if($min_price == ''){
+										$min_price = '-';
+									}
+									
+									$sales_price = $('#filter_sales_price').val();
+									if($sales_price == ''){
+										$sales_price = '-';
+									}
+									
+									$stock_shop = $('#filter_stock_shop').val();
+									if($stock_shop == ''){
+										$stock_shop = '-';
+									}
+									
+									$stock_storage = $('#filter_stock_storage').val();
+									if($stock_storage == ''){
+										$stock_storage = '-';
+									}
+									
+									$deleted = $('#filter_deleted').val();
+									if($deleted == 'yes'){
+										$deleted = 1;
+									}else if($deleted == 'no'){
+										$deleted = 0;
+									}else{
+										$deleted = '-';
+									}
+									
+									window.location = "{{URL::route('gentry.view_stock')}}" + "?filtered=1&product_code="+$product_code+"&name="+$name+"&color="+$color+"&modal_price="+$modal_price+"&min_price="+$min_price+"&sales_price="+$sales_price+"&stock_shop="+$stock_shop+"&stock_storage="+$stock_storage+"&deleted="+$deleted;
+								});
+							</script>
 
 <script>
 
