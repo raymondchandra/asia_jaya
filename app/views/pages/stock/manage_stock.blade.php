@@ -306,8 +306,8 @@
 				@if($datas != null)
 				@foreach($datas as $prodList)
 				{
-					prod_id: "{{ $_i }}",
-					prod_detail_id: "0",
+					prod_id: "{{$prodList->id}}",
+					prod_detail_id: "{{$prodList->idDetail}}",
 					sidebar: "{{ $sidebar_i }}",
 					kode_barang: "{{$prodList->product_code}}", 
 					foto: "{{URL::asset($prodList->photo)}}",
@@ -326,19 +326,16 @@
 						deleted: "Ya",
 					@endif
 					command: ''
-							+ '<input type="hidden" value="{{$prodList->idDetail}}" />'
-							+ '<input type="hidden" value="{{$prodList->id}}" />'
-							+ '<button class="btn btn-success btn-xs update_row_button" id="update_row_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;">'
-							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Update Row'
-							+ '</button>'
 							+ '<button class="btn btn-danger btn-xs obral-btn" data-toggle="modal" data-target=".pop_up_obral" style="display: inline-block; margin-top: 5px;">'
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Obral'
-							+ '</button><span class="clearfix"></span>'
+							+ '</button><input type="hidden" value="{{$prodList->idDetail}}" /><span class="clearfix"></span>'
 							+ '<input type="hidden" value="{{$prodList->idDetail}}" />'
 							+ '<input type="hidden" value="{{$prodList->id}}" />'
 							+ '<button class="btn btn-danger btn-xs  hapus_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">'
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Delete'
 							+ '</button>'
+							+ '<input type="hidden" value="{{$prodList->idDetail}}" />'
+							+ '<input type="hidden" value="{{$prodList->id}}" />'
 							+ '<button class="btn btn-success btn-xs  undelete_button" data-toggle="" data-target="" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">'
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Undelete'
 							+ '</button>'
@@ -437,11 +434,13 @@
 					      	return cellProperties;
 					      },
 					      afterChange: function(changes, source) { 
-					      	//alert('g');
+							
 					      	var ht = $('#example1').handsontable('getInstance');
 					      	var coordinate = ht.getSelected();
-
+							var count = $("#example1").handsontable('countRows');
 					      	var colAffected = coordinate[1];
+							var datas = ht.getDataAtCell(1,1);
+							
 
 							//alert(colAffected);
 
@@ -461,12 +460,55 @@
 							var stok_gudang  	= rowArr[11];
 							var deleted  		= rowArr[12];
 							var command  		= rowArr[13];
-
-							alert("Col: " + colAffected +", Prod. ID: "+ prod_id + ", Prod. Detail ID: " + prod_detail_id);
+							
+							if(source == 'edit')
+							{
+								//ajax disini;
+								
+								$.ajax({
+									type: 'PUT',
+									url: '{{URL::route('gentry.edit_stock')}}',
+									data: {
+										'idProduct' : prod_id,
+										'idDetail' : prod_detail_id,
+										'editName' : merek_barang,
+										'editColor' : warna,
+										'editModal' : harga_modal,
+										'editMin' : harga_min,
+										'editSales' : harga_jual,
+										'editShop' : stok_toko,
+										'editStorage' : stok_gudang,
+										'editKode' : kode_barang,
+										'editFoto' : foto
+									},
+									success: function(response){
+										alert('success');
+									},error: function(xhr, textStatus, errorThrown){
+										alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+										alert("responseText: "+xhr.responseText);
+									}
+								},'json');
+								
+								for(var i=0 ; i<count ; i++)
+								{
+									if(ht.getDataAtCell(i,0) == prod_id)
+									{
+										$('#example1').handsontable('setDataAtCell', i, 3, kode_barang,"alter");
+										$('#example1').handsontable('setDataAtCell', i, 5, merek_barang,"alter");
+									}
+								}
+								return ;
+							}
+							
+							 
+							//$('#example1').handsontable('setDataAtCell', 5, 5, "New Value");
+							
+							//alert("Col: " + colAffected +", Prod. ID: "+ prod_id + ", Prod. Detail ID: " + prod_detail_id + " " + count + " " + datas);
 
 
 					      }
 					  });
+					   
 
 
 				      	 
@@ -474,8 +516,8 @@
 			//Return index of the currently selected cells as an array [startRow, startCol, endRow, endCol]
 			
 
-			//'alert' the index of the starting row of the selection
-			 			  
+			//'alert' the index of the starting row of the selection 
+							
 				</script>
 				<style>
 				.handsontableInput {
@@ -521,7 +563,8 @@
 								});
 								
 								$( 'body' ).on( "click",'.obral-btn', function() {
-									$id= $(this).next().val();
+									//$id= $(this).next().val();
+									alert($id);
 									$('#tableRep').val($id);
 								});
 								
@@ -536,6 +579,25 @@
 										},
 										success: function(response){
 											alert('Delete Berhasil');
+											location.reload();
+										},error: function(xhr, textStatus, errorThrown){
+											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+											alert("responseText: "+xhr.responseText);
+										}
+									},'json');
+								});
+								
+								$( 'body' ).on( "click",'.undelete_button', function() {
+									$id= $(this).prev().val();
+									$idDetail = $(this).prev().prev().val();
+									$.ajax({
+										type: 'PUT',
+										url: '{{URL::route('david.undelete_prod_det')}}',
+										data: {
+											'data' : $idDetail,
+										},
+										success: function(response){
+											alert('Pembatalan Penghapusan Berhasil');
 											location.reload();
 										},error: function(xhr, textStatus, errorThrown){
 											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);

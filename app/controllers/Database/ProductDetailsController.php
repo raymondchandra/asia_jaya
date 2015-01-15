@@ -285,6 +285,29 @@ class ProductDetailsController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	public function unDeleteProdDet($id)
+	{
+		$respond = array();
+		$productdetail = Productdetail::find($id);
+		if ($productdetail == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			//edit value
+			$productdetail->deleted = 0;
+			try {
+				$productdetail->save();
+				$respond = array('code'=>'200','status' => 'OK');
+			} catch (Exception $e) {
+				$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+			}
+			
+		}
+		return Response::json($respond);
+	}
+	
 	/*
 		@author : Gentry Swanri
 		@parameter : 

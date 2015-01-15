@@ -21,7 +21,7 @@ class ProductsTableSeeder extends Seeder {
 			'deleted' => 0
 		]);
 		
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 2) as $index)
 		{
 			Product::create([
 				'product_code' => $faker->randomNumber(5),

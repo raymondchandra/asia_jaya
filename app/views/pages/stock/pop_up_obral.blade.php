@@ -24,7 +24,7 @@
 										$( 'body' ).on( "click",'.save-btn', function() {
 											$id = $('#tableRep').val();
 											$amount = $('#input_amount').val();
-											alert($id+ " " + $amount);
+											//alert($id+ " " + $amount);
 											$.ajax({
 												type: 'PUT',
 												url: '{{URL::route('david.add_obral')}}',
