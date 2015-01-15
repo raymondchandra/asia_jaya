@@ -31,11 +31,11 @@
 				<div class="panel-heading">Awal Uang Kas Harian</div>
 				<div class="panel-body">
 					<form class="form-horizontal">
-						<div class="form-group">
+						<div class="form-group" style="margin-bottom: 0px;">
 							<label class="g-sm-3 control-label">
 								Jumlah Uang 
 							</label>
-							<div class="g-sm-7">
+							<div class="g-sm-6">
 
 								<div class="input-group">
 									<input type="text" class="form-control" id="opening-cash-input" aria-describedby="basic-ribuan">
@@ -43,14 +43,7 @@
 									
 								</div>
 							</div>
-						</div>
-					</form>
-					<form class="form-horizontal">
-						<div class="form-group">
-							<label class="g-sm-3 control-label">
-
-							</label>
-							<div class="g-sm-7">
+							<div class="g-sm-2">
 								<input type="button" value="Save" class="btn btn-success opening-cash-btn">
 								<script>
 									$('body').on('click','.opening-cash-btn',function(){
@@ -98,10 +91,41 @@
 				</div>
 			</div>
 			<div class="panel panel-default">
+				<div class="panel-heading">Total Modal Keseluruhan</div>
+				<div class="panel-body">
+					<form class="form-horizontal">
+						<div class="form-group" style="margin-bottom: 0px;">
+							<label class="g-sm-6 control-label">
+								Total Modal Toko 
+							</label>
+							<div class="g-sm-6">
+								<p type="text" class="form-control-static">5456</p>
+							</div>
+						</div>
+						<div class="form-group" style="margin-bottom: 0px;">
+							<label class="g-sm-6 control-label">
+								Total Modal Gudang 
+							</label>
+							<div class="g-sm-6">
+								<p type="text" class="form-control-static">5456</p>
+							</div>
+						</div>
+						<div class="form-group" style="margin-bottom: 0px;">
+							<label class="g-sm-6 control-label">
+								Total Modal Keseluruhan 
+							</label>
+							<div class="g-sm-6">
+								<p type="text" class="form-control-static">5456</p>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="panel panel-default">
 				<div class="panel-heading">Cash Flow Hari Ini</div>
 				<div class="panel-body">
 					<form class="form-horizontal">
-						<div class="form-group">
+						<div class="form-group" style="margin-bottom: 0px;">
 							<label class="g-sm-3 control-label">
 								Jumlah Uang 
 							</label>
