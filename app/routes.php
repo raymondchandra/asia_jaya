@@ -265,8 +265,8 @@ Route::group(array('prefix' => 'warning'), function()
 	});
 });
 
-/* routing sementara Domi coba interaction + css + jquery */
-Route::group(array('prefix' => 'byaxugan'), function()
+/* routing sementara Domi coba interaction + css + jquery byaxugan */
+Route::group(array('prefix' => 'test'), function()
 {
 
     //Login via Desktop
@@ -409,6 +409,16 @@ Route::group(array('prefix' => 'byaxugan'), function()
 	Route::get('/history_restock', function()
 	{
 		return View::make('pages.restock.history_restock');
+	});
+
+	Route::get('/view_keuntungan_bulanan', function()
+	{
+		return View::make('pages.laporan_keuntungan.manage_keuntungan_bulanan');
+	});
+
+	Route::get('/view_keuntungan_harian', function()
+	{
+		return View::make('pages.laporan_keuntungan.manage_keuntungan_harian');
 	});
 
 });

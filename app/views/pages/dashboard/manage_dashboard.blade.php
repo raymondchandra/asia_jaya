@@ -331,14 +331,17 @@
 				series: [{
 					name: 'Bulan',
 					data: [{{$yearCash}}]
-				}]
+				}
+					,{
+						name: 'Bulan Uang Untung',
+						data: [8, 17, 7, 12, 8, 17, 7, 12, 8, 17, 7, 12 ]
+				 }] 
 			});
 		});
-</script>
-</script>
-<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+		</script> 
+		<div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-</div>
+	</div>
 </div>
 
 

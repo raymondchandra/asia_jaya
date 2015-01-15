@@ -9,24 +9,28 @@
 						Laporan Seluruh Transaksi
 					</h3>
 				</div>
-				<div class="g-lg-9" style="margin-top: 14px;">
-					<div class="g-md-3" style="text-align: right; line-height: 34px;">
-						Range tanggal
-					</div>
-					<div class="input-daterange g-md-6">
-						<div class="g-md-4">
-							<input value="{{$start_date}}" class="f_date_0 form-control" id="start_date"/>
-						</div>
-						<div class="g-md-1" style="text-align:center; line-height: 34px;">
-							<span>to</span>
-						</div>
-						<div class="g-md-4">
-							<input value="{{$end_date}}" class="f_date_1 form-control" id="end_date"/>
-						</div>
-						<div class="g-md-3">
-							<button type="button" class="btn btn-success" id="show_range_button">
-								Show
-							</button>
+				<div class="g-lg-6" style="">
+					<div class="panel panel-default" style="margin-bottom: 0px;">
+						<div class="panel-body">
+							<div class="g-xs-2" style="text-align: right; line-height: 34px;">
+								Range
+							</div>
+							<div class="input-daterange g-xs-10">
+								<div class="g-xs-4">
+									<input value="{{$start_date}}" class="f_date_0 form-control" id="start_date"/>
+								</div>
+								<div class="g-xs-1" style="text-align:center; line-height: 34px;">
+									<span>to</span>
+								</div>
+								<div class="g-xs-4">
+									<input value="{{$end_date}}" class="f_date_1 form-control" id="end_date"/>
+								</div>
+								<div class="g-xs-3">
+									<button type="button" class="btn btn-success" id="show_range_button">
+										Show
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -202,7 +206,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="120">
+							<th class="table-bordered" width="90">
 								<a href="javascript:void(0)">Void</a>
 								@if($filtered == 0)
 										@if($sortBy == 'is_void')
@@ -228,7 +232,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" width="120">
+							<th class="table-bordered" width="90">
 								<a href="javascript:void(0)">Status</a>
 								@if($filtered == 0)
 										@if($sortBy == 'status')

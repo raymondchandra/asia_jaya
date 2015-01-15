@@ -114,6 +114,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							@if(Auth::user()->role == 1)
 							<th class="table-bordered" >
 								<a href="javascript:void(0)">Harga Modal</a>
 									@if($filtered == 0)
@@ -140,6 +141,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
+							@endif
 							<th class="table-bordered" >
 								<a href="javascript:void(0)">Harga Min.</a>
 									@if($filtered == 0)
@@ -283,7 +285,9 @@
 							<td></td>
 							<td><input type="text" class="form-control input-sm" id="filter_name"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_color"></td>
+							@if(Auth::user()->role == 1)
 							<td><input type="text" class="form-control input-sm" id="filter_modal_price"></td>
+							@endif
 							<td><input type="text" class="form-control input-sm" id="filter_min_price"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_sales_price"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_stock_shop"></td>
@@ -309,7 +313,9 @@
 					foto: "{{URL::asset($prodList->photo)}}",
 					merek_barang: "{{$prodList->name}}",
 					warna: "{{$prodList->color}}",
+					@if(Auth::user()->role == 1)
 					harga_modal: "{{$prodList->modal_price}}",
+					@endif
 					harga_min: "{{$prodList->min_price}}",
 					harga_jual: "{{$prodList->sales_price}}",
 					stok_toko: "{{$prodList->stock_shop}}",
@@ -394,67 +400,73 @@
 				    data: data,
 				    enterMoves: {row: 0, col: 0},
 				    //colWidths: [50, 50, 50, 60,50, 50, 50, 60,50, 50, 50, 60,50],
-				    colHeaders: ["prod_id", "prod_det_id", "","Kode Barang", "Foto","Merek Barang", "Warna", "Harga Modal", "Harga Min.","Harga Jual", "Stok Toko", "Stok Gudang", "Deleted",""],
+				    colHeaders: ["prod_id", "prod_det_id", "","Kode Barang", "Foto","Merek Barang", "Warna", 
+				    @if(Auth::user()->role == 1) 
+				    "Harga Modal", 
+				    @endif
+				    "Harga Min.","Harga Jual", "Stok Toko", "Stok Gudang", "Deleted",""],
 				    columns: [
-				      {data: "prod_id", renderer: "html"},
-				      {data: "prod_detail_id", renderer: "html"},
-				      {data: "sidebar", renderer: "html"},
-				      {data: "kode_barang", renderer: "html"},
-				      {data: "foto", renderer: coverRenderer},
-				      {data: "merek_barang", renderer: "html"},
-				      {data: "warna", renderer: "html"},
-				      {data: "harga_modal", renderer: "html"},
-				      {data: "harga_min", renderer: "html"},
-				      {data: "harga_jual", renderer: "html"},
-				      {data: "stok_toko", renderer: "html"},
-				      {data: "stok_gudang", renderer: "html"},
-				      {data: "deleted", renderer: "html"},
-				      {data: "command", renderer: "html"}
-				      ],
-				      cells : function(row, col, prop) {
-				      	var cellProperties = {};
+					    {data: "prod_id", renderer: "html"},
+					    {data: "prod_detail_id", renderer: "html"},
+					    {data: "sidebar", renderer: "html"},
+					    {data: "kode_barang", renderer: "html"},
+					    {data: "foto", renderer: coverRenderer},
+					    {data: "merek_barang", renderer: "html"},
+					    {data: "warna", renderer: "html"},
+					    @if(Auth::user()->role == 1) 
+					    {data: "harga_modal", renderer: "html"},
+					    @endif
+					    {data: "harga_min", renderer: "html"},
+					    {data: "harga_jual", renderer: "html"},
+					    {data: "stok_toko", renderer: "html"},
+					    {data: "stok_gudang", renderer: "html"},
+					    {data: "deleted", renderer: "html"},
+					    {data: "command", renderer: "html"}
+					    ],
+					      cells : function(row, col, prop) {
+					      	var cellProperties = {};
 
-				      	if (col == 0 || col == 1 || col == 2 || col == 4 || col == 12 || col == 13) {
-				      		cellProperties.readOnly = true;
-				      	}
-				      	else
-				      	{
-				      		cellProperties.readOnly = false;
-				      	}
+					      	if (col == 0 || col == 1 || col == 2 || col == 4 || col == 12 || col == 13) {
+					      		cellProperties.readOnly = true;
+					      	}
+					      	else
+					      	{
+					      		cellProperties.readOnly = false;
+					      	}
 
-				      	return cellProperties;
-				      },
-				      afterChange: function(changes, source) { 
-				      	//alert('g');
-				      	var ht = $('#example1').handsontable('getInstance');
-				      	var coordinate = ht.getSelected();
+					      	return cellProperties;
+					      },
+					      afterChange: function(changes, source) { 
+					      	//alert('g');
+					      	var ht = $('#example1').handsontable('getInstance');
+					      	var coordinate = ht.getSelected();
 
-				      	var colAffected = coordinate[1];
+					      	var colAffected = coordinate[1];
 
-						//alert(colAffected);
+							//alert(colAffected);
 
-						var rowArr 			= ht.getDataAtRow(coordinate[0]);
+							var rowArr 			= ht.getDataAtRow(coordinate[0]);
 
-						var prod_id 		= rowArr[0];
-						var prod_detail_id 	= rowArr[1];
-						var sidebar 		= rowArr[2];
-						var kode_barang  	= rowArr[3];
-						var foto  			= rowArr[4];
-						var merek_barang  	= rowArr[5];
-						var warna  			= rowArr[6];
-						var harga_modal  	= rowArr[7];
-						var harga_min  		= rowArr[8];	
-						var harga_jual  	= rowArr[9];
-						var stok_toko  		= rowArr[10];
-						var stok_gudang  	= rowArr[11];
-						var deleted  		= rowArr[12];
-						var command  		= rowArr[13];
+							var prod_id 		= rowArr[0];
+							var prod_detail_id 	= rowArr[1];
+							var sidebar 		= rowArr[2];
+							var kode_barang  	= rowArr[3];
+							var foto  			= rowArr[4];
+							var merek_barang  	= rowArr[5];
+							var warna  			= rowArr[6];
+							var harga_modal  	= rowArr[7];
+							var harga_min  		= rowArr[8];	
+							var harga_jual  	= rowArr[9];
+							var stok_toko  		= rowArr[10];
+							var stok_gudang  	= rowArr[11];
+							var deleted  		= rowArr[12];
+							var command  		= rowArr[13];
 
-						alert("Col: " + colAffected +", Prod. ID: "+ prod_id + ", Prod. Detail ID: " + prod_detail_id);
+							alert("Col: " + colAffected +", Prod. ID: "+ prod_id + ", Prod. Detail ID: " + prod_detail_id);
 
 
-				      }
-				  });
+					      }
+					  });
 
 
 				      	 

@@ -33,7 +33,8 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Laporan<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="{{URL::route('david.view_all_transaction')}}"><span class="glyphicon glyphicon-briefcase" style="margin-right:10px;"></span>Semua Transaksi</a></li>
-						<li><a href="{{URL::route('david.view_cashflow')}}"><span class="glyphicon glyphicon-usd" style="margin-right:10px;"></span>Semua Cashflow</a></li>
+						<li><a href="{{URL::to('/test/view_keuntungan_bulanan')}}"><span class="glyphicon glyphicon-usd" style="margin-right:10px;"></span>Semua Keuntungan</a></li>
+						<li><a href="{{URL::route('david.view_cashflow')}}"><span class="glyphicon glyphicon-refresh" style="margin-right:10px;"></span>Semua Cashflow</a></li>
 						<li><a href="{{URL::route('gentry.view_customer')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>Semua Customer</a></li>
 					</ul>
 				</li>
