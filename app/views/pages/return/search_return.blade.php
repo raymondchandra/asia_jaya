@@ -143,6 +143,7 @@
 									{{ $data->created_at }}
 								</td>
 								<td>
+									<button id="" type="button" class="btn btn-primary btn-xs"  data-toggle="modal" data-target=".pop_up_detail_nota">Lihat Detail</button>
 									<button id="" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
 									<input type="hidden" value="{{$data->id}}" />
 								</td>
@@ -201,6 +202,7 @@
 											$row += "</td><td>";
 											$row += data.transTime;
 											$row += "</td><td>";
+											$row += "<button type='button' id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Lihat Detail</button>";
 											$row += "<button id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
 											$row += "<input type='hidden' value='"+data.id+"' >";
 											$row += "</td></tr>";
@@ -221,6 +223,7 @@
 	</div>
 
 
+	@include('pages.return.pop_up_detail_nota')
 	@include('pages.return.pop_up_add_return')
 
 	<script>

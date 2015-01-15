@@ -54,8 +54,8 @@
 			<table class="table table-bordered">
 				<thead class="table-bordered">
 					<tr>
-						<th class="table-bordered" width="110">
-							<a href="javascript:void(0)">Order ID</a>
+						<th class="table-bordered">
+							<a href="javascript:void(0)">No. Nota</a>
 								@if($filtered == 0)
 									@if($sortBy == 'order_id')
 										@if($order == 'asc')
@@ -80,7 +80,59 @@
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
-						<th class="table-bordered" style="width: 180px;">
+						<th>
+							<a href="javascript:void(0)">Kode Barang</a>
+								@if($filtered == 0)
+									@if($sortBy == 'order_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'order_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
+								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+							</a>
+						</th>
+						<th>
+							<a href="javascript:void(0)">Nama Pelanggan</a>
+								@if($filtered == 0)
+									@if($sortBy == 'order_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+									@endif
+								@else
+									@if($sortBy == 'order_id')
+										@if($order == 'asc')
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@else
+											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										@endif
+									@else
+										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+									@endif
+								@endif
+								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+							</a>
+						</th>
+						<th class="table-bordered" style=x;">
 							<a href="javascript:void(0)">Tipe</a>
 								@if($filtered == 0)
 									@if($sortBy == 'type')
@@ -184,7 +236,7 @@
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
-						<th class="table-bordered" width="140">
+						<th class="table-bordered">
 							<a href="javascript:void(0)">Selisih</a>
 								@if($filtered == 0)
 									@if($sortBy == 'difference')
@@ -210,7 +262,7 @@
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
-						<th class="table-bordered" width="140">
+						<th class="table-bordered">
 							<a href="javascript:void(0)">created_at</a>
 								@if($filtered == 0)
 									@if($sortBy == 'created_at')
@@ -243,8 +295,11 @@
 					<tr>
 						
 						<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
+						<td><input type="text" class="form-control input-sm" id=" "></td>
+						<td><input type="text" class="form-control input-sm" id=" "></td>
 						<td>
 							<select class="form-control input-sm" id="filter_type">
+									<option value="">Pilih Tipe</option>
 									<option value="tukar_barang_sama">tukar barang sama</option>
 									<option value="tukar_barang_beda">tukar barang beda</option>
 									<option value="tukar_uang">tukar uang</option>
@@ -253,6 +308,7 @@
 						</td>
 						<td>
 							<select class="form-control input-sm" id="filter_status">
+									<option value="">Pilih Status</option>
 									<option value="pending">pending</option>
 									<option value="fixed">fixed</option>
 									<option value="semua_status">semua status</option>
@@ -260,6 +316,7 @@
 						</td>
 						<td>
 							<select class="form-control input-sm" id="filter_solution">
+									<option value="">Pilih Solution</option>
 									<option value="kembalikan_ke_toko">kembalikan ke toko</option>
 									<option value="masukkan_ke_daftar_obral">masukan ke daftar obral</option>
 									<option value="semua_solusi">semua solusi</option>
@@ -281,6 +338,12 @@
 								<td>
 									{{ $data->order_id }}
 								</td>
+								<td>
+									JK987
+								</td>
+								<td>
+									Orang
+								</td> 
 								<td>
 									{{ $data->type }}
 								</td>

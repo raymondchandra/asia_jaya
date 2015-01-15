@@ -1,4 +1,4 @@
-<div class="modal fade pop_up_detail_transaction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade pop_up_detail_nota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -29,10 +29,7 @@
 										</th>
 										<th>
 											Qty.
-										</th>
-										<th>
-											S. Toko - Gdg.
-										</th>
+										</th> 
 										<th>
 											Harga Satuan
 										</th>
@@ -45,66 +42,31 @@
 									</tr>
 								</thead>
 								<tbody id="transaction_detail_content">
-
+									<tr>
+										<td>
+											k
+										</td>
+										<td>
+											k
+										</td>
+										<td>
+											k
+										</td>
+										<td>
+											k
+										</td>
+										<td>
+											k
+										</td>
+										<td>
+											k
+										</td>
+										<td>
+											<button type="button" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
+										</td>
+									</tr>
 								</tbody>
 							</table>
-							<hr></hr>
-							<div class="form-group">
-								<!--
-								<label class="g-sm-8 control-label">Subtotal</label>
-								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_subtotal_detail">IDR 3.100.000</p>
-								</div>
-								-->
-								<label class="g-sm-8 control-label"><img src="{{asset('assets/img/pigblk.png')}}" height="20"></label>
-								<div class="g-sm-3">
-
-									<div class="input-group">
-										<input type="text" class="form-control" id="transaction_diskon_detail" aria-describedby="basic-ribuan">
-										<span class="input-group-addon" id="basic-ribuan">.000</span>
-									</div>
-									
-								</div>
-								<label class="g-sm-8 control-label">Tax</label>
-								<div class="g-sm-3">
-									
-									<p type="text" class="form-control-static" id="transaction_tax_detail"></p>
-									
-								</div>
-								<label class="g-sm-8 control-label"></label>
-								<!--
-								<div class="g-sm-3">
-									<hr style="float: left; width: 166px;"></hr>
-									<span class="glyphicon glyphicon-plus pull-right" style="line-height: 39px;"></span>
-								</div>
-								-->
-								<label class="g-sm-8 control-label">Total</label>
-								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_total_detail"></p>
-								</div>
-
-								<label class="g-sm-8 control-label">Bayar</label>
-								<div class="g-sm-3">
-									
-									<div class="input-group">
-										<input type="text" class="form-control" id="f_uang_bayaran" aria-describedby="basic-ribuan">
-										<span class="input-group-addon" id="basic-ribuan">.000</span>
-									</div>
-								</div>
-								<span class="clearfix"></span>
-
-								<label class="g-sm-8 control-label"></label>
-								<div class="g-sm-3">
-									<hr style="float: left; width: 100%;"></hr>
-								</div>
-								<span class="clearfix"></span>
-
-								<label class="g-sm-8 control-label">Kembalian</label>
-								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="f_uang_kembalian"></p>
-								</div>
-							</div>
-							
 							<script>
 								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 								function toRp(angka){
@@ -129,15 +91,6 @@
 									
 								});
 								
-							</script>
-							
-
-							<hr></hr>
-							<input type="hidden" value="-" id="deleted_order"/>
-							<button type="button" class="btn btn-success pull-right" id="save-btn"  data-dismiss="modal">
-								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Save
-							</button>
-							<script>
 								$('body').on('click','#save-btn',function(){
 
 									//ajax bayar.... ajax ngupdet order dan ngurangin stock
