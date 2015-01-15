@@ -48,29 +48,6 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="g-md-3 control-label" >
-										Range tanggal
-									</label>
-									<div class="input-daterange g-md-7">
-										<div class="g-md-5">
-											<input value="" class="f_date_0 form-control" id="start_date"/>
-										</div>
-										<div class="g-md-2" style="text-align:center; line-height: 34px;">
-											<span>to</span>
-										</div>
-										<div class="g-md-5">
-											<input value="" class="f_date_1 form-control" id="end_date"/>
-										</div>
-									</div>
-								</div>
-
-								<script>
-								$('.f_date_0').datepicker();
-
-								$('.f_date_1').datepicker();
-								</script>
-
-								<div class="form-group">
 									<label class="g-sm-3 control-label"></label>
 									<div class="g-sm-7">
 										<button class="btn btn-success" type="button" id="search_button" readonly>
@@ -167,6 +144,7 @@
 								</td>
 								<td>
 									<button id="" type="button" class="btn btn-primary btn-xs"  data-toggle="modal" data-target=".pop_up_detail_nota">Lihat Detail</button>
+									<button id="" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
 									<input type="hidden" value="{{$data->id}}" />
 								</td>
 							</tr> 
@@ -225,6 +203,7 @@
 											$row += data.transTime;
 											$row += "</td><td>";
 											$row += "<button type='button' id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Lihat Detail</button>";
+											$row += "<button id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
 											$row += "<input type='hidden' value='"+data.id+"' >";
 											$row += "</td></tr>";
 										});
