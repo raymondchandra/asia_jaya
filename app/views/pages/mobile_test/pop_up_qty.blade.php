@@ -12,10 +12,18 @@
 						<label class="g-xs-4 control-label"> 
 							Jumlah Kuantitas
 						</label>
-						<div class="g-xs-6">
-							<input type="number" class="form-control" id="ff_quant_first" placeholder="" value="1"> 
+						<div class="g-xs-4"> 
+
+							<div class="input-group">
+							  <span class="input-group-addon ff_qty_min"><span class="glyphicon glyphicon-minus"></span></span>
+							  <input type="number" class="form-control" id="ff_quant_first" value="1">
+							  <span class="input-group-addon ff_qty_plus"><span class="glyphicon glyphicon-plus"></span></span>
+							</div>
 						</div>
-						<div class="g-xs-2">
+					</div>
+					<div class="form-group has-feedback">
+						
+						<div class="g-xs-3">
 							<button type="button" class="btn btn-success ff_save_to_pesanan" data-dismiss="modal">Save</button>
 						</div>
 					</div>
@@ -54,6 +62,20 @@
 		}
 
 	});
+
+
+		$('body').on('click','.fq_qty_min',function(){ 
+			if($('#ff_quant_first').val() != 1){
+				var qty_temp = parseInt($('#ff_quant_first').val())-1; 
+				$('#ff_quant_first').val(qty_temp);
+				//$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+			}
+		});
+		$('body').on('click','.fq_qty_plus',function(){ 
+			var qty_temp = parseInt($('#ff_quant_first').val())+1; 
+			$('#ff_quant_first').val(qty_temp);
+			//$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+		});
 
 	function toRp(angka){
 		var rev     = parseInt(angka, 10).toString().split('').reverse().join('');

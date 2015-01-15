@@ -47,8 +47,10 @@
 						<div class="g-sm-4">
 							<input type="number" class="form-control" id="f_hsatuan_qty" value="">
 						</div>
+					</div>
+					<div class="form-group" style="margin-bottom: 0px;"> 
 						<label for="" class="g-sm-2 control-label">Qty.</label>
-						<div class="g-sm-3">
+						<div class="g-sm-6">
 							<!--<input type="number" class="form-control" value="" id="f_edit_qty">-->
 
 							<div class="input-group">

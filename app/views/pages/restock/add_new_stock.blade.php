@@ -56,36 +56,14 @@
 											<label class="g-sm-3 control-label"></label>
 											<div class="g-sm-6">
 												<span class="clearfix"></span>
-												<div class="pad" data-jsfiddle="example1">
-													<h2>Load &amp; Save (Ajax)</h2>
+												<div class="pad" data-jsfiddle="example1"> 
 
-													<p>Use the
-														<b>onChange</b> callback to track changes made in the table. In the example below, $.ajax is used to load
-														and save grid data.
-													</p>
-
-													<p>Note: this is a mockup. Nothing is acually saved. You have to implement that part server-side.</p>
-
-													<p>
-														<button name="load" id="load">Load</button>
-														<button name="save" id="save">Save</button>
-														<label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label>
-													</p>
-
-													<pre id="example1console" class="console">Click "Load" to load data from server</pre>
-
-													<div id="example1" class="handsontable">
-													</div>
-
-													<p>
-														<button name="dump" data-dump="#example1" data-instance="hot1" title="Prints current data source to Firebug/Chrome Dev Tools">
-															Dump data to console
-														</button>
-													</p>
+													<div id="example1" class="handsontable"> </div>
+ 
 												</div>
 												<script>
 												var data = [ 
-												@for($sidebar_i = 1; $sidebar_i < 10; $sidebar_i++)
+												@for($sidebar_i = 1; $sidebar_i < 15; $sidebar_i++)
 												{
 													prod_id: "",
 													prod_detail_id: "",
@@ -189,15 +167,15 @@
 												});
 
 												Handsontable.Dom.addEvent(autosave,'click', function (){
-													if (autosave.checked) {
+													/*if (autosave.checked) {
 														exapmleConsole.innerText = 'Changes will be autosaved';
 													}
 													else {
 														exapmleConsole.innerText ='Changes will not be autosaved';
-													}
+													}*/
 												});
 												</script>
-												<table class="table table-bordered" style="margin-top: 300px;">
+												<!--<table class="table table-bordered" style="margin-top: 300px;">
 													<thead>
 														<tr>
 															<th>
@@ -236,121 +214,18 @@
 															</td>
 														</tr>
 													</tbody>
-												</table>
-												<script>
-												/*var container = document.getElementById("example1"),
-												  exapmleConsole = document.getElementById("example1console"),
-												  autosave = document.getElementById('autosave'),
-												  load = document.getElementById('load'),
-												  save = document.getElementById('save'),
-												  autosaveNotification,
-												  hot1 = new Handsontable(container,{
-												    startRows: 10,
-												    startCols: 6,
-												    rowHeaders: true,
-												    colHeaders: true,
-												    minSpareRows: 1,
-												    contextMenu: true,
-												    afterChange: function (change, source) {
-												      if (source === 'loadData') {
-												        return; //don't save this change
-												      }
-												      if(autosave.checked){
-												        clearTimeout(autosaveNotification);
-												        ajax(
-												          "json/save.json",
-												          "POST",
-												          function (data) {
-												            exapmleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
-												            autosaveNotification = setTimeout(function () {
-												              exapmleConsole.innerText ='Changes will be autosaved';
-												            }, 1000);
-												          },
-												          JSON.stringify({data: change})
-												        );
-												      }
-
-
-												    }
-												  });
-
-												Handsontable.Dom.addEvent(load,'click', function (){
-												  ajax(
-												    "json/load.json",
-												    'GET',
-												    function (res) {
-												      var data = JSON.parse(res.response);
-												      hot1.loadData(data.data);
-												      exapmleConsole.innerText = 'Data loaded';
-												    }
-												  );
-												});
-
-												Handsontable.Dom.addEvent(save,'click', function (){
-												  ajax(
-												    "json/save.json",
-												    'POST',
-												    function (res) {
-
-												      var response = JSON.parse(res.response);
-												      if (response.result === 'ok') {
-												        exapmleConsole.innerText = 'Data saved';
-												      }
-												      else {
-												        exapmleConsole.innerText = 'Save error';
-												      }
-												    },
-												    JSON.stringify({"data": hot1.getData()}) //returns all cells' data
-												  );
-												});
-
-												Handsontable.Dom.addEvent(autosave,'click', function (){
-												  if (autosave.checked) {
-												    exapmleConsole.innerText = 'Changes will be autosaved';
-												  }
-												  else {
-												    exapmleConsole.innerText ='Changes will not be autosaved';
-												  }
-												});*/
-</script>
-												<!--<div class="pad" data-jsfiddle="example1">
-													<h2>Load &amp; Save (Ajax)</h2>
-
-													<p>Use the
-														<b>onChange</b> callback to track changes made in the table. In the example below, $.ajax is used to load
-														and save grid data.
-													</p>
-
-													<p>Note: this is a mockup. Nothing is acually saved. You have to implement that part server-side.</p>
-
-													<p>
-														<button name="load" id="load">Load</button>
-														<button name="save" id="save">Save</button>
-														<label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label>
-													</p>
-
-													<pre id="example1console" class="console">Changes will not be autosaved</pre>
-
-													<div id="example1" class="handsontable"><div class="htContainer" style="position: relative;"><div class="wtHolder ht_master" style="position: relative; width: 350px; height: 210px;"><div class="wtHider" style="position: relative; left: 0px; top: 0px;"><div class="wtSpreader"><table class="htCore"><colgroup><col class="rowHeader"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"></colgroup><thead><tr><th class=""><div class="relative"><span class="colHeader">&nbsp;</span></div></th><th class=""><div class="relative"><span class="colHeader">A</span></div></th><th class=""><div class="relative"><span class="colHeader">B</span></div></th><th class=""><div class="relative"><span class="colHeader">C</span></div></th><th class=""><div class="relative"><span class="colHeader">D</span></div></th><th class=""><div class="relative"><span class="colHeader">E</span></div></th><th class=""><div class="relative"><span class="colHeader">F</span></div></th></tr></thead><tbody><tr><th class=""><div class="relative"><span class="rowHeader">1</span></div></th><td class="">5</td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr><tr><th class=""><div class="relative"><span class="rowHeader">2</span></div></th><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr><tr><th class=""><div class="relative"><span class="rowHeader">3</span></div></th><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr><tr><th class=""><div class="relative"><span class="rowHeader">4</span></div></th><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr><tr><th class=""><div class="relative"><span class="rowHeader">5</span></div></th><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr><tr><th class=""><div class="relative"><span class="rowHeader">6</span></div></th><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr><tr><th class=""><div class="relative"><span class="rowHeader">7</span></div></th><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr><tr><th class=""><div class="relative"><span class="rowHeader">8</span></div></th><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td><td class=""></td></tr></tbody></table></div><div class="htBorders"><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: red;"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: rgb(137, 175, 249);"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder current" style="height: 2px; width: 50px; display: none; top: 141px; left: 99px; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 23px; width: 2px; display: none; top: 141px; left: 99px; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 50px; display: none; top: 163px; left: 99px; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 24px; width: 2px; display: none; top: 141px; left: 148px; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; top: 160px; left: 145px; background-color: rgb(82, 146, 247);"></div></div></div></div></div><div class="ht_clone_top handsontable" style="position: absolute; top: 0px; left: 0px; overflow: hidden; transform: translate3d(0px, 0px, 0px); width: 350px; height: 30px;"><div class="wtHolder" style="position: relative;"><div class="wtHider" style="position: relative;"><div class="wtSpreader"><table class="htCore"><colgroup><col class="rowHeader"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"><col style="width: 50px;"></colgroup><thead><tr><th class=""><div class="relative"><span class="colHeader">&nbsp;</span></div></th><th class=""><div class="relative"><span class="colHeader">A</span></div></th><th class=""><div class="relative"><span class="colHeader">B</span></div></th><th class=""><div class="relative"><span class="colHeader">C</span></div></th><th class=""><div class="relative"><span class="colHeader">D</span></div></th><th class=""><div class="relative"><span class="colHeader">E</span></div></th><th class=""><div class="relative"><span class="colHeader">F</span></div></th></tr></thead><tbody></tbody></table></div><div class="htBorders"><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: red;"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: rgb(137, 175, 249);"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: rgb(82, 146, 247);"></div></div></div></div></div></div><div class="ht_clone_left handsontable" style="position: absolute; top: 0px; left: 0px; overflow: hidden; transform: translate3d(0px, 0px, 0px); height: 211px; width: 54px;"><div class="wtHolder" style="position: relative;"><div class="wtHider" style="position: relative;"><div class="wtSpreader"><table class="htCore"><colgroup><col class="rowHeader"></colgroup><thead><tr><th class=""><div class="relative"><span class="colHeader">&nbsp;</span></div></th></tr></thead><tbody><tr><th class=""><div class="relative"><span class="rowHeader">1</span></div></th></tr><tr><th class=""><div class="relative"><span class="rowHeader">2</span></div></th></tr><tr><th class=""><div class="relative"><span class="rowHeader">3</span></div></th></tr><tr><th class=""><div class="relative"><span class="rowHeader">4</span></div></th></tr><tr><th class=""><div class="relative"><span class="rowHeader">5</span></div></th></tr><tr><th class=""><div class="relative"><span class="rowHeader">6</span></div></th></tr><tr><th class=""><div class="relative"><span class="rowHeader">7</span></div></th></tr><tr><th class=""><div class="relative"><span class="rowHeader">8</span></div></th></tr></tbody></table></div><div class="htBorders"><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: red;"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: rgb(137, 175, 249);"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: rgb(82, 146, 247);"></div></div></div></div></div></div><div class="ht_clone_corner handsontable" style="position: absolute; top: 0px; left: 0px; overflow: hidden; transform: translate3d(0px, 0px, 0px); width: 54px; height: 30px;"><div class="wtHolder" style="position: relative;"><div class="wtHider" style="position: relative;"><div class="wtSpreader"><table class="htCore"><colgroup><col class="rowHeader"></colgroup><thead><tr><th class=""><div class="relative"><span class="colHeader">&nbsp;</span></div></th></tr></thead><tbody></tbody></table></div><div class="htBorders"><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill" style="height: 1px; width: 1px; display: none; background-color: red;"></div><div class="wtBorder fill corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: red;"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area" style="height: 1px; width: 1px; display: none; background-color: rgb(137, 175, 249);"></div><div class="wtBorder area corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: rgb(137, 175, 249);"></div></div><div style="position: absolute; top: 0px; left: 0px;"><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current" style="height: 2px; width: 2px; display: none; background-color: rgb(82, 146, 247);"></div><div class="wtBorder current corner" style="height: 5px; width: 5px; border: 2px solid rgb(255, 255, 255); display: none; background-color: rgb(82, 146, 247);"></div></div></div></div></div></div></div><div class="handsontableInputHolder" style="top: 25px; left: 49px; display: none;"><textarea class="handsontableInput" style="width: 41px; height: 20px; font-size: 12px; font-family: Verdana, Helvetica, Arial, FreeSans, sans-serif; resize: none; min-width: 41px; max-width: 540px; overflow-y: hidden;"></textarea></div></div>
-
-													<p>
-														<button name="dump" data-dump="#example1" data-instance="hot1" title="Prints current data source to Firebug/Chrome Dev Tools">
-															Dump data to console
-														</button>
-													</p>
-												</div>-->
-
+												</table>--> 
 
 											</div>
 
-											<div class="g-sm-1">
+											<!--<div class="g-sm-1">
 												<button type="button" class="btn btn-danger btn-sm  f_delete_form_warna pull-right">
 													<span class="glyphicon glyphicon-minus"></span>
 												</button>
 												<button type="button" class="btn btn-success btn-sm f_add_form_warna pull-right">
 													<span class="glyphicon glyphicon-plus"></span>
 												</button>
-											</div>
+											</div>-->
 										</div>
 										
 									</div>
@@ -395,7 +270,7 @@
 								<div class="form-group">
 									<label class="g-sm-3 control-label"></label>
 									<div class="g-sm-7">
-										<button type="button" class="btn btn-success" id="button_non_series">Add</button>
+										<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
 									</div>
 								</div>
 							</form>
