@@ -253,6 +253,9 @@
 			var total = a+b;
 			$('#subtotal_text_'+$inc).text("IDR " + toRp(total));
 		}
+
+		//show modal set qty pertama kali
+		$('#pop_up_qty').modal('show');
 		
 		
 	});

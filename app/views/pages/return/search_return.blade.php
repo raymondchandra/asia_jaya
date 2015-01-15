@@ -65,160 +65,157 @@
 			<!--<button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target=".pop_up_add_account" style="margin-bottom: 20px;">
 				<span class="glyphicon glyphicon-plus"></span>Add Account
 			</button>-->
+			<div class="g-xs-8" style="margin-left: auto; margin-right: auto; float: none;">
 
-			<table class="table table-bordered">
-				<thead class="table-bordered">
-					<tr>
-						<th class="table-bordered" width="110">
-							<a href="javascript:void(0)">Order ID</a>
-								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-							</a>
-						</th>
-						<th class="table-bordered" style="width: 180px;">
-							<a href="javascript:void(0)">Nama Orang</a>
-								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-							</a>
-						</th>
-						<th class="table-bordered">
-							<a href="javascript:void(0)">Kode Produk</a>
-								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-							</a>
-						</th>
-						<th class="table-bordered">
-							<a href="javascript:void(0)">Nama Produk</a>
-								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-							</a>
-						</th>
-						<th class="table-bordered" width="140">
-							<a href="javascript:void(0)">No. Nota</a>
-								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-							</a>
-						</th>
-						<th class="table-bordered" width="140">
-							<a href="javascript:void(0)">Tanggal</a>
-								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-							</a>
-						</th>
-						<th class="table-bordered" width="100">
-							<a href="javascript:void(0)">Command</a>
-							<a href="javascript:void(0)">
-								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-							</a>
-						</th>
-					</tr>
-				</thead>
-				<!--<thead>
-					<tr>
+				<table class="table table-bordered">
+					<thead class="table-bordered">
+						<tr>
+							<th class="table-bordered" width="110">
+								<a href="javascript:void(0)">No. Nota</a>
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" style="width: 180px;">
+								<a href="javascript:void(0)">Nama Pelanggan</a>
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<!-- <th class="table-bordered">
+								<a href="javascript:void(0)">Kode Produk</a>
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th> 
+							<th class="table-bordered">
+								<a href="javascript:void(0)">Nama Produk</a>
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th> -->
+							<th class="table-bordered" width="">
+								<a href="javascript:void(0)">Tanggal</a>
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered" width=" ">
+								<a href="javascript:void(0)">Command</a>
+								<a href="javascript:void(0)">
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+						</tr>
+					</thead>
+					<!--<thead>
+						<tr>
 
-						<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
-						<td><input type="text" class="form-control input-sm" id="filter_cust_name"></td>
-						<td><input type="text" class="form-control input-sm" id="filter_prod_code"></td>
-						<td><input type="text" class="form-control input-sm" id="filter_prod_name"></td>
-						<td><input type="text" class="form-control input-sm" id="filter_transaction_id"></td>
-						<td><input type="text" class="form-control input-sm" id="filter_created"></td>
-						<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
-						
-					</tr>
-				</thead>-->
-				<tbody id="body_content">
+							<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_cust_name"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_prod_code"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_prod_name"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_transaction_id"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_created"></td>
+							<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
+							
+						</tr>
+					</thead>-->
+					<tbody id="body_content">
 
-					@if($dataOrder != null)
-						@foreach($dataOrder as $data)
-						<tr> 
-							<td>
-								{{ $data->id }}
-								<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
-								<input type="hidden" id="order_price_{{$data->id}}" value="{{$data->price}}">
-								<!--<input type="hidden" id="prod_id_{{$data->id}}" value="{{$data->prod_id}}" >-->
-							</td>
-							<td>
-								{{ $data->cust_name }}
-							</td>
-							<td>
-								{{ $data->prod_code }}
-							</td>
-							<td id="prod_name_{{$data->id}}">
-								{{ $data->prod_name }}
-							</td>
-							<td>
-								{{ $data->transaction_id }}
-							</td>
-							<td>
-								{{ $data->created_at }}
-							</td>
-							<td>
-								<button id="" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
-								<input type="hidden" value="{{$data->id}}" />
-							</td>
-						</tr> 
-						@endforeach
-					@endif
-						
-						<script>
-						$( 'body' ).on( "click",'.f_excel_xlabel', function() {
-							$(this).siblings('.f_excel_xinput').removeClass('hidden');
-							$(this).siblings('.f_excel_xinput').val($(this).text());
-							$(this).addClass('hidden');
-						});
-
-						$('.f_excel_xinput').keypress(function(e) {
-							if(e.which == 13) {
-								$(this).siblings('.f_excel_xlabel').text($(this).val());
-								$(this).siblings('.f_excel_xlabel').removeClass('hidden');
+						@if($dataOrder != null)
+							@foreach($dataOrder as $data)
+							<tr> 
+								<td>
+									{{ $data->id }}
+									<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
+									<input type="hidden" id="order_price_{{$data->id}}" value="{{$data->price}}">
+									<!--<input type="hidden" id="prod_id_{{$data->id}}" value="{{$data->prod_id}}" >-->
+								</td>
+								<!-- <td>
+									{{-- $data->cust_name --}}
+								</td>
+								<td>
+									{{-- $data->prod_code --}}
+								</td> 
+								<td id="prod_name_{{$data->id}}">
+									{{ $data->prod_name }}
+								</td> -->
+								<td>
+									{{ $data->transaction_id }}
+								</td>
+								<td>
+									{{ $data->created_at }}
+								</td>
+								<td>
+									<button id="" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
+									<input type="hidden" value="{{$data->id}}" />
+								</td>
+							</tr> 
+							@endforeach
+						@endif
+							
+							<script>
+							$( 'body' ).on( "click",'.f_excel_xlabel', function() {
+								$(this).siblings('.f_excel_xinput').removeClass('hidden');
+								$(this).siblings('.f_excel_xinput').val($(this).text());
 								$(this).addClass('hidden');
-							}
-						});
-						
-						//blm jalan
-						$("body").on('click', '#search_button', function(){
-							$cust_name = $("#cust_name").val();
-							$prod_code = $("#prod_code").val();
-							$prod_name = $("#prod_name").val();
-							$trans_code = $("#trans_code").val();
-							//alert($cust_name);
-							$.ajax({
-								type: 'GET',
-								url: '{{URL::route('gentry.search_return2')}}',
-								data: {
-									'cust_name' : $cust_name,
-									'prod_code' : $prod_code,
-									'prod_name' : $prod_name,
-									'trans_code' : $trans_code
-								},
-								success: function(response){
-									$('#body_content').html("");
-									$row = "";
-									$.each(response, function(i,data){
-										$row += "<tr><td>";
-										$row += data.id;
-										$row += "<input type='hidden' id='prod_quantity_"+data.id+"' value='"+data.quantity+"' >";
-										$row += "<input type='hidden' id='order_price_"+data.id+"' value='"+data.price+"' >";
-										//$row += "<input type='hidden' id='prod_id_"+data.id+"' value='"+data.id+"' >";
-										$row += "</td><td>";
-										$row += data.cust_name;
-										$row += "</td><td>";
-										$row += data.product_code;
-										$row += "</td><td id='prod_name_"+data.id+"'>";
-										$row += data.name;
-										$row += "</td><td>";
-										$row += data.transaction_id;
-										$row += "</td><td>";
-										$row += data.transTime;
-										$row += "</td><td>";
-										$row += "<button id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
-										$row += "<input type='hidden' value='"+data.id+"' >";
-										$row += "</td></tr>";
-									});
-									$("#body_content").html($row);
-								},error: function(xhr, textStatus, errorThrown){
-									alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-									alert("responseText: "+xhr.responseText);
+							});
+
+							$('.f_excel_xinput').keypress(function(e) {
+								if(e.which == 13) {
+									$(this).siblings('.f_excel_xlabel').text($(this).val());
+									$(this).siblings('.f_excel_xlabel').removeClass('hidden');
+									$(this).addClass('hidden');
 								}
-							},'json');
-						});
-						</script>
-					</tbody>
-				</table>
+							});
+							
+							//blm jalan
+							$("body").on('click', '#search_button', function(){
+								$cust_name = $("#cust_name").val();
+								$prod_code = $("#prod_code").val();
+								$prod_name = $("#prod_name").val();
+								$trans_code = $("#trans_code").val();
+								//alert($cust_name);
+								$.ajax({
+									type: 'GET',
+									url: '{{URL::route('gentry.search_return2')}}',
+									data: {
+										'cust_name' : $cust_name,
+										'prod_code' : $prod_code,
+										'prod_name' : $prod_name,
+										'trans_code' : $trans_code
+									},
+									success: function(response){
+										$('#body_content').html("");
+										$row = "";
+										$.each(response, function(i,data){
+											$row += "<tr><td>";
+											$row += data.id;
+											$row += "<input type='hidden' id='prod_quantity_"+data.id+"' value='"+data.quantity+"' >";
+											$row += "<input type='hidden' id='order_price_"+data.id+"' value='"+data.price+"' >";
+											//$row += "<input type='hidden' id='prod_id_"+data.id+"' value='"+data.id+"' >";
+											$row += "</td><td>";
+											$row += data.cust_name;
+											$row += "</td><td>";
+											$row += data.product_code;
+											$row += "</td><td id='prod_name_"+data.id+"'>";
+											$row += data.name;
+											$row += "</td><td>";
+											$row += data.transaction_id;
+											$row += "</td><td>";
+											$row += data.transTime;
+											$row += "</td><td>";
+											$row += "<button id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
+											$row += "<input type='hidden' value='"+data.id+"' >";
+											$row += "</td></tr>";
+										});
+										$("#body_content").html($row);
+									},error: function(xhr, textStatus, errorThrown){
+										alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+										alert("responseText: "+xhr.responseText);
+									}
+								},'json');
+							});
+							</script>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

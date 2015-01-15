@@ -247,6 +247,8 @@
 	@include('pages.mobile_test.pop_up_edit_barang')
 	<!-- Modal Finalisasi Belanja-->
 	@include('pages.mobile_test.pop_up_finalisasi_belanja')
+	
+	@include('pages.mobile_test.pop_up_qty')
 
 
 	<script type="text/javascript">
