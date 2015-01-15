@@ -297,6 +297,14 @@ class stockController extends \HomeController{
 		return $productDetailController->deleteProdDet($id);
 	}
 	
+	public function unDeleteProduct()
+	{
+		$id = Input::get('data');
+		$productDetailController = new ProductDetailsController();
+		
+		return $productDetailController->unDeleteProdDet($id);
+	}
+	
 	public function makeObral()
 	{
 		$amount = Input::get('amount');

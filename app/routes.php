@@ -196,7 +196,7 @@ Route::group(['prefix' => 'owner','before' => 'authOwner'], function()
 	//tambah
 	Route::post('/account', ['as' => 'add.account' , 'uses' => 'AccountsController@insert']);
 	//hapus
-	Route::delete('/account/{id}', ['as' => 'delete.account' , 'uses' => 'AccountsController@delete']);
+	Route::delete('/account/{id}', ['as' => '.account' , 'uses' => 'AccountsController@delete']);
 	//edit
 	Route::put('/account/{id}', ['as' => 'edit.account' , 'uses' => 'AccountsController@']);
 	//getlog
@@ -482,6 +482,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	//Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
 	
 	Route::put('/delete_product_detail', ['as'=>'david.delete_prod_det','uses' => 'stockController@deleteProduct']);
+	
+	Route::put('/undelete_product_detail', ['as'=>'david.undelete_prod_det','uses' => 'stockController@unDeleteProduct']);
 	
 	Route::get('/view_print_toko', ['as'=>'david.view_print_toko','uses' => 'printController@view_print_toko']);
 	
