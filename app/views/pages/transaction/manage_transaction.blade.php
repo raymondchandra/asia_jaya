@@ -351,13 +351,18 @@
 					$data += "<td>"
 					$data += resp.namaProduk;
 					$data += "</td><td>";
-					$data += "<img src='{{asset('"+resp.foto+"')}}' width='100' height='100'>";
+					$data += "<img src='{{asset('"+resp.foto+"')}}' width='80' height='80'>";
 					$data += "</td><td>";
 					$data += resp.warna;
-					$data += "</td><td class='f_td_excel_xlabel'>";
+					$data += "</td>";
+					$data += "<td class='f_td_excel_xlabel'>";
 					$data += "<span class='f_excel_xlabel' id=' style=''line-height: 30px;' >"+ resp.quantity +"</span>";
 					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden f_qty_transaction' style=''/>";
-					$data += "</td><td class='f_price_transaction'>IDR ";
+					$data += "</td>";
+					$data += "<td>";
+					$data += "5 | 5";
+					$data += "</td>";
+					$data += "<td class='f_price_transaction'>IDR ";
 					$data += toRp(parseInt(resp.price)/parseInt(resp.quantity));
 					$data += "</td><td class='f_subtotal_price_transaction'>IDR ";
 					$data += toRp(resp.price);

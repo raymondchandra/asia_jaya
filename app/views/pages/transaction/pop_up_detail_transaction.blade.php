@@ -27,8 +27,11 @@
 										<th>
 											Warna
 										</th>
-										<th width="120">
-											Kuantitas
+										<th>
+											Qty.
+										</th>
+										<th>
+											S. Toko - Gdg.
 										</th>
 										<th>
 											Harga Satuan

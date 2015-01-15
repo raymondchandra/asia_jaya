@@ -8,7 +8,7 @@
 					<li class="active">Retur</li>
 				</ol>
 				<h3 style="">
-					Search Barang
+					Search Nota
 					<!--<button class="btn btn-success pull-right" data-toggle="modal" data-target=".pop_up_add_return">
 						<span class="glyphicon glyphicon-plus" style="margin-right: 5px;"></span>Retur
 					</button>-->
@@ -16,51 +16,51 @@
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
 			<span class="clearfix"></span>
-			<div class="panel panel-default">
-				<div class="panel-body">
-					
 			<form class="form-horizontal" role="form">
-					<div class="row">
-						<div class="g-sm-12">
+				<div class="row">
+					<div class="g-sm-6" style="margin-left: auto; margin-right: auto; float: none;">
 
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Nama Orang</label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control" id="cust_name" placeholder="Masukkan nama pelanggan">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Kode Produk <span style="font-weight: 300;">(opt)</span></label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control" id="prod_code">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">Nama Produk <span style="font-weight: 300;">(opt)</span></label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control" id="prod_name">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label">No. Nota<span style="font-weight: 300;">(opt)</span></label>
-								<div class="g-sm-7">
-									<input type="text" class="form-control" id="trans_code">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="g-sm-3 control-label"></label>
-								<div class="g-sm-7">
-									<button class="btn btn-success" type="button" id="search_button" readonly>
-										Search
-									</button>
-								</div>
-							</div>
+						<div class="panel panel-default">
+							<div class="panel-body">
 
+								<div class="form-group">
+									<label class="g-sm-3 control-label">Nama Orang</label>
+									<div class="g-sm-7">
+										<input type="text" class="form-control" id="cust_name" placeholder="Masukkan nama pelanggan">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="g-sm-3 control-label">Kode Produk <span style="font-weight: 300;">(opt)</span></label>
+									<div class="g-sm-7">
+										<input type="text" class="form-control" id="prod_code">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="g-sm-3 control-label">Nama Produk <span style="font-weight: 300;">(opt)</span></label>
+									<div class="g-sm-7">
+										<input type="text" class="form-control" id="prod_name">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="g-sm-3 control-label">No. Nota<span style="font-weight: 300;">(opt)</span></label>
+									<div class="g-sm-7">
+										<input type="text" class="form-control" id="trans_code">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="g-sm-3 control-label"></label>
+									<div class="g-sm-7">
+										<button class="btn btn-success" type="button" id="search_button" readonly>
+											Search
+										</button>
+									</div>
+								</div>
+
+							</div>
 						</div>
 					</div>
-			</form>
 				</div>
-			</div>
+			</form>
 			<hr></hr>
 			<!--<button type="button" class="pull-right btn btn-success" data-toggle="modal" data-target=".pop_up_add_account" style="margin-bottom: 20px;">
 				<span class="glyphicon glyphicon-plus"></span>Add Account
