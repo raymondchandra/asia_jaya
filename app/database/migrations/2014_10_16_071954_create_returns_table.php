@@ -15,6 +15,7 @@ class CreateReturnsTable extends Migration {
 		Schema::create('returns', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('no_faktur');
 			$table->integer('order_id')->unsigned();
 			$table->tinyInteger('type');
 			$table->string('status');

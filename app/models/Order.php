@@ -13,6 +13,7 @@ class Order extends \Eloquent {
 		'transaction_id',
 		'price',
 		'product_detail_id',
+		'modal',
 	];
 	
 	public function transaction()

@@ -31,8 +31,8 @@ class OrdersController extends \BaseController {
 		@return : response => created or failed
 		-) Fungsi ini digunakan untuk memasukkan order milik customer ke dalam tabel order sesuai dengan parameter
 	*/
-	public function insertWithParam($quantity, $transactionId, $price, $prodDetailId){
-		$data = array("quantity"=>$quantity, "transaction_id"=>$transactionId, "price"=>$price, "product_detail_id"=>$prodDetailId);
+	public function insertWithParam($quantity, $transactionId, $price, $prodDetailId, $modal){
+		$data = array("quantity"=>$quantity, "transaction_id"=>$transactionId, "price"=>$price, "product_detail_id"=>$prodDetailId,'modal'=>$modal);
 		
 		//validate
 		$validator = Validator::make($data, Order::$rules);

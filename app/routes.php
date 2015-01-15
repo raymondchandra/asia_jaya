@@ -2,8 +2,9 @@
 use Carbon\Carbon;
 	Route::get('/tes', function()
 	{
-		echo Hash::make('owner');
-		
+		$product = Product::find(ProductDetail::find(3)->product_id);
+		$modal = 1 * $product->modal_price;	
+		echo $modal;
 	});
 	Route::get('/tes2', function()
 	{

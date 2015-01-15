@@ -21,25 +21,7 @@ class printController extends \HomeController{
 			$total += $value->price;
 		}
 		$strukController = new StrukController();
-		$noStruk = $strukController->get();
-		if($noStruk < 10)
-		{
-			$noStruk = "00".$noStruk;
-		}
-		else if($noStruk < 100)
-		{
-			$noStruk = "0".$noStruk;
-		}
-		else
-		{
-		
-		}
-		
-		$year = substr(date('Y'), -2);
-		$date = date('d');
-		$month = date('m');
-		$dw = date( "w");
-		$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+		$kodeFaktur = $transaksi->no_faktur;
 		return View::make('pages.print_struk.print_toko', compact('namaPelanggan','namaSales','transaksi','orders','total','kodeFaktur'));
 	}
 	
@@ -58,25 +40,7 @@ class printController extends \HomeController{
 			$total += $value->price;
 		}
 		$strukController = new StrukController();
-		$noStruk = $strukController->get();
-		if($noStruk < 10)
-		{
-			$noStruk = "00".$noStruk;
-		}
-		else if($noStruk < 100)
-		{
-			$noStruk = "0".$noStruk;
-		}
-		else
-		{
-		
-		}
-		
-		$year = substr(date('Y'), -2);
-		$date = date('d');
-		$month = date('m');
-		$dw = date( "w");
-		$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+		$kodeFaktur = $transaksi->no_faktur;
 		return View::make('pages.print_struk.print_konsumen', compact('namaPelanggan','namaSales','transaksi','orders','total','kodeFaktur'));
 	}
 	

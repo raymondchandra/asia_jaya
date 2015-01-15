@@ -32,7 +32,7 @@ class TransactionsController extends \BaseController {
 		-) Fungsi ini digunakan untuk memasukkan transaksi baru ke dalam tabel transaksi sesuai dengan parameter
 	*/
 	public function insertWithParam($customerId, $total, $salesId, $discount, $tax){
-		$data = array("customer_id"=>$customerId, "total"=>$total, "discount"=>$discount, "tax"=>$tax, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>$salesId, "status"=>"UnPaid");
+		$data = array("customer_id"=>$customerId, "total"=>$total, "discount"=>$discount, "tax"=>$tax, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>$salesId, "status"=>"UnPaid", "no_faktur"=>"-");
 		
 		$validator = Validator::make($data, Transaction::$rules);
 
@@ -619,6 +619,26 @@ class TransactionsController extends \BaseController {
 		$transaction->print_customer = $print_customer;
 		$transaction->print_shop = $print_shop;
 		$transaction->status = $status;
+		$noStruk = $strukController->get();
+		if($noStruk < 10)
+		{
+			$noStruk = "00".$noStruk;
+		}
+		else if($noStruk < 100)
+		{
+			$noStruk = "0".$noStruk;
+		}
+		else
+		{
+		
+		}
+		
+		$year = substr(date('Y'), -2);
+		$date = date('d');
+		$month = date('m');
+		$dw = date( "w");
+		$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+		$transaction->no_faktur = $kodeFaktur;
 		
 		try
 		{

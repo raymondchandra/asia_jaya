@@ -44,7 +44,9 @@ class mobile_view extends \BaseController{
 	*/
 	public function addOrders($quantity, $transactionId, $price, $productDetailId){
 		$orderController = new OrdersController();
-		$addOrder = $orderController->insertWithParam($quantity, $transactionId, $price, $productDetailId);
+		$product = Product::find(ProductDetail::find($productDetailId)->product_id);
+		$modal = $quantity * $product->modal_price;
+		$addOrder = $orderController->insertWithParam($quantity, $transactionId, $price, $productDetailId, $modal);
 		$addJson = json_decode($addOrder->getContent());
 		
 		//echo $addJson->{'status'};
@@ -146,7 +148,7 @@ class mobile_view extends \BaseController{
 						$productMessages = $productJson->{'messages'};
 						foreach($productMessages as $prodMes){
 							$productId = $prodMes->id;
-							$price = $prodMes->sales_price;
+							$price = $prodMes->sales_price;							
 						}
 						$detailByProductId = $productDetailController->getByProductId($productId);
 						$prodIdJson = json_decode($detailByProductId->getContent());
@@ -155,7 +157,7 @@ class mobile_view extends \BaseController{
 						}else{
 							$detail = $prodIdJson->{'messages'};
 							$productDetailId = -1;
-							
+							$productModal = 0;
 							foreach($detail as $det){
 								if($det->isSeri == 1)
 								{

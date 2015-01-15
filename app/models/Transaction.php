@@ -18,6 +18,7 @@ class Transaction extends \Eloquent {
 		'is_void',
 		'sales_id',
 		'status',
+		'no_faktur',
 	];
 	
 	public function customer()
