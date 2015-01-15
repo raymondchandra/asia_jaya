@@ -232,7 +232,7 @@
 		$min_price = $('#min_price_'+$id).val();
 		$quant = $color.split('-');
 		
-		if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
+		/*if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{
 		
 		}
@@ -252,7 +252,7 @@
 			var b = parseInt($price);
 			var total = a+b;
 			$('#subtotal_text_'+$inc).text("IDR " + toRp(total));
-		}
+		}*/
 
 		//show modal set qty pertama kali
 		$('#pop_up_qty').modal('show');

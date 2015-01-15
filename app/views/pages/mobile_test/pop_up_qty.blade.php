@@ -13,10 +13,10 @@
 							Jumlah Kuantitas
 						</label>
 						<div class="g-xs-6">
-							<input type="number" class="form-control" id=" " placeholder="" value="1"> 
+							<input type="number" class="form-control" id="ff_quant_first" placeholder="" value="1"> 
 						</div>
 						<div class="g-xs-2">
-							<button type="button" class="btn btn-success ff_dd" data-dismiss="modal">Save</button>
+							<button type="button" class="btn btn-success ff_save_to_pesanan" data-dismiss="modal">Save</button>
 						</div>
 					</div>
 				</div> 
@@ -29,19 +29,8 @@
 	</div>
 </div>
 <script>
-	$('body').on('click','.ff_dd', function(){
-		trigger = true;
-		$inc = $('#tableRep').val();
-		$id = $(this).children().first().children('.hiddenVal').children('.id').val();
-		$product_code = $('#code_'+$id).val();
-		$color = $('#color_'+$id).val();
-		$stock_shop = $('#stock_shop_'+$id).val();
-		$stock_storage = $('#stock_storage_'+$id).val();
-		$name = $('#name_'+$id).val();
-		$price = $('#price_'+$id).val();
-		$min_price = $('#min_price_'+$id).val();
-		$quant = $color.split('-');
-		
+	$('body').on('click','.ff_save_to_pesanan', function(){
+
 		if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{
 		
@@ -52,7 +41,7 @@
 			$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + $quant.length + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + parseInt($('#ff_quant_first').val())*($quant.length) + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + "" + toRp($price) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 			
 			$('#pesanan_content_'+$inc).prepend($data);

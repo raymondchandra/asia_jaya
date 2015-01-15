@@ -663,7 +663,7 @@
 					$data += "<input type='text' id='' class='f_excel_xinput form-control input-sm hidden f_qty_transaction' style=''/>";
 					$data += "</td>";
 					$data += "<td>";
-					$data += "5 | 5"; 
+					$data += resp.stock_shop + " | " + resp.stock_storage; 
 					$data += "</td>";
 					$data += "<td class='f_price_transaction'>IDR ";
 					$data += toRp(resp.hargaSatuan);
