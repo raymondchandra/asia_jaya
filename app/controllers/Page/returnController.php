@@ -256,31 +256,68 @@ class returnController extends \HomeController{
 		$filtered = Input::get('filtered', '0');
 		$returnController = new ReturnsController();
 		
+		$start_date = Input::get('start_date');
+		$end_date = Input::get('end_date');
+		
+		if($start_date != '' && $end_date != ''){
+			//$finalEndDate = $this->addDate($end_date);
+			$from = date("Y-m-d, G:i:s", strtotime($start_date));
+			$to = date("Y-m-d, G:i:s", strtotime($end_date));
+			$to = new DateTime($to);
+			$diff1day = new DateInterval('P1D');
+			$to->add($diff1day);
+		}else{
+			$from = '';
+			$to = '';
+		}
+		
 		if($filtered == '0')
 		{
 			if($sortBy === "none")
 			{
 				$allReturnJson = $returnController->getAll();
 				$allReturn = json_decode($allReturnJson->getContent());
+				
+				if($allReturn->{'status'} != 'Not Found'){
+					$allReturnData = $allReturn->{'messages'};
+					foreach($allReturnData as $data){
+						$order = Order::find($data->order_id);
+						$transaction = Transaction::find($order->transaction_id);
+						$prod_id = ProductDetail::find($order->product_detail_id)->product_id;
+						
+						$data->no_nota = $transaction->no_faktur;
+						$data->kode_barang = Product::find($prod_id)->product_code;
+						$data->nama_pelanggan = Customer::find($transaction->customer_id)->name;
+					}
+				}else{
+					$allReturnData = null;
+				}
 			}
 			else
 			{
-				$allReturnJson = $returnController->getSortedAll($sortBy, $order);
+				$allReturnJson = $returnController->getSortedAll($sortBy, $order, $from, $to);
 				$allReturn = json_decode($allReturnJson->getContent());
+				
+				if($allReturn->{'status'} != 'Not Found'){
+					$allReturnData = $allReturn->{'messages'};
+				}else{
+					$allReturnData = null;
+				}
 			}
 			$datas = null;
-			if($allReturn->{'status'} != 'Not Found'){
-				$allReturnData = $allReturn->{'messages'};
+			if($allReturnData != null){
 				foreach($allReturnData as $allData){
-					$datas[] = (object)array('id'=>$allData->id,'order_id'=>$allData->order_id, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+					$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
 				}
 			}
 
-			return View::make('pages.return.manage_return', compact('datas','sortBy','order','filtered'));
+			return View::make('pages.return.manage_return', compact('datas','sortBy','order','filtered','start_date','end_date'));
 		}
 		else
 		{
-			$order_id = Input::get('order_id','-');
+			$no_nota = Input::get('no_nota','-');
+			$kode_barang = Input::get('kode_barang','-');
+			$nama_pelanggan = Input::get('nama_pelanggan','-');
 			$type = Input::get('type', '-');
 			$status = Input::get('status', '-');
 			$solution = Input::get('solution', '-');
@@ -290,11 +327,11 @@ class returnController extends \HomeController{
 			
 			if($sortBy == "none")
 			{
-				$allReturnJson = $returnController->getFilteredAccount($order_id, $type, $status, $solution, $trade_product_id, $difference, $created_at);
+				$allReturnJson = $returnController->getFilteredAccount($no_nota, $kode_barang, $nama_pelanggan, $type, $status, $solution, $trade_product_id, $difference, $created_at, $from, $to);
 			}
 			else
 			{
-				$allReturnJson = $returnController->getSortedFilteredAccount($order_id, $type, $status, $solution, $trade_product_id, $difference, $created_at, $sortBy, $order);
+				$allReturnJson = $returnController->getSortedFilteredAccount($no_nota, $kode_barang, $nama_pelanggan, $type, $status, $solution, $trade_product_id, $difference, $created_at, $sortBy, $order, $from, $to);
 			}
 			//$allEmployeeJson = $accountController->getFilteredProfile($username, $role, $lastLogin, $active);
 			$allReturn = json_decode($allReturnJson->getContent());
@@ -302,11 +339,11 @@ class returnController extends \HomeController{
 			if($allReturn->{'status'} != 'Not Found'){
 				$allReturnData = $allReturn->{'messages'};
 				foreach($allReturnData as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'order_id'=>$allData->order_id, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+					$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
 				}
 			}
 
-			return View::make('pages.return.manage_return', compact('datas','sortBy','order','filtered','order_id','type','status','solution','trade_product_id', 'difference','created_at'));
+			return View::make('pages.return.manage_return', compact('datas','sortBy','order','filtered','no_nota','kode_barang','nama_pelanggan','type','status','solution','trade_product_id', 'difference','created_at', 'start_date', 'end_date'));
 		}
 		
 		
@@ -324,6 +361,8 @@ class returnController extends \HomeController{
 			$data->prod_id = $product_data->id;
 			$data->prod_code = $product_data->product_code;
 			$data->prod_name = $product_data->name;
+			
+			$data->no_nota = Transaction::find($data->transaction_id)->no_faktur;
 		}
 		
 		//return $transaction_id;
@@ -403,7 +442,21 @@ class returnController extends \HomeController{
 		$cust_name = Input::get('cust_name');
 		$prod_code = Input::get('prod_code');
 		$prod_name = Input::get('prod_name');
-		$trans_code = Input::get('trans_code');
+		$no_nota = Input::get('no_nota');
+		$start_date = Input::get('start_date');
+		$end_date = Input::get('end_date');
+		
+		if($start_date != '' && $end_date != ''){
+			//$finalEndDate = $this->addDate($end_date);
+			$from = date("Y-m-d, G:i:s", strtotime($start_date));
+			$to = date("Y-m-d, G:i:s", strtotime($end_date));
+			$to = new DateTime($to);
+			$diff1day = new DateInterval('P1D');
+			$to->add($diff1day);
+		}else{
+			$from = '';
+			$to = '';
+		}
 		
 		/*$list_cust = Customer::where('name', 'LIKE', $cust_name)->get();
 		foreach($list_cust as $listCust){
@@ -425,8 +478,11 @@ class returnController extends \HomeController{
 		}
 		else
 		{
-			$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transaction_id', 'LIKE', '%'.$trans_code.'%')->get();
-			
+			if($from != '' && $to != ''){
+				$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->whereBetween('orders.created_at', array($from, $to))->select('transactions.customer_id AS customer_id', 'orders.transaction_id AS transaction_id', 'products.product_code AS prod_code', 'orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->get();
+			}else{
+				$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->select('transactions.customer_id AS customer_id','orders.transaction_id AS transaction_id','products.product_code AS prod_code','orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->get();
+			}
 			foreach($joinTable as $data){
 				$data->cust_name = Customer::find($data->customer_id)->name;
 			}

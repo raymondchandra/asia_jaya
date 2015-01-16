@@ -257,27 +257,65 @@ class ReturnsController extends \BaseController {
 	}
 	*/
 	
-	public function getSortedAll($by, $order)
+	public function getSortedAll($by, $order, $from, $to)
 	{
-		$result = ReturnDB::orderBy($by, $order)->get();
+		if($from != '' && $to != ''){
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at')->whereBetween('returns.created_at', array($from, $to));
+		}else{
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at');
+		}
+		
+		$result = $joined->orderBy($by, $order)->get();
 		
 		return $this->getReturn($result);
 	}
 	
-	public function getFilteredAccount($orderId, $type, $status, $solution, $tradeProductId, $difference, $created)
+	public function getFilteredAccount($no_nota, $kode_barang, $nama_pelanggan, $type, $status, $solution, $tradeProductId, $difference, $created, $from, $to)
 	{
+		if($from != '' && $to != ''){
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at')->whereBetween('returns.created_at', array($from, $to));
+		}else{
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at');
+		}
+	
 		$isFirst = false;
 		
-		if($orderId != '-')
+		if($no_nota != '-')
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('order_id', '=', $orderId);
+				$resultTab = $joined->where('transactions.no_faktur', '=', $no_nota);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('order_id', '=', $orderId);
+				$resultTab = $resultTab->where('transactions.no_faktur', '=', $no_nota);
+			}
+		}
+		
+		if($kode_barang != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$kode_barang.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', 'LIKE', '%'.$kode_barang.'%');
+			}
+		}
+		
+		if($nama_pelanggan != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.name', 'LIKE', '%'.$nama_pelanggan.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.name', 'LIKE', '%'.$nama_pelanggan.'%');
 			}
 		}
 		
@@ -285,12 +323,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('type', '=', $type);
+				$resultTab = $joined->where('returns.type', '=', $type);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('type', '=', $type);
+				$resultTab = $resultTab->where('returns.type', '=', $type);
 			}
 		}
 		
@@ -298,12 +336,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $joined->where('returns.status', 'LIKE', '%'.$status.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $resultTab->where('returns.status', 'LIKE', '%'.$status.'%');
 			}
 		}
 		
@@ -311,12 +349,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('solution', 'LIKE', '%'.$solution.'%');
+				$resultTab = $joined->where('returns.solution', 'LIKE', '%'.$solution.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('solution', 'LIKE', '%'.$solution.'%');
+				$resultTab = $resultTab->where('returns.solution', 'LIKE', '%'.$solution.'%');
 			}
 		}
 		
@@ -324,12 +362,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('trade_product_id', '=', $tradeProductId);
+				$resultTab = $joined->where('returns.trade_product_id', '=', $tradeProductId);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('trade_product_id', '=', $tradeProductId);
+				$resultTab = $resultTab->where('returns.trade_product_id', '=', $tradeProductId);
 			}
 		}
 		
@@ -337,12 +375,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('difference', '=', $difference);
+				$resultTab = $joined->where('returns.difference', '=', $difference);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('difference', '=', $difference);
+				$resultTab = $resultTab->where('returns.difference', '=', $difference);
 			}
 		}
 		
@@ -350,18 +388,18 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('created_at', 'LIKE', '%'.$created.'%');
+				$resultTab = $joined->where('returns.created_at', 'LIKE', '%'.$created.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('created_at', 'LIKE', '%'.$created.'%');
+				$resultTab = $resultTab->where('returns.created_at', 'LIKE', '%'.$created.'%');
 			}
 		}
 		
 		if($isFirst == false)
 		{
-			$result = ReturnDB::all();
+			$result = $joined->get();
 			$isFirst = true;
 		}
 		else
@@ -372,20 +410,52 @@ class ReturnsController extends \BaseController {
 		return $this->getReturn($result);
 	}
 	
-	public function getSortedFilteredAccount($orderId, $type, $status, $solution, $tradeProductId, $difference, $created)
+	public function getSortedFilteredAccount($no_nota, $kode_barang, $nama_pelanggan, $type, $status, $solution, $tradeProductId, $difference, $created, $sortBy, $order, $from, $to)
 	{
+		if($from != '' && $to != ''){
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at')->whereBetween('returns.created_at', array($from, $to));
+		}else{
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at');
+		}
+	
 		$isFirst = false;
 		
-		if($orderId != '-')
+		if($no_nota != '-')
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('order_id', '=', $orderId);
+				$resultTab = $joined->where('transactions.no_faktur', '=', $no_nota);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('order_id', '=', $order_id);
+				$resultTab = $resultTab->where('transactions.no_faktur', '=', $no_nota);
+			}
+		}
+		
+		if($kode_barang != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$kode_barang.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('products.product_code', 'LIKE', '%'.$kode_barang.'%');
+			}
+		}
+		
+		if($nama_pelanggan != '-')
+		{
+			if($isFirst == false)
+			{
+				$resultTab = $joined->where('customers.name', 'LIKE', '%'.$nama_pelanggan.'%');
+				$isFirst = true;
+			}
+			else
+			{
+				$resultTab = $resultTab->where('customers.name', 'LIKE', '%'.$nama_pelanggan.'%');
 			}
 		}
 		
@@ -393,12 +463,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('type', '=', $type);
+				$resultTab = $joined->where('returns.type', '=', $type);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('type', '=', $type);
+				$resultTab = $resultTab->where('returns.type', '=', $type);
 			}
 		}
 		
@@ -406,12 +476,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $joined->where('returns.status', 'LIKE', '%'.$status.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $resultTab->where('returns.status', 'LIKE', '%'.$status.'%');
 			}
 		}
 		
@@ -419,12 +489,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('solution', 'LIKE', '%'.$solution.'%');
+				$resultTab = $joined->where('returns.solution', 'LIKE', '%'.$solution.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('solution', 'LIKE', '%'.$solution.'%');
+				$resultTab = $resultTab->where('returns.solution', 'LIKE', '%'.$solution.'%');
 			}
 		}
 		
@@ -432,12 +502,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('trade_product_id', '=', $tradeProductId);
+				$resultTab = $joined->where('returns.trade_product_id', '=', $tradeProductId);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('trade_product_id', '=', $tradeProductId);
+				$resultTab = $resultTab->where('returns.trade_product_id', '=', $tradeProductId);
 			}
 		}
 		
@@ -445,12 +515,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('difference', '=', $difference);
+				$resultTab = $joined->where('returns.difference', '=', $difference);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('difference', '=', $difference);
+				$resultTab = $resultTab->where('returns.difference', '=', $difference);
 			}
 		}
 		
@@ -458,18 +528,18 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = ReturnDB::where('created_at', 'LIKE', '%'.$created.'%');
+				$resultTab = $joined->where('returns.created_at', 'LIKE', '%'.$created.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('created_at', 'LIKE', '%'.$created.'%');
+				$resultTab = $resultTab->where('returns.created_at', 'LIKE', '%'.$created.'%');
 			}
 		}
 		
 		if($isFirst == false)
 		{
-			$result = ReturnDB::orderBy($sortBy, $order)->get();
+			$result = $joined->orderBy($sortBy, $order)->get();
 			$isFirst = true;
 		}
 		else
