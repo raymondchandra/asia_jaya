@@ -231,6 +231,9 @@
 		$price = $('#price_'+$id).val();
 		$min_price = $('#min_price_'+$id).val();
 		$quant = $color.split('-');
+		if( $id == 1){ // kalau dia barang obral
+			$quant.length = 1; 
+		}
 		
 		/*if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{
