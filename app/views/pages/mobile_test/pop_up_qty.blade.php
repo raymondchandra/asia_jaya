@@ -59,7 +59,9 @@
 			$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + parseInt($('#ff_quant_first').val())*($quant.length) + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+			$data = $data + parseInt($('#ff_quant_first').val())*($quant.length) + "</td>";
+			$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + $stock_shop +" | "+ $stock_storage + "</td>";
+			$data = $data + "<td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + "" + toRp( parseInt($('#ff_quant_first').val())*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 			
 			$('#pesanan_content_'+$inc).prepend($data);
