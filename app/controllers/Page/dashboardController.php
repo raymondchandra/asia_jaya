@@ -9,7 +9,7 @@ class dashboardController extends \HomeController{
 		$returnController = new ReturnsController();
 		$cashController = new CashesController();
 		$productDetailController = new ProductDetailsController();
-		$productsController = new ProductsController();
+		$productsController = new ProductsController(); 
 		
 		$topBuyer = $customerController->getTop10Buyer();
 		$topProduct = $ordersController->getTop10ProductBought();
@@ -51,9 +51,11 @@ class dashboardController extends \HomeController{
 
 		$totaltokogudang = $totaltoko + $totalgudang;
 
+		$kasHariIni = $cashController->getTodayInpuCash();
 
 
-		return View::make('pages.dashboard.manage_dashboard', compact('topBuyer','topProduct','topReturn','topRepeat','todayCash','monthCash','yearCash','totaltoko', 'totalgudang','totaltokogudang'));
+
+		return View::make('pages.dashboard.manage_dashboard', compact('topBuyer','topProduct','topReturn','topRepeat','todayCash','monthCash','yearCash','totaltoko', 'totalgudang','totaltokogudang','kasHariIni'));
 	}
 	
 	public function addOpeningCash()

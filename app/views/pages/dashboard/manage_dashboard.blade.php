@@ -32,10 +32,10 @@
 				<div class="panel-body">
 					<form class="form-horizontal">
 						<div class="form-group" style="margin-bottom: 0px;">
-							<label class="g-sm-3 control-label">
+							<label class="g-sm-4 control-label">
 								Jumlah Uang 
 							</label>
-							<div class="g-sm-6">
+							<div class="g-sm-5">
 
 								<div class="input-group">
 									<input type="text" class="form-control" id="opening-cash-input" aria-describedby="basic-ribuan">
@@ -90,6 +90,29 @@
 					</form>
 				</div>
 			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">Cash Flow Hari Ini</div>
+				<div class="panel-body">
+					<form class="form-horizontal">
+						<div class="form-group" style="margin-bottom: 0px;">
+							<label class="g-sm-6 control-label">
+								Jumlah Uang Kas Awal
+							</label>
+							<div class="g-sm-6">
+								<p type="text" class="form-control-static today-cash">{{ toMoney($kasHariIni) }}</p>
+							</div>
+						</div>
+						<div class="form-group" style="margin-bottom: 0px;">
+							<label class="g-sm-6 control-label">
+								Jumlah Uang Di Kasir
+							</label>
+							<div class="g-sm-6">
+								<p type="text" class="form-control-static today-cash">{{ toMoney($todayCash) }}</p>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">Total Modal Keseluruhan</div>
@@ -117,21 +140,6 @@
 							</label>
 							<div class="g-sm-6">
 								<p type="text" class="form-control-static ff_to_rp">{{ toMoney($totaltokogudang) }}</p>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">Cash Flow Hari Ini</div>
-				<div class="panel-body">
-					<form class="form-horizontal">
-						<div class="form-group" style="margin-bottom: 0px;">
-							<label class="g-sm-3 control-label">
-								Jumlah Uang 
-							</label>
-							<div class="g-sm-7">
-								<p type="text" class="form-control-static today-cash">{{toMoney($todayCash)}}</p>
 							</div>
 						</div>
 					</form>
