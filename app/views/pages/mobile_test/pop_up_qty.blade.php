@@ -49,8 +49,18 @@
 		{
 			if($seri==0)
 			{
-				$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-				$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				if( (( parseInt($stock_shop) + parseInt($stock_storage) ) < $('#ff_quant_first').val()) )
+				{
+					$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_2' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				}else if( (parseInt($stock_shop) < $('#ff_quant_first').val()) && (( parseInt($stock_shop) + parseInt($stock_storage) ) >= $('#ff_quant_first').val()) )
+				{
+					$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_1' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				}
+				else
+				{
+					$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row ' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				}
+ 				$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 				$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 				$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 				$data = $data + parseInt($quantity)*($quant.length) + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
@@ -98,6 +108,17 @@
 								$quant.length = 1;
 								
 								
+								if( (( parseInt($stock_shop) + parseInt($stock_storage) ) < $('#ff_quant_first').val()) )
+								{
+									$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_2' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								}else if( (parseInt($stock_shop) < $('#ff_quant_first').val()) && (( parseInt($stock_shop) + parseInt($stock_storage) ) >= $('#ff_quant_first').val()) )
+								{
+									$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_1' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								}
+								else
+								{
+									$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row ' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								}
 								$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 								$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 								$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
