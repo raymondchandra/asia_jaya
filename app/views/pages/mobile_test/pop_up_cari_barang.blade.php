@@ -234,7 +234,7 @@
 		//if( $id == 1){ // kalau dia barang obral
 			$quant.length = 1; 
 	//	}
-		
+		 //alert($stock_storage);
 		/*if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{
 		
