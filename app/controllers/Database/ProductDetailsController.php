@@ -413,6 +413,7 @@ class ProductDetailsController extends \BaseController {
 			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->get();
 			foreach($products as $product => $key)
 			{
+				/*
 				if($key->isSeri == '1')
 				{
 					$reference = $key->reference;
@@ -487,6 +488,7 @@ class ProductDetailsController extends \BaseController {
 						$key->sales_price = $salesPrice;
 					}
 				}
+				*/
 			}
 			if(count($products) == 0)
 			{
@@ -512,7 +514,7 @@ class ProductDetailsController extends \BaseController {
 	public function getTop10RepeatedProduct()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))->join('transactions', 'transactions.id', '=','orders.transaction_id')->groupBy('customer_id')->groupBy('product_detail_id')->orderBy('quant_total','dsc')->take(10)->get();
+		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))->join('transactions', 'transactions.id', '=','orders.transaction_id')->whereRaw('MONTH(orders.created_at) >= MONTH(curdate())')->groupBy('customer_id')->groupBy('product_detail_id')->orderBy('quant_total','dsc')->take(10)->get();
 		foreach($orders as $ord)
 		{
 			$prdDtl = ProductDetail::find($ord->product_detail_id);

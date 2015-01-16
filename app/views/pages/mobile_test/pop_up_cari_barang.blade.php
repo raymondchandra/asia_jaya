@@ -98,6 +98,7 @@
 						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
 						$data = $data + "</span>";
 						$data = $data + "</td></tr>";
 						
@@ -152,6 +153,7 @@
 						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
 						$data = $data + "</span>";
 						$data = $data + "</td></tr>";
 						
@@ -203,6 +205,7 @@
 						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
 						$data = $data + "</span>";
 						$data = $data + "</td></tr>";
 						
