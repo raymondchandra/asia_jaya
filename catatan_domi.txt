@@ -1,10 +1,10 @@
   
 Daftar Pesanan Hari Ini
 - Coloumn "No. Nota" belum menampilkan 'No. Nota' atau '-'
-- Anomali jikalau kita sudah membayar dan kita mengecek transaksi itu lagi dengan mengklik [View Detail], si harga satuan barang tersebut jadi 1/kuantitasnya   
+- Anomali jikalau kita sudah membayar dan kita mengecek transaksi itu lagi dengan mengklik [View Detail], si harga satuan barang tersebut jadi 1/kuantitasnya (FIXED)
 
 Anomalies
-- timeout user leave keyboard brapa lamaya?
+- timeout user leave keyboard brapa lamaya? (FIXED)
 
 
 
@@ -26,5 +26,5 @@ tukar dengan uang: add OK
 
 solusi: BELUM
 
-tampilan tukar dengan kode produk: BELUM Seharusnya Kode Barang bukan product_id
+tampilan tukar dengan kode produk: BELUM Seharusnya Kode Barang bukan product_detail_id
 selisih:OK

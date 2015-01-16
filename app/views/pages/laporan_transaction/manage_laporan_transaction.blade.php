@@ -522,7 +522,14 @@
 	
 	$('body').on('click','#filter_button',function(){
 		$start_date = $('#start_date').val();
+		/*if($start_date == ''){
+			$start_date = '-';
+		}*/
+
 		$end_date = $('#end_date').val();
+		/*if($end_date == ''){
+			$end_date = '-';
+		}*/
 	
 		$id = $('#filter_id').val();
 		if($id == ''){
@@ -680,7 +687,10 @@
 				});
 				//$('#transaction_subtotal_detail').text("Rp " + toRp($total));
 				$('#transaction_diskon_detail').val(toAngka($discount));			
-				$('#transaction_tax_detail').text($tax);			
+				$('#transaction_tax_detail').text($tax);	 
+				$total -= toAngka($discount); //copy dari view_transaction
+				$tax = $total * toAngka($tax) / 100; //copy dari view_transaction
+				$total += $tax;	//copy dari view_transaction
 				$('#transaction_total_detail').text("Rp " + toRp($total));
 				if($status == "Paid")
 				{
