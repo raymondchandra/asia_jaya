@@ -46,7 +46,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Merek Barang</label>
+										<label class="g-sm-3 control-label">Merek Barang <span style="font-weight: 300;">(opt)</span></label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="nama_produk">
 										</div>
@@ -270,7 +270,7 @@
 								<div class="form-group">
 									<label class="g-sm-3 control-label"></label>
 									<div class="g-sm-7">
-										<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
+										<button type="button" class="btn btn-success" name="save" id="button_non_series" disabled>Add</button> 
 									</div>
 								</div>
 							</form>
@@ -616,19 +616,33 @@ $('body').on('click','#add_seri_button',function(){
 							alert("responseText: "+xhr.responseText);
 						}
 					},'json');
-}
-},error: function(xhr, textStatus, errorThrown){
-	alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-	alert("responseText: "+xhr.responseText);
-}
-});
-});
-</script>
-<script>
-$('body').on('click','.f_row_remove',function(){
-	$(this).closest('tr').remove();
-});
+				}
+				},error: function(xhr, textStatus, errorThrown){
+					alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+					alert("responseText: "+xhr.responseText);
+				}
+				});
+				});
+				</script>
+				<script>
+				$('body').on('click','.f_row_remove',function(){
+					$(this).closest('tr').remove();
+				});
 
 
-</script>
+					/* -- button disabled error prevention -- */
+					$('#kode_produk').keyup(function(){
+						if( $(this).val() != '' ){
+							$('#button_non_series').removeAttr('disabled');
+						}
+					});
+					$('#kode_produk').keydown(function(){
+						if( $(this).val() == '' ){
+							$('#button_non_series').attr('disabled','disabled'); 
+						}
+					});
+
+
+
+				</script>
 @stop

@@ -158,7 +158,7 @@
 													Qty. 
 												</th>
 												<th rowspan="2">
-													Price(IDR)
+													Price (.000)
 												</th>
 											</tr>
 
