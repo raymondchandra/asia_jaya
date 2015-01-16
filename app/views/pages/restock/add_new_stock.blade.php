@@ -114,11 +114,11 @@
 												      	return cellProperties;
 												      },
 													afterChange: function (change, source) {
-														if (source === 'loadData') {
-													        return; //don't save this change
-													    }
-													    if(autosave.checked){
-													    	clearTimeout(autosaveNotification);
+														//if (source === 'loadData') { <- kade2 bikin error klo di uncomment
+													        //return; //don't save this change 
+													  //  }
+													   // if(autosave.checked){
+													    //	clearTimeout(autosaveNotification);
 													    	/*$.ajax(
 													    		"json/save.json",
 													    		"POST",
@@ -130,7 +130,7 @@
 													    		},
 													    		JSON.stringify({data: change})
 													    		);*/
-													    }
+													   // }
 
 
 													}
