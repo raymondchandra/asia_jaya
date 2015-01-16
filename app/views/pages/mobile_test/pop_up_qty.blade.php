@@ -39,27 +39,84 @@
 </div>
 <script>
 	$('body').on('click','.ff_save_to_pesanan', function(){
-
+		$quantity = $('#ff_quant_first').val();
+		$subtotalNow = toAngka($('#subtotal_text_'+$inc).text());
 		if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{
 		
 		}
 		else
 		{
-			$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + parseInt($('#ff_quant_first').val())*($quant.length) + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + "" + toRp( parseInt($('#ff_quant_first').val())*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
-			
-			$('#pesanan_content_'+$inc).prepend($data);
-			
-			$subtotalNow = toAngka($('#subtotal_text_'+$inc).text());
-			var a = parseInt($subtotalNow);
-			var b = parseInt( parseInt($('#ff_quant_first').val())*$price );
-			var total = a+b;
-			$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
+			if($seri==0)
+			{
+				$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				$data = $data + parseInt($quantity)*($quant.length) + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+				$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+				
+				$('#pesanan_content_'+$inc).prepend($data);
+				
+				
+				var a = parseInt($subtotalNow);
+				var b = parseInt( parseInt($('#ff_quant_first').val())*$price );
+				var total = a+b;
+				$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
+			}
+			else
+			{
+				$.ajax({
+					type: 'GET',
+					url: '{{URL::route('david.getProductByReference')}}',
+					data: {
+						'reference' : $reference
+					},
+					success: function(response){
+						if(response['code'] == '404')
+						{
+							//gagal
+							//$data = "<tr><td> No Result Found </td></tr>";
+							//$('#searchContent').html($data);
+						}
+						else
+						{
+							//berhasil...foreach setiap barang
+							var a = parseInt($subtotalNow);
+							var b = 0;
+							$.each(response['messages'], function( i, resp ) {
+								$id = resp.id;
+								$product_code = resp.product_code;
+								$color = resp.color;
+								$stock_shop = resp.stock_shop;
+								$stock_storage = resp.stock_storage;
+								$name = resp.name;
+								$price = resp.sales_price;
+								$min_price = resp.min_price;
+								$quant = resp.color.split('-');
+								//if( $id == 1){ // kalau dia barang obral
+								$quant.length = 1;
+								
+								
+								$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								$data = $data + $quantity*($quant.length) + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+								$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+								
+								$('#pesanan_content_'+$inc).prepend($data);
+								b = parseInt(b) + parseInt($quantity*$price);
+							});
+							var total = a+b;
+							$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
+						}
+					},error: function(xhr, textStatus, errorThrown){
+						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+						alert("responseText: "+xhr.responseText);
+					}
+				},'json');
+			}
 		}
 
 	});

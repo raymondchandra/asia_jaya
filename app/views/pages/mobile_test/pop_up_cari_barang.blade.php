@@ -99,6 +99,7 @@
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.reference + "' id='reference_" + resp.id + "' />";
 						$data = $data + "</span>";
 						$data = $data + "</td></tr>";
 						
@@ -154,6 +155,7 @@
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.reference + "' id='reference_" + resp.id + "' />";
 						$data = $data + "</span>";
 						$data = $data + "</td></tr>";
 						
@@ -206,6 +208,7 @@
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
+						$data = $data + "<input type='hidden' value='" + resp.reference + "' id='reference_" + resp.id + "' />";
 						$data = $data + "</span>";
 						$data = $data + "</td></tr>";
 						
@@ -235,8 +238,10 @@
 		$min_price = $('#min_price_'+$id).val();
 		$quant = $color.split('-');
 		//if( $id == 1){ // kalau dia barang obral
-			$quant.length = 1; 
+		$quant.length = 1; 
 	//	}
+		$seri = $('#seri_'+$id).val();
+		$reference = $('#reference_'+$id).val();
 		
 		/*if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{

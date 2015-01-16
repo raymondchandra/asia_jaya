@@ -159,29 +159,8 @@ class mobile_view extends \BaseController{
 							$productDetailId = -1;
 							$productModal = 0;
 							foreach($detail as $det){
-								if($det->isSeri == 1)
-								{
-									$tempColor = explode(' - ',$prodList["color"]);
-									$counter = count($tempColor);
-									$realColor = "";
-									for($x = 0 ; $x<$counter ; $x++)
-									{
-										$iterColor = explode(' * ',$tempColor[$x]);
-										$realColor .= $iterColor[1]."-";
-									}
-									
-									$realColor = substr($realColor,0,strlen($realColor)-1);
-									$wadoo .= $realColor;
-									if($det->color == $realColor){
-										$productDetailId = $det->id;
-										
-									}
-								}
-								else
-								{
-									if($det->color == $prodList["color"]){
-										$productDetailId = $det->id;
-									}
+								if($det->color == $prodList["color"]){
+									$productDetailId = $det->id;
 								}
 							}
 							if($productDetailId!=-1){

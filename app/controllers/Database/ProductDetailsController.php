@@ -511,6 +511,31 @@ class ProductDetailsController extends \BaseController {
 		}
 	}
 	
+	public function getProductByReference()
+	{
+		$reference = Input::get('reference');
+		$reference = explode(';',$reference,-1);
+		$result = array();
+		foreach($reference as $ref)
+		{
+			$explodeRes = explode('-',$ref);
+			$prodDetId = $explodeRes[0];
+			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prds.id', '=', $prodDetId)->first();
+			$result[] = $products;
+		}
+		
+		if(count($result)==0)
+		{
+			$response = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			$response = array('code'=>'200','status' => 'OK','messages'=>$result);
+		}
+		
+		return $response;
+	}
+	
 	public function getTop10RepeatedProduct()
 	{
 		$respond = array();

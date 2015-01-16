@@ -5,14 +5,19 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$respond = array();
-		$customer = DB::table('transactions')->select(DB::raw('customer_id,sum(total) as total'))->whereRaw('MONTH(created_at) >= MONTH(curdate())')->groupBy('customer_id')->orderBy('total','dsc')->take(10)->get();
-		foreach($customer as $cust)
+		$reference = '2-1;3-1;';
+		$reference = explode(';',$reference,-1);
+		$result = array();
+		foreach($reference as $ref)
 		{
-			$cust->name = Customer::find($cust->customer_id)->name;
+			echo "1";
+			$explodeRes = explode('-',$ref);
+			$prodDetId = $explodeRes[0];
+			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prds.id', '=', $prodDetId)->first();
+			$result[] = $products;
 		}
 		
-		var_dump($customer);
+		var_dump($result);
 	});
 	Route::get('/tes2', function()
 	{
@@ -435,6 +440,8 @@ Route::group(array('prefix' => 'test'), function()
 Route::group(array('prefix' => 'fungsi'), function()
 {
 	Route::get('/get_product_live_search', ['as'=>'david.getProductLiveSearch','uses' => 'ProductDetailsController@search']);
+	
+	Route::get('/get_product_by_reference', ['as'=>'david.getProductByReference','uses' => 'ProductDetailsController@getProductByReference']);
 	
 	Route::get('/get_customer_live_search', ['as'=>'david.getCustomerLiveSearch','uses' => 'CustomersController@search']);
 	

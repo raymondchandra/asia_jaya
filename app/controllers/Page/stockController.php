@@ -44,6 +44,7 @@ class stockController extends \HomeController{
 			$datas = null;
 			if(count($dataAll)!=0){
 				foreach($dataAll as $allData){
+					/*
 					if($allData->isSeri == 1)
 					{
 						$reference = $allData->reference;
@@ -116,7 +117,7 @@ class stockController extends \HomeController{
 						$allData->sales_price = $salesPrice;
 						$allData->modal_price = $modPrice;
 					}
-					
+					*/
 					$datas[] = (object)array('id'=>$allData->id, 'idDetail'=>$allData->idDetail, 'product_code'=>$allData->product_code, 'photo'=>$allData->photo, 'name'=>$allData->name, 'color'=>$allData->color, 'modal_price'=>$allData->modal_price, 'min_price'=>$allData->min_price, 'sales_price'=>$allData->sales_price, 'stock_shop'=>$allData->stock_shop, 'stock_storage'=>$allData->stock_storage, 'deleted'=>$allData->deleted, 'isSeri'=>$allData->isSeri);
 				}
 			}
@@ -149,6 +150,7 @@ class stockController extends \HomeController{
 			if($allProduct->{'status'} != 'Not Found'){
 				$allProductData = $allProduct->{'messages'};
 				foreach($allProductData as $allData){
+					/*
 					if($allData->isSeri == 1)
 					{
 						$reference = $allData->reference;
@@ -221,6 +223,7 @@ class stockController extends \HomeController{
 						$allData->sales_price = $salesPrice;
 						$allData->modal_price = $modPrice;
 					}
+					*/
 					$datas[] = (object)array('id'=>$allData->id, 'idDetail'=>$allData->idDetail, 'product_code'=>$allData->product_code, 'photo'=>$allData->photo, 'name'=>$allData->name, 'color'=>$allData->color, 'modal_price'=>$allData->modal_price, 'min_price'=>$allData->min_price, 'sales_price'=>$allData->sales_price, 'stock_shop'=>$allData->stock_shop, 'stock_storage'=>$allData->stock_storage, 'deleted'=>$allData->deleted, 'isSeri'=>$allData->isSeri);
 					
 				}
