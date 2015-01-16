@@ -168,7 +168,15 @@
 								<td><input type="text" class="form-control input-sm" id="input_2"></td>
 								<td><input type="text" class="form-control input-sm" id="input_3" placeholder=" > input"></td>
 								<td><input type="text" class="form-control input-sm" id="input_4" placeholder=" > input"></td>
-								<td><input type="text" class="form-control input-sm" id="input_5" placeholder="yyyy-MM-dd hh-mm-ss"></td>
+								<td>
+									<input type="text" class="form-control input-sm" id="input_5" placeholder="">
+									<script> 
+									$('#input_5').datepicker({
+										format: 'yyyy-mm-dd',
+										startDate: '-3d'
+									})
+									</script>
+								</td>
 								<td width="">
 									<a class="btn btn-primary btn-xs" id="filter_button">Filter</a>
 									<a class="btn btn-primary btn-xs" id="unfilter_button"><span class="glyphicon glyphicon-refresh" style="margin-right: 5px;"></span>Reset</a>

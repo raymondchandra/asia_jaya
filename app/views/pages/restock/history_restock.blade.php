@@ -204,7 +204,15 @@
 							<td><input type="text" class="form-control input-sm" id="filter_color"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_shop"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_storage"></td>
-							<td><input type="text" class="form-control input-sm" id="filter_time"></td>
+							<td>
+								<input type="text" class="form-control input-sm" id="filter_time">
+								<script> 
+								$('#filter_time').datepicker({
+								    format: 'yyyy-mm-dd',
+								    startDate: '-3d'
+								})
+								</script>
+							</td>
 							<td width="140">
 							<a class="btn btn-primary btn-xs" id="filter_button" style="float: left;">Filter</a>
 							

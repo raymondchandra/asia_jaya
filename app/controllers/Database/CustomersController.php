@@ -180,12 +180,14 @@ class CustomersController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('customers.created_at', '=', $created_at);
+				//$resultTab = $joined->where('customers.created_at', '=', $created_at);
+				$resultTab = $joined->where('customers.created_at', 'LIKE', '%'.$created_at.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('customers.created_at', '=', $created_at);
+				//$resultTab = $resultTab->where('customers.created_at', '=', $created_at);
+				$resultTab = $resultTab->where('customers.created_at', 'LIKE', '%'.$created_at.'%');
 			}
 		}
 		

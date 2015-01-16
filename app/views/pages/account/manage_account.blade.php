@@ -140,7 +140,15 @@
 										<option value="manager">manager</option>
 									</select>
 								</td>
-								<td><input type="text" class="form-control input-sm" id="filter_last_login" placeholder="yyyy-mm-dd hh:mm:ss"></td>
+								<td>
+									<input type="text" class="form-control input-sm" id="filter_last_login" placeholder="">
+									<script> 
+									$('#filter_last_login').datepicker({
+										format: 'yyyy-mm-dd',
+										startDate: '-3d'
+									})
+									</script>
+								</td>
 								<td>
 									<select class="form-control input-sm" id="filter_active">
 										<option value="no-filter">no-filter</option>
@@ -288,6 +296,11 @@
 	
 	$('body').on('click','#filter_button',function(){
 		$username = $('#filter_username').val();
+		if($username == ''){
+			$username = '-';
+		}
+			
+
 		var x=document.getElementById("filter_role");
 		for (var i = 0; i < x.options.length; i++) 
 		{
@@ -312,6 +325,10 @@
 		
 		
 		$lastLogin = $('#filter_last_login').val();
+		if($lastLogin == ''){
+			$lastLogin = '-';
+		}
+			
 		var y=document.getElementById("filter_active");
 		for (var i = 0; i < y.options.length; i++) 
 		{

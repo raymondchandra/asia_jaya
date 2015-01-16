@@ -36,18 +36,18 @@
 
 						<h3>Masukan Stock</h3>
 						<div class="panel panel-default f_non_seri">
-							<div class="panel-heading">Tambah Stock Produk Non-seri</div>
+							<div class="panel-heading">Tambah Stock Produk</div>
 							<div class="panel-body">
 								<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" id="form_non_series">
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Kode Barang</label>
-										<div class="g-sm-7">
+										<div class="g-sm-4">
 											<input type="text" class="form-control" id="kode_produk">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label">Merek Barang <span style="font-weight: 300;">(opt)</span></label>
-										<div class="g-sm-7">
+										<div class="g-sm-4">
 											<input type="text" class="form-control" id="nama_produk">
 										</div>
 									</div>
@@ -242,20 +242,32 @@
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label ff_num_only">Harga Modal</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control" id="harga_modal">
+										<div class="g-sm-4"> 
+											<div class="input-group">
+												<input type="text" class="form-control" id="harga_modal" aria-describedby="basic-ribuan">
+												<span class="input-group-addon" id="basic-ribuan">.000</span>
+
+											</div> 
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label ff_num_only">Harga Minimal</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control" id="harga_minimal">
+										<div class="g-sm-4">
+											<div class="input-group">
+												<input type="text" class="form-control" id="harga_minimal" aria-describedby="basic-ribuan">
+												<span class="input-group-addon" id="basic-ribuan">.000</span>
+
+											</div> 
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="g-sm-3 control-label ff_num_only">Harga Jual</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control" id="harga_jual">
+										<div class="g-sm-4">
+											<div class="input-group">
+												<input type="text" class="form-control" id="harga_jual" aria-describedby="basic-ribuan">
+												<span class="input-group-addon" id="basic-ribuan">.000</span>
+
+											</div> 
 										</div>
 									</div>
 									<!--<div class="form-group">

@@ -292,7 +292,13 @@
 							<td><input type="text" class="form-control input-sm" id="filter_sales_price"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_stock_shop"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_stock_storage"></td>
-							<td><input type="text" class="form-control input-sm" id="filter_deleted"></td>
+							<td> 
+								<select class="form-control input-sm" id="filter_deleted" style="padding-right: 0px;">
+									<option value="">Pilih</option>
+									<option value="1">Ya</option>
+									<option value="0">Tidak</option>
+								</select>
+							</td>
 							<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
 							<!--<td></td>-->
 							
