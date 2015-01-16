@@ -73,7 +73,7 @@
 
 														<tr style="height: 23px;">
 															<td style="padding: 0px;">
-																<input accept="image/*" type="file" id="" class="product_foto_{{ $_n }}">
+																<input accept="image/*" type="file" id="product_foto_{{ $_n }}" class="product_foto_{{ $_n }}">
 															</td>
 														</tr>
 
@@ -85,13 +85,13 @@
 												<script>
 												<?php $sidebar_i = 0; ?>
 												var data = [ 
-												@for($sidebar_i = 0; $sidebar_i < 15; $sidebar_i++)
+												@for($sidebar_i = 1; $sidebar_i <= 15; $sidebar_i++)
 												{
-													prod_id: "",
-													prod_detail_id: "",
-													sidebar: "", 
+													warna: "-",
+													stock_shop: "-",
+													stock_storage: "-", 
 													command: '' 
-															+ '<input accept="image/*" type="file" id="" class="product_foto">'
+															+ '<input accept="image/*" type="file" id="product_foto_'+count+'" class="product_foto">'
 															+ ''
 												},
  												@endfor
@@ -106,9 +106,9 @@
 				  									enterMoves: {row: 1, col: 0},
 													//startRows: 10,
 													columns: [
-														      {data: "prod_id", renderer: "html"},
-														      {data: "prod_detail_id", renderer: "html"},
-														      {data: "sidebar", renderer: "html"},
+														      {data: "warna", renderer: "html"},
+														      {data: "stock_shop", renderer: "html"},
+														      {data: "stock_storage", renderer: "html"},
 														      //{data: "command", renderer: "html"},
 														      ],
 
@@ -136,14 +136,14 @@
 										      	var ht = $('#example1').handsontable('getInstance');
 										      	var coordinate = ht.getSelected();
 
-												var rowArr 			= ht.getDataAtRow(coordinate[0]);
+												var rowArr 	= ht.getDataAtRow(coordinate[0]);
 														if(source == 'edit')
 														{ 
 															if(coordinate[0] == count+1){
 																count++;
 																trhtml = '<tr style="height: 23px;">'
 																trhtml += '<td style="padding: 0px;">'
-																trhtml += '<input accept="image/*" type="file" id="" class="product_foto_'+count+'">'
+																trhtml += '<input accept="image/*" type="file" id="product_foto_'+count+'" class="product_foto_'+count+'">'
 																trhtml += '</td>'
 																trhtml += '</tr>'
 
@@ -362,95 +362,103 @@ $('body').on('click', '#button_non_series', function(){
 	$stok_toko = [];
 	$stok_gudang = [];
 	$fotos = [];
-	$fileName = "";
 	$detailName = [];
 	$total_stok_toko = 0;
 	$total_stok_gudang = 0;
-	for($i=1; $i<=$count; $i++){
-		$warna_produk[$i] = $('#warna_produk_'+$i).val();
-		$stok_toko[$i] = $('#stok_toko_'+$i).val();
-		$stok_gudang[$i] = $('#stok_gudang_'+$i).val();
-		$total_stok_toko += parseInt($stok_toko[$i]);
-		$total_stok_gudang += parseInt($stok_gudang[$i]);
-		$fotoPath = $('#foto_produk_'+$i).val();
-		var arr = $fotoPath.split('\\');
-		var arr2 = arr[arr.length-1].split('.');
-		$fileName += $nama_produk+"-"+$warna_produk[$i] + ",";
-		$detailName[$i] = "assets/product_img/" + $nama_produk+"-"+$warna_produk[$i] + "." + arr2[arr2.length - 1];
-	}
-	$harga_modal = $('#harga_modal').val();
-	$harga_minimal = $('#harga_minimal').val();
-	$harga_jual = $('#harga_jual').val();
+	$fileName = "";
+	var count = $("#example1").handsontable('countRows');
+	alert(count);
+	$i_warna = 0;
+	//($('#example1').handsontable('getDataAtCell', 15, 0));
+	for(var i=0 ; i<count-1 ; i++)
+	{
+		if($('#example1').handsontable('getDataAtCell', i, 0) != "-")
+		{
+			$warna_produk[i+1] = $('#example1').handsontable('getDataAtCell', i, 0);
+			$stok_toko[i+1] = $('#example1').handsontable('getDataAtCell', i, 1);
+			$stok_gudang[i+1] = $('#example1').handsontable('getDataAtCell', i, 2);
+			$total_stok_toko += parseInt($stok_toko[i]);
+			$total_stok_gudang += parseInt($stok_gudang[i]);
 
-		//$foto = "http://localhost/asia_jaya/public/assets/product_img/"+$nama_produk+"-"+$warna_produk[1]+"."+arr2[arr2.length - 1];
-		
-		//based on :  http://www.formget.com/ajax-image-upload-php/#
-		//based on :  http://stackoverflow.com/questions/6974684/how-to-send-formdata-objects-with-ajax-requests-in-jquery
-		$fd = new FormData();
-		for($i=1; $i<=$count; $i++){
-			$fd.append('file_'+$i, $('#foto_produk_'+$i)[0].files[0]);
+			$fotoPath = $('#product_foto_'+i).val();
+			alert($fotoPath);
+			var arr = $fotoPath.split('\\');
+			var arr2 = arr[arr.length-1].split('.');
+			$fileName += $nama_produk+"-"+$warna_produk[i] + ",";
+			$detailName[i+1] = "assets/product_img/" + $nama_produk+"-"+$warna_produk[i] + "." + arr2[arr2.length - 1];
+			
+			$i_warna++;
 		}
-		
-		$fd.append('fileName', $fileName);
-		$fd.append('count', i_warna);
-		
-		$.ajax({
-			url: '{{URL::route('gentry.upload_image_v2')}}', 	// Url to which the request is send
-			type: "POST",             									// Type of request to be send, called as method
-			data: $fd,		// Data sent to server, a set of key/value pairs (i.e. form fields and values)
-			contentType: false,       									// The content type used when sending data to the server.
-			cache: false,             										// To unable request pages to be cached
-			processData:false,        									// To send DOMDocument or non processed data file it is set to false
-			success: function(data)   								// A function to be called if request succeeds
-			{
-				alert(data);
-				if(true){
+	}
+	$harga_modal = $('#harga_modal').val() * 1000;
+	$harga_minimal = $('#harga_minimal').val() * 1000;
+	$harga_jual = $('#harga_jual').val() * 1000;
+	
+	$fd = new FormData();
+	for($i=0; $i<$i_warna; $i++)
+	{
+		$fd.append('file_'+$i, $('#product_foto_'+$i)[0].files[0]);
+	}
+	$fd.append('fileName', $fileName);
+	$fd.append('count', $i_warna);
+	
+	$.ajax({
+		url: '{{URL::route('gentry.upload_image_v2')}}', 	// Url to which the request is send
+		type: "POST",             									// Type of request to be send, called as method
+		data: $fd,		// Data sent to server, a set of key/value pairs (i.e. form fields and values)
+		contentType: false,       									// The content type used when sending data to the server.
+		cache: false,             										// To unable request pages to be cached
+		processData:false,        									// To send DOMDocument or non processed data file it is set to false
+		success: function(data)   								// A function to be called if request succeeds
+		{
+			if(true)
+			{		
+				$.ajax({
 					
-					$.ajax({
-						
-						type: 'PUT',
-						url: '{{URL::route('gentry.add_new_stock1')}}',
-						data: {
-							'product_code' : $kode_produk,
-							'name' : $nama_produk,
-							'modal_price' : $harga_modal,
-							'min_price' : $harga_minimal,
-							'sales_price' : $harga_jual,
-							'stock_shop' : $total_stok_toko,
-							'stock_storage' : $total_stok_gudang,
-							'color' : $warna_produk,
-							'detail_stock_shop' : $stok_toko,
-							'detail_stock_storage' : $stok_gudang,
-							'photo' : $detailName,
-							'i_warna' : i_warna
-						},
-						success: function(response){
-							alert(response);
-							$('#kode_produk').val("");
-							$('#nama_produk').val("");
-							for($i=1; $i<=$count; $i++){
-								$warna_produk[$i] = $('#warna_produk_'+$i).val("");
-								$stok_toko[$i] = $('#stok_toko_'+$i).val("");
-								$stok_gudang[$i] = $('#stok_gudang_'+$i).val("");
-							}
-							$('#harga_modal').val("");
-							$('#harga_minimal').val("");
-							$('#harga_jual').val("");
-							$('#foto').val("");
-
-							//$('.f_form_warna').append(row_warna);
-						},error: function(xhr, textStatus, errorThrown){
-							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-							alert("responseText: "+xhr.responseText);
+					type: 'PUT',
+					url: '{{URL::route('gentry.add_new_stock1')}}',
+					data: {
+						'product_code' : $kode_produk,
+						'name' : $nama_produk,
+						'modal_price' : $harga_modal,
+						'min_price' : $harga_minimal,
+						'sales_price' : $harga_jual,
+						'stock_shop' : $total_stok_toko,
+						'stock_storage' : $total_stok_gudang,
+						'color' : $warna_produk,
+						'detail_stock_shop' : $stok_toko,
+						'detail_stock_storage' : $stok_gudang,
+						'photo' : $detailName,
+						'i_warna' : $i_warna
+					},
+					success: function(response){
+						alert(response);
+						$('#kode_produk').val("");
+						$('#nama_produk').val("");
+						for($i=1; $i<=$count; $i++){
+							$warna_produk[$i] = $('#warna_produk_'+$i).val("");
+							$stok_toko[$i] = $('#stok_toko_'+$i).val("");
+							$stok_gudang[$i] = $('#stok_gudang_'+$i).val("");
 						}
-					},'json');
+						$('#harga_modal').val("");
+						$('#harga_minimal').val("");
+						$('#harga_jual').val("");
+						$('#foto').val("");
 
-}
-},error: function(xhr, textStatus, errorThrown){
+						//$('.f_form_warna').append(row_warna);
+					},error: function(xhr, textStatus, errorThrown){
+						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+						alert("responseText: "+xhr.responseText);
+					}
+				},'json');
+
+	}
+	},error: function(xhr, textStatus, errorThrown){
 	alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 	alert("responseText: "+xhr.responseText);
-}
-});
+	}
+	});
+	
 });
 </script>
 <script>
