@@ -5,7 +5,7 @@
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
 					<span class="sr-only">Close</span>
 				</button>
-				<div style="font-size: 1.2em;">
+				<div style="font-size: 1.2em;"> 
 					<!-- <b>ID Transaksi :</b>  <span id="pop_up_trans_id"></span>
 					<span class="clearfix"></span>-->
 					<b>Nama Customer :</b> <span id="pop_up_trans_name"></span>
@@ -62,7 +62,7 @@
 											k
 										</td>
 										<td>
-											<button type="button" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
+											<button type="button" class="btn btn-warning btn-xs"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
 										</td>
 									</tr>
 								</tbody>

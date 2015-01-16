@@ -64,8 +64,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" id="return_id_hidden_print"/>
-					<button type="button" class="btn btn-success print-btn" data-dismiss="modal" id="">Print</button>
+					<!--<input type="hidden" id="return_id_hidden_print"/>
+					<button type="button" class="btn btn-success print-btn" data-dismiss="modal" id="">Print</button>-->
 					<script>
 						$( 'body' ).on( "click",'.print-btn', function() {
 							window.open("{{URL::route('gentry.view_print_konsumen')}}"+"?dataT="+$(this).prev().val());

@@ -273,7 +273,7 @@
 					$total = (parseInt($price)/parseInt($quantity)*parseInt($quantity));
 					$data += $total;
 					$data += "</td><td>";
-					$data += "<button type='button' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
+					$data += "<button type='button' class='btn btn-warning btn-xs'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
 					$data += "</td></tr>";
 				});
 				

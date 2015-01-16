@@ -1,6 +1,17 @@
 @extends('layouts.admin_layout'){{-- WARNING! fase ini sementara untuk show saja, untuk lebih lanjut akan dibuat controller agar tidak meng-extend layout --}}
 @section('content')	
 <div class="container-fluid">
+	<?php
+			
+		function toMoney($val,$symbol='Rp ',$r=0)
+		{
+			$n = $val;
+			$sign = ($n < 0) ? '-' : '';
+			$i = number_format(abs($n),$r,",",".");
+
+			return  $symbol.$sign.$i;
+		}
+	?>
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">

@@ -1,6 +1,18 @@
 @extends('layouts.admin_layout'){{-- WARNING! fase ini sementara untuk show saja, untuk lebih lanjut akan dibuat controller agar tidak meng-extend layout --}}
 @section('content')	
 <div class="container-fluid">
+
+	<?php
+			
+		function toMoney($val,$symbol='Rp ',$r=0)
+		{
+			$n = $val;
+			$sign = ($n < 0) ? '-' : '';
+			$i = number_format(abs($n),$r,",",".");
+
+			return  $symbol.$sign.$i;
+		}
+	?>
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
@@ -132,7 +144,7 @@
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
-						<th class="table-bordered" style="x;">
+						<th class="table-bordered" width="140">
 							<a href="javascript:void(0)">Tipe</a>
 								@if($filtered == 0)
 									@if($sortBy == 'type')
@@ -298,7 +310,7 @@
 						<td><input type="text" class="form-control input-sm" id="filter_kode_barang"></td>
 						<td><input type="text" class="form-control input-sm" id="filter_nama_pelanggan"></td>
 						<td>
-							<select class="form-control input-sm" id="filter_type">
+							<select class="form-control input-sm" id="filter_type" style="padding-right: 0px;">
 									<option value="">Pilih Tipe</option>
 									<option value="tukar_barang_sama">tukar barang sama</option>
 									<option value="tukar_barang_beda">tukar barang beda</option>
@@ -307,7 +319,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="form-control input-sm" id="filter_status">
+							<select class="form-control input-sm" id="filter_status" style="padding-right: 0px;">
 									<option value="">Pilih Status</option>
 									<option value="pending">pending</option>
 									<option value="fixed">fixed</option>
@@ -315,7 +327,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="form-control input-sm" id="filter_solution">
+							<select class="form-control input-sm" id="filter_solution" style="padding-right: 0px;">
 									<option value="">Pilih Solution</option>
 									<option value="kembalikan_ke_toko">kembalikan ke toko</option>
 									<option value="masukkan_ke_daftar_obral">masukan ke daftar obral</option>
@@ -341,11 +353,18 @@
 								<td>
 									{{ $data->kode_barang }}
 								</td>
-								<td>
+								<td> 
 									{{ $data->nama_pelanggan }}
 								</td> 
 								<td>
-									{{ $data->type }}
+									{{-- $data->type --}}
+									@if( ($data->type) == '1')
+										tukar barang sama
+									@elseif( ($data->type) == '2')
+										tukar barang beda
+									@elseif( ($data->type) == '3')
+										tukar uang
+									@endif
 								</td>
 								<td>
 									{{ $data->status }}
@@ -357,7 +376,7 @@
 									{{ $data->trade_product_id }}
 								</td>
 								<td>
-									{{ $data->difference }}
+									{{ toMoney($data->difference) }}
 								</td>
 								<td>
 									{{ $data->created_at}}
