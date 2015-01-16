@@ -1,6 +1,18 @@
 @extends('layouts.admin_layout'){{-- WARNING! fase ini sementara untuk show saja, untuk lebih lanjut akan dibuat controller agar tidak meng-extend layout --}}
 @section('content')	
 <div class="container-fluid">
+
+	<?php
+			
+		function toMoney($val,$symbol='Rp ',$r=0)
+		{
+			$n = $val;
+			$sign = ($n < 0) ? '-' : '';
+			$i = number_format(abs($n),$r,",",".");
+
+			return  $symbol.$sign.$i;
+		}
+	?>
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
@@ -16,13 +28,13 @@
 					</div>
 					<div class="input-daterange g-md-6">
 						<div class="g-md-4">
-							<input value="" class="f_date_0 form-control" id="start_date"/>
+							<input value="{{$start_date}}" class="f_date_0 form-control" id="start_date"/>
 						</div>
 						<div class="g-md-1" style="text-align:center; line-height: 34px;">
 							<span>to</span>
 						</div>
 						<div class="g-md-4">
-							<input value="" class="f_date_1 form-control" id="end_date"/>
+							<input value="{{$end_date}}" class="f_date_1 form-control" id="end_date"/>
 						</div>
 						<div class="g-md-3">
 							<button type="button" class="btn btn-success" id="show_range_button">
@@ -57,24 +69,24 @@
 						<th class="table-bordered">
 							<a href="javascript:void(0)">No. Nota</a>
 								@if($filtered == 0)
-									@if($sortBy == 'order_id')
+									@if($sortBy == 'no_nota')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'no_nota', 'order' => 'desc', 'filtered'=>'0'))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'no_nota', 'order' => 'asc', 'filtered'=>'0'))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'no_nota', 'order' => 'asc', 'filtered'=>'0'))}}">
 									@endif
 								@else
-									@if($sortBy == 'order_id')
+									@if($sortBy == 'no_nota')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'no_nota', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'no_nota', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'no_nota', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -83,24 +95,24 @@
 						<th>
 							<a href="javascript:void(0)">Kode Barang</a>
 								@if($filtered == 0)
-									@if($sortBy == 'order_id')
+									@if($sortBy == 'kode_barang')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'kode_barang', 'order' => 'desc', 'filtered'=>'0'))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'kode_barang', 'order' => 'asc', 'filtered'=>'0'))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'kode_barang', 'order' => 'asc', 'filtered'=>'0'))}}">
 									@endif
 								@else
-									@if($sortBy == 'order_id')
+									@if($sortBy == 'kode_barang')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'kode_barang', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'kode_barang', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'kode_barang', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -109,30 +121,30 @@
 						<th>
 							<a href="javascript:void(0)">Nama Pelanggan</a>
 								@if($filtered == 0)
-									@if($sortBy == 'order_id')
+									@if($sortBy == 'nama_pelanggan')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'0'))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'nama_pelanggan', 'order' => 'desc', 'filtered'=>'0'))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'nama_pelanggan', 'order' => 'asc', 'filtered'=>'0'))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'0'))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'nama_pelanggan', 'order' => 'asc', 'filtered'=>'0'))}}">
 									@endif
 								@else
-									@if($sortBy == 'order_id')
+									@if($sortBy == 'nama_pelanggan')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'nama_pelanggan', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'nama_pelanggan', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'order_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'nama_pelanggan', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 							</a>
 						</th>
-						<th class="table-bordered" style=x;">
+						<th class="table-bordered" width="140">
 							<a href="javascript:void(0)">Tipe</a>
 								@if($filtered == 0)
 									@if($sortBy == 'type')
@@ -147,12 +159,12 @@
 								@else
 									@if($sortBy == 'type')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'type', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -173,12 +185,12 @@
 								@else
 									@if($sortBy == 'status')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'status', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -199,12 +211,12 @@
 								@else
 									@if($sortBy == 'solution')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'solution', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -225,12 +237,12 @@
 								@else
 									@if($sortBy == 'trade_product_id')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'trade_product_id', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -251,12 +263,12 @@
 								@else
 									@if($sortBy == 'difference')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'difference', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -277,12 +289,12 @@
 								@else
 									@if($sortBy == 'created_at')
 										@if($order == 'asc')
-											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'desc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@else
-											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+											<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 										@endif
 									@else
-										<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','order_id'=>$order_id,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at))}}">
+										<a href="{{action('returnController@view_return', array('sortBy' => 'created_at', 'order' => 'asc', 'filtered'=>'1','no_nota'=>$no_nota,'kode_barang'=>$kode_barang,'nama_pelanggan'=>$nama_pelanggan,'type'=>$type,'status'=>$status,'solution'=>$solution,'trade_product_id'=>$trade_product_id,'difference'=>$difference,'created_at'=>$created_at,'start_date'=>$start_date,'end_date'=>$end_date))}}">
 									@endif
 								@endif
 								<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -294,11 +306,11 @@
 				<thead>
 					<tr>
 						
-						<td><input type="text" class="form-control input-sm" id="filter_order_id"></td>
-						<td><input type="text" class="form-control input-sm" id=" "></td>
-						<td><input type="text" class="form-control input-sm" id=" "></td>
+						<td><input type="text" class="form-control input-sm" id="filter_no_nota"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_kode_barang"></td>
+						<td><input type="text" class="form-control input-sm" id="filter_nama_pelanggan"></td>
 						<td>
-							<select class="form-control input-sm" id="filter_type">
+							<select class="form-control input-sm" id="filter_type" style="padding-right: 0px;">
 									<option value="">Pilih Tipe</option>
 									<option value="tukar_barang_sama">tukar barang sama</option>
 									<option value="tukar_barang_beda">tukar barang beda</option>
@@ -307,7 +319,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="form-control input-sm" id="filter_status">
+							<select class="form-control input-sm" id="filter_status" style="padding-right: 0px;">
 									<option value="">Pilih Status</option>
 									<option value="pending">pending</option>
 									<option value="fixed">fixed</option>
@@ -315,7 +327,7 @@
 							</select>
 						</td>
 						<td>
-							<select class="form-control input-sm" id="filter_solution">
+							<select class="form-control input-sm" id="filter_solution" style="padding-right: 0px;">
 									<option value="">Pilih Solution</option>
 									<option value="kembalikan_ke_toko">kembalikan ke toko</option>
 									<option value="masukkan_ke_daftar_obral">masukan ke daftar obral</option>
@@ -336,16 +348,23 @@
 							@foreach($datas as $data)
 							<tr> 
 								<td>
-									{{ $data->order_id }}
+									{{ $data->no_nota }}
 								</td>
 								<td>
-									JK987
+									{{ $data->kode_barang }}
 								</td>
-								<td>
-									Orang
+								<td> 
+									{{ $data->nama_pelanggan }}
 								</td> 
 								<td>
-									{{ $data->type }}
+									{{-- $data->type --}}
+									@if( ($data->type) == '1')
+										tukar barang sama
+									@elseif( ($data->type) == '2')
+										tukar barang beda
+									@elseif( ($data->type) == '3')
+										tukar uang
+									@endif
 								</td>
 								<td>
 									{{ $data->status }}
@@ -357,7 +376,7 @@
 									{{ $data->trade_product_id }}
 								</td>
 								<td>
-									{{ $data->difference }}
+									{{ toMoney($data->difference) }}
 								</td>
 								<td>
 									{{ $data->created_at}}
@@ -428,10 +447,68 @@
 	@include('pages.return.pop_up_solusi')
 
 	<script>
+	
+		$('body').on('click','#show_range_button',function(){
+			$start_date = $('#start_date').val();
+			$end_date = $('#end_date').val();
+			
+			/*
+			$month = "";
+			$dates = "";
+			$year = "";
+			$i = 0;
+			
+			while($end_date.charAt($i) != '/'){
+				$month += $end_date.charAt($i);
+				$i++;
+			}
+			$i++;
+			while($end_date.charAt($i) != '/'){
+				$dates += $end_date.charAt($i);
+				$i++;
+			}
+			$i++;
+			while($i < $end_date.length){
+				$year += $end_date.charAt($i);
+				$i++;
+			}
+			
+			$dates = parseInt($dates)+1;
+			
+			$end_date = $month + '/' + $dates + '/' +$year; 
+			*/
+			
+			$no_nota = '-';
+			$kode_barang = '-';
+			$nama_pelanggan = '-';
+			$type = '-';
+			$status = '-';
+			$solution = '-';
+			$trade_product_id = '-';
+			$difference = '-';
+			$created_at = '-';
+			
+			window.location = "{{URL::route('gentry.view_return')}}" + "?filtered=1&no_nota="+$no_nota+"&kode_barang="+$kode_barang+"&nama_pelanggan="+$nama_pelanggan+"&type="+$type+"&status="+$status+"&solution="+$solution+"&trade_product_id="+$trade_product_id+"&difference="+$difference+"&created_at="+$created_at+"&start_date="+$start_date+"&end_date="+$end_date;
+		
+		});
+		
 		$('body').on('click','#filter_button',function(){
-			$order_id = $('#filter_order_id').val();
-			if($order_id == ''){
-				$order_id = '-';
+			$start_date = $('#start_date').val();
+			$end_date = $('#end_date').val();
+		
+			$no_nota = $('#filter_no_nota').val();
+			if($no_nota == ''){
+				$no_nota = '-';
+			}
+			
+			$kode_barang = $('#filter_kode_barang').val();
+			if($kode_barang == ''){
+				$kode_barang = '-';
+			}
+			
+			$nama_pelanggan = $('#filter_nama_pelanggan').val();
+			if($nama_pelanggan == ''){
+				$nama_pelanggan = '-';
 			}
 			
 			var a=document.getElementById("filter_type");
@@ -504,7 +581,7 @@
 				$created_at = '-';
 			}
 			
-			window.location = "{{URL::route('gentry.view_return')}}" + "?filtered=1&order_id="+$order_id+"&type="+$type+"&status="+$status+"&solution="+$solution+"&trade_product_id="+$trade_product_id+"&difference="+$difference+"&created_at="+$created_at;
+			window.location = "{{URL::route('gentry.view_return')}}" + "?filtered=1&no_nota="+$no_nota+"&kode_barang="+$kode_barang+"&nama_pelanggan="+$nama_pelanggan+"&type="+$type+"&status="+$status+"&solution="+$solution+"&trade_product_id="+$trade_product_id+"&difference="+$difference+"&created_at="+$created_at+"&start_date="+$start_date+"&end_date="+$end_date;
 		});
 	</script>
 	@stop

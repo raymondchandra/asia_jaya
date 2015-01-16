@@ -70,7 +70,7 @@
 						</div>
 						<script>
 						$('body').on('keyup','#f_edit_qty',function(){
-							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
+							$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
 						});
 						$('body').on('keyup','#f_hsatuan_qty',function(){
 							/*
@@ -79,20 +79,20 @@
 							{
 								$('#f_hsatuan_qty').val($min_price);
 							}
-							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
+							$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
 							*/
 						});
 						$('body').on('click','.ff_qty_min',function(){ 
 							if($('#f_edit_qty').val() != 1){
 								var qty_temp = parseInt($('#f_edit_qty').val())-1; 
 								$('#f_edit_qty').val(qty_temp);
-								$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+								$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*qty_temp);
 							}
 						});
 						$('body').on('click','.ff_qty_plus',function(){ 
 							var qty_temp = parseInt($('#f_edit_qty').val())+1; 
 							$('#f_edit_qty').val(qty_temp);
-							$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+							$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*qty_temp);
 						});
 						</script>
 					</div>
@@ -123,7 +123,7 @@
 
 					$total = $currentTotal - $oldTotal;
 					
-					$('#subtotal_text_'+$inc).text("IDR " + $total);
+					$('#subtotal_text_'+$inc).text("Rp " + $total);
 					$('#'+$row_id).remove();
 					$('.f_slider_alert').addClass('hidden');
 				});
@@ -139,7 +139,7 @@
 
 
 					$total = $currentTotal + $newTotal - $oldTotal;
-					$('#subtotal_text_'+$inc).text("IDR " + $total);
+					$('#subtotal_text_'+$inc).text("Rp " + $total);
 					$('.f_slider_alert').addClass('hidden');
 				});
 				

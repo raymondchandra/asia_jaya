@@ -1,0 +1,30 @@
+  
+Daftar Pesanan Hari Ini
+- Coloumn "No. Nota" belum menampilkan 'No. Nota' atau '-'
+- Anomali jikalau kita sudah membayar dan kita mengecek transaksi itu lagi dengan mengklik [View Detail], si harga satuan barang tersebut jadi 1/kuantitasnya   
+
+Anomalies
+- timeout user leave keyboard brapa lamaya?
+
+
+
+
+CASES
+View Stock::
+ubah kode barang: OK
+ubah merek barang: OK
+ubah Harga Modal: harga yang lain tampilannya gak keubah otomatis tapi udah masuk DB (FIXED)
+ubah Harga Min.: harga yang lain tampilannya gak keubah otomatis tapi udah masuk DB (FIXED)
+ubah Harga Jual: harga yang lain tampilannya gak keubah otomatis tapi udah masuk DB (FIXED)
+
+Return::
+filter range: OK
+
+tukar dengan barang yang sama: add OK
+tukar dengan barang yang beda: add OK
+tukar dengan uang: add OK
+
+solusi: BELUM
+
+tampilan tukar dengan kode produk: BELUM Seharusnya Kode Barang bukan product_id
+selisih:OK

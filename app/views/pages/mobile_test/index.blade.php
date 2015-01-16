@@ -158,7 +158,7 @@
 													Qty. 
 												</th>
 												<th rowspan="2">
-													Price (.000)
+													Price(Rp)
 												</th>
 											</tr>
 
@@ -171,7 +171,7 @@
 									<div class="form-group">
 										<label for="" class="control-label g-sm-6">Subtotal</label>
 										<div class="g-sm-6">
-											<p class="form-control-static" id="subtotal_text_0" placeholder="" >IDR 0</p>
+											<p class="form-control-static" id="subtotal_text_0" placeholder="" >Rp 0</p>
 										</div>
 									</div>
 
@@ -338,7 +338,7 @@
 			tab_panel+='						Qty.                                                                                                                                       ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='					<th rowspan="2">                                                                                                                               ';
-			tab_panel+='						Price(IDR)                                                                                                                                 ';
+			tab_panel+='						Price(Rp)                                                                                                                                 ';
 			tab_panel+='					</th>                                                                                                                                          ';
 			tab_panel+='				</tr>                                                                                                                                              ';
 			tab_panel+='                                                                                                                                                                  ';
@@ -351,7 +351,7 @@
 			tab_panel+='		<div class="form-group">                                                                                                                                   ';
 			tab_panel+='			<label for="" class="control-label g-sm-6">Subtotal</label>                                                                                            ';
 			tab_panel+='			<div class="g-sm-6">                                                                                                                                   ';
-			tab_panel+='				<p class="form-control-static" placeholder="" id= "subtotal_text_' + inc + '" >IDR 0</p>                                                                                      ';
+			tab_panel+='				<p class="form-control-static" placeholder="" id= "subtotal_text_' + inc + '" >Rp 0</p>                                                                                      ';
 			tab_panel+='			</div>                                                                                                                                                 ';
 			tab_panel+='		</div>                                                                                                                                                     ';
 			tab_panel+='		<div class="form-group">                                                                                                                                   ';
@@ -419,7 +419,7 @@
 
 			$('#f_hsatuan_qty').val(toAngka($harga)/toAngka($quantity));
 			$('#f_edit_qty').val($quantity);
-			$('#f_subtotal_edit').text("IDR " + $total);
+			$('#f_subtotal_edit').text("Rp " + $total);
 			$('#rowRep').val($row_id);
 			$('#tabRep').val($tab_id);
 			$('#minPrice').val($min_price);
@@ -466,7 +466,7 @@
 					$('#total_text').text($('#subtotal_text_'+$repId).text());
 					$subs = toAngka($('#subtotal_text_'+$repId).text());
 					$newSubs = parseInt($subs) * (100 + parseInt(response.messages.amount)) / 100;
-					$('#total_biaya_text').text("IDR " + toRp(parseInt($newSubs)));
+					$('#total_biaya_text').text("Rp " + toRp(parseInt($newSubs)));
 					$('#total_biaya_label').text("Total Biaya + PPN(" + response.messages.amount + "%)");
 					$('#f_nama_pelanggan').val("");
 					$('#transaction_tax').val(response.messages.amount);

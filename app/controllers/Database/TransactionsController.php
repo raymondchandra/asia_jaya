@@ -619,6 +619,7 @@ class TransactionsController extends \BaseController {
 		$transaction->print_customer = $print_customer;
 		$transaction->print_shop = $print_shop;
 		$transaction->status = $status;
+		$strukController = new StrukController();
 		$noStruk = $strukController->get();
 		if($noStruk < 10)
 		{

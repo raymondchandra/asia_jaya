@@ -5,7 +5,7 @@
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span>
 					<span class="sr-only">Close</span>
 				</button>
-				<div style="font-size: 1.2em;">
+				<div style="font-size: 1.2em;"> 
 					<!-- <b>ID Transaksi :</b>  <span id="pop_up_trans_id"></span>
 					<span class="clearfix"></span>-->
 					<b>Nama Customer :</b> <span id="pop_up_trans_name"></span>
@@ -62,7 +62,7 @@
 											k
 										</td>
 										<td>
-											<button type="button" class="btn btn-warning btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
+											<button type="button" class="btn btn-warning btn-xs"  data-toggle="modal" data-target=".pop_up_add_return">Pilih</button>
 										</td>
 									</tr>
 								</tbody>
@@ -86,7 +86,7 @@
 										$('#f_uang_kembalian').text("Uang Belum Cukup");
 									}else{
 										var kembalian = parseInt($('#f_uang_bayaran').val()) - parseInt(toAngka($('#transaction_total_detail').text()));
-										$('#f_uang_kembalian').text("IDR " + toRp(kembalian));
+										$('#f_uang_kembalian').text("Rp " + toRp(kembalian));
 									}
 									
 								});
@@ -203,7 +203,7 @@
 									
 									$tax = parseInt($total) * toAngka($('#transaction_tax_detail').text()) / parseInt(100);
 									$total += $tax;
-									$('#transaction_total_detail').text("IDR " + toRp($total));
+									$('#transaction_total_detail').text("Rp " + toRp($total));
 								});
 								
 								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}

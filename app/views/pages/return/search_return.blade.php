@@ -44,7 +44,7 @@
 								<div class="form-group">
 									<label class="g-sm-3 control-label">No. Nota<span style="font-weight: 300;">(opt)</span></label>
 									<div class="g-sm-7">
-										<input type="text" class="form-control" id="trans_code">
+										<input type="text" class="form-control" id="no_nota">
 									</div>
 								</div>
 								<div class="form-group">
@@ -145,28 +145,20 @@
 							@foreach($dataOrder as $data)
 							<tr> 
 								<td>
-									{{ $data->id }}
+									{{ $data->no_nota }}
 									<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
 									<input type="hidden" id="order_price_{{$data->id}}" value="{{$data->price}}">
-									<!--<input type="hidden" id="prod_id_{{$data->id}}" value="{{$data->prod_id}}" >-->
-								</td>
-								<!-- <td>
-									{{-- $data->cust_name --}}
+									<input type="hidden" id="transaction_id_{{$data->id}}" value="{{$data->transaction_id}}">
+									<input type="hidden" id="prod_code_{{$data->id}}" value="{{$data->prod_code}}">
 								</td>
 								<td>
-									{{-- $data->prod_code --}}
-								</td> 
-								<td id="prod_name_{{$data->id}}">
-									{{ $data->prod_name }}
-								</td> -->
-								<td>
-									{{ $data->transaction_id }}
+									{{ $data->cust_name }}
 								</td>
 								<td>
 									{{ $data->created_at }}
 								</td>
 								<td>
-									<button id="" type="button" class="btn btn-primary btn-xs"  data-toggle="modal" data-target=".pop_up_detail_nota">Lihat Detail</button>
+									<button id="" type="button" class="btn btn-primary btn-xs view_detail_button"  data-toggle="modal" data-target=".pop_up_detail_nota">Lihat Detail</button>
 									<input type="hidden" value="{{$data->id}}" />
 								</td>
 							</tr> 
@@ -193,7 +185,9 @@
 								$cust_name = $("#cust_name").val();
 								$prod_code = $("#prod_code").val();
 								$prod_name = $("#prod_name").val();
-								$trans_code = $("#trans_code").val();
+								$no_nota = $("#no_nota").val();
+								$start_date = $('#start_date').val();
+								$end_date = $('#end_date').val();
 								//alert($cust_name);
 								$.ajax({
 									type: 'GET',
@@ -202,29 +196,26 @@
 										'cust_name' : $cust_name,
 										'prod_code' : $prod_code,
 										'prod_name' : $prod_name,
-										'trans_code' : $trans_code
+										'no_nota' : $no_nota,
+										'start_date' : $start_date,
+										'end_date' : $end_date
 									},
 									success: function(response){
 										$('#body_content').html("");
 										$row = "";
 										$.each(response, function(i,data){
 											$row += "<tr><td>";
-											$row += data.id;
+											$row += data.no_nota;
 											$row += "<input type='hidden' id='prod_quantity_"+data.id+"' value='"+data.quantity+"' >";
 											$row += "<input type='hidden' id='order_price_"+data.id+"' value='"+data.price+"' >";
-											//$row += "<input type='hidden' id='prod_id_"+data.id+"' value='"+data.id+"' >";
+											$row += "<input type='hidden' id='transaction_id_"+data.id+"' value='"+data.transaction_id+"' >";
+											$row += "<input type='hidden' id='prod_code_"+data.id+"' value='"+data.prod_code+"' >";
 											$row += "</td><td>";
 											$row += data.cust_name;
 											$row += "</td><td>";
-											$row += data.product_code;
-											$row += "</td><td id='prod_name_"+data.id+"'>";
-											$row += data.name;
+											$row += data.created_at;
 											$row += "</td><td>";
-											$row += data.transaction_id;
-											$row += "</td><td>";
-											$row += data.transTime;
-											$row += "</td><td>";
-											$row += "<button type='button' id='' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Lihat Detail</button>";
+											$row += "<button id='' type='button' class='btn btn-primary btn-xs'  data-toggle='modal' data-target='.pop_up_detail_nota'>Lihat Detail</button>";
 											$row += "<input type='hidden' value='"+data.id+"' >";
 											$row += "</td></tr>";
 										});
@@ -248,6 +239,51 @@
 	@include('pages.return.pop_up_add_return')
 
 	<script>
+	
+	$('body').on('click','.view_detail_button',function(){
+		$id = $(this).next().val();
+		$quantity = $('#prod_quantity_'+$id).val();
+		$price = $('#order_price_'+$id).val();
+		$transaction_id = $('#transaction_id_'+$id).val();
+		$prod_code = $('#prod_code_'+$id).val();
+		
+		$('#transaction_detail_content').html("");
+		$.ajax({
+			type : 'GET',
+			url: '{{URL::route('david.get_order_by_trans_id')}}',
+			data: {
+				'data' : $transaction_id
+			},
+			success: function(response){
+				$data = "";
+				$total = 0;
+				
+				$.each(response['messages'], function( i, resp ) {
+					$data += "<tr><td>";
+					$data += $prod_code;
+					$data += "</td><td>";
+					$data += "<img src='{{asset('"+resp.foto+"')}}' width='20' height='20'>";
+					$data += "</td><td>";
+					$data += resp.warna;
+					$data += "</td><td>";
+					$data += $quantity;
+					$data += "</td><<td>";
+					$data += parseInt($price)/parseInt($quantity);
+					$data += "</td><td>";
+					$total = (parseInt($price)/parseInt($quantity)*parseInt($quantity));
+					$data += $total;
+					$data += "</td><td>";
+					$data += "<button type='button' class='btn btn-warning btn-xs'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
+					$data += "</td></tr>";
+				});
+				
+				$('#transaction_detail_content').html($data);
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+	});
 	
 	/*
 		$('body').on('click','#filter_button',function(){

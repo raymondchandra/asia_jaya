@@ -31,10 +31,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="">
-								<a href="javascript:void(0)">Jumlah Barang Obral</a>
-								<a href="javascript:void(0)">
-									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
-								</a>
+								<a href="javascript:void(0)">Jumlah Barang Obral</a> 
 							</th>
 							<!--
 							<th class="table-bordered">

@@ -153,7 +153,7 @@
 							<tbody id="body_content">
 								<?php
 
-								function toMoney($val,$symbol='IDR ',$r=0)
+								function toMoney($val,$symbol='Rp ',$r=0)
 								{
 									$n = $val;
 									$sign = ($n < 0) ? '-' : '';

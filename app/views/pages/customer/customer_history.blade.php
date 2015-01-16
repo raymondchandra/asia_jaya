@@ -1,6 +1,17 @@
 @extends('layouts.admin_layout'){{-- WARNING! fase ini sementara untuk show saja, untuk lebih lanjut akan dibuat controller agar tidak meng-extend layout --}}
 @section('content')	
 <div class="container-fluid">
+	<?php
+			
+		function toMoney($val,$symbol='Rp ',$r=0)
+		{
+			$n = $val;
+			$sign = ($n < 0) ? '-' : '';
+			$i = number_format(abs($n),$r,",",".");
+
+			return  $symbol.$sign.$i;
+		}
+	?>
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
@@ -145,9 +156,9 @@
 					$data += resp.warna;
 					$data += "</td><td>";
 					$data += resp.quantity;
-					$data += "</td><td>IDR ";
+					$data += "</td><td>Rp ";
 					$data += toRp(resp.hargaSatuan);
-					$data += "</td><td>IDR ";
+					$data += "</td><td>Rp ";
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
 					$data += "</td>";
 					$data += "</tr>"
@@ -156,10 +167,10 @@
 				});
 				$('#transaction_status_detail').text($status);
 				$('#transaction_is_void_detail').text($is_void);
-				$('#transaction_subtotal_detail').text("IDR " + toRp($total));
-				$('#transaction_diskon_detail').text("IDR " + toRp(toAngka($discount)));				
+				$('#transaction_subtotal_detail').text("Rp " + toRp($total));
+				$('#transaction_diskon_detail').text("Rp " + toRp(toAngka($discount)));				
 				$('#transaction_tax_detail').text($tax);			
-				$('#transaction_total_detail').text("IDR " + toRp($total));			
+				$('#transaction_total_detail').text("Rp " + toRp($total));			
 			},error: function(xhr, textStatus, errorThrown){
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 				alert("responseText: "+xhr.responseText);

@@ -53,7 +53,7 @@
 								<!--
 								<label class="g-sm-8 control-label">Subtotal</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_subtotal_detail">IDR 3.100.000</p>
+									<p type="text" class="form-control-static" id="transaction_subtotal_detail">Rp 3.100.000</p>
 								</div>
 								-->
 								<label class="g-sm-8 control-label"><img src="{{asset('assets/img/pigblk.png')}}" height="20"></label>
@@ -124,7 +124,7 @@
 										$('#f_uang_kembalian').text("Uang Belum Cukup");
 									}else{
 										var kembalian = parseInt($('#f_uang_bayaran').val()) - parseInt(toAngka($('#transaction_total_detail').text()));
-										$('#f_uang_kembalian').text("IDR " + toRp(kembalian));
+										$('#f_uang_kembalian').text("Rp " + toRp(kembalian));
 									}
 									
 								});
@@ -250,7 +250,7 @@
 									
 									$tax = parseInt($total) * toAngka($('#transaction_tax_detail').text()) / parseInt(100);
 									$total += $tax;
-									$('#transaction_total_detail').text("IDR " + toRp($total));
+									$('#transaction_total_detail').text("Rp " + toRp($total));
 								});
 								
 								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}

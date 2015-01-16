@@ -316,6 +316,20 @@ class CashesController extends \BaseController {
 		return $this->getReturn($result);
 	}
 
+	public function getTodayInpuCash(){
+
+
+		$cashes = DB::table('cashes')->where('type', '=', 'opening cash')->whereRaw('created_at >= curdate()')->get();
+
+		$uangKasReturn = 0;
+		foreach ($cashes as $uangKas) {
+			 	$uangKasReturn += $uangKas->in_amount;
+		}
+
+		return $uangKasReturn;
+
+	}
+
 	/*
 	public function exist()
 	{

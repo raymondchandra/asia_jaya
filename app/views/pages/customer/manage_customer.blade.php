@@ -1,6 +1,17 @@
 @extends('layouts.admin_layout'){{-- WARNING! fase ini sementara untuk show saja, untuk lebih lanjut akan dibuat controller agar tidak meng-extend layout --}}
 @section('content')	
 <div class="container-fluid">
+	<?php
+			
+		function toMoney($val,$symbol='Rp ',$r=0)
+		{
+			$n = $val;
+			$sign = ($n < 0) ? '-' : '';
+			$i = number_format(abs($n),$r,",",".");
+
+			return  $symbol.$sign.$i;
+		}
+	?>
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
@@ -173,9 +184,9 @@
 									<td id="">{{ $data->countTrans }}</td>
 									<td id="">
 										@if($data->total == null)
-											0
+											Rp 0
 										@else
-											{{ $data->total}}
+											{{ toMoney($data->total) }}
 										@endif
 										</td>
 									<td id="">{{ $data->created_at }}</td>
@@ -197,7 +208,7 @@
 	<script>
 		/*$(document).ready(function(){
 			//$total = $('#totalTransaksi').text();
-			//$('#totalTransaksi').text("IDR " + $total);
+			//$('#totalTransaksi').text("Rp " + $total);
 		});*/
 	
 		function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
