@@ -229,7 +229,7 @@ class ReturnsController extends \BaseController {
 	public function getTop10ReturnedProduct()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(return_quantity) as total'))->join('returns', 'returns.order_id', '=','orders.id')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
+		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(return_quantity) as total'))->join('returns', 'returns.order_id', '=','orders.id')->whereRaw('MONTH(returns.created_at) >= MONTH(curdate())')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
 		foreach($orders as $ord)
 		{
 			$prdDtl = ProductDetail::find($ord->product_detail_id);

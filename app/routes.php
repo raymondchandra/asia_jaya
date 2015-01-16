@@ -5,9 +5,14 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$product = Product::find(ProductDetail::find(3)->product_id);
-		$modal = 1 * $product->modal_price;	
-		echo $modal;
+		$respond = array();
+		$customer = DB::table('transactions')->select(DB::raw('customer_id,sum(total) as total'))->whereRaw('MONTH(created_at) >= MONTH(curdate())')->groupBy('customer_id')->orderBy('total','dsc')->take(10)->get();
+		foreach($customer as $cust)
+		{
+			$cust->name = Customer::find($cust->customer_id)->name;
+		}
+		
+		var_dump($customer);
 	});
 	Route::get('/tes2', function()
 	{
