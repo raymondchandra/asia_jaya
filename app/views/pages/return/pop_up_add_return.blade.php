@@ -98,11 +98,11 @@
 							<!--<div class="form-group">
 								<label class="g-sm-9 control-label">Subtotal</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static">IDR 3.100.000</p>
+									<p type="text" class="form-control-static">Rp 3.100.000</p>
 								</div>
 								<label class="g-sm-9 control-label">Diskon</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static">IDR 0</p>
+									<p type="text" class="form-control-static">Rp 0</p>
 									
 								</div>
 								<label class="g-sm-9 control-label"></label>
@@ -112,7 +112,7 @@
 								</div>
 								<label class="g-sm-9 control-label">Total</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static">IDR 3.100.000</p>
+									<p type="text" class="form-control-static">Rp 3.100.000</p>
 								</div>
 							</div>-->
 

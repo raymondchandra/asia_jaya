@@ -46,7 +46,7 @@
 							<div class="form-group">
 								<label class="g-sm-9 control-label">Subtotal</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_subtotal_detail">IDR 3.100.000</p>
+									<p type="text" class="form-control-static" id="transaction_subtotal_detail">Rp 3.100.000</p>
 								</div>
 								<label class="g-sm-9 control-label"><img src="{{asset('assets/img/pigblk.png')}}" height="14"></label>
 								<div class="g-sm-3">
@@ -55,7 +55,7 @@
 								</div>
 								<label class="g-sm-9 control-label">Tax</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_tax_detail">IDR 0</p>
+									<p type="text" class="form-control-static" id="transaction_tax_detail">Rp 0</p>
 									
 								</div>
 								<label class="g-sm-9 control-label"></label>
@@ -67,7 +67,7 @@
 								-->
 								<label class="g-sm-9 control-label">Total</label>
 								<div class="g-sm-3">
-									<p type="text" class="form-control-static" id="transaction_total_detail">IDR 3.100.000</p>
+									<p type="text" class="form-control-static" id="transaction_total_detail">Rp 3.100.000</p>
 								</div>
 							</div>
 

@@ -1,5 +1,8 @@
 <?php
 use Carbon\Carbon;
+
+	//Route::get('/qwertyuiop', 'CashesController@getTodayInpuCash');
+
 	Route::get('/tes', function()
 	{
 		$product = Product::find(ProductDetail::find(3)->product_id);

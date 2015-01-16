@@ -58,7 +58,7 @@
 			var a = parseInt($subtotalNow);
 			var b = parseInt($price);
 			var total = a+b;
-			$('#subtotal_text_'+$inc).text("IDR " + toRp(total));
+			$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
 		}
 
 	});
@@ -68,13 +68,13 @@
 			if($('#ff_quant_first').val() != 1){
 				var qty_temp = parseInt($('#ff_quant_first').val())-1; 
 				$('#ff_quant_first').val(qty_temp);
-				//$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+				//$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*qty_temp);
 			}
 		});
 		$('body').on('click','.fq_qty_plus',function(){ 
 			var qty_temp = parseInt($('#ff_quant_first').val())+1; 
 			$('#ff_quant_first').val(qty_temp);
-			//$('#f_subtotal_edit').text("IDR " + $('#f_hsatuan_qty').val()*qty_temp);
+			//$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*qty_temp);
 		});
 
 	function toRp(angka){

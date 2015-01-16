@@ -3,7 +3,7 @@
 <div class="container-fluid">
 	<?php
 			
-		function toMoney($val,$symbol='IDR ',$r=0)
+		function toMoney($val,$symbol='Rp ',$r=0)
 		{
 			$n = $val;
 			$sign = ($n < 0) ? '-' : '';
@@ -32,10 +32,10 @@
 				<div class="panel-body">
 					<form class="form-horizontal">
 						<div class="form-group" style="margin-bottom: 0px;">
-							<label class="g-sm-3 control-label">
+							<label class="g-sm-4 control-label">
 								Jumlah Uang 
 							</label>
-							<div class="g-sm-6">
+							<div class="g-sm-5">
 
 								<div class="input-group">
 									<input type="text" class="form-control" id="opening-cash-input" aria-describedby="basic-ribuan">
@@ -58,7 +58,7 @@
 												if(response['code'] == 200)
 												{
 													alert('success add opeing cash');
-													$('.today-cash').text("IDR " + toRp(response['message']));
+													$('.today-cash').text("Rp " + toRp(response['message']));
 												}
 												else
 												{
@@ -91,6 +91,30 @@
 				</div>
 			</div>
 			<div class="panel panel-default">
+				<div class="panel-heading">Cash Flow Hari Ini</div>
+				<div class="panel-body">
+					<form class="form-horizontal">
+						<div class="form-group" style="margin-bottom: 0px;">
+							<label class="g-sm-6 control-label">
+								Jumlah Uang Kas Awal
+							</label>
+							<div class="g-sm-6">
+								<p type="text" class="form-control-static today-cash">{{ toMoney($kasHariIni) }}</p>
+							</div>
+						</div>
+						<div class="form-group" style="margin-bottom: 0px;">
+							<label class="g-sm-6 control-label">
+								Jumlah Uang Di Kasir
+							</label>
+							<div class="g-sm-6">
+								<p type="text" class="form-control-static today-cash">{{ toMoney($todayCash) }}</p>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
 				<div class="panel-heading">Total Modal Keseluruhan</div>
 				<div class="panel-body">
 					<form class="form-horizontal">
@@ -99,7 +123,7 @@
 								Total Modal Toko 
 							</label>
 							<div class="g-sm-6">
-								<p type="text" class="form-control-static">5456</p>
+								<p type="text" class="form-control-static ff_to_rp">{{ toMoney($totaltoko) }}</p>
 							</div>
 						</div>
 						<div class="form-group" style="margin-bottom: 0px;">
@@ -107,7 +131,7 @@
 								Total Modal Gudang 
 							</label>
 							<div class="g-sm-6">
-								<p type="text" class="form-control-static">5456</p>
+								<p type="text" class="form-control-static ff_to_rp">{{ toMoney($totalgudang) }}</p>
 							</div>
 						</div>
 						<div class="form-group" style="margin-bottom: 0px;">
@@ -115,22 +139,7 @@
 								Total Modal Keseluruhan 
 							</label>
 							<div class="g-sm-6">
-								<p type="text" class="form-control-static">5456</p>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">Cash Flow Hari Ini</div>
-				<div class="panel-body">
-					<form class="form-horizontal">
-						<div class="form-group" style="margin-bottom: 0px;">
-							<label class="g-sm-3 control-label">
-								Jumlah Uang 
-							</label>
-							<div class="g-sm-7">
-								<p type="text" class="form-control-static today-cash">{{toMoney($todayCash)}}</p>
+								<p type="text" class="form-control-static ff_to_rp">{{ toMoney($totaltokogudang) }}</p>
 							</div>
 						</div>
 					</form>
@@ -407,7 +416,6 @@
 </div>
 </div>
 
-<script>
-
+<script> 
 </script>
 @stop
