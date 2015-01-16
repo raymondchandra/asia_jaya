@@ -43,7 +43,7 @@ class ZCreateForeignKey extends Migration {
 		Schema::table('returns', function($table)
 		{
 		    $table->foreign('order_id')->references('id')->on('orders');
-		    $table->foreign('trade_product_id')->references('id')->on('products');
+		    $table->foreign('trade_product_id')->references('id')->on('product_details');
 		});
 	}
 

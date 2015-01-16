@@ -144,14 +144,14 @@
 						@if($dataOrder != null)
 							@foreach($dataOrder as $data)
 							<tr> 
-								<td>
+								<td id="no_nota_{{$data->id}}">
 									{{ $data->no_nota }}
 									<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
 									<input type="hidden" id="order_price_{{$data->id}}" value="{{$data->price}}">
 									<input type="hidden" id="transaction_id_{{$data->id}}" value="{{$data->transaction_id}}">
 									<input type="hidden" id="prod_code_{{$data->id}}" value="{{$data->prod_code}}">
 								</td>
-								<td>
+								<td id="cust_name_{{$data->id}}">
 									{{ $data->cust_name }}
 								</td>
 								<td>
@@ -204,13 +204,13 @@
 										$('#body_content').html("");
 										$row = "";
 										$.each(response, function(i,data){
-											$row += "<tr><td>";
+											$row += "<tr><td id='no_nota_"+data.id+"'>";
 											$row += data.no_nota;
 											$row += "<input type='hidden' id='prod_quantity_"+data.id+"' value='"+data.quantity+"' >";
 											$row += "<input type='hidden' id='order_price_"+data.id+"' value='"+data.price+"' >";
 											$row += "<input type='hidden' id='transaction_id_"+data.id+"' value='"+data.transaction_id+"' >";
 											$row += "<input type='hidden' id='prod_code_"+data.id+"' value='"+data.prod_code+"' >";
-											$row += "</td><td>";
+											$row += "</td><td id='cust_name_"+data.id+"'>";
 											$row += data.cust_name;
 											$row += "</td><td>";
 											$row += data.created_at;
@@ -242,17 +242,20 @@
 	
 	$('body').on('click','.view_detail_button',function(){
 		$id = $(this).next().val();
+		$no_nota = $('#no_nota_'+$id).text();
 		$quantity = $('#prod_quantity_'+$id).val();
 		$price = $('#order_price_'+$id).val();
 		$transaction_id = $('#transaction_id_'+$id).val();
 		$prod_code = $('#prod_code_'+$id).val();
+		$cust_name = $('#cust_name_'+$id).text();
+		$('#pop_up_trans_name').text($cust_name);
 		
 		$('#transaction_detail_content').html("");
 		$.ajax({
 			type : 'GET',
-			url: '{{URL::route('david.get_order_by_trans_id')}}',
+			url: '{{URL::route('gentry.get_order_by_order_id')}}',
 			data: {
-				'data' : $transaction_id
+				'data' : $id
 			},
 			success: function(response){
 				$data = "";
@@ -273,7 +276,7 @@
 					$total = (parseInt($price)/parseInt($quantity)*parseInt($quantity));
 					$data += $total;
 					$data += "</td><td>";
-					$data += "<button type='button' class='btn btn-warning btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
+					$data += "<button type='button' class='btn btn-warning btn-xs view_pilih_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
 					$data += "</td></tr>";
 				});
 				
@@ -283,6 +286,52 @@
 				alert("responseText: "+xhr.responseText);
 			}
 		},'json');
+		
+		$('body').on('click','.view_pilih_button',function(){
+			$('#prod_quantity_pop').text($quantity);
+			$('#prod_name_pop').text($prod_code);
+			
+			$('body').on('click','.f_pilih_tipe_retur', function(){
+
+				var target = $(this).find(":selected").val();
+
+				if(target == "3"){
+					$('#nominal_uang').val(parseInt($price)/parseInt($quantity));
+				}
+			});
+			
+			$('body').on('click','#save_pop',function(){
+				//alert($id);
+				$type = $('#type_return option:selected').text();
+				$trade_id = $('#id_trade_prod').val();
+				$return_quantity = $("#quantity_pop").val();
+				$nominal_uang = $('#nominal_uang').val();
+				
+				//alert($trade_id);
+				//alert($type);
+				
+				$.ajax({
+					type: 'PUT',
+					url: '{{URL::route('gentry.insert_return')}}',
+					data: {
+						'order_id' : $id,
+						'no_nota' : $no_nota,
+						'type' : $type,
+						'trade_id' : $trade_id,
+						'return_quantity' : $return_quantity,
+						'nominal_uang' : $nominal_uang
+					},
+					success: function(response){
+						alert(response);
+						//alert('Insert Berhasil');
+					},error: function(xhr, textStatus, errorThrown){
+						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+						alert("responseText: "+xhr.responseText);
+					}
+				},'json');
+				
+			});
+		});
 	});
 	
 	/*
@@ -335,56 +384,5 @@
 		}
 	});
 	/* -- jan 9 2015 | END -- */
-
-		$('body').on('click','.view_detail_button',function(){
-			$id = $(this).next().val();
-			$prodName = $('#prod_name_'+$id).text();
-			$prodQuantity = $('#prod_quantity_'+$id).val();
-			$('#prod_name_pop').text($prodName);
-			$('#prod_quantity_pop').text($prodQuantity);
-			
-			$('body').on('click','.f_pilih_tipe_retur', function(){
-
-				var target = $(this).find(":selected").val();
-
-				if(target == "3"){
-					$tempQuantity = $('#prod_quantity_'+$id).val();
-					$tempPrice = $('#order_price_'+$id).val();
-					$('#nominal_uang').val($tempPrice / $tempQuantity);
-				}
-			});
-			
-			$('body').on('click','#save_pop',function(){
-				//$prod_id = $('#prod_id_'+$id).val();
-				$type = $('#type_return option:selected').text();
-				//alert($type);
-				$trade_id = $('#id_trade_prod').val();
-				$return_quantity = $("#quantity_pop").val();
-				$nominal_uang = $('#nominal_uang').val();
-				
-				//alert($return_quantity);
-				
-				$.ajax({
-					type: 'PUT',
-					url: '{{URL::route('gentry.insert_return')}}',
-					data: {
-						'order_id' : $id,
-						//'prod_id' : $prod_id,
-						'type' : $type,
-						'trade_id' : $trade_id,
-						'return_quantity' : $return_quantity,
-						'nominal_uang' : $nominal_uang
-					},
-					success: function(response){
-						//alert(response);
-						alert('Insert Berhasil');
-					},error: function(xhr, textStatus, errorThrown){
-						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-						alert("responseText: "+xhr.responseText);
-					}
-				},'json');
-				
-				});
-		});
 	</script>
 	@stop

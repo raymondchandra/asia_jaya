@@ -31,8 +31,8 @@ class ReturnsController extends \BaseController {
 		@return :
 		-) Fungsi ini digunakan untuk menambahkan 1 baris baru ke dalam tabel return
 	*/
-	public function insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $returnQuantity, $in_amount, $out_amount){
-		$data = array("order_id"=>$orderId, "type"=>$type, "status"=>$status, "solution"=>$solution, "trade_product_id"=>$tradeProductId, "difference"=>$difference, "return_quantity"=>$returnQuantity);
+	public function insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $returnQuantity, $in_amount, $out_amount){
+		$data = array("no_faktur"=>$no_nota, "order_id"=>$orderId, "type"=>$type, "status"=>$status, "solution"=>$solution, "trade_product_id"=>$tradeProductId, "difference"=>$difference, "return_quantity"=>$returnQuantity);
 		$validator = Validator::make($data, ReturnDB::$rules);
 
 		if ($validator->fails())

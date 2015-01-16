@@ -519,6 +519,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::post('/post_sign_out', ['as'=>'david.post_sign_out','uses' => 'AccountsController@postLogOut']);
 	
+	Route::get('/get_order_by_order_id', ['as'=>'gentry.get_order_by_order_id','uses' => 'returnController@getOrderByOrderId']);
+	
 });
 
 

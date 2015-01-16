@@ -493,6 +493,34 @@ class returnController extends \HomeController{
 		//$joinProdDet = DB::table('product_details')->join('products', 'product_details.product_id', '=', 'products.id')->get();
 	}
 	
+	function getOrderByOrderId(){
+		$id = Input::get('data');
+		$order = Order::where('id','=',$id)->get();
+		
+		if(count($order) == 0)
+		{
+			$order = null;
+			$response = array('code'=>'404','status' => 'Not Found', 'messages' => $order);
+		}
+		else
+		{
+			foreach($order as $ord)
+			{
+				$product_detail = ProductDetail::find($ord->product_detail_id);
+				$product = Product::find($product_detail->product_id);
+				$ord->namaProduk = $product->name;
+				$ord->warna = $product_detail->color;
+				$ord->hargaSatuan = $product->sales_price;
+				$ord->foto = $product_detail->photo;
+				$ord->stock_shop = $product_detail->stock_shop;
+				$ord->stock_storage = $product_detail->stock_storage;
+			}
+			$response = array('code'=>'200','status' => 'OK', 'messages' => $order);
+		}
+		
+		return Response::json($response);
+	}
+	
 	public function find_cust_name($transaction_id){
 		$customer_id = Transaction::find($transaction_id)->customer_id;
 		$customer_name = Customer::find($customer_id)->name;
@@ -507,6 +535,7 @@ class returnController extends \HomeController{
 	
 	public function returnProduct(){
 		$orderId = Input::get('order_id');
+		$no_nota = Input::get('no_nota');
 		$type = Input::get('type');
 		$status = "pending";
 		$solution = "pending";
@@ -539,7 +568,8 @@ class returnController extends \HomeController{
 		}else if($type == "tukar dengan barang yang beda"){
 			$type = 2;
 			
-			$product_price = Product::find($tradeProductId)->sales_price;
+			$product_id = ProductDetail::find($tradeProductId)->product_id;
+			$product_price = Product::find($product_id)->sales_price;
 			$in_amount = $product_price;
 			$difference = $priceReturn-($product_price*$return_quantity);
 			if($difference < 0){
@@ -558,10 +588,10 @@ class returnController extends \HomeController{
 		}
 		
 		$returnController = new ReturnsController();
-		$addReturns = $returnController->insertWithParam($orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
-		//$temp = json_decode($addReturns->getContent());
-		return $addReturns;
-		//return $difference;
+		$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
+		$temp = json_decode($addReturns->getContent());
+		//return $addReturns;
+		return $temp->{'status'};
 	}
 	
 	public function updateSolution()
