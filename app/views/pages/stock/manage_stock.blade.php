@@ -495,6 +495,9 @@
 									{
 										$('#example1').handsontable('setDataAtCell', i, 3, kode_barang,"alter");
 										$('#example1').handsontable('setDataAtCell', i, 5, merek_barang,"alter");
+										$('#example1').handsontable('setDataAtCell', i, 7, harga_modal,"alter");
+										$('#example1').handsontable('setDataAtCell', i, 8, harga_min,"alter");
+										$('#example1').handsontable('setDataAtCell', i, 9, harga_jual,"alter");
 									}
 								}
 								return ;
