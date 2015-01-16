@@ -12,17 +12,18 @@
 						<label class="g-xs-4 control-label"> 
 							Jumlah Kuantitas
 						</label>
-						<div class="g-xs-4"> 
+						<div class="g-xs-7"> 
 
 							<div class="input-group">
-							  <span class="input-group-addon ff_qty_min"><span class="glyphicon glyphicon-minus"></span></span>
-							  <input type="number" class="form-control" id="ff_quant_first" value="1">
-							  <span class="input-group-addon ff_qty_plus"><span class="glyphicon glyphicon-plus"></span></span>
+							  <span class="input-group-addon fq_qty_min"><span class="glyphicon glyphicon-minus"></span></span>
+							  <input type="number" class="form-control" id="ff_quant_first" value="1" style="padding-right: 12px; text-align: center;">
+							  <span class="input-group-addon fq_qty_plus"><span class="glyphicon glyphicon-plus"></span></span>
 							</div>
 						</div>
 					</div>
-					<div class="form-group has-feedback">
-						
+					<div class="form-group has-feedback"> 
+						<label class="g-xs-4 control-label">  
+						</label>
 						<div class="g-xs-3">
 							<button type="button" class="btn btn-success ff_save_to_pesanan" data-dismiss="modal">Save</button>
 						</div>
@@ -50,13 +51,13 @@
 			$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 			$data = $data + parseInt($('#ff_quant_first').val())*($quant.length) + "</td> <td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-			$data = $data + "" + toRp($price) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+			$data = $data + "" + toRp( parseInt($('#ff_quant_first').val())*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 			
 			$('#pesanan_content_'+$inc).prepend($data);
 			
 			$subtotalNow = toAngka($('#subtotal_text_'+$inc).text());
 			var a = parseInt($subtotalNow);
-			var b = parseInt($price);
+			var b = parseInt( parseInt($('#ff_quant_first').val())*$price );
 			var total = a+b;
 			$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
 		}
@@ -91,5 +92,8 @@
 	
 	function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 
+	$('#pop_up_qty').on('hidden.bs.modal', function () {
+		$('#ff_quant_first').val(1);
+	});
 
 </script>

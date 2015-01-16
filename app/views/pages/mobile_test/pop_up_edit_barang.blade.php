@@ -42,14 +42,17 @@
 							<p class="form-control-static" id="edit_harga_min"></p>
 						</div>
 					</div>
-					<div class="form-group" style="margin-bottom: 0px;">
+					<div class="form-group" style=" ">
 						<label for="" class="g-sm-3 control-label">Harga@</label>
-						<div class="g-sm-4">
-							<input type="number" class="form-control" id="f_hsatuan_qty" value="">
+						<div class="g-sm-6">
+							<!--<div class="input-group"> -->
+								<input type="number" class="form-control" id="f_hsatuan_qty" value="">
+							<!--	<span class="input-group-addon">.000</span>
+							</div> -->
 						</div>
 					</div>
 					<div class="form-group" style="margin-bottom: 0px;"> 
-						<label for="" class="g-sm-2 control-label">Qty.</label>
+						<label for="" class="g-sm-3 control-label">Qty.</label>
 						<div class="g-sm-6">
 							<!--<input type="number" class="form-control" value="" id="f_edit_qty">-->
 
