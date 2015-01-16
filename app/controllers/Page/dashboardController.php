@@ -23,19 +23,19 @@ class dashboardController extends \HomeController{
 		$yearCash = $yearCash->{'message'};
 
 		$totaltoko = 0;
-		$stock = 0;
+		$stocktok = 0;
 		$products = DB::table('products')->get();
 		foreach($products as $product)
 		{
 			$detail_product = DB::table('product_details')->where('product_id', '=', $product->id)->get();
 			foreach($detail_product as $row_detail_product)
 			{
-				$stock += $row_detail_product->stock_shop;
+				$stocktok += $row_detail_product->stock_shop * $product->modal_price;
 			}
-			$totaltoko += ($stock * $product->modal_price);
+			$totaltoko = $stocktok;
 		}
 
-		$stock = 0;
+		$stockgud = 0;
 
 		$totalgudang = 0;
 		$products = DB::table('products')->get();		
@@ -44,9 +44,9 @@ class dashboardController extends \HomeController{
 			$detail_product = DB::table('product_details')->where('product_id', '=', $product->id)->get();
 			foreach($detail_product as $row_detail_product)
 			{
-				$stock += $row_detail_product->stock_storage;
+				$stockgud += $row_detail_product->stock_storage * $product->modal_price;
 			}
-			$totalgudang += ($stock * $product->modal_price);
+			$totalgudang = $stockgud;
 		}
 
 		$totaltokogudang = $totaltoko + $totalgudang;
