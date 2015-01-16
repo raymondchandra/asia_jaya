@@ -54,16 +54,38 @@
 									<div class="">
 										<div class="form-group">
 											<label class="g-sm-3 control-label"></label>
-											<div class="g-sm-6">
+											<div class="g-sm-9">
 												<span class="clearfix"></span>
-												<div class="pad" data-jsfiddle="example1"> 
+												<!--<div class="pad" data-jsfiddle="example1"> -->
 
-													<div id="example1" class="handsontable"> </div>
- 
-												</div>
+												<div id="example1" class="handsontable" style="float: left"> </div>
+												<table class="table table-bordered" style="float: left; width: 200px;">
+													<thead>
+														<tr>
+															<th style="padding: 0px; height: 26px; text-align: center">
+																Gambar
+															</th>
+														</tr>
+													</thead>
+													<tbody class="f_tbody_product_img_container">
+
+														@for($_n = 0; $_n < 15; $_n++)
+
+														<tr style="height: 23px;">
+															<td style="padding: 0px;">
+																<input accept="image/*" type="file" id="" class="product_foto_{{ $_n }}">
+															</td>
+														</tr>
+
+														@endfor
+													</tbody>
+												</table>
+
+												<!--</div>-->
 												<script>
+												<?php $sidebar_i = 0; ?>
 												var data = [ 
-												@for($sidebar_i = 1; $sidebar_i < 15; $sidebar_i++)
+												@for($sidebar_i = 0; $sidebar_i < 15; $sidebar_i++)
 												{
 													prod_id: "",
 													prod_detail_id: "",
@@ -77,14 +99,9 @@
 
 												];
 
-
-												var container = document.getElementById("example1"),
-												exapmleConsole = document.getElementById("example1console"),
-												autosave = document.getElementById('autosave'),
-												load = document.getElementById('load'),
-												save = document.getElementById('save'),
-												autosaveNotification,
-												hot1 = new Handsontable(container,{
+ 												var count = {{$sidebar_i-1 }}
+												var save = document.getElementById('save'); 
+												 $("#example1").handsontable({
 													data: data,
 				  									enterMoves: {row: 1, col: 0},
 													//startRows: 10,
@@ -92,7 +109,7 @@
 														      {data: "prod_id", renderer: "html"},
 														      {data: "prod_detail_id", renderer: "html"},
 														      {data: "sidebar", renderer: "html"},
-														      {data: "command", renderer: "html"},
+														      //{data: "command", renderer: "html"},
 														      ],
 
 				    								colWidths: [100, 100, 100, 200],
@@ -114,39 +131,40 @@
 												      	return cellProperties;
 												      },
 													afterChange: function (change, source) {
-														//if (source === 'loadData') { <- kade2 bikin error klo di uncomment
-													        //return; //don't save this change 
-													  //  }
-													   // if(autosave.checked){
-													    //	clearTimeout(autosaveNotification);
-													    	/*$.ajax(
-													    		"json/save.json",
-													    		"POST",
-													    		function (data) {
-													    			exapmleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
-													    			autosaveNotification = setTimeout(function () {
-													    				exapmleConsole.innerText ='Changes will be autosaved';
-													    			}, 1000);
-													    		},
-													    		JSON.stringify({data: change})
-													    		);*/
-													   // }
+														
+															
+										      	var ht = $('#example1').handsontable('getInstance');
+										      	var coordinate = ht.getSelected();
+
+												var rowArr 			= ht.getDataAtRow(coordinate[0]);
+														if(source == 'edit')
+														{ 
+															if(coordinate[0] == count+1){
+																count++;
+																trhtml = '<tr style="height: 23px;">'
+																trhtml += '<td style="padding: 0px;">'
+																trhtml += '<input accept="image/*" type="file" id="" class="product_foto_'+count+'">'
+																trhtml += '</td>'
+																trhtml += '</tr>'
+
+																$('.f_tbody_product_img_container').append(trhtml);
+															//$('#example1').handsontable('setDataAtCell', count, 3, '<input accept="image/*" type="file" id="" class="product_foto">',"alter");
+															return ;
+															}
+															//alert(coordinate[0]);
+														}
+														//alert(count);
+														//alert(coordinate[0]);
+														//count++;
+ 
+														//$('#example1').handsontable('setDataAtCell', 14, 3, "command","alter");
 
 
-													}
+														//return ;
+
+													} 
 													});
 
-												Handsontable.Dom.addEvent(load,'click', function (){
-													/*$.ajax(
-														"json/load.json",
-														'GET',
-														function (res) {
-															var data = JSON.parse(res.response);
-															hot1.loadData(data.data);
-															exapmleConsole.innerText = 'Data loaded';
-														}
-														);*/
-												});
 
 												Handsontable.Dom.addEvent(save,'click', function (){
 													/*$.ajax(
@@ -166,14 +184,7 @@
 													    );*/
 												});
 
-												Handsontable.Dom.addEvent(autosave,'click', function (){
-													/*if (autosave.checked) {
-														exapmleConsole.innerText = 'Changes will be autosaved';
-													}
-													else {
-														exapmleConsole.innerText ='Changes will not be autosaved';
-													}*/
-												});
+											
 												</script>
 												<!--<table class="table table-bordered" style="margin-top: 300px;">
 													<thead>
