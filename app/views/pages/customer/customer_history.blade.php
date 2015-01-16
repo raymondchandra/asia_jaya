@@ -145,9 +145,9 @@
 					$data += resp.warna;
 					$data += "</td><td>";
 					$data += resp.quantity;
-					$data += "</td><td>IDR ";
+					$data += "</td><td>Rp ";
 					$data += toRp(resp.hargaSatuan);
-					$data += "</td><td>IDR ";
+					$data += "</td><td>Rp ";
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
 					$data += "</td>";
 					$data += "</tr>"
@@ -156,10 +156,10 @@
 				});
 				$('#transaction_status_detail').text($status);
 				$('#transaction_is_void_detail').text($is_void);
-				$('#transaction_subtotal_detail').text("IDR " + toRp($total));
-				$('#transaction_diskon_detail').text("IDR " + toRp(toAngka($discount)));				
+				$('#transaction_subtotal_detail').text("Rp " + toRp($total));
+				$('#transaction_diskon_detail').text("Rp " + toRp(toAngka($discount)));				
 				$('#transaction_tax_detail').text($tax);			
-				$('#transaction_total_detail').text("IDR " + toRp($total));			
+				$('#transaction_total_detail').text("Rp " + toRp($total));			
 			},error: function(xhr, textStatus, errorThrown){
 				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 				alert("responseText: "+xhr.responseText);

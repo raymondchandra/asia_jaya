@@ -197,7 +197,7 @@
 	<script>
 		/*$(document).ready(function(){
 			//$total = $('#totalTransaksi').text();
-			//$('#totalTransaksi').text("IDR " + $total);
+			//$('#totalTransaksi').text("Rp " + $total);
 		});*/
 	
 		function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}

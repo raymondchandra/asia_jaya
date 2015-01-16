@@ -297,7 +297,7 @@
 						<tbody id="body_content">
 							<?php
 			
-								function toMoney($val,$symbol='IDR ',$r=0)
+								function toMoney($val,$symbol='Rp ',$r=0)
 								{
 									$n = $val;
 									$sign = ($n < 0) ? '-' : '';
@@ -479,9 +479,9 @@
 						$row += "Tidak Ada Nama";
 					}
 					$row += "</td><td id='hidden_trans_total_"+data.id+"'>";
-					$row += "IDR " + data.total;
+					$row += "Rp" + data.total;
 					$row += "</td><td d='hidden_trans_discount_"+data.id+"'>";
-					$row += "IDR " + data.discount;
+					$row += "Rp " + data.discount;
 					$row += "</td><td id='hidden_trans_tax_"+data.id+"'>";
 					$row += data.tax + "%";
 					$row += "</td><td>";
@@ -665,9 +665,9 @@
 					$data += "<td>";
 					$data += resp.stock_shop + " | " + resp.stock_storage; 
 					$data += "</td>";
-					$data += "<td class='f_price_transaction'>IDR ";
+					$data += "<td class='f_price_transaction'>Rp ";
 					$data += toRp(resp.hargaSatuan);
-					$data += "</td><td class='f_subtotal_price_transaction'>IDR ";
+					$data += "</td><td class='f_subtotal_price_transaction'>Rp ";
 					$data += toRp(parseInt(resp.hargaSatuan) * parseInt(resp.quantity));
 					$data += "</td>";
 					$data += "<td>";
@@ -678,17 +678,17 @@
 					$('#transaction_detail_content').html($data);
 					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);
 				});
-				//$('#transaction_subtotal_detail').text("IDR " + toRp($total));
+				//$('#transaction_subtotal_detail').text("Rp " + toRp($total));
 				$('#transaction_diskon_detail').val(toAngka($discount));			
 				$('#transaction_tax_detail').text($tax);			
-				$('#transaction_total_detail').text("IDR " + toRp($total));
+				$('#transaction_total_detail').text("Rp " + toRp($total));
 				if($status == "Paid")
 				{
-					$('#f_uang_bayaran').val("IDR " + toRp($paid));
+					$('#f_uang_bayaran').val("Rp " + toRp($paid));
 					$('#f_uang_bayaran').attr('disabled','disabled');
 					$('#transaction_diskon_detail').attr('disabled','disabled');
 					$kembalian = parseInt($paid) - parseInt($total);
-					$('#f_uang_kembalian').text("IDR " + toRp($kembalian));
+					$('#f_uang_kembalian').text("Rp " + toRp($kembalian));
 					$('#save-btn').addClass('hidden');
 					$('#save-btn').addClass('paid');
 				}
@@ -725,7 +725,7 @@
 		var f_cur_discounted = f_new_subtotal - f_cur_transaction_diskon_detail;
 		var f_cur_transaction_total_detail = f_cur_discounted + (f_cur_discounted*f_cur_transaction_tax_detail);
 
-		$('#transaction_total_detail').text("IDR " + toRp(f_cur_transaction_total_detail));
+		$('#transaction_total_detail').text("Rp " + toRp(f_cur_transaction_total_detail));
 		var current = $('#deleted_order').val();
 		if(current == "-")
 		{
@@ -812,7 +812,7 @@
 			var sub_tot_text = toAngka($(this).closest('tr').find('.f_price_transaction').text());
 			var perkalian_subtotal = sub_tot_text*($(this).val());
 			//alert(perkalian_subtotal);
-			$(this).closest('tr').find('.f_subtotal_price_transaction').text('IDR ' + toRp(perkalian_subtotal));
+			$(this).closest('tr').find('.f_subtotal_price_transaction').text('Rp ' + toRp(perkalian_subtotal));
 			$total = 0;
 			$("#transaction_detail_content tr").each(function(i, v)
 			{
@@ -822,7 +822,7 @@
 			$total -= toAngka($('#transaction_diskon_detail').val())
 			$tax = $total * toAngka($('#transaction_tax_detail').text()) / 100;
 			$total += $tax;
-			$('#transaction_total_detail').text("IDR " + toRp($total));
+			$('#transaction_total_detail').text("Rp " + toRp($total));
 			
 			//cek stock
 			$shop = $(this).closest('tr').find('#hidden_shop').val();

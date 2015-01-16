@@ -3,7 +3,7 @@
 <div class="container-fluid">
 	<?php
 			
-		function toMoney($val,$symbol='IDR ',$r=0)
+		function toMoney($val,$symbol='Rp ',$r=0)
 		{
 			$n = $val;
 			$sign = ($n < 0) ? '-' : '';
@@ -58,7 +58,7 @@
 												if(response['code'] == 200)
 												{
 													alert('success add opeing cash');
-													$('.today-cash').text("IDR " + toRp(response['message']));
+													$('.today-cash').text("Rp " + toRp(response['message']));
 												}
 												else
 												{
@@ -90,6 +90,7 @@
 					</form>
 				</div>
 			</div>
+
 			<div class="panel panel-default">
 				<div class="panel-heading">Total Modal Keseluruhan</div>
 				<div class="panel-body">
@@ -99,7 +100,7 @@
 								Total Modal Toko 
 							</label>
 							<div class="g-sm-6">
-								<p type="text" class="form-control-static">5456</p>
+								<p type="text" class="form-control-static ff_to_rp">{{ toMoney($totaltoko) }}</p>
 							</div>
 						</div>
 						<div class="form-group" style="margin-bottom: 0px;">
@@ -107,7 +108,7 @@
 								Total Modal Gudang 
 							</label>
 							<div class="g-sm-6">
-								<p type="text" class="form-control-static">5456</p>
+								<p type="text" class="form-control-static ff_to_rp">{{ toMoney($totalgudang) }}</p>
 							</div>
 						</div>
 						<div class="form-group" style="margin-bottom: 0px;">
@@ -115,7 +116,7 @@
 								Total Modal Keseluruhan 
 							</label>
 							<div class="g-sm-6">
-								<p type="text" class="form-control-static">5456</p>
+								<p type="text" class="form-control-static ff_to_rp">{{ toMoney($totaltokogudang) }}</p>
 							</div>
 						</div>
 					</form>
@@ -407,7 +408,6 @@
 </div>
 </div>
 
-<script>
-
+<script> 
 </script>
 @stop

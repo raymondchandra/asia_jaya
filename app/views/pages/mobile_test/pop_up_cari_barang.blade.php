@@ -88,7 +88,7 @@
 						$data = $data + "</span> <span style='display: block;'> ";
 						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
 						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
-						$data = $data + "<span class='pull-right'>IDR " + toRp(resp.sales_price) + "</span> </span>";
+						$data = $data + "<span class='pull-right'>Rp " + toRp(resp.sales_price) + "</span> </span>";
 						$data = $data + "<span class='hiddenVal'>";
 						$data = $data + "<input type='hidden' value='" + resp.id + "' id='id_" + resp.id + "' class='id' />";
 						$data = $data + "<input type='hidden' value='" + resp.product_code + "' id='code_" + resp.id + "' />";
@@ -142,7 +142,7 @@
 						$data = $data + "</span> <span style='display: block;'> ";
 						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
 						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
-						$data = $data + "<span class='pull-right'>IDR " + toRp(resp.sales_price) + "</span> </span>";
+						$data = $data + "<span class='pull-right'>Rp " + toRp(resp.sales_price) + "</span> </span>";
 						$data = $data + "<span class='hiddenVal'>";
 						$data = $data + "<input type='hidden' value='" + resp.id + "' id='id_" + resp.id + "' class='id' />";
 						$data = $data + "<input type='hidden' value='" + resp.product_code + "' id='code_" + resp.id + "' />";
@@ -193,7 +193,7 @@
 						$data = $data + "</span> <span style='display: block;'> ";
 						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
 						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
-						$data = $data + "<span class='pull-right'>IDR " + toRp(resp.sales_price) + "</span> </span>";
+						$data = $data + "<span class='pull-right'>Rp " + toRp(resp.sales_price) + "</span> </span>";
 						$data = $data + "<span class='hiddenVal'>";
 						$data = $data + "<input type='hidden' value='" + resp.id + "' id='id_" + resp.id + "' class='id' />";
 						$data = $data + "<input type='hidden' value='" + resp.product_code + "' id='code_" + resp.id + "' />";
@@ -251,7 +251,7 @@
 			var a = parseInt($subtotalNow);
 			var b = parseInt($price);
 			var total = a+b;
-			$('#subtotal_text_'+$inc).text("IDR " + toRp(total));
+			$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
 		}*/
 
 		//show modal set qty pertama kali

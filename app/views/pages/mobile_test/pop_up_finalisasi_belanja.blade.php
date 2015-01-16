@@ -109,7 +109,7 @@
 						</label>
 						<p type="text" class="form-control-static" placeholder="">
 							<span id="total_text">
-							IDR 0
+							Rp 0
 							</span>
 							<button class="btn btn-warning btn-sm pull-right f_diskon_revealer">
 								<span class="glyphicon glyphicon-usd"></span>
@@ -132,7 +132,7 @@
 						</label>
 						<p type="text" class="form-control-static" placeholder="">
 							<span id="total_biaya_text">
-							IDR 0
+							Rp 0
 							</span>
 						</p>
 					</div>
@@ -166,7 +166,7 @@
 					var diskon = $('#diskon_text').val();
 					var tax = $('#transaction_tax').val();
 					var newTotal = (oldTotal-diskon) * ((100+parseInt(tax)) / 100);
-					$('#total_biaya_text').text("IDR " + toRp(newTotal));
+					$('#total_biaya_text').text("Rp " + toRp(newTotal));
 				});
 				
 				$('body').on('click','.f_send_ke_kasir',function(){
