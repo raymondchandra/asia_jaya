@@ -352,6 +352,109 @@ class restockController extends \HomeController{
 		}
 	}
 	
+	public function addNewProductView2()
+	{
+		$productCode = Input::get('product_code');
+		$name = Input::get('name');
+		$color = Input::get('color');
+		$modalPrice = Input::get('modal_price');
+		$minPrice = Input::get('min_price');
+		$salesPrice = Input::get('sales_price');
+		$stockShop = Input::get('detail_stock_shop');
+		$stockStorage = Input::get('detail_stock_storage');
+		$photo = Input::get('photo');
+		$counter = Input::get('counter');
+		$productController = new ProductsController();
+		for($i=0 ; $i<$counter ; $i++)
+		{
+			$product = $productController->getByCode($productCode[$i]);
+			$productJson = json_decode($product->getContent());
+			//cek produk..udah ada apa belum
+			if($productJson->{'code'} == '404')
+			{
+				//buat baru
+				$insertResult = $productController->insertWithParam($productCode[$i], $name[$i], $modalPrice[$i]*1000, $minPrice[$i]*1000, $salesPrice[$i]*1000, $stockShop[$i], $stockStorage[$i], 1, 0);
+				$insertResultJson = json_decode($insertResult->getContent());
+				if($insertResultJson->{'code'} == '500')
+				{
+					//gagal
+				}
+				else
+				{
+					//berhasil
+					$id = $insertResultJson->{'message'};
+				}
+			}
+			else
+			{
+				//update stock product..
+				$prdctRes = $productJson->{'messages'};
+				$prdct = Product::find($prdctRes->id);
+				$id = $prdct->id;
+				$current_shop = $prdct->stock_shop;
+				$current_storage = $prdct->stock_storage;
+				$prdct->stock_shop = $current_shop + $stockShop[$i];
+				$prdct->stock_storage = $current_storage + $stockStorage[$i];
+				try
+				{
+					$prdct->save();
+				}
+				catch(Exception $ex)
+				{
+				
+				}
+			}
+			
+			//buat produk detail baru
+			$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $stockShop[$i], $stockStorage[$i], $id,0, 0, 0);
+		
+			//cek seri
+			$productDetailController = new ProductDetailsController();
+			$checker = $productDetailController->getByProductId($id);
+			$checkerJson = json_decode($checker->getContent());
+			$chekerResult = $checkerJson->{'messages'};
+			if(count($chekerResult) <= 1)
+			{
+				//jgn buatin seri
+			}
+			else
+			{
+				//buatin seri
+				//buat reference dulu
+				$reference = "";
+				foreach($chekerResult as $rslt)
+				{
+					$reference .= $rslt->id."-1;";
+				}
+				$seri = $productDetailController->getSeri($productCode[$i]);
+				$seriJson = json_decode($seri->getContent());
+				if($seriJson->{'code'} == '404')
+				{
+					//buat seri baru
+					$insertDetailStatus = $this->insertNewProductDetail($productCode[$i]."-seri", '-', 0, 0, $id,0, $reference, 1);
+				}
+				else
+				{
+					//update reference seri...
+					$prdctSeriRes = $seriJson->{'messages'};
+					$prdctSeri = ProductDetail::find($prdctSeriRes->id);
+					$prdctSeri->reference = $reference;
+					try
+					{
+						$prdctSeri->save();
+					}
+					catch(Exception $ex)
+					{
+					
+					}
+					
+				}
+			}
+		}
+		
+		return "proses selesai";
+	}
+	
 	public function addNewProductView(){
 		$productCode = Input::get('product_code');
 		$name = Input::get('name');
@@ -527,12 +630,12 @@ class restockController extends \HomeController{
 		$mark = 0;
 		$fileName[] = array();
 		
-		for($i=1 ; $i<=$count ; $i++)
+		for($i=0 ; $i<$count ; $i++)
 		{
 			if(isset($_FILES['file_'.$i]['name']))
 			{
 				$ext = pathinfo($_FILES['file_'.$i]['name'], PATHINFO_EXTENSION);
-				$newFileName = $datas[$i-1].".".$ext;
+				$newFileName = $datas[$i].".".$ext;
 				if(true){
 					$sourcePath = $_FILES['file_'.$i]['tmp_name']; 																						// Storing source path of the file in a variable
 					$targetPath = "/xampp/htdocs/asia_jaya/public/assets/product_img/".$newFileName; 		// Target path where file is to be stored

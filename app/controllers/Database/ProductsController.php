@@ -79,6 +79,21 @@ class ProductsController extends \BaseController {
 		return $this->getReturn($product);
 	}
 	
+	public function getByCode($code)
+	{
+		$product = Product::where('product_code','=',$code)->first();
+		if ($product == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			$respond = array('code'=>'200','status' => 'OK','messages'=>$product);
+		}
+		
+		return Response::json($respond);
+	}
+	
 	/*
 		@author : Gentry Swanri
 		@parameter : $productCode

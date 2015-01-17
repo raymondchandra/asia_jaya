@@ -5,19 +5,13 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$reference = '2-1;3-1;';
-		$reference = explode(';',$reference,-1);
-		$result = array();
-		foreach($reference as $ref)
-		{
-			echo "1";
-			$explodeRes = explode('-',$ref);
-			$prodDetId = $explodeRes[0];
-			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prds.id', '=', $prodDetId)->first();
-			$result[] = $products;
-		}
-		
-		var_dump($result);
+		$productController = new ProductsController();
+		$product = $productController->getByCode(123);
+		$productJson = json_decode($product->getContent());
+		$prdct = $productJson->{'messages'};
+		$prdct->name="BRO";
+		$prdct->save();
+		var_dump($prdct);
 	});
 	Route::get('/tes2', function()
 	{
@@ -487,7 +481,7 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	//Route::put('/put_search_return', ['as'=>'gentry.put_search_return','uses' => 'returnController@search_product_return']);
 	
-	Route::put('/add_new_stock1', ['as'=>'gentry.add_new_stock1','uses' => 'restockController@addNewProductView']);
+	Route::put('/add_new_stock1', ['as'=>'gentry.add_new_stock1','uses' => 'restockController@addNewProductView2']);
 	
 	Route::put('/add_new_seri', ['as'=>'gentry.add_new_seri','uses' => 'restockController@addNewSeri']);
 	
