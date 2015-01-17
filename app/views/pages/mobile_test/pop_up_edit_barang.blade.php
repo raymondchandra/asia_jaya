@@ -11,6 +11,8 @@
 			</div>
 			<div class="f_slider_alert hidden"  style="text-align: center; padding-top:20px;">
 				Apakah Anda yakin ingin menghapus barang ini?
+				<span class="clearfix">
+				</span>
 				<button type="button" id="hyper_x" class="btn btn-danger" data-dismiss="modal">Ya</button>
 				<button type="button" class="btn btn-primary f_slider_tutup" data-dismiss="">Tidak</button>
 				<hr/>
@@ -45,8 +47,12 @@
 					<div class="form-group" style=" ">
 						<label for="" class="g-sm-3 control-label">Harga@</label>
 						<div class="g-sm-6">
-							<!--<div class="input-group"> -->
-								<input type="number" class="form-control" id="f_hsatuan_qty" value="">
+							<!--<div class="input-group"> -->  
+								<div class="input-group">
+									<input type="text" class="form-control" id="f_hsatuan_qty" aria-describedby="basic-ribuan">
+									<span class="input-group-addon" id="basic-ribuan">.000</span>
+									
+								</div>
 							<!--	<span class="input-group-addon">.000</span>
 							</div> -->
 						</div>
@@ -86,13 +92,13 @@
 							if($('#f_edit_qty').val() != 1){
 								var qty_temp = parseInt($('#f_edit_qty').val())-1; 
 								$('#f_edit_qty').val(qty_temp);
-								$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*qty_temp);
+								$('#f_subtotal_edit').text("Rp " + toRp( ($('#f_hsatuan_qty').val()*1000 )*qty_temp) );
 							}
 						});
 						$('body').on('click','.ff_qty_plus',function(){ 
 							var qty_temp = parseInt($('#f_edit_qty').val())+1; 
 							$('#f_edit_qty').val(qty_temp);
-							$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*qty_temp);
+							$('#f_subtotal_edit').text("Rp " + toRp( ($('#f_hsatuan_qty').val()*1000 )*qty_temp) );
 						});
 						</script>
 					</div>
@@ -133,7 +139,7 @@
 					
 					
 					$oldTotal = $('#currentTotal').val();
-					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
+					$newTotal = ($('#f_hsatuan_qty').val()*1000)*$('#f_edit_qty').val();
 					$('#price_'+$row_id).text("" + toRp($newTotal));
 					$inc = $('#tabRep').val(); 
 
@@ -162,6 +168,21 @@
 					$('.f_slider_alert').addClass('hidden');
 				});
 				
+
+				/* -- jan 9 2015 | START -- */
+				/* -- button disabled error prevention -- */
+				$('#f_hsatuan_qty').on('input', function() {  
+				   var ff_harga_min = parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_min').text()) );
+				   if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
+				   	$('#changeButton').attr('disabled','disabled');
+				   } else {
+				   	$('#changeButton').removeAttr('disabled');
+				   }  
+							$('#f_subtotal_edit').text("Rp " + toRp( ($('#f_hsatuan_qty').val()*1000 )*$('#f_edit_qty').val()  ) );
+
+
+				});
+				/* -- jan 9 2015 | END -- */
 				function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 				function toRp(angka){
 					var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
@@ -175,18 +196,6 @@
 					return rev2.split('').reverse().join('');
 				}
 
-
-				/* -- jan 9 2015 | START -- */
-				/* -- button disabled error prevention -- */
-				$('#f_hsatuan_qty').on('input', function() {  
-				   var ff_harga_min = parseFloat($(this).closest('.form-horizontal').find('#edit_harga_min').text());
-				   if( ($(this).val() < ff_harga_min) || isNaN($(this).val())){
-				   	$('#changeButton').attr('disabled','disabled');
-				   } else {
-				   	$('#changeButton').removeAttr('disabled');
-				   }
-				});
-				/* -- jan 9 2015 | END -- */
 			</script>
 
 		</div>

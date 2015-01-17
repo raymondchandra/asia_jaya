@@ -41,7 +41,23 @@
 		?>
 		<table>
 			<tr>
-				<td colspan="3">Toko Asia Jaya</td>
+				<td colspan="3">
+					<p style="text-align: center;  ">
+						<font style="font-size: 1.2em;">ASIA JAYA</font>
+						<br/>
+						Menjul Tas Import Wanita
+						<br />
+						Grosir &amp; Eceran 
+						<br />
+						-------
+						<br />
+						<font style="font-size: 0.8em;">Pusat Grosir Senen Jaya </font>
+						<br />
+						<font style="font-size: 0.8em;">Blok 4 Lt. 3 Blok B 7 No. 16 Jakarta Pusat</font>
+						<br />
+						HP: 081 910 558 710
+					</p>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="3">&nbsp;</td>
@@ -185,12 +201,21 @@
 			<tr>
 				<td colspan="3">
 					
-					<p>
-						Terimakasih telah berbelanja di toko kami.
+				
+					<p style="text-align: center; border: 1px solid #000; font-size: 0.8em;">
+						PERHATIAN!!!
 						<br/>
-						Barang yang sudah dibeli tidak dapat dikembalikan.
+						Barang yang sudah dibeli tidak dapat
 						<br />
-						Salam Owner.
+						ditukar atau dikembalikan.
+					</p>
+					<p style="text-align: center; font-size: 0.8em;">
+						Terima kasih, semoga tetap menjadi langanan
+					</p>
+					<p style="text-align: center; font-size: 0.9em;">
+						No. Rek: <br/>
+						BCA: 091 800 3765 a/n: Winnie Husin<br/>
+						Mandiri: 103-00-800-3765-4 a/n: Winnie Husin
 					</p>
 				</td>
 			</tr>

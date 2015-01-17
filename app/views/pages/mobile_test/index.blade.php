@@ -421,11 +421,11 @@
 			$('#edit_nama').text($nama);
 			$('#edit_warna').text($warna);
 
-			$('#edit_harga_min').text($min_price);
+			$('#edit_harga_min').text( toRp($min_price) );
 
-			$('#f_hsatuan_qty').val(toAngka($harga)/toAngka($quantity));
+			$('#f_hsatuan_qty').val( (toAngka($harga)/toAngka($quantity))/1000 );
 			$('#f_edit_qty').val($quantity);
-			$('#f_subtotal_edit').text("Rp " + $total);
+			$('#f_subtotal_edit').text("Rp " + toRp($total) );
 			$('#rowRep').val($row_id);
 			$('#tabRep').val($tab_id);
 			$('#minPrice').val($min_price);

@@ -15,17 +15,25 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
+				@if(Auth::user()->role == 1) 
 				<li><a href="{{URL::route('david.view_dashboard')}}"><span class="glyphicon glyphicon-home" style="color:#fff; margin-right:10px;"></span>Dashboard</a></li>
+				@endif
 				<li><a href="{{URL::route('david.view_transaction')}}"><span class="glyphicon glyphicon-usd" style="color:#fff; margin-right:10px;"></span>Transaksi Hari Ini</a></li>
 
 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-folder-close" style="color:#fff; margin-right:10px;"></span>Barang<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
+						@if( (Auth::user()->role == 1) || (Auth::user()->role == 2) ) 
 						<li><a href="{{URL::route('gentry.view_stock')}}"><span class="glyphicon glyphicon-unchecked" style="margin-right:10px;"></span>View Stock</a></li>
+						@endif
+						@if(Auth::user()->role == 1) 
 						<li><a href="{{URL::route('david.view_restock_history')}}"><span class="glyphicon glyphicon-collapse-down" style="margin-right:10px;"></span>View Restock History</a></li>
+						@endif
+						@if( (Auth::user()->role == 1) || (Auth::user()->role == 2) ) 
 						<li><a href="{{URL::route('gentry.view_return')}}"><span class="glyphicon glyphicon-log-in" style="margin-right:10px;"></span>View Retur</a></li>
 						<li><a href="{{URL::route('david.view_obral')}}"><span class="glyphicon glyphicon-new-window" style="margin-right:10px;"></span>View Obral</a></li>
+						@endif
 					</ul>
 				</li>
 
@@ -33,12 +41,18 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-briefcase" style="color:#fff; margin-right:10px;"></span>Laporan<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="{{URL::route('david.view_all_transaction')}}"><span class="glyphicon glyphicon-briefcase" style="margin-right:10px;"></span>Semua Transaksi</a></li>
-						<li><a href="{{URL::to('/test/view_keuntungan_bulanan')}}"><span class="glyphicon glyphicon-usd" style="margin-right:10px;"></span>Semua Keuntungan</a></li>
+						@if(Auth::user()->role == 1) 
+						<li><a href="{{URL::route('david.view_keuntungan')}}"><span class="glyphicon glyphicon-usd" style="margin-right:10px;"></span>Semua Keuntungan</a></li>
+						@endif
+						@if(Auth::user()->role == 1) 	
 						<li><a href="{{URL::route('david.view_cashflow')}}"><span class="glyphicon glyphicon-refresh" style="margin-right:10px;"></span>Semua Cashflow</a></li>
+						@endif
+						@if(Auth::user()->role == 1) 
 						<li><a href="{{URL::route('gentry.view_customer')}}"><span class="glyphicon glyphicon-user" style="margin-right:10px;"></span>Semua Customer</a></li>
+						@endif
 					</ul>
 				</li>
-
+				@if(Auth::user()->role == 1) 
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" style="color:#fff; margin-right:10px;"></span>Kepegawaian<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
@@ -46,10 +60,10 @@
 						<li><a href="{{URL::route('gentry.manage_log')}}"><span class="glyphicon glyphicon-stats" style="margin-right:10px;"></span>Log Karyawan</a></li>
 					</ul>
 				</li> 
-
-				
+				@endif
+				@if(Auth::user()->role == 1) 
 				<li><a href="{{URL::route('gentry.view_tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Set Tax</a></li>
-
+				@endif
 
 				<!--
 				<li class="dropdown">
