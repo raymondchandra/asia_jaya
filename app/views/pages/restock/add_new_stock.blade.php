@@ -39,22 +39,22 @@
 							<div class="panel-heading">Tambah Stock Produk</div>
 							<div class="panel-body">
 								<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" id="form_non_series">
-									<div class="form-group">
-										<label class="g-sm-3 control-label">Kode Barang</label>
+									<!-- <div class="form-group">
+										<label class="g-sm-2 control-label">Kode Barang</label>
 										<div class="g-sm-4">
 											<input type="text" class="form-control" id="kode_produk">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Merek Barang <span style="font-weight: 300;">(opt)</span></label>
+										<label class="g-sm-2 control-label">Merek Barang <span style="font-weight: 300;">(opt)</span></label>
 										<div class="g-sm-4">
 											<input type="text" class="form-control" id="nama_produk">
 										</div>
-									</div>
+									</div>-->
 									<div class="">
 										<div class="form-group">
-											<label class="g-sm-3 control-label"></label>
-											<div class="g-sm-9">
+											<label class="g-sm-2 control-label"></label>
+											<div class="g-sm-10">
 												<span class="clearfix"></span>
 												<!--<div class="pad" data-jsfiddle="example1"> -->
 
@@ -87,9 +87,14 @@
 												var data = [ 
 												@for($sidebar_i = 1; $sidebar_i <= 15; $sidebar_i++)
 												{
+													kode_barang: "-",
+													merek_barang: "-",
 													warna: "-",
+													harga_modal: "-",
+													harga_min: "-",
+													harga_jual: "-",
 													stock_shop: "-",
-													stock_storage: "-", 
+													stock_storage: "-",
 													command: '' 
 															+ '<input accept="image/*" type="file" id="product_foto_'+count+'" class="product_foto">'
 															+ ''
@@ -106,17 +111,23 @@
 				  									enterMoves: {row: 1, col: 0},
 													//startRows: 10,
 													columns: [
+														       {data: "kode_barang", renderer: "html"},
+														      {data: "merek_barang", renderer: "html"},
 														      {data: "warna", renderer: "html"},
+														      {data: "harga_modal", renderer: "html"},
+														      {data: "harga_min", renderer: "html"},
+														      {data: "harga_jual", renderer: "html"},
 														      {data: "stock_shop", renderer: "html"},
 														      {data: "stock_storage", renderer: "html"},
 														      //{data: "command", renderer: "html"},
 														      ],
 
-				    								colWidths: [100, 100, 100, 200],
+
+				    								colWidths: [100, 100, 80,70, 70, 70, 70,70],
 													//rowHeaders: true,
-													colHeaders: ["Warna", "Stok Toko", "Stok Gudang", "Foto"],
+													colHeaders: ["Kode Barang","Merek Barang","Warna","H. Modal","H. Min.","H. Jual", "Stok Toko", "Stok Gdg"],
 													minSpareRows: true,
-													//contextMenu: true,
+													contextMenu: true,
 													cells : function(row, col, prop) {
 												      	var cellProperties = {};
 
@@ -135,6 +146,11 @@
 															
 										      	var ht = $('#example1').handsontable('getInstance');
 										      	var coordinate = ht.getSelected();
+
+										      	if(typeof coordinate=='undefined'){
+										      	}else{
+										      		var rowArr 			= ht.getDataAtRow(coordinate[0]);
+										      	}
 
 												var rowArr 	= ht.getDataAtRow(coordinate[0]);
 														if(source == 'edit')
@@ -240,8 +256,8 @@
 										</div>
 										
 									</div>
-									<div class="form-group">
-										<label class="g-sm-3 control-label ff_num_only">Harga Modal</label>
+									<!--<div class="form-group">
+										<label class="g-sm-2 control-label ff_num_only">Harga Modal</label>
 										<div class="g-sm-4"> 
 											<div class="input-group">
 												<input type="text" class="form-control" id="harga_modal" aria-describedby="basic-ribuan">
@@ -251,7 +267,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label ff_num_only">Harga Minimal</label>
+										<label class="g-sm-2 control-label ff_num_only">Harga Minimal</label>
 										<div class="g-sm-4">
 											<div class="input-group">
 												<input type="text" class="form-control" id="harga_minimal" aria-describedby="basic-ribuan">
@@ -261,7 +277,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label ff_num_only">Harga Jual</label>
+										<label class="g-sm-2 control-label ff_num_only">Harga Jual</label>
 										<div class="g-sm-4">
 											<div class="input-group">
 												<input type="text" class="form-control" id="harga_jual" aria-describedby="basic-ribuan">
@@ -269,31 +285,31 @@
 
 											</div> 
 										</div>
-									</div>
+									</div>-->
 									<!--<div class="form-group">
-										<label class="g-sm-3 control-label">Stok Toko</label>
+										<label class="g-sm-2 control-label">Stok Toko</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="stok_toko">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Stok Gudang</label>
+										<label class="g-sm-2 control-label">Stok Gudang</label>
 										<div class="g-sm-7">
 											<input type="text" class="form-control" id="stok_gudang">
 										</div>
 									</div>-->
 									<!--
 									<div class="form-group">
-										<label class="g-sm-3 control-label">Foto</label>
+										<label class="g-sm-2 control-label">Foto</label>
 										<div class="g-sm-7">
 											<input type="file" id="foto">
 										</div>
 									</div>
 								-->
 								<div class="form-group">
-									<label class="g-sm-3 control-label"></label>
+									<label class="g-sm-2 control-label"></label>
 									<div class="g-sm-7">
-										<button type="button" class="btn btn-success" name="save" id="button_non_series" disabled>Add</button> 
+										<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
 									</div>
 								</div>
 							</form>
