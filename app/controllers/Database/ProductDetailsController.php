@@ -79,6 +79,20 @@ class ProductDetailsController extends \BaseController {
 		return $this->getReturn($productdetail);
 	}
 	
+	public function getSeri($code)
+	{
+		$productdetail = Productdetail::where('color','=',$code.'-seri')->first();
+		if($productdetail == null)
+		{
+			$respond = array('code'=>'404','status' => 'Not Found');
+		}
+		else
+		{
+			$respond = array('code'=>'200','status' => 'OK','messages'=>$productdetail);
+		}
+		return Response::json($respond);
+	}
+	
 	/*
 		@author : Gentry Swanri
 		@parameter : $productId

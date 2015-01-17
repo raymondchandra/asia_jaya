@@ -131,7 +131,7 @@
 													cells : function(row, col, prop) {
 												      	var cellProperties = {};
 
-												      	if (col == 3) {
+												      	if (col == 8) {
 												      		cellProperties.readOnly = true;
 												      	}
 												      	else
@@ -371,51 +371,66 @@ $('body').on('click','.f_delete_form_warna',function(){
 
 
 $('body').on('click', '#button_non_series', function(){
-	$kode_produk = $('#kode_produk').val();
-	$nama_produk = $('#nama_produk').val();
+	$kode_produk = [];
+	$nama_produk = [];
 	$warna_produk = [];
 	$stok_toko = [];
 	$stok_gudang = [];
 	$fotos = [];
 	$detailName = [];
-	$total_stok_toko = 0;
-	$total_stok_gudang = 0;
+	$harga_modal = [];
+	$harga_minimal = [];
+	$harga_jual = [];
 	$fileName = "";
 	var count = $("#example1").handsontable('countRows');
-	alert(count);
 	$i_warna = 0;
+	$i_foto = 0;
 	//($('#example1').handsontable('getDataAtCell', 15, 0));
 	for(var i=0 ; i<count-1 ; i++)
 	{
 		if($('#example1').handsontable('getDataAtCell', i, 0) != "-")
 		{
-			$warna_produk[i+1] = $('#example1').handsontable('getDataAtCell', i, 0);
-			$stok_toko[i+1] = $('#example1').handsontable('getDataAtCell', i, 1);
-			$stok_gudang[i+1] = $('#example1').handsontable('getDataAtCell', i, 2);
-			$total_stok_toko += parseInt($stok_toko[i]);
-			$total_stok_gudang += parseInt($stok_gudang[i]);
+			$kode_produk[i] = $('#example1').handsontable('getDataAtCell', i, 0);
+			$nama_produk[i] = $('#example1').handsontable('getDataAtCell', i, 1);
+			$warna_produk[i] = $('#example1').handsontable('getDataAtCell', i, 2);
+			$harga_modal[i] = $('#example1').handsontable('getDataAtCell', i, 3);
+			$harga_minimal[i] = $('#example1').handsontable('getDataAtCell', i, 4);
+			$harga_jual[i] = $('#example1').handsontable('getDataAtCell', i, 5);
+			$stok_toko[i] = $('#example1').handsontable('getDataAtCell', i, 6);
+			$stok_gudang[i] = $('#example1').handsontable('getDataAtCell', i, 7);
 
 			$fotoPath = $('#product_foto_'+i).val();
-			alert($fotoPath);
-			var arr = $fotoPath.split('\\');
-			var arr2 = arr[arr.length-1].split('.');
-			$fileName += $nama_produk+"-"+$warna_produk[i] + ",";
-			$detailName[i+1] = "assets/product_img/" + $nama_produk+"-"+$warna_produk[i] + "." + arr2[arr2.length - 1];
+			
+			if($fotoPath != "")
+			{
+				var arr = $fotoPath.split('\\');
+				var arr2 = arr[arr.length-1].split('.');
+				$fileName += $kode_produk[i]+"-"+$warna_produk[i] + ",";
+				$detailName[i] = "assets/product_img/" + $kode_produk[i]+"-"+$warna_produk[i] + "." + arr2[arr2.length - 1];
+				$i_foto++;
+			}
+			else
+			{
+				$detailName[i] = "assets/img/nophoto.jpg";
+			}
 			
 			$i_warna++;
 		}
 	}
-	$harga_modal = $('#harga_modal').val() * 1000;
-	$harga_minimal = $('#harga_minimal').val() * 1000;
-	$harga_jual = $('#harga_jual').val() * 1000;
+	
 	
 	$fd = new FormData();
+	$fotoCount = 0;
 	for($i=0; $i<$i_warna; $i++)
 	{
-		$fd.append('file_'+$i, $('#product_foto_'+$i)[0].files[0]);
+		if($('#product_foto_'+$i).val() != "")
+		{
+			$fd.append('file_'+$fotoCount, $('#product_foto_'+$i)[0].files[0]);
+			$fotoCount++;
+		}
 	}
 	$fd.append('fileName', $fileName);
-	$fd.append('count', $i_warna);
+	$fd.append('count', $i_foto);
 	
 	$.ajax({
 		url: '{{URL::route('gentry.upload_image_v2')}}', 	// Url to which the request is send
@@ -438,13 +453,11 @@ $('body').on('click', '#button_non_series', function(){
 						'modal_price' : $harga_modal,
 						'min_price' : $harga_minimal,
 						'sales_price' : $harga_jual,
-						'stock_shop' : $total_stok_toko,
-						'stock_storage' : $total_stok_gudang,
-						'color' : $warna_produk,
 						'detail_stock_shop' : $stok_toko,
 						'detail_stock_storage' : $stok_gudang,
+						'color' : $warna_produk,
 						'photo' : $detailName,
-						'i_warna' : $i_warna
+						'counter' : $i_warna
 					},
 					success: function(response){
 						alert(response);
