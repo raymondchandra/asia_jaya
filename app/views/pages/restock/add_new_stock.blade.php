@@ -151,8 +151,7 @@
 										      	}else{
 										      		var rowArr 			= ht.getDataAtRow(coordinate[0]);
 										      	}
-
-												var rowArr 	= ht.getDataAtRow(coordinate[0]);
+ 
 														if(source == 'edit')
 														{ 
 															if(coordinate[0] == count+1){
