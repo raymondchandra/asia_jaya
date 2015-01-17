@@ -154,8 +154,7 @@
 					$("#" + $row_id).addClass('s_danger_1');
  				}
 				else
-				{
-
+				{ 
 					$("#" + $row_id).removeClass('s_danger_1');
 					$("#" + $row_id).removeClass('s_danger_2');
  				}
