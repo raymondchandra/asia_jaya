@@ -64,7 +64,7 @@
 				$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 				$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 				$data = $data + parseInt($quantity)*($quant.length) + "</td>";
-				$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + $stock_shop +" | "+ $stock_storage + "</td>"; 
+				$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + "<span id='stock_shop_"+ $product_code + "_"+ $color + "_" + $inc +"'>" + $stock_shop +"</span> | <span id='stock_storage_"+ $product_code + "_" +$color + "_" + $inc +"'>"+ $stock_storage + "</span></td>"; 
 				$data = $data + "<td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 				$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 				
@@ -125,7 +125,7 @@
 								$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 								$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 								$data = $data + $quantity*($quant.length) + "</td>"; 
-								$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + $stock_shop +" | "+ $stock_storage + "</td>"; 
+								$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + "<span id='stock_shop_"+ $product_code + "_"+ $color + "_" + $inc +"'>" + $stock_shop +"</span> | <span id='stock_storage_"+ $product_code + "_"+ $color + "_" + $inc +"'>"+ $stock_storage + "</span></td>"; 
 								$data = $data + "<td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 								$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
 								

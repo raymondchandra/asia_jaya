@@ -130,10 +130,29 @@
 				$('body').on('click','#changeButton',function(){
 					$row_id = $('#rowRep').val();
 					$('#quantity_'+$row_id).text($('#f_edit_qty').val());
+					
+					
 					$oldTotal = $('#currentTotal').val();
 					$newTotal = $('#f_hsatuan_qty').val()*$('#f_edit_qty').val();
 					$('#price_'+$row_id).text("" + toRp($newTotal));
 					$inc = $('#tabRep').val(); 
+
+
+				if( (( parseInt($('#stock_shop_'+$row_id).text()) + parseInt($('#stock_storage_'+$row_id).text()) ) < $('#f_edit_qty').val()) )
+				{
+					$("#" + $row_id).removeClass('s_danger_1');
+					$("#" + $row_id).addClass('s_danger_2'); 
+ 				}else if( (parseInt($('#stock_shop_'+$row_id).text()) < $('#f_edit_qty').val()) && (( parseInt($('#stock_shop_'+$row_id).text()) + parseInt($('#stock_storage_'+$row_id).text()) ) >= $('#f_edit_qty').val()) )
+				{
+					$("#" + $row_id).removeClass('s_danger_2');
+					$("#" + $row_id).addClass('s_danger_1');
+ 				}
+				else
+				{
+
+					$("#" + $row_id).removeClass('s_danger_1');
+					$("#" + $row_id).removeClass('s_danger_2');
+ 				}
 					
 					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
 

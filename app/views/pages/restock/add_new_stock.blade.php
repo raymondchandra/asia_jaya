@@ -69,7 +69,7 @@
 													</thead>
 													<tbody class="f_tbody_product_img_container">
 
-														@for($_n = 0; $_n < 15; $_n++)
+														@for($_n = 0; $_n < 250; $_n++)
 
 														<tr style="height: 23px;">
 															<td style="padding: 0px;">
@@ -85,7 +85,7 @@
 												<script>
 												<?php $sidebar_i = 0; ?>
 												var data = [ 
-												@for($sidebar_i = 1; $sidebar_i <= 15; $sidebar_i++)
+												@for($sidebar_i = 1; $sidebar_i <= 250; $sidebar_i++)
 												{
 													kode_barang: "-",
 													merek_barang: "-",
@@ -108,7 +108,7 @@
 												var save = document.getElementById('save'); 
 												 $("#example1").handsontable({
 													data: data,
-				  									enterMoves: {row: 1, col: 0},
+				  									//enterMoves: {row: 1, col: 0},
 													//startRows: 10,
 													columns: [
 														       {data: "kode_barang", renderer: "html"},
