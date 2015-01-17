@@ -68,25 +68,8 @@ class printController extends \HomeController{
 		}
 		$difference = $return_data->difference;
 		$strukController = new StrukController();
-		$noStruk = $strukController->get();
-		if($noStruk < 10)
-		{
-			$noStruk = "00".$noStruk;
-		}
-		else if($noStruk < 100)
-		{
-			$noStruk = "0".$noStruk;
-		}
-		else
-		{
 		
-		}
-		
-		$year = substr(date('Y'), -2);
-		$date = date('d');
-		$month = date('m');
-		$dw = date( "w");
-		$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+		$kodeFaktur = $return_data->no_faktur;
 		
 		return View::make('pages.print_struk.print_return', compact('created','pelanggan','sales','type','solution','barangReturn','barangTukar','difference','kodeFaktur'));
 	}

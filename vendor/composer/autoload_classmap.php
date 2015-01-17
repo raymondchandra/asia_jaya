@@ -1926,6 +1926,7 @@ return array(
     'dashboardController' => $baseDir . '/app/controllers/Page/dashboardController.php',
     'finalizeSellController' => $baseDir . '/app/controllers/Page/finalizeSellController.php',
     'historyRestockController' => $baseDir . '/app/controllers/Page/historyRestockController.php',
+    'keuntunganController' => $baseDir . '/app/controllers/Page/keuntunganController.php',
     'mobile_view' => $baseDir . '/app/controllers/Page/mobile_view.php',
     'obralViewController' => $baseDir . '/app/controllers/Page/obralViewController.php',
     'printController' => $baseDir . '/app/controllers/Page/printController.php',

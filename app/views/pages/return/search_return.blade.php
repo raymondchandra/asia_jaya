@@ -145,11 +145,7 @@
 							@foreach($dataOrder as $data)
 							<tr> 
 								<td id="no_nota_{{$data->id}}">
-									{{ $data->no_nota }}
-									<input type="hidden" id="prod_quantity_{{$data->id}}" value="{{$data->quantity}}">
-									<input type="hidden" id="order_price_{{$data->id}}" value="{{$data->price}}">
-									<input type="hidden" id="transaction_id_{{$data->id}}" value="{{$data->transaction_id}}">
-									<input type="hidden" id="prod_code_{{$data->id}}" value="{{$data->prod_code}}">
+									{{ $data->no_faktur }}
 								</td>
 								<td id="cust_name_{{$data->id}}">
 									{{ $data->cust_name }}
@@ -210,13 +206,13 @@
 											$row += "<input type='hidden' id='order_price_"+data.id+"' value='"+data.price+"' >";
 											$row += "<input type='hidden' id='transaction_id_"+data.id+"' value='"+data.transaction_id+"' >";
 											$row += "<input type='hidden' id='prod_code_"+data.id+"' value='"+data.prod_code+"' >";
-											$row += "</td><td id='cust_name_"+data.id+"'>";
+											$row += "</td><td id='cust_name_"+data.transaction_id+"'>";
 											$row += data.cust_name;
 											$row += "</td><td>";
 											$row += data.created_at;
 											$row += "</td><td>";
-											$row += "<button id='' type='button' class='btn btn-primary btn-xs'  data-toggle='modal' data-target='.pop_up_detail_nota'>Lihat Detail</button>";
-											$row += "<input type='hidden' value='"+data.id+"' >";
+											$row += "<button id='' type='button' class='btn btn-primary btn-xs view_detail_button'  data-toggle='modal' data-target='.pop_up_detail_nota'>Lihat Detail</button>";
+											$row += "<input type='hidden' value='"+data.transaction_id+"' >";
 											$row += "</td></tr>";
 										});
 										$("#body_content").html($row);
@@ -242,18 +238,13 @@
 	
 	$('body').on('click','.view_detail_button',function(){
 		$id = $(this).next().val();
-		$no_nota = $('#no_nota_'+$id).text();
-		$quantity = $('#prod_quantity_'+$id).val();
-		$price = $('#order_price_'+$id).val();
-		$transaction_id = $('#transaction_id_'+$id).val();
-		$prod_code = $('#prod_code_'+$id).val();
 		$cust_name = $('#cust_name_'+$id).text();
 		$('#pop_up_trans_name').text($cust_name);
 		
 		$('#transaction_detail_content').html("");
 		$.ajax({
 			type : 'GET',
-			url: '{{URL::route('gentry.get_order_by_order_id')}}',
+			url: '{{URL::route('david.get_order_by_trans_id')}}',
 			data: {
 				'data' : $id
 			},
@@ -263,20 +254,24 @@
 				
 				$.each(response['messages'], function( i, resp ) {
 					$data += "<tr><td>";
-					$data += $prod_code;
+					$data += resp.kodeProduk;
 					$data += "</td><td>";
 					$data += "<img src='{{asset('"+resp.foto+"')}}' width='20' height='20'>";
 					$data += "</td><td>";
 					$data += resp.warna;
 					$data += "</td><td>";
-					$data += $quantity;
+					$data += resp.quantity;
 					$data += "</td><<td>";
-					$data += parseInt($price)/parseInt($quantity);
+					$data += "IDR " + toRp(parseInt(resp.hargaSatuan)/parseInt(resp.quantity));
 					$data += "</td><td>";
-					$total = (parseInt($price)/parseInt($quantity)*parseInt($quantity));
-					$data += $total;
+					$total = (parseInt(resp.hargaSatuan)*parseInt(resp.quantity));
+					$data += "IDR " + toRp($total);
 					$data += "</td><td>";
 					$data += "<button type='button' class='btn btn-warning btn-xs view_pilih_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
+					$data += "<input type='hidden' value='"+resp.id+"'/> ";
+					$data += "<input type='hidden' value='"+resp.quantity+"'/> ";
+					$data += "<input type='hidden' value='"+resp.kodeProduk+"'/> ";
+					$data += "<input type='hidden' value='"+resp.price+"'/> ";
 					$data += "</td></tr>";
 				});
 				
@@ -286,10 +281,25 @@
 				alert("responseText: "+xhr.responseText);
 			}
 		},'json');
-		
+		function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
+		function toRp(angka){
+			var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
+			var rev2    = '';
+			for(var i = 0; i < rev.length; i++){
+				rev2  += rev[i];
+				if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
+					rev2 += '.';
+				}
+			}
+			return rev2.split('').reverse().join('');
+		}
 		$('body').on('click','.view_pilih_button',function(){
-			$('#prod_quantity_pop').text($quantity);
-			$('#prod_name_pop').text($prod_code);
+			$quantity = $(this).next().next().val();
+			$id = $(this).next().val()
+			$prodCode = $(this).next().next().next().val();
+			$price = $(this).next().next().next().next().val()
+			$('#prod_quantity_pop').text($(this).next().next().val());
+			$('#prod_name_pop').text($(this).next().next().next().val());
 			
 			$('body').on('click','.f_pilih_tipe_retur', function(){
 
@@ -315,8 +325,8 @@
 					url: '{{URL::route('gentry.insert_return')}}',
 					data: {
 						'order_id' : $id,
-						'no_nota' : $no_nota,
 						'type' : $type,
+						'no_nota' : 0,
 						'trade_id' : $trade_id,
 						'return_quantity' : $return_quantity,
 						'nominal_uang' : $nominal_uang

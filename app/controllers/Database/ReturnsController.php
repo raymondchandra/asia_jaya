@@ -160,6 +160,7 @@ class ReturnsController extends \BaseController {
 	{
 		$respond = array();
 		$return = ReturnDB::find($id);
+		$strukController = new StrukController();
 		if ($return == null)
 		{
 			$respond = array('code'=>'404','status' => 'Not Found');
@@ -167,6 +168,26 @@ class ReturnsController extends \BaseController {
 		else
 		{
 			//edit value
+			$noStruk = $strukController->get();
+			if($noStruk < 10)
+			{
+				$noStruk = "00".$noStruk;
+			}
+			else if($noStruk < 100)
+			{
+				$noStruk = "0".$noStruk;
+			}
+			else
+			{
+			
+			}
+			
+			$year = substr(date('Y'), -2);
+			$date = date('d');
+			$month = date('m');
+			$dw = date( "w");
+			$kodeFaktur = $year.$month.$date.$dw.$noStruk;
+			$return->no_faktur = $kodeFaktur;
 			$return->status = 'fixed';
 			$return->solution = $solution;
 			try {
@@ -229,7 +250,7 @@ class ReturnsController extends \BaseController {
 	public function getTop10ReturnedProduct()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(return_quantity) as total'))->join('returns', 'returns.order_id', '=','orders.id')->whereRaw('MONTH(returns.created_at) >= MONTH(curdate())')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
+		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(return_quantity) as total'))->join('returns', 'returns.order_id', '=','orders.id')->whereRaw('MONTH(returns.created_at) >= MONTH(curdate())')->whereRaw('YEAR(returns.created_at) >= YEAR(curdate())')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
 		foreach($orders as $ord)
 		{
 			$prdDtl = ProductDetail::find($ord->product_detail_id);

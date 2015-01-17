@@ -424,7 +424,10 @@ class restockController extends \HomeController{
 				$reference = "";
 				foreach($chekerResult as $rslt)
 				{
-					$reference .= $rslt->id."-1;";
+					if($rslt->isSeri == 0)
+					{
+						$reference .= $rslt->id."-1;";
+					}
 				}
 				$seri = $productDetailController->getSeri($productCode[$i]);
 				$seriJson = json_decode($seri->getContent());

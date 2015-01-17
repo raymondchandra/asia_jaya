@@ -254,7 +254,7 @@ class CashesController extends \BaseController {
 			}
 			
 			$todayDate = date('Y')."-".$month."-".$date;
-			$datas = Cash::where(DB::raw('DATE(created_at)'),'=',$todayDate)->get();
+			$datas = Cash::where(DB::raw('DATE(created_at)'),'=',$todayDate)->whereRaw('YEAR(created_at) = YEAR(curdate())')->get();
 			$todayTotal = 0;
 			foreach($datas as $data)
 			{
@@ -272,13 +272,15 @@ class CashesController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	
+	
 	public function getYearlyCashFlow()
 	{
 		$respond = array();
 		$array = array();
 		for($i=1 ; $i<13 ; $i++)
 		{
-			$datas = Cash::where(DB::raw('MONTH(created_at)'),'=',$i)->get();
+			$datas = Cash::where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->get();
 			$todayTotal = 0;
 			foreach($datas as $data)
 			{

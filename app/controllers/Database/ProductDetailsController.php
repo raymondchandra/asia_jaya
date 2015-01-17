@@ -553,7 +553,7 @@ class ProductDetailsController extends \BaseController {
 	public function getTop10RepeatedProduct()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))->join('transactions', 'transactions.id', '=','orders.transaction_id')->whereRaw('MONTH(orders.created_at) >= MONTH(curdate())')->groupBy('customer_id')->groupBy('product_detail_id')->orderBy('quant_total','dsc')->take(10)->get();
+		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))->join('transactions', 'transactions.id', '=','orders.transaction_id')->whereRaw('MONTH(orders.created_at) >= MONTH(curdate())')->whereRaw('YEAR(orders.created_at) >= YEAR(curdate())')->groupBy('customer_id')->groupBy('product_detail_id')->orderBy('quant_total','dsc')->take(10)->get();
 		foreach($orders as $ord)
 		{
 			$prdDtl = ProductDetail::find($ord->product_detail_id);
