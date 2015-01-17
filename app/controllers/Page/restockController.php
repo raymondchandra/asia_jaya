@@ -373,7 +373,7 @@ class restockController extends \HomeController{
 			if($productJson->{'code'} == '404')
 			{
 				//buat baru
-				$insertResult = $productController->insertWithParam($productCode[$i], $name[$i], $modalPrice[$i], $minPrice[$i], $salesPrice[$i], $stockShop[$i], $stockStorage[$i], 1, 0);
+				$insertResult = $productController->insertWithParam($productCode[$i], $name[$i], $modalPrice[$i]*1000, $minPrice[$i]*1000, $salesPrice[$i]*1000, $stockShop[$i], $stockStorage[$i], 1, 0);
 				$insertResultJson = json_decode($insertResult->getContent());
 				if($insertResultJson->{'code'} == '500')
 				{
