@@ -25,14 +25,7 @@
 				<div class="container">
 					<div class="g-sm-12">
 
-
-						<!--<h3>Non-seri atau Seri?</h3>
-						<label class="radio-inline">
-							<input type="radio" name="seri_or_not" id="rad_non_seri" value="0" checked> Non-seri
-						</label>
-						<label class="radio-inline">
-							<input type="radio" name="seri_or_not" id="rad_seri" value="1"> Seri
-						</label>-->
+ 
 
 						<h3>Masukan Stock</h3>
 						<div class="panel panel-default f_non_seri">
@@ -53,8 +46,15 @@
 									</div>-->
 									<div class="">
 										<div class="form-group">
+											<div class="form-group">
+												<label class="g-sm-2 control-label"></label>
+												<div class="g-sm-7">
+													<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
+												</div>
+											</div>
 											<label class="g-sm-2 control-label"></label>
 											<div class="g-sm-10">
+
 												<span class="clearfix"></span>
 												<!--<div class="pad" data-jsfiddle="example1"> -->
 
@@ -69,7 +69,7 @@
 													</thead>
 													<tbody class="f_tbody_product_img_container">
 
-														@for($_n = 0; $_n < 250; $_n++)
+														@for($_n = 0; $_n < 100; $_n++)
 
 														<tr style="height: 23px;">
 															<td style="padding: 0px;">
@@ -85,7 +85,7 @@
 												<script>
 												<?php $sidebar_i = 0; ?>
 												var data = [ 
-												@for($sidebar_i = 1; $sidebar_i <= 250; $sidebar_i++)
+												@for($sidebar_i = 1; $sidebar_i <= 100; $sidebar_i++)
 												{
 													kode_barang: "-",
 													merek_barang: "-",
@@ -244,67 +244,11 @@
 
 											</div>
 
-											<!--<div class="g-sm-1">
-												<button type="button" class="btn btn-danger btn-sm  f_delete_form_warna pull-right">
-													<span class="glyphicon glyphicon-minus"></span>
-												</button>
-												<button type="button" class="btn btn-success btn-sm f_add_form_warna pull-right">
-													<span class="glyphicon glyphicon-plus"></span>
-												</button>
-											</div>-->
+
+ 
 										</div>
 										
-									</div>
-									<!--<div class="form-group">
-										<label class="g-sm-2 control-label ff_num_only">Harga Modal</label>
-										<div class="g-sm-4"> 
-											<div class="input-group">
-												<input type="text" class="form-control" id="harga_modal" aria-describedby="basic-ribuan">
-												<span class="input-group-addon" id="basic-ribuan">.000</span>
-
-											</div> 
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-2 control-label ff_num_only">Harga Minimal</label>
-										<div class="g-sm-4">
-											<div class="input-group">
-												<input type="text" class="form-control" id="harga_minimal" aria-describedby="basic-ribuan">
-												<span class="input-group-addon" id="basic-ribuan">.000</span>
-
-											</div> 
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-2 control-label ff_num_only">Harga Jual</label>
-										<div class="g-sm-4">
-											<div class="input-group">
-												<input type="text" class="form-control" id="harga_jual" aria-describedby="basic-ribuan">
-												<span class="input-group-addon" id="basic-ribuan">.000</span>
-
-											</div> 
-										</div>
-									</div>-->
-									<!--<div class="form-group">
-										<label class="g-sm-2 control-label">Stok Toko</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control" id="stok_toko">
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="g-sm-2 control-label">Stok Gudang</label>
-										<div class="g-sm-7">
-											<input type="text" class="form-control" id="stok_gudang">
-										</div>
-									</div>-->
-									<!--
-									<div class="form-group">
-										<label class="g-sm-2 control-label">Foto</label>
-										<div class="g-sm-7">
-											<input type="file" id="foto">
-										</div>
-									</div>
-								-->
+									</div> 
 								<div class="form-group">
 									<label class="g-sm-2 control-label"></label>
 									<div class="g-sm-7">
