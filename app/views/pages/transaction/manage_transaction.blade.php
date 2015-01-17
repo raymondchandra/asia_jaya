@@ -178,7 +178,7 @@
 							@if($datas != null)
 								@foreach($datas as $data)
 									<tr> 
-										<td>{{$data->id}}</td>
+										<td>{{$data->no_faktur}}</td>
 										@if($data->name == "")
 											<td id="hidden_trans_customer_name_{{$data->id}}">Tidak Ada Nama</td>
 										@else

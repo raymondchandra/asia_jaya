@@ -47,7 +47,7 @@
 								<input type="button" value="Save" class="btn btn-success opening-cash-btn">
 								<script>
 									$('body').on('click','.opening-cash-btn',function(){
-										$amount = $('#opening-cash-input').val();
+										$amount = $('#opening-cash-input').val() * 1000; //per1000
 										$.ajax({
 											type: 'GET',
 											url: '{{URL::route('david.add_opening_cash')}}',
@@ -58,6 +58,7 @@
 												if(response['code'] == 200)
 												{
 													alert('success add opeing cash');
+													$('.today-input-cash').text( "Rp " + toRp( parseInt(toAngka($('.today-input-cash').text())) + parseInt($amount) ) );
 													$('.today-cash').text("Rp " + toRp(response['message']));
 												}
 												else
@@ -99,7 +100,7 @@
 								Jumlah Uang Kas Awal
 							</label>
 							<div class="g-sm-6">
-								<p type="text" class="form-control-static today-cash">{{ toMoney($kasHariIni) }}</p>
+								<p type="text" class="form-control-static today-input-cash">{{ toMoney($kasHariIni) }}</p>
 							</div>
 						</div>
 						<div class="form-group" style="margin-bottom: 0px;">

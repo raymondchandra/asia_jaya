@@ -117,7 +117,7 @@ class transController extends \HomeController{
 					foreach($dataAll as $data){
 						$data->name = Customer::find($data->customer_id)->name;
 						$data->username = Account::find($data->sales_id)->username;
-						$data->order = $this->getOrderArray($data->id);
+						$data->order = $this->getOrderArray($data->id);  
 					}
 				}else{
 					$dataAll = null;
@@ -130,7 +130,7 @@ class transController extends \HomeController{
 				if($allTransaction->{'status'} != 'Not Found'){
 					$dataAll = $allTransaction->{'messages'};
 					foreach($dataAll as $data){
-						$data->order = $this->getOrderArray($data->id);
+						$data->order = $this->getOrderArray($data->id); 
 					}
 				}else{
 					$dataAll = null;
@@ -139,7 +139,7 @@ class transController extends \HomeController{
 			$datas = null;
 			if($dataAll != null){
 				foreach($dataAll as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'is_void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at'=>$allData->created_at, 'order'=>$allData->order);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'is_void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at'=>$allData->created_at, 'order'=>$allData->order, 'no_faktur'=>$allData->no_faktur);
 				}
 			}
 		
@@ -254,7 +254,7 @@ class transController extends \HomeController{
 			$datas = null;
 			if($allTransaction->{'status'} != 'Not Found'){
 				foreach($dataAll as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'is_void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at'=>$allData->created_at);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'is_void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at'=>$allData->created_at, 'no_faktur'=>$allData->no_faktur);
 				}
 			}
 
@@ -367,7 +367,7 @@ class transController extends \HomeController{
 			{
 				$product_detail = ProductDetail::find($ord->product_detail_id);
 				$product = Product::find($product_detail->product_id);
-				$ord->namaProduk = $product->name;
+				$ord->namaProduk = $product->product_code; //name;
 				$ord->warna = $product_detail->color;
 				$ord->hargaSatuan = $product->sales_price;
 				$ord->foto = $product_detail->photo;

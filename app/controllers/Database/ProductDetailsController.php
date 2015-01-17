@@ -410,7 +410,7 @@ class ProductDetailsController extends \BaseController {
 		try
 		{
 			$keyword = Input::get('keyword');
-			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->get();
+			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->orWhere('prds.color', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->get();
 			foreach($products as $product => $key)
 			{
 				/*
