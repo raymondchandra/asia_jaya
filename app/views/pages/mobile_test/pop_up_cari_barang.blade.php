@@ -229,11 +229,11 @@
 		trigger = true;
 		$inc = $('#tableRep').val();
 		$id = $(this).children().first().children('.hiddenVal').children('.id').val();
-		$product_code = $('#code_'+$id).val();
-		$color = $('#color_'+$id).val();
+		$product_code = $('#code_'+$id).val().replace(/\s+/g, '');
+		$color = $('#color_'+$id).val().replace(/\s+/g, '');
 		$stock_shop = $('#stock_shop_'+$id).val();
 		$stock_storage = $('#stock_storage_'+$id).val();
-		$name = $('#name_'+$id).val();
+		$name = $('#name_'+$id).val().replace(/\s+/g, '');
 		$price = $('#price_'+$id).val();
 		$min_price = $('#min_price_'+$id).val();
 		$quant = $color.split('-');
