@@ -185,7 +185,7 @@
 				</div>
 			</div>
 			<div class="panel panel-default">
-				<div class="panel-heading">Top 10 Barang Paling Sering Dibeli</div>
+				<div class="panel-heading">Top 10 Barang Paling Sering Dibeli Bulan Ini</div>
 				<div class="panel-body">
 					<table class="table table-bordered">
 						<thead>
@@ -217,7 +217,7 @@
 			</div>
 
 			<div class="panel panel-default">
-				<div class="panel-heading">Top 10 Barang Paling Sering Direturn</div>
+				<div class="panel-heading">Top 10 Barang Paling Sering Direturn Bulan Ini</div>
 				<div class="panel-body"><table class="table table-bordered">
 					<thead>
 						<tr>
@@ -375,7 +375,7 @@
 
 
 <div class="panel panel-default">
-	<div class="panel-heading">Top 10 Barang Paling Sering Direpeat</div>
+	<div class="panel-heading">Top 10 Barang Paling Sering Direpeat Bulan Ini</div>
 	<div class="panel-body"><table class="table table-bordered">
 		<table class="table table-bordered">
 			<thead>
