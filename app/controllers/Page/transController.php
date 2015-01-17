@@ -367,6 +367,7 @@ class transController extends \HomeController{
 			{
 				$product_detail = ProductDetail::find($ord->product_detail_id);
 				$product = Product::find($product_detail->product_id);
+				$ord->kodeProduk = $product->product_code;
 				$ord->namaProduk = $product->name;
 				$ord->warna = $product_detail->color;
 				$ord->hargaSatuan = $product->sales_price;

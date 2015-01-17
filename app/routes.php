@@ -5,13 +5,22 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$productController = new ProductsController();
-		$product = $productController->getByCode(123);
-		$productJson = json_decode($product->getContent());
-		$prdct = $productJson->{'messages'};
-		$prdct->name="BRO";
-		$prdct->save();
-		var_dump($prdct);
+		$array = array();
+		for($i=1 ; $i<13 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price) as total'))->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			if($datas->total == null)
+			{
+				$array[$i-1] = 0;
+			}
+			else
+			{
+				$array[$i-1] = $datas->total;
+			}
+			
+		}
+		$result = $array[0];
+		var_dump($array);
 	});
 	Route::get('/tes2', function()
 	{
@@ -190,6 +199,9 @@ Route::group(['prefix' => 'owner','before' => 'authOwner'], function()
 	Route::get('/view_restock_history', ['as'=>'david.view_restock_history','uses' => 'historyRestockController@viewHistoryRestock']);
 //add new stock
 	Route::get('/view_add_new_stock', ['as'=>'david.view_add_new_stock','uses' => 'stockController@viewAddStock']);
+//keuntungan
+	Route::get('/view_keuntungan', ['as'=>'david.view_keuntungan','uses' => 'keuntunganController@viewDashboard']);
+	Route::get('/view_keuntungan_harian', ['as'=>'david.view_keuntungan_harian','uses' => 'keuntunganController@viewKeuntunganHarian']);
 //product
 	//(get pake route yang manager dan sales)
 	//edit barang

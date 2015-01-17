@@ -112,11 +112,11 @@
 						series: [
 						{
 							name: 'Uang Masuk',
-							data: [ ]
+							data: [{{$incomes}}]
 						},
 						{
 							name: 'Uang Untung',
-							data: [ ]
+							data: [{{$profits}}]
 						}
 						]
 					});
@@ -160,13 +160,15 @@
 									return  $symbol.$sign.$i;
 								}
 								?> 
-								<?php for($m = 1; $m < 32; $m++){?>
-								<tr> 
-									<td style="text-align: right;">{{ $m }}</td>  
-									<td>Rp 3.000.000</td>
-									<td>Rp 2.000.000</td> 
+								<?php $counter = 1?>
+								@foreach($monthlyDetail as $detail)
+									<tr> 
+									<td style="text-align: right;">{{ $counter }}</td>  
+									<td>{{toMoney($detail[1])}}</td>
+									<td>{{toMoney($detail[0])}}</td> 
 								</tr>  
-								<?php } ?>
+									<?php $counter++?>
+								@endforeach
 							</tbody>
 						</table>
 

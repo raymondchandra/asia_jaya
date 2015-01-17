@@ -373,7 +373,11 @@
 									{{ $data->solution }}
 								</td>
 								<td>
-									{{ $data->trade_product_id }}
+									@if($data->trade_product_id == null)
+										-
+									@else
+										{{ $data->trade_product_id }}
+									@endif
 								</td>
 								<td>
 									{{ toMoney($data->difference) }}
@@ -382,8 +386,10 @@
 									{{ $data->created_at}}
 								</td>
 								<td>
-									<input type="hidden" value="{{$data->id}}"/>
-									<button id="" class="btn btn-info btn-xs solution-btn"  data-toggle="modal" data-target=".pop_up_solusi">Solusi</button>
+									@if($data->solution == "pending")
+										<input type="hidden" value="{{$data->id}}"/>
+										<button id="" class="btn btn-info btn-xs solution-btn"  data-toggle="modal" data-target=".pop_up_solusi">Solusi</button>
+									@endif
 								</td>
 							</tr> 
 							@endforeach

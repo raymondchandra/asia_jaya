@@ -185,7 +185,7 @@ class OrdersController extends \BaseController {
 	public function getTop10ProductBought()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as total'))->whereRaw('MONTH(created_at) >= MONTH(curdate())')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
+		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as total'))->whereRaw('MONTH(created_at) >= MONTH(curdate())')->whereRaw('YEAR(created_at) >= YEAR(curdate())')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
 		foreach($orders as $ord)
 		{
 			$prdDtl = ProductDetail::find($ord->product_detail_id);
@@ -194,6 +194,174 @@ class OrdersController extends \BaseController {
 		}
 		
 		return $orders;
+	}
+	
+	public function getDailyProfit($month)
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<=31 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			if($datas->total == null)
+			{
+				$array[$i-1] = 0;
+			}
+			else
+			{
+				$array[$i-1] = $datas->total;
+			}
+		}
+		
+		$result = $array[0];
+		for($i=1 ; $i<31 ; $i++)
+		{
+			$result .= ",".$array[$i];
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$result);
+		return Response::json($respond);
+	}
+	
+	public function getDailyIncome($month)
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<=31 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			if($datas->total == null)
+			{
+				$array[$i-1] = 0;
+			}
+			else
+			{
+				$array[$i-1] = $datas->total;
+			}
+		}
+		
+		$result = $array[0];
+		for($i=1 ; $i<31 ; $i++)
+		{
+			$result .= ",".$array[$i];
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$result);
+		return Response::json($respond);
+	}
+	
+	public function getDailyProfitDetail($month)
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<31 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			if($datas->total == null)
+			{
+				$array[$i-1][0] = 0;
+			}
+			else
+			{
+				$array[$i-1][0] = $datas->total;
+			}
+		}
+		for($i=1 ; $i<31 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			if($datas->total == null)
+			{
+				$array[$i-1][1] = 0;
+			}
+			else
+			{
+				$array[$i-1][1] = $datas->total;
+			}
+		}
+		
+		$respond = array('code'=>'200','status' => 'OK','message'=>$array);
+		return Response::json($respond);
+	}
+	
+	public function getMonthlyProfitDetail()
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<13 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			if($datas->total == null)
+			{
+				$array[$i-1][0] = 0;
+			}
+			else
+			{
+				$array[$i-1][0] = $datas->total;
+			}
+		}
+		for($i=1 ; $i<13 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			if($datas->total == null)
+			{
+				$array[$i-1][1] = 0;
+			}
+			else
+			{
+				$array[$i-1][1] = $datas->total;
+			}
+		}
+		
+		$respond = array('code'=>'200','status' => 'OK','message'=>$array);
+		return Response::json($respond);
+	}
+	
+	public function getYearlyProfit()
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<13 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			if($datas->total == null)
+			{
+				$array[$i-1] = 0;
+			}
+			else
+			{
+				$array[$i-1] = $datas->total;
+			}
+		}
+		$result = $array[0];
+		for($i=1 ; $i<12 ; $i++)
+		{
+			$result .= ",".$array[$i];
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$result);
+		return Response::json($respond);
+	}
+	
+	public function getYearlyIncome()
+	{
+		$respond = array();
+		$array = array();
+		for($i=1 ; $i<13 ; $i++)
+		{
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			if($datas->total == null)
+			{
+				$array[$i-1] = 0;
+			}
+			else
+			{
+				$array[$i-1] = $datas->total;
+			}
+		}
+		$result = $array[0];
+		for($i=1 ; $i<12 ; $i++)
+		{
+			$result .= ",".$array[$i];
+		}
+		$respond = array('code'=>'200','status' => 'OK','message'=>$result);
+		return Response::json($respond);
 	}
 
 	/*

@@ -112,10 +112,10 @@
 									series: [
 									{
 										name: 'Bulan Uang Masuk',
-										data: [10, 20, 10, 14, 10, 20, 10, 14, 10, 20, 10, 14 ]
+										data: [{{$incomes}}]
 									},{
 										name: 'Bulan Uang Untung',
-										data: [8, 17, 7, 12, 8, 17, 7, 12, 8, 17, 7, 12 ]
+										data: [{{$profits}}]
 									}
 									]
 								});
@@ -153,7 +153,7 @@
 							<tbody id="body_content">
 								<?php
 
-								function toMoney($val,$symbol='Rp ',$r=0)
+								function toMoney($val,$symbol='IDR ',$r=0)
 								{
 									$n = $val;
 									$sign = ($n < 0) ? '-' : '';
@@ -162,18 +162,21 @@
 									return  $symbol.$sign.$i;
 								}
 								?> 
-								<?php for($m = 1; $m < 13; $m++){?>
-								<tr> 
-									<td style="text-align: right;">{{ $m }}</td>  
-									<td>Rp 30.000.000</td>
-									<td>Rp 20.000.000</td>
-									<td>
-										<a href="{{URL::to('test/view_keuntungan_harian')}}" class="btn btn-primary btn-xs" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">
-											<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Lihat Detail Harian
-										</a>
-									</td>
-								</tr>  
-								<?php } ?>
+								<?php $counter = 1?>
+								@foreach($monthlyDetail as $detail)
+									<tr> 
+										<td style="text-align: right;">{{ $counter }}</td>  
+										<td>{{toMoney($detail[1])}}</td>
+										<td>{{toMoney($detail[0])}}</td>
+										<td>
+											<a href="{{action('keuntunganController@viewKeuntunganHarian', array('month' => $counter))}}" class="btn btn-primary btn-xs" style="display: inline-block; margin-top: 5px;margin-bottom: 5px;">
+												<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Lihat Detail Harian
+											</a>
+										</td>
+									</tr> 
+									<?php $counter++?>
+								@endforeach
+								
 							</tbody>
 						</table>
 

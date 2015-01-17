@@ -354,15 +354,9 @@ class returnController extends \HomeController{
 		//$transaction_id = Input::get('data');
 		//$transaction_id = 1;
 		
-		$dataOrder = Order::where('transaction_id', '>', 0)->get();
+		$dataOrder = Transaction::where('id', '>', 0)->get();
 		foreach($dataOrder as $data){
-			$data->cust_name = $this->find_cust_name($data->transaction_id);
-			$product_data = $this->find_product_order($data->product_detail_id);
-			$data->prod_id = $product_data->id;
-			$data->prod_code = $product_data->product_code;
-			$data->prod_name = $product_data->name;
-			
-			$data->no_nota = Transaction::find($data->transaction_id)->no_faktur;
+			$data->cust_name = $this->find_cust_name($data->id);
 		}
 		
 		//return $transaction_id;
@@ -479,9 +473,9 @@ class returnController extends \HomeController{
 		else
 		{
 			if($from != '' && $to != ''){
-				$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->whereBetween('orders.created_at', array($from, $to))->select('transactions.customer_id AS customer_id', 'orders.transaction_id AS transaction_id', 'products.product_code AS prod_code', 'orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->get();
+				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->whereBetween('orders.created_at', array($from, $to))->select('transactions.customer_id AS customer_id', 'orders.transaction_id AS transaction_id', 'products.product_code AS prod_code', 'orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
 			}else{
-				$joinTable = DB::table('orders')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->select('transactions.customer_id AS customer_id','orders.transaction_id AS transaction_id','products.product_code AS prod_code','orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->get();
+				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->select('transactions.customer_id AS customer_id','orders.transaction_id AS transaction_id','products.product_code AS prod_code','orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
 			}
 			foreach($joinTable as $data){
 				$data->cust_name = Customer::find($data->customer_id)->name;
@@ -598,7 +592,7 @@ class returnController extends \HomeController{
 	{
 		$id = Input::get('data');
 		$solusi = Input::get('solusi');
-		$controller = new RestockController();
+		$controller = new RestocksController();
 		$returnController = new ReturnsController();
 		
 		if($solusi == "Masukan ke stok toko")

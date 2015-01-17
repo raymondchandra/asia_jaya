@@ -31,6 +31,7 @@
 											$id = $(this).prev().val();
 											var e = document.getElementById("solution-opt");
 											var solution = e.options[e.selectedIndex].text;
+											alert(solution);
 											$.ajax({
 												type: 'PUT',
 												url: '{{URL::route('david.update_solution_return')}}',
@@ -42,7 +43,7 @@
 													//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
 													if(response['code'] == 204)
 													{
-														window.open("{{URL::route('gentry.view_print_konsumen')}}"+"?dataT="+$id;
+														window.open("{{URL::route('gentry.view_print_konsumen')}}"+"?dataT="+$id);
 														location.reload();
 													}
 													else
