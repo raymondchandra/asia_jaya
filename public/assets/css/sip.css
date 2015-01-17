@@ -2,12 +2,12 @@
 * Ink v1.0.5 - Copyright 2013 ZURB Inc        *
 **********************************************/
 /* Client-specific Styles & Reset */
-/* line 8, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 8, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 #outlook a {
   padding: 0;
 }
 
-/* line 12, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 12, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 body {
   width: 100% !important;
   min-width: 100%;
@@ -17,12 +17,12 @@ body {
   padding: 0;
 }
 
-/* line 21, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 21, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .ExternalClass {
   width: 100%;
 }
 
-/* line 30, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 30, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .ExternalClass,
 .ExternalClass p,
 .ExternalClass span,
@@ -32,7 +32,7 @@ body {
   line-height: 100%;
 }
 
-/* line 34, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 34, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 #backgroundTable {
   margin: 0;
   padding: 0;
@@ -40,7 +40,7 @@ body {
   line-height: 100% !important;
 }
 
-/* line 41, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 41, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 img {
   outline: none;
   text-decoration: none;
@@ -52,29 +52,29 @@ img {
   display: block;
 }
 
-/* line 52, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 52, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 center {
   width: 100%;
   min-width: 580px;
 }
 
-/* line 57, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 57, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 a img {
   border: none;
 }
 
-/* line 61, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 61, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 p {
   margin: 0 0 0 10px;
 }
 
-/* line 65, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 65, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table {
   border-spacing: 0;
   border-collapse: collapse;
 }
 
-/* line 70, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 70, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td {
   word-break: break-word;
   -webkit-hyphens: auto;
@@ -83,14 +83,14 @@ td {
   border-collapse: collapse !important;
 }
 
-/* line 78, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 78, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table, tr, td {
   padding: 0;
   vertical-align: top;
   text-align: left;
 }
 
-/* line 84, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 84, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 hr {
   color: #d9d9d9;
   background-color: #d9d9d9;
@@ -99,50 +99,50 @@ hr {
 }
 
 /* Responsive Grid */
-/* line 93, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 93, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.body {
   height: 100%;
   width: 100%;
 }
 
-/* line 98, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 98, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.container {
   width: 580px;
   margin: 0 auto;
   text-align: inherit;
 }
 
-/* line 104, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 104, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.row {
   padding: 0px;
   width: 100%;
   position: relative;
 }
 
-/* line 110, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 110, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.container table.row {
   display: block;
 }
 
-/* line 114, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 114, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.wrapper {
   padding: 10px 20px 0px 0px;
   position: relative;
 }
 
-/* line 120, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 120, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns,
 table.column {
   margin: 0 auto;
 }
 
-/* line 125, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 125, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns td,
 table.column td {
   padding: 0px 0px 10px;
 }
 
-/* line 132, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 132, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns td.sub-columns,
 table.column td.sub-columns,
 table.columns td.sub-column,
@@ -150,339 +150,339 @@ table.column td.sub-column {
   padding-right: 10px;
 }
 
-/* line 136, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 136, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.sub-column, td.sub-columns {
   min-width: 0px;
 }
 
-/* line 141, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 141, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.row td.last,
 table.container td.last {
   padding-right: 0px;
 }
 
-/* line 145, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 145, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.one {
   width: 30px;
 }
 
-/* line 146, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 146, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.two {
   width: 80px;
 }
 
-/* line 147, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 147, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.three {
   width: 130px;
 }
 
-/* line 148, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 148, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.four {
   width: 180px;
 }
 
-/* line 149, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 149, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.five {
   width: 230px;
 }
 
-/* line 150, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 150, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.six {
   width: 280px;
 }
 
-/* line 151, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 151, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.seven {
   width: 330px;
 }
 
-/* line 152, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 152, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.eight {
   width: 380px;
 }
 
-/* line 153, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 153, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.nine {
   width: 430px;
 }
 
-/* line 154, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 154, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.ten {
   width: 480px;
 }
 
-/* line 155, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 155, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.eleven {
   width: 530px;
 }
 
-/* line 156, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 156, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.twelve {
   width: 580px;
 }
 
-/* line 158, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 158, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.one center {
   min-width: 30px;
 }
 
-/* line 159, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 159, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.two center {
   min-width: 80px;
 }
 
-/* line 160, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 160, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.three center {
   min-width: 130px;
 }
 
-/* line 161, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 161, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.four center {
   min-width: 180px;
 }
 
-/* line 162, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 162, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.five center {
   min-width: 230px;
 }
 
-/* line 163, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 163, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.six center {
   min-width: 280px;
 }
 
-/* line 164, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 164, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.seven center {
   min-width: 330px;
 }
 
-/* line 165, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 165, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.eight center {
   min-width: 380px;
 }
 
-/* line 166, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 166, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.nine center {
   min-width: 430px;
 }
 
-/* line 167, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 167, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.ten center {
   min-width: 480px;
 }
 
-/* line 168, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 168, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.eleven center {
   min-width: 530px;
 }
 
-/* line 169, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 169, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.twelve center {
   min-width: 580px;
 }
 
-/* line 171, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 171, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.one .panel center {
   min-width: 10px;
 }
 
-/* line 172, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 172, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.two .panel center {
   min-width: 60px;
 }
 
-/* line 173, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 173, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.three .panel center {
   min-width: 110px;
 }
 
-/* line 174, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 174, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.four .panel center {
   min-width: 160px;
 }
 
-/* line 175, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 175, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.five .panel center {
   min-width: 210px;
 }
 
-/* line 176, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 176, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.six .panel center {
   min-width: 260px;
 }
 
-/* line 177, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 177, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.seven .panel center {
   min-width: 310px;
 }
 
-/* line 178, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 178, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.eight .panel center {
   min-width: 360px;
 }
 
-/* line 179, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 179, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.nine .panel center {
   min-width: 410px;
 }
 
-/* line 180, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 180, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.ten .panel center {
   min-width: 460px;
 }
 
-/* line 181, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 181, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.eleven .panel center {
   min-width: 510px;
 }
 
-/* line 182, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 182, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.twelve .panel center {
   min-width: 560px;
 }
 
-/* line 185, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 185, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.one,
 .body .column td.one {
   width: 8.333333%;
 }
 
-/* line 187, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 187, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.two,
 .body .column td.two {
   width: 16.666666%;
 }
 
-/* line 189, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 189, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.three,
 .body .column td.three {
   width: 25%;
 }
 
-/* line 191, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 191, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.four,
 .body .column td.four {
   width: 33.333333%;
 }
 
-/* line 193, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 193, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.five,
 .body .column td.five {
   width: 41.666666%;
 }
 
-/* line 195, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 195, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.six,
 .body .column td.six {
   width: 50%;
 }
 
-/* line 197, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 197, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.seven,
 .body .column td.seven {
   width: 58.333333%;
 }
 
-/* line 199, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 199, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.eight,
 .body .column td.eight {
   width: 66.666666%;
 }
 
-/* line 201, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 201, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.nine,
 .body .column td.nine {
   width: 75%;
 }
 
-/* line 203, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 203, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.ten,
 .body .column td.ten {
   width: 83.333333%;
 }
 
-/* line 205, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 205, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.eleven,
 .body .column td.eleven {
   width: 91.666666%;
 }
 
-/* line 207, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 207, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .body .columns td.twelve,
 .body .column td.twelve {
   width: 100%;
 }
 
-/* line 209, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 209, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-one {
   padding-left: 50px;
 }
 
-/* line 210, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 210, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-two {
   padding-left: 100px;
 }
 
-/* line 211, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 211, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-three {
   padding-left: 150px;
 }
 
-/* line 212, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 212, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-four {
   padding-left: 200px;
 }
 
-/* line 213, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 213, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-five {
   padding-left: 250px;
 }
 
-/* line 214, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 214, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-six {
   padding-left: 300px;
 }
 
-/* line 215, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 215, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-seven {
   padding-left: 350px;
 }
 
-/* line 216, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 216, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-eight {
   padding-left: 400px;
 }
 
-/* line 217, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 217, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-nine {
   padding-left: 450px;
 }
 
-/* line 218, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 218, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-ten {
   padding-left: 500px;
 }
 
-/* line 219, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 219, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.offset-by-eleven {
   padding-left: 550px;
 }
 
-/* line 221, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 221, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 td.expander {
   visibility: hidden;
   width: 0px;
   padding: 0 !important;
 }
 
-/* line 228, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 228, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns .text-pad,
 table.column .text-pad {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-/* line 236, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 236, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns .left-text-pad,
 table.columns .text-pad-left,
 table.column .left-text-pad,
@@ -490,7 +490,7 @@ table.column .text-pad-left {
   padding-left: 10px;
 }
 
-/* line 243, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 243, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns .right-text-pad,
 table.columns .text-pad-right,
 table.column .right-text-pad,
@@ -499,60 +499,60 @@ table.column .text-pad-right {
 }
 
 /* Block Grid */
-/* line 249, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 249, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .block-grid {
   width: 100%;
   max-width: 580px;
 }
 
-/* line 254, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 254, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .block-grid td {
   display: inline-block;
   padding: 10px;
 }
 
-/* line 259, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 259, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .two-up td {
   width: 270px;
 }
 
-/* line 263, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 263, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .three-up td {
   width: 173px;
 }
 
-/* line 267, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 267, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .four-up td {
   width: 125px;
 }
 
-/* line 271, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 271, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .five-up td {
   width: 96px;
 }
 
-/* line 275, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 275, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .six-up td {
   width: 76px;
 }
 
-/* line 279, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 279, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .seven-up td {
   width: 62px;
 }
 
-/* line 283, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 283, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .eight-up td {
   width: 52px;
 }
 
 /* Alignment & Visibility Classes */
-/* line 289, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 289, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.center, td.center {
   text-align: center;
 }
 
-/* line 298, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 298, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h1.center,
 h2.center,
 h3.center,
@@ -562,27 +562,27 @@ h6.center {
   text-align: center;
 }
 
-/* line 302, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 302, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 span.center {
   display: block;
   width: 100%;
   text-align: center;
 }
 
-/* line 308, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 308, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 img.center {
   margin: 0 auto;
   float: none;
 }
 
-/* line 314, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 314, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .show-for-small,
 .hide-for-desktop {
   display: none;
 }
 
 /* Typography */
-/* line 320, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 320, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 body, table.body, h1, h2, h3, h4, h5, h6, p, td {
   color: #222222;
   font-family: "Helvetica", "Arial", sans-serif;
@@ -593,85 +593,85 @@ body, table.body, h1, h2, h3, h4, h5, h6, p, td {
   line-height: 1.3;
 }
 
-/* line 330, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 330, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h1, h2, h3, h4, h5, h6 {
   word-break: normal;
 }
 
-/* line 334, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 334, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h1 {
   font-size: 40px;
 }
 
-/* line 335, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 335, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h2 {
   font-size: 36px;
 }
 
-/* line 336, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 336, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h3 {
   font-size: 32px;
 }
 
-/* line 337, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 337, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h4 {
   font-size: 28px;
 }
 
-/* line 338, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 338, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h5 {
   font-size: 24px;
 }
 
-/* line 339, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 339, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h6 {
   font-size: 20px;
 }
 
-/* line 340, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 340, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 body, table.body, p, td {
   font-size: 14px;
   line-height: 19px;
 }
 
-/* line 342, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 342, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 p.lead, p.lede, p.leed {
   font-size: 18px;
   line-height: 21px;
 }
 
-/* line 347, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 347, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 p {
   margin-bottom: 10px;
 }
 
-/* line 351, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 351, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 small {
   font-size: 10px;
 }
 
-/* line 355, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 355, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 a {
   color: #2ba6cb;
   text-decoration: none;
 }
 
-/* line 360, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 360, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 a:hover {
   color: #2795b6 !important;
 }
 
-/* line 364, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 364, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 a:active {
   color: #2795b6 !important;
 }
 
-/* line 368, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 368, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 a:visited {
   color: #2ba6cb !important;
 }
 
-/* line 377, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 377, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h1 a,
 h2 a,
 h3 a,
@@ -681,7 +681,7 @@ h6 a {
   color: #2ba6cb;
 }
 
-/* line 386, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 386, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h1 a:active,
 h2 a:active,
 h3 a:active,
@@ -691,7 +691,7 @@ h6 a:active {
   color: #2ba6cb !important;
 }
 
-/* line 395, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 395, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 h1 a:visited,
 h2 a:visited,
 h3 a:visited,
@@ -702,25 +702,25 @@ h6 a:visited {
 }
 
 /* Panels */
-/* line 401, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 401, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .panel {
   background: #f2f2f2;
   border: 1px solid #d9d9d9;
   padding: 10px !important;
 }
 
-/* line 407, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 407, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .sub-grid table {
   width: 100%;
 }
 
-/* line 411, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 411, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .sub-grid td.sub-columns {
   padding-bottom: 0;
 }
 
 /* Buttons */
-/* line 421, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 421, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.button,
 table.tiny-button,
 table.small-button,
@@ -730,7 +730,7 @@ table.large-button {
   overflow: hidden;
 }
 
-/* line 430, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 430, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.button td,
 table.tiny-button td,
 table.small-button td,
@@ -745,27 +745,27 @@ table.large-button td {
   padding: 8px 0;
 }
 
-/* line 440, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 440, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.tiny-button td {
   padding: 5px 0 4px;
 }
 
-/* line 444, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 444, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.small-button td {
   padding: 8px 0 7px;
 }
 
-/* line 448, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 448, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.medium-button td {
   padding: 12px 0 10px;
 }
 
-/* line 452, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 452, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.large-button td {
   padding: 21px 0 18px;
 }
 
-/* line 460, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 460, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.button td a,
 table.tiny-button td a,
 table.small-button td a,
@@ -778,42 +778,42 @@ table.large-button td a {
   font-size: 16px;
 }
 
-/* line 468, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 468, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.tiny-button td a {
   font-size: 12px;
   font-weight: normal;
 }
 
-/* line 473, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 473, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.small-button td a {
   font-size: 16px;
 }
 
-/* line 477, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 477, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.medium-button td a {
   font-size: 20px;
 }
 
-/* line 481, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 481, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.large-button td a {
   font-size: 24px;
 }
 
-/* line 487, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 487, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.button:hover td,
 table.button:visited td,
 table.button:active td {
   background: #2795b6 !important;
 }
 
-/* line 493, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 493, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.button:hover td a,
 table.button:visited td a,
 table.button:active td a {
   color: #fff !important;
 }
 
-/* line 501, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 501, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.button:hover td,
 table.tiny-button:hover td,
 table.small-button:hover td,
@@ -822,7 +822,7 @@ table.large-button:hover td {
   background: #2795b6 !important;
 }
 
-/* line 519, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 519, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.button:hover td a,
 table.button:active td a,
 table.button td a:visited,
@@ -841,61 +841,61 @@ table.large-button td a:visited {
   color: #ffffff !important;
 }
 
-/* line 523, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 523, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.secondary td {
   background: #e9e9e9;
   border-color: #d0d0d0;
   color: #555;
 }
 
-/* line 529, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 529, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.secondary td a {
   color: #555;
 }
 
-/* line 533, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 533, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.secondary:hover td {
   background: #d0d0d0 !important;
   color: #555;
 }
 
-/* line 540, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 540, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.secondary:hover td a,
 table.secondary td a:visited,
 table.secondary:active td a {
   color: #555 !important;
 }
 
-/* line 544, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 544, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.success td {
   background: #5da423;
   border-color: #457a1a;
 }
 
-/* line 549, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 549, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.success:hover td {
   background: #457a1a !important;
 }
 
-/* line 553, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 553, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.alert td {
   background: #c60f13;
   border-color: #970b0e;
 }
 
-/* line 558, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 558, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.alert:hover td {
   background: #970b0e !important;
 }
 
-/* line 562, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 562, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.radius td {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
 
-/* line 568, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 568, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.round td {
   -webkit-border-radius: 500px;
   -moz-border-radius: 500px;
@@ -903,42 +903,42 @@ table.round td {
 }
 
 /* Outlook First */
-/* line 576, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 576, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 body.outlook p {
   display: inline !important;
 }
 
 /*  Media Queries */
 @media only screen and (max-width: 600px) {
-  /* line 584, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 584, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] img {
     width: auto !important;
     height: auto !important;
   }
 
-  /* line 589, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 589, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] center {
     min-width: 0 !important;
   }
 
-  /* line 593, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 593, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .container {
     width: 95% !important;
   }
 
-  /* line 597, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 597, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .row {
     width: 100% !important;
     display: block !important;
   }
 
-  /* line 602, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 602, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .wrapper {
     display: block !important;
     padding-right: 0 !important;
   }
 
-  /* line 608, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 608, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns,
   table[class="body"] .column {
     table-layout: fixed !important;
@@ -949,91 +949,91 @@ body.outlook p {
     display: block !important;
   }
 
-  /* line 618, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 618, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .wrapper.first .columns,
   table[class="body"] .wrapper.first .column {
     display: table !important;
   }
 
-  /* line 623, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 623, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] table.columns td,
   table[class="body"] table.column td {
     width: 100% !important;
   }
 
-  /* line 628, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 628, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.one,
   table[class="body"] .column td.one {
     width: 8.333333% !important;
   }
 
-  /* line 630, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 630, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.two,
   table[class="body"] .column td.two {
     width: 16.666666% !important;
   }
 
-  /* line 632, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 632, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.three,
   table[class="body"] .column td.three {
     width: 25% !important;
   }
 
-  /* line 634, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 634, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.four,
   table[class="body"] .column td.four {
     width: 33.333333% !important;
   }
 
-  /* line 636, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 636, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.five,
   table[class="body"] .column td.five {
     width: 41.666666% !important;
   }
 
-  /* line 638, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 638, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.six,
   table[class="body"] .column td.six {
     width: 50% !important;
   }
 
-  /* line 640, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 640, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.seven,
   table[class="body"] .column td.seven {
     width: 58.333333% !important;
   }
 
-  /* line 642, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 642, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.eight,
   table[class="body"] .column td.eight {
     width: 66.666666% !important;
   }
 
-  /* line 644, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 644, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.nine,
   table[class="body"] .column td.nine {
     width: 75% !important;
   }
 
-  /* line 646, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 646, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.ten,
   table[class="body"] .column td.ten {
     width: 83.333333% !important;
   }
 
-  /* line 648, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 648, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.eleven,
   table[class="body"] .column td.eleven {
     width: 91.666666% !important;
   }
 
-  /* line 650, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 650, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .columns td.twelve,
   table[class="body"] .column td.twelve {
     width: 100% !important;
   }
 
-  /* line 662, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 662, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] td.offset-by-one,
   table[class="body"] td.offset-by-two,
   table[class="body"] td.offset-by-three,
@@ -1048,119 +1048,119 @@ body.outlook p {
     padding-left: 0 !important;
   }
 
-  /* line 666, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 666, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] table.columns td.expander {
     width: 1px !important;
   }
 
-  /* line 671, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 671, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .right-text-pad,
   table[class="body"] .text-pad-right {
     padding-left: 10px !important;
   }
 
-  /* line 676, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 676, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .left-text-pad,
   table[class="body"] .text-pad-left {
     padding-right: 10px !important;
   }
 
-  /* line 681, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 681, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .hide-for-small,
   table[class="body"] .show-for-desktop {
     display: none !important;
   }
 
-  /* line 686, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 686, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .show-for-small,
   table[class="body"] .hide-for-desktop {
     display: inherit !important;
   }
 }
-/* line 692, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 692, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.facebook td {
   background: #3b5998;
   border-color: #2d4473;
 }
 
-/* line 697, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 697, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.facebook:hover td {
   background: #2d4473 !important;
 }
 
-/* line 701, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 701, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.twitter td {
   background: #00acee;
   border-color: #0087bb;
 }
 
-/* line 706, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 706, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.twitter:hover td {
   background: #0087bb !important;
 }
 
-/* line 710, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 710, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.google-plus td {
   background-color: #DB4A39;
   border-color: #CC0000;
 }
 
-/* line 715, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 715, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.google-plus:hover td {
   background: #CC0000 !important;
 }
 
-/* line 719, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 719, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .template-label {
   color: #ffffff;
   font-weight: bold;
   font-size: 11px;
 }
 
-/* line 725, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 725, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .callout .panel {
   background: #ECF8FF;
   border-color: #b9e5ff;
 }
 
-/* line 730, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 730, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .header {
   background: #999999;
 }
 
-/* line 734, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 734, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .footer .wrapper {
   background: #ebebeb;
 }
 
-/* line 738, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 738, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 .footer h5 {
   padding-bottom: 10px;
 }
 
-/* line 742, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 742, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns .text-pad {
   padding-left: 10px;
   padding-right: 10px;
 }
 
-/* line 747, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 747, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns .left-text-pad {
   padding-left: 10px;
 }
 
-/* line 751, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+/* line 751, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
 table.columns .right-text-pad {
   padding-right: 10px;
 }
 
 @media only screen and (max-width: 600px) {
-  /* line 757, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 757, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .right-text-pad {
     padding-left: 10px !important;
   }
 
-  /* line 761, E:/xampp/htdocs/asiajaya/public/assets/css/sip.scss */
+  /* line 761, E:/xampp/htdocs/asia_jaya/public/assets/css/sip.scss */
   table[class="body"] .left-text-pad {
     padding-right: 10px !important;
   }
