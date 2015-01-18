@@ -65,6 +65,8 @@
 				<li><a href="{{URL::route('gentry.view_tax')}}"><span class="glyphicon glyphicon-credit-card" style="color:#fff; margin-right:10px;"></span>Set Tax</a></li>
 				@endif
 
+				<li><a href="{{URL::route('mobile_site')}}"><span class="glyphicon glyphicon-shopping-cart" style="color:#fff; margin-right:10px;"></span>Form Pemesanan</a></li>
+
 				<!--
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-volume-up" style="color:#fff; margin-right:10px;"></span>Link<span class="caret"></span></a>

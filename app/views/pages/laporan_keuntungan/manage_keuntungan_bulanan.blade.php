@@ -5,6 +5,10 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<div class="g-lg-3">
+
+					<ol class="breadcrumb"> 
+						<li class="active">Lap. Keuntungan Bulanan</li> 
+					</ol>
 					<h3 style="float: left;">
 						Lap. Keuntungan Bulanan
 					</h3>

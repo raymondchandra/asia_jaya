@@ -5,6 +5,11 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<div class="g-lg-3">
+
+					<ol class="breadcrumb">
+						<li><a href="{{URL::route('david.view_keuntungan')}}">Lap. Keuntungan Bulanan</a></li> 
+						<li class="active">Lap. Keuntungan Harian</li> 
+					</ol>
 					<h3 style="float: left;">
 						Lap. Keuntungan Harian
 					</h3>
