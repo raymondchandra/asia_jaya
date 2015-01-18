@@ -5,22 +5,8 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$array = array();
-		for($i=1 ; $i<13 ; $i++)
-		{
-			$datas = Order::select(DB::raw('sum(price) as total'))->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
-			if($datas->total == null)
-			{
-				$array[$i-1] = 0;
-			}
-			else
-			{
-				$array[$i-1] = $datas->total;
-			}
-			
-		}
-		$result = $array[0];
-		var_dump($array);
+		$orders = DB::table('orders')->select(DB::raw('name , SUM(quantity) as quantity, SUM(price) as price'), 'product_detail_id as prd_id','product_code')->join('product_details', 'product_details.id', '=', 'orders.product_detail_id')->join('products' , 'product_id' , '=' , 'products.id')->where('transaction_id', '=', 9)->groupBy('product_code')->get();
+		var_dump($orders);
 	});
 	Route::get('/tes2', function()
 	{
@@ -500,6 +486,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	Route::post('/upload_image', ['as'=>'gentry.upload_image','uses' => 'restockController@uploadImage']);
 	
 	Route::post('/upload_image_v2', ['as'=>'gentry.upload_image_v2','uses' => 'restockController@uploadArrayImage']);
+	
+	Route::post('/upload_image_v3', ['as'=>'gentry.upload_image_v3','uses' => 'restockController@uploadImageV3']);
 	
 	//Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
 	

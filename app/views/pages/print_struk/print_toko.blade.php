@@ -95,7 +95,7 @@
 				<tr>
 				<td>
 					<tr>
-						<td colspan="2">{{$order->productName}} - {{$order->productColor}}</td>
+						<td colspan="2">{{$order->productCode}} - {{$order->productColor}}</td>
 					</tr>
 					<tr>
 						<td style="text-align: right;">{{$order->quantity}} x {{toMoney($order->price/$order->quantity)}}</td>
@@ -153,16 +153,20 @@
 		-----------------------------------------
 
 		<table>
+			<!--
 			<tr>
 				<td>Total</td>
 				<td>:</td>
 				<td style="text-align: right;">{{toMoney($total)}}</td>
 			</tr>
-			<tr>
-				<td>Diskon</td>
-				<td>:</td>
-				<td style="text-align: right;">{{toMoney($transaksi->discount)}}</td>
-			</tr>
+			-->
+			@if($transaksi->discount != 0)
+				<tr>
+					<td>Diskon</td>
+					<td>:</td>
+					<td style="text-align: right;">{{toMoney($transaksi->discount)}}</td>
+				</tr>
+			@endif
 			<tr>
 				<td>Pajak</td>
 				<td>:</td>
@@ -215,7 +219,7 @@
 					<p style="text-align: center; font-size: 0.9em;">
 						No. Rek: <br/>
 						BCA: 091 800 3765 a/n: Winnie Husin<br/>
-						Mandiri: 103-00-800-3765-4 a/n: Winnie Husin
+						Mandiri: 103-00-800-37654 a/n: Winnie Husin
 					</p>
 				</td>
 			</tr>

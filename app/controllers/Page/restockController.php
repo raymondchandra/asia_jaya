@@ -434,7 +434,7 @@ class restockController extends \HomeController{
 				if($seriJson->{'code'} == '404')
 				{
 					//buat seri baru
-					$insertDetailStatus = $this->insertNewProductDetail($productCode[$i]."-seri", '-', 0, 0, $id,0, $reference, 1);
+					$insertDetailStatus = $this->insertNewProductDetail($productCode[$i]."-seri", 'assets/img/nophoto.jpg', 0, 0, $id,0, $reference, 1);
 				}
 				else
 				{
@@ -621,6 +621,40 @@ class restockController extends \HomeController{
 			}else{
 				return "Filename is already exist";
 			}
+		}else{
+			return "Upload Failed";
+		}
+	}
+	
+	public function uploadImageV3(){
+		//$data = Input::get('data');
+		$id = Input::get('id');
+		$productDetail = ProductDetail::find($id);
+		$product = Product::find($productDetail->product_id);
+		if(isset($_FILES['file']['name']))
+		{
+			$ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+			$newFileName = $product->product_code."-".$productDetail->color.".".$ext;
+			$productDetail->photo = "assets/product_img/".$newFileName;
+			try
+			{
+				$productDetail->save();
+				if(true)
+				{
+					$sourcePath = $_FILES['file']['tmp_name']; 																						// Storing source path of the file in a variable
+					$targetPath = "/xampp/htdocs/asia_jaya/public/assets/product_img/".$newFileName; 		// Target path where file is to be stored
+					move_uploaded_file($sourcePath,$targetPath) ; 																				// Moving Uploaded file
+					return "Upload Success";
+				}else
+				{
+					return "Filename is already exist";
+				}
+			}
+			catch(Exception $ex)
+			{
+				
+			}
+			
 		}else{
 			return "Upload Failed";
 		}

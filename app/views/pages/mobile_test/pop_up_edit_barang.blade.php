@@ -38,12 +38,12 @@
 							<p class="form-control-static" id="edit_warna"></p>
 						</div>
 					</div>
-					<div class="form-group" style="margin-bottom: 0px;">
+					<!--<div class="form-group" style="margin-bottom: 0px;">
 						<label class="g-sm-3 control-label">Harga Min</label>
 						<div class="g-sm-9">
 							<p class="form-control-static" id="edit_harga_min"></p>
 						</div>
-					</div>
+					</div>-->
 					<div class="form-group" style=" ">
 						<label for="" class="g-sm-3 control-label">Harga@</label>
 						<div class="g-sm-6">
@@ -76,7 +76,9 @@
 						</div>
 						<script>
 						$('body').on('keyup','#f_edit_qty',function(){
-							$('#f_subtotal_edit').text("Rp " + $('#f_hsatuan_qty').val()*$('#f_edit_qty').val());
+							var newVal = parseInt(toAngka($('#f_hsatuan_qty').val()))*1000;
+							var newQty = $('#f_edit_qty').val();
+							$('#f_subtotal_edit').text("Rp " + toRp(parseInt(newVal)*parseInt(newQty)));
 						});
 						$('body').on('keyup','#f_hsatuan_qty',function(){
 							/*
@@ -163,8 +165,9 @@
 
 
 					$total = $currentTotal + $newTotal - $oldTotal;
-					$('#subtotal_text_'+$inc).text("Rp " + $total);
+					$('#subtotal_text_'+$inc).text("Rp " + toRp($total) );
 					$('.f_slider_alert').addClass('hidden');
+
 				});
 				
 

@@ -386,10 +386,8 @@
 									{{ $data->created_at}}
 								</td>
 								<td>
-									@if($data->solution == "pending")
-										<input type="hidden" value="{{$data->id}}"/>
-										<button id="" class="btn btn-info btn-xs solution-btn"  data-toggle="modal" data-target=".pop_up_solusi">Solusi</button>
-									@endif
+									<input type="hidden" value="{{$data->id}}"/>
+									<button id="" class="btn btn-info btn-xs solution-btn"  data-toggle="modal" data-target=".pop_up_solusi">Solusi</button>
 								</td>
 							</tr> 
 							@endforeach

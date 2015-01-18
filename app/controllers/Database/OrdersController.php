@@ -121,9 +121,11 @@ class OrdersController extends \BaseController {
 	public function updateOrder($id, $quantity, $price)
 	{
 		$order = Order::find($id);
-		
+		$productDetail = ProductDetail::find($order->product_detail_id);
+		$product = Product::find($productDetail->product_id);
 		$order->quantity = $quantity;
 		$order->price = $price;
+		$order->modal = $quantity * $product->modal_price;
 		
 		try
 		{

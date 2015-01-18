@@ -85,7 +85,6 @@
 			</div>
 		</div>
 			 
-		
 		<div id="yield_content" class="s_content_admin">
 			@yield('content')
 		</div>

@@ -172,7 +172,7 @@
 					<p style="text-align: center; font-size: 0.9em;">
 						No. Rek: <br/>
 						BCA: 091 800 3765 a/n: Winnie Husin<br/>
-						Mandiri: 103-00-800-3765-4 a/n: Winnie Husin
+						Mandiri: 103-00-800-37654 a/n: Winnie Husin
 					</p>
 				</td>
 			</tr>

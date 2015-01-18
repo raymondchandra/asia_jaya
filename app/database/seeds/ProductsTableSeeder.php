@@ -20,21 +20,6 @@ class ProductsTableSeeder extends Seeder {
 			'type' => $faker->text,
 			'deleted' => 0
 		]);
-		
-		foreach(range(1, 2) as $index)
-		{
-			Product::create([
-				'product_code' => $faker->randomNumber(5),
-				'name' => $faker->word,
-				'modal_price' => $faker->randomNumber(6),
-				'min_price' => $faker->randomNumber(6),
-				'sales_price' => $faker->randomNumber(6),
-				'stock_shop' => $faker->randomNumber(3),
-				'stock_storage' => $faker->randomNumber(3),
-				'type' => $faker->text,
-				'deleted' => 0
-			]);
-		}
 	}
 
 }

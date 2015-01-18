@@ -659,7 +659,7 @@
 					$data += "<input id='hidden_shop' type=hidden value='"+$shop+"'/>";
 					$data += "<input id='hidden_storage' type=hidden value='"+$storage+"'/>";
 					$data += "<td>"
-					$data += resp.namaProduk;
+					$data += resp.kodeProduk;
 					$data += "</td><td>";
 					$data += "<img src='{{asset('"+resp.foto+"')}}' width='80' height='80'>";
 					$data += "</td><td>";
@@ -686,7 +686,7 @@
 					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);
 				});
 				//$('#transaction_subtotal_detail').text("Rp " + toRp($total));
-				$('#transaction_diskon_detail').val(toAngka($discount));			
+				$('#transaction_diskon_detail').val(parseInt(toAngka($discount))/1000);			
 				$('#transaction_tax_detail').text($tax);	 
 				$total -= toAngka($discount); //copy dari view_transaction
 				$tax = $total * toAngka($tax) / 100; //copy dari view_transaction

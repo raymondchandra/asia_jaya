@@ -106,6 +106,18 @@
 							</div>
 							
 							<script>
+								
+								$('body').on('keyup','#f_uang_bayaran',function(){
+
+									if(toAngka($('#transaction_total_detail').text()) > (toAngka($('#f_uang_bayaran').val())*1000 ) ){
+										$('#f_uang_kembalian').text("Uang Belum Cukup");
+									}else{
+										var kembalian = parseInt( (toAngka($('#f_uang_bayaran').val())*1000 ) ) - parseInt( toAngka($('#transaction_total_detail').text()) );
+										$('#f_uang_kembalian').text("Rp " + toRp(kembalian));
+									}
+									
+								});
+								
 								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 								function toRp(angka){
 									var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
@@ -118,16 +130,6 @@
 									}
 									return rev2.split('').reverse().join('');
 								}
-								$('body').on('keyup','#f_uang_bayaran',function(){
-
-									if(toAngka($('#transaction_total_detail').text()) > toAngka($('#f_uang_bayaran').val())){
-										$('#f_uang_kembalian').text("Uang Belum Cukup");
-									}else{
-										var kembalian = parseInt($('#f_uang_bayaran').val()) - parseInt(toAngka($('#transaction_total_detail').text()));
-										$('#f_uang_kembalian').text("Rp " + toRp(kembalian));
-									}
-									
-								});
 								
 							</script>
 							
@@ -144,7 +146,7 @@
 									//ajax buat ngupdate
 									$id = $('#pop_up_trans_id').text();
 									$total = toAngka($('#transaction_total_detail').text());									
-									$total_paid = toAngka($('#f_uang_bayaran').val());
+									$total_paid = toAngka($('#f_uang_bayaran').val())*1000;
 									$discount = toAngka($('#transaction_diskon_detail').val());
 									$orderIds = [];
 									$orderQtys = [];
@@ -155,7 +157,7 @@
 									{
 										$orderIds[$counter] = $(this).find('#hidden_id').val();
 										$orderQtys[$counter] = $(this).children('td')[3].innerText;
-										$orderPrices[$counter] = toAngka($(this).children('td')[5].innerText);
+										$orderPrices[$counter] = toAngka($(this).children('td')[6].innerText);
 										$counter++;
 									});
 
@@ -179,7 +181,7 @@
 														'data' : $id,
 														'total' : $total,
 														'paid' : $total_paid,
-														'discount' : $discount
+														'discount' : $discount*1000
 													},
 													success: function(response){
 														//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
@@ -234,7 +236,7 @@
 									$total = 0;
 									$("#transaction_detail_content tr").each(function(i, v)
 									{
-										$totalPrice = $(this).children('td')[5].innerText;
+										$totalPrice = $(this).children('td')[6].innerText;
 										$total += toAngka($totalPrice);
 									});
 									
@@ -245,7 +247,7 @@
 									}
 									else
 									{
-										$total -= toAngka($('#transaction_diskon_detail').val());
+										$total -= parseInt(toAngka($('#transaction_diskon_detail').val()))*1000;
 									}
 									
 									$tax = parseInt($total) * toAngka($('#transaction_tax_detail').text()) / parseInt(100);
@@ -253,18 +255,7 @@
 									$('#transaction_total_detail').text("Rp " + toRp($total));
 								});
 								
-								function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
-								function toRp(angka){
-									var rev     = parseInt(angka, 10).toString().split('').reverse().join('');
-									var rev2    = '';
-									for(var i = 0; i < rev.length; i++){
-										rev2  += rev[i];
-										if((i + 1) % 3 === 0 && i !== (rev.length - 1)){
-											rev2 += '.';
-										}
-									}
-									return rev2.split('').reverse().join('');
-								}
+								
 								
 								
 							</script>
