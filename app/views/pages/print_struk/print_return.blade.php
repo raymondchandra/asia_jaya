@@ -80,11 +80,13 @@
 						<td>:</td>
 						<td>{{$type}}</td>
 					</tr>
+					<!--
 					<tr>
 						<td>Solusi</td>
 						<td>:</td>
 						<td>{{$solution}}</td>
 					</tr>
+					-->
 					<tr>
 						<td>Barang Retur</td>
 						<td>:</td>

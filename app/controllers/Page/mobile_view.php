@@ -90,6 +90,7 @@ class mobile_view extends \BaseController{
 		}
 	}
 	
+	
 	/*
 		@author : Gentry Swanri
 		@parameter :
@@ -165,47 +166,7 @@ class mobile_view extends \BaseController{
 							}
 							if($productDetailId!=-1){
 								//add Orders
-								//cek seri
-								$cekProduct = ProductDetail::find($productDetailId);
-								if($cekProduct -> isSeri == 1)
-								{
-									//iterasi dari reference
-									$reference = $cekProduct->reference;
-									$reference = explode(';',$reference);
-									$counter = count($reference);
-									$pricePerOrder = $prodList['price']/($counter-1);
-									for($i=0 ; $i<$counter-1 ; $i++)
-									{
-										$quant = explode('-',$reference[$i]);
-										$productDetail = ProductDetail::find($quant[0]);
-										
-										$orderQuantity = $prodList['quantity'] * $quant[1];
-										$shop_stock = $productDetail->stock_shop;
-										$storage_stock = $productDetail->stock_storage;
-										//cek stock
-										if($orderQuantity > $shop_stock)
-										{
-											if($orderQuantity > ($shop_stock + $storage_stock))
-											{
-												//jgn tambahin
-											}
-											else
-											{
-												//tambahin
-												$addOrders = $this->addOrders($prodList['quantity']*$quant[1], $transactionId, $pricePerOrder, $quant[0]);
-											}
-										}
-										else
-										{
-											//tambahin
-											$addOrders = $this->addOrders($prodList['quantity']*$quant[1], $transactionId, $pricePerOrder, $quant[0]);
-										}
-									}
-								}
-								else
-								{
-									$addOrders = $this->addOrders($prodList['quantity'], $transactionId, $prodList['price'], $productDetailId);
-								}
+								$addOrders = $this->addOrders($prodList['quantity'], $transactionId, $prodList['price'], $productDetailId);
 								if($addOrders!=-1){
 									$response = array('code'=>'201','status' => 'Created');
 								}else{

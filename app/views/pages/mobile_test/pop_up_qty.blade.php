@@ -109,28 +109,34 @@
 								//if( $id == 1){ // kalau dia barang obral
 								$quant.length = 1;
 								
+								if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
+								{
 								
-								if( (( parseInt($stock_shop) + parseInt($stock_storage) ) < $('#ff_quant_first').val()) )
-								{
-									$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_2' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-								}else if( (parseInt($stock_shop) < $('#ff_quant_first').val()) && (( parseInt($stock_shop) + parseInt($stock_storage) ) >= $('#ff_quant_first').val()) )
-								{
-									$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_1' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
 								}
 								else
 								{
-									$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row ' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									if( (( parseInt($stock_shop) + parseInt($stock_storage) ) < $quantity) )
+									{
+										$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_2' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									}else if( (parseInt($stock_shop) < $quantity) && (( parseInt($stock_shop) + parseInt($stock_storage) ) >= $quantity) )
+									{
+										$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row s_danger_1' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									}
+									else
+									{
+										$data = "<tr data-toggle='modal' data-target='#pop_up_edit_barang' class='table_row ' id='"+ $product_code + "_" + $color + "_" + $inc +"'> <td id='code_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									}
+									$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									$data = $data + $quantity*($quant.length) + "</td>"; 
+									$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + "<span id='stock_shop_"+ $product_code + "_"+ $color + "_" + $inc +"'>" + $stock_shop +"</span> | <span id='stock_storage_"+ $product_code + "_"+ $color + "_" + $inc +"'>"+ $stock_storage + "</span></td>"; 
+									$data = $data + "<td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
+									$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+									
+									$('#pesanan_content_'+$inc).prepend($data);
+									b = parseInt(b) + parseInt($quantity*$price);
 								}
- 								$data = $data + $product_code + "</td> <td id='name_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-								$data = $data + $name + "</td> <td id='color_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-								$data = $data + $color + "</td> <td id='quantity_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-								$data = $data + $quantity*($quant.length) + "</td>"; 
-								$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + "<span id='stock_shop_"+ $product_code + "_"+ $color + "_" + $inc +"'>" + $stock_shop +"</span> | <span id='stock_storage_"+ $product_code + "_"+ $color + "_" + $inc +"'>"+ $stock_storage + "</span></td>"; 
-								$data = $data + "<td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-								$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
-								
-								$('#pesanan_content_'+$inc).prepend($data);
-								b = parseInt(b) + parseInt($quantity*$price);
 							});
 							var total = a+b;
 							$('#subtotal_text_'+$inc).text("Rp " + toRp(total));

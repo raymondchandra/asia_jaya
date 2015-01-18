@@ -273,16 +273,16 @@
 								<td><input type="text" class="form-control input-sm" id="filter_username"></td>
 								<td>
 									<select class="form-control input-sm" id="filter_void">
-										<option value="true">true</option>
-										<option value="false">false</option>
 										<option value="semua_void">semua void</option>
+										<option value="true">true</option>
+										<option value="false">false</option>								
 									</select>
 								</td>
 								<td>
 									<select class="form-control input-sm" id="filter_status">
-										<option value="true">paid</option>
-										<option value="false">unpaid</option>
 										<option value="semua_status">semua status</option>
+										<option value="true">paid</option>
+										<option value="false">unpaid</option>										
 									</select>
 								</td>
 								<td></td>
@@ -556,10 +556,7 @@
 			$tax = '-';
 		}
 		
-		$sales_id = $('#filter_sales_id').val();
-		if($sales_id == ''){
-			$sales_id = '-';
-		}
+		$sales_id = '-';
 		
 		$username = $('#filter_username').val();
 		if($username == ''){

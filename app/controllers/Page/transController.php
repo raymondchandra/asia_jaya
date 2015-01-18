@@ -215,11 +215,12 @@ class transController extends \HomeController{
 		
 		if($start_date != '' && $end_date != ''){
 			//$finalEndDate = $this->addDate($end_date);
-			$from = date("Y-m-d, G:i:s", strtotime($start_date));
+			$from = date("Y-m-d, G:i:s", (strtotime ( '-1 day' , strtotime ( $start_date) ) ));
 			$to = date("Y-m-d, G:i:s", strtotime($end_date));
 			$to = new DateTime($to);
 			$diff1day = new DateInterval('P1D');
 			$to->add($diff1day);
+			
 		}else{
 			$from = '';
 			$to = '';
@@ -271,14 +272,15 @@ class transController extends \HomeController{
 			$username = Input::get('username', '-');
 			$is_void = Input::get('is_void', '-');
 			$status = Input::get('status', '-');
-			
 			if($sortBy == "none")
 			{
 				$allTransactionJson = $transactionController->getFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $is_void, $status, $from, $to);
+				
 			}
 			else
 			{
 				$allTransactionJson = $transactionController->getSortedFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $is_void, $status, $sortBy, $order, $from, $to);
+				
 			}
 			//$allEmployeeJson = $accountController->getFilteredProfile($username, $role, $lastLogin, $active);
 			$allTransaction = json_decode($allTransactionJson->getContent());
@@ -287,7 +289,7 @@ class transController extends \HomeController{
 				$allTransactionData = $allTransaction->{'messages'};
 				foreach($allTransactionData as $allData){
 					$allData->order = $this->getOrderArray($allData->id);
-					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'is_void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at'=>$allData->created_at);
+					$datas[] = (object)array('id'=>$allData->id, 'name'=>$allData->name, 'total'=>$allData->total, 'discount'=>$allData->discount, 'tax'=>$allData->tax, 'sales_id'=>$allData->sales_id, 'username'=>$allData->username, 'is_void'=>$allData->is_void, 'status'=>$allData->status, 'order'=>$allData->order, 'total_paid'=>$allData->total_paid, 'created_at'=>$allData->created_at, 'no_faktur'=> $allData->no_faktur);
 					
 				}
 			}

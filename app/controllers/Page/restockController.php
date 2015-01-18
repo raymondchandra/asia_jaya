@@ -406,8 +406,13 @@ class restockController extends \HomeController{
 			}
 			
 			//buat produk detail baru
-			$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $stockShop[$i], $stockStorage[$i], $id,0, 0, 0);
-		
+			$productDetailController = new ProductDetailsController();
+			//cek dulu warnanya..ada yg sama apa ga
+			if($productDetailController->checkColor($id, $color[$i]) == 1)
+			{
+				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $stockShop[$i], $stockStorage[$i], $id,0, 0, 0);
+			}
+
 			//cek seri
 			$productDetailController = new ProductDetailsController();
 			$checker = $productDetailController->getByProductId($id);

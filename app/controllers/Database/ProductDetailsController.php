@@ -25,6 +25,20 @@ class ProductDetailsController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	public function checkColor($product_id,$color)
+	{
+		$prod = ProductDetail::where('product_id','=',$product_id)->where('color','=',$color)->first();
+		
+		if($prod == null)
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
 	/*
 		@author : Gentry Swanri
 		@paramater : $color, $stockShop, $stockStorage, $productId, $deleted
@@ -421,12 +435,14 @@ class ProductDetailsController extends \BaseController {
 	*/
 	public function search()
 	{
+		$source = Input::get('source','-');
 		try
 		{
 			$keyword = Input::get('keyword');
 			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->orWhere('prds.color', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->get();
 			foreach($products as $product => $key)
 			{
+
 				if($key->stock_shop == 0 && $key->stock_storage == 0)
 				{
 					if($key->isSeri == 0)
@@ -434,54 +450,72 @@ class ProductDetailsController extends \BaseController {
 						unset($products[$product]);
 					}
 				}
-					
-				/*
-				if($key->isSeri == '1')
+				if($source == '-')
 				{
-					$reference = $key->reference;
-					$prdClr = $key->color;
-					$reference = explode(';',$reference);
-					$counter = count($reference);
-					$prdClr = explode('-',$prdClr);
-					$clr = "";
-					$shopTotal = 0;
-					$storageTotal = 0;
-					$salesPrice = 0;
-					$minPrice = 0;
-					for($i=0 ; $i<$counter-1 ; $i++)
+					if($key->isSeri == 1)
 					{
-						$quant = explode('-',$reference[$i]);
-						$productDetail = ProductDetail::find($quant[0]);
-						if($productDetail->deleted == '0')
-						{							
-							//cek stok
-							$prd = Product::find($productDetail->product_id);
-							$salesPrice += $prd->sales_price;
-							$minPrice += $prd->min_price;
-							
-							$shop = $productDetail->stock_shop;
-							$shopTotal += $shop;
-							
-							$storage = $productDetail->stock_storage;
-							$storageTotal += $storage;
-							if($quant[count($quant)-1] > $shop)
+						$reference = $key->reference;
+						$reference = explode(';',$reference);
+						$counter = count($reference);
+						$canShow = $counter-1;
+						for($i=0 ; $i<$counter-1 ; $i++)
+						{
+							$quant = explode('-',$reference[$i]);
+							$productDetail = ProductDetail::find($quant[0]);
+							if($productDetail->stock_shop == 0 && $productDetail->stock_storage == 0)
 							{
-								if($quant[count($quant)-1] > ($shop + $storage))
-								{
-								 //jgn masukin
-								}
-								else
-								{
-									//masukin
-									if($i == 0)
-									{
-										$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
-									}
-									else
-									{
-										$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
-									}
-								}
+								$canShow--;
+							}
+						}
+						if($canShow == 0)
+						{
+							unset($products[$product]);
+						}
+					}
+				}
+				else
+				{
+					if($key->isSeri)
+					{
+						unset($products[$product]);
+					}
+				}
+
+			}
+			/*
+			if($key->isSeri == '1')
+			{
+				$reference = $key->reference;
+				$prdClr = $key->color;
+				$reference = explode(';',$reference);
+				$counter = count($reference);
+				$prdClr = explode('-',$prdClr);
+				$clr = "";
+				$shopTotal = 0;
+				$storageTotal = 0;
+				$salesPrice = 0;
+				$minPrice = 0;
+				for($i=0 ; $i<$counter-1 ; $i++)
+				{
+					$quant = explode('-',$reference[$i]);
+					$productDetail = ProductDetail::find($quant[0]);
+					if($productDetail->deleted == '0')
+					{							
+						//cek stok
+						$prd = Product::find($productDetail->product_id);
+						$salesPrice += $prd->sales_price;
+						$minPrice += $prd->min_price;
+						
+						$shop = $productDetail->stock_shop;
+						$shopTotal += $shop;
+						
+						$storage = $productDetail->stock_storage;
+						$storageTotal += $storage;
+						if($quant[count($quant)-1] > $shop)
+						{
+							if($quant[count($quant)-1] > ($shop + $storage))
+							{
+							 //jgn masukin
 							}
 							else
 							{
@@ -496,22 +530,34 @@ class ProductDetailsController extends \BaseController {
 								}
 							}
 						}
-					}
-					if($clr == "")
-					{
-						unset($products[$product]);
-					}
-					else
-					{
-						$key->color = $clr;
-						$key->stock_shop = $shopTotal;
-						$key->stock_storage = $storageTotal;
-						$key->min_price = $minPrice;
-						$key->sales_price = $salesPrice;
+						else
+						{
+							//masukin
+							if($i == 0)
+							{
+								$clr .= $quant[count($quant)-1]." * ".$prdClr[$i];
+							}
+							else
+							{
+								$clr .= " - ".$quant[count($quant)-1]." * ".$prdClr[$i];
+							}
+						}
 					}
 				}
-				*/
+				if($clr == "")
+				{
+					unset($products[$product]);
+				}
+				else
+				{
+					$key->color = $clr;
+					$key->stock_shop = $shopTotal;
+					$key->stock_storage = $storageTotal;
+					$key->min_price = $minPrice;
+					$key->sales_price = $salesPrice;
+				}
 			}
+			*/
 			if(count($products) == 0)
 			{
 				//not found
@@ -549,7 +595,14 @@ class ProductDetailsController extends \BaseController {
 			}
 			else
 			{
-				$result[] = $products;
+				if($products->deleted == 1)
+				{
+				
+				}
+				else
+				{
+					$result[] = $products;
+				}
 			}
 			
 		}

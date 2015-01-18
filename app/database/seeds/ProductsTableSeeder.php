@@ -14,7 +14,7 @@ class ProductsTableSeeder extends Seeder {
 			'name' => "Barang Obral",
 			'modal_price' => "0",
 			'min_price' => "0",
-			'sales_price' => "0",
+			'sales_price' => "150000",
 			'stock_shop' => "0",
 			'stock_storage' => "0",
 			'type' => $faker->text,

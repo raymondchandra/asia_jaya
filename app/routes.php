@@ -5,8 +5,8 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$orders = DB::table('orders')->select(DB::raw('name , SUM(quantity) as quantity, SUM(price) as price'), 'product_detail_id as prd_id','product_code')->join('product_details', 'product_details.id', '=', 'orders.product_detail_id')->join('products' , 'product_id' , '=' , 'products.id')->where('transaction_id', '=', 9)->groupBy('product_code')->get();
-		var_dump($orders);
+		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at', 'transactions.no_faktur')->where('transactions.no_faktur', 'LIKE', '%002%')->get();
+		var_dump($joined);
 	});
 	Route::get('/tes2', function()
 	{

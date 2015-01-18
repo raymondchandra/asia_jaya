@@ -19,6 +19,7 @@ class CreateRestockDetailsTable extends Migration {
 			$table->integer('product_detail_id')->unsigned();
 			$table->integer('stock_shop');
 			$table->integer('stock_storage');
+			$table->integer('restock_by')->unsigned();
 			$table->timestamps();
 		});
 	}

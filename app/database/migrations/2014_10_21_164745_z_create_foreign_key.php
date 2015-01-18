@@ -38,6 +38,7 @@ class ZCreateForeignKey extends Migration {
 		{
 		    $table->foreign('restock_id')->references('id')->on('restocks');
 		    $table->foreign('product_detail_id')->references('id')->on('product_details');
+		    $table->foreign('restock_by')->references('id')->on('accounts');
 		});
 		
 		Schema::table('returns', function($table)
