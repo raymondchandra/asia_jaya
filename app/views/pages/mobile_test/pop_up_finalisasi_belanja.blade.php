@@ -163,7 +163,7 @@
 				<script>
 				$('body').on('keyup','#diskon_text',function(){
 					var oldTotal = toAngka($('#total_text').text());
-					var diskon = $('#diskon_text').val();
+					var diskon = parseInt($('#diskon_text').val())*1000;
 					var tax = $('#transaction_tax').val();
 					var newTotal = (oldTotal-diskon) * ((100+parseInt(tax)) / 100);
 					$('#total_biaya_text').text("Rp " + toRp(newTotal));
@@ -209,7 +209,7 @@
 					$custName = $('#f_nama_pelanggan').val();
 					$totalBiaya = toAngka($('#total_biaya_text').text());
 					$custIdRep = $('#custIdRep').val();
-					$discount = $('#diskon_text').val();
+					$discount = parseInt($('#diskon_text').val())*1000;
 					$tax = $('#transaction_tax').val();
 					$.ajax({
 						type: 'POST',

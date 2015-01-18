@@ -18,6 +18,7 @@ class printController extends \HomeController{
 			$product = Product::find($productDetail->product_id);
 			$value->productColor = $productDetail->color;
 			$value->productName = $product->name;
+			$value->productCode = $product->product_code;
 			$total += $value->price;
 		}
 		$strukController = new StrukController();
@@ -33,10 +34,13 @@ class printController extends \HomeController{
 		
 		$namaPelanggan = Customer::find($transaksi->customer_id)->name;
 		$namaSales = Account::find($transaksi->sales_id)->username;
-		$orders = DB::table('orders')->select(DB::raw('name , SUM(quantity) as quantity, SUM(price) as price'))->join('product_details', 'product_details.id', '=', 'orders.product_detail_id')->join('products' , 'product_id' , '=' , 'products.id')->where('transaction_id', '=', $idTransaksi)->groupBy('name')->get();
+		$orders = DB::table('orders')->select(DB::raw('name , SUM(quantity) as quantity, SUM(price) as price'), 'product_detail_id as prd_id','product_code')->join('product_details', 'product_details.id', '=', 'orders.product_detail_id')->join('products' , 'product_id' , '=' , 'products.id')->where('transaction_id', '=', $idTransaksi)->groupBy('product_code')->get();
 		$total = 0;
 		foreach ($orders as $value)
 		{
+			$productDetail = ProductDetail::find($value->prd_id);
+			$product = Product::find($productDetail->product_id);
+			$value->productCode = $product->product_code;
 			$total += $value->price;
 		}
 		$strukController = new StrukController();
@@ -60,9 +64,9 @@ class printController extends \HomeController{
 		$sales = $account_data->username;
 		$type = $return_data->type;
 		$solution = $return_data->solution;
-		$barangReturn = $product_data->name;
+		$barangReturn = $product_data->product_code;
 		if($type==2){
-			$barangTukar = Product::find($return_data->trade_product_id)->name;
+			$barangTukar = Product::find(ProductDetail::find($return_data->trade_product_id)->product_id)->product_code;
 		}else{
 			$barangTukar = '-';
 		}

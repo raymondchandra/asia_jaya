@@ -262,7 +262,7 @@
 					$data += "</td><td>";
 					$data += resp.quantity;
 					$data += "</td><<td>";
-					$data += "IDR " + toRp(parseInt(resp.hargaSatuan)/parseInt(resp.quantity));
+					$data += "IDR " + toRp(parseInt(resp.hargaSatuan));
 					$data += "</td><td>";
 					$total = (parseInt(resp.hargaSatuan)*parseInt(resp.quantity));
 					$data += "IDR " + toRp($total);

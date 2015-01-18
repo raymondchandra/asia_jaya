@@ -98,11 +98,11 @@
 							var b = 0;
 							$.each(response['messages'], function( i, resp ) {
 								$id = resp.id;
-								$product_code = resp.product_code;
-								$color = resp.color;
+								$product_code = resp.product_code.replace(/\s+/g, '');
+								$color = resp.color.replace(/\s+/g, '');
 								$stock_shop = resp.stock_shop;
 								$stock_storage = resp.stock_storage;
-								$name = resp.name;
+								$name = resp.name.replace(/\s+/g, '');
 								$price = resp.sales_price;
 								$min_price = resp.min_price;
 								$quant = resp.color.split('-');

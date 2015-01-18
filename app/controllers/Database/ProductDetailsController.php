@@ -535,7 +535,15 @@ class ProductDetailsController extends \BaseController {
 			$explodeRes = explode('-',$ref);
 			$prodDetId = $explodeRes[0];
 			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prds.id', '=', $prodDetId)->first();
-			$result[] = $products;
+			if($products->stock_shop == 0 && $products->stock_storage == 0)
+			{
+				
+			}
+			else
+			{
+				$result[] = $products;
+			}
+			
 		}
 		
 		if(count($result)==0)

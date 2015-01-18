@@ -383,7 +383,7 @@
 					//alert($allAvaliability);
 				});
 				//$('#transaction_subtotal_detail').text("Rp " + toRp($total));
-				$('#transaction_diskon_detail').val(toAngka($discount));				
+				$('#transaction_diskon_detail').val(parseInt(toAngka($discount))/1000);				
 				$('#transaction_tax_detail').text($tax);	
 				$total -= toAngka($discount);
 				$tax = $total * toAngka($tax) / 100;
@@ -585,9 +585,41 @@
 		var f_new_subtotal = 0; 
 
 		//foreach subtotal per row
+		$allAvaliability = 0;
 		$('#transaction_detail_content tr').each(function(){
 		 	f_new_subtotal += toAngka( $(this).find('.f_subtotal_price_transaction').text() );
+			
+			$shop = $(this).closest('tr').find('#hidden_shop').val();
+			$storage = $(this).closest('tr').find('#hidden_storage').val();
+			
+			$avaliability = 0;
+			if(parseInt($(this).children('td')[3].innerText) > parseInt($shop))
+			{
+				if(parseInt($(this).children('td')[3].innerText) > parseInt(parseInt($storage) + parseInt($shop)))
+				{
+					$avaliability = 2;
+					$allAvaliability = 2;
+				}
+				else
+				{
+					$avaliability = 1;
+					if($allAvaliability < $avaliability)
+					{
+						$allAvaliability = 1;
+					}
+				}
+			}
+			else
+			{
+				
+			}
+			
 		});
+		$('#save-btn').removeClass('hidden');
+		if($allAvaliability == 2)
+		{
+			$('#save-btn').addClass('hidden');
+		}
 
 		var f_cur_transaction_diskon_detail = toAngka( $('#transaction_diskon_detail').val() );
 		var f_cur_transaction_tax_detail = toAngka( $('#transaction_tax_detail').text() ) / 100;

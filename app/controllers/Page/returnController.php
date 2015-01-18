@@ -307,7 +307,9 @@ class returnController extends \HomeController{
 			$datas = null;
 			if($allReturnData != null){
 				foreach($allReturnData as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+					$tempDetail = ProductDetail::find($allData->trade_product_id);
+					$prdctTemp = Product::find($tempDetail->product_id);
+					$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$prdctTemp->product_code, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
 				}
 			}
 
