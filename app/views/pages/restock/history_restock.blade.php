@@ -32,7 +32,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">Kode Produk</a>
+								<a href="javascript:void(0)">Kode Barang</a>
 								@if($filtered == 0)
 									@if($sortBy == 'product_code')
 										@if($order == 'asc')
@@ -58,7 +58,7 @@
 								</a>
 							</th>
 							<th class="table-bordered" style="width: 180px;">
-								<a href="javascript:void(0)">Merk Produk</a>
+								<a href="javascript:void(0)">Merk Barang</a>
 								@if($filtered == 0)
 									@if($sortBy == 'name')
 										@if($order == 'asc')
@@ -162,6 +162,32 @@
 								</a>
 							</th>
 							<th class="table-bordered">
+								<a href="javascript:void(0)">Eksekutor</a>
+								@if($filtered == 0)
+									@if($sortBy == 'created_at')
+										@if($order == 'asc')
+											<a href=" ">
+										@else
+											<a href=" ">
+										@endif
+									@else
+											<a href=" ">
+									@endif
+								@else
+									@if($sortBy == 'product_name')
+										@if($order == 'asc')
+											<a href=" ">
+										@else
+											<a href=" ">
+										@endif
+									@else
+											<a href=" ">
+									@endif
+								@endif
+									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
+								</a>
+							</th>
+							<th class="table-bordered">
 								<a href="javascript:void(0)">Waktu</a>
 								@if($filtered == 0)
 									@if($sortBy == 'created_at')
@@ -213,6 +239,8 @@
 								})
 								</script>
 							</td>
+
+							<td><input type="text" class="form-control input-sm" id="filter_eksekutor"></td>
 							<td width="140">
 							<a class="btn btn-primary btn-xs" id="filter_button" style="float: left;">Filter</a>
 							
@@ -243,6 +271,9 @@
 									</td>
 									<td>
 										{{$data->created_at}}
+									</td>
+									<td>
+										siapa
 									</td>
 									<td>
 										<input type="hidden" id="idProduct" value="" />
