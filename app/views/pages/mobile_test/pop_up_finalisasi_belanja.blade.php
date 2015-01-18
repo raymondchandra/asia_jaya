@@ -179,6 +179,7 @@
 					//name color quantity
 					$("#pesanan_content_"+$idTable+" tr").each(function(i, v){
 						$data[i] = [];
+						$code = $(this).children('td')[0].innerText;
 						$name = $(this).children('td')[1].innerText;
 						$color = $(this).children('td')[2].innerText;
 						$quantity = $(this).children('td')[3].innerText;
@@ -201,7 +202,7 @@
 							}
 						});
 						*/
-						$data[i] = {name:$name, color:$color, quantity:$quantity, price:$price};
+						$data[i] = {name:$name, color:$color, quantity:$quantity, price:$price, code:$code};
 					});
 					//alert($data);
 					

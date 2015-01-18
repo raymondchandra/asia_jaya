@@ -313,20 +313,26 @@
 			success: function(response){
 				$data = "";
 				$total = 0;
-				
+				$allAvaliability = 0;
 				$.each(response['messages'], function( i, resp ) {
 					$shop = resp.stock_shop;
 					$storage = resp.stock_storage;
 					$avaliability = 0;
+					
 					if(resp.quantity > $shop)
 					{
 						if(resp.quantity > $storage)
 						{
 							$avaliability = 2;
+							$allAvaliability = 2;
 						}
 						else
 						{
 							$avaliability = 1;
+							if($allAvaliability < $avaliability)
+							{
+								$allAvaliability = 1;
+							}
 						}
 					}
 					else
@@ -374,6 +380,7 @@
 					$data += "</tr>"
 					$('#transaction_detail_content').html($data);
 					$total += parseInt(parseInt(resp.price)/parseInt(resp.quantity)) * parseInt(resp.quantity);
+					//alert($allAvaliability);
 				});
 				//$('#transaction_subtotal_detail').text("Rp " + toRp($total));
 				$('#transaction_diskon_detail').val(toAngka($discount));				
@@ -399,6 +406,11 @@
 					$('#transaction_diskon_detail').removeAttr('disabled');
 					$('#f_uang_kembalian').text("");
 					$('#save-btn').removeClass('hidden');
+					//alert($allAvaliability);
+					if($allAvaliability == 2)
+					{
+						$('#save-btn').addClass('hidden');
+					} 
 				}
 							
 			},error: function(xhr, textStatus, errorThrown){

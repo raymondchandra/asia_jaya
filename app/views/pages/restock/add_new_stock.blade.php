@@ -126,7 +126,7 @@
 				    								colWidths: [100, 100, 80,70, 70, 70, 70,70],
 													//rowHeaders: true,
 													colHeaders: ["Kode Barang","Merek Barang","Warna","H. Modal","H. Min.","H. Jual", "Stok Toko", "Stok Gdg"],
-													minSpareRows: true,
+													//minSpareRows: true,
 													contextMenu: true,
 													cells : function(row, col, prop) {
 												      	var cellProperties = {};
@@ -330,7 +330,7 @@ $('body').on('click', '#button_non_series', function(){
 	$i_warna = 0;
 	$i_foto = 0;
 	//($('#example1').handsontable('getDataAtCell', 15, 0));
-	for(var i=0 ; i<count-1 ; i++)
+	for(var i=0 ; i<count ; i++)
 	{
 		if($('#example1').handsontable('getDataAtCell', i, 0) != "-")
 		{

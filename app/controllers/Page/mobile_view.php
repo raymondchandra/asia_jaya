@@ -140,7 +140,7 @@ class mobile_view extends \BaseController{
 				$productController = new ProductsController();
 				$productDetailController = new ProductDetailsController();
 				foreach($productList as $prodList){
-					$product = $productController->getByProductName($prodList["name"]);
+					$product = $productController->getByProductCode($prodList["code"]);
 					$productJson = json_decode($product->getContent());
 					if($productJson->{'status'}=="Not Found"){
 						$response = array('code'=>'500','status' => 'Internal Server Error', 'messages' => 'Product Name Not Found');

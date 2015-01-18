@@ -120,10 +120,10 @@
 								}
 								$('body').on('keyup','#f_uang_bayaran',function(){
 
-									if(toAngka($('#transaction_total_detail').text()) > toAngka($('#f_uang_bayaran').val())){
+									if(toAngka($('#transaction_total_detail').text()) > (toAngka($('#f_uang_bayaran').val())*1000 ) ){
 										$('#f_uang_kembalian').text("Uang Belum Cukup");
 									}else{
-										var kembalian = parseInt($('#f_uang_bayaran').val()) - parseInt(toAngka($('#transaction_total_detail').text()));
+										var kembalian = parseInt( (toAngka($('#f_uang_bayaran').val())*1000 ) ) - parseInt( toAngka($('#transaction_total_detail').text()) );
 										$('#f_uang_kembalian').text("Rp " + toRp(kembalian));
 									}
 									
@@ -144,7 +144,7 @@
 									//ajax buat ngupdate
 									$id = $('#pop_up_trans_id').text();
 									$total = toAngka($('#transaction_total_detail').text());									
-									$total_paid = toAngka($('#f_uang_bayaran').val());
+									$total_paid = toAngka($('#f_uang_bayaran').val() *1000);
 									$discount = toAngka($('#transaction_diskon_detail').val());
 									$orderIds = [];
 									$orderQtys = [];

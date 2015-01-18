@@ -31,7 +31,7 @@ class stockController extends \HomeController{
 		{
 			if($sortBy === "none")
 			{
-				$dataAll = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference')->get();
+				$dataAll = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference')->where('prds.isSeri','=',0)->get();
 			}
 			else
 			{

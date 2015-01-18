@@ -1,6 +1,17 @@
 @extends('layouts.admin_layout'){{-- WARNING! fase ini sementara untuk show saja, untuk lebih lanjut akan dibuat controller agar tidak meng-extend layout --}}
 @section('content')	
 <div class="container-fluid">
+	<?php
+			
+		function toMoney($val,$symbol='Rp ',$r=0)
+		{
+			$n = $val;
+			$sign = ($n < 0) ? '-' : '';
+			$i = number_format(abs($n),$r,",",".");
+
+			return  $symbol.$sign.$i;
+		}
+	?>
 	<div class="row ">
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
@@ -27,10 +38,12 @@
 				}
 
 				</style>
-				<table class="table table-bordered">
+				<table class="table table-bordered" style="margin-bottom: 0px;">
 					<thead class="table-bordered">
 						<tr>
-							<th class="table-bordered">
+							<th class="table-bordered" width="34"> 
+							</th>
+							<th class="table-bordered" width="98">
 								<a href="javascript:void(0)">Kode Produk</a>
 									@if($filtered == 0)
 										@if($sortBy == 'product_code')
@@ -56,13 +69,13 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="95">
 								<a href="javascript:void(0)">Foto</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="121">
 								<a href="javascript:void(0)">Merek Produk</a>
 									@if($filtered == 0)
 										@if($sortBy == 'name')
@@ -88,7 +101,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="118">
 								<a href="javascript:void(0)">Warna</a>
 									@if($filtered == 0)
 										@if($sortBy == 'color')
@@ -115,7 +128,7 @@
 								</a>
 							</th>
 							@if(Auth::user()->role == 1)
-							<th class="table-bordered" >
+							<th class="table-bordered" width="120" >
 								<a href="javascript:void(0)">Harga Modal</a>
 									@if($filtered == 0)
 										@if($sortBy == 'modal_price')
@@ -142,7 +155,7 @@
 								</a>
 							</th>
 							@endif
-							<th class="table-bordered" >
+							<th class="table-bordered" width="119" >
 								<a href="javascript:void(0)">Harga Min.</a>
 									@if($filtered == 0)
 										@if($sortBy == 'min_price')
@@ -168,7 +181,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="132">
 								<a href="javascript:void(0)">Harga Jual</a>
 									@if($filtered == 0)
 										@if($sortBy == 'sales_price')
@@ -194,7 +207,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered" >
+							<th class="table-bordered" width="140" >
 								<a href="javascript:void(0)">Stok Toko</a>
 									@if($filtered == 0)
 										@if($sortBy == 'stock_shop')
@@ -220,7 +233,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="122">
 								<a href="javascript:void(0)">Stok Gudang</a>
 									@if($filtered == 0)
 										@if($sortBy == 'stock_storage')
@@ -246,7 +259,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="106">
 								<a href="javascript:void(0)">Deleted</a>
 									@if($filtered == 0)
 										@if($sortBy == 'deleted')
@@ -272,7 +285,7 @@
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
 							</th>
-							<th class="table-bordered">
+							<th class="table-bordered" width="124">
 								Command
 							</th>
 						</tr>
@@ -281,6 +294,7 @@
 					<thead>
 						<tr>
 							
+							<td></td>
 							<td><input type="text" class="form-control input-sm" id="filter_product_code"></td>
 							<td></td>
 							<td><input type="text" class="form-control input-sm" id="filter_name"></td>
@@ -320,10 +334,10 @@
 					merek_barang: "{{$prodList->name}}",
 					warna: "{{$prodList->color}}",
 					@if(Auth::user()->role == 1)
-					harga_modal: "{{$prodList->modal_price}}",
+					harga_modal: "{{ $prodList->modal_price }}",
 					@endif
-					harga_min: "{{$prodList->min_price}}",
-					harga_jual: "{{$prodList->sales_price}}",
+					harga_min: "{{ $prodList->min_price }}",
+					harga_jual: "{{ $prodList->sales_price }}",
 					stok_toko: "{{$prodList->stock_shop}}",
 					stok_gudang: "{{$prodList->stock_storage}}",
 					@if($prodList->deleted == 0)
@@ -346,7 +360,7 @@
 							+ '	<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Undelete'
 							+ '</button>'
 							+ '<input type="hidden" value="{{$prodList->id}}" />'
-							+ '<input accept="image/*" type="file" class="filestyle edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}" style="width: 100px;">'
+							+ '<input accept="image/*" type="file" class="edit_gambar_button" data-input="false" id="edit_gambar_button_{{$prodList->id}}" style="width: 94px;">'
 							+ ''
 				},
 
@@ -402,12 +416,12 @@
 				  $("#example1").handsontable({
 				    data: data,
 				    enterMoves: {row: 0, col: 0},
-				    //colWidths: [50, 50, 50, 60,50, 50, 50, 60,50, 50, 50, 60,50],
-				    colHeaders: ["prod_id", "prod_det_id", "","Kode Barang", "Foto","Merek Barang", "Warna", 
+				    colWidths: [10, 10, 71, 113, 110, 112, 111, 123, 131, 114, 99,114, 92, 129],
+				    //colHeaders: ["prod_id", "prod_det_id", "No.","Kode Barang", "Foto","Merek Barang", "Warna", 
 				    @if(Auth::user()->role == 1) 
-				    "Harga Modal", 
+				    //"Harga Modal", 
 				    @endif
-				    "Harga Min.","Harga Jual", "Stok Toko", "Stok Gudang", "Deleted",""],
+				    //"Harga Min.","Harga Jual", "Stok Toko", "Stok Gudang", "Deleted",""],
 				    columns: [
 					    {data: "prod_id", renderer: "html"},
 					    {data: "prod_detail_id", renderer: "html"},
@@ -546,14 +560,14 @@
 				.htCore tr td:nth-child(1),
 				.htCore tr td:nth-child(2)
 				{
-					/*display: none;*/
+					display: none;
 				}
 
 				.htCore tr td:nth-child(3),.htCore tr th:nth-child(3) {
 					border-left: 1px solid #CCC;
 				}
 				.htCore tr td:nth-child(4) {
-					width: 82px !important;
+					width: 98px !important;
 					text-align: center;
 				}
 
@@ -616,24 +630,29 @@
 								});
 								
 								$( 'body' ).on( "change",'.edit_gambar_button', function(evt) {
-									var tgt = evt.target || window.event.srcElement,
-									files = tgt.files;
-									if (FileReader && files && files.length) 
-									{
-										$id= $(this).prev().val();
-										$("#fotoChanged_"+$id).val('1');
-										
-										var fr = new FileReader();
-										fr.onload = function () {
-											$('#gambar_'+$id).attr('src',fr.result);
+									
+									$id= $(this).prev().val();
+
+									$fd = new FormData();
+									$fd.append('file', $('#edit_gambar_button_'+$id)[0].files[0]);
+									$fd.append('id', $id);
+									$.ajax({
+										url: '{{URL::route('gentry.upload_image_v3')}}',
+										type: "POST",             									
+										data: $fd,
+										contentType: false,       									
+										cache: false,             										
+										processData:false,        									
+										success: function(data)   								
+										{
+											alert(data);
+											location.reload();
+											
+										},error: function(xhr, textStatus, errorThrown){
+											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+											alert("responseText: "+xhr.responseText);
 										}
-										fr.readAsDataURL(files[0]);
-									}
-									// Not supported
-									else {
-										// fallback -- perhaps submit the input to an iframe and temporarily store
-										// them on the server until the user's session ends.
-									}
+									});
 									
 									
 								});
@@ -959,4 +978,46 @@ $(document).keydown(function(e) {
 });
 
 </script>
+<style>
+
+
+
+/*
+.htCore tr td:nth-child(3){
+	width: 34px!important;
+}
+.htCore tr td:nth-child(4){
+	width: 98px!important;
+}
+.htCore tr td:nth-child(5){
+	width: 95px!important;
+}
+.htCore tr td:nth-child(6){
+	width: 121px!important;
+}
+.htCore tr td:nth-child(7){
+	width: 118px!important;
+}
+.htCore tr td:nth-child(8){
+	width: 120px!important;
+}
+.htCore tr td:nth-child(9){
+	width: 119px!important;
+}
+.htCore tr td:nth-child(10){
+	width: 132px
+}
+.htCore tr td:nth-child(11){
+	width: 140px!important;
+}
+.htCore tr td:nth-child(12){
+	width: 122px!important;
+}
+.htCore tr td:nth-child(13){
+	width: 106px!important;
+}
+.htCore tr td:nth-child(14){
+	width: 124px!important;
+}*/
+</style>
 @stop

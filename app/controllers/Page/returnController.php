@@ -599,7 +599,7 @@ class returnController extends \HomeController{
 		{
 			//rubah stock
 			$return = ReturnDB::find($id);
-			$order = Order::find($return->return_id);
+			$order = Order::find($return->order_id);
 			$productDetail = ProductDetail::find($order->product_detail_id);
 			$currentStock = $productDetail->stock_shop;
 			$productDetail->stock_shop = $currentStock + $return->return_quantitiy;

@@ -501,6 +501,8 @@ Route::group(array('prefix' => 'fungsi'), function()
 	
 	Route::post('/upload_image_v2', ['as'=>'gentry.upload_image_v2','uses' => 'restockController@uploadArrayImage']);
 	
+	Route::post('/upload_image_v3', ['as'=>'gentry.upload_image_v3','uses' => 'restockController@uploadImageV3']);
+	
 	//Route::get('/manage_log', ['as'=>'gentry.manage_log','uses' => 'accountController@manageLog']);
 	
 	Route::put('/delete_product_detail', ['as'=>'david.delete_prod_det','uses' => 'stockController@deleteProduct']);
