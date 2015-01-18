@@ -355,7 +355,7 @@
 					$data += "<input id='hidden_shop' type=hidden value='"+$shop+"'/>";
 					$data += "<input id='hidden_storage' type=hidden value='"+$storage+"'/>";
 					$data += "<td>"
-					$data += resp.namaProduk;
+					$data += resp.kodeProduk;
 					$data += "</td><td>";
 					$data += "<img src='{{asset('"+resp.foto+"')}}' width='80' height='80'>";
 					$data += "</td><td>";
@@ -501,10 +501,10 @@
 			$total = 0;
 			$("#transaction_detail_content tr").each(function(i, v)
 			{
-				$totalPrice = $(this).children('td')[5].innerText;
+				$totalPrice = $(this).children('td')[6].innerText;
 				$total += toAngka($totalPrice);
 			});
-			$total -= toAngka($('#transaction_diskon_detail').val())
+			$total -= toAngka($('#transaction_diskon_detail').val())*1000;
 			$tax = $total * toAngka($('#transaction_tax_detail').text()) / 100;
 			$total += $tax;
 			$('#transaction_total_detail').text("Rp " + toRp($total));
@@ -621,7 +621,7 @@
 			$('#save-btn').addClass('hidden');
 		}
 
-		var f_cur_transaction_diskon_detail = toAngka( $('#transaction_diskon_detail').val() );
+		var f_cur_transaction_diskon_detail = toAngka( $('#transaction_diskon_detail').val() ) * 1000;
 		var f_cur_transaction_tax_detail = toAngka( $('#transaction_tax_detail').text() ) / 100;
 
 		var f_cur_discounted = f_new_subtotal - f_cur_transaction_diskon_detail;

@@ -659,7 +659,7 @@
 					$data += "<input id='hidden_shop' type=hidden value='"+$shop+"'/>";
 					$data += "<input id='hidden_storage' type=hidden value='"+$storage+"'/>";
 					$data += "<td>"
-					$data += resp.namaProduk;
+					$data += resp.kodeProduk;
 					$data += "</td><td>";
 					$data += "<img src='{{asset('"+resp.foto+"')}}' width='80' height='80'>";
 					$data += "</td><td>";

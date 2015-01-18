@@ -307,9 +307,17 @@ class returnController extends \HomeController{
 			$datas = null;
 			if($allReturnData != null){
 				foreach($allReturnData as $allData){
-					$tempDetail = ProductDetail::find($allData->trade_product_id);
-					$prdctTemp = Product::find($tempDetail->product_id);
-					$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$prdctTemp->product_code, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+					if($allData->trade_product_id != null)
+					{
+						$tempDetail = ProductDetail::find($allData->trade_product_id);
+						$prdctTemp = Product::find($tempDetail->product_id);
+						$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$prdctTemp->product_code, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+					}
+					else
+					{
+						$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>'-', 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+					}
+					
 				}
 			}
 
@@ -467,17 +475,22 @@ class returnController extends \HomeController{
 			}
 		}*/
 		
-		$cust_id = Customer::where('name', 'LIKE', '%'.$cust_name.'%')->first();
+		$cust_id = Customer::where('name', 'LIKE', '%'.$cust_name.'%')->get();
 		if($cust_id == null)
 		{
 			return null;
 		}
 		else
 		{
+			$ids = array();
+			foreach($cust_id as $id)
+			{
+				$ids[] = $id->id;
+			}
 			if($from != '' && $to != ''){
-				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->whereBetween('orders.created_at', array($from, $to))->select('transactions.customer_id AS customer_id', 'orders.transaction_id AS transaction_id', 'products.product_code AS prod_code', 'orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
+				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->whereIn('customer_id',$ids)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->whereBetween('orders.created_at', array($from, $to))->select('transactions.customer_id AS customer_id', 'orders.transaction_id AS transaction_id', 'products.product_code AS prod_code', 'orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
 			}else{
-				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->where('customer_id', '=', $cust_id->id)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->select('transactions.customer_id AS customer_id','orders.transaction_id AS transaction_id','products.product_code AS prod_code','orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
+				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->whereIn('customer_id',$ids)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->select('transactions.customer_id AS customer_id','orders.transaction_id AS transaction_id','products.product_code AS prod_code','orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
 			}
 			foreach($joinTable as $data){
 				$data->cust_name = Customer::find($data->customer_id)->name;
@@ -604,12 +617,12 @@ class returnController extends \HomeController{
 			$order = Order::find($return->order_id);
 			$productDetail = ProductDetail::find($order->product_detail_id);
 			$currentStock = $productDetail->stock_shop;
-			$productDetail->stock_shop = $currentStock + $return->return_quantitiy;
+			$productDetail->stock_shop = $currentStock + $return->return_quantity;
 			try
 			{
 				$productDetail->save();
 				//restock
-				$controller->insertWithParam(5, $productDetail->id, $return->return_quantitiy, 0);
+				$controller->insertWithParam(5, $productDetail->id, $return->return_quantity, 0);
 			}
 			catch(Exception $e)
 			{
@@ -622,7 +635,7 @@ class returnController extends \HomeController{
 			//tambah barang obral
 			$return = ReturnDB::find($id);
 			$controller = new ProductDetailsController();
-			$controller->addObral($return->return_quantitiy);
+			$controller->addObral($return->return_quantity);
 		}
 		return $returnController->updateSolution($id, $solusi);
 	}

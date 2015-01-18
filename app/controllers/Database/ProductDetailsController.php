@@ -427,6 +427,14 @@ class ProductDetailsController extends \BaseController {
 			$products = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->where('prod.product_code', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->orWhere('prod.name', 'LIKE', '%'.$keyword.'%')->orWhere('prds.color', 'LIKE', '%'.$keyword.'%')->where('prds.deleted','=',0)->get();
 			foreach($products as $product => $key)
 			{
+				if($key->stock_shop == 0 && $key->stock_storage == 0)
+				{
+					if($key->isSeri == 0)
+					{
+						unset($products[$product]);
+					}
+				}
+					
 				/*
 				if($key->isSeri == '1')
 				{
