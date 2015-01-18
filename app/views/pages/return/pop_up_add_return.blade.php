@@ -169,7 +169,8 @@ $('body').on('click','.f_pilih_tipe_retur', function(){
 			type: 'GET',
 			url: '{{URL::route('david.getProductLiveSearch')}}',
 			data: {
-				'keyword' : $keyword
+				'keyword' : $keyword,
+				'source' : "return";
 			},
 			success: function(response){
 				if(response['code'] == '404')
