@@ -33,7 +33,7 @@
 								</a>
 							</th>
 							<th class="table-bordered">
-								<a href="javascript:void(0)">ID Transaksi</a>
+								<a href="javascript:void(0)">No. Nota</a>
 									@if($filtered == 0)
 										@if($sortBy == 'transaction_id')
 											@if($order == 'asc')

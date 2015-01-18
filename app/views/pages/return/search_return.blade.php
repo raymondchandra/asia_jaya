@@ -5,7 +5,7 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<ol class="breadcrumb">
-					<li class="active">Retur</li>
+					 <li><a href="{{URL::route('gentry.view_return')}}">Retur</a></li> 
 				</ol>
 				<h3 style="">
 					Search Nota
