@@ -14,6 +14,12 @@ class AccountsController extends \BaseController {
 		return View::make('pages.mobile_test.login');
 	}
 	
+	public function getByName($name)
+	{
+		$account = Account::where('username','LIKE','%'.$name.'%')->get();
+		return $this->getReturn($account);
+	}
+	
 	public function postSignIn()
 	{
 		$username = Input::get('data');

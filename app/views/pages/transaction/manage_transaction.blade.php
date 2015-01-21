@@ -321,7 +321,7 @@
 					
 					if(resp.quantity > $shop)
 					{
-						if(resp.quantity > $storage)
+						if(resp.quantity > $storage + $shop)
 						{
 							$avaliability = 2;
 							$allAvaliability = 2;
@@ -339,13 +339,21 @@
 					{
 						
 					}
-					if($avaliability == 1)
+					
+					if($status != "Paid")
 					{
-						$data += "<tr class='s_danger_1'>";
-					}
-					else if($avaliability == 2)
-					{
-						$data += "<tr class='s_danger_2'>";
+						if($avaliability == 1)
+						{
+							$data += "<tr class='s_danger_1'>";
+						}
+						else if($avaliability == 2)
+						{
+							$data += "<tr class='s_danger_2'>";
+						}
+						else
+						{
+							$data += "<tr>";
+						}
 					}
 					else
 					{
@@ -617,6 +625,11 @@
 		});
 		$('#save-btn').removeClass('hidden');
 		if($allAvaliability == 2)
+		{
+			$('#save-btn').addClass('hidden');
+		}
+		
+		if($('#save-btn').hasClass('paid'))
 		{
 			$('#save-btn').addClass('hidden');
 		}

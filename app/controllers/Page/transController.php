@@ -114,7 +114,8 @@ class transController extends \HomeController{
 				$dataAll = Transaction::whereRaw('created_at >= curdate()')->get();
 				if(count($dataAll) != 0)
 				{
-					foreach($dataAll as $data){
+					foreach($dataAll as $data)
+					{
 						$data->name = Customer::find($data->customer_id)->name;
 						$data->username = Account::find($data->sales_id)->username;
 						$data->order = $this->getOrderArray($data->id);  
@@ -155,7 +156,7 @@ class transController extends \HomeController{
 		if($allDataJson->{'status'}!='Not Found'){
 			$dataAll = $allDataJson->{'messages'};
 			foreach($dataAll as $data){
-				$data->customerName = Customer::find($data->customer_id)->name;
+				$data->name = Customer::find($data->customer_id)->name;
 				$data->salesName = Account::find($data->sales_id)->username;
 				$data->order = $this->getOrderArray($data->id);
 			}
@@ -625,6 +626,27 @@ class transController extends \HomeController{
 			$trans = Transaction::find($id);
 			$cash = new CashesController();
 			$cashUpdate = $cash->insertWithParam($id, 0, $trans->total,"void transaction");
+			
+			//balikin barang ke stock
+			$controller = new RestocksController();
+			$order = Order::where('transaction_id', '=', $trans->id)->get();
+			foreach($order as $ord)
+			{
+				$controller->insertWithParam(4, $ord->product_detail_id, $ord->quantity, 0);
+				$productDetail = ProductDetail::find($ord->product_detail_id);
+				$oldStock = $productDetail->stock_shop;
+				$newStock = $oldStock + $ord->quantity;
+				$productDetail->stock_shop = $newStock;
+				try
+				{
+					$productDetail->save();
+				}
+				catch(Exception $ex)
+				{
+				
+				}
+			}
+			
 			return Response::json($response = array('code'=>'200','status' => 'OK'));
 		}
 		else

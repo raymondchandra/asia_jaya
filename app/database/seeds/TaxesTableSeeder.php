@@ -10,7 +10,7 @@ class TaxesTableSeeder extends Seeder {
 		$faker = Faker::create();
 
 		Tax::create([
-			'amount' => 10
+			'amount' => 0
 		]);
 	}
 

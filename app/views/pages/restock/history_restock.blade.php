@@ -70,7 +70,7 @@
 										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'asc', 'filtered'=>'0'))}}">
 									@endif
 								@else
-									@if($sortBy == 'product_name')
+									@if($sortBy == 'name')
 										@if($order == 'asc')
 											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'name', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
 										@else
@@ -96,7 +96,7 @@
 										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'asc', 'filtered'=>'0'))}}">
 									@endif
 								@else
-									@if($sortBy == 'product_name')
+									@if($sortBy == 'color')
 										@if($order == 'asc')
 											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'color', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
 										@else
@@ -122,7 +122,7 @@
 										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'asc', 'filtered'=>'0'))}}">
 									@endif
 								@else
-									@if($sortBy == 'product_name')
+									@if($sortBy == 'stock_shop')
 										@if($order == 'asc')
 											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'stock_shop', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
 										@else
@@ -164,24 +164,24 @@
 							<th class="table-bordered">
 								<a href="javascript:void(0)">Eksekutor</a>
 								@if($filtered == 0)
-									@if($sortBy == 'created_at')
+									@if($sortBy == 'restock_by')
 										@if($order == 'asc')
-											<a href=" ">
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'restock_by', 'order' => 'desc', 'filtered'=>'0'))}}">
 										@else
-											<a href=" ">
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'restock_by', 'order' => 'asc', 'filtered'=>'0'))}}">
 										@endif
 									@else
-											<a href=" ">
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'restock_by', 'order' => 'asc', 'filtered'=>'0'))}}">
 									@endif
 								@else
-									@if($sortBy == 'product_name')
+									@if($sortBy == 'restock_by')
 										@if($order == 'asc')
-											<a href=" ">
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'restock_by', 'order' => 'desc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
 										@else
-											<a href=" ">
+											<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'restock_by', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
 										@endif
 									@else
-											<a href=" ">
+										<a href="{{action('historyRestockController@viewHistoryRestock', array('sortBy' => 'restock_by', 'order' => 'asc', 'filtered'=>'1','code'=>$code,'name'=>$prod_name,'color'=>$color,'shop'=>$shop,'storage'=>$storage,'created_at'=>$time))}}">
 									@endif
 								@endif
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
@@ -230,6 +230,7 @@
 							<td><input type="text" class="form-control input-sm" id="filter_color"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_shop"></td>
 							<td><input type="text" class="form-control input-sm" id="filter_storage"></td>
+							<td><input type="text" class="form-control input-sm" id="filter_eksekutor"></td>
 							<td>
 								<input type="text" class="form-control input-sm" id="filter_time">
 								<script> 
@@ -238,9 +239,7 @@
 								    startDate: '-3d'
 								})
 								</script>
-							</td>
-
-							<td><input type="text" class="form-control input-sm" id="filter_eksekutor"></td>
+							</td>							
 							<td width="140">
 							<a class="btn btn-primary btn-xs" id="filter_button" style="float: left;">Filter</a>
 							
@@ -270,10 +269,10 @@
 										{{$data->stock_storage}}
 									</td>
 									<td>
-										{{$data->created_at}}
+										{{$data->eksekutor}}
 									</td>
 									<td>
-										siapa
+										{{$data->created_at}}
 									</td>
 									<td>
 										<input type="hidden" id="idProduct" value="" />
@@ -373,8 +372,13 @@
 			$time = '-';
 		}
 		
+		$eksekutor = $('#filter_eksekutor').val();
+		if($eksekutor == ''){
+			$eksekutor = '-';
+		}
+		
 
-		window.location = "{{URL::route('david.view_restock_history')}}" + "?filtered=1&code="+$code+"&name="+$name+"&color="+$color+"&hop="+$shop+"&storage="+$storage+"&time="+$time;
+		window.location = "{{URL::route('david.view_restock_history')}}" + "?filtered=1&code="+$code+"&name="+$name+"&color="+$color+"&shop="+$shop+"&storage="+$storage+"&time="+$time+"&eksekutor="+$eksekutor;
 	});
 
 	$('body').on('click','#unfilter_button',function(){

@@ -32,7 +32,7 @@ class RestockDetailsController extends \BaseController {
 		-) Fungsi ini digunakan untuk meng-insert record baru ke dalam tabel restock detail
 	*/
 	public function insertWithParam($restockId, $productDetailId, $shopAmount, $storageAmount){
-		$data = array('restock_id'=>$restockId, 'product_detail_id'=>$productDetailId, 'stock_shop'=>$shopAmount, 'stock_storage'=>$storageAmount);
+		$data = array('restock_id'=>$restockId, 'product_detail_id'=>$productDetailId, 'stock_shop'=>$shopAmount, 'stock_storage'=>$storageAmount,'restock_by'=>Auth::user()->id);
 		//validate
 		$validator = Validator::make($data, Restockdetail::$rules);
 
@@ -165,23 +165,23 @@ class RestockDetailsController extends \BaseController {
 	
 	public function getAlls()
 	{
-		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy('restock_details.created_at','dsc')->get();
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at','restock_details.restock_by')->orderBy('restock_details.created_at','dsc')->get();
 		
 		return $this->getReturn($joined);
 	}
 	
 	public function getSortedAll($by, $order)
 	{
-		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy('restock_details.created_at','dsc')->get();
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name as name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at','restock_details.restock_by')->orderBy($by,$order)->get();
 		
 		return $this->getReturn($joined);
 	}
 	
-	public function getFilteredRestock($code, $prod_name, $color, $shop, $storage, $created_at)
+	public function getFilteredRestock($code, $prod_name, $color, $shop, $storage, $created_at, $eksekutor)
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at')->orderBy('restock_details.created_at','dsc');
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at','restock_details.restock_by')->orderBy('restock_details.created_at','dsc');
 		
 		if($code != '-')
 		{
@@ -200,12 +200,12 @@ class RestockDetailsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$prod_name.'%');
+				$resultTab = $joined->where('products.name', 'LIKE', '%'.$prod_name.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('products.product_code', 'LIKE', '%'.$prod_name.'%');
+				$resultTab = $resultTab->where('products.name', 'LIKE', '%'.$prod_name.'%');
 			}
 		}
 		
@@ -213,12 +213,12 @@ class RestockDetailsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('product_details.color', 'LIKE', '%'.$total.'%');
+				$resultTab = $joined->where('product_details.color', 'LIKE', '%'.$color.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('product_details.color', 'LIKE', '%'.$total.'%');
+				$resultTab = $resultTab->where('product_details.color', 'LIKE', '%'.$color.'%');
 			}
 		}
 		
@@ -258,6 +258,44 @@ class RestockDetailsController extends \BaseController {
 			else
 			{
 				$resultTab = $resultTab->where('restock_details.created_at', 'LIKE', '%'.$created_at.'%');
+			}
+		}
+		
+		if($eksekutor != '-')
+		{
+		
+			$accountController = new AccountsController();
+			$account = $accountController->getByName($eksekutor);
+			$accountJson = json_decode($account->getContent());
+			if($accountJson->{'code'} != 404)
+			{
+				$ids = array();
+				foreach($accountJson->{'messages'} as $acc)
+				{
+					$ids[] = $acc->id;
+				}
+			
+				if($isFirst == false)
+				{
+					$resultTab = $joined->whereIn('restock_details.restock_by', $ids);
+					$isFirst = true;
+				}
+				else
+				{
+					$resultTab = $resultTab->whereIn('restock_details.restock_by', $ids);
+				}
+			}
+			else
+			{
+				if($isFirst == false)
+				{
+					$resultTab = $joined->where('restock_details.restock_by', '=', '-');
+					$isFirst = true;
+				}
+				else
+				{
+					$resultTab = $resultTab->where('restock_details.restock_by', '=', '-');
+				}
 			}
 		}
 		
@@ -274,11 +312,11 @@ class RestockDetailsController extends \BaseController {
 		return $this->getReturn($result);
 	}
 	
-	public function getSortedFilteredAccount($code, $prod_name, $color, $shop, $storage, $created_at, $sortBy, $order)
+	public function getSortedFilteredAccount($code, $prod_name, $color, $shop, $storage, $created_at, $sortBy, $order, $eksekutor)
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at');
+		$joined = DB::table('product_details')->join('restock_details', 'product_details.id', '=', 'restock_details.product_detail_id')->join('products', 'products.id', '=', 'product_details.product_id')->select('products.product_code', 'products.name', 'product_details.color', 'restock_details.stock_shop', 'restock_details.stock_storage', 'restock_details.created_at','restock_details.restock_by');
 		
 		if($code != '-')
 		{
@@ -355,6 +393,44 @@ class RestockDetailsController extends \BaseController {
 			else
 			{
 				$resultTab = $resultTab->where('restock_details.created_at', 'LIKE', '%'.$created_at.'%');
+			}
+		}
+		
+		if($eksekutor != '-')
+		{
+		
+			$accountController = new AccountsController();
+			$account = $accountController->getByName($eksekutor);
+			$accountJson = json_decode($account->getContent());
+			if($accountJson->{'code'} != 404)
+			{
+				$ids = array();
+				foreach($accountJson->{'messages'} as $acc)
+				{
+					$ids[] = $acc->id;
+				}
+			
+				if($isFirst == false)
+				{
+					$resultTab = $joined->whereIn('restock_details.restock_by', $ids);
+					$isFirst = true;
+				}
+				else
+				{
+					$resultTab = $resultTab->whereIn('restock_details.restock_by', $ids);
+				}
+			}
+			else
+			{
+				if($isFirst == false)
+				{
+					$resultTab = $joined->where('restock_details.restock_by', '=', '-');
+					$isFirst = true;
+				}
+				else
+				{
+					$resultTab = $resultTab->where('restock_details.restock_by', '=', '-');
+				}
 			}
 		}
 		

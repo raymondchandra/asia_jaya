@@ -25,6 +25,10 @@ class historyRestockController extends \HomeController{
 			$datas = null;
 			if($allResult->{'status'} != 'Not Found'){
 				$datas = $allResult->{'messages'};
+				foreach($datas as $data)
+				{
+					$data->eksekutor = Account::find($data->restock_by)->username;
+				}
 			}
 			return View::make('pages.restock.history_restock', compact('datas','sortBy','order','filtered'));
 		}
@@ -36,14 +40,15 @@ class historyRestockController extends \HomeController{
 			$shop = Input::get('shop', '-');
 			$storage = Input::get('storage', '-');
 			$time = Input::get('time', '-');
+			$eksekutor = Input::get('eksekutor', '-');
 			
 			if($sortBy == "none")
 			{
-				$allResultJson = $controller->getFilteredRestock($code, $prod_name, $color, $shop, $storage, $time);
+				$allResultJson = $controller->getFilteredRestock($code, $prod_name, $color, $shop, $storage, $time,$eksekutor);
 			}
 			else
 			{
-				$allResultJson = $controller->getSortedFilteredAccount($code, $prod_name, $color, $shop, $storage, $time, $sortBy, $order);
+				$allResultJson = $controller->getSortedFilteredAccount($code, $prod_name, $color, $shop, $storage, $time, $sortBy, $order,$eksekutor);
 			}
 			
 			$allResult = json_decode($allResultJson->getContent());
@@ -51,6 +56,10 @@ class historyRestockController extends \HomeController{
 			$datas = null;
 			if($allResult->{'status'} != 'Not Found'){
 				$datas = $allResult->{'messages'};	
+				foreach($datas as $data)
+				{
+					$data->eksekutor = Account::find($data->restock_by)->username;
+				}
 			}
 			
 			return View::make('pages.restock.history_restock', compact('datas','sortBy','order','filtered','code','prod_name','color','shop','storage','time'));

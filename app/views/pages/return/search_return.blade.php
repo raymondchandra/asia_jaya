@@ -262,9 +262,9 @@
 					$data += "</td><td>";
 					$data += resp.quantity;
 					$data += "</td><<td>";
-					$data += "IDR " + toRp(parseInt(resp.hargaSatuan));
+					$data += "IDR " + toRp(parseInt(resp.price)/parseInt(resp.quantity));
 					$data += "</td><td>";
-					$total = (parseInt(resp.hargaSatuan)*parseInt(resp.quantity));
+					$total = (parseInt(resp.price));
 					$data += "IDR " + toRp($total);
 					$data += "</td><td>";
 					$data += "<button type='button' class='btn btn-warning btn-xs view_pilih_button'  data-toggle='modal' data-target='.pop_up_add_return'>Pilih</button>";
@@ -306,42 +306,44 @@
 				var target = $(this).find(":selected").val();
 
 				if(target == "3"){
-					$('#nominal_uang').val(parseInt($price)/parseInt($quantity));
+					$('#nominal_uang').val(parseInt($price)/parseInt($quantity)*parseInt($('#quantity_pop').val()));
 				}
 			});
 			
-			$('body').on('click','#save_pop',function(){
-				//alert($id);
-				$type = $('#type_return option:selected').text();
-				$trade_id = $('#id_trade_prod').val();
-				$return_quantity = $("#quantity_pop").val();
-				$nominal_uang = $('#nominal_uang').val();
-				
-				//alert($trade_id);
-				//alert($type);
-				
-				$.ajax({
-					type: 'PUT',
-					url: '{{URL::route('gentry.insert_return')}}',
-					data: {
-						'order_id' : $id,
-						'type' : $type,
-						'no_nota' : 0,
-						'trade_id' : $trade_id,
-						'return_quantity' : $return_quantity,
-						'nominal_uang' : $nominal_uang
-					},
-					success: function(response){
-						alert(response);
-						//alert('Insert Berhasil');
-					},error: function(xhr, textStatus, errorThrown){
-						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-						alert("responseText: "+xhr.responseText);
-					}
-				},'json');
-				
-			});
+			
 		});
+	});
+	
+	$('body').on('click','#save_pop',function(){
+		//alert($id);
+		$type = $('#type_return option:selected').val();
+		$trade_id = $('#id_trade_prod').val();
+		$return_quantity = $("#quantity_pop").val();
+		$nominal_uang = $('#nominal_uang').val();
+		
+		//alert($trade_id);
+		//alert($type);
+		
+		$.ajax({
+			type: 'PUT',
+			url: '{{URL::route('gentry.insert_return')}}',
+			data: {
+				'order_id' : $id,
+				'type' : $type,
+				'no_nota' : 0,
+				'trade_id' : $trade_id,
+				'return_quantity' : $return_quantity,
+				'nominal_uang' : $nominal_uang
+			},
+			success: function(response){
+				alert(response);
+				//alert('Insert Berhasil');
+			},error: function(xhr, textStatus, errorThrown){
+				alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+				alert("responseText: "+xhr.responseText);
+			}
+		},'json');
+		
 	});
 	
 	/*

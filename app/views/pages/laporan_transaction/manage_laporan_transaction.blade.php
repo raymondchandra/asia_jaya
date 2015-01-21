@@ -627,9 +627,10 @@
 					$avaliability = 0;
 					if(resp.quantity > $shop)
 					{
-						if(resp.quantity > $storage)
+						if(resp.quantity > $storage + $shop)
 						{
 							$avaliability = 2;
+							$allAvaliability = 2;
 						}
 						else
 						{
@@ -640,18 +641,27 @@
 					{
 						
 					}
-					if($avaliability == 1)
+					
+					if($status != "Paid")
 					{
-						$data += "<tr class='s_danger_1'>";
-					}
-					else if($avaliability == 2)
-					{
-						$data += "<tr class='s_danger_2'>";
+						if($avaliability == 1)
+						{
+							$data += "<tr class='s_danger_1'>";
+						}
+						else if($avaliability == 2)
+						{
+							$data += "<tr class='s_danger_2'>";
+						}
+						else
+						{
+							$data += "<tr>";
+						}
 					}
 					else
 					{
 						$data += "<tr>";
 					}
+					
 					$data += "<input id='hidden_id' type=hidden value='"+resp.id+"'/>";
 					$data += "<input id='hidden_shop' type=hidden value='"+$shop+"'/>";
 					$data += "<input id='hidden_storage' type=hidden value='"+$storage+"'/>";
@@ -722,11 +732,48 @@
 		var f_new_subtotal = 0; 
 
 		//foreach subtotal per row
+		$allAvaliability = 0;
 		$('#transaction_detail_content tr').each(function(){
 		 	f_new_subtotal += toAngka( $(this).find('.f_subtotal_price_transaction').text() );
+			
+			$shop = $(this).closest('tr').find('#hidden_shop').val();
+			$storage = $(this).closest('tr').find('#hidden_storage').val();
+			
+			$avaliability = 0;
+			if(parseInt($(this).children('td')[3].innerText) > parseInt($shop))
+			{
+				if(parseInt($(this).children('td')[3].innerText) > parseInt(parseInt($storage) + parseInt($shop)))
+				{
+					$avaliability = 2;
+					$allAvaliability = 2;
+				}
+				else
+				{
+					$avaliability = 1;
+					if($allAvaliability < $avaliability)
+					{
+						$allAvaliability = 1;
+					}
+				}
+			}
+			else
+			{
+				
+			}
+			
 		});
+		$('#save-btn').removeClass('hidden');
+		if($allAvaliability == 2)
+		{
+			$('#save-btn').addClass('hidden');
+		}
+		
+		if($('#save-btn').hasClass('paid'))
+		{
+			$('#save-btn').addClass('hidden');
+		}
 
-		var f_cur_transaction_diskon_detail = toAngka( $('#transaction_diskon_detail').val() );
+		var f_cur_transaction_diskon_detail = toAngka( $('#transaction_diskon_detail').val() ) * 1000;
 		var f_cur_transaction_tax_detail = toAngka( $('#transaction_tax_detail').text() ) / 100;
 
 		var f_cur_discounted = f_new_subtotal - f_cur_transaction_diskon_detail;

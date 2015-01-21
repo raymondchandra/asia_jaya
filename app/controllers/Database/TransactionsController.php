@@ -52,6 +52,27 @@ class TransactionsController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	public function insertForObral($salesId){
+		$data = array("customer_id"=>null, "total"=>0, "discount"=>0, "tax"=>0, "print_customer"=>0, "print_shop"=>0, "is_void"=>0, "sales_id"=>$salesId, "status"=>"Paid", "no_faktur"=>"Obral");
+		
+		$validator = Validator::make($data, Transaction::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			$trans = Transaction::create($data);
+			$respond = array('code'=>'201','status' => 'Created','messages'=>$trans->id);
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($transaction)
 	{
 		$respond = array();

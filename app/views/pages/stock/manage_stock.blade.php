@@ -309,8 +309,8 @@
 							<td> 
 								<select class="form-control input-sm" id="filter_deleted" style="padding-right: 0px;">
 									<option value="">Pilih</option>
-									<option value="1">Ya</option>
-									<option value="0">Tidak</option>
+									<option value="yes">Ya</option>
+									<option value="no">Tidak</option>
 								</select>
 							</td>
 							<td width=""><a class="btn btn-primary btn-xs" id="filter_button">Filter</a></td>
@@ -455,34 +455,106 @@
 					      },
 					      afterChange: function(changes, source) { 
 							
-					      	var ht = $('#example1').handsontable('getInstance');
-					      	var coordinate = ht.getSelected();
-							var count = $("#example1").handsontable('countRows');
-					      	var colAffected = coordinate[1];
-							var datas = ht.getDataAtCell(1,1);
-							
-
-							//alert(colAffected);
-
-							var rowArr 			= ht.getDataAtRow(coordinate[0]);
-
-							var prod_id 		= rowArr[0];
-							var prod_detail_id 	= rowArr[1];
-							var sidebar 		= rowArr[2];
-							var kode_barang  	= rowArr[3];
-							var foto  			= rowArr[4];
-							var merek_barang  	= rowArr[5];
-							var warna  			= rowArr[6];
-							var harga_modal  	= rowArr[7];
-							var harga_min  		= rowArr[8];	
-							var harga_jual  	= rowArr[9];
-							var stok_toko  		= rowArr[10];
-							var stok_gudang  	= rowArr[11];
-							var deleted  		= rowArr[12];
-							var command  		= rowArr[13];
-							
 							if(source == 'edit')
 							{
+								var ht = $('#example1').handsontable('getInstance');
+								var coordinate = ht.getSelected();
+								var count = $("#example1").handsontable('countRows');
+								var colAffected = coordinate[1];
+								var datas = ht.getDataAtCell(1,1);
+								
+								
+								//alert(colAffected);
+
+								var rowArr 			= ht.getDataAtRow(coordinate[0]);
+
+								var prod_id 		= rowArr[0];
+								var prod_detail_id 	= rowArr[1];
+								var sidebar 		= rowArr[2];
+								var kode_barang  	= rowArr[3];
+								var foto  			= rowArr[4];
+								var merek_barang  	= rowArr[5];
+								var warna  			= rowArr[6];								
+								@if(Auth::user()->role == 2)
+									var harga_modal 	= "-";
+									var harga_min  		= rowArr[7];
+									var harga_jual  	= rowArr[8];
+									var stok_toko  		= rowArr[9];
+									var stok_gudang  	= rowArr[10];
+									var deleted  		= rowArr[11];
+									var command  		= rowArr[12];
+								@else
+									var harga_modal  	= rowArr[7];
+									var harga_min  		= rowArr[8];
+									var harga_jual  	= rowArr[9];
+									var stok_toko  		= rowArr[10];
+									var stok_gudang  	= rowArr[11];
+									var deleted  		= rowArr[12];
+									var command  		= rowArr[13];
+								@endif
+								
+								
+								@if(Auth::user()->role == 2)
+									//alert(changes);
+									if(changes[0][1] == 'stok_gudang')
+									{
+										if(changes[0][3] == changes[0][2])
+										{
+										
+										}
+										else if(changes[0][3] < changes[0][2])
+										{
+											var diff = parseInt(changes[0][2])-parseInt(changes[0][3]);
+											stok_toko += diff;
+											$('#example1').handsontable('setDataAtCell', changes[0][0], 9, stok_toko,"alter");
+										}
+										else
+										{
+											var diff = parseInt(changes[0][3])-parseInt(changes[0][2]);
+											if(parseInt(stok_toko)-parseInt(diff) < 0)
+											{
+												$('#example1').handsontable('setDataAtCell', changes[0][0], 10, changes[0][2],"alter");
+												return;
+											}
+											else
+											{
+												stok_toko -= diff;
+												$('#example1').handsontable('setDataAtCell', changes[0][0], 9, stok_toko,"alter");
+												
+											}
+										}
+									}
+									else if(changes[0][1] == 'stok_toko')
+									{
+										if(changes[0][3] == changes[0][2])
+										{
+										
+										}
+										else if(changes[0][3] < changes[0][2])
+										{
+											var diff = parseInt(changes[0][2])-parseInt(changes[0][3]);
+											stok_gudang += diff;
+											$('#example1').handsontable('setDataAtCell', changes[0][0], 10, stok_gudang,"alter");
+										}
+										else
+										{
+											var diff = parseInt(changes[0][3])-parseInt(changes[0][2]);
+											if(parseInt(stok_gudang)-parseInt(diff) < 0)
+											{
+												$('#example1').handsontable('setDataAtCell', changes[0][0], 9, changes[0][2],"alter");
+												return;
+											}
+											else
+											{
+												stok_gudang -= diff;
+												$('#example1').handsontable('setDataAtCell', changes[0][0], 10, stok_gudang,"alter");
+												
+											}
+										}
+									}
+								@else
+
+								@endif
 								//ajax disini;
 								
 								$.ajax({
@@ -499,7 +571,7 @@
 										'editShop' : stok_toko,
 										'editStorage' : stok_gudang,
 										'editKode' : kode_barang,
-										'editFoto' : foto
+										'editFoto' : "-"
 									},
 									success: function(response){
 										alert('success');
@@ -509,15 +581,23 @@
 									}
 								},'json');
 								
+								
 								for(var i=0 ; i<count ; i++)
 								{
 									if(ht.getDataAtCell(i,0) == prod_id)
 									{
-										$('#example1').handsontable('setDataAtCell', i, 3, kode_barang,"alter");
-										$('#example1').handsontable('setDataAtCell', i, 5, merek_barang,"alter");
-										$('#example1').handsontable('setDataAtCell', i, 7, harga_modal,"alter");
-										$('#example1').handsontable('setDataAtCell', i, 8, harga_min,"alter");
-										$('#example1').handsontable('setDataAtCell', i, 9, harga_jual,"alter");
+										@if(Auth::user()->role == 2)
+											$('#example1').handsontable('setDataAtCell', i, 3, kode_barang,"alter");
+											$('#example1').handsontable('setDataAtCell', i, 5, merek_barang,"alter");
+											$('#example1').handsontable('setDataAtCell', i, 7, harga_min,"alter");
+											$('#example1').handsontable('setDataAtCell', i, 8, harga_jual,"alter");
+										@else
+											$('#example1').handsontable('setDataAtCell', i, 3, kode_barang,"alter");
+											$('#example1').handsontable('setDataAtCell', i, 5, merek_barang,"alter");
+											$('#example1').handsontable('setDataAtCell', i, 7, harga_modal,"alter");
+											$('#example1').handsontable('setDataAtCell', i, 8, harga_min,"alter");
+											$('#example1').handsontable('setDataAtCell', i, 9, harga_jual,"alter");
+										@endif
 									}
 								}
 								return ;
@@ -586,8 +666,7 @@
 								});
 								
 								$( 'body' ).on( "click",'.obral-btn', function() {
-									//$id= $(this).next().val();
-									alert($id);
+									$id= $(this).next().val();
 									$('#tableRep').val($id);
 								});
 								
@@ -813,11 +892,15 @@
 									if($color == ''){
 										$color = '-';
 									}
+									@if(Auth::user()->role == 2)
+										$modal_price = "-";
+									@else
+										$modal_price = $('#filter_modal_price').val();
+										if($modal_price == ''){
+											$modal_price = '-';
+										}
+									@endif
 									
-									$modal_price = $('#filter_modal_price').val();
-									if($modal_price == ''){
-										$modal_price = '-';
-									}
 									
 									$min_price = $('#filter_min_price').val();
 									if($min_price == ''){

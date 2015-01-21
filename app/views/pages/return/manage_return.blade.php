@@ -351,7 +351,7 @@
 									{{ $data->no_nota }}
 								</td>
 								<td>
-									{{ $data->kode_barang }}
+									{{ $data->kode_barang }} | {{ $data->product_color }}
 								</td>
 								<td> 
 									{{ $data->nama_pelanggan }}
@@ -376,7 +376,7 @@
 									@if($data->trade_product_id == null)
 										-
 									@else
-										{{ $data->trade_product_id }}
+										{{ $data->trade_product_id }} | {{ $data->trade_color }}
 									@endif
 								</td>
 								<td>

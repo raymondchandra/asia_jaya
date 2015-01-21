@@ -387,7 +387,7 @@ class CustomersController extends \BaseController {
 	public function getTop10Buyer()
 	{
 		$respond = array();
-		$customer = DB::table('transactions')->select(DB::raw('customer_id,sum(total) as total'))->whereRaw('MONTH(created_at) >= MONTH(curdate())')->whereRaw('YEAR(created_at) >= YEAR(curdate())')->groupBy('customer_id')->orderBy('total','dsc')->take(10)->get();
+		$customer = DB::table('transactions')->select(DB::raw('customer_id,sum(total) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=',0)->whereRaw('MONTH(created_at) >= MONTH(curdate())')->whereRaw('YEAR(created_at) >= YEAR(curdate())')->groupBy('customer_id')->orderBy('total','dsc')->take(10)->get();
 		foreach($customer as $cust)
 		{
 			$cust->name = Customer::find($cust->customer_id)->name;

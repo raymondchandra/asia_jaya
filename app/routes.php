@@ -5,7 +5,7 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$joined = DB::table('transactions')->join('customers', 'transactions.customer_id', '=', 'customers.id')->join('accounts', 'transactions.sales_id', '=', 'accounts.id')->select('transactions.id', 'customers.name', 'transactions.total', 'transactions.discount', 'transactions.tax', 'transactions.sales_id', 'accounts.username', 'transactions.is_void', 'transactions.status','transactions.total_paid', 'transactions.created_at AS created_at', 'transactions.no_faktur')->where('transactions.no_faktur', 'LIKE', '%002%')->get();
+		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference')->where('prds.isSeri','=',0)->where('prod.name', 'LIKE', '%adl%')->get();
 		var_dump($joined);
 	});
 	Route::get('/tes2', function()

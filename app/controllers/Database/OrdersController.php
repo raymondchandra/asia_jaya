@@ -53,6 +53,28 @@ class OrdersController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	public function insertForObral($quantity, $transactionId, $prodDetailId, $modal){
+		$data = array("quantity"=>$quantity, "transaction_id"=>$transactionId, "price"=>0, "product_detail_id"=>$prodDetailId,'modal'=>$modal);
+		
+		//validate
+		$validator = Validator::make($data, Order::$rules);
+
+		if ($validator->fails())
+		{
+			$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+			return Response::json($respond);
+		}
+
+		//save
+		try {
+			$order = Order::create($data);
+			$respond = array('code'=>'201','status' => 'Created', 'messages'=> $order->id);
+		} catch (Exception $e) {
+			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+		}
+		return Response::json($respond);
+	}
+	
 	public function getReturn($order)
 	{
 		$respond = array();
@@ -205,13 +227,18 @@ class OrdersController extends \BaseController {
 		for($i=1 ; $i<=31 ; $i++)
 		{
 			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1] = 0;
 			}
 			else
 			{
-				$array[$i-1] = $datas->total;
+				$array[$i-1] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		
@@ -230,14 +257,19 @@ class OrdersController extends \BaseController {
 		$array = array();
 		for($i=1 ; $i<=31 ; $i++)
 		{
-			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where('transactions.is_void','=','0')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1] = 0;
 			}
 			else
 			{
-				$array[$i-1] = $datas->total;
+				$array[$i-1] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		
@@ -256,26 +288,36 @@ class OrdersController extends \BaseController {
 		$array = array();
 		for($i=1 ; $i<31 ; $i++)
 		{
-			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where('transactions.is_void','=','0')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1][0] = 0;
 			}
 			else
 			{
-				$array[$i-1][0] = $datas->total;
+				$array[$i-1][0] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		for($i=1 ; $i<31 ; $i++)
 		{
-			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',$month)->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where('transactions.is_void','=','0')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('DAY(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->where(DB::raw('MONTH(created_at)'),'=',$month)->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1][1] = 0;
 			}
 			else
 			{
-				$array[$i-1][1] = $datas->total;
+				$array[$i-1][1] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		
@@ -289,26 +331,36 @@ class OrdersController extends \BaseController {
 		$array = array();
 		for($i=1 ; $i<13 ; $i++)
 		{
-			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1][0] = 0;
 			}
 			else
 			{
-				$array[$i-1][0] = $datas->total;
+				$array[$i-1][0] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		for($i=1 ; $i<13 ; $i++)
 		{
-			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1][1] = 0;
 			}
 			else
 			{
-				$array[$i-1][1] = $datas->total;
+				$array[$i-1][1] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		
@@ -322,14 +374,19 @@ class OrdersController extends \BaseController {
 		$array = array();
 		for($i=1 ; $i<13 ; $i++)
 		{
-			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			$datas = Order::select(DB::raw('sum(price)-sum(modal) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1] = 0;
 			}
 			else
 			{
-				$array[$i-1] = $datas->total;
+				$array[$i-1] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		$result = $array[0];
@@ -347,14 +404,19 @@ class OrdersController extends \BaseController {
 		$array = array();
 		for($i=1 ; $i<13 ; $i++)
 		{
-			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			$datas = Order::select(DB::raw('sum(price) as total'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->first();
+			
+			$trans = Transaction::select(DB::raw('sum(discount) as total'))->where('transactions.status','=','Paid')->where('transactions.is_void','=','0')->where('transactions.is_void','=','0')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
+			$cashes = Cash::select(DB::raw('sum(out_amount) as total'))->where('cashes.type','=','Obral')->where(DB::raw('MONTH(created_at)'),'=',$i)->whereRaw('YEAR(created_at) = YEAR(curdate())')->first();
+			
 			if($datas->total == null)
 			{
 				$array[$i-1] = 0;
 			}
 			else
 			{
-				$array[$i-1] = $datas->total;
+				$array[$i-1] = $datas->total - $trans->total - $cashes->total;
 			}
 		}
 		$result = $array[0];

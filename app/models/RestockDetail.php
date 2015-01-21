@@ -12,7 +12,8 @@ class RestockDetail extends \Eloquent {
 		'restock_id',
 		'product_detail_id',
 		'stock_shop',
-		'stock_storage'
+		'stock_storage',
+		'restock_by'
 	];
 	
 	public function product_detail()

@@ -50,24 +50,7 @@
 								<div class="g-sm-8 g-sm-push-2">
 									<table class="table table-bordered">
 										<tbody id="search_barang_return" class="hidden">
-											<tr class="f_suggest_tukar_barang" id="barang_ceritanya">
-												<td>
-													<img src="" height="50" width="50" style="margin-right: 20px; float: left;">
-													<p class="f_nama_barang_yang_mau_ditukar pull-left" style="line-height: 50px; margin: 0px;">Nama Barang Lain 1/Warna</p>
-												</td>
-											</tr>
-											<tr class="f_suggest_tukar_barang" id="barang_ceritanya">
-												<td>
-													<img src="" height="50" width="50" style="margin-right: 20px; float: left;">
-													<p class="f_nama_barang_yang_mau_ditukar pull-left" style="line-height: 50px; margin: 0px;">Nama Barang Lain 2</p>
-												</td>
-											</tr>
-											<tr class="f_suggest_tukar_barang" id="barang_ceritanya">
-												<td>
-													<img src="" height="50" width="50" style="margin-right: 20px; float: left;">
-													<p class="f_nama_barang_yang_mau_ditukar pull-left" style="line-height: 50px; margin: 0px;">Nama Barang Lain 3</p>
-												</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>
@@ -170,7 +153,7 @@ $('body').on('click','.f_pilih_tipe_retur', function(){
 			url: '{{URL::route('david.getProductLiveSearch')}}',
 			data: {
 				'keyword' : $keyword,
-				'source' : "return";
+				'source' : "return"
 			},
 			success: function(response){
 				if(response['code'] == '404')
@@ -187,7 +170,7 @@ $('body').on('click','.f_pilih_tipe_retur', function(){
 					$.each(response['messages'], function( i, resp ) {
 						$data += "<tr class='f_suggest_tukar_barang' id='barang_ceritanya'><td>";
 						$data += "<img src='{{asset('"+resp.photo+"')}}' height='50' width='50' style='margin-right: 20px; float: left;'>";
-						$data += "<p class='f_nama_barang_yang_mau_ditukar pull-left' style='line-height: 50px; margin: 0px;'>"+ resp.name +" / "+resp.color+"</p>";
+						$data += "<p class='f_nama_barang_yang_mau_ditukar pull-left' style='line-height: 50px; margin: 0px;'>"+ resp.product_code +" / "+resp.color+ " " + resp.stock_shop +  " | "+ resp.stock_storage  + "</p>";
 						$data += "<input type='hidden' class='f_id_barang_yang_mau_ditukar' value='"+resp.id+"'>";
 						$data += "</td></tr>";
 					});

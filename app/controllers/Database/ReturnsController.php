@@ -46,9 +46,8 @@ class ReturnsController extends \BaseController {
 			ReturnDB::create($data);
 			//masukin ke cash dulu ya..ijin aja sih ini ma
 			$transId = Order::find($orderId);
-			$amount = Input::get('amount');
 			$controller = new CashesController();
-			$controller->insertWithParam($transId->transaction_id,$in_amount,$in_amount,'return');
+			$controller->insertWithParam($transId->transaction_id,$in_amount,$out_amount,'return');
 			$respond = array('code'=>'201','status' => 'Created');
 		} catch (Exception $e) {
 			$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
@@ -281,9 +280,9 @@ class ReturnsController extends \BaseController {
 	public function getSortedAll($by, $order, $from, $to)
 	{
 		if($from != '' && $to != ''){
-			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at')->whereBetween('returns.created_at', array($from, $to));
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at','product_details.color AS productColor')->whereBetween('returns.created_at', array($from, $to));
 		}else{
-			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at');
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at','product_details.color AS productColor');
 		}
 		
 		$result = $joined->orderBy($by, $order)->get();
@@ -294,9 +293,9 @@ class ReturnsController extends \BaseController {
 	public function getFilteredAccount($no_nota, $kode_barang, $nama_pelanggan, $type, $status, $solution, $tradeProductId, $difference, $created, $from, $to)
 	{
 		if($from != '' && $to != ''){
-			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at')->whereBetween('returns.created_at', array($from, $to));
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at', 'product_details.color AS productColor')->whereBetween('returns.created_at', array($from, $to));
 		}else{
-			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at');
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at', 'product_details.color AS productColor');
 		}
 	
 		$isFirst = false;
@@ -305,12 +304,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('transactions.no_faktur', '=', $no_nota);
+				$resultTab = $joined->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('transactions.no_faktur', '=', $no_nota);
+				$resultTab = $resultTab->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%');
 			}
 		}
 		
@@ -434,9 +433,9 @@ class ReturnsController extends \BaseController {
 	public function getSortedFilteredAccount($no_nota, $kode_barang, $nama_pelanggan, $type, $status, $solution, $tradeProductId, $difference, $created, $sortBy, $order, $from, $to)
 	{
 		if($from != '' && $to != ''){
-			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at')->whereBetween('returns.created_at', array($from, $to));
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at', 'product_details.color AS productColor')->whereBetween('returns.created_at', array($from, $to));
 		}else{
-			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at');
+			$joined = DB::table('returns')->join('orders', 'returns.order_id', '=', 'orders.id')->join('transactions', 'orders.transaction_id', '=','transactions.id')->join('product_details', 'orders.product_detail_id','=', 'product_details.id')->join('products', 'product_details.product_id', '=', 'products.id')->join('customers', 'transactions.customer_id', '=', 'customers.id')->select('returns.id AS id', 'transactions.no_faktur AS no_nota', 'products.product_code AS kode_barang', 'customers.name AS nama_pelanggan', 'returns.type AS type', 'returns.status AS status', 'returns.solution AS solution', 'returns.trade_product_id AS trade_product_id', 'returns.difference AS difference', 'returns.created_at AS created_at', 'product_details.color AS productColor');
 		}
 	
 		$isFirst = false;
@@ -445,12 +444,12 @@ class ReturnsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('transactions.no_faktur', '=', $no_nota);
+				$resultTab = $joined->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('transactions.no_faktur', '=', $no_nota);
+				$resultTab = $resultTab->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%');
 			}
 		}
 		

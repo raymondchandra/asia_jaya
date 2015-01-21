@@ -261,7 +261,7 @@ class returnController extends \HomeController{
 		
 		if($start_date != '' && $end_date != ''){
 			//$finalEndDate = $this->addDate($end_date);
-			$from = date("Y-m-d, G:i:s", strtotime($start_date));
+			$from = date("Y-m-d, G:i:s", (strtotime ( '-1 day' , strtotime ( $start_date) ) ));
 			$to = date("Y-m-d, G:i:s", strtotime($end_date));
 			$to = new DateTime($to);
 			$diff1day = new DateInterval('P1D');
@@ -288,6 +288,7 @@ class returnController extends \HomeController{
 						$data->no_nota = $transaction->no_faktur;
 						$data->kode_barang = Product::find($prod_id)->product_code;
 						$data->nama_pelanggan = Customer::find($transaction->customer_id)->name;
+						$data->productColor = ProductDetail::find($order->product_detail_id)->color;
 					}
 				}else{
 					$allReturnData = null;
@@ -309,13 +310,23 @@ class returnController extends \HomeController{
 				foreach($allReturnData as $allData){
 					if($allData->trade_product_id != null)
 					{
-						$tempDetail = ProductDetail::find($allData->trade_product_id);
-						$prdctTemp = Product::find($tempDetail->product_id);
-						$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$prdctTemp->product_code, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+						if($allData->trade_product_id != null)
+						{
+							$productDetail = ProductDetail::find($allData->trade_product_id);
+							$product = Product::find($productDetail->product_id);
+							$prdCd = $product->product_code;
+							$prdClr = $productDetail->color;
+						}
+						else
+						{
+							$prdCd = '-';
+							$prdClr = '-';
+						}
+						$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$prdCd, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at, 'trade_color'=>$prdClr,'product_color'=>$allData->productColor);
 					}
 					else
 					{
-						$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>'-', 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+						$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>'-', 'difference'=>$allData->difference, 'created_at'=>$allData->created_at,'trade_color'=>'-','product_color'=>$allData->productColor);
 					}
 					
 				}
@@ -349,7 +360,19 @@ class returnController extends \HomeController{
 			if($allReturn->{'status'} != 'Not Found'){
 				$allReturnData = $allReturn->{'messages'};
 				foreach($allReturnData as $allData){
-					$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$allData->trade_product_id, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at);
+					if($allData->trade_product_id != null)
+						{
+							$productDetail = ProductDetail::find($allData->trade_product_id);
+							$product = Product::find($productDetail->product_id);
+							$prdCd = $product->product_code;
+							$prdClr = $productDetail->color;
+						}
+						else
+						{
+							$prdCd = '-';
+							$prdClr = '-';
+						}
+					$datas[] = (object)array('id'=>$allData->id, 'no_nota'=>$allData->no_nota, 'kode_barang'=>$allData->kode_barang, 'nama_pelanggan'=>$allData->nama_pelanggan, 'type'=>$allData->type, 'status'=>$allData->status, 'solution'=>$allData->solution, 'trade_product_id'=>$prdCd, 'difference'=>$allData->difference, 'created_at'=>$allData->created_at,'trade_color'=>$prdClr,'product_color'=>$allData->productColor);
 				}
 			}
 
@@ -364,7 +387,7 @@ class returnController extends \HomeController{
 		//$transaction_id = Input::get('data');
 		//$transaction_id = 1;
 		
-		$dataOrder = Transaction::where('id', '>', 0)->get();
+		$dataOrder = Transaction::where('id', '>', 0)->where('is_void','=',0)->get();
 		foreach($dataOrder as $data){
 			$data->cust_name = $this->find_cust_name($data->id);
 		}
@@ -488,9 +511,9 @@ class returnController extends \HomeController{
 				$ids[] = $id->id;
 			}
 			if($from != '' && $to != ''){
-				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->whereIn('customer_id',$ids)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->whereBetween('orders.created_at', array($from, $to))->select('transactions.customer_id AS customer_id', 'orders.transaction_id AS transaction_id', 'products.product_code AS prod_code', 'orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
+				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->whereIn('customer_id',$ids)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->where('transactions.is_void','=',0)->whereBetween('orders.created_at', array($from, $to))->select('transactions.customer_id AS customer_id', 'orders.transaction_id AS transaction_id', 'products.product_code AS prod_code', 'orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
 			}else{
-				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->whereIn('customer_id',$ids)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->select('transactions.customer_id AS customer_id','orders.transaction_id AS transaction_id','products.product_code AS prod_code','orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
+				$joinTable = DB::table('orders')->join('product_details', 'orders.product_detail_id', "=",'product_details.id')->join('products', 'product_details.product_id',"=", 'products.id')->join('transactions', 'orders.transaction_id', '=', 'transactions.id')->whereIn('customer_id',$ids)->where('product_code', 'LIKE','%'.$prod_code.'%' )->where('name', 'LIKE', '%'.$prod_name.'%')->where('transactions.no_faktur', 'LIKE', '%'.$no_nota.'%')->where('transactions.is_void','=',0)->select('transactions.customer_id AS customer_id','orders.transaction_id AS transaction_id','products.product_code AS prod_code','orders.id AS id', 'transactions.no_faktur AS no_nota', 'orders.quantity AS quantity', 'orders.price AS price', 'orders.created_at AS created_at')->groupBy('transactions.no_faktur')->get();
 			}
 			foreach($joinTable as $data){
 				$data->cust_name = Customer::find($data->customer_id)->name;
@@ -565,42 +588,107 @@ class returnController extends \HomeController{
 		$priceReturn = $priceReturn * $return_quantity;
 		$out_amount = $priceReturn;
 		$in_amount = 0;
-		if($type == "tukar dengan barang yang sama"){
+		if($type == 1){
 			$type = 1;
-			
-			$in_amount = $currentPrice;
+			$tradeProductId = $order_data->product_detail_id;
+			$in_amount = $currentPrice * $return_quantity;
 			$difference = $priceReturn-$currentPrice;
 			if($difference<0){
-				$difference = $difference*-1;
+				$difference = $difference;
 			}
 			
-		}else if($type == "tukar dengan barang yang beda"){
+		}else if($type == 2){
 			$type = 2;
 			
 			$product_id = ProductDetail::find($tradeProductId)->product_id;
 			$product_price = Product::find($product_id)->sales_price;
-			$in_amount = $product_price;
+			$in_amount = $product_price * $return_quantity;
 			$difference = $priceReturn-($product_price*$return_quantity);
 			if($difference < 0){
-				$difference = $difference*-1;
+				$difference = $difference;
 			}
 		}else{
 			$type = 3;
 			
 			$in_amount = $nominal_uang;
 			if($nominal_uang != ''){
-				$difference = $nominal_uang-$priceReturn;
+				$difference = $priceReturn-$nominal_uang;
 				if($difference<0){
-					$difference = $difference*-1;
+					$difference = $difference;
 				}
 			}
 		}
 		
 		$returnController = new ReturnsController();
-		$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
-		$temp = json_decode($addReturns->getContent());
-		//return $addReturns;
-		return $temp->{'status'};
+		
+		//edit stock
+		//kurangin stock
+		$orderPerPrice = $order_data->price / $order_data->quantity;
+		$orderPerModal = $order_data->modal / $order_data->quantity;
+		$newQuantity = $order_data->quantity - $return_quantity;
+		$order_data->quantity = $newQuantity;
+		$order_data->price = $newQuantity*$orderPerPrice;
+		$order_data->modal = $newQuantity*$orderPerModal;
+		try
+		{			
+			if($type != 3)
+			{
+				$transId = $order_data->transaction_id;
+				$orderController = new OrdersController();
+				$tradeProductDetail = ProductDetail::find($tradeProductId);
+				$tradeProduct = Product::find($tradeProductDetail->product_id);
+				$newModal = $tradeProduct->modal_price * $return_quantity;
+				$newPrice = $tradeProduct->sales_price * $return_quantity;
+				//return $newPrice;
+				
+				//kurangin stock si doi
+				$productDetail = ProductDetail::find($tradeProductId);
+				$productDetail_shop = $productDetail->stock_shop;
+				$productDetail_storage = $productDetail->stock_storage;
+				if($productDetail_shop < $return_quantity)
+				{
+					if($return_quantity > ($productDetail_shop + $productDetail_storage))
+					{
+						return "stok barang tidak cukup";
+					}
+					else
+					{
+						$newShopStock = 0;
+						$newStorageStock = $productDetail_storage + $productDetail_shop - $return_quantity;
+						//$quantity, $transactionId, $price, $prodDetailId, $modal
+						//return $newPrice;
+						$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
+						$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
+						$temp = json_decode($addReturns->getContent());
+						$productDetail->save();
+						$order_data->save();
+					}
+				}
+				else
+				{
+					$newShopStock = $productDetail_shop - $return_quantity;
+					//return $newPrice;
+					$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
+					$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
+					$temp = json_decode($addReturns->getContent());
+					$productDetail->save();
+					$order_data->save();
+				}
+			}
+			else
+			{
+				$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
+				$temp = json_decode($addReturns->getContent());
+				$order_data->save();
+			}
+			//return $addReturns;
+			return $temp->{'status'};
+		}
+		catch(Exception $ex)
+		{
+			return "gagal";
+		}
+		return "gagal";
 	}
 	
 	public function updateSolution()
@@ -635,7 +723,18 @@ class returnController extends \HomeController{
 			//tambah barang obral
 			$return = ReturnDB::find($id);
 			$controller = new ProductDetailsController();
-			$controller->addObral($return->return_quantity);
+			$obralResult = $controller->addObral($return->return_quantity);
+			if($obralResult == 1)
+			{
+				//masukin ke cash
+				$cash = new CashesController();
+				//$transactionId, $in, $out, $type
+				$order = Order::find($return->order_id);
+				$productDetail = ProductDetail::find($order->product_detail_id);
+				$product = Product::find($productDetail->product_id);
+				$cashUpdate = $cash->insertWithParam('-', 0, $product->modal_price * $return->return_quantity,"Obral");
+			}
+			
 		}
 		return $returnController->updateSolution($id, $solusi);
 	}

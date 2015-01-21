@@ -358,7 +358,7 @@ class ProductDetailsController extends \BaseController {
 			$productdetail->stock_storage = $editStorage;
 			if($editFoto != '-')
 			{
-				$productdetail->photo = "http://localhost/asia_jaya/public/assets/product_img/".$editFoto;
+				//$productdetail->photo = "http://localhost/asia_jaya/public/assets/product_img/".$editFoto;
 			}
 			try {
 				$productdetail->save();

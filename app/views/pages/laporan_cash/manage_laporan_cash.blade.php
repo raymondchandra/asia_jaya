@@ -184,7 +184,7 @@
 											@if($data->transaction_id == null)
 												-
 											@else
-												{{$data->transaction_id}}
+												{{$data->no_faktur}}
 											@endif
 										</td>
 										<td>

@@ -42,6 +42,16 @@ class CashesController extends \BaseController {
 				$out = $data->out_amount;
 				$total = $total + $in -$out;
 				$data->total = $total;
+				$transaction = Transaction::find($data->transaction_id);
+				if($transaction != null)
+				{
+					$data->no_faktur = $transaction->no_faktur;
+				}
+				else
+				{
+					$data->no_faktur = "-";
+				}
+				
 			}
 		}
 		$respond = array('code'=>'200','status' => 'OK','message'=>$datas);
@@ -304,7 +314,7 @@ class CashesController extends \BaseController {
 		
 			$result = $resultTemp->orderBy($by, $order)->whereRaw('created_at >= curdate()')->get();
 			
-			/*
+			
 			$total = 0;
 			foreach($result as $data)
 			{
@@ -312,8 +322,17 @@ class CashesController extends \BaseController {
 				$out = $data->out_amount;
 				$total = $total + $in -$out;
 				$data->total = $total;
+				$transaction = Transaction::find($data->transaction_id);
+				if($transaction != null)
+				{
+					$data->no_faktur = $transaction->no_faktur;
+				}
+				else
+				{
+					$data->no_faktur = "-";
+				}
 			}
-			*/
+			
 		
 		return $this->getReturn($result);
 	}

@@ -248,6 +248,7 @@ class stockController extends \HomeController{
 		
 		//cek restock
 		$productDetail = ProductDetail::find($idDetail);
+		$editFoto = $productDetail->photo;
 		$stock_shop = $productDetail->stock_shop;
 		$stock_storage = $productDetail->stock_storage;
 		$controller = new RestocksController();
@@ -285,6 +286,11 @@ class stockController extends \HomeController{
 		
 		$productController = new ProductsController();
 		$productDetailController = new ProductDetailsController();
+		if($editModal == '-')
+		{
+			$product = Product::find($idProduct);
+			$editModal = $product->modal_price;
+		}
 		
 		$editProductJson = $productController->updateForViewStock($idProduct, $editName, $editModal, $editMin, $editSales, $editKode);
 		$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage, $editFoto);
@@ -314,9 +320,15 @@ class stockController extends \HomeController{
 		$id = Input::get('data');
 		
 		$controller = new ProductDetailsController();
+		$productDetail = ProductDetail::find($id);
+		$product = Product::find($productDetail->product_id);
 		$obralResult = $controller->addObral($amount);
 		if($obralResult == 1)
 		{
+			//masukin ke cash
+			$cash = new CashesController();
+			//$transactionId, $in, $out, $type
+			$cashUpdate = $cash->insertWithParam('-', 0, $product->modal_price * $amount,"Obral");
 			return $controller->updateMinusShop($id, $amount);
 		}
 		$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
