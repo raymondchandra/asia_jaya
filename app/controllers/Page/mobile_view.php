@@ -160,7 +160,7 @@ class mobile_view extends \BaseController{
 							$productDetailId = -1;
 							$productModal = 0;
 							foreach($detail as $det){
-								if($det->color == $prodList["color"]){
+								if(rtrim($det->color) == rtrim($prodList["color"])){
 									$productDetailId = $det->id;
 								}
 							}
