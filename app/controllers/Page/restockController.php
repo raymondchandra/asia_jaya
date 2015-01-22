@@ -367,95 +367,98 @@ class restockController extends \HomeController{
 		$productController = new ProductsController();
 		for($i=0 ; $i<$counter ; $i++)
 		{
-			$product = $productController->getByCode($productCode[$i]);
-			$productJson = json_decode($product->getContent());
-			//cek produk..udah ada apa belum
-			if($productJson->{'code'} == '404')
+			if($productCode[$i] != '-' && $productCode[$i] !="")
 			{
-				//buat baru
-				$insertResult = $productController->insertWithParam($productCode[$i], $name[$i], $modalPrice[$i]*1000, $minPrice[$i]*1000, $salesPrice[$i]*1000, $stockShop[$i], $stockStorage[$i], 1, 0);
-				$insertResultJson = json_decode($insertResult->getContent());
-				if($insertResultJson->{'code'} == '500')
+				$product = $productController->getByCode($productCode[$i]);
+				$productJson = json_decode($product->getContent());
+				//cek produk..udah ada apa belum
+				if($productJson->{'code'} == '404')
 				{
-					//gagal
-				}
-				else
-				{
-					//berhasil
-					$id = $insertResultJson->{'message'};
-				}
-			}
-			else
-			{
-				//update stock product..
-				$prdctRes = $productJson->{'messages'};
-				$prdct = Product::find($prdctRes->id);
-				$id = $prdct->id;
-				$current_shop = $prdct->stock_shop;
-				$current_storage = $prdct->stock_storage;
-				$prdct->stock_shop = $current_shop + $stockShop[$i];
-				$prdct->stock_storage = $current_storage + $stockStorage[$i];
-				try
-				{
-					$prdct->save();
-				}
-				catch(Exception $ex)
-				{
-				
-				}
-			}
-			
-			//buat produk detail baru
-			$productDetailController = new ProductDetailsController();
-			//cek dulu warnanya..ada yg sama apa ga
-			if($productDetailController->checkColor($id, $color[$i]) == 1)
-			{
-				$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $stockShop[$i], $stockStorage[$i], $id,0, 0, 0);
-			}
-
-			//cek seri
-			$productDetailController = new ProductDetailsController();
-			$checker = $productDetailController->getByProductId($id);
-			$checkerJson = json_decode($checker->getContent());
-			$chekerResult = $checkerJson->{'messages'};
-			if(count($chekerResult) <= 1)
-			{
-				//jgn buatin seri
-			}
-			else
-			{
-				//buatin seri
-				//buat reference dulu
-				$reference = "";
-				foreach($chekerResult as $rslt)
-				{
-					if($rslt->isSeri == 0)
+					//buat baru
+					$insertResult = $productController->insertWithParam($productCode[$i], $name[$i], $modalPrice[$i]*1000, $minPrice[$i]*1000, $salesPrice[$i]*1000, $stockShop[$i], $stockStorage[$i], 1, 0);
+					$insertResultJson = json_decode($insertResult->getContent());
+					if($insertResultJson->{'code'} == '500')
 					{
-						$reference .= $rslt->id."-1;";
+						//gagal
+					}
+					else
+					{
+						//berhasil
+						$id = $insertResultJson->{'message'};
 					}
 				}
-				$seri = $productDetailController->getSeri($productCode[$i]);
-				$seriJson = json_decode($seri->getContent());
-				if($seriJson->{'code'} == '404')
-				{
-					//buat seri baru
-					$insertDetailStatus = $this->insertNewProductDetail($productCode[$i]."-seri", 'assets/img/nophoto.jpg', 0, 0, $id,0, $reference, 1);
-				}
 				else
 				{
-					//update reference seri...
-					$prdctSeriRes = $seriJson->{'messages'};
-					$prdctSeri = ProductDetail::find($prdctSeriRes->id);
-					$prdctSeri->reference = $reference;
+					//update stock product..
+					$prdctRes = $productJson->{'messages'};
+					$prdct = Product::find($prdctRes->id);
+					$id = $prdct->id;
+					$current_shop = $prdct->stock_shop;
+					$current_storage = $prdct->stock_storage;
+					$prdct->stock_shop = $current_shop + $stockShop[$i];
+					$prdct->stock_storage = $current_storage + $stockStorage[$i];
 					try
 					{
-						$prdctSeri->save();
+						$prdct->save();
 					}
 					catch(Exception $ex)
 					{
 					
 					}
-					
+				}
+				
+				//buat produk detail baru
+				$productDetailController = new ProductDetailsController();
+				//cek dulu warnanya..ada yg sama apa ga
+				if($productDetailController->checkColor($id, $color[$i]) == 1)
+				{
+					$insertDetailStatus = $this->insertNewProductDetail($color[$i], $photo[$i], $stockShop[$i], $stockStorage[$i], $id,0, 0, 0);
+				}
+
+				//cek seri
+				$productDetailController = new ProductDetailsController();
+				$checker = $productDetailController->getByProductId($id);
+				$checkerJson = json_decode($checker->getContent());
+				$chekerResult = $checkerJson->{'messages'};
+				if(count($chekerResult) <= 1)
+				{
+					//jgn buatin seri
+				}
+				else
+				{
+					//buatin seri
+					//buat reference dulu
+					$reference = "";
+					foreach($chekerResult as $rslt)
+					{
+						if($rslt->isSeri == 0)
+						{
+							$reference .= $rslt->id."-1;";
+						}
+					}
+					$seri = $productDetailController->getSeri($productCode[$i]);
+					$seriJson = json_decode($seri->getContent());
+					if($seriJson->{'code'} == '404')
+					{
+						//buat seri baru
+						$insertDetailStatus = $this->insertNewProductDetail($productCode[$i]."-seri", 'assets/img/nophoto.jpg', 0, 0, $id,0, $reference, 1);
+					}
+					else
+					{
+						//update reference seri...
+						$prdctSeriRes = $seriJson->{'messages'};
+						$prdctSeri = ProductDetail::find($prdctSeriRes->id);
+						$prdctSeri->reference = $reference;
+						try
+						{
+							$prdctSeri->save();
+						}
+						catch(Exception $ex)
+						{
+						
+						}
+						
+					}
 				}
 			}
 		}
