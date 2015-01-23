@@ -45,7 +45,7 @@
 					<p style="text-align: center;  ">
 						<font style="font-size: 1.2em;">ASIA JAYA</font>
 						<br/>
-						Menjul Tas Import Wanita
+						Menjual Tas Import Wanita
 						<br />
 						Grosir &amp; Eceran 
 						<br />
