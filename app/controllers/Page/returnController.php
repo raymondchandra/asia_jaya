@@ -592,7 +592,7 @@ class returnController extends \HomeController{
 			$type = 1;
 			$tradeProductId = $order_data->product_detail_id;
 			$in_amount = $currentPrice * $return_quantity;
-			$difference = $priceReturn-$currentPrice;
+			$difference = $currentPrice-$priceReturn;
 			if($difference<0){
 				$difference = $difference;
 			}
@@ -603,7 +603,7 @@ class returnController extends \HomeController{
 			$product_id = ProductDetail::find($tradeProductId)->product_id;
 			$product_price = Product::find($product_id)->sales_price;
 			$in_amount = $product_price * $return_quantity;
-			$difference = $priceReturn-($product_price*$return_quantity);
+			$difference = ($product_price*$return_quantity)-$priceReturn;
 			if($difference < 0){
 				$difference = $difference;
 			}
@@ -612,7 +612,7 @@ class returnController extends \HomeController{
 			
 			$in_amount = $nominal_uang;
 			if($nominal_uang != ''){
-				$difference = $priceReturn-$nominal_uang;
+				$difference = $nominal_uang-$priceReturn;
 				if($difference<0){
 					$difference = $difference;
 				}
