@@ -216,7 +216,8 @@ class transController extends \HomeController{
 		
 		if($start_date != '' && $end_date != ''){
 			//$finalEndDate = $this->addDate($end_date);
-			$from = date("Y-m-d, G:i:s", (strtotime ( '-1 day' , strtotime ( $start_date) ) ));
+			//$from = date("Y-m-d, G:i:s", (strtotime ( '-1 day' , strtotime ( $start_date) ) ));
+			$from = date("Y-m-d, G:i:s", strtotime ( $start_date) ) ;
 			$to = date("Y-m-d, G:i:s", strtotime($end_date));
 			$to = new DateTime($to);
 			$diff1day = new DateInterval('P1D');
