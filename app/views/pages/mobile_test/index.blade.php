@@ -421,7 +421,7 @@
 			$('#edit_nama').text($nama);
 			$('#edit_warna').text($warna);
 
-			$('#edit_harga_min').text( toRp($min_price) );
+			$('#edit_harga_min').val( toRp($min_price) );
 
 			$('#f_hsatuan_qty').val( (toAngka($harga)/toAngka($quantity))/1000 );
 			$('#f_edit_qty').val($quantity);
