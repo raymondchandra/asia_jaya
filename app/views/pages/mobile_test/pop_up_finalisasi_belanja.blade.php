@@ -170,7 +170,14 @@
 				});
 				
 				$('body').on('click','.f_send_ke_kasir',function(){
-
+					$('.f_masuk_kasir').removeClass('hidden');
+					$('.f_send_ke_kasir').addClass('hidden');
+					$custName = $('#f_nama_pelanggan').val();
+					$totalBiaya = toAngka($('#total_biaya_text').text());
+					$custIdRep = $('#custIdRep').val();
+					$discount = parseInt($('#diskon_text').val())*1000;
+					$tax = $('#transaction_tax').val();
+					
 					$idTable = $('#tableReps').val();
 					$('#flag_'+ $idTable).val('1');
 					$data = [];
@@ -223,8 +230,7 @@
 							'tax' : $tax
 						},
 						success: function(response){
-							$('.f_masuk_kasir').removeClass('hidden');
-							$('.f_send_ke_kasir').addClass('hidden');
+							
 							
 						},error: function(xhr, textStatus, errorThrown){
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
