@@ -47,13 +47,13 @@
 									<div class="">
 										<div class="form-group">
 											<div class="form-group">
-												<label class="g-sm-2 control-label"></label>
+												<label class="g-sm-1 control-label"></label>
 												<div class="g-sm-7">
 													<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
 												</div>
 											</div>
-											<label class="g-sm-2 control-label"></label>
-											<div class="g-sm-10">
+											<label class="g-sm-1 control-label"></label>
+											<div class="g-sm-11">
 
 												<span class="clearfix"></span>
 												<!--<div class="pad" data-jsfiddle="example1"> -->
@@ -250,7 +250,7 @@
 										
 									</div> 
 								<div class="form-group">
-									<label class="g-sm-2 control-label"></label>
+									<label class="g-sm-1 control-label"></label>
 									<div class="g-sm-7">
 										<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
 									</div>
