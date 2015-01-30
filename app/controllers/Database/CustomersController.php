@@ -101,7 +101,7 @@ class CustomersController extends \BaseController {
 	
 	public function getAlls()
 	{
-		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id')->get();
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->where('transactions.is_void','=',0)->where('transactions.status','=','Paid')->groupBy('customers.id')->get();
 		
 		return $this->getReturn($joined);
 	}
@@ -109,7 +109,7 @@ class CustomersController extends \BaseController {
 	public function getSortedAll($by, $order)
 	{
 	
-		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id');
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->where('transactions.is_void','=',0)->where('transactions.status','=','Paid')->groupBy('customers.id');
 		
 		$result = $joined->orderBy($by, $order)->get();
 		
@@ -120,7 +120,7 @@ class CustomersController extends \BaseController {
 	{
 		$isFirst = false;
 		
-		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->groupBy('customers.id');
+		$joined = DB::table('customers')->leftJoin('transactions', 'transactions.customer_id', '=', 'customers.id')->select('customers.id', 'customers.name', DB::raw('COUNT(transactions.total) AS countTrans'), 'customers.created_at', DB::raw('SUM(transactions.total) AS total'))->where('transactions.is_void','=',0)->where('transactions.status','=','Paid')->groupBy('customers.id');
 		
 		if($id != '-')
 		{

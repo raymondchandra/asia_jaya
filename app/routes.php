@@ -5,8 +5,11 @@ use Carbon\Carbon;
 
 	Route::get('/tes', function()
 	{
-		$joined = DB::table('products AS prod')->join('product_details AS prds', 'prod.id', '=', 'prds.product_id')->select('prod.product_code','prod.name','prds.photo','prds.color','prod.modal_price','prod.min_price','prod.sales_price','prds.stock_shop','prds.stock_storage','prds.deleted','prod.id','prds.id AS idDetail','prds.isSeri AS isSeri', 'prds.reference AS reference')->where('prds.isSeri','=',0)->where('prod.name', 'LIKE', '%adl%')->get();
-		var_dump($joined);
+		$ids = Order::select(DB::raw('orders.id as id'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',3)->get();
+		foreach($ids as $id)
+		{
+			echo $id->id;
+		}
 	});
 	Route::get('/tes2', function()
 	{

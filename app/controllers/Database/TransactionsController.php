@@ -445,12 +445,12 @@ class TransactionsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $joined->where('status', '=', $status);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $resultTab->where('status', '=', $status);
 			}
 		}
 		

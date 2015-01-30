@@ -82,9 +82,25 @@
 					//berhasil...foreach setiap barang
 					$data = "";
 					$.each(response['messages'], function( i, resp ) {
-						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						if(resp.isSeri == 0)
+						{
+							$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						}
+						else
+						{
+							$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td style='background-color:#ff9900' ><span style='display: block;'>";
+						}
+						
 						$data = $data + "<img src='{{asset('"+resp.photo+"')}}' width='64' height='64' class='pull-left' style='margin-right:8px;'>";
-						$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						if(resp.isSeri == 1)
+						{
+							$data = $data + "#" + resp.product_code + " / <b>" + resp.color + "</b>  ";
+						}
+						else
+						{
+							$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						}
+						
 						$data = $data + "</span> <span style='display: block;'> ";
 						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
 						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
@@ -138,9 +154,23 @@
 					//berhasil...foreach setiap barang
 					$data = "";
 					$.each(response['messages'], function( i, resp ) {
-						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						if(resp.isSeri == 0)
+						{
+							$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						}
+						else
+						{
+							$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td style='background-color:#ff9900' ><span style='display: block;'>";
+						}
 						$data = $data + "<img src='{{asset('"+resp.photo+"')}}' width='64' height='64' class='pull-left' style='margin-right:8px;'>";
-						$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						if(resp.isSeri == 1)
+						{
+							$data = $data + "#" + resp.product_code + " / <b>" + resp.color + "</b>  ";
+						}
+						else
+						{
+							$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						}
 						$data = $data + "</span> <span style='display: block;'> ";
 						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
 						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";
@@ -191,9 +221,23 @@
 					//berhasil...foreach setiap barang
 					$data = "";
 					$.each(response['messages'], function( i, resp ) {
-						$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						if(resp.isSeri == 0)
+						{
+							$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td><span style='display: block;'>";
+						}
+						else
+						{
+							$data = $data + "<tr id='row_" + resp.id + "' class='search_row' style='border-bottom: 1px solid #000 !important;' data-dismiss='modal'><td style='background-color:#ff9900' ><span style='display: block;'>";
+						}
 						$data = $data + "<img src='{{asset('"+resp.photo+"')}}' width='64' height='64' class='pull-left' style='margin-right:8px;'>";
-						$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						if(resp.isSeri == 1)
+						{
+							$data = $data + "#" + resp.product_code + " / <b>" + resp.color + "</b>  ";
+						}
+						else
+						{
+							$data = $data + "#" + resp.product_code + " / " + resp.color + "  ";
+						}
 						$data = $data + "</span> <span style='display: block;'> ";
 						$data = $data + "<span class='' style='display: block;'>" + resp.name + "</span>   ";
 						$data = $data + "<span class=''>" + resp.stock_shop + " | " + resp.stock_storage + "</span>";

@@ -574,6 +574,7 @@ class returnController extends \HomeController{
 		$tradeProductId = Input::get('trade_id');
 		$return_quantity = Input::get('return_quantity');
 		$difference = -1;
+		$modDiff = -1;
 		$nominal_uang = Input::get('nominal_uang');
 		
 		if($tradeProductId==''){
@@ -584,8 +585,13 @@ class returnController extends \HomeController{
 		$product_detail_data = ProductDetail::find($order_data->product_detail_id);
 		$product_data = Product::find($product_detail_data->product_id);
 		$currentPrice = $product_data->sales_price;
+		$currentModal = $product_data->modal_price;
+		$currentProfit = $currentPrice - $currentModal;
 		$priceReturn = $order_data->price / $order_data->quantity;
+		$returnModal = $order_data->modal / $order_data->quantity;
 		$priceReturn = $priceReturn * $return_quantity;
+		$returnModal = $returnModal * $return_quantity;
+		$returnProfit = $priceReturn - $returnModal;
 		$out_amount = $priceReturn;
 		$in_amount = 0;
 		if($type == 1){
@@ -593,6 +599,7 @@ class returnController extends \HomeController{
 			$tradeProductId = $order_data->product_detail_id;
 			$in_amount = $currentPrice * $return_quantity;
 			$difference = $currentPrice-$priceReturn;
+			$modDiff = $returnProfit - ($currentProfit*$return_quantity);
 			if($difference<0){
 				$difference = $difference;
 			}
@@ -602,8 +609,10 @@ class returnController extends \HomeController{
 			
 			$product_id = ProductDetail::find($tradeProductId)->product_id;
 			$product_price = Product::find($product_id)->sales_price;
+			$product_modal = Product::find($product_id)->modal_price;
 			$in_amount = $product_price * $return_quantity;
 			$difference = ($product_price*$return_quantity)-$priceReturn;
+			$modDiff = $returnProfit - ($product_modal*$return_quantity);
 			if($difference < 0){
 				$difference = $difference;
 			}
@@ -613,6 +622,7 @@ class returnController extends \HomeController{
 			$in_amount = $nominal_uang;
 			if($nominal_uang != ''){
 				$difference = $nominal_uang-$priceReturn;
+				$modDiff =  $nominal_uang - $returnProfit;
 				if($difference<0){
 					$difference = $difference;
 				}
@@ -623,6 +633,7 @@ class returnController extends \HomeController{
 		
 		//edit stock
 		//kurangin stock
+		
 		$orderPerPrice = $order_data->price / $order_data->quantity;
 		$orderPerModal = $order_data->modal / $order_data->quantity;
 		$newQuantity = $order_data->quantity - $return_quantity;
@@ -657,29 +668,29 @@ class returnController extends \HomeController{
 						$newStorageStock = $productDetail_storage + $productDetail_shop - $return_quantity;
 						//$quantity, $transactionId, $price, $prodDetailId, $modal
 						//return $newPrice;
-						$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
-						$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
+						//$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
+						$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $in_amount, $out_amount);
 						$temp = json_decode($addReturns->getContent());
 						$productDetail->save();
-						$order_data->save();
+						//$order_data->save();
 					}
 				}
 				else
 				{
 					$newShopStock = $productDetail_shop - $return_quantity;
 					//return $newPrice;
-					$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
-					$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
+					//$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
+					$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $in_amount, $out_amount);
 					$temp = json_decode($addReturns->getContent());
 					$productDetail->save();
-					$order_data->save();
+					//$order_data->save();
 				}
 			}
 			else
 			{
-				$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $return_quantity, $in_amount, $out_amount);
+				$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $in_amount, $out_amount);
 				$temp = json_decode($addReturns->getContent());
-				$order_data->save();
+				//$order_data->save();
 			}
 			//return $addReturns;
 			return $temp->{'status'};

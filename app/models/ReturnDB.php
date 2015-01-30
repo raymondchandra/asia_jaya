@@ -15,6 +15,7 @@ class ReturnDB extends \Eloquent {
 		'solution',
 		'trade_product_id',
 		'difference',
+		'diffModal',
 		'return_quantity'
 	];
 	
