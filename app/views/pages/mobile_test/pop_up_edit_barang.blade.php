@@ -40,16 +40,16 @@
 					</div>
 					<!--<div class="form-group" style="margin-bottom: 0px;">
 						<label class="g-sm-3 control-label">Harga Min</label>
-						<div class="g-sm-9">
-							<p class="form-control-static" id="edit_harga_min"></p>
-						</div>
+						<div class="g-sm-9">-->
+							<input type="hidden" id="edit_harga_min" value="">
+						<!--</div>
 					</div>-->
 					<div class="form-group" style=" ">
 						<label for="" class="g-sm-3 control-label">Harga@</label>
 						<div class="g-sm-6">
 							<!--<div class="input-group"> -->  
 								<div class="input-group">
-									<input type="text" class="form-control" id="f_hsatuan_qty" aria-describedby="basic-ribuan">
+									<input type="number" class="form-control" id="f_hsatuan_qty" aria-describedby="basic-ribuan">
 									<span class="input-group-addon" id="basic-ribuan">.000</span>
 									
 								</div>
@@ -150,6 +150,7 @@
 				{
 					$("#" + $row_id).removeClass('s_danger_1');
 					$("#" + $row_id).addClass('s_danger_2'); 
+					alert();
  				}else if( (parseInt($('#stock_shop_'+$row_id).text()) < $('#f_edit_qty').val()) && (( parseInt($('#stock_shop_'+$row_id).text()) + parseInt($('#stock_storage_'+$row_id).text()) ) >= $('#f_edit_qty').val()) )
 				{
 					$("#" + $row_id).removeClass('s_danger_2');
@@ -174,7 +175,7 @@
 				/* -- jan 9 2015 | START -- */
 				/* -- button disabled error prevention -- */
 				$('#f_hsatuan_qty').on('input', function() {  
-				   var ff_harga_min = parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_min').text()) );
+				   var ff_harga_min = parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_min').val()) );
 				   if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
 				   	$('#changeButton').attr('disabled','disabled');
 				   } else {

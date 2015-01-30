@@ -47,13 +47,13 @@
 									<div class="">
 										<div class="form-group">
 											<div class="form-group">
-												<label class="g-sm-2 control-label"></label>
+												<label class="g-sm-1 control-label"></label>
 												<div class="g-sm-7">
 													<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
 												</div>
 											</div>
-											<label class="g-sm-2 control-label"></label>
-											<div class="g-sm-10">
+											<label class="g-sm-1 control-label"></label>
+											<div class="g-sm-11">
 
 												<span class="clearfix"></span>
 												<!--<div class="pad" data-jsfiddle="example1"> -->
@@ -250,7 +250,7 @@
 										
 									</div> 
 								<div class="form-group">
-									<label class="g-sm-2 control-label"></label>
+									<label class="g-sm-1 control-label"></label>
 									<div class="g-sm-7">
 										<button type="button" class="btn btn-success" name="save" id="button_non_series">Add</button> 
 									</div>
@@ -272,6 +272,23 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="f_loader_container hidden">
+	<div class="s_tbl">
+		<div class="s_cell">
+			<div class="spinner">
+				<div class="rect1"></div>
+				<div class="rect2"></div>
+				<div class="rect3"></div>
+				<div class="rect4"></div>
+				<div class="rect5"></div>
+			</div>
+		</div>
+	</div>
+</div> 
+
+
 <script>
 var i_warna = 1;
 $count = 1;
@@ -315,6 +332,9 @@ $('body').on('click','.f_delete_form_warna',function(){
 
 
 $('body').on('click', '#button_non_series', function(){
+
+	$('.f_loader_container').removeClass("hidden");
+
 	$kode_produk = [];
 	$nama_produk = [];
 	$warna_produk = [];
@@ -416,11 +436,17 @@ $('body').on('click', '#button_non_series', function(){
 						$('#harga_minimal').val("");
 						$('#harga_jual').val("");
 						$('#foto').val("");
+						
+						$('.f_loader_container').addClass("hidden");
+
+
 
 						//$('.f_form_warna').append(row_warna);
 					},error: function(xhr, textStatus, errorThrown){
 						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 						alert("responseText: "+xhr.responseText);
+ 						
+ 						$('.f_loader_container').addClass("hidden");
 					}
 				},'json');
 
@@ -428,6 +454,8 @@ $('body').on('click', '#button_non_series', function(){
 	},error: function(xhr, textStatus, errorThrown){
 	alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 	alert("responseText: "+xhr.responseText);
+ 
+ 	$('.f_loader_container').addClass("hidden");
 	}
 	});
 	
