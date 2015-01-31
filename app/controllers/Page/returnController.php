@@ -598,7 +598,7 @@ class returnController extends \HomeController{
 			$type = 1;
 			$tradeProductId = $order_data->product_detail_id;
 			$in_amount = $currentPrice * $return_quantity;
-			$difference = $currentPrice-$priceReturn;
+			$difference = ($currentPrice * $return_quantity)-$priceReturn;
 			$modDiff = $returnProfit - ($currentProfit*$return_quantity);
 			if($difference<0){
 				$difference = $difference;
