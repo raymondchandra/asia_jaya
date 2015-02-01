@@ -669,8 +669,10 @@ class returnController extends \HomeController{
 						//$quantity, $transactionId, $price, $prodDetailId, $modal
 						//return $newPrice;
 						//$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
-						$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $in_amount, $out_amount);
+						$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $out_amount, $in_amount);
 						$temp = json_decode($addReturns->getContent());
+						$productDetail->stock_shop = 0;
+						$productDetail->stock_storage = $productDetail->stock_storage - ($return_quantity - $productDetail_shop);
 						$productDetail->save();
 						//$order_data->save();
 					}
@@ -680,15 +682,16 @@ class returnController extends \HomeController{
 					$newShopStock = $productDetail_shop - $return_quantity;
 					//return $newPrice;
 					//$orderController->insertWithParam($return_quantity, $transId, $newPrice, $tradeProductId, $newModal);
-					$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $in_amount, $out_amount);
+					$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $out_amount, $in_amount);
 					$temp = json_decode($addReturns->getContent());
+					$productDetail->stock_shop = $productDetail_shop - $return_quantity;
 					$productDetail->save();
 					//$order_data->save();
 				}
 			}
 			else
 			{
-				$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $in_amount, $out_amount);
+				$addReturns = $returnController->insertWithParam($no_nota, $orderId, $type, $status, $solution, $tradeProductId, $difference, $modDiff, $return_quantity, $out_amount, $in_amount);
 				$temp = json_decode($addReturns->getContent());
 				//$order_data->save();
 			}
