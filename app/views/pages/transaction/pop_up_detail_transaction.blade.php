@@ -9,6 +9,7 @@
 					<!-- <b>ID Transaksi :</b>  <span id="pop_up_trans_id"></span>
 					<span class="clearfix"></span>-->
 					<b>Nama Customer :</b> <span id="pop_up_trans_name"></span>
+					<input type="hidden" id="pop_up_trans_id"/>
 				</div>
 			</div>
 			<form class="form-horizontal" role="form">
