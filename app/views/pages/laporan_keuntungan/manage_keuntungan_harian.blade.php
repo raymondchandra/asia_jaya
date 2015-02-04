@@ -135,7 +135,7 @@
 						<thead class="table-bordered">
 							<tr>
 								<th class="table-bordered">
-									<a href="javascript:void(0)">Bulan Ke</a>
+									<a href="javascript:void(0)">Hari Ke</a>
 									<a href=" ">
 										<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 									</a>

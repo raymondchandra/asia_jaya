@@ -43,7 +43,7 @@ class cashController extends \HomeController{
 				}
 			}
 			$datas = null;
-			if($dataAll != null){
+			if($dataAll != null){				
 				foreach($dataAll as $allData){
 					$datas[] = (object)array('type'=>$allData->type, 'transaction_id'=>$allData->transaction_id, 'in_amount'=>$allData->in_amount, 'out_amount'=>$allData->out_amount, 'total'=>$allData->total, 'created_at'=>$allData->created_at, 'no_faktur'=>$allData->no_faktur);
 				}

@@ -40,7 +40,8 @@ class CashesController extends \BaseController {
 			{
 				$in = $data->in_amount;
 				$out = $data->out_amount;
-				$total = $total + $in -$out;
+				// $total = $total + $in -$out;
+				$total = $in - $out;
 				$data->total = $total;
 				$transaction = Transaction::find($data->transaction_id);
 				if($transaction != null)
@@ -310,17 +311,18 @@ class CashesController extends \BaseController {
 	
 	public function getSortedAll($by, $order)
 	{
-			$resultTemp = DB::table('cashes')->select('type', 'transaction_id', 'in_amount', 'out_amount', DB::raw('SUM(in_amount-out_amount) AS total'), 'created_at');
+			// $resultTemp = DB::table('cashes')->select('type', 'transaction_id', 'in_amount', 'out_amount', DB::raw('SUM(in_amount-out_amount) AS total'), 'created_at');
+			$resultTemp = DB::table('cashes')->select('type', 'transaction_id', 'in_amount', 'out_amount', DB::raw('(in_amount - out_amount) AS total'), 'created_at');
 		
-			$result = $resultTemp->orderBy($by, $order)->whereRaw('created_at >= curdate()')->get();
-			
+			$result = $resultTemp->orderBy($by, $order)->whereRaw('created_at >= curdate()')->get();			
 			
 			$total = 0;
 			foreach($result as $data)
 			{
 				$in = $data->in_amount;
 				$out = $data->out_amount;
-				$total = $total + $in -$out;
+				// $total = $total + $in -$out;
+				$total = $in - $out;
 				$data->total = $total;
 				$transaction = Transaction::find($data->transaction_id);
 				if($transaction != null)

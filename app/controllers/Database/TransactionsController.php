@@ -499,12 +499,14 @@ class TransactionsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('transactions.id', '=', $id);
+				// $resultTab = $joined->where('transactions.id', '=', $id);
+				$resultTab = $joined->where('transactions.no_faktur', 'LIKE', '%'.$id.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('transactions.id', '=', $id);
+				// $resultTab = $resultTab->where('transactions.id', '=', $id);
+				$resultTab = $resultTab->where('transactions.no_faktur', 'LIKE', '%'.$id.'%');
 			}
 		}
 		
@@ -603,12 +605,14 @@ class TransactionsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('status', 'LIKE', '%'.$status.'%');
+				// $resultTab = $joined->where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $joined->where('status', '=', $status);
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+				// $resultTab = $resultTab->where('status', 'LIKE', '%'.$status.'%');
+				$resultTab = $resultTab->where('status', '=', $status);
 			}
 		}
 		

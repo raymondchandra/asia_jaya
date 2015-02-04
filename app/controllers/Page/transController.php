@@ -274,7 +274,7 @@ class transController extends \HomeController{
 			$username = Input::get('username', '-');
 			$is_void = Input::get('is_void', '-');
 			$status = Input::get('status', '-');
-			if($sortBy == "none")
+			if($sortBy === "none")
 			{
 				$allTransactionJson = $transactionController->getFilteredAccount($id, $name, $total, $discount, $tax, $sales_id, $username, $is_void, $status, $from, $to);
 				

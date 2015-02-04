@@ -187,12 +187,14 @@ class RestockDetailsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('products.product_code', '=', $code);
+				// $resultTab = $joined->where('products.product_code', '=', $code);
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$code.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('products.product_code', '=', $code);
+				// $resultTab = $resultTab->where('products.product_code', '=', $code);
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$code.'%');
 			}
 		}
 		
@@ -322,12 +324,14 @@ class RestockDetailsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$resultTab = $joined->where('products.product_code', '=', $code);
+				// $resultTab = $joined->where('products.product_code', '=', $code);
+				$resultTab = $joined->where('products.product_code', 'LIKE', '%'.$code.'%');
 				$isFirst = true;
 			}
 			else
 			{
-				$resultTab = $resultTab->where('products.product_code', '=', $code);
+				// $resultTab = $resultTab->where('products.product_code', '=', $code);
+				$resultTab = $resultTab->where('products.product_code', '=', '%'.$code.'%');
 			}
 		}
 		

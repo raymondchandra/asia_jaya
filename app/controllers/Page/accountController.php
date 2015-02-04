@@ -136,7 +136,7 @@ class accountController extends \BaseController {
 			$lastLogin = Input::get('lastLogin', '-');
 			$id = Input::get('id', '-');
 			
-			if($sortBy == "none")
+			if($sortBy === "none")
 			{
 				$allEmployeeJson = $accountController->getFilteredAccount2($username, $role, $lastLogin, $id);
 			}

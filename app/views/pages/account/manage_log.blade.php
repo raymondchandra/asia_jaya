@@ -210,15 +210,17 @@
 			}
 		}
 		
-		//alert($roleRaw);
+		// alert($roleRaw);
 		
 		if($roleRaw == 'manager')
 		{
-			$role = 'manager';
+			// $role = 'manager';
+			$role = '2';
 		}
 		else if($roleRaw == 'sales')
 		{
-			$role = 'sales';
+			// $role = 'sales';
+			$role = '3';
 		}
 		else
 		{

@@ -274,12 +274,14 @@ class AccountsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$accountTab = Account::where('role', 'LIKE', '%'.$role.'%');
+				// $accountTab = Account::where('role', 'LIKE', '%'.$role.'%');
+				$accountTab = Account::where('role', '=', $role);
 				$isFirst = true;
 			}
 			else
 			{
-				$accountTab = $accountTab->where('role', 'LIKE', '%'.$role.'%');
+				// $accountTab = $accountTab->where('role', 'LIKE', '%'.$role.'%');
+				$accountTab = $accountTab->where('role', '=', $role);
 			}
 		}
 		
@@ -412,12 +414,14 @@ class AccountsController extends \BaseController {
 		{
 			if($isFirst == false)
 			{
-				$accountTab = Account::where('role', 'LIKE', '%'.$role.'%');
+				// $accountTab = Account::where('role', 'LIKE', '%'.$role.'%');
+				$accountTab = Account::where('role', '=', $role);
 				$isFirst = true;
 			}
 			else
 			{
-				$accountTab = $accountTab->where('role', 'LIKE', '%'.$role.'%');
+				// $accountTab = $accountTab->where('role', 'LIKE', '%'.$role.'%');
+				$accountTab = $accountTab->where('role', '=', $role);
 			}
 		}
 		
