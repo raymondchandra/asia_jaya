@@ -31,7 +31,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">Trans. ID</a>
+								<a href="javascript:void(0)">No. Nota</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -73,27 +73,13 @@
 								</a>
 							</th>
 							<th class="table-bordered" width="100">Command</th>
-						</thead>
-						<!--
-						<thead>
-							<tr>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
-							</tr>
-						</thead>
-						-->
+						</thead> 
 						<tbody>
 							@if($transaction!=null)
 								@foreach($transaction as $trans)
 									<tr> 
 										<td>
-											{{ $trans->id }}
+											{{ $trans->no_faktur }}
 											<input type="hidden" id="hidden_trans_tax_{{$trans->id}}" value="{{$trans->tax}}" />
 										</td>
 										<td id="">{{ $trans->total }}</td>
