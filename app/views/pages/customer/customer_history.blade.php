@@ -16,11 +16,11 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<ol class="breadcrumb">
-  					<li><a href="#">Data Customer</a></li>
+  					<li><a href="{{URL::route('gentry.view_customer')}}">Data Customer</a></li>
 					<li class="active">Transaction History</li>
 				</ol>
 				<h3 style="float: left;">
-					Transaction History | {{$customer->id}} | {{$customer->name}}
+					Transaction History | ID: {{ $customer->id }} | {{$customer->name}}
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
@@ -74,6 +74,7 @@
 							</th>
 							<th class="table-bordered" width="100">Command</th>
 						</thead>
+						<!--
 						<thead>
 							<tr>
 								<td><input type="text" class="form-control input-sm"></td>
@@ -86,6 +87,7 @@
 								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
 							</tr>
 						</thead>
+						-->
 						<tbody>
 							@if($transaction!=null)
 								@foreach($transaction as $trans)
