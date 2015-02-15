@@ -195,7 +195,7 @@
 									Rank
 								</td>
 								<td>
-									Nama Barang
+									Kode Barang - Warna
 								</td>
 							</tr>
 						</thead>
@@ -226,7 +226,7 @@
 								Rank
 							</td>
 							<td>
-								Nama Barang
+								Kode Barang - Warna
 							</td>
 						</tr>
 					</thead>
@@ -385,7 +385,7 @@
 						Rank
 					</td>
 					<td>
-						Nama Barang
+						Kode Barang - Warna
 					</td>
 				</tr>
 			</thead>
