@@ -215,6 +215,7 @@ class OrdersController extends \BaseController {
 			$prdDtl = ProductDetail::find($ord->product_detail_id);
 			$prd = Product::find($prdDtl->product_id);
 			$ord->name = $prd->name." - ".$prdDtl->color;
+			$ord->code = $prd->product_code." - ".$prdDtl->color;
 		}
 		
 		return $orders;

@@ -208,7 +208,7 @@
 									<?php $counter++ ?>
 								</td>
 								<td>
-									{{$product->name}}
+									{{$product->code}}
 								</td>
 							</tr>
 							@endforeach
@@ -239,7 +239,7 @@
 								<?php $counter++ ?>
 							</td>
 							<td>
-								{{$return->name}}
+								{{$return->code}}
 							</td>
 						</tr>
 						@endforeach
@@ -398,7 +398,7 @@
 						<?php $counter++ ?>
 					</td>
 					<td>
-						{{$repeat->name}}
+						{{$repeat->code}}
 					</td>
 				</tr>
 				@endforeach
