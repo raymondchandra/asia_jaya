@@ -621,7 +621,8 @@ class returnController extends \HomeController{
 			
 			$in_amount = $nominal_uang;
 			if($nominal_uang != ''){
-				$difference = $nominal_uang-$priceReturn;
+				//$difference = $nominal_uang-$priceReturn;
+				$difference = $nominal_uang;
 				$modDiff =  $nominal_uang - $returnProfit;
 				if($difference<0){
 					$difference = $difference;

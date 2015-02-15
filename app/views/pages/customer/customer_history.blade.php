@@ -16,11 +16,11 @@
 		<div class="g-lg-12">
 			<div class="s_title_n_control">
 				<ol class="breadcrumb">
-  					<li><a href="#">Data Customer</a></li>
+  					<li><a href="{{URL::route('gentry.view_customer')}}">Data Customer</a></li>
 					<li class="active">Transaction History</li>
 				</ol>
 				<h3 style="float: left;">
-					Transaction History | {{$customer->id}} | {{$customer->name}}
+					Transaction History | ID: {{ $customer->id }} | {{$customer->name}}
 				</h3>
 				<!--<a href="index.php" class="btn btn-default" style="float: right; margin-top: 20px; margin-right: 10px;">Back</a> -->
 			</div>
@@ -31,7 +31,7 @@
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
-								<a href="javascript:void(0)">Trans. ID</a>
+								<a href="javascript:void(0)">No. Nota</a>
 								<a href="javascript:void(0)">
 									<span class="glyphicon glyphicon-sort" style="float: right;"></span>
 								</a>
@@ -73,25 +73,13 @@
 								</a>
 							</th>
 							<th class="table-bordered" width="100">Command</th>
-						</thead>
-						<thead>
-							<tr>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td><input type="text" class="form-control input-sm"></td>
-								<td width=""><a class="btn btn-primary btn-xs">Filter</a></td>
-							</tr>
-						</thead>
+						</thead> 
 						<tbody>
 							@if($transaction!=null)
 								@foreach($transaction as $trans)
 									<tr> 
 										<td>
-											{{ $trans->id }}
+											{{ $trans->no_faktur }}
 											<input type="hidden" id="hidden_trans_tax_{{$trans->id}}" value="{{$trans->tax}}" />
 										</td>
 										<td id="">{{ $trans->total }}</td>
