@@ -185,6 +185,15 @@
 
 
 				});
+
+				$('#f_edit_qty').on('input', function() {   
+
+				  if( $.isNumeric( $(this).val() ) ){
+				   	$('#changeButton').removeAttr('disabled');
+				   } else {
+				   	$('#changeButton').attr('disabled','disabled');
+				   } 
+				});
 				/* -- jan 9 2015 | END -- */
 				function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 				function toRp(angka){
