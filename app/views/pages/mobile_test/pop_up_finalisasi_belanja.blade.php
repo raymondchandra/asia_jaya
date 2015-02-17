@@ -171,7 +171,7 @@
 				
 				$('body').on('click','.f_send_ke_kasir',function(){
 					$('.f_masuk_kasir').removeClass('hidden');
-					$('.f_send_ke_kasir').addClass('hidden');
+					//$('.f_send_ke_kasir').addClass('hidden');
 					$custName = $('#f_nama_pelanggan').val();
 					$totalBiaya = toAngka($('#total_biaya_text').text());
 					$custIdRep = $('#custIdRep').val();
