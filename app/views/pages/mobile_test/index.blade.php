@@ -494,7 +494,7 @@
 			$('.f_send_ke_kasir').removeClass('hidden');
 			$('.f_masuk_kasir').addClass('hidden');
 		}else if($(this).next('input').val() == 1){
-			$('.f_send_ke_kasir').addClass('hidden');
+			//$('.f_send_ke_kasir').addClass('hidden');
 			$('.f_masuk_kasir').removeClass('hidden');
 		}
 	});
