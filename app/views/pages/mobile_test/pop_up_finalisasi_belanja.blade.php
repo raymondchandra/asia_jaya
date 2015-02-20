@@ -238,7 +238,14 @@
 							$('.f_loader_container').addClass('hidden');
 							//temp code
 							$('.f_masuk_kasir').addClass('hidden');
-							$('.f_send_ke_kasir').removeClass('hidden');														
+							$('.f_send_ke_kasir').removeClass('hidden');	
+							if(	$('#custIdRep').val() == 'none' ){
+								$('#custIdRep').val("none");
+								$('#f_nama_pelanggan').val("");
+								$('.f_send_ke_kasir').attr('disabled','disabled'); 
+							}
+												
+													
 						},error: function(xhr, textStatus, errorThrown){
 							//loader remove
 							$('.f_loader_container').addClass('hidden');
