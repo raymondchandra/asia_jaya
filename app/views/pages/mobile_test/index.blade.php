@@ -20,7 +20,104 @@
 	<script src="{{ asset('assets/js/jquery.easing.min.js') }}"></script>
 	<!-- <script src="{{ asset('assets/js/datepicker/js/bootstrap-datepicker.js') }}"></script> -->
 	<!-- <script src="{{ asset('assets/js/tinymce/js/tinymce/tinymce.min.js') }}"></script> -->
-
+<style>
+	.f_loader_container {
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		top: 0;
+		left: 0;
+		background-color: rgba(255,255,255,0.8);
+		z-index: 999999999999;
+	}
+	.s_photos {
+		/* Prevent vertical gaps */
+		line-height: 0;
+		-webkit-column-count: 2;
+		-webkit-column-gap:   0px;
+		-moz-column-count:    2;
+		-moz-column-gap:      0px;
+		column-count:         2;
+		column-gap:           0px;
+	}
+	.s_photos img {
+		/* Just in case there are inline attributes */
+		width: 100% !important;
+		height: auto !important;
+	}
+	@media (max-width: 1200px) {
+		.s_photos {
+			-moz-column-count:    2;
+			-webkit-column-count: 2;
+			column-count:         2;
+		}
+	}
+	@media (max-width: 1000px) {
+		.s_photos {
+			-moz-column-count:    2;
+			-webkit-column-count: 2;
+			column-count:         2;
+		}
+	}
+	@media (max-width: 800px) {
+		.s_photos {
+			-moz-column-count:    2;
+			-webkit-column-count: 2;
+			column-count:         2;
+		}
+	}
+	@media (max-width: 400px) {
+		.s_photos {
+			-moz-column-count:    1;
+			-webkit-column-count: 1;
+			column-count:         1;
+		}
+	}
+	.spinner {
+		margin: 100px auto;
+		width: 50px;
+		height: 30px;
+		text-align: center;
+		font-size: 10px;
+	}
+	.spinner > div {
+		background-color: #333;
+		height: 100%;
+		width: 6px;
+		display: inline-block;
+		-webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+		animation: stretchdelay 1.2s infinite ease-in-out;
+	}
+	.spinner .rect2 {
+		-webkit-animation-delay: -1.1s;
+		animation-delay: -1.1s;
+	}
+	.spinner .rect3 {
+		-webkit-animation-delay: -1.0s;
+		animation-delay: -1.0s;
+	}
+	.spinner .rect4 {
+		-webkit-animation-delay: -0.9s;
+		animation-delay: -0.9s;
+	}
+	.spinner .rect5 {
+		-webkit-animation-delay: -0.8s;
+		animation-delay: -0.8s;
+	}
+	@-webkit-keyframes stretchdelay {
+		0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+		20% { -webkit-transform: scaleY(1.0) }
+	}
+	@keyframes stretchdelay {
+		0%, 40%, 100% {
+			transform: scaleY(0.4);
+			-webkit-transform: scaleY(0.4);
+			}  20% {
+				transform: scaleY(1.0);
+				-webkit-transform: scaleY(1.0);
+			}
+		}
+	</style>
 </head>
 <body>
 	<section class="s_super_container">
@@ -241,6 +338,20 @@
 			</div>
 		</section>
 	</section>
+
+	<div class="f_loader_container hidden">
+		<div class="s_tbl">
+			<div class="s_cell">
+				<div class="spinner">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 

@@ -171,7 +171,11 @@
 				
 				$('body').on('click','.f_send_ke_kasir',function(){
 					$('.f_masuk_kasir').removeClass('hidden');
-					//$('.f_send_ke_kasir').addClass('hidden');
+					$('.f_send_ke_kasir').addClass('hidden');
+
+					//loader
+					$('.f_loader_container').removeClass('hidden');
+
 					$custName = $('#f_nama_pelanggan').val();
 					$totalBiaya = toAngka($('#total_biaya_text').text());
 					$custIdRep = $('#custIdRep').val();
@@ -230,9 +234,14 @@
 							'tax' : $tax
 						},
 						success: function(response){
-							
-							
+							//loader remove
+							$('.f_loader_container').addClass('hidden');
+							//temp code
+							$('.f_masuk_kasir').addClass('hidden');
+							$('.f_send_ke_kasir').removeClass('hidden');														
 						},error: function(xhr, textStatus, errorThrown){
+							//loader remove
+							$('.f_loader_container').addClass('hidden');
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 							alert("responseText: "+xhr.responseText);
 						}
