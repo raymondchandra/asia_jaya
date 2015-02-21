@@ -35,7 +35,7 @@ class AccountsTableSeeder extends Seeder {
 
 		Account::create([
 			'username' => 'super',
-			'password' => Hash::make('owner'),
+			'password' => Hash::make('super'),
 			'role' => 1,
 			'last_login' => $faker->dateTime($max = 'now') ,
 			'active' => 1
