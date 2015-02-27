@@ -32,6 +32,14 @@ class AccountsTableSeeder extends Seeder {
 			'last_login' => $faker->dateTime($max = 'now') ,
 			'active' => 1
 		]);
+
+		Account::create([
+			'username' => 'super',
+			'password' => Hash::make('super'),
+			'role' => 1,
+			'last_login' => $faker->dateTime($max = 'now') ,
+			'active' => 1
+		]);
 		
 		/*
 		foreach(range(1, 10) as $index)

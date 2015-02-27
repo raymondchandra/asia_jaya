@@ -31,6 +31,7 @@
 								<label class="g-sm-4 control-label" >Role</label>
 								<div class="g-sm-5">
 									<select class="form-control" id="edit_role">
+										<option value="owner" id="edit_role_owner">Owner</option>
 										<option value="manager" id="edit_role_manager">Manager</option>
 										<option value="sales" id="edit_role_sales">Sales</option>
 									</select>
@@ -97,7 +98,11 @@
 				$roleRaw = x.options[i].value;
 			}
 		}
-		if($roleRaw === 'manager')
+		if($roleRaw === 'owner')
+		{
+			$role = 1;
+		}
+		else if ($roleRaw === 'manager')
 		{
 			$role = 2;
 		}

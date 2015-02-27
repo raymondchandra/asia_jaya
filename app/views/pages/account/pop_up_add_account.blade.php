@@ -30,6 +30,7 @@
 								<label class="g-sm-4 control-label">Role</label>
 								<div class="g-sm-5">
 									<select class="form-control" name="add_account_role" id="add_role">
+										<option value="owner">owner</option>
 										<option value="manager">manager</option>
 										<option value="sales" selected="selected">sales</option>
 									</select>
@@ -58,7 +59,11 @@
 			}
 		}
 		
-		if($roleRaw === 'manager')
+		if($roleRaw === 'owner')
+		{
+			$role = 1;
+		}
+		else if ($roleRaw === 'manager')
 		{
 			$role = 2;
 		}
@@ -81,17 +86,17 @@
 			},
 			success: function(response){
 			
-				var f_tbody_karyawan_node = '<tr class="bg-success">';
+				var f_tbody_karyawan_node = '<tr class="bg-danger">';
 				f_tbody_karyawan_node +=' <td>'+$username+'</td>';
 				f_tbody_karyawan_node +=' <td>'+$role+'</td>';
 				f_tbody_karyawan_node +=' <td>-</td>';
-				f_tbody_karyawan_node +=' <td>Aktif</td>';
+				f_tbody_karyawan_node +=' <td>inactive</td>';
 				f_tbody_karyawan_node +=' <td>';
 				f_tbody_karyawan_node +=' 	<button class="btn btn-info btn-xs" data-toggle="modal" data-target=".pop_up_edit_account">Edit</button>';
 				f_tbody_karyawan_node +=' 	<input type="hidden" value="'+response['messages']+'"/>';
-				f_tbody_karyawan_node +=' 	<button type="button" class="f_activate_btn btn btn-success btn-xs hidden">Activate</button>';
+				f_tbody_karyawan_node +=' 	<button type="button" class="f_activate_btn btn btn-success btn-xs ">Activate</button>';
 				f_tbody_karyawan_node +=' 	<input type="hidden" value="'+response['messages']+'"/>';
-				f_tbody_karyawan_node +=' 	<button type="button" class="f_deactivate_btn btn btn-danger btn-xs">Deactivate</button>';
+				f_tbody_karyawan_node +=' 	<button type="button" class="f_deactivate_btn btn btn-danger btn-xs hidden">Deactivate</button>';
 				f_tbody_karyawan_node +=' 	<input type="hidden" value="'+response['messages']+'"/>';
 				f_tbody_karyawan_node +=' <td>';
 				f_tbody_karyawan_node +=' 	<button class="btn btn-danger btn-xs" data-toggle="modal" data-target=".pop_up_delete_account">Delete</button>';
