@@ -88,7 +88,7 @@
 								<div class="g-sm-3">
 									
 									<div class="input-group">
-										<input type="text" class="form-control" id="f_uang_bayaran" aria-describedby="basic-ribuan">
+										<!--disini--><input type="text" class="form-control" id="f_uang_bayaran" aria-describedby="basic-ribuan" onkeypress="return isNumberKey(event)" />
 										<span class="input-group-addon" id="basic-ribuan">.000</span>
 									</div>
 								</div>
@@ -106,8 +106,7 @@
 								</div>
 							</div>
 							
-							<script>
-								
+							<script>															
 								$('body').on('keyup','#f_uang_bayaran',function(){
 
 									if(toAngka($('#transaction_total_detail').text()) > (toAngka($('#f_uang_bayaran').val())*1000 ) ){
@@ -132,16 +131,34 @@
 									return rev2.split('').reverse().join('');
 								}
 								
+								function isNumberKey(evt){
+									var charCode = (evt.which) ? evt.which : event.keyCode
+									if (charCode > 31 && (charCode < 48 || charCode > 57))
+										return false;
+									return true;		
+								}	
 							</script>
 							
 
 							<hr></hr>
 							<input type="hidden" value="-" id="deleted_order"/>
-							<button type="button" class="btn btn-success pull-right" id="save-btn"  data-dismiss="modal">
+							<!--//<button type="button" class="btn btn-success pull-right" id="save-btn"  data-dismiss="modal">-->
+							<button type="button" class="btn btn-success pull-right" id="save-btn" >
 								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Save
 							</button>
 							<script>
 								$('body').on('click','#save-btn',function(){
+
+									//prevention kalo uang bayar kosong atau masih belum cukup
+									if(toAngka($('#transaction_total_detail').text()) > (toAngka($('#f_uang_bayaran').val())*1000 ) ){
+										//uang masih blom cukup
+										alert("uang pembayaran tidak cukup");
+										return; //break fungsi
+									}else if($('#f_uang_bayaran').val() == ""){
+										//uang bayar masih kosong										
+										alert("uang pembayaran masih kosong, mohon diisi");
+										return;	//break fungsi						
+									}
 
 									//ajax bayar.... ajax ngupdet order dan ngurangin stock
 									//ajax buat ngupdate
