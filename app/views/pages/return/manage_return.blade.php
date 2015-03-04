@@ -379,8 +379,8 @@
 										{{ $data->trade_product_id }} | {{ $data->trade_color }}
 									@endif
 								</td>
-								<td>
-									{{ toMoney($data->difference) }}
+								<td>									
+									{{ toMoney($data->difference*-1) }}
 								</td>
 								<td>
 									{{ $data->created_at}}

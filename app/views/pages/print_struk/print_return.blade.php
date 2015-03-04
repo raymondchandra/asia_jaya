@@ -99,8 +99,8 @@
 					</tr>
 					<tr>
 						<td>Selisih</td>
-						<td>:</td>
-						<td>{{$difference}}</td>
+						<td>:</td>						
+						<td>{{$difference*-1}}</td>												
 					</tr>
 					<tr>
 						<td colspan="3">
