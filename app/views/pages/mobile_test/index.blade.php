@@ -517,6 +517,8 @@
 			$row_id = $(this).attr('id');
 			$tab_id = $row_id.split('_')[2];
 			$min_price = $('#hidden_'+$row_id).val();
+			//newcode
+			$modal_price = $('#hidden_modal_'+$row_id).val();
 			$code = $('#code_'+$row_id).text();
 			$nama = $('#name_'+$row_id).text();
 			$warna = $('#color_'+$row_id).text();
@@ -533,6 +535,8 @@
 			$('#edit_warna').text($warna);
 
 			$('#edit_harga_min').val( toRp($min_price) );
+			//newcode
+			$('#edit_harga_modal').val( toRp($modal_price) );
 
 			$('#f_hsatuan_qty').val( (toAngka($harga)/toAngka($quantity))/1000 );
 			$('#f_edit_qty').val($quantity);
@@ -540,6 +544,8 @@
 			$('#rowRep').val($row_id);
 			$('#tabRep').val($tab_id);
 			$('#minPrice').val($min_price);
+			//newcode
+			$('#modalPrice').val($modal_price);
 			$('#currentTotal').val($total);
 			
 			$('.f_slider_alert').addClass('hidden');

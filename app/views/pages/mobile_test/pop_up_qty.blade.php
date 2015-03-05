@@ -66,7 +66,11 @@
 				$data = $data + parseInt($quantity)*($quant.length) + "</td>";
 				$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + "<span id='stock_shop_"+ $product_code + "_"+ $color + "_" + $inc +"'>" + $stock_shop +"</span> | <span id='stock_storage_"+ $product_code + "_" +$color + "_" + $inc +"'>"+ $stock_storage + "</span></td>"; 
 				$data = $data + "<td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-				$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+				//$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+				//newcode
+				$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' /> ";
+				$data = $data + "<input type='hidden' id='hidden_modal_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $modal_price + "' /> ";
+				$data = $data + "</tr>";
 				
 				$('#pesanan_content_'+$inc).prepend($data);
 				
@@ -105,6 +109,8 @@
 								$name = resp.name.replace(/\s+/g, '');
 								$price = resp.sales_price;
 								$min_price = resp.min_price;
+								//newcode
+								$modal_price = resp.modal_price;
 								$quant = resp.color.split('-');
 								//if( $id == 1){ // kalau dia barang obral
 								$quant.length = 1;
@@ -132,7 +138,11 @@
 									$data = $data + $quantity*($quant.length) + "</td>"; 
 									$data = $data + "<td id='stock" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>" + "<span id='stock_shop_"+ $product_code + "_"+ $color + "_" + $inc +"'>" + $stock_shop +"</span> | <span id='stock_storage_"+ $product_code + "_"+ $color + "_" + $inc +"'>"+ $stock_storage + "</span></td>"; 
 									$data = $data + "<td class='ff_price_subtot' id='price_" + $product_code + "_" + $color + "_" + $inc + "' style='line-height: 30px;'>";
-									$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+									//$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' </tr>";
+									//newcode
+									$data = $data + "" + toRp( parseInt($quantity)*$price ) + "</td> <input type='hidden' id='hidden_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $min_price + "' /> ";
+									$data = $data + "<input type='hidden' id='hidden_modal_" + $product_code + "_" + $color + "_" + $inc + "' value='" + $modal_price + "' /> ";
+									$data = $data + "</tr>";
 									
 									$('#pesanan_content_'+$inc).prepend($data);
 									b = parseInt(b) + parseInt($quantity*$price);

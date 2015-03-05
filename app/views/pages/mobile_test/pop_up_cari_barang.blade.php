@@ -114,6 +114,8 @@
 						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
+						//newcode
+						$data = $data + "<input type='hidden' value='" + resp.modal_price + "' id='modal_price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.reference + "' id='reference_" + resp.id + "' />";
 						$data = $data + "</span>";
@@ -184,6 +186,8 @@
 						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
+						//newcode
+						$data = $data + "<input type='hidden' value='" + resp.modal_price + "' id='modal_price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.reference + "' id='reference_" + resp.id + "' />";
 						$data = $data + "</span>";
@@ -251,6 +255,8 @@
 						$data = $data + "<input type='hidden' value='" + resp.name + "' id='name_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.sales_price + "' id='price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.min_price + "' id='min_price_" + resp.id + "' />";
+						//newcode
+						$data = $data + "<input type='hidden' value='" + resp.modal_price + "' id='modal_price_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.isSeri + "' id='seri_" + resp.id + "' />";
 						$data = $data + "<input type='hidden' value='" + resp.reference + "' id='reference_" + resp.id + "' />";
 						$data = $data + "</span>";
@@ -280,6 +286,8 @@
 		$name = $('#name_'+$id).val().replace(/\s+/g, '');
 		$price = $('#price_'+$id).val();
 		$min_price = $('#min_price_'+$id).val();
+		//newcode
+		$modal_price = $('#modal_price_'+$id).val();
 		$quant = $color.split('-');
 		//if( $id == 1){ // kalau dia barang obral
 		$quant.length = 1; 

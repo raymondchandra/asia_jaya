@@ -7,6 +7,8 @@
 				<input type="hidden" id="rowRep" value="">
 				<input type="hidden" id="tabRep" value="">
 				<input type="hidden" id="minPrice" value="">
+				<!-- newcode -->
+				<input type="hidden" id="modalPrice" value="">
 				<input type="hidden" id="currentTotal" value="">
 			</div>
 			<div class="f_slider_alert hidden"  style="text-align: center; padding-top:20px;">
@@ -41,7 +43,9 @@
 					<!--<div class="form-group" style="margin-bottom: 0px;">
 						<label class="g-sm-3 control-label">Harga Min</label>
 						<div class="g-sm-9">-->
-							<input type="hidden" id="edit_harga_min" value="">
+							<!-- newcode -->
+							<input type="hidden" id="edit_harga_modal" value=""/>
+							<input type="hidden" id="edit_harga_min" value=""/>
 						<!--</div>
 					</div>-->
 					<div class="form-group" style=" ">
@@ -174,9 +178,18 @@
 
 				/* -- jan 9 2015 | START -- */
 				/* -- button disabled error prevention -- */
-				$('#f_hsatuan_qty').on('input', function() {  
+				$('#f_hsatuan_qty').on('input', function() {  				   	 				   	
 				   var ff_harga_min = parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_min').val()) );
-				   if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
+				   		var ff_harga_modal =  parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_modal').val()) );
+				   		if(ff_harga_modal < ff_harga_min){
+				   			var lowest = ff_harga_modal;
+				   		}else{
+				   			var lowest = ff_harga_min;
+				   		}
+				   		
+
+				   //if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
+				   if( ($(this).val() < (lowest/1000) ) || isNaN($(this).val())){
 				   	$('#changeButton').attr('disabled','disabled');
 				   } else {
 				   	$('#changeButton').removeAttr('disabled');
