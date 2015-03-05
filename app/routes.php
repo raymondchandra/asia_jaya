@@ -81,8 +81,12 @@ if ((Agent::isMobile() == true) || (Agent::isTablet() == true)) {
 } else if((Agent::isMobile() == false) && (Agent::isTablet() == false)) {
 	
 	Route::get('/login_mobile', ['as' => 'login.mobile', 'uses' => 'AccountsController@viewMobileLogin','before'=>'' ]);
-	Route::get('/login', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
-	Route::get('/', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
+	//Route::get('/login', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
+	//newcode
+	Route::get('/login', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'']);
+	//Route::get('/', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'checkLogin']);
+	//newcode
+	Route::get('/', ['as' => 'login.desktop', 'uses' => 'AccountsController@viewDesktopLogin','before'=>'']);
 } 
 
 //home + login 
