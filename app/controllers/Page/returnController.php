@@ -611,7 +611,10 @@ class returnController extends \HomeController{
 			$product_price = Product::find($product_id)->sales_price;
 			$product_modal = Product::find($product_id)->modal_price;
 			$in_amount = $product_price * $return_quantity;
-			$difference = ($product_price*$return_quantity)-$priceReturn;
+			//$difference = ($product_price*$return_quantity)-$priceReturn;
+			//newcode
+			$difference = $nominal_uang-$priceReturn;			
+			$in_amount = $nominal_uang;
 			$modDiff = $returnProfit - ($product_modal*$return_quantity);
 			if($difference < 0){
 				$difference = $difference;

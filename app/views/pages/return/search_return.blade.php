@@ -315,6 +315,13 @@
 	});
 	
 	$('body').on('click','#save_pop',function(){
+
+		//alert jika field jumlah yang mau dikembalikan kosong
+		if($('#quantity_pop').val() == "")
+		{
+			alert("banyak jumlah barang yang dikembalikan harus diisi dahulu");
+			return;
+		}
 		//alert($id);
 		$type = $('#type_return option:selected').val();
 		$trade_id = $('#id_trade_prod').val();

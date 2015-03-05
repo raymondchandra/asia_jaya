@@ -27,7 +27,7 @@
 							<div class="form-group">
 								<label class="g-sm-4 control-label">Jumlah Yang Mau Dikembalikan</label>
 								<div class="g-sm-6">
-									<input type="text" class="form-control" id="quantity_pop">
+									<input type="text" class="form-control" id="quantity_pop" onkeypress="return isNumberKey(event)" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -58,7 +58,10 @@
 								$('body').on('click','.f_suggest_tukar_barang',function(){
 									var t_barang =  $(this).find('.f_nama_barang_yang_mau_ditukar').text();
 									var id_barang = $(this).find('.f_id_barang_yang_mau_ditukar').val();
+									var harga_jual_barang = $(this).find('.f_harga_jual_yang_mau_ditukar').val();
 									$('.f_search_barang_beda').val(t_barang);
+									//newcode
+									$('.f_input_tukar_uang').val( harga_jual_barang*$('#quantity_pop').val() );
 									$('#search_barang_return').addClass('hidden');
 									$('#id_trade_prod').val(id_barang);
 									trigger = true;
@@ -68,7 +71,7 @@
 							<div class="form-group f_tukar_dengan_uang hidden">
 								<label class="g-sm-4 control-label">Nominal Uang</label>
 								<div class="g-sm-6">
-									<input type="text" class="form-control f_input_tukar_uang" id="nominal_uang">
+									<input type="text" class="form-control f_input_tukar_uang" id="nominal_uang" onkeypress="return isNumberKey(event)" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -126,14 +129,16 @@ $('body').on('click','.f_pilih_tipe_retur', function(){
 
 	if(target == "2"){
 		$('.f_tukar_barang_beda').removeClass('hidden');
-		$('.f_tukar_dengan_uang').addClass('hidden');
+		//$('.f_tukar_dengan_uang').addClass('hidden');
+		//newcode
+		$('.f_tukar_dengan_uang').removeClass('hidden');
 		$('.f_input_tukar_uang').val('');
 		$('.f_search_barang_beda').val('');
 	}else if(target == "3"){
 		$('.f_tukar_dengan_uang').removeClass('hidden');
 		$('.f_tukar_barang_beda').addClass('hidden');
 		$('.f_search_barang_beda').val('');
-	}else{
+	}else{ //tukar dengan barang sama
 		$('.f_tukar_dengan_uang').addClass('hidden');
 		$('.f_tukar_barang_beda').addClass('hidden');
 		$('.f_search_barang_beda').val('');
@@ -171,7 +176,9 @@ $('body').on('click','.f_pilih_tipe_retur', function(){
 						$data += "<tr class='f_suggest_tukar_barang' id='barang_ceritanya'><td>";
 						$data += "<img src='{{asset('"+resp.photo+"')}}' height='50' width='50' style='margin-right: 20px; float: left;'>";
 						$data += "<p class='f_nama_barang_yang_mau_ditukar pull-left' style='line-height: 50px; margin: 0px;'>"+ resp.product_code +" / "+resp.color+ " " + resp.stock_shop +  " | "+ resp.stock_storage  + "</p>";
-						$data += "<input type='hidden' class='f_id_barang_yang_mau_ditukar' value='"+resp.id+"'>";
+						$data += "<input type='hidden' class='f_id_barang_yang_mau_ditukar' value='"+resp.id+"'/>";
+						//newcode
+						$data += "<input type='hidden' class='f_harga_jual_yang_mau_ditukar' value='"+resp.sales_price+"'/>";
 						$data += "</td></tr>";
 					});
 					$("#search_barang_return").html($data);
@@ -187,4 +194,11 @@ $('body').on('click','.f_pilih_tipe_retur', function(){
 		},'json');
 		
 	});
+
+	function isNumberKey(evt){
+		var charCode = (evt.which) ? evt.which : event.keyCode
+		if (charCode > 31 && (charCode < 48 || charCode > 57))
+			return false;
+		return true;		
+	}
 </script>
