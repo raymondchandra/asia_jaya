@@ -249,14 +249,34 @@ class ReturnsController extends \BaseController {
 	public function getTop10ReturnedProduct()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(return_quantity) as total'))->join('returns', 'returns.order_id', '=','orders.id')->whereRaw('MONTH(returns.created_at) >= MONTH(curdate())')->whereRaw('YEAR(returns.created_at) >= YEAR(curdate())')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
-		foreach($orders as $ord)
-		{
-			$prdDtl = ProductDetail::find($ord->product_detail_id);
-			$prd = Product::find($prdDtl->product_id);
-			$ord->name = $prd->name." - ".$prdDtl->color;
-			$ord->code = $prd->product_code." - ".$prdDtl->color;
-		}
+		// $orders = DB::table('orders')
+		// 			->select(DB::raw('product_detail_id,sum(return_quantity) as total'))
+		// 			->join('returns', 'returns.order_id', '=','orders.id')
+		// 			->whereRaw('MONTH(returns.created_at) >= MONTH(curdate())')
+		// 			->whereRaw('YEAR(returns.created_at) >= YEAR(curdate())')
+		// 			->groupBy('product_detail_id')
+		// 			->orderBy('total','dsc')
+		// 			->take(10)
+		// 			->get();
+		//newcode
+		$orders = DB::table('products AS pro')
+						->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+						->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
+						->join('returns AS ret', 'ret.order_id', '=','ord.id')
+						->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ret.return_quantity) as total'))
+						->whereRaw('MONTH(ret.created_at) >= MONTH(curdate())')
+						->whereRaw('YEAR(ret.created_at) >= YEAR(curdate())')
+						->groupBy('ord.product_detail_id')
+						->orderBy('total','dsc')
+						->take(10)
+						->get();		
+		// foreach($orders as $ord)
+		// {
+		// 	$prdDtl = ProductDetail::find($ord->product_detail_id);
+		// 	$prd = Product::find($prdDtl->product_id);
+		// 	$ord->name = $prd->name." - ".$prdDtl->color;
+		// 	$ord->code = $prd->product_code." - ".$prdDtl->color;
+		// }
 		
 		return $orders;
 	}

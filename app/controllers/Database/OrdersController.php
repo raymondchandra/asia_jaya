@@ -209,14 +209,30 @@ class OrdersController extends \BaseController {
 	public function getTop10ProductBought()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as total'))->whereRaw('MONTH(created_at) >= MONTH(curdate())')->whereRaw('YEAR(created_at) >= YEAR(curdate())')->groupBy('product_detail_id')->orderBy('total','dsc')->take(10)->get();
-		foreach($orders as $ord)
-		{
-			$prdDtl = ProductDetail::find($ord->product_detail_id);
-			$prd = Product::find($prdDtl->product_id);
-			$ord->name = $prd->name." - ".$prdDtl->color;
-			$ord->code = $prd->product_code." - ".$prdDtl->color;
-		}
+		// $orders = DB::table('orders')
+		// 			->select(DB::raw('product_detail_id,sum(quantity) as total'))
+		// 			->whereRaw('MONTH(created_at) >= MONTH(curdate())')->whereRaw('YEAR(created_at) >= YEAR(curdate())')
+		// 			->groupBy('product_detail_id')
+		// 			->orderBy('total','dsc')
+		// 			->take(10)->get();
+		//newcode
+		$orders = DB::table('products AS pro')
+					->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+					->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
+					->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
+					->whereRaw('MONTH(ord.created_at) >= MONTH(curdate())')
+					->whereRaw('YEAR(ord.created_at) >= YEAR(curdate())')
+					->groupBy('ord.product_detail_id')
+					->orderBy('total','dsc')
+					->take(10)												
+					->get();
+		// foreach($orders as $ord)
+		// {
+		// 	$prdDtl = ProductDetail::find($ord->product_detail_id);
+		// 	$prd = Product::find($prdDtl->product_id);
+		// 	$ord->name = $prd->name." - ".$prdDtl->color;
+		// 	$ord->code = $prd->product_code." - ".$prdDtl->color;
+		// }
 		
 		return $orders;
 	}

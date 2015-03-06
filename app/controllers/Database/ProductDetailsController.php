@@ -622,14 +622,35 @@ class ProductDetailsController extends \BaseController {
 	public function getTop10RepeatedProduct()
 	{
 		$respond = array();
-		$orders = DB::table('orders')->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))->join('transactions', 'transactions.id', '=','orders.transaction_id')->whereRaw('MONTH(orders.created_at) >= MONTH(curdate())')->whereRaw('YEAR(orders.created_at) >= YEAR(curdate())')->groupBy('customer_id')->groupBy('product_detail_id')->orderBy('quant_total','dsc')->take(10)->get();
-		foreach($orders as $ord)
-		{
-			$prdDtl = ProductDetail::find($ord->product_detail_id);
-			$prd = Product::find($prdDtl->product_id);
-			$ord->name = $prd->name." - ".$prdDtl->color;
-			$ord->code = $prd->product_code." - ".$prdDtl->color;
-		}
+		// $orders = DB::table('orders')
+  //                   ->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))
+		// 			->join('transactions', 'transactions.id', '=','orders.transaction_id')
+		// 			->whereRaw('MONTH(orders.created_at) >= MONTH(curdate())')
+		// 			->whereRaw('YEAR(orders.created_at) >= YEAR(curdate())')
+		// 			->groupBy('customer_id')
+		// 			->groupBy('product_detail_id')->orderBy('quant_total','dsc')
+		// 			->take(10)
+		// 			->get();
+		//newcode
+		$orders = DB::table('products AS pro')
+						->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+						->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')
+						->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')		
+						->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) as quant_total'))	
+						->whereRaw('MONTH(tran.created_at) >= MONTH(curdate())')
+						->whereRaw('YEAR(tran.created_at) >= YEAR(curdate())')
+						->groupBy('tran.customer_id')
+						->groupBy('ord.product_detail_id')
+						->orderBy('quant_total','dsc')
+						->take(10)
+						->get();
+		// foreach($orders as $ord)
+		// {
+		// 	$prdDtl = ProductDetail::find($ord->product_detail_id);
+		// 	$prd = Product::find($prdDtl->product_id);
+		// 	$ord->name = $prd->name." - ".$prdDtl->color;
+		// 	$ord->code = $prd->product_code." - ".$prdDtl->color;
+		// }
 		
 		return $orders;
 	}

@@ -3,6 +3,57 @@ use Carbon\Carbon;
 
 	//Route::get('/qwertyuiop', 'CashesController@getTodayInpuCash');
 
+	Route::get('/coba', function()
+		{
+			//top10bought
+			// $orders = DB::table('products AS pro')
+			// 			->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+			// 			->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
+			// 			->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
+			// 			->whereRaw('MONTH(ord.created_at) >= MONTH(curdate())')
+			// 			->whereRaw('YEAR(ord.created_at) >= YEAR(curdate())')
+			// 			->groupBy('ord.product_detail_id')
+			// 			->orderBy('total','dsc')
+			// 			->take(10)												
+			// 			->get();
+			//return
+			// $orders = DB::table('products AS pro')
+			// 			->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+			// 			->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
+			// 			->join('returns AS ret', 'ret.order_id', '=','ord.id')
+			// 			->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ret.return_quantity) as total'))
+			// 			->whereRaw('MONTH(ret.created_at) >= MONTH(curdate())')
+			// 			->whereRaw('YEAR(ret.created_at) >= YEAR(curdate())')
+			// 			->groupBy('ord.product_detail_id')
+			// 			->orderBy('total','dsc')
+			// 			->take(10)
+			// 			->get();						
+			//repeat		
+			// $orders = DB::table('products AS pro')
+			// 			->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+			// 			->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')
+			// 			->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')		
+			// 			->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) as quant_total'))	
+			// 			->whereRaw('MONTH(tran.created_at) >= MONTH(curdate())')
+			// 			->whereRaw('YEAR(tran.created_at) >= YEAR(curdate())')
+			// 			->groupBy('tran.customer_id')
+			// 			->groupBy('ord.product_detail_id')
+			// 			->orderBy('quant_total','dsc')
+			// 			->take(10)
+			// 			->get();
+			// $orders = DB::table('orders')
+   //                  ->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))
+			// 		->join('transactions', 'transactions.id', '=','orders.transaction_id')
+			// 		->whereRaw('MONTH(orders.created_at) >= MONTH(curdate())')
+			// 		->whereRaw('YEAR(orders.created_at) >= YEAR(curdate())')
+			// 		->groupBy('customer_id')
+			// 		->groupBy('product_detail_id')->orderBy('quant_total','dsc')
+			// 		->take(10)
+			// 		->get();
+
+			//echo var_dump($orders);		
+		});
+		
 	Route::get('/tes', function()
 	{
 		$ids = Order::select(DB::raw('orders.id as id'))->join('transactions','orders.transaction_id','=','transactions.id')->where('transactions.status','=','Paid')->where(DB::raw('DAY(orders.created_at)'),'=',$i)->whereRaw('YEAR(orders.created_at) = YEAR(curdate())')->where(DB::raw('MONTH(orders.created_at)'),'=',3)->get();

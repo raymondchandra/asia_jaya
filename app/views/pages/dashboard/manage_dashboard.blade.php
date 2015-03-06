@@ -208,7 +208,8 @@
 									<?php $counter++ ?>
 								</td>
 								<td>
-									{{$product->code}}
+									{{--$product->code--}}
+									{{$product->product_code}} - {{$product->product_color}}									
 								</td>
 							</tr>
 							@endforeach
@@ -239,7 +240,8 @@
 								<?php $counter++ ?>
 							</td>
 							<td>
-								{{$return->code}}
+								{{--$return->code--}}
+								{{$return->product_code}} - {{$return->product_color}}									
 							</td>
 						</tr>
 						@endforeach
@@ -398,7 +400,8 @@
 						<?php $counter++ ?>
 					</td>
 					<td>
-						{{$repeat->code}}
+						{{--$repeat->code--}}
+						{{$repeat->product_code}} - {{$repeat->product_color}}
 					</td>
 				</tr>
 				@endforeach
