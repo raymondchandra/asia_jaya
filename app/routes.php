@@ -5,42 +5,146 @@ use Carbon\Carbon;
 
 	Route::get('/coba', function()
 		{
+			//$datas = Cash::whereRaw('created_at >= curdate()')->get();
+			//echo var_dump($datas);
+			//echo curdate();
 			//top10bought
 			// $orders = DB::table('products AS pro')
 			// 			->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
 			// 			->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
-			// 			->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
+			// 			// ->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
+			// 			->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id, sum(ord.quantity) AS total'))
 			// 			->whereRaw('MONTH(ord.created_at) >= MONTH(curdate())')
 			// 			->whereRaw('YEAR(ord.created_at) >= YEAR(curdate())')
 			// 			->groupBy('ord.product_detail_id')
-			// 			->orderBy('total','dsc')
-			// 			->take(10)												
+			// 			->orderBy('total','dsc')						
+			// 			//->take(10)												
 			// 			->get();
+			// //echo var_dump($orders);			
+			// $result = array();
+			// $temp_code = array();
+			// $duplicate = 0;
+			// $count = 1;			
+			// foreach($orders as $ord)
+			// {
+			// 	//limit 10
+			// 	if($count > 10){
+			// 		break;
+			// 	}
+
+			// 	//cek duplicate
+			// 	foreach($temp_code as $code)
+			// 	{
+			// 		if($code == $ord->product_code) //duplicate
+			// 		{
+			// 			$duplicate = 1;
+			// 			break; //langsung break ga dimasukin ke result						
+			// 		}
+			// 	}
+
+			// 	if($duplicate == 1){
+			// 		//do nothing
+			// 	}else{
+			// 		$result[] = $ord;
+			// 		$temp_code[] = $ord->product_code;
+			// 		$count++;
+			// 	}
+
+			// 	//reset
+			// 	$duplicate = 0;
+			// }					
+			// echo var_dump($result);			
 			//return
 			// $orders = DB::table('products AS pro')
 			// 			->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
 			// 			->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
 			// 			->join('returns AS ret', 'ret.order_id', '=','ord.id')
-			// 			->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ret.return_quantity) as total'))
+			// 			->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id,sum(ret.return_quantity) as total'))
 			// 			->whereRaw('MONTH(ret.created_at) >= MONTH(curdate())')
 			// 			->whereRaw('YEAR(ret.created_at) >= YEAR(curdate())')
 			// 			->groupBy('ord.product_detail_id')
 			// 			->orderBy('total','dsc')
-			// 			->take(10)
+			// 			//->take(10)
 			// 			->get();						
+			// $result = array();
+			// $temp_code = array();
+			// $duplicate = 0;
+			// $count = 1;			
+			// foreach($orders as $ord)
+			// {
+			// 	//limit 10
+			// 	if($count > 10){
+			// 		break;
+			// 	}
+
+			// 	//cek duplicate
+			// 	foreach($temp_code as $code)
+			// 	{
+			// 		if($code == $ord->product_code) //duplicate
+			// 		{
+			// 			$duplicate = 1;
+			// 			break; //langsung break ga dimasukin ke result						
+			// 		}
+			// 	}
+
+			// 	if($duplicate == 1){
+			// 		//do nothing
+			// 	}else{
+			// 		$result[] = $ord;
+			// 		$temp_code[] = $ord->product_code;
+			// 		$count++;
+			// 	}
+
+			// 	//reset
+			// 	$duplicate = 0;
+			// }					
 			//repeat		
 			// $orders = DB::table('products AS pro')
 			// 			->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
 			// 			->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')
 			// 			->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')		
-			// 			->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) as quant_total'))	
+			// 			->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id,sum(ord.quantity) as quant_total'))	
 			// 			->whereRaw('MONTH(tran.created_at) >= MONTH(curdate())')
 			// 			->whereRaw('YEAR(tran.created_at) >= YEAR(curdate())')
 			// 			->groupBy('tran.customer_id')
 			// 			->groupBy('ord.product_detail_id')
 			// 			->orderBy('quant_total','dsc')
-			// 			->take(10)
+			// 			//->take(10)
 			// 			->get();
+			// $result = array();
+			// $temp_code = array();
+			// $duplicate = 0;
+			// $count = 1;			
+			// foreach($orders as $ord)
+			// {
+			// 	//limit 10
+			// 	if($count > 10){
+			// 		break;
+			// 	}
+
+			// 	//cek duplicate
+			// 	foreach($temp_code as $code)
+			// 	{
+			// 		if($code == $ord->product_code) //duplicate
+			// 		{
+			// 			$duplicate = 1;
+			// 			break; //langsung break ga dimasukin ke result						
+			// 		}
+			// 	}
+
+			// 	if($duplicate == 1){
+			// 		//do nothing
+			// 	}else{
+			// 		$result[] = $ord;
+			// 		$temp_code[] = $ord->product_code;
+			// 		$count++;
+			// 	}
+
+			// 	//reset
+			// 	$duplicate = 0;
+			// }	
+
+
 			// $orders = DB::table('orders')
    //                  ->select(DB::raw('product_detail_id,sum(quantity) as quant_total'))
 			// 		->join('transactions', 'transactions.id', '=','orders.transaction_id')

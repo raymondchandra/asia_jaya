@@ -215,17 +215,6 @@ class OrdersController extends \BaseController {
 		// 			->groupBy('product_detail_id')
 		// 			->orderBy('total','dsc')
 		// 			->take(10)->get();
-		//newcode
-		$orders = DB::table('products AS pro')
-					->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
-					->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
-					->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
-					->whereRaw('MONTH(ord.created_at) >= MONTH(curdate())')
-					->whereRaw('YEAR(ord.created_at) >= YEAR(curdate())')
-					->groupBy('ord.product_detail_id')
-					->orderBy('total','dsc')
-					->take(10)												
-					->get();
 		// foreach($orders as $ord)
 		// {
 		// 	$prdDtl = ProductDetail::find($ord->product_detail_id);
@@ -234,7 +223,52 @@ class OrdersController extends \BaseController {
 		// 	$ord->code = $prd->product_code." - ".$prdDtl->color;
 		// }
 		
-		return $orders;
+		//return $orders;
+		
+		//newcode
+		$orders = DB::table('products AS pro')
+					->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+					->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
+					// ->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
+					->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id, sum(ord.quantity) AS total'))
+					->whereRaw('MONTH(ord.created_at) >= MONTH(curdate())')
+					->whereRaw('YEAR(ord.created_at) >= YEAR(curdate())')
+					->groupBy('ord.product_detail_id')
+					->orderBy('total','dsc')											
+					->get();		
+		$result = array();
+		$temp_code = array();
+		$duplicate = 0;
+		$count = 1;			
+		foreach($orders as $ord)
+		{
+			//limit 10
+			if($count > 10){
+				break;
+			}
+
+			//cek duplicate
+			foreach($temp_code as $code)
+			{
+				if($code == $ord->product_code) //duplicate
+				{
+					$duplicate = 1;
+					break; //langsung break ga dimasukin ke result						
+				}
+			}
+
+			if($duplicate == 1){
+				//do nothing
+			}else{
+				$result[] = $ord;
+				$temp_code[] = $ord->product_code;
+				$count++;
+			}
+
+			//reset
+			$duplicate = 0;
+		}				
+		return $result;
 	}
 	
 	public function getDailyProfit($month)

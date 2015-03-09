@@ -215,13 +215,12 @@ class CashesController extends \BaseController {
 			$datas = null;
 		}
 		else
-		{
-			
+		{			
 			foreach($datas as $data)
 			{
 				$in = $data->in_amount;
 				$out = $data->out_amount;
-				$total = $total + $in -$out;
+				$total = $total + $in - $out;
 				$data->total = $total;
 			}
 		}
