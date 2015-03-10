@@ -140,6 +140,13 @@
 					$('.f_slider_alert').addClass('hidden');
 				});
 				$('body').on('click','#changeButton',function(){
+
+					//prevent quantity minus
+					if($('#f_edit_qty').val() < 1){
+						alert("kuantitas harus lebih besar dari 0");
+						return;
+					}
+
 					$row_id = $('#rowRep').val();
 					$('#quantity_'+$row_id).text($('#f_edit_qty').val());
 					
@@ -150,22 +157,22 @@
 					$inc = $('#tabRep').val(); 
 
 
-				if( (( parseInt($('#stock_shop_'+$row_id).text()) + parseInt($('#stock_storage_'+$row_id).text()) ) < $('#f_edit_qty').val()) )
-				{
-					$("#" + $row_id).removeClass('s_danger_1');
-					$("#" + $row_id).addClass('s_danger_2'); 
-					alert();
- 				}else if( (parseInt($('#stock_shop_'+$row_id).text()) < $('#f_edit_qty').val()) && (( parseInt($('#stock_shop_'+$row_id).text()) + parseInt($('#stock_storage_'+$row_id).text()) ) >= $('#f_edit_qty').val()) )
-				{
-					$("#" + $row_id).removeClass('s_danger_2');
-					$("#" + $row_id).addClass('s_danger_1');
- 				}
-				else
-				{ 
-					$("#" + $row_id).removeClass('s_danger_1');
-					$("#" + $row_id).removeClass('s_danger_2');
- 				}
-					
+					if( (( parseInt($('#stock_shop_'+$row_id).text()) + parseInt($('#stock_storage_'+$row_id).text()) ) < $('#f_edit_qty').val()) )
+					{
+						$("#" + $row_id).removeClass('s_danger_1');
+						$("#" + $row_id).addClass('s_danger_2'); 
+						alert();
+	 				}else if( (parseInt($('#stock_shop_'+$row_id).text()) < $('#f_edit_qty').val()) && (( parseInt($('#stock_shop_'+$row_id).text()) + parseInt($('#stock_storage_'+$row_id).text()) ) >= $('#f_edit_qty').val()) )
+					{
+						$("#" + $row_id).removeClass('s_danger_2');
+						$("#" + $row_id).addClass('s_danger_1');
+	 				}
+					else
+					{ 
+						$("#" + $row_id).removeClass('s_danger_1');
+						$("#" + $row_id).removeClass('s_danger_2');
+	 				}
+						
 					$currentTotal = toAngka($('#subtotal_text_'+$inc).text());
 
 

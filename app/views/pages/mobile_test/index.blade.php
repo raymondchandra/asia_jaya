@@ -22,7 +22,7 @@
 	<!-- <script src="{{ asset('assets/js/tinymce/js/tinymce/tinymce.min.js') }}"></script> -->
 <style>
 	.f_loader_container {
-		position: absolute;
+		position: fixed !important;
 		width: 100vw;
 		height: 100vh;
 		top: 0;

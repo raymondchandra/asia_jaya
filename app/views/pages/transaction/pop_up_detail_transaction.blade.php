@@ -19,7 +19,7 @@
 							<table class="table">
 								<thead>
 									<tr>
-										<th>
+										<th>	
 											Kode Produk
 										</th>
 										<th>
@@ -139,115 +139,131 @@
 								}	
 							</script>
 							
-
 							<hr></hr>
 							<input type="hidden" value="-" id="deleted_order"/>
 							<!--//<button type="button" class="btn btn-success pull-right" id="save-btn"  data-dismiss="modal">-->
-							<button type="button" class="btn btn-success pull-right" id="save-btn" >
+							<button type="button" class="btn btn-success pull-right wuzzy" id="save-btn" >
 								<span class="glyphicon glyphicon-print" style="margin-right: 5px;"></span>Save
 							</button>
-							<script>
+							
+							<script>								
 								$('body').on('click','#save-btn',function(){
 
+									//show loader, prevent many click
+									$('.f_loader_container').removeClass('hidden');
+
 									//prevention kalo uang bayar kosong atau masih belum cukup
-									if(toAngka($('#transaction_total_detail').text()) > (toAngka($('#f_uang_bayaran').val())*1000 ) ){
+									if(toAngka($('#transaction_total_detail').text()) > (toAngka($('#f_uang_bayaran').val())*1000 ) ){										
 										//uang masih blom cukup
-										alert("uang pembayaran tidak cukup");
-										return; //break fungsi
+										alert("uang pembayaran tidak cukup");										
+										return; //break fungsi			
+										//remove loader
+										$('.f_loader_container').removeClass('hidden');							
 									}else if($('#f_uang_bayaran').val() == ""){
+										//remove loader
+										$('.f_loader_container').removeClass('hidden');
 										//uang bayar masih kosong										
 										alert("uang pembayaran masih kosong, mohon diisi");
 										return;	//break fungsi						
+										//remove loader
+										$('.f_loader_container').removeClass('hidden');									
+									}										
+									else{
+										//ajax bayar.... ajax ngupdet order dan ngurangin stock
+										//ajax buat ngupdate
+										$id = $('#pop_up_trans_id').text();
+										$total = toAngka($('#transaction_total_detail').text());									
+										$total_paid = toAngka($('#f_uang_bayaran').val())*1000;
+										$discount = toAngka($('#transaction_diskon_detail').val());
+										$orderIds = [];
+										$orderQtys = [];
+										$orderPrices = [];
+										$counter = 0;
+										$deleted = $(this).prev().val();
+										$("#transaction_detail_content tr").each(function(i, v)
+										{
+											$orderIds[$counter] = $(this).find('#hidden_id').val();
+											$orderQtys[$counter] = $(this).children('td')[3].innerText;
+											$orderPrices[$counter] = toAngka($(this).children('td')[6].innerText);
+											$counter++;
+										});
+
+										$.ajax({
+											type: 'PUT',
+											url: '{{URL::route('david.update_order')}}',
+											data: {
+												'data' : $orderIds,
+												'qty' : $orderQtys,
+												'prcs' : $orderPrices,
+												'deleted' : $deleted,
+												'ctr' : $counter
+											},
+											success: function(response){
+												if(response['code'] == 200)
+												{
+													$.ajax({
+														type: 'PUT',
+														url: '{{URL::route('david.save_transaction')}}',
+														data: {
+															'data' : $id,
+															'total' : $total,
+															'paid' : $total_paid,
+															'discount' : $discount*1000
+														},
+														success: function(response){
+															//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
+															if(response['code'] == 200)
+															{
+																$.ajax({
+																	type: 'PUT',
+																	url: '{{URL::route('david.update_stock')}}',
+																	data: {
+																		'data' : $orderIds,
+																		'qty' : $orderQtys,
+																		'ctr' : $counter
+																	},
+																	success: function(response){
+																		if(response['code'] == 200)
+																		{
+																			window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$id);
+																			location.reload();
+																		}
+																		else
+																		{
+																			alert("Something Going Wrong.. Check your form or contact developer..");
+																			//removeloader																		
+																			$('.f_loader_container').addClass('hidden');
+																		}
+																	},error: function(xhr, textStatus, errorThrown){
+																		alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+																		alert("responseText: "+xhr.responseText);
+																	}
+																},'json');
+															}
+															else
+															{
+																alert("Something Going Wrong.. Check your payment input or contact developer..");
+																//removeloader																		
+																$('.f_loader_container').addClass('hidden');
+															}
+														},error: function(xhr, textStatus, errorThrown){
+															alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+															alert("responseText: "+xhr.responseText);
+														}
+													},'json');
+												}
+												else
+												{
+													alert("Something Going Wrong.. Check your form or contact developer..");
+													//removeloader																		
+													$('.f_loader_container').addClass('hidden');
+												}
+											},error: function(xhr, textStatus, errorThrown){
+												alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
+												alert("responseText: "+xhr.responseText);
+											}
+										},'json');									
 									}
-
-									//ajax bayar.... ajax ngupdet order dan ngurangin stock
-									//ajax buat ngupdate
-									$id = $('#pop_up_trans_id').text();
-									$total = toAngka($('#transaction_total_detail').text());									
-									$total_paid = toAngka($('#f_uang_bayaran').val())*1000;
-									$discount = toAngka($('#transaction_diskon_detail').val());
-									$orderIds = [];
-									$orderQtys = [];
-									$orderPrices = [];
-									$counter = 0;
-									$deleted = $(this).prev().val();
-									$("#transaction_detail_content tr").each(function(i, v)
-									{
-										$orderIds[$counter] = $(this).find('#hidden_id').val();
-										$orderQtys[$counter] = $(this).children('td')[3].innerText;
-										$orderPrices[$counter] = toAngka($(this).children('td')[6].innerText);
-										$counter++;
-									});
-
-									$.ajax({
-										type: 'PUT',
-										url: '{{URL::route('david.update_order')}}',
-										data: {
-											'data' : $orderIds,
-											'qty' : $orderQtys,
-											'prcs' : $orderPrices,
-											'deleted' : $deleted,
-											'ctr' : $counter
-										},
-										success: function(response){
-											if(response['code'] == 200)
-											{
-												$.ajax({
-													type: 'PUT',
-													url: '{{URL::route('david.save_transaction')}}',
-													data: {
-														'data' : $id,
-														'total' : $total,
-														'paid' : $total_paid,
-														'discount' : $discount*1000
-													},
-													success: function(response){
-														//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG
-														if(response['code'] == 200)
-														{
-															$.ajax({
-																type: 'PUT',
-																url: '{{URL::route('david.update_stock')}}',
-																data: {
-																	'data' : $orderIds,
-																	'qty' : $orderQtys,
-																	'ctr' : $counter
-																},
-																success: function(response){
-																	if(response['code'] == 200)
-																	{
-																		window.open("{{URL::route('david.view_print_konsumen')}}"+"?dataT="+$id);
-																		location.reload();
-																	}
-																	else
-																	{
-																		alert("Something Going Wrong.. Check your form or contact developer..");
-																	}
-																},error: function(xhr, textStatus, errorThrown){
-																	alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-																	alert("responseText: "+xhr.responseText);
-																}
-															},'json');
-														}
-														else
-														{
-															alert("Something Going Wrong.. Check your payment input or contact developer..");
-														}
-													},error: function(xhr, textStatus, errorThrown){
-														alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-														alert("responseText: "+xhr.responseText);
-													}
-												},'json');
-											}
-											else
-											{
-												alert("Something Going Wrong.. Check your form or contact developer..");
-											}
-										},error: function(xhr, textStatus, errorThrown){
-											alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
-											alert("responseText: "+xhr.responseText);
-										}
-									},'json');
 								});
 								
 								$('body').on( "keyup",'#transaction_diskon_detail', function(e) {
