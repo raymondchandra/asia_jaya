@@ -735,6 +735,20 @@ class returnController extends \HomeController{
 				
 			}
 			
+			//masukin ke cash
+			$cash = new CashesController();
+			//$transactionId, $in, $out, $type
+			$order = Order::find($return->order_id);
+			$productDetail = ProductDetail::find($order->product_detail_id);
+			$product = Product::find($productDetail->product_id);
+			$cashUpdate = $cash->insertWithParam('-', 0, $product->modal_price * $return->return_quantity,"Obral");
+			//NOTE : kolom 'current' di kas diisi harga_jual retur
+			// $cashUpdate = $cash->insertWithParamByReturn
+			// 										('-', 
+			// 										0,															
+			// 										0,
+			// 										$product->sales_price * $return->return_quantity, 
+			// 										"Retur");
 		}
 		else
 		{
@@ -751,6 +765,13 @@ class returnController extends \HomeController{
 				$productDetail = ProductDetail::find($order->product_detail_id);
 				$product = Product::find($productDetail->product_id);
 				$cashUpdate = $cash->insertWithParam('-', 0, $product->modal_price * $return->return_quantity,"Obral");
+				//NOTE : kolom 'current' di kas diisi harga_jual retur
+				// $cashUpdate = $cash->insertWithParamByReturn
+				// 										('-', 
+				// 										0,															
+				// 										$product->modal_price * $return->return_quantity,
+				// 										$product->sales_price * $return->return_quantity, 
+				// 										"Obral");
 			}
 			
 		}

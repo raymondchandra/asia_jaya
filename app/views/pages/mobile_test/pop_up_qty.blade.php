@@ -39,6 +39,12 @@
 </div>
 <script>
 	$('body').on('click','.ff_save_to_pesanan', function(){
+		//prevention kalo angkanya < 1
+		if($('#ff_quant_first').val() < 1){
+			alert("kuantitas harus lebih besar dari 0");
+			return;
+		}
+
 		$quantity = $('#ff_quant_first').val();
 		$subtotalNow = toAngka($('#subtotal_text_'+$inc).text());
 		if($('#'+ $product_code + "_" + $color + "_" + $inc).length)

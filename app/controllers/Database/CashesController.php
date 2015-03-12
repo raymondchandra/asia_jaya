@@ -94,6 +94,44 @@ class CashesController extends \BaseController {
 		return Response::json($respond);
 	}
 	
+	/*
+		@author: Bernico Darmawan
+		@parameter :
+		@return : 
+		-) Fungsi ini berguna untuk memasukkan pembayaran tansaksi ke dalam tabel cashes sesuai dengan parameter
+	*/
+	// public function insertWithParamByReturn($transactionId, $in, $out, $current, $type){
+	// 	// if($transactionId == "-")
+	// 	// {
+	// 	// 	$data = array("in_amount"=>$in, "out_amount"=>$out, "current"=>0, "type"=>$type);
+	// 	// }
+	// 	// else
+	// 	// {
+	// 	// 	$data = array("transaction_id"=>$transactionId, "in_amount"=>$in, "out_amount"=>$out, "current"=>0, "type"=>$type);
+	// 	// }
+				
+	// 	// //validate
+	// 	// $validator = Validator::make($data, Cash::$rules);
+
+	// 	// if ($validator->fails())
+	// 	// {
+	// 	// 	$respond = array('code'=>'400','status' => 'Bad Request','messages' => $validator->messages());
+	// 	// 	return Response::json($respond);
+	// 	// }
+		
+	// 	//NOTE : param transactionId pasti "-" karena method ini hanya digunakan untuk solusi restock
+	// 	$data = array("transaction_id"=>$transactionId, "in_amount"=>$in, "out_amount"=>$out, "current"=>$current, "type"=>$type);
+
+	// 	//save
+	// 	try {
+	// 		Cash::create($data);
+	// 		$respond = array('code'=>'201','status' => 'Created');
+	// 	} catch (Exception $e) {
+	// 		$respond = array('code'=>'500','status' => 'Internal Server Error', 'messages' => $e);
+	// 	}
+	// 	return Response::json($respond);
+	// }
+
 	public function getReturn($cash)
 	{
 		$respond = array();
@@ -217,11 +255,28 @@ class CashesController extends \BaseController {
 		else
 		{			
 			foreach($datas as $data)
-			{
-				$in = $data->in_amount;
-				$out = $data->out_amount;
-				$total = $total + $in - $out;
-				$data->total = $total;
+			{	
+				//NOTE : UNTUK KEPERLUAN TOTAL UANG DI KASIR, YANG DILIHAT HANYA TIPE OPENING CASH, TRANSACTION, RETURN
+				//		, UNTUK TIPE OBRAL TIDAK DIHITUNG !
+				if($data->type == "opening cash" || $data->type == "transaction")
+				{
+					$in = $data->in_amount;
+					$out = $data->out_amount;
+					$total = $total + $in - $out;
+					$data->total = $total;	
+				}
+				else if($data->type == "return") //hanya minus
+				{
+					$in = 0;
+					$out = $data->out_amount;
+					$total = $total + $in - $out;
+					$data->total = $total;
+				}
+				else
+				{
+					//tipe obral -> do nothing
+				}
+				
 			}
 		}
 		$respond = array('code'=>'200','status' => 'OK','message'=>$total);
