@@ -691,14 +691,15 @@
 					$data += "</tr>"
 					$('#transaction_detail_content').html($data);
 					$total += parseInt(resp.hargaSatuan) * parseInt(resp.quantity);
-				});
+				});				
 				//$('#transaction_subtotal_detail').text("Rp " + toRp($total));
 				$('#transaction_diskon_detail').val(parseInt(toAngka($discount))/1000);			
 				$('#transaction_tax_detail').text($tax);	 
-				$total -= toAngka($discount); //copy dari view_transaction
+				$total -= toAngka($discount); //copy dari view_transaction				
 				$tax = $total * toAngka($tax) / 100; //copy dari view_transaction
 				$total += $tax;	//copy dari view_transaction
 				$('#transaction_total_detail').text("Rp " + toRp($total));
+
 				if($status == "Paid")
 				{
 					$('#f_uang_bayaran').val("Rp " + toRp($paid));

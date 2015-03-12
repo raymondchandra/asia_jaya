@@ -374,7 +374,8 @@ class transController extends \HomeController{
 				$ord->kodeProduk = $product->product_code;
 				$ord->namaProduk = $product->name;
 				$ord->warna = $product_detail->color;
-				$ord->hargaSatuan = $product->sales_price;
+				//$ord->hargaSatuan = $product->sales_price;
+				$ord->hargaSatuan = $ord->price / $ord->quantity;
 				$ord->foto = $product_detail->photo;
 				$ord->stock_shop = $product_detail->stock_shop;
 				$ord->stock_storage = $product_detail->stock_storage;
