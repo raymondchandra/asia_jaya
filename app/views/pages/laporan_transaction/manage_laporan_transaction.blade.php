@@ -47,7 +47,7 @@
 			<hr></hr>
 		
 			<div>
-				<table class="table table-bordered table-hover ">
+				<table class="table table-bordered table-striped table-hover ">
 					<thead class="table-bordered">
 						<tr>
 							<th class="table-bordered" width="110">
