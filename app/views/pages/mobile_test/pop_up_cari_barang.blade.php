@@ -203,7 +203,7 @@
 		},'json');
 	});
 	
-	$('body').on('keyup','#barang_text_box',function(){
+	$('body').on('keyup','#barang_text_box',function(){	
 		trigger = false;
 		$keyword = $('#barang_text_box').val();
 		//alert($keyword);
@@ -266,6 +266,7 @@
 					if(trigger == false)
 					{
 						$('#searchContent').html($data);
+						trigger = true;
 					}
 				}
 			},error: function(xhr, textStatus, errorThrown){

@@ -39,6 +39,9 @@
 </div>
 <script>
 	$('body').on('click','.ff_save_to_pesanan', function(){
+		//show loader
+		$('.f_loader_container').removeClass('hidden');
+
 		//prevention kalo angkanya < 1
 		if($('#ff_quant_first').val() < 1){
 			alert("kuantitas harus lebih besar dari 0");
@@ -49,7 +52,8 @@
 		$subtotalNow = toAngka($('#subtotal_text_'+$inc).text());
 		if($('#'+ $product_code + "_" + $color + "_" + $inc).length)
 		{
-		
+			//remove loader
+			$('.f_loader_container').addClass('hidden');
 		}
 		else
 		{
@@ -156,10 +160,14 @@
 							});
 							var total = a+b;
 							$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
+							//remove loader
+							$('.f_loader_container').addClass('hidden');
 						}
 					},error: function(xhr, textStatus, errorThrown){
 						alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 						alert("responseText: "+xhr.responseText);
+						//remove loader
+						$('.f_loader_container').addClass('hidden');
 					}
 				},'json');
 			}

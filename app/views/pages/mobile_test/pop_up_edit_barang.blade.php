@@ -122,10 +122,12 @@
 					$('.f_slider_alert').removeClass('hidden');
 					//alert("sad");
 				});
+
 				$('body').on('click','.f_slider_tutup',function(){
 					$('.f_slider_alert').addClass('hidden');
 					//alert("sad");
 				});
+				
 				$('body').on('click','#hyper_x',function(){
 					
 					$row_id = $('#rowRep').val();
@@ -139,7 +141,12 @@
 					$('#'+$row_id).remove();
 					$('.f_slider_alert').addClass('hidden');
 				});
+
 				$('body').on('click','#changeButton',function(){
+					//show loader					
+					$('.f_loader_container').removeClass('hidden');					
+					setTimeout(function(){ $('.f_loader_container').addClass('hidden'); }, 2000);
+						
 
 					//prevent quantity minus
 					if($('#f_edit_qty').val() < 1){

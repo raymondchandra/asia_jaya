@@ -503,7 +503,6 @@
 			tab_panel+='</div>                                                                                                                                                            ';
 
 			$('.sf_panel_orderan').append(tab_panel);
-
 			
 		});
 
