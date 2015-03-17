@@ -45,6 +45,8 @@
 		//prevention kalo angkanya < 1
 		if($('#ff_quant_first').val() < 1){
 			alert("kuantitas harus lebih besar dari 0");
+			//remove loader
+			$('.f_loader_container').addClass('hidden');
 			return;
 		}
 
@@ -89,6 +91,9 @@
 				var b = parseInt( parseInt($('#ff_quant_first').val())*$price );
 				var total = a+b;
 				$('#subtotal_text_'+$inc).text("Rp " + toRp(total));
+
+				//remove loader
+				$('.f_loader_container').addClass('hidden');
 			}
 			else
 			{
