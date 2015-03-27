@@ -129,7 +129,8 @@
 				});
 				
 				$('body').on('click','#hyper_x',function(){
-					
+					$('.f_loader_container').removeClass('hidden');
+
 					$row_id = $('#rowRep').val();
 					$oldTotal = $('#currentTotal').val();
 					$inc = $('#tabRep').val();
@@ -140,6 +141,9 @@
 					$('#subtotal_text_'+$inc).text("Rp " + $total);
 					$('#'+$row_id).remove();
 					$('.f_slider_alert').addClass('hidden');
+					setTimeout(function(){ 
+						$('.f_loader_container').addClass('hidden');
+					}, 200);
 				});
 
 				$('body').on('click','#changeButton',function(){
