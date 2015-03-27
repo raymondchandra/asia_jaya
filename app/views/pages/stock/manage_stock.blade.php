@@ -2,6 +2,7 @@
 @section('content')	
 <div class="container-fluid">
 	<?php
+
 			
 		function toMoney($val,$symbol='Rp ',$r=0)
 		{
@@ -412,6 +413,7 @@
 				 // var container = document.getElementById("example1");
 
 				 //  var hot1 = new Handsontable(container, {
+				 	var first = true;
 
 				  $("#example1").handsontable({
 				    data: data,
@@ -574,18 +576,22 @@
 										'editFoto' : "-"
 									},
 									success: function(response){
-										alert('success');
+										//alert('success');
 									},error: function(xhr, textStatus, errorThrown){
 										alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 										alert("responseText: "+xhr.responseText);
 									}
 								},'json');
 								
-								
+
+								if(!first)
+								{
+									return ;
+								}
 								for(var i=0 ; i<count ; i++)
 								{
 									if(ht.getDataAtCell(i,0) == prod_id)
-									{
+									{										
 										@if(Auth::user()->role == 2)
 											$('#example1').handsontable('setDataAtCell', i, 3, kode_barang,"alter");
 											$('#example1').handsontable('setDataAtCell', i, 5, merek_barang,"alter");
@@ -600,6 +606,7 @@
 										@endif
 									}
 								}
+								first = false;
 								return ;
 							}
 							
