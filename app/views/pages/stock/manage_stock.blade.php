@@ -507,20 +507,22 @@
 										else if(changes[0][3] < changes[0][2])
 										{
 											var diff = parseInt(changes[0][2])-parseInt(changes[0][3]);
-											stok_toko += diff;
+											//stok_toko += diff; //semua baris yang kaya ini bakal kenanya string!! bukan int !!
+											stok_toko = parseInt(stok_toko) + parseInt(diff);
 											$('#example1').handsontable('setDataAtCell', changes[0][0], 9, stok_toko,"alter");
 										}
 										else
 										{
-											var diff = parseInt(changes[0][3])-parseInt(changes[0][2]);
-											if(parseInt(stok_toko)-parseInt(diff) < 0)
+											var diff = parseInt(changes[0][3])-parseInt(changes[0][2]);											
+											if( (parseInt(stok_toko)-parseInt(diff)) < 0)
 											{
 												$('#example1').handsontable('setDataAtCell', changes[0][0], 10, changes[0][2],"alter");
 												return;
 											}
 											else
 											{
-												stok_toko -= diff;
+												//stok_toko -= diff;
+												stok_toko = parseInt(stok_toko) - parseInt(diff);
 												$('#example1').handsontable('setDataAtCell', changes[0][0], 9, stok_toko,"alter");
 												
 											}
@@ -534,21 +536,27 @@
 										}
 										else if(changes[0][3] < changes[0][2])
 										{
+											//alert("changes 0 2 "+parseInt(changes[0][2])); //nilai awal
+											//alert("changes 0 3"+parseInt(changes[0][3])); //nilai edit
 											var diff = parseInt(changes[0][2])-parseInt(changes[0][3]);
-											stok_gudang += diff;
+											//alert(diff);
+											//stok_gudang += parseInt(diff);
+											stok_gudang = parseInt(stok_gudang) + parseInt(diff);
 											$('#example1').handsontable('setDataAtCell', changes[0][0], 10, stok_gudang,"alter");
 										}
 										else
 										{
 											var diff = parseInt(changes[0][3])-parseInt(changes[0][2]);
-											if(parseInt(stok_gudang)-parseInt(diff) < 0)
+											if( (parseInt(stok_gudang)-parseInt(diff)) < 0)
 											{
+												//alert("gudang minus");
 												$('#example1').handsontable('setDataAtCell', changes[0][0], 9, changes[0][2],"alter");
 												return;
 											}
 											else
 											{
-												stok_gudang -= diff;
+												//stok_gudang -= diff;
+												stok_gudang = parseInt(stok_gudang) - parseInt(diff);
 												$('#example1').handsontable('setDataAtCell', changes[0][0], 10, stok_gudang,"alter");
 												
 											}
