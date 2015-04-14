@@ -169,7 +169,7 @@
 						ditukar atau dikembalikan.
 					</p>
 					<p style="text-align: center; font-size: 0.8em;">
-						Terima kasih, semoga tetap menjadi langanan
+						Terima kasih, semoga tetap menjadi langganan
 					</p>
 					<p style="text-align: center; font-size: 0.9em;">
 						No. Rek: <br/>

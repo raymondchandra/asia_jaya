@@ -557,8 +557,7 @@
 											{
 												//stok_gudang -= diff;
 												stok_gudang = parseInt(stok_gudang) - parseInt(diff);
-												$('#example1').handsontable('setDataAtCell', changes[0][0], 10, stok_gudang,"alter");
-												
+												$('#example1').handsontable('setDataAtCell', changes[0][0], 10, stok_gudang,"alter");												
 											}
 										}
 									}
@@ -592,10 +591,10 @@
 								},'json');
 								
 
-								if(!first)
-								{
-									return ;
-								}
+								// if(!first)
+								// {
+								// 	return ;
+								// }
 								for(var i=0 ; i<count ; i++)
 								{
 									if(ht.getDataAtCell(i,0) == prod_id)
@@ -614,8 +613,8 @@
 										@endif
 									}
 								}
-								first = false;
-								return ;
+								// first = false;
+								// return ;
 							}
 							
 							 
