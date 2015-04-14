@@ -415,7 +415,7 @@
 				 //  var hot1 = new Handsontable(container, {
 				 	var first = true;
 
-				  $("#example1").handsontable({
+				  $("#example1").handsontable({				  	
 				    data: data,
 				    enterMoves: {row: 0, col: 0},
 				    colWidths: [10, 10, 71, 113, 110, 112, 111, 123, 131, 114, 99,114, 92, 129],
@@ -455,10 +455,10 @@
 
 					      	return cellProperties;
 					      },
-					      afterChange: function(changes, source) { 
-							
+					      afterChange: function(changes, source) { 							
+
 							if(source == 'edit')
-							{
+							{								
 								var ht = $('#example1').handsontable('getInstance');
 								var coordinate = ht.getSelected();
 								var count = $("#example1").handsontable('countRows');
@@ -468,7 +468,7 @@
 								
 								//alert(colAffected);
 
-								var rowArr 			= ht.getDataAtRow(coordinate[0]);
+								var rowArr 			= ht.getDataAtRow(coordinate[0]);								
 
 								var prod_id 		= rowArr[0];
 								var prod_detail_id 	= rowArr[1];
@@ -565,7 +565,10 @@
 
 								@endif
 								//ajax disini;
-								
+									
+								//show loader
+								$('.f_loader_container').removeClass('hidden');
+
 								$.ajax({
 									type: 'PUT',
 									url: '{{URL::route('gentry.edit_stock')}}',
@@ -582,11 +585,13 @@
 										'editKode' : kode_barang,
 										'editFoto' : "-"
 									},
-									success: function(response){
-										//alert('success');
+									success: function(response){										
+										
 									},error: function(xhr, textStatus, errorThrown){
 										alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 										alert("responseText: "+xhr.responseText);
+										//remove loader
+										$('.f_loader_container').addClass('hidden');
 									}
 								},'json');
 								
@@ -595,10 +600,14 @@
 								// {
 								// 	return ;
 								// }
+								var check = 0;
+								var before = 0;
 								for(var i=0 ; i<count ; i++)
 								{
+									before = check;
 									if(ht.getDataAtCell(i,0) == prod_id)
-									{										
+									{		
+										check = check + 1;								
 										@if(Auth::user()->role == 2)
 											$('#example1').handsontable('setDataAtCell', i, 3, kode_barang,"alter");
 											$('#example1').handsontable('setDataAtCell', i, 5, merek_barang,"alter");
@@ -610,11 +619,19 @@
 											$('#example1').handsontable('setDataAtCell', i, 7, harga_modal,"alter");
 											$('#example1').handsontable('setDataAtCell', i, 8, harga_min,"alter");
 											$('#example1').handsontable('setDataAtCell', i, 9, harga_jual,"alter");
-										@endif
+										@endif										
 									}
+									if(check != 0 && before == check)
+									{
+										//remove loader
+										$('.f_loader_container').addClass('hidden');
+										return;
+									}
+
 								}
 								// first = false;
 								// return ;
+									
 							}
 							
 							 
