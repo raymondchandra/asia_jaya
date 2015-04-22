@@ -243,7 +243,7 @@
 								$('.f_send_ke_kasir').attr('disabled','disabled'); 
 							}
 							//loader remove
-							//$('.f_loader_container').addClass('hidden');
+							$('.f_loader_container').addClass('hidden');
 													
 						},error: function(xhr, textStatus, errorThrown){							
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
@@ -255,11 +255,11 @@
 								$('.f_send_ke_kasir').attr('disabled','disabled'); 
 							}
 							//loader remove
-							//$('.f_loader_container').addClass('hidden');
+							$('.f_loader_container').addClass('hidden');
 						}
 					},'json');
 					//loader remove
-					$('.f_loader_container').addClass('hidden'); 
+					//$('.f_loader_container').addClass('hidden'); 
 				});
 				function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 				function toRp(angka){
