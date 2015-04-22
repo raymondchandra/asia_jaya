@@ -243,16 +243,23 @@
 								$('.f_send_ke_kasir').attr('disabled','disabled'); 
 							}
 							//loader remove
-							$('.f_loader_container').addClass('hidden');
+							//$('.f_loader_container').addClass('hidden');
 													
 						},error: function(xhr, textStatus, errorThrown){							
 							alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 							alert("responseText: "+xhr.responseText);
+							$('.f_send_ke_kasir').removeClass('hidden');	
+							if(	$('#custIdRep').val() == 'none' ){
+								$('#custIdRep').val("none");
+								$('#f_nama_pelanggan').val("");
+								$('.f_send_ke_kasir').attr('disabled','disabled'); 
+							}
 							//loader remove
-							$('.f_loader_container').addClass('hidden');
+							//$('.f_loader_container').addClass('hidden');
 						}
 					},'json');
-					
+					//loader remove
+					$('.f_loader_container').addClass('hidden'); 
 				});
 				function toAngka(rp){return parseInt(rp.replace(/,.*|\D/g,''),10)}
 				function toRp(angka){
