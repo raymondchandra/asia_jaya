@@ -586,7 +586,8 @@
 										'editFoto' : "-"
 									},
 									success: function(response){										
-										
+										//remove loader
+										$('.f_loader_container').addClass('hidden');
 									},error: function(xhr, textStatus, errorThrown){
 										alert("readyState: "+xhr.readyState+"\nstatus: "+xhr.status);
 										alert("responseText: "+xhr.responseText);
