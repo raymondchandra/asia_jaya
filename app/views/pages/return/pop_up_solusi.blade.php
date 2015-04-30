@@ -29,15 +29,18 @@
 									<script>
 										$( 'body' ).on( "click",'.save-solution-btn', function() {
 											$id = $(this).prev().val();
+											$idx_solusi = $("#solution-opt").val();
 											var e = document.getElementById("solution-opt");
 											var solution = e.options[e.selectedIndex].text;
 											alert(solution);
+											// alert($("#solution-opt").val());
 											$.ajax({
 												type: 'PUT',
 												url: '{{URL::route('david.update_solution_return')}}',
 												data: {
 													'data' : $id,
-													'solusi' : solution
+													'solusi' : solution,
+													'idx_solusi' : $idx_solusi
 												},
 												success: function(response){
 													//ajax lagi baru window.open.. ITS SOMMMEEETTTHIIINNGG

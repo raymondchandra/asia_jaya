@@ -584,10 +584,10 @@ class returnController extends \HomeController{
 		$order_data = Order::find($orderId);
 		$product_detail_data = ProductDetail::find($order_data->product_detail_id);
 		$product_data = Product::find($product_detail_data->product_id);
-		$currentPrice = $product_data->sales_price;
+		$currentPrice = $product_data->sales_price; //ini adalah HARGA JUAL TAS SEKARANG
 		$currentModal = $product_data->modal_price;
 		$currentProfit = $currentPrice - $currentModal;
-		$priceReturn = $order_data->price / $order_data->quantity;
+		$priceReturn = $order_data->price / $order_data->quantity; //ini adalah HARGA SATUAN TAS SAAT DIBELI
 		$returnModal = $order_data->modal / $order_data->quantity;
 		$priceReturn = $priceReturn * $return_quantity;
 		$returnModal = $returnModal * $return_quantity;
@@ -598,10 +598,10 @@ class returnController extends \HomeController{
 			$type = 1;
 			$tradeProductId = $order_data->product_detail_id;
 			$in_amount = $currentPrice * $return_quantity;
-			$difference = ($currentPrice * $return_quantity)-$priceReturn;
+			$difference = ($currentPrice * $return_quantity) - $priceReturn;
 			$modDiff = $returnProfit - ($currentProfit*$return_quantity);
 			if($difference<0){
-				$difference = $difference;
+				$difference = 0;
 			}
 			
 		}else if($type == 2){
@@ -613,7 +613,7 @@ class returnController extends \HomeController{
 			$in_amount = $product_price * $return_quantity;
 			//$difference = ($product_price*$return_quantity)-$priceReturn;
 			//newcode
-			$difference = $nominal_uang-$priceReturn;			
+			$difference = $nominal_uang - $priceReturn;			
 			$in_amount = $nominal_uang;
 			$modDiff = $returnProfit - ($product_modal*$return_quantity);
 			if($difference < 0){
@@ -713,10 +713,12 @@ class returnController extends \HomeController{
 	{
 		$id = Input::get('data');
 		$solusi = Input::get('solusi');
+		$idx_solusi = Input::get('idx_solusi');
 		$controller = new RestocksController();
 		$returnController = new ReturnsController();
 		
-		if($solusi == "Masukan ke stok toko")
+		// if($solusi == "Masukan ke stok toko")
+		if($idx_solusi == 0)
 		{
 			//rubah stock
 			$return = ReturnDB::find($id);
@@ -735,6 +737,8 @@ class returnController extends \HomeController{
 				
 			}
 			
+			/*TIDAK USAH MASUK KE KAS KARENA HANYA BUTUH UPDATE STOK*/
+			/*
 			//masukin ke cash
 			$cash = new CashesController();
 			//$transactionId, $in, $out, $type
@@ -742,6 +746,7 @@ class returnController extends \HomeController{
 			$productDetail = ProductDetail::find($order->product_detail_id);
 			$product = Product::find($productDetail->product_id);
 			$cashUpdate = $cash->insertWithParam('-', 0, $product->modal_price * $return->return_quantity,"Obral");
+			*/
 			//NOTE : kolom 'current' di kas diisi harga_jual retur
 			// $cashUpdate = $cash->insertWithParamByReturn
 			// 										('-', 
@@ -752,6 +757,7 @@ class returnController extends \HomeController{
 		}
 		else
 		{
+
 			//tambah barang obral
 			$return = ReturnDB::find($id);
 			$controller = new ProductDetailsController();
