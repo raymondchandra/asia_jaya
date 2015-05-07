@@ -598,11 +598,13 @@ class returnController extends \HomeController{
 			$type = 1;
 			$tradeProductId = $order_data->product_detail_id;
 			$in_amount = $currentPrice * $return_quantity;
-			$difference = ($currentPrice * $return_quantity) - $priceReturn;
+			//$difference = ($currentPrice * $return_quantity) - $priceReturn;
+			/*difference untuk tukar barang sama akan selalu 0 walaupun inflasi*/
+			$difference = 0;
 			$modDiff = $returnProfit - ($currentProfit*$return_quantity);
-			if($difference<0){
-				$difference = 0;
-			}
+			// if($difference<0){
+			// 	$difference = 0;
+			// }
 			
 		}else if($type == 2){
 			$type = 2;
