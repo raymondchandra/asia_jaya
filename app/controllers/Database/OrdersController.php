@@ -229,6 +229,8 @@ class OrdersController extends \BaseController {
 		$orders = DB::table('products AS pro')
 					->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
 					->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
+					->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')
+					->where('tran.status', '=', 'Paid')
 					// ->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
 					->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id, sum(ord.quantity) AS total'))
 					->whereRaw('MONTH(ord.created_at) >= MONTH(curdate())')
@@ -236,6 +238,7 @@ class OrdersController extends \BaseController {
 					->groupBy('ord.product_detail_id')
 					->orderBy('total','dsc')											
 					->get();		
+							
 		$result = array();
 		$temp_code = array();
 		$duplicate = 0;

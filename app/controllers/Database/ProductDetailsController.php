@@ -645,15 +645,30 @@ class ProductDetailsController extends \BaseController {
 		$orders = DB::table('products AS pro')
 					->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
 					->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')
-					->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')		
-					->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id,sum(ord.quantity) as quant_total'))	
+					->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')
+					->where('tran.status', '=', 'Paid')		
 					->whereRaw('MONTH(tran.created_at) >= MONTH(curdate())')
 					->whereRaw('YEAR(tran.created_at) >= YEAR(curdate())')
+					->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id,sum(ord.quantity) as quant_total'))						
 					->groupBy('tran.customer_id')
 					->groupBy('ord.product_detail_id')
 					->orderBy('quant_total','dsc')
 					//->take(10)
 					->get();
+
+		// DB::table('products AS pro')
+		// 			->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+		// 			->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')												
+		// 			->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')
+		// 			->where('tran.status', '=', 'Paid')
+		// 			// ->select(DB::raw('DISTINCT pro.product_code AS product_code'), DB::raw('prodtl.color AS product_color'), DB::raw('ord.product_detail_id,sum(ord.quantity) AS total'))
+		// 			->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id, sum(ord.quantity) AS total'))
+		// 			->whereRaw('MONTH(ord.created_at) >= MONTH(curdate())')
+		// 			->whereRaw('YEAR(ord.created_at) >= YEAR(curdate())')
+		// 			->groupBy('ord.product_detail_id')
+		// 			->orderBy('total','dsc')											
+		// 			->get();	
+
 		$result = array();
 		$temp_code = array();
 		$duplicate = 0;

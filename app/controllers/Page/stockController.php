@@ -246,6 +246,12 @@ class stockController extends \HomeController{
 		$editKode = Input::get('editKode');
 		$editFoto = Input::get('editFoto');
 		
+		//update manager cuma boleh hargajual, stoktoko, stokgudang, deleted
+		// if(Auth::user()->role == 2) //manager
+		// {
+
+		// }
+
 		//cek restock
 		$productDetail = ProductDetail::find($idDetail);
 		$editFoto = $productDetail->photo;
@@ -267,33 +273,28 @@ class stockController extends \HomeController{
 				$controller->insertWithParam(2, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
 			}
 			else if($editStorage > $stock_storage && $editShop = $stock_shop)//restock dari luar ke gudang
-			{
-				if(Auth::user()->role == 2)
-				{
-					return 0;
-				}
+			{				
 				$controller->insertWithParam(3, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
 			}
 			else //restock dari luar ke toko
-			{
-				if(Auth::user()->role == 2)
-				{
-					return 0;
-				}
+			{				
 				$controller->insertWithParam(4, $idDetail, $editShop-$stock_shop, $editStorage-$stock_storage);
 			}
 		}
 		
-		$productController = new ProductsController();
-		$productDetailController = new ProductDetailsController();
-		if($editModal == '-')
+		if(Auth::user()->role == 1)
 		{
-			$product = Product::find($idProduct);
-			$editModal = $product->modal_price;
-		}
-		
-		$editProductJson = $productController->updateForViewStock($idProduct, $editName, $editModal, $editMin, $editSales, $editKode);
-		$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage, $editFoto);
+			$productController = new ProductsController();
+			$productDetailController = new ProductDetailsController();
+			if($editModal == '-')
+			{
+				$product = Product::find($idProduct);
+				$editModal = $product->modal_price;
+			}
+			
+			$editProductJson = $productController->updateForViewStock($idProduct, $editName, $editModal, $editMin, $editSales, $editKode);
+			$editDetailJson = $productDetailController->updateForViewStock($idDetail, $editColor, $editShop, $editStorage, $editFoto);
+		}		
 		
 		return 1;
 	}
