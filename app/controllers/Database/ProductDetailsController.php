@@ -647,9 +647,9 @@ class ProductDetailsController extends \BaseController {
 					->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')
 					->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')
 					->where('tran.status', '=', 'Paid')		
-					->whereRaw('MONTH(tran.created_at) >= MONTH(curdate())')
-					->whereRaw('YEAR(tran.created_at) >= YEAR(curdate())')
-					->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id,sum(ord.quantity) as quant_total'))						
+					->whereRaw('MONTH(tran.created_at) <= MONTH(curdate())')
+					->whereRaw('YEAR(tran.created_at) <= YEAR(curdate())')
+					->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id,count(ord.quantity) as quant_total'))						
 					->groupBy('tran.customer_id')
 					->groupBy('ord.product_detail_id')
 					->orderBy('quant_total','dsc')
@@ -693,9 +693,12 @@ class ProductDetailsController extends \BaseController {
 			if($duplicate == 1){
 				//do nothing
 			}else{
-				$result[] = $ord;
-				$temp_code[] = $ord->product_code;
-				$count++;
+				if ($ord->quant_total > 1) {
+					$result[] = $ord;
+					$temp_code[] = $ord->product_code;
+					$count++;
+				}
+				
 			}
 
 			//reset
