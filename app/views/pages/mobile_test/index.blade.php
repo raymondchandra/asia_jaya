@@ -117,6 +117,12 @@
 				-webkit-transform: scaleY(1.0);
 			}
 		}
+
+	.f_table_pesanan tr:nth-child(odd){
+		background-color: #87ffc7;
+	}
+	.f_table_pesanan tr:nth-child(even){ 	
+	} 
 	</style>
 </head>
 <body>
