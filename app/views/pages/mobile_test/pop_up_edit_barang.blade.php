@@ -198,7 +198,7 @@
 				/* -- button disabled error prevention -- */
 				$('#f_hsatuan_qty').on('input', function() {  				   	 				   	
 				   var ff_harga_min = parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_min').val()) );
-				   		var ff_harga_modal =  parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_modal').val()) );
+				   		var ff_harga_modal =  parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_modal').val()) );				   		
 				   		if(ff_harga_modal < ff_harga_min){
 				   			var lowest = ff_harga_modal;
 				   		}else{
@@ -206,14 +206,13 @@
 				   		}
 				   		
 
-				   //if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
-				   if( ($(this).val() < (lowest/1000) ) || isNaN($(this).val())){
+				   if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
+				   // if( ($(this).val() < (lowest/1000) ) || isNaN($(this).val())){
 				   	$('#changeButton').attr('disabled','disabled');
 				   } else {
 				   	$('#changeButton').removeAttr('disabled');
 				   }  
 							$('#f_subtotal_edit').text("Rp " + toRp( ($('#f_hsatuan_qty').val()*1000 )*$('#f_edit_qty').val()  ) );
-
 
 				});
 

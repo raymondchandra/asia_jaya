@@ -2,9 +2,39 @@
 use Carbon\Carbon;
 
 	//Route::get('/qwertyuiop', 'CashesController@getTodayInpuCash');
+	// Event::listen('illuminate.query', function($query){
+	// 	echo var_dump($query);
+	// });
 
 	Route::get('/coba', function()
 		{
+			// $orders = DB::table('products AS pro')
+			// 		->join('product_details AS prodtl', 'pro.id', '=', 'prodtl.product_id')
+			// 		->join('orders AS ord', 'prodtl.id', '=', 'ord.product_detail_id')
+			// 		->join('transactions AS tran', 'tran.id', '=','ord.transaction_id')
+			// 		->where('tran.status', '=', 'Paid')		
+			// 		->whereRaw('MONTH(tran.created_at) >= MONTH(curdate())')
+			// 		->whereRaw('YEAR(tran.created_at) >= YEAR(curdate())')
+			// 		->select('pro.product_code AS product_code', 'prodtl.color AS product_color', DB::raw('ord.product_detail_id,count(ord.quantity) as quant_total'))						
+			// 		->groupBy('tran.customer_id')
+			// 		->groupBy('ord.product_detail_id')
+			// 		->orderBy('quant_total','dsc')
+			// 		//->take(10)
+			// 		->get();
+
+			// $stockgud = 0;			
+			// $products = DB::table('products')->get();		
+			// foreach($products as $product)
+			// {
+			// 	$detail_product = DB::table('product_details')->where('product_id', '=', $product->id)->get();
+			// 	foreach($detail_product as $row_detail_product)
+			// 	{
+			// 		$stockgud += $row_detail_product->stock_storage * $product->modal_price;
+			// 	}
+			// 	$totalgudang = $stockgud;
+			// }
+			// echo $totalgudang;
+
 			//$datas = Cash::whereRaw('created_at >= curdate()')->get();
 			//echo var_dump($datas);
 			//echo curdate();
