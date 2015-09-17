@@ -206,8 +206,9 @@
 				   		}
 				   		
 
-				   if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
+				   // if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
 				   // if( ($(this).val() < (lowest/1000) ) || isNaN($(this).val())){
+				   if( ($(this).val() < 0 ) || isNaN($(this).val())){
 				   	$('#changeButton').attr('disabled','disabled');
 				   } else {
 				   	$('#changeButton').removeAttr('disabled');
