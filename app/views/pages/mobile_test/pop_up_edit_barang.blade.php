@@ -45,7 +45,7 @@
 						<div class="g-sm-9">-->
 							<!-- newcode -->
 							<input type="hidden" id="edit_harga_modal" value=""/>
-							<input type="hidden" id="edit_harga_min" value=""/>
+							<input type="hidden" id="edit_harga_min" value=""/>							
 						<!--</div>
 					</div>-->
 					<div class="form-group" style=" ">
@@ -114,7 +114,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-danger pull-left f_slide_alert" id="deleteButton">Delete</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" id="changeButton">Save changes</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="changeButton" >Save changes</button>
 				<!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
 			</div>
 			<script>
@@ -196,24 +196,27 @@
 
 				/* -- jan 9 2015 | START -- */
 				/* -- button disabled error prevention -- */
-				$('#f_hsatuan_qty').on('input', function() {  				   	 				   	
-				   var ff_harga_min = parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_min').val()) );
-				   		var ff_harga_modal =  parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_modal').val()) );				   		
-				   		if(ff_harga_modal < ff_harga_min){
-				   			var lowest = ff_harga_modal;
-				   		}else{
-				   			var lowest = ff_harga_min;
-				   		}
-				   		
+				//xxx $('#f_hsatuan_qty').on('input', function() {
+				$('#f_hsatuan_qty').on('input', function() {
+				    var ff_harga_min = parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_min').val()) );
+			   		var ff_harga_modal =  parseFloat( toAngka($(this).closest('.form-horizontal').find('#edit_harga_modal').val()) );				   					   					   	
+			   		if(ff_harga_modal < ff_harga_min){
+			   			var lowest = ff_harga_modal;
+			   		}else{
+			   			var lowest = ff_harga_min;
+			   		}
 
 				   // if( ($(this).val() < (ff_harga_min/1000) ) || isNaN($(this).val())){
 				   // if( ($(this).val() < (lowest/1000) ) || isNaN($(this).val())){
-				   if( ($(this).val() < 0 ) || isNaN($(this).val())){
-				   	$('#changeButton').attr('disabled','disabled');
-				   } else {
-				   	$('#changeButton').removeAttr('disabled');
+				   //xxx if( ($(this).val() < 0 ) || isNaN($(this).val())){	
+				   if( isNaN($(this).val()) ){
+						$('#changeButton').addClass('hidden');						
+				   }else if( ($(this).val()*1000) < lowest ){
+				   		$('#changeButton').attr('disabled','disabled');				   		
+				   } else {				   		
+				   		$('#changeButton').removeAttr('disabled');				   		
 				   }  
-							$('#f_subtotal_edit').text("Rp " + toRp( ($('#f_hsatuan_qty').val()*1000 )*$('#f_edit_qty').val()  ) );
+					$('#f_subtotal_edit').text("Rp " + toRp( ($('#f_hsatuan_qty').val()*1000 )*$('#f_edit_qty').val()  ) );
 
 				});
 
